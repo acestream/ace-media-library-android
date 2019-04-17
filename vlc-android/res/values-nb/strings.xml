@@ -19,10 +19,6 @@
     <string name="sortby_number_desc">Ant. spor (synk.)</string>
     <string name="searchable_hint">Søk…</string>
     <string name="history">Historie</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d resultat funnet</item>
-        <item quantity="other">%d resultater funnet</item>
-    </plurals>
     <string name="play">Spill</string>
     <string name="playback">Avspilling</string>
     <string name="playback_controls">Avspillings-kontroller</string>
@@ -71,14 +67,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 undermappe</item>
         <item quantity="other">%d undermapper</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 mediefil</item>
-        <item quantity="other">%d mediefiler</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 video</item>
-        <item quantity="other">%d vidoer</item>
     </plurals>
     <string name="internal_memory">Internt minne</string>
     <string name="parent_folder">Til øverste katalog</string>
@@ -140,10 +128,6 @@
     <string name="navmenu">navigasjonsmeny</string>
     <string name="advanced">avanserte innstillinger</string>
     <string name="audio_boost_warning">Dra opp igjen for å gå forbi 100%</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 kanal\n</item>
-        <item quantity="other">%1$d kanaler\n</item>
-    </plurals>
     <string name="track_samplerate_info">Samplingsfrekvens: %1$d Hz\n</string>
     <string name="track_resolution_info">Oppløsning: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Bildefrekvens: %1$.3f\n</string>
@@ -179,7 +163,7 @@
     <string name="error_not_compatible">Beklager. Din enhet er for øyeblikket ikke støttet av denne versjonen VLC for Android™.</string>
     <string name="error_problem">Beklager. VLC for Android hadde et problem med lasting og måtte lukkes.</string>
     <string name="error_message_is">Feilmeldingen er (vennligst nevn dette på engelsk når du rapporterer en feil):\n\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Avspillingsfeil</string>
     <string name="encountered_error_message">VLC støtte på et problem med dette mediet.\n\nVennligst prøv å oppdatere mediebiblioteket.</string>
     <string name="invalid_location">Plasseringen %1$s kan ikke avspilles.</string>
@@ -435,14 +419,14 @@
     <!--Widget-->
     <string name="widget_name_w">Lys VLC-modul</string>
     <string name="widget_name_b">Mørk VLC-modul</string>
-    <string name="allow_storage_access_title">Gi VLC tilgang til video- og lyd-filer</string>
-    <string name="allow_storage_access_description">VLC behøver denne tilgangen for å kunne lese mediefilene på denne enheten.</string>
-    <string name="allow_settings_access_ringtone_title">Tillat VLC å velge ringetonen</string>
-    <string name="allow_settings_access_ringtone_description">VLC behøver denne tilgangen for å sette denne sangen som din ringetone.</string>
-    <string name="allow_settings_access_brightness_title">Tillat VLC å endre lysstyrkemodus</string>
-    <string name="allow_settings_access_brightness_description">VLC behøver denne tilgangen for å endre din lysstyrkemodus.</string>
-    <string name="allow_draw_overlays_title">Tillat at VLC å sprette opp over andre programmer</string>
-    <string name="allow_sdraw_overlays_description">VLC behøver denne tilgangen for å vise video i et oppsprett over andre programmer.</string>
+    <string name="allow_storage_access_title">Gi Ace Stream tilgang til video- og lyd-filer</string>
+    <string name="allow_storage_access_description">Ace Stream behøver denne tilgangen for å kunne lese mediefilene på denne enheten.</string>
+    <string name="allow_settings_access_ringtone_title">Tillat Ace Stream å velge ringetonen</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream behøver denne tilgangen for å sette denne sangen som din ringetone.</string>
+    <string name="allow_settings_access_brightness_title">Tillat Ace Stream å endre lysstyrkemodus</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream behøver denne tilgangen for å endre din lysstyrkemodus.</string>
+    <string name="allow_draw_overlays_title">Tillat at Ace Stream å sprette opp over andre programmer</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream behøver denne tilgangen for å vise video i et oppsprett over andre programmer.</string>
     <string name="permission_ask_again">Gi tillatelse</string>
     <string name="exit_app">Lukk VLC</string>
     <string name="exit_app_msg">Er du sikker på at du vil avslutte VLC?</string>
@@ -523,4 +507,43 @@
     <string name="renderer_list_title">Visninger</string>
     <string name="feedback_player_crashed">Beklager, men VLC har nettopp krasjet. Vennligst prøv igjen.</string>
     <string name="dialog_sd_wizard">Vis meg</string>
+    <string name="torrent_files">Torrent filer</string>
+    <string name="select_language">Velg språk</string>
+    <string name="media_fast_seek" source="google_translate">Aktiver hurtig søkemulighet</string>
+    <string name="enable_headset_actions_title" source="google_translate">Hurtigvalg snarveier</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Dobbeltklikk på \'Play \' for å hoppe over til neste og lenge trykke på den for å hoppe over til forrige spor</string>
+    <string name="audio_ducking_title" source="google_translate">Nedre VLC-volum på varsler</string>
+    <string name="audio_ducking_summary" source="google_translate">Hjelper å høre lydvarsler, navigasjonsinstruksjoner eller assistent snakker</string>
+    <string name="casting_passthrough_summary" source="google_translate">La TV-en administrere lydgjengivelse</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Velg konverteringskvalitet når du støper på ekstern skjerm</string>
+    <string name="cast_performance_warning" source="google_translate">Casting denne videoen krever konvertering. Denne konverteringen kan bruke all ledig strøm og kan raskt tømme batteriet.</string>
+    <string name="artists_show_all_summary" source="google_translate">Vis alle artister i artister, ikke bare album artister</string>
+    <string name="main_prefs_category" source="google_translate">Hovedinnstillinger</string>
+    <string name="dump_media_db" source="google_translate">Dump media database</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopier database til intern lagringsrot</string>
+    <string name="streams" source="google_translate">strømmer</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Du må gi VLC skrive tilgang til SD-kortet ditt</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC kan ikke slette denne filen uten å skrive tillatelse. \ NFor å gå til SD-kortet og klikk på \ "Velg \". \ NDu må kanskje klikke på \ "Vis SD-kort \" først i øverste høyre meny</string>
+    <string name="renderers_disconnect" source="google_translate">Koble fra</string>
+    <string name="audio_digital_failed" source="google_translate">Kunne ikke endre lyd digital utgangstilstand</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Lyd Digital utgang aktivert</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio Digital Output deaktivert</string>
+    <string name="live_streams" source="google_translate">Levende strømmer</string>
+    <string name="all_live_streams" source="google_translate">Alle livsstrømmer</string>
+    <string name="video_torrents" source="google_translate">Video torrents</string>
+    <string name="audio_torrents" source="google_translate">Lyd torrents</string>
+    <string name="all_torrents" source="google_translate">Alle torrenter</string>
+    <string name="main" source="google_translate">Hoved</string>
+    <string name="media_player" source="google_translate">Mediaspiller</string>
+    <string name="acestream_server" source="google_translate">Ace Stream-server (motor)</string>
+    <string name="media_player_settings" source="google_translate">Mediespiller innstillinger</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream server (motor) innstillinger</string>
+    <string name="sign_out" source="google_translate">Logg ut</string>
+    <string name="sign_in" source="google_translate">Logg inn</string>
+    <string name="sign_in_acestream" source="google_translate">Logg inn med Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Logg på med Google</string>
+    <string name="video_files" source="google_translate">Videofiler</string>
+    <string name="audio_files" source="google_translate">Lydfiler</string>
+    <string name="retry" source="google_translate">Prøv på nytt</string>
+    <string name="failed_to_load_web_page" source="google_translate">Kunne ikke laste inn nettsiden</string>
 </resources>

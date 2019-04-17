@@ -1,7 +1,8 @@
 package org.videolan.vlc.gui;
 
 
-import android.databinding.DataBindingUtil;
+import android.annotation.SuppressLint;
+import androidx.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -9,11 +10,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.annotation.Nullable;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -43,6 +44,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class InfoActivity extends AudioPlayerContainerActivity implements View.OnClickListener {
+
+    private static final String TAG = "AS/Info";
 
     public final static String TAG_ITEM = "ML_ITEM";
     public final static String TAG_FAB_VISIBILITY= "FAB";
@@ -89,6 +92,7 @@ public class InfoActivity extends AudioPlayerContainerActivity implements View.O
                     if (cover != null) {
                         mBinding.setCover(new BitmapDrawable(InfoActivity.this.getResources(), cover));
                         VLCApplication.runOnMainThread(new Runnable() {
+                            @SuppressLint("WrongConstant")
                             @Override
                             public void run() {
                                 ViewCompat.setNestedScrollingEnabled(mBinding.container, true);
@@ -131,9 +135,30 @@ public class InfoActivity extends AudioPlayerContainerActivity implements View.O
 
         if (mItem.getItemType() == MediaLibraryItem.TYPE_MEDIA) {
             MediaWrapper media = (MediaWrapper) mItem;
-            mBinding.setPath(Uri.decode(media.getUri().getPath()));
-            mBinding.setProgress(media.getLength() == 0 ? 0 : (int) ((long) 100 * media.getTime() / length));
-            mBinding.setSizeTitleText(getString(R.string.file_size));
+
+            if(media.isP2PItem()) {
+                long time = media.getMetaLong(MediaWrapper.META_PROGRESS);
+                long duration = media.getMetaLong(MediaWrapper.META_DURATION);
+                long fileSize = media.getMetaLong(MediaWrapper.META_FILE_SIZE);
+                String path = media.getMetaString(MediaWrapper.META_TRANSPORT_FILE_PATH);
+
+                if(duration > 0) {
+                    mBinding.setLength(Tools.millisToText(duration));
+                }
+                if(!TextUtils.isEmpty(path)) {
+                    mBinding.setPath(path);
+                }
+                if(fileSize > 0) {
+                    mBinding.setSizeTitleText(getString(R.string.file_size));
+                    mBinding.setSizeValueText(Strings.readableFileSize(fileSize));
+                }
+                mBinding.setProgress(duration == 0 ? 0 : (int) ((long) 100 * time / duration));
+            }
+            else {
+                mBinding.setPath(Uri.decode(media.getUri().getPath()));
+                mBinding.setProgress(media.getLength() == 0 ? 0 : (int) ((long) 100 * media.getTime() / length));
+                mBinding.setSizeTitleText(getString(R.string.file_size));
+            }
         } else if (mItem.getItemType() == MediaLibraryItem.TYPE_ARTIST) {
             Medialibrary ml = VLCApplication.getMLInstance();
             Album[] albums = ((Artist)mItem).getAlbums();

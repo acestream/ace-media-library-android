@@ -9,11 +9,6 @@
     <string name="sortby_length">дужини</string>
     <string name="searchable_hint">Претражи…</string>
     <string name="history">Историја</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">Пронађен је %d резултат</item>
-        <item quantity="few">Пронађена су %d резултата</item>
-        <item quantity="other">Пронађено је %d резултата</item>
-    </plurals>
     <string name="play">Пусти</string>
     <string name="play_from_start">Пусти од почетка</string>
     <string name="play_as_audio">Пусти као звук</string>
@@ -52,16 +47,6 @@
         <item quantity="one">1 потфасцикла</item>
         <item quantity="few">%d потфасцикле</item>
         <item quantity="other">%d потфасцикли</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 медијска датотека</item>
-        <item quantity="few">%d медијске датотеке</item>
-        <item quantity="other">%d медијских датотека</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">видео</item>
-        <item quantity="few">%d видео</item>
-        <item quantity="other">%d видео</item>
     </plurals>
     <string name="internal_memory">Унутрашња меморија</string>
     <string name="parent_folder">Претходни ниво</string>
@@ -175,12 +160,10 @@
     <string name="subtitle_text_encoding">Енкодирање текстуалних титлова</string>
     <string name="extra_prefs_category">Додатне поставке</string>
     <string name="interface_prefs_screen">Интерфејс</string>
-    <string name="interface_secondary_display_category">Интерфејс – други екран</string>
     <string name="interface_secondary_display_category_summary">Поставке при повезивању другог екрана (HDMI/Miracast).</string>
     <string name="enable_clone_mode">Клонирање</string>
     <string name="enable_clone_mode_summary">Клонирајте екран уређаја без управљања на даљину.</string>
     <string name="interface_other_category">Интерфејс – друго</string>
-    <string name="enable_brightness_gesture">Покрет за осветљење</string>
     <string name="enable_brightness_gesture_summary">Управљајте осветљењем покретима током репродукције</string>
     <string name="enable_headset_detection">Откриј слушалице</string>
     <string name="enable_headset_detection_summary">Паузирај по уклањању слушалица; настави по убацивању</string>
@@ -234,4 +217,319 @@
     <string name="sending_log">Шаљем извештај…</string>
     <!--Accessibility-->
     <!--Widget-->
+    <string name="torrent_files">Torrent филес</string>
+    <string name="select_language">Изаберите језик</string>
+    <string name="sortby_name_desc" source="google_translate">Име (десц)</string>
+    <string name="sortby_artist_name" source="google_translate">Име извођача</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Име извођача (десц)</string>
+    <string name="sortby_album_name" source="google_translate">Назив албума</string>
+    <string name="sortby_album_name_desc" source="google_translate">Назив албума (десц)</string>
+    <string name="sortby_length_desc" source="google_translate">Дужина (десц)</string>
+    <string name="sortby_date" source="google_translate">Датум</string>
+    <string name="sortby_date_desc" source="google_translate">Подаци (десц)</string>
+    <string name="sortby_number" source="google_translate">Нб трацкс</string>
+    <string name="sortby_number_desc" source="google_translate">Нб нумера (десц)</string>
+    <string name="playback" source="google_translate">Репродукција</string>
+    <string name="playback_controls" source="google_translate">Контроле репродукције</string>
+    <string name="medialibrary_scan" source="google_translate">Скенирање библиотеке медија</string>
+    <string name="Medialibrary_progress" source="google_translate">Медијска библиотека скенира ажурирања прогреса</string>
+    <string name="video_app_switch_title" source="google_translate">Позадински / ПиП режим</string>
+    <string name="video_app_switch_summary" source="google_translate">Изаберите ВЛЦ понашање када пређете на другу апликацију из видео репродукције</string>
+    <string name="play_pip_title" source="google_translate">Репродукујте видео записе у режиму слике у слици</string>
+    <string name="play_as_audio_background" source="google_translate">Репродукујте видео записе у позадини</string>
+    <string name="insert_next" source="google_translate">Инсерт нект</string>
+    <string name="unknown_number" source="google_translate">Непознат број записа</string>
+    <string name="tracks" source="google_translate">Трацкс</string>
+    <string name="noplaylist" source="google_translate">Није пронађена ниједна листа за репродукцију.</string>
+    <string name="shuffle_title" source="google_translate">Схуффле моде</string>
+    <string name="shuffle" source="google_translate">Схуффле Офф</string>
+    <string name="shuffle_on" source="google_translate">Схуффле Он</string>
+    <string name="repeat_title" source="google_translate">Мод понављања</string>
+    <string name="repeat" source="google_translate">Понови ништа</string>
+    <string name="repeat_single" source="google_translate">Репеат сингле</string>
+    <string name="repeat_all" source="google_translate">Понови све</string>
+    <string name="firstsong" source="google_translate">Прва песма са листе песама</string>
+    <string name="lastsong" source="google_translate">Последња песма на листи за репродукцију</string>
+    <string name="surface_fit_screen" source="google_translate">Фит сцреен</string>
+    <string name="sound_on" source="google_translate">Соунд Он</string>
+    <string name="sound_off" source="google_translate">Звук искључен</string>
+    <string name="navmenu" source="google_translate">мени за навигацију</string>
+    <string name="advanced" source="google_translate">напредне опције</string>
+    <string name="sleep_in" source="google_translate">Спава у</string>
+    <string name="server_add_title" source="google_translate">Додајте нови сервер у омиљене</string>
+    <string name="server_domain_hint" source="google_translate">Адреса сервера (име домена или ИП)</string>
+    <string name="server_share_hint" source="google_translate">Назив мрежног дељења (или ИП адреса)</string>
+    <string name="server_folder_hint" source="google_translate">Путања фасцикле (опционално)</string>
+    <string name="server_username_hint" source="google_translate">Корисничко име</string>
+    <string name="server_servername_hint" source="google_translate">Име сервера, за погодност</string>
+    <string name="server_port" source="google_translate">Порт:</string>
+    <string name="login" source="google_translate">Пријавите се</string>
+    <string name="password" source="google_translate">Пассворд</string>
+    <string name="search_results" source="google_translate">Резултати претраге</string>
+    <string name="search_no_result" source="google_translate">Нема пронађених медија</string>
+    <string name="favorites_add" source="google_translate">Додај у фаворите</string>
+    <string name="favorites_remove" source="google_translate">Избаци из омиљених</string>
+    <string name="favorites_edit" source="google_translate">Уредити</string>
+    <string name="favorite_added" source="google_translate">Сачувано у фаворите</string>
+    <string name="favorite_removed" source="google_translate">Уклоњено из омиљених</string>
+    <string name="playback_history_title" source="google_translate">Историја репродукције</string>
+    <string name="playback_history_summary" source="google_translate">Сачувајте све медије репродуковане у одељку Историја</string>
+    <string name="playback_speed_title" source="google_translate">Сачувај брзину репродукције</string>
+    <string name="playback_speed_summary" source="google_translate">Запамтите брзину репродукције коју сте поставили</string>
+    <string name="audio_sub" source="google_translate">Аудио записи и титлови</string>
+    <string name="hardware_acceleration_summary" source="google_translate">Онемогућено: боља стабилност нДецодинг: може побољшати перформансе.</string>
+    <string name="dev_hardware_decoder" source="google_translate">Напредни хардверски декодер</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">Присилни хардверски декодер, само за напредне кориснике</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">иомк</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">иомк-др</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">медиацодец</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">медиацодец-ДР</string>
+    <string name="daynight_title" source="google_translate">ДаиНигхт мод</string>
+    <string name="daynight_summary" source="google_translate">Аутоматски се пребаците у ноћни режим у одговарајуће време</string>
+    <string name="interface_gui" source="google_translate">Приказ</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">Секундарни приказ</string>
+    <string name="video_prefs_category" source="google_translate">Видео</string>
+    <string name="video_min_group_length_title" source="google_translate">Групни видео снимци</string>
+    <string name="video_min_group_length_summary" source="google_translate">Видеозаписи се групишу ако су њихова прва слова иста.</string>
+    <string name="video_min_group_length_disable" source="google_translate">Онемогући</string>
+    <string name="video_min_group_length_first" source="google_translate">Само прво слово</string>
+    <string name="video_min_group_length_short" source="google_translate">Кратак број слова (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Дугачак број слова (9)</string>
+    <string name="media_fast_seek" source="google_translate">Омогућите опцију брзог тражења</string>
+    <string name="media_seen" source="google_translate">Прикажи приказани видео маркер</string>
+    <string name="media_seen_summary" source="google_translate">Означите видео снимак када га видите до краја</string>
+    <string name="force_list_portrait" source="google_translate">Нема решетке у портретном режиму</string>
+    <string name="force_list_portrait_summary" source="google_translate">Прикажи видео записе у листи уместо мреже у портретном режиму</string>
+    <string name="force_play_all_summary" source="google_translate">Репродукујте све видео записе, почевши од оне коју сте кликнули</string>
+    <string name="force_play_all_title" source="google_translate">Режим за репродукцију видео записа</string>
+    <string name="save_brightness_summary" source="google_translate">Запамтите ниво осветљености у видео плејеру</string>
+    <string name="save_brightness_title" source="google_translate">Сачувајте ниво осветљености за видео</string>
+    <string name="save_audiodelay_summary" source="google_translate">Сачувајте појединачно кашњење звука за сваки видео</string>
+    <string name="save_audiodelay_title" source="google_translate">Сачувајте кашњење звука</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Геста осветљења</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Гест за гласноћу</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Контролишите јачину звука гестом током репродукције видео записа</string>
+    <string name="enable_seek_buttons" source="google_translate">Омогућите дугмад за тражење</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">Прикажи типке за премотавање уназад и напријед на видео сучељу</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Двапут додирните за тражење</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Двапут додирните ивице екрана да бисте тражили 10 секунди</string>
+    <string name="popup_keepscreen_title" source="google_translate">Задржите екран ОН у поп-уп моду</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Увек држите екран укљученим док је приказано Поп-Уп, чак и ако је видео паузиран.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Прикажи скривене датотеке</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Прикажи скривене датотеке у прегледницима</string>
+    <string name="subtitles_prefs_category" source="google_translate">Титлови</string>
+    <string name="subtitles_size_title" source="google_translate">Величина Величина</string>
+    <string name="subtitles_size_small" source="google_translate">Мала</string>
+    <string name="subtitles_size_normal" source="google_translate">Нормално</string>
+    <string name="subtitles_size_big" source="google_translate">Биг</string>
+    <string name="subtitles_size_huge" source="google_translate">Огроман</string>
+    <string name="subtitles_color_title" source="google_translate">Субтитлес Цолор</string>
+    <string name="subtitles_color_white" source="google_translate">бео</string>
+    <string name="subtitles_color_gray" source="google_translate">Граи</string>
+    <string name="subtitles_color_pink" source="google_translate">Пинк</string>
+    <string name="subtitles_color_blue" source="google_translate">Плави</string>
+    <string name="subtitles_color_yellow" source="google_translate">Жута</string>
+    <string name="subtitles_color_green" source="google_translate">Зелен</string>
+    <string name="subtitles_background_title" source="google_translate">Субтитлес Бацкгроунд</string>
+    <string name="subtitles_bold_title" source="google_translate">Болд субтитлес</string>
+    <string name="subtitles_autoload_title" source="google_translate">Аутоматски учитај титлове</string>
+    <string name="audio_prefs_category" source="google_translate">Аудио</string>
+    <string name="lockscreen_cover_title" source="google_translate">Медиа цовер на Лоцксцреен-у</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Када је доступно, подесите тренутну медијску слику као позадину екрана</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Анимирајте аутоматско скроловање тренутне листе песама</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Анимирајте скроловање на медијској транзицији</string>
+    <string name="audio_title_alignment" source="google_translate">Поравнавање аудио наслова</string>
+    <string name="audio_save_repeat_title" source="google_translate">Сачувај режим понављања</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Запамтите начин понављања приликом учитавања аудио листа за репродукцију</string>
+    <string name="audio_boost_title" source="google_translate">Аудио појачање</string>
+    <string name="headset_prefs_category" source="google_translate">Хеадсет</string>
+    <string name="enable_headset_actions_title" source="google_translate">Пречице за даљинско управљање</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Двапут притисните на Плаи да бисте прешли на следећи и дуго притисните да бисте прешли на претходну нумеру</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Наставите на уметању слушалица</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">У супротном, паузирајте</string>
+    <string name="audio_ducking_title" source="google_translate">Смањите волумен ВЛЦ на обавештењима</string>
+    <string name="audio_ducking_summary" source="google_translate">Помаже при слушању звучних обавештења, упутстава за навигацију или разговора помоћника</string>
+    <string name="casting_category" source="google_translate">Ливење</string>
+    <string name="casting_passthrough_title" source="google_translate">Аудио Пасстхроугх</string>
+    <string name="casting_passthrough_summary" source="google_translate">Нека ваш ТВ управља аудио приказом</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Квалитет конверзије</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Изаберите квалитет конверзије приликом бацања на удаљени екран</string>
+    <string name="casting_quality_high" source="google_translate">Високо</string>
+    <string name="casting_quality_medium" source="google_translate">Средње</string>
+    <string name="casting_quality_low" source="google_translate">Лов</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Најниже</string>
+    <string name="cast_performance_warning" source="google_translate">Емитовање овог видеа захтијева конверзију. Ова конверзија може да користи сву расположиву снагу и може брзо да исцрпи батерију.</string>
+    <string name="artists_show_all_title" source="google_translate">Покажи све уметнике</string>
+    <string name="artists_show_all_summary" source="google_translate">Прикажи све извођаче у листингу уметника, а не само извођаче албума</string>
+    <string name="extensions_prefs_category" source="google_translate">Ектенсионс</string>
+    <string name="extensions_enable_category" source="google_translate">Изаберите проширења која желите да омогућите</string>
+    <string name="extensions_empty" source="google_translate">Није откривено проширење</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Активирати</string>
+    <string name="android_auto" source="google_translate">Андроид цар</string>
+    <string name="controls_prefs_category" source="google_translate">Контроле</string>
+    <string name="chroma_format_summary" source="google_translate">РГБ 32-битни: дефаулт цхрома нРГБ 16-битни: боље перформансе али нижи квалитет нУУВ: најбоље перформансе али не ради на свим уређајима. Само за Андроид 2.3 и касније.</string>
+    <string name="main_prefs_category" source="google_translate">Главне поставке</string>
+    <string name="save_video_none" source="google_translate">Не штедите брзину</string>
+    <string name="save_video_session" source="google_translate">Уштедите брзину током сесије</string>
+    <string name="save_video_always" source="google_translate">Уштедите брзину преко сесија</string>
+    <string name="auto_rescan" source="google_translate">Ауто ресцан</string>
+    <string name="auto_rescan_summary" source="google_translate">Аутоматско скенирање уређаја за нове или избрисане медије приликом покретања апликације</string>
+    <string name="dump_media_db" source="google_translate">Думп медиа датабасе</string>
+    <string name="dump_media_db_summary" source="google_translate">Копирај базу података у интерни роот простор</string>
+    <string name="clear_media_db_summary" source="google_translate">Приступите Андроид ВЛЦ инфо да бисте избрисали податке</string>
+    <string name="resume_playback_title" source="google_translate">Наставите репродукцију након позива</string>
+    <string name="resume_playback_summary" source="google_translate">Остани у паузи</string>
+    <string name="network_caching_popup" source="google_translate">Ова вредност мора бити између 0 и 6000 мс</string>
+    <string name="log_service_title" source="google_translate">ВЛЦ логс рецординг</string>
+    <string name="log_service_text" source="google_translate">Отворите конзолу дневника</string>
+    <string name="drawer_open" source="google_translate">Отворите навигацијску ладицу</string>
+    <string name="drawer_close" source="google_translate">Затворите навигацијску ладицу</string>
+    <string name="network_browsing" source="google_translate">Локална мрежа</string>
+    <string name="browsing" source="google_translate">Прегледавање</string>
+    <string name="file_size" source="google_translate">Величина фајла:</string>
+    <string name="audio_delay" source="google_translate">Аудио делаи</string>
+    <string name="spu_delay" source="google_translate">Одгода титла</string>
+    <string name="sleep_time_not_set" source="google_translate">ноне сет</string>
+    <string name="network_shares_discovery" source="google_translate">Тражење мрежних делова ...</string>
+    <string name="network_empty" source="google_translate">Овај директоријум је празан.</string>
+    <string name="network_connection_needed" source="google_translate">Нема везе са локалном мрежом.</string>
+    <string name="search_hint" source="google_translate">Сеарцх медиа</string>
+    <string name="search_list_hint" source="google_translate">Претражите медије у тренутној листи</string>
+    <string name="search_global" source="google_translate">Претражите у свим медијским библиотекама</string>
+    <string name="directory_show_medialib" source="google_translate">Прикажи у МедиаЛиб-у</string>
+    <string name="directory_hide_medialib" source="google_translate">Сакриј се из МедиаЛиб-а</string>
+    <string name="playlist_save" source="google_translate">Саве Плаилист</string>
+    <string name="playlist_name_hint" source="google_translate">име плејлисте</string>
+    <string name="go_to_chapter" source="google_translate">Иди на поглавље…</string>
+    <string name="chapter" source="google_translate">Цхаптер</string>
+    <string name="resume_from_position" source="google_translate">Наставите са задње позиције</string>
+    <string name="confirm_resume" source="google_translate">Наставите са задње позиције?</string>
+    <string name="confirm_resume_title" source="google_translate">Тражите потврду да наставите</string>
+    <string name="confirm_resume_summary" source="google_translate">ако се активира, од вас ће се тражити да потврдите када се видео може наставити са задње позиције</string>
+    <string name="directory_empty" source="google_translate">Директоријум је празан</string>
+    <string name="player_touch_title" source="google_translate">Додирните контроле за Видео</string>
+    <string name="player_touch_enable_all" source="google_translate">Омогући додирне контроле</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Онемогућите контролу светлине</string>
+    <string name="player_touch_disable_all" source="google_translate">Онемогућите све Тоуцх контроле</string>
+    <string name="tv_ui_title" source="google_translate">Андроид ТВ интерфејс</string>
+    <string name="tv_ui_summary" source="google_translate">Промените УИ на тему прилагођену телевизији</string>
+    <string name="medialibrary" source="google_translate">Медиа либрари</string>
+    <string name="medialibrary_directories" source="google_translate">Фолдери библиотеке медија</string>
+    <string name="more_actions" source="google_translate">Више акције</string>
+    <string name="move" source="google_translate">Потез</string>
+    <string name="back_quit_lock" source="google_translate">Поново притисните Назад да бисте прекинули видео</string>
+    <string name="playlist_deleted" source="google_translate">Листа песама је избрисана</string>
+    <string name="file_deleted" source="google_translate">Датотека је избрисана</string>
+    <string name="no_subs_found" source="google_translate">Нема титлова у овом директоријуму</string>
+    <string name="music_now_playing" source="google_translate">Сада пуштено</string>
+    <string name="widget_name_w" source="google_translate">ВЛЦ Вхите Видгет</string>
+    <string name="widget_name_b" source="google_translate">ВЛЦ Дарк Видгет</string>
+    <string name="allow_storage_access_title" source="google_translate">Дозволите Аце Стреаму приступање видео и аудио датотекама</string>
+    <string name="allow_storage_access_description" source="google_translate">Аце Стреам треба да одобрите ову дозволу за приступ медијским датотекама на овом уређају.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Дозволите Аце Стреаму да подеси тон звона</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Аце Стреам треба да дозволите ову дозволу за постављање ове песме као мелодије звона.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Дозволите Аце Стреаму да промени режим осветљења</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Аце Стреам треба да одобрите ову дозволу за промену режима осветљења.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Дозволи Аце Стреам плаиер попуп преко других апликација</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Аце Стреам треба да одобрите ову дозволу за приказивање видео записа у искачућем прозору у другим апликацијама.</string>
+    <string name="permission_ask_again" source="google_translate">Дајте дозволу</string>
+    <string name="exit_app" source="google_translate">Цлосе ВЛЦ</string>
+    <string name="exit_app_msg" source="google_translate">Да ли сте сигурни да желите да напустите ВЛЦ?</string>
+    <string name="fastscroller_track" source="google_translate">ФастСцроллер трацк</string>
+    <string name="fastscroller_handle" source="google_translate">ФастСцроллер хандле</string>
+    <string name="plugins" source="google_translate">Додаци</string>
+    <string name="download_on_device" source="google_translate">Преузимање</string>
+    <string name="extension_empty" source="google_translate">Нема ставки за приказ, идите на поставке проширења да бисте добили неке.</string>
+    <string name="opengl_title" source="google_translate">ОпенГЛ ЕС2 употреба</string>
+    <string name="opengl_summary" source="google_translate">Подразумевано, ОпенГЛ ЕС2 се користи за декодирање софтвера и декодирање хардвера када је потребно (360 ° видео).</string>
+    <string name="opengl_automatic" source="google_translate">Аутоматски</string>
+    <string name="opengl_on" source="google_translate">Форце Он</string>
+    <string name="opengl_off" source="google_translate">Форце Офф</string>
+    <string name="network_favorites" source="google_translate">Мрежа фаворита</string>
+    <string name="network_shared_folders" source="google_translate">Дељене фасцикле</string>
+    <string name="encryption_warning" source="google_translate">Упозорење, шифровање није доступно за ову верзију Андроида, лозинка ће бити сачувана у приватном простору, али неће бити шифрована</string>
+    <string name="store_password" source="google_translate">Запамти лозинку</string>
+    <string name="add_to_playlist" source="google_translate">Додај на листу за репродукцију</string>
+    <string name="popup_playback_title" source="google_translate">Репродукујте видео у искачућем прозору</string>
+    <string name="popup_playback" source="google_translate">Репродукција у искачућем прозору</string>
+    <string name="popup_expand" source="google_translate">Прошири видео</string>
+    <string name="snack_subloader_sub_found" source="google_translate">Преузети титлови</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">Титлови нису пронађени</string>
+    <string name="dialog_subloader_success" source="google_translate">Титлови пронађено за:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Титлови нису пронађени за:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">Преузимање је завршено</string>
+    <string name="download_subtitles" source="google_translate">Преузмите титлове</string>
+    <string name="preferences_languages_download" source="google_translate">Субтитлес лангуагес</string>
+    <string name="list_languages_download_summary" source="google_translate">Језици које треба преузети приликом преузимања титлова</string>
+    <string name="list_languages_download_title" source="google_translate">Субтитлес довнлоад лангуагес</string>
+    <string name="service_unavailable" source="google_translate">Услуга није доступна</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Није успјело постављање језика титла, покушајте га поставити у поставкама апликације</string>
+    <string name="downloading_subtitles" source="google_translate">Преузимање титлова</string>
+    <string name="browse_folder" source="google_translate">Бровсе фолдер</string>
+    <string name="listen" source="google_translate">Слушај</string>
+    <string name="subtitles_download_title" source="google_translate">Субс довнлоад</string>
+    <string name="connecting" source="google_translate">Повезивање ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">сачувајте кашњење за Блуетоотх уређај</string>
+    <string name="episodes" source="google_translate">епизоде</string>
+    <string name="movies" source="google_translate">филмове</string>
+    <string name="videos" source="google_translate">видеос</string>
+    <string name="streams" source="google_translate">потоци</string>
+    <string name="clear_playback_history" source="google_translate">Брисање историје репродукције</string>
+    <string name="various_artists" source="google_translate">Разни извођачи</string>
+    <string name="ml_scanning" source="google_translate">Скенирање за медијске датотеке</string>
+    <string name="ml_parse_media" source="google_translate">Медиум Парсинг</string>
+    <string name="ml_discovering" source="google_translate">Дисцоверинг</string>
+    <string name="resume" source="google_translate">Резиме</string>
+    <string name="length" source="google_translate">Ленгтх</string>
+    <string name="tv_settings_hint" source="google_translate">Притисните дугме ОК да бисте проверили / одзначили директоријуме</string>
+    <string name="ml_external_storage_title" source="google_translate">Откривена нова вањска похрана</string>
+    <string name="ml_external_storage_accept" source="google_translate">да</string>
+    <string name="ml_external_storage_decline" source="google_translate">Не</string>
+    <string name="last_added_media" source="google_translate">ласт аддед</string>
+    <string name="no" source="google_translate">Не</string>
+    <string name="loading_medialibrary" source="google_translate">Лоадинг Медиалибрари ...</string>
+    <string name="yes" source="google_translate">да</string>
+    <string name="custom_set_save_title" source="google_translate">Неспремљене промене</string>
+    <string name="custom_set_save_warning" source="google_translate">Упозорење: неспремљене измене</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Спреми скуп еквилајзера као…</string>
+    <string name="new_custom_set_save_message" source="google_translate">Сачувајте нови скуп еквилајзера као…</string>
+    <string name="save" source="google_translate">сачувати</string>
+    <string name="do_not_save" source="google_translate">Не штеде</string>
+    <string name="custom_set_wrong_input" source="google_translate">Погрешно име.</string>
+    <string name="custom_set_already_exist" source="google_translate">Сет еквилајзера са овим именом већ постоји</string>
+    <string name="custom_set_restored" source="google_translate">Кориснички подешени еквилајзер је враћен.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Избрисан је неспремљени скуп еквилајзера.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Нев</string>
+    <string name="settings_ml_block_scan" source="google_translate">Медиалибрари тренутно скенира ваше уређаје</string>
+    <string name="recommendations" source="google_translate">Препоруке</string>
+    <string name="recommendations_desc" source="google_translate">Препоруке картице на лансеру</string>
+    <string name="browser_quick_access" source="google_translate">Брзи приступ</string>
+    <string name="browser_storages" source="google_translate">Складишта</string>
+    <string name="renderer_list_title" source="google_translate">Дисплаис</string>
+    <string name="feedback_player_crashed" source="google_translate">Жао ми је, ВЛЦ се управо срушио. Молим вас, покушајте поново.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Морате одобрити ВЛЦ приступу писања на СД картицу</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">ВЛЦ не може да избрише ову датотеку без дозволе приступа за писање Молим вас, идите на вашу СД картицу и кликните на "Изабери" .. Можда ћете морати да кликнете на "Прикажи СД картицу" прво у горњем десном менију</string>
+    <string name="dialog_sd_wizard" source="google_translate">Покажи ми</string>
+    <string name="renderers_disconnect" source="google_translate">Дисцоннецт</string>
+    <string name="audio_digital_failed" source="google_translate">Промена стања дигиталног аудио излаза није успела</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Омогућен је дигитални аудио излаз</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Аудио дигитални излаз је онемогућен</string>
+    <string name="live_streams" source="google_translate">Ливе стреам</string>
+    <string name="all_live_streams" source="google_translate">Сви преноси уживо</string>
+    <string name="video_torrents" source="google_translate">Видео торрентс</string>
+    <string name="audio_torrents" source="google_translate">Аудио торрентс</string>
+    <string name="all_torrents" source="google_translate">Алл торрентс</string>
+    <string name="main" source="google_translate">Главни</string>
+    <string name="media_player" source="google_translate">Медиа плаиер</string>
+    <string name="acestream_server" source="google_translate">Аце Стреам сервер (мотор)</string>
+    <string name="media_player_settings" source="google_translate">Подешавања медија плејера</string>
+    <string name="acestream_server_settings" source="google_translate">Поставке Аце Стреам сервера (мотора)</string>
+    <string name="sign_out" source="google_translate">Одјава</string>
+    <string name="sign_in" source="google_translate">Пријавите се</string>
+    <string name="sign_in_acestream" source="google_translate">Пријавите се помоћу Аце Стреам-а</string>
+    <string name="sign_in_google" source="google_translate">Пријавите се са Гоогле-ом</string>
+    <string name="video_files" source="google_translate">Видео датотеке</string>
+    <string name="audio_files" source="google_translate">Аудио филес</string>
+    <string name="retry" source="google_translate">Покушај поново</string>
+    <string name="failed_to_load_web_page" source="google_translate">Учитавање веб странице није успело</string>
 </resources>

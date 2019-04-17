@@ -22,7 +22,10 @@
 #define VLC_MEDIALIB_UTILS_H
 #include <jni.h>
 #include <medialibrary/Types.h>
+#include <medialibrary/IMedia.h>
 #include <medialibrary/IMediaLibrary.h>
+
+#define VLC_JNI_VERSION JNI_VERSION_1_2
 
 struct fields {
     jint SDK_INT;
@@ -96,6 +99,7 @@ struct fields {
     } SearchAggregate;
 };
 
+medialibrary::IMedia::Type mediaWrapperTypeToMediaType(jint mediaWrapperType);
 jobject mediaToMediaWrapper(JNIEnv*, fields*, const medialibrary::MediaPtr &);
 jobject convertAlbumObject(JNIEnv* env, fields *fields, medialibrary::AlbumPtr const& albumPtr);
 jobject convertArtistObject(JNIEnv* env, fields *fields, medialibrary::ArtistPtr const& artistPtr);

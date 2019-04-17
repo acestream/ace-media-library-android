@@ -54,7 +54,7 @@ Java_org_videolan_libvlc_RendererDiscoverer_nativeNew(JNIEnv *env,
 
     if (!jname || !(p_name = (*env)->GetStringUTFChars(env, jname, 0)))
     {
-        throw_IllegalArgumentException(env, "jname invalid");
+        throw_Exception(env, VLCJNI_EX_ILLEGAL_ARGUMENT, "jname invalid");
         return;
     }
 
@@ -72,7 +72,7 @@ Java_org_videolan_libvlc_RendererDiscoverer_nativeNew(JNIEnv *env,
     if (!p_obj->u.p_rd)
     {
         VLCJniObject_release(env, thiz, p_obj);
-        throw_IllegalStateException(env, "can't create RendererDiscoverer instance");
+        throw_Exception(env, VLCJNI_EX_OUT_OF_MEMORY, "RendererDiscoverer");
         return;
     }
     VLCJniObject_attachEvents(p_obj, RendererDiscoverer_event_cb,
@@ -142,20 +142,23 @@ item_to_object(JNIEnv *env, libvlc_renderer_item_t *p_item)
     jstring jname = NULL;
     jstring jType = NULL;
     jstring jIconUri = NULL;
+    jstring jSout = NULL;
     jint jFlags = 0;
 
     jname = (*env)->NewStringUTF(env, libvlc_renderer_item_name(p_item));
     jType = (*env)->NewStringUTF(env, libvlc_renderer_item_type(p_item));
     jIconUri = (*env)->NewStringUTF(env, libvlc_renderer_item_icon_uri(p_item));
+    jSout = (*env)->NewStringUTF(env, libvlc_renderer_item_sout(p_item));
     jFlags = libvlc_renderer_item_flags(p_item);
 
     jobject jobj = (*env)->CallStaticObjectMethod(env, fields.RendererDiscoverer.clazz,
                         fields.RendererDiscoverer.createItemFromNativeID,
-                        jname, jType, jIconUri, jFlags, (jlong) p_item);
+                        jname, jType, jIconUri, jFlags, (jlong) p_item, jSout);
 
     (*env)->DeleteLocalRef(env, jname);
     (*env)->DeleteLocalRef(env, jType);
     (*env)->DeleteLocalRef(env, jIconUri);
+    (*env)->DeleteLocalRef(env, jSout);
     return jobj;
 }
 
@@ -197,22 +200,25 @@ error:
 }
 
 jobject
-Java_org_videolan_libvlc_RendererItem_nativeNewItem(JNIEnv *env, jobject thiz, jobject rd,
+Java_org_videolan_libvlc_RendererDiscoverer_nativeNewItem(JNIEnv *env, jobject thiz,
                                                     jlong ref)
 {
-    vlcjni_object *p_rd_obj = VLCJniObject_getInstance(env, rd);
+    vlcjni_object *p_rd_obj = VLCJniObject_getInstance(env, thiz);
     vlcjni_object *p_obj;
+    libvlc_renderer_item_t *item_ref = (libvlc_renderer_item_t *)(intptr_t)ref;
 
     if (!p_rd_obj)
         return NULL;
 
-    p_obj = VLCJniObject_newFromLibVlc(env, thiz, p_rd_obj->p_libvlc);
+    jobject jitem = item_to_object(env, item_ref);
+
+    p_obj = VLCJniObject_newFromLibVlc(env, jitem, p_rd_obj->p_libvlc);
     if (!p_obj)
         return NULL;
 
-    p_obj->u.p_r = libvlc_renderer_item_hold((libvlc_renderer_item_t *)ref);
+    p_obj->u.p_r = libvlc_renderer_item_hold(item_ref);
 
-    return item_to_object(env, p_obj->u.p_r);
+    return jitem;
 }
 
 void

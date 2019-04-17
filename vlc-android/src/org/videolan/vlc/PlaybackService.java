@@ -20,6 +20,7 @@
 
 package org.videolan.vlc;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -49,16 +50,16 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.content.LocalBroadcastManager;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.support.v4.media.MediaBrowserCompat;
-import android.support.v4.media.MediaBrowserServiceCompat;
+import androidx.media.MediaBrowserServiceCompat;
 import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.MediaMetadataCompat;
-import android.support.v4.media.session.MediaButtonReceiver;
+import androidx.media.session.MediaButtonReceiver;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.telephony.TelephonyManager;
@@ -67,6 +68,26 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
+import org.acestream.sdk.AceStream;
+import org.acestream.sdk.AceStreamManager;
+import org.acestream.sdk.EngineSession;
+import org.acestream.sdk.EngineStatus;
+import org.acestream.sdk.JsonRpcMessage;
+import org.acestream.sdk.RemoteDevice;
+import org.acestream.sdk.SelectedPlayer;
+import org.acestream.sdk.controller.EngineApi;
+import org.acestream.sdk.controller.api.TransportFileDescriptor;
+import org.acestream.sdk.controller.api.response.MediaFilesResponse;
+import org.acestream.sdk.csdk.PlaybackStatus;
+import org.acestream.sdk.interfaces.ConnectableDeviceListener;
+import org.acestream.sdk.interfaces.DeviceDiscoveryListener;
+import org.acestream.sdk.interfaces.IRemoteDevice;
+import org.acestream.sdk.interfaces.RemoteDeviceListener;
+import org.acestream.sdk.player.api.AceStreamPlayer;
+import org.acestream.sdk.utils.Logger;
+import org.acestream.sdk.utils.MiscUtils;
+import org.acestream.sdk.utils.VlcBridge;
+import org.json.JSONException;
 import org.videolan.libvlc.IVLCVout;
 import org.videolan.libvlc.Media;
 import org.videolan.libvlc.MediaPlayer;
@@ -77,18 +98,25 @@ import org.videolan.medialibrary.Tools;
 import org.videolan.medialibrary.media.MediaLibraryItem;
 import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.medialibrary.media.SearchAggregate;
+import org.videolan.medialibrary.media.TrackDescription;
 import org.videolan.vlc.extensions.ExtensionsManager;
+import org.videolan.vlc.gui.dialogs.AdvOptionsDialog;
 import org.videolan.vlc.gui.helpers.AudioUtil;
 import org.videolan.vlc.gui.helpers.BitmapUtil;
 import org.videolan.vlc.gui.helpers.NotificationHelper;
 import org.videolan.vlc.gui.video.PopupManager;
 import org.videolan.vlc.gui.video.VideoPlayerActivity;
 import org.videolan.vlc.media.BrowserProvider;
+import org.videolan.vlc.media.MediaPlayerEvent;
 import org.videolan.vlc.media.MediaUtils;
+import org.videolan.vlc.media.MediaWrapperList;
+import org.videolan.vlc.media.PlayerController;
 import org.videolan.vlc.media.PlaylistManager;
+import org.videolan.vlc.util.AceStreamUtils;
 import org.videolan.vlc.util.AndroidDevices;
 import org.videolan.vlc.util.Constants;
 import org.videolan.vlc.util.Permissions;
+import org.videolan.vlc.util.RendererItemWrapper;
 import org.videolan.vlc.util.Util;
 import org.videolan.vlc.util.VLCInstance;
 import org.videolan.vlc.util.VLCOptions;
@@ -98,18 +126,23 @@ import org.videolan.vlc.widget.VLCAppWidgetProvider;
 import org.videolan.vlc.widget.VLCAppWidgetProviderBlack;
 import org.videolan.vlc.widget.VLCAppWidgetProviderWhite;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 
-public class PlaybackService extends MediaBrowserServiceCompat{
+public class PlaybackService extends MediaBrowserServiceCompat implements RendererDelegate.InstanceListener {
 
-    private static final String TAG = "VLC/PlaybackService";
+    private static final String TAG = "VLC/PS";
 
     private static final int SHOW_PROGRESS = 0;
     private static final int SHOW_TOAST = 1;
@@ -117,6 +150,19 @@ public class PlaybackService extends MediaBrowserServiceCompat{
 
     private static final long DELAY_DOUBLE_CLICK = 800L;
     private static final long DELAY_LONG_CLICK = 1000L;
+
+    private static boolean sIsStarted = false;
+
+    // RendererDelegate.InstanceListener
+    @Override
+    public void onReloaded() {
+        Logger.v(TAG, "RendererDelegate instance reloaded");
+        if(mAceStreamManager != null) {
+            for (RemoteDevice device : mAceStreamManager.getRemoteDevices()) {
+                RendererDelegate.INSTANCE.addDevice(device);
+            }
+        }
+    }
 
     public interface Callback {
         void update();
@@ -140,6 +186,419 @@ public class PlaybackService extends MediaBrowserServiceCompat{
     private SharedPreferences mSettings;
     private final IBinder mBinder = new LocalBinder();
     private Medialibrary mMedialibrary;
+
+    //:ace
+    // Hardcoded debug flag
+    private final static boolean LOG_STATUS_MESSAGES = false;
+
+    private RendererItemWrapper mSelectedRenderer = null;
+    private final ReentrantLock mEngineStateCallbacksLock = new ReentrantLock();
+    private Set<EngineStateCallback> mEngineStateCallbacks = null;
+
+    private EngineApi mEngineApi = null;
+    private AceStreamManager mAceStreamManager = null;
+    private AceStreamManager.Client mAceStreamManagerClient = null;
+
+    private int mLastRendererType = -1;
+    private String mLastRendererId = null;
+    private boolean mLastRendererIsGlobal = false;
+    private MediaWrapper mLastMediaWrapper = null;
+
+    private final BroadcastReceiver mLocalBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if(action == null) return;
+            switch(action) {
+                case Constants.ACTION_SERVICE_STARTED:
+                    break;
+                case Constants.ACTION_SERVICE_ENDED:
+                    // Parsing service finished, start PTFS
+                    processTransportFiles();
+                    break;
+            }
+        }
+    };
+
+    private AceStreamManager.Callback mAceStreamManagerCallback = new AceStreamManager.Callback() {
+        @Override
+        public void onEngineConnected(EngineApi service) {
+            Logger.v(TAG, "onEngineConnected: wasConnected=" + (mEngineApi != null));
+            if(mEngineApi == null) {
+                mEngineApi = service;
+                notifyEngineConnected();
+            }
+        }
+
+        @Override
+        public void onEngineFailed() {
+            Logger.v(TAG, "onEngineFailed");
+            mEngineApi = null;
+        }
+
+        @Override
+        public void onEngineUnpacking() {
+            Logger.v(TAG, "onEngineUnpacking");
+        }
+
+        @Override
+        public void onEngineStarting() {
+            Logger.v(TAG, "onEngineStarting");
+        }
+
+        @Override
+        public void onEngineStopped() {
+            Logger.v(TAG, "onEngineStopped");
+            mEngineApi = null;
+        }
+
+        @Override
+        public void onBonusAdsAvailable(boolean available) {
+        }
+    };
+
+    private DeviceDiscoveryListener mDeviceDiscoveryListener = new DeviceDiscoveryListener() {
+        @Override
+        public void onDeviceAdded(@NonNull RemoteDevice device) {
+            Logger.v(TAG, "onDeviceAdded: device=" + device + " last=" + mLastRendererId);
+            if(device.isAceCast()) {
+                RendererDelegate.INSTANCE.addDevice(device);
+            }
+            restoreRemoteDeviceConnection(device);
+        }
+
+        @Override
+        public void onDeviceRemoved(RemoteDevice device) {
+            Logger.v(TAG, "onDeviceRemoved: device=" + device);
+            boolean isGlobal = RendererDelegate.INSTANCE.getGlobalRenderer();
+            if(device.isAceCast()) {
+                RendererDelegate.INSTANCE.removeDevice(device);
+            }
+            if(isCurrentDevice(device)) {
+                Logger.v(TAG, "onDeviceRemoved: reset current: global=" + isGlobal);
+                setRenderer(null, "device.removed");
+                // Treat removing of current device as not clean disconnect.
+                handleDeviceDisconnect(new RendererItemWrapper(device), isGlobal,false);
+            }
+        }
+
+        @Override
+        public void onCurrentDeviceChanged(RemoteDevice device) {
+            //TODO: implement
+        }
+
+        @Override
+        public boolean canStopDiscovery() {
+            return true;
+        }
+    };
+
+    private AceStreamManager.PlaybackStateCallback mPlaybackStateCallback = new AceStreamManager.PlaybackStateCallback() {
+        @Override
+        public void onPlaylistUpdated() {
+        }
+
+        @Override
+        public void onStart(@Nullable EngineSession session) {
+        }
+
+        @Override
+        public void onPrebuffering(@Nullable EngineSession session, int progress) {
+        }
+
+        @Override
+        public void onPlay(@Nullable EngineSession session) {
+            RemoteDevice device = getCurrentRemoteDevice();
+            if(device != null && !device.isAceCast()) {
+                if(mAceStreamManager != null && session != null) {
+                    mAceStreamManager.startCastDevice(
+                            device.getId(),
+                            session.playbackData.resumePlayback,
+                            session.playbackData.seekOnStart,
+                            null);
+                }
+            }
+        }
+
+        @Override
+        public void onStop() {
+        }
+    };
+
+    private ConnectableDeviceListener mCsdkDeviceListener = new ConnectableDeviceListener() {
+        private long mPosition = -1;
+        private long mDuration = -1;
+        private float mVolume = 0.0f;
+        private int mStatus = -1;
+
+        @Override
+        public void onStatus(IRemoteDevice device, int status) {
+            if(mStatus == -1 && status == PlaybackStatus.FINISHED) {
+                Logger.v(TAG, "csdk:status: skip finished on start");
+                return;
+            }
+
+            mStatus = status;
+            MediaPlayerEvent delegateEvent = null;
+            switch (status) {
+                case PlaybackStatus.PLAYING:
+                    delegateEvent = new MediaPlayerEvent(MediaPlayer.Event.Playing);
+                    onMediaPlayerEvent(new MediaPlayerEvent(MediaPlayer.Event.PausableChanged, 1));
+                    break;
+                case PlaybackStatus.BUFFERING:
+                    onMediaPlayerEvent(new MediaPlayerEvent(MediaPlayer.Event.Buffering));
+                    break;
+                case PlaybackStatus.PAUSED:
+                    delegateEvent = new MediaPlayerEvent(MediaPlayer.Event.Paused);
+                    break;
+                case PlaybackStatus.IDLE:
+                    onMediaPlayerEvent(new MediaPlayerEvent(MediaPlayer.Event.Stopped));
+                    break;
+                case PlaybackStatus.UNKNOWN:
+                    onMediaPlayerEvent(new MediaPlayerEvent(MediaPlayer.Event.Stopped));
+                    break;
+                case PlaybackStatus.FINISHED:
+                    delegateEvent = new MediaPlayerEvent(MediaPlayer.Event.EndReached);
+                    break;
+            }
+
+            if(delegateEvent != null) {
+                playlistManager.fireMediaPlayerEvent(delegateEvent);
+            }
+        }
+
+        @Override
+        public void onPosition(IRemoteDevice device, Long position) {
+            if(mPosition == position) return;
+            mPosition = position;
+            onMediaPlayerEvent(new MediaPlayerEvent(
+                    MediaPlayer.Event.TimeChanged,
+                    position));
+        }
+
+        @Override
+        public void onDuration(IRemoteDevice device, Long duration) {
+            if(mDuration == duration) return;
+            mDuration = duration;
+            onMediaPlayerEvent(new MediaPlayerEvent(
+                    MediaPlayer.Event.LengthChanged,
+                    duration));
+        }
+
+        @Override
+        public void onVolume(IRemoteDevice device, Float volume) {
+            if(mVolume == volume) return;
+            mVolume = volume;
+            onMediaPlayerEvent(new MediaPlayerEvent(
+                    MediaPlayerEvent.VolumeChanged,
+                    (int)(volume * 100)));
+        }
+    };
+
+    private RemoteDeviceListener mRemoteDeviceListener = new RemoteDeviceListener() {
+        @Override
+        public void onConnected(RemoteDevice device) {
+            Logger.v(TAG, "onConnected: device=" + device);
+        }
+
+        @Override
+        public void onDisconnected(RemoteDevice device, boolean cleanShutdown) {
+            Logger.v(TAG, "onDisconnected: clean=" + cleanShutdown + " device=" + device);
+            if(isCurrentDevice(device)) {
+                handleDeviceDisconnect(
+                        new RendererItemWrapper(device),
+                        RendererDelegate.INSTANCE.getGlobalRenderer(),
+                        cleanShutdown);
+            }
+        }
+
+        @Override
+        public void onMessage(@NonNull RemoteDevice device, JsonRpcMessage msg) {
+            if(LOG_STATUS_MESSAGES || !TextUtils.equals(msg.getMethod(), RemoteDevice.Messages.ENGINE_STATUS) && !TextUtils.equals(msg.getMethod(), RemoteDevice.Messages.PLAYER_STATUS)) {
+                Log.v(TAG, "onMessage: msg=" + msg.toString() + " device=" + device.toString());
+            }
+
+            // Set delegateEvent when need to pass this event to playlist manager.
+            // Need this because some events triggers some logic.
+            // PlaybackService.onMediaPlayerEvent() will be called from playlist manager in such
+            // case, no need to call it here.
+            MediaPlayerEvent delegateEvent = null;
+            switch(msg.getMethod()) {
+                case RemoteDevice.Messages.PLAYER_PLAYING:
+                    delegateEvent = new MediaPlayerEvent(MediaPlayer.Event.Playing);
+                    break;
+                case RemoteDevice.Messages.PLAYER_PAUSED:
+                    delegateEvent = new MediaPlayerEvent(MediaPlayer.Event.Paused);
+                    break;
+                case RemoteDevice.Messages.PLAYER_BUFFERING:
+                    onMediaPlayerEvent(new MediaPlayerEvent(MediaPlayer.Event.Buffering));
+                    break;
+                case RemoteDevice.Messages.PLAYER_STOPPED:
+                    onMediaPlayerEvent(new MediaPlayerEvent(MediaPlayer.Event.Stopped));
+                    break;
+                case RemoteDevice.Messages.PLAYER_END_REACHED:
+                    delegateEvent = new MediaPlayerEvent(MediaPlayer.Event.EndReached);
+                    break;
+                case RemoteDevice.Messages.PLAYER_CLOSED:
+                    // Stop to clear local playlist and save metadata
+                    // PlayerClosed media event will be sent from stop() when remote device is connected
+                    stop();
+                    break;
+                case RemoteDevice.Messages.PLAYER_OPENING:
+                    onMediaPlayerEvent(new MediaPlayerEvent(MediaPlayer.Event.Opening));
+                    break;
+                case RemoteDevice.Messages.PLAYER_ERROR:
+                    onMediaPlayerEvent(new MediaPlayerEvent(MediaPlayer.Event.EncounteredError));
+                    break;
+                case RemoteDevice.Messages.PLAYER_PAUSABLE_CHANGED:
+                    onMediaPlayerEvent(new MediaPlayerEvent(
+                            MediaPlayer.Event.PausableChanged,
+                            msg.getBoolean("value") ? 1 : 0));
+                    break;
+                case RemoteDevice.Messages.PLAYER_TIME_CHANGED:
+                    onMediaPlayerEvent(new MediaPlayerEvent(
+                            MediaPlayer.Event.TimeChanged,
+                            msg.getLong("value")));
+                    break;
+                case RemoteDevice.Messages.PLAYER_LENGTH_CHANGED:
+                    onMediaPlayerEvent(new MediaPlayerEvent(
+                            MediaPlayer.Event.LengthChanged,
+                            msg.getLong("value")));
+                    break;
+                case RemoteDevice.Messages.PLAYER_VOLUME_CHANGED:
+                    onMediaPlayerEvent(new MediaPlayerEvent(
+                            MediaPlayerEvent.VolumeChanged,
+                            msg.getInt("value")));
+                    break;
+                case RemoteDevice.Messages.PLAYER_VIDEO_SIZE_CHANGED:
+                    onMediaPlayerEvent(new MediaPlayerEvent(
+                            MediaPlayerEvent.VideoSizeChanged,
+                            msg.getInt("value")));
+                    break;
+                case RemoteDevice.Messages.PLAYER_DEINTERLACE_MODE_CHANGED:
+                    onMediaPlayerEvent(new MediaPlayerEvent(
+                            MediaPlayerEvent.DeinterlaceModeChanged,
+                            msg.getString("value")));
+                    break;
+                case RemoteDevice.Messages.PLAYER_AUDIO_TRACKS_CHANGED:
+                    // This event invalidates tracks
+                    onMediaPlayerEvent(new MediaPlayerEvent(MediaPlayer.Event.ESAdded, Media.Track.Type.Audio));
+                    break;
+                case RemoteDevice.Messages.PLAYER_SUBTITLE_TRACKS_CHANGED:
+                    // This event invalidates tracks
+                    onMediaPlayerEvent(new MediaPlayerEvent(MediaPlayer.Event.ESAdded, Media.Track.Type.Text));
+                    break;
+                case RemoteDevice.Messages.ENGINE_STATUS:
+                    EngineStatus status = EngineStatus.fromJson(msg.getString("status"));
+                    if(status != null) {
+                        status.selectedPlayer = SelectedPlayer.fromId(msg.getString("selectedPlayer"));
+                        status.outputFormat = msg.getString("outputFormat");
+                        status.fileIndex = msg.getInt("fileIndex", -1);
+
+                        MediaWrapper mw = getCurrentMediaWrapper();
+                        if(mw != null && status.fileIndex != -1 && mw.getP2PFileIndex() != -1) {
+                            int localIndex = mw.getP2PFileIndex();
+                            if (localIndex != status.fileIndex) {
+                                Logger.v(TAG, "onMessage:engine-status: remote file index changed: " + localIndex + "->" + status.fileIndex);
+                                Uri baseUri = mw.getP2PBaseUri();
+                                if(baseUri != null) {
+                                    boolean found = false;
+                                    for(int i=0; i < playlistManager.getMediaListSize(); i++) {
+                                        MediaWrapper media = playlistManager.getMedia(i);
+                                        if (media != null && baseUri.equals(media.getP2PBaseUri()) && media.getP2PFileIndex() == status.fileIndex) {
+                                            Logger.v(TAG, "onMessage:engine-status: media found in playlist: i=" + i + " uri=" + media.getUri());
+                                            found = true;
+                                            playlistManager.updateCurrentIndex(i);
+                                        }
+                                    }
+
+                                    if(!found) {
+                                        Uri target = Uri.parse(baseUri.toString() + "&index=" + status.fileIndex);
+                                        MediaWrapper media = mMedialibrary.getMedia(target);
+                                        Logger.v(TAG, "onMessage:engine-status: find in ml: target=" + target + " media=" + (media == null ? null : media.getUri()));
+                                        if(media != null) {
+                                            load(media, false);
+                                        }
+                                        else {
+                                            loadUri(target, false);
+                                        }
+                                    }
+
+                                    if(found) {
+                                        //TODO: notify video player activity via broadcast that current item changed?
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+
+            if(delegateEvent != null) {
+                playlistManager.fireMediaPlayerEvent(delegateEvent);
+            }
+        }
+
+        @Override
+        public void onAvailable(RemoteDevice device) {
+        }
+
+        @Override
+        public void onUnavailable(RemoteDevice device) {
+        }
+
+        @Override
+        public void onPingFailed(RemoteDevice device) {
+        }
+
+        @Override
+        public void onOutputFormatChanged(RemoteDevice device, String outputFormat) {
+        }
+
+        @Override
+        public void onSelectedPlayerChanged(RemoteDevice device, SelectedPlayer player) {
+        }
+    };
+
+    private AceStreamManager.Client.Callback mAceStreamManagerClientCallback = new AceStreamManager.Client.Callback() {
+        @Override
+        public void onConnected(AceStreamManager service) {
+            Log.v(TAG, "playback manager connected");
+            mAceStreamManager = service;
+            mAceStreamManager.addCallback(mAceStreamManagerCallback);
+            mAceStreamManager.addDeviceDiscoveryListener(mDeviceDiscoveryListener);
+            mAceStreamManager.addRemoteDeviceListener(mRemoteDeviceListener);
+            mAceStreamManager.addPlaybackStatusListener(mCsdkDeviceListener);
+            mAceStreamManager.addPlaybackStateCallback(mPlaybackStateCallback);
+
+            mAceStreamManager.startEngine();
+
+            // Now we got access to ace remote devices so number of renderers may change.
+            //notifyRemoteDeviceListeners();
+
+            for(RemoteDevice device: mAceStreamManager.getRemoteDevices()) {
+                RendererDelegate.INSTANCE.addDevice(device);
+            }
+        }
+
+        @Override
+        public void onDisconnected() {
+            Log.v(TAG, "playback manager disconnected");
+            if(mAceStreamManager != null) {
+                mAceStreamManager.removeCallback(mAceStreamManagerCallback);
+                mAceStreamManager.removeDeviceDiscoveryListener(mDeviceDiscoveryListener);
+                mAceStreamManager.removeRemoteDeviceListener(mRemoteDeviceListener);
+                mAceStreamManager.removePlaybackStatusListener(mCsdkDeviceListener);
+                mAceStreamManager.removePlaybackStateCallback(mPlaybackStateCallback);
+                mAceStreamManager = null;
+            }
+        }
+    };
+
+    public interface EngineStateCallback {
+        void onEngineConnected(@NonNull AceStreamManager playbackManager, @NonNull EngineApi engineApi);
+    }
+    ///ace
 
     private final List<Callback> mCallbacks = new ArrayList<>();
     private boolean mDetectHeadset = true;
@@ -173,7 +632,9 @@ public class PlaybackService extends MediaBrowserServiceCompat{
 
     @Override
     public void onCreate() {
+        Logger.v(TAG, "onCreate");
         super.onCreate();
+        sIsStarted = true;
         mSettings = PreferenceManager.getDefaultSharedPreferences(this);
         playlistManager = new PlaylistManager(this);
         if (!VLCInstance.testCompatibleCPU(this)) {
@@ -191,7 +652,9 @@ public class PlaybackService extends MediaBrowserServiceCompat{
         // Make sure the audio player will acquire a wake-lock while playing. If we don't do
         // that, the CPU might go to sleep while the song is playing, causing playback to stop.
         final PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
-        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+        if(pm != null) {
+            mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "acestream:ps");
+        }
 
         updateHasWidget();
         initMediaSession();
@@ -214,7 +677,12 @@ public class PlaybackService extends MediaBrowserServiceCompat{
         filter.addAction(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
         filter.addAction(VLCApplication.SLEEP_INTENT);
         filter.addAction(Constants.ACTION_CAR_MODE_EXIT);
+        filter.addAction(Constants.ACTION_ACE_STREAM_PLAYER_EVENT);
         registerReceiver(mReceiver, filter);
+
+        IntentFilter lbFilter = new IntentFilter(Constants.ACTION_SERVICE_STARTED);
+        lbFilter.addAction(Constants.ACTION_SERVICE_ENDED);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mLocalBroadcastReceiver, lbFilter);
 
         final boolean stealRemoteControl = mSettings.getBoolean("enable_steal_remote_control", false);
 
@@ -227,6 +695,22 @@ public class PlaybackService extends MediaBrowserServiceCompat{
             registerReceiver(mRemoteControlClientReceiver, stealFilter);
         }
         mKeyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+
+        //:ace
+        mEngineStateCallbacks = new CopyOnWriteArraySet<>();
+        mAceStreamManagerClient = new AceStreamManager.Client(this, mAceStreamManagerClientCallback);
+        mAceStreamManagerClient.connect();
+
+        RendererDelegate.INSTANCE.addInstanceListener(this);
+        RendererDelegate.INSTANCE.resume();
+
+        // Restore selected renderer from RendererDelegate instance
+        updateRenderer("service.onCreate");
+        ///ace
+    }
+
+    public void updateRenderer(String caller) {
+        setRenderer(RendererDelegate.INSTANCE.getSelectedRenderer(), caller);
     }
 
     private MedialibraryReceiver mLibraryReceiver = null;
@@ -249,9 +733,10 @@ public class PlaybackService extends MediaBrowserServiceCompat{
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(final Intent intent, int flags, int startId) {
         if (intent == null) return START_NOT_STICKY;
         final String action = intent.getAction();
+
         if (Intent.ACTION_MEDIA_BUTTON.equals(action)) {
             MediaButtonReceiver.handleIntent(mMediaSession, intent);
             return START_NOT_STICKY;
@@ -269,14 +754,177 @@ public class PlaybackService extends MediaBrowserServiceCompat{
             mMediaSession.getController().getTransportControls()
                     .playFromSearch(extras.getString(SearchManager.QUERY), extras);
         }
+        else if(VlcBridge.ACTION_START_PLAYBACK_SERVICE.equals(action)) {
+            handleBridgeAction(intent);
+        }
+
         return START_NOT_STICKY;
+    }
+
+    private void handleBridgeAction(final Intent intent) {
+        String action = VlcBridge.getAction(intent);
+        Log.v(TAG, "handleBridgeAction: action=" + action);
+
+        if(VlcBridge.ACTION_SAVE_P2P_PLAYLIST.equals(action)) {
+            MediaWrapperList playlist = parseP2PPlaylist(intent);
+            if(playlist != null) {
+                playlistManager.saveMediaList(playlist);
+
+                // Save first item to history
+                MediaWrapper firstMedia = playlist.getMedia(0);
+                if(firstMedia != null) {
+                    playlistManager.increasePlayCount(firstMedia, 0);
+                }
+            }
+        }
+        else if(VlcBridge.ACTION_LOAD_P2P_PLAYLIST.equals(action)) {
+            mAceStreamManagerClient.runWhenReady(new Runnable() {
+                @Override
+                public void run() {
+                    loadP2PPlaylist(intent);
+                }
+            });
+        }
+        else if(VlcBridge.ACTION_STOP_PLAYBACK.equals(action)) {
+            stop(intent.getBooleanExtra("systemExit", false),
+                    intent.getBooleanExtra("clearPlaylist", false),
+                    intent.getBooleanExtra("saveMetadata", false));
+        }
+        else if(VlcBridge.ACTION_SAVE_METADATA.equals(action)) {
+            saveMediaMeta();
+        }
+    }
+
+    public void showSimplePlaybackNotification() {
+        if(!mIsForeground) {
+            Notification notification = NotificationHelper.createSimplePlaybackNotification(this);
+            startForeground(4, notification);
+            mIsForeground = true;
+        }
+    }
+
+    public void hideSimplePlaybackNotification() {
+        if (mIsForeground) {
+            stopForeground(true);
+            mIsForeground = false;
+        }
+        NotificationManagerCompat.from(this).cancel(4);
+    }
+
+    private void loadP2PPlaylist(final Intent intent) {
+        SelectedPlayer player = null;
+        if(intent.hasExtra(VlcBridge.EXTRA_PLAYER)) {
+            try {
+                player = SelectedPlayer.fromJson(intent.getStringExtra(VlcBridge.EXTRA_PLAYER));
+                RemoteDevice device = mAceStreamManager.findRemoteDevice(player);
+                RendererItemWrapper renderer = device == null ? null : new RendererItemWrapper(device);
+
+                Logger.v(TAG, "receiver:load_p2p_playlist: set renderer: " + renderer);
+                if (renderer != null) {
+                    RendererDelegate.INSTANCE.selectRenderer(true, renderer, false);
+                } else {
+                    RendererDelegate.INSTANCE.selectRenderer(true, null, false);
+                }
+            }
+            catch(JSONException e) {
+                Log.e(TAG, "error", e);
+            }
+        }
+
+        int playlistPosition = intent.getIntExtra(VlcBridge.EXTRA_PLAYLIST_POSITION, 0);
+        boolean start = intent.getBooleanExtra(VlcBridge.EXTRA_START, true);
+        boolean skipPlayer = intent.getBooleanExtra(VlcBridge.EXTRA_SKIP_PLAYER, false);
+        boolean skipResettingDevices = intent.getBooleanExtra(VlcBridge.EXTRA_SKIP_RESETTINGS_DEVICES, false);
+
+        Bundle extras = new Bundle();
+        if(intent.hasExtra(VlcBridge.EXTRA_REMOTE_CLIENT_ID)) {
+            extras.putString("remoteClientId", intent.getStringExtra(VlcBridge.EXTRA_REMOTE_CLIENT_ID));
+        }
+        if(intent.hasExtra(VlcBridge.EXTRA_SEEK_ON_START)) {
+            extras.putLong("seekOnStart", intent.getLongExtra(VlcBridge.EXTRA_SEEK_ON_START, -1));
+        }
+        if(intent.hasExtra(VlcBridge.EXTRA_ASK_RESUME)) {
+            extras.putBoolean("askResume", intent.getBooleanExtra(VlcBridge.EXTRA_ASK_RESUME, false));
+        }
+        if(player != null) {
+            extras.putString("player", player.toJson());
+        }
+
+        MediaWrapperList playlist = parseP2PPlaylist(intent);
+        if(playlist != null) {
+            load(playlist.getAll(),
+                 playlistPosition,
+                 start,
+                 skipPlayer,
+                 skipResettingDevices,
+                 extras);
+        }
+    }
+
+    private MediaWrapperList parseP2PPlaylist(Intent intent) {
+        try {
+            TransportFileDescriptor descriptor = TransportFileDescriptor.fromJson(intent.getStringExtra(VlcBridge.EXTRA_DESCRIPTOR));
+            MediaFilesResponse metadata = null;
+            if(intent.hasExtra(VlcBridge.EXTRA_METADATA)) {
+                metadata = MediaFilesResponse.fromJson(intent.getStringExtra(VlcBridge.EXTRA_METADATA));
+            }
+            String[] mediaFiles = intent.getStringArrayExtra(VlcBridge.EXTRA_MEDIA_FILES);
+            boolean isMulti = mediaFiles.length > 1;
+            final File transportFile = MiscUtils.getFile(descriptor.getLocalPath());
+            MediaWrapperList playlist = new MediaWrapperList();
+            for(String mediaFileJson: mediaFiles) {
+                MediaFilesResponse.MediaFile mf = MediaFilesResponse.MediaFile.fromJson(mediaFileJson);
+                MediaWrapper mw = new MediaWrapper(descriptor, mf);
+                playlist.add(mw);
+
+                if(mMedialibrary != null && mMedialibrary.isInitiated()) {
+                    MediaWrapper mlItem = mMedialibrary.findMedia(mw);
+                    if (mlItem == null || mlItem.getId() == 0) {
+                        mw = mMedialibrary.addMedia(mw);
+                        if (mw != null) {
+                            if (isMulti && metadata != null && !TextUtils.isEmpty(metadata.name)) {
+                                // Set group name for multifile torrent
+                                mw.setStringMeta(MediaWrapper.META_GROUP_NAME, metadata.name);
+                            }
+                            if (!mf.isLive()) {
+                                mw.setLongMeta(MediaWrapper.META_FILE_SIZE,
+                                        mf.size);
+                            }
+                            if (transportFile != null && transportFile.exists()) {
+                                mw.setStringMeta(MediaWrapper.META_TRANSPORT_FILE_PATH,
+                                        transportFile.getAbsolutePath());
+                                mw.setLongMeta(MediaWrapper.META_LAST_MODIFIED,
+                                        transportFile.lastModified());
+                            }
+                        }
+                    }
+                }
+            }
+            playlist.sort();
+
+
+            return playlist;
+        }
+        catch(Throwable e) {
+            Log.e(TAG, "parseP2PPlaylist: error", e);
+            return null;
+        }
     }
 
     @Override
     public void onDestroy() {
+        Logger.v(TAG, "onDestroy");
         super.onDestroy();
+        sIsStarted = false;
+
+        //:ace
+        RendererDelegate.INSTANCE.shutdown();
+        RendererDelegate.INSTANCE.removeInstanceListener(this);
+        ///ace
+
         mHandler.removeCallbacksAndMessages(null);
         if (mMediaSession != null) {
+            mMediaSession.setActive(false);
             mMediaSession.release();
             mMediaSession = null;
         }
@@ -285,12 +933,19 @@ public class PlaybackService extends MediaBrowserServiceCompat{
 
         if (!AndroidDevices.hasTsp && !AndroidDevices.hasPlayServices)
             AndroidDevices.setRemoteControlReceiverEnabled(false);
+
         unregisterReceiver(mReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mLocalBroadcastReceiver);
+
         if (mRemoteControlClientReceiver != null) {
             unregisterReceiver(mRemoteControlClientReceiver);
             mRemoteControlClientReceiver = null;
         }
         playlistManager.onServiceDestroyed();
+
+        //:ace
+        mAceStreamManagerClient.disconnect();
+        ///ace
     }
 
     @Override
@@ -318,10 +973,13 @@ public class PlaybackService extends MediaBrowserServiceCompat{
                  */
                 switch (focusChange) {
                     case AudioManager.AUDIOFOCUS_LOSS:
-                        if (BuildConfig.DEBUG) Log.i(TAG, "AUDIOFOCUS_LOSS");
-                        // Pause playback
-                        changeAudioFocus(false);
-                        pause();
+                        boolean shouldPause = mSettings.getBoolean(org.acestream.sdk.Constants.PREF_KEY_PAUSE_ON_AUDIOFOCUS_LOSS, org.acestream.sdk.Constants.PREF_DEFAULT_PAUSE_ON_AUDIOFOCUS_LOSS);
+                        if (BuildConfig.DEBUG) Log.i(TAG, "AUDIOFOCUS_LOSS: shouldPause=" + shouldPause);
+                        if(shouldPause) {
+                            // Pause playback
+                            changeAudioFocus(false);
+                            pause();
+                        }
                         break;
                     case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
                         if (BuildConfig.DEBUG) Log.i(TAG, "AUDIOFOCUS_LOSS_TRANSIENT");
@@ -499,6 +1157,11 @@ public class PlaybackService extends MediaBrowserServiceCompat{
                 }
             } else if (action.equalsIgnoreCase(Constants.ACTION_CAR_MODE_EXIT))
                 BrowserProvider.unbindExtensionConnection();
+
+            // Handle events from AceStream player
+            if(TextUtils.equals(action, Constants.ACTION_ACE_STREAM_PLAYER_EVENT)) {
+                handleAceStreamPlayerEvent(intent);
+            }
         }
     };
 
@@ -681,7 +1344,7 @@ public class PlaybackService extends MediaBrowserServiceCompat{
                                     : AudioUtil.readCoverBitmap(Uri.decode(mw.getArtworkMrl()), 256);
                         }
                         if (cover == null || cover.isRecycled())
-                            cover = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_no_media);
+                            cover = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.acestreamplayer);
 
                         final Notification notification = NotificationHelper.createPlaybackNotification(ctx,
                                 mw.hasFlag(MediaWrapper.MEDIA_FORCE_AUDIO), title, artist, album,
@@ -715,7 +1378,7 @@ public class PlaybackService extends MediaBrowserServiceCompat{
     }
 
     public PendingIntent getSessionPendingIntent() {
-        if (playlistManager.getPlayer().isVideoPlaying()) { //PIP
+        if (playlistManager.getPlayer().isVideoPlaying() || isRemoteDeviceConnected()) { //PIP or AceCast
             final Intent notificationIntent = new Intent(this, VideoPlayerActivity.class);
             return PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         } if (playlistManager.getVideoBackground() || (canSwitchToVideo() && !currentMediaHasFlag(MediaWrapper.MEDIA_FORCE_AUDIO))) { //resume video playback
@@ -757,23 +1420,24 @@ public class PlaybackService extends MediaBrowserServiceCompat{
 
     @MainThread
     public void pause() {
-        playlistManager.pause();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            device.pause();
+        }
+        else {
+            playlistManager.pause();
+        }
     }
 
     @MainThread
     public void play() {
-        playlistManager.play();
-    }
-
-    @MainThread
-    public void stop() {
-        stop(false);
-    }
-
-    @MainThread
-    public void stop(boolean systemExit) {
-        removePopup();
-        playlistManager.stop(systemExit);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            device.play();
+        }
+        else {
+            playlistManager.play();
+        }
     }
 
     private void initMediaSession() {
@@ -784,7 +1448,7 @@ public class PlaybackService extends MediaBrowserServiceCompat{
         final ComponentName mbrName = new ComponentName(this, RemoteControlClientReceiver.class);
 
         mSessionCallback = new MediaSessionCallback();
-        mMediaSession = new MediaSessionCompat(this, "VLC", mbrName, mbrIntent);
+        mMediaSession = new MediaSessionCompat(this, "AceStream", mbrName, mbrIntent);
         mMediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS
                 | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
         mMediaSession.setCallback(mSessionCallback);
@@ -800,6 +1464,21 @@ public class PlaybackService extends MediaBrowserServiceCompat{
             mMediaSession.setActive(true);
         }
         setSessionToken(mMediaSession.getSessionToken());
+    }
+
+    private void updateMediaSession(String title, String artist) {
+        if(mMediaSession == null) return;
+
+        if(TextUtils.isEmpty(artist)) {
+            artist = "";
+        }
+
+        MediaMetadataCompat metadata = new MediaMetadataCompat.Builder()
+            .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_TITLE, title)
+            .putString(MediaMetadataCompat.METADATA_KEY_TITLE, title)
+            .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, artist)
+            .build();
+        mMediaSession.setMetadata(metadata);
     }
 
     private final class MediaSessionCallback extends MediaSessionCompat.Callback {
@@ -921,7 +1600,7 @@ public class PlaybackService extends MediaBrowserServiceCompat{
                     MediaLibraryItem[] items = null;
                     MediaWrapper[] tracks = null;
                     if (vsp.isAny) {
-                        items = mMedialibrary.getAudio();
+                        items = mMedialibrary.getAudio(-1, -1);
                         if (!isShuffling())
                             shuffle();
                     } else if (vsp.isArtistFocus) {
@@ -1000,6 +1679,7 @@ public class PlaybackService extends MediaBrowserServiceCompat{
             initMediaSession();
         final Context ctx = this;
         ExecutorHolder.executorService.execute(new Runnable() {
+            @SuppressLint("WrongConstant")
             @Override
             public void run() {
                 synchronized (ExecutorHolder.updateMeta) {
@@ -1012,6 +1692,7 @@ public class PlaybackService extends MediaBrowserServiceCompat{
                 boolean coverOnLockscreen = mSettings.getBoolean("lockscreen_cover", true);
                 final MediaMetadataCompat.Builder bob = new MediaMetadataCompat.Builder();
                 bob.putString(MediaMetadataCompat.METADATA_KEY_TITLE, title)
+                        .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_TITLE, title)
                         .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID, BrowserProvider.generateMediaId(media))
                         .putString(MediaMetadataCompat.METADATA_KEY_GENRE, MediaUtils.getMediaGenre(ctx, media))
                         .putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER, media.getTrackNumber())
@@ -1048,7 +1729,7 @@ public class PlaybackService extends MediaBrowserServiceCompat{
         long actions = PLAYBACK_BASE_ACTIONS;
         final boolean hasMedia = playlistManager.hasCurrentMedia();
         long time = getTime();
-        int state = playlistManager.getPlayer().getPlaybackState();
+        int state = getPlaybackState();
         if (state == PlaybackStateCompat.STATE_PLAYING) {
             actions |= PlaybackStateCompat.ACTION_PAUSE | PlaybackStateCompat.ACTION_STOP;
         } else if (state == PlaybackStateCompat.STATE_PAUSED) {
@@ -1066,7 +1747,7 @@ public class PlaybackService extends MediaBrowserServiceCompat{
                 }
             }
         }
-        pscb.setState(state, time, playlistManager.getPlayer().getRate());
+        pscb.setState(state, time, getRate());
         final int repeatType = playlistManager.getRepeating();
         if (repeatType != Constants.REPEAT_NONE || hasNext())
             actions |= PlaybackStateCompat.ACTION_SKIP_TO_NEXT;
@@ -1091,6 +1772,13 @@ public class PlaybackService extends MediaBrowserServiceCompat{
             sendStartSessionIdIntent();
         else
             sendStopSessionIdIntent();
+
+        if(hasMedia) {
+            MediaWrapper mw = playlistManager.getCurrentMedia();
+            if(mw != null) {
+                updateMediaSession(mw.getTitle(), mw.getArtist());
+            }
+        }
     }
 
     private void notifyTrackChanged() {
@@ -1125,6 +1813,11 @@ public class PlaybackService extends MediaBrowserServiceCompat{
     @MainThread
     public void setRepeatType(int repeatType) {
         playlistManager.setRepeatType(repeatType);
+        publishState();
+    }
+
+    public void setShuffle(boolean shuffle) {
+        playlistManager.setShuffle(shuffle);
         publishState();
     }
 
@@ -1204,7 +1897,12 @@ public class PlaybackService extends MediaBrowserServiceCompat{
     }
 
     public void loadLastPlaylist(int type) {
+        resetDisconnectedRemoteDevices();
         playlistManager.loadLastPlaylist(type);
+    }
+
+    public List<MediaWrapper> getLastPlaylist(int type) {
+        return playlistManager.getLastPlaylistSync(type);
     }
 
     public void showToast(String text, int duration) {
@@ -1219,17 +1917,35 @@ public class PlaybackService extends MediaBrowserServiceCompat{
 
     @MainThread
     public boolean isPlaying() {
-        return playlistManager.getPlayer().isPlaying();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.isPlaying();
+        }
+        else {
+            return playlistManager.getPlayer().isPlaying();
+        }
     }
 
     @MainThread
     public boolean isSeekable() {
-        return playlistManager.getPlayer().getSeekable();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.isSeekable();
+        }
+        else {
+            return playlistManager.getPlayer().getSeekable();
+        }
     }
 
     @MainThread
     public boolean isPausable() {
-        return playlistManager.getPlayer().getPausable();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.isPausable();
+        }
+        else {
+            return playlistManager.getPlayer().getPausable();
+        }
     }
 
     @MainThread
@@ -1259,7 +1975,13 @@ public class PlaybackService extends MediaBrowserServiceCompat{
 
     @MainThread
     public boolean isVideoPlaying() {
-        return playlistManager.getPlayer().isVideoPlaying();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.isVideoPlaying();
+        }
+        else {
+            return playlistManager.getPlayer().isVideoPlaying();
+        }
     }
 
     @MainThread
@@ -1344,12 +2066,24 @@ public class PlaybackService extends MediaBrowserServiceCompat{
 
     @MainThread
     public long getTime() {
-        return playlistManager.getPlayer().getTime();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getTime();
+        }
+        else {
+            return playlistManager.getPlayer().getTime();
+        }
     }
 
     @MainThread
     public long getLength() {
-        return playlistManager.getPlayer().getLength();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getLength();
+        }
+        else {
+            return playlistManager.getPlayer().getLength();
+        }
     }
 
     public void restartMediaPlayer() {
@@ -1377,28 +2111,77 @@ public class PlaybackService extends MediaBrowserServiceCompat{
      */
     @MainThread
     public void loadLocations(List<String> mediaPathList, int position) {
-        playlistManager.loadLocations(mediaPathList, position);
+        loadLocations(mediaPathList, position, true);
+    }
+
+    @MainThread
+    public void loadLocations(List<String> mediaPathList, int position, boolean start) {
+        playlistManager.loadLocations(mediaPathList, position, start);
     }
 
     @MainThread
     public void loadUri(Uri uri) {
-        loadLocation(uri.toString());
+        loadUri(uri, true);
+    }
+
+    @MainThread
+    public void loadUri(Uri uri, boolean start) {
+        loadLocation(uri.toString(), start);
     }
 
     @MainThread
     public void loadLocation(String mediaPath) {
-        loadLocations(Collections.singletonList(mediaPath), 0);
+        loadLocation(mediaPath, true);
+    }
+
+    @MainThread
+    public void loadLocation(String mediaPath, boolean start) {
+        loadLocations(Collections.singletonList(mediaPath), 0, start);
     }
 
     @MainThread
     public void load(MediaWrapper[] mediaList, int position) {
-        load(Arrays.asList(mediaList), position);
+        load(Arrays.asList(mediaList), position, true, false, false, null);
     }
 
     @MainThread
     public void load(List<MediaWrapper> mediaList, int position) {
-        playlistManager.load(mediaList, position);
+        load(mediaList, position, true, false, false, null);
     }
+
+    //:ace
+    @MainThread
+    public void load(List<MediaWrapper> mediaList, int position, boolean start, boolean skipPlayer, boolean skipResettingDevices, Bundle extras) {
+        if(isAceCastSelected()) {
+            // Filter media list: leave only p2p items.
+            // Reason: AceCast supports only p2p items.
+            List<MediaWrapper> filteredList = new ArrayList<>();
+            for (MediaWrapper mw : mediaList) {
+                if(mw.isP2PItem()) {
+                    filteredList.add(mw);
+                }
+            }
+
+            if(filteredList.size() == 0) {
+                // Close video player if started
+                Log.w(TAG, "load: deny playing regular playlist over acecast");
+                LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(Constants.EXIT_PLAYER));
+                //TODO: translate
+                AceStream.toast("Only P2P playlist can be used with AceCast");
+                return;
+            }
+
+            if(position >= filteredList.size()) {
+                position = filteredList.size() - 1;
+            }
+            mediaList = filteredList;
+        }
+        if(!skipResettingDevices) {
+            resetDisconnectedRemoteDevices();
+        }
+        playlistManager.load(mediaList, position, start, skipPlayer, extras);
+    }
+    ///ace
 
     private void updateMediaQueue() {
         final LinkedList<MediaSessionCompat.QueueItem> queue = new LinkedList<>();
@@ -1418,9 +2201,26 @@ public class PlaybackService extends MediaBrowserServiceCompat{
     }
 
     @MainThread
-    public void load(MediaWrapper media) {
-        load(Collections.singletonList(media), 0);
+    public void load(@NonNull MediaWrapper media) {
+        load(media, true, false, null);
     }
+
+    @MainThread
+    public void load(@NonNull MediaWrapper media, Bundle extras) {
+        load(media, true, false, extras);
+    }
+
+    @MainThread
+    public void load(MediaWrapper media, boolean skipPlayer) {
+        load(media, true, skipPlayer, null);
+    }
+
+    //:ace
+    @MainThread
+    public void load(MediaWrapper media, boolean start, boolean skipPlayer, Bundle extras) {
+        load(Collections.singletonList(media), 0, start, skipPlayer, false, extras);
+    }
+    ///ace
 
     /**
      * Play a media from the media list (playlist)
@@ -1429,7 +2229,11 @@ public class PlaybackService extends MediaBrowserServiceCompat{
      * @param flags LibVLC.MEDIA_* flags
      */
     public void playIndex(int index, int flags) {
-        playlistManager.playIndex(index, flags);
+        playlistManager.playIndex(index, flags, false, null);
+    }
+
+    public void playIndex(int index, Bundle extras) {
+        playlistManager.playIndex(index, 0, false, extras);
     }
 
     /**
@@ -1601,12 +2405,18 @@ public class PlaybackService extends MediaBrowserServiceCompat{
 
     @MainThread
     public MediaWrapper getCurrentMediaWrapper() {
-        return PlaybackService.this.playlistManager.getCurrentMedia();
+        return playlistManager.getCurrentMedia();
     }
 
     @MainThread
     public void setTime(long time) {
-        playlistManager.getPlayer().setTime(time);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            device.setTime(time);
+        }
+        else {
+            playlistManager.getPlayer().setTime(time);
+        }
     }
 
     @MainThread
@@ -1626,57 +2436,123 @@ public class PlaybackService extends MediaBrowserServiceCompat{
 
     @MainThread
     public float getRate()  {
-        return playlistManager.getPlayer().getRate();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getRate();
+        }
+        else {
+            return playlistManager.getPlayer().getRate();
+        }
     }
 
     @MainThread
     public void setRate(float rate, boolean save) {
-        playlistManager.getPlayer().setRate(rate, save);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            device.setRate(rate, save);
+        }
+        else {
+            playlistManager.getPlayer().setRate(rate, save);
+        }
     }
 
     @MainThread
     public void navigate(int where) {
-        playlistManager.getPlayer().navigate(where);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            // not implemented
+        }
+        else {
+            playlistManager.getPlayer().navigate(where);
+        }
     }
 
     @MainThread
     public MediaPlayer.Chapter[] getChapters(int title) {
-        return playlistManager.getPlayer().getChapters(title);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return null;
+        }
+        else {
+            return playlistManager.getPlayer().getChapters(title);
+        }
     }
 
     @MainThread
     public MediaPlayer.Title[] getTitles() {
-        return playlistManager.getPlayer().getTitles();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return null;
+        }
+        else {
+            return playlistManager.getPlayer().getTitles();
+        }
     }
 
     @MainThread
     public int getChapterIdx() {
-        return playlistManager.getPlayer().getChapterIdx();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return 0;
+        }
+        else {
+            return playlistManager.getPlayer().getChapterIdx();
+        }
     }
 
     @MainThread
     public void setChapterIdx(int chapter) {
-        playlistManager.getPlayer().setChapterIdx(chapter);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            // not implemented
+        }
+        else {
+            playlistManager.getPlayer().setChapterIdx(chapter);
+        }
     }
 
     @MainThread
     public int getTitleIdx() {
-        return playlistManager.getPlayer().getTitleIdx();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return 0;
+        }
+        else {
+            return playlistManager.getPlayer().getTitleIdx();
+        }
     }
 
     @MainThread
     public void setTitleIdx(int title) {
-        playlistManager.getPlayer().setTitleIdx(title);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            // not implemented
+        }
+        else {
+            playlistManager.getPlayer().setTitleIdx(title);
+        }
     }
 
     @MainThread
     public int getVolume() {
-        return playlistManager.getPlayer().getVolume();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getVolume();
+        }
+        else {
+            return playlistManager.getPlayer().getVolume();
+        }
     }
 
     @MainThread
     public int setVolume(int volume) {
-        return playlistManager.getPlayer().setVolume(volume);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.setVolume(volume);
+        }
+        else {
+            return playlistManager.getPlayer().setVolume(volume);
+        }
     }
 
     @MainThread
@@ -1692,7 +2568,14 @@ public class PlaybackService extends MediaBrowserServiceCompat{
 
     @MainThread
     public boolean updateViewpoint(float yaw, float pitch, float roll, float fov, boolean absolute) {
-        return playlistManager.getPlayer().updateViewpoint(yaw, pitch, roll, fov, absolute);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            // not implemented
+            return true;
+        }
+        else {
+            return playlistManager.getPlayer().updateViewpoint(yaw, pitch, roll, fov, absolute);
+        }
     }
 
     @MainThread
@@ -1702,141 +2585,331 @@ public class PlaybackService extends MediaBrowserServiceCompat{
 
     @MainThread
     public void setPosition(float pos) {
-        playlistManager.getPlayer().setPosition(pos);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            device.setPosition(pos);
+        }
+        else {
+            playlistManager.getPlayer().setPosition(pos);
+        }
     }
 
     @MainThread
     public int getAudioTracksCount() {
-        return playlistManager.getPlayer().getAudioTracksCount();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getAudioTracksCount();
+        }
+        else {
+            return playlistManager.getPlayer().getAudioTracksCount();
+        }
     }
 
     @MainThread
-    public MediaPlayer.TrackDescription[] getAudioTracks() {
-        return playlistManager.getPlayer().getAudioTracks();
+    public TrackDescription[] getAudioTracks() {
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return AceStreamUtils.convertTrackDescriptionArray(device.getAudioTracks());
+        }
+        else {
+            return TrackDescription.fromNative(playlistManager.getPlayer().getAudioTracks());
+        }
     }
 
     @MainThread
     public int getAudioTrack() {
-        return playlistManager.getPlayer().getAudioTrack();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getAudioTrack();
+        }
+        else {
+            return playlistManager.getPlayer().getAudioTrack();
+        }
     }
 
     @MainThread
     public boolean setAudioTrack(int index) {
-        return playlistManager.getPlayer().setAudioTrack(index);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.setAudioTrack(index);
+        }
+        else {
+            return playlistManager.getPlayer().setAudioTrack(index);
+        }
     }
 
     @MainThread
     public boolean setAudioDigitalOutputEnabled(boolean enabled) {
-        return playlistManager.getPlayer().setAudioDigitalOutputEnabled(enabled);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.setAudioDigitalOutputEnabled(enabled);
+        }
+        else {
+            return playlistManager.getPlayer().setAudioDigitalOutputEnabled(enabled);
+        }
+    }
+
+    @MainThread
+    public boolean setAudioOutput(String aout, String audioDevice) {
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.setAudioOutput(aout);
+        }
+        else {
+            boolean success1 = true;
+            boolean success2 = true;
+            PlayerController player = playlistManager.getPlayer();
+            if(!TextUtils.isEmpty(aout)) {
+                success1 = player.setAudioOutput(aout);
+            }
+
+            if(!TextUtils.isEmpty(audioDevice)) {
+                success2 = player.setAudioOutputDevice(audioDevice);
+            }
+
+            return success1 && success2;
+        }
     }
 
     @MainThread
     public boolean setVideoTrack(int index) {
-        return playlistManager.getPlayer().setVideoTrack(index);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            // not implemented
+            return true;
+        }
+        else {
+            return playlistManager.getPlayer().setVideoTrack(index);
+        }
     }
 
     @MainThread
     public int getVideoTracksCount() {
-        return hasMedia() ? playlistManager.getPlayer().getVideoTracksCount() : 0;
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            // not implemented
+            return 0;
+        }
+        else {
+            return hasMedia() ? playlistManager.getPlayer().getVideoTracksCount() : 0;
+        }
     }
 
     @MainThread
-    public MediaPlayer.TrackDescription[] getVideoTracks() {
-        return playlistManager.getPlayer().getVideoTracks();
+    public TrackDescription[] getVideoTracks() {
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return null;
+        }
+        else {
+            return TrackDescription.fromNative(playlistManager.getPlayer().getVideoTracks());
+        }
     }
 
     @MainThread
     public Media.VideoTrack getCurrentVideoTrack() {
-        return playlistManager.getPlayer().getCurrentVideoTrack();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return null;
+        }
+        else {
+            return playlistManager.getPlayer().getCurrentVideoTrack();
+        }
     }
 
     @MainThread
     public int getVideoTrack() {
-        return playlistManager.getPlayer().getVideoTrack();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            // not implemented
+            return 0;
+        }
+        else {
+            return playlistManager.getPlayer().getVideoTrack();
+        }
     }
 
     @MainThread
     public boolean addSubtitleTrack(String path, boolean select) {
-        return playlistManager.getPlayer().addSubtitleTrack(path, select);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            // not implemented
+            return true;
+        }
+        else {
+            return playlistManager.getPlayer().addSubtitleTrack(path, select);
+        }
     }
 
     @MainThread
     public boolean addSubtitleTrack(Uri uri,boolean select) {
-        return playlistManager.getPlayer().addSubtitleTrack(uri, select);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            // not implemented
+            return true;
+        }
+        else {
+            return playlistManager.getPlayer().addSubtitleTrack(uri, select);
+        }
     }
 
     @MainThread
-    public MediaPlayer.TrackDescription[] getSpuTracks() {
-        return playlistManager.getPlayer().getSpuTracks();
+    public TrackDescription[] getSpuTracks() {
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return AceStreamUtils.convertTrackDescriptionArray(device.getSpuTracks());
+        }
+        else {
+            return TrackDescription.fromNative(playlistManager.getPlayer().getSpuTracks());
+        }
     }
 
     @MainThread
     public int getSpuTrack() {
-        return playlistManager.getPlayer().getSpuTrack();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getSpuTrack();
+        }
+        else {
+            return playlistManager.getPlayer().getSpuTrack();
+        }
     }
 
     @MainThread
     public boolean setSpuTrack(int index) {
-        return playlistManager.getPlayer().setSpuTrack(index);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.setSpuTrack(index);
+        }
+        else {
+            return playlistManager.getPlayer().setSpuTrack(index);
+        }
     }
 
     @MainThread
     public int getSpuTracksCount() {
-        return playlistManager.getPlayer().getSpuTracksCount();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getSpuTracksCount();
+        }
+        else {
+            return playlistManager.getPlayer().getSpuTracksCount();
+        }
     }
 
     @MainThread
     public boolean setAudioDelay(long delay) {
-        return playlistManager.getPlayer().setAudioDelay(delay);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.setAudioDelay(delay);
+        }
+        else {
+            return playlistManager.getPlayer().setAudioDelay(delay);
+        }
     }
 
     @MainThread
     public long getAudioDelay() {
-        return playlistManager.getPlayer().getAudioDelay();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getAudioDelay();
+        }
+        else {
+            return playlistManager.getPlayer().getAudioDelay();
+        }
     }
 
     @MainThread
     public boolean setSpuDelay(long delay) {
-        return playlistManager.getPlayer().setSpuDelay(delay);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.setSpuDelay(delay);
+        }
+        else {
+            return playlistManager.getPlayer().setSpuDelay(delay);
+        }
     }
 
     @MainThread
     public boolean hasRenderer() {
-        return playlistManager.getPlayer().getHasRenderer();
+        return mSelectedRenderer != null || playlistManager.getPlayer().getHasRenderer();
     }
 
     @MainThread
-    public void setRenderer(RendererItem item) {
+    public void setRenderer(RendererItemWrapper item, String caller) {
+        setRenderer(item, false, caller);
+    }
+
+    @MainThread
+    public void setRenderer(RendererItemWrapper item, boolean fromRenderersDialog, String caller) {
+        Logger.v(TAG, "setRenderer: item=" + item + " caller=" + caller);
         final boolean wasOnRenderer = hasRenderer();
         if (wasOnRenderer && !hasRenderer() && canSwitchToVideo()) VideoPlayerActivity.startOpened(VLCApplication.getAppContext(),
                 playlistManager.getCurrentMedia().getUri(), playlistManager.getCurrentIndex());
-        playlistManager.getPlayer().setRenderer(item);
+
+        // Stop current remote device if eny
+        if(fromRenderersDialog && item == null && mSelectedRenderer != null) {
+            stop(false, true, true);
+        }
+
+        if(item == null) {
+            playlistManager.getPlayer().setRenderer(null);
+        }
+        else if(item.getVlcRenderer() != null) {
+            playlistManager.getPlayer().setRenderer(item.getVlcRenderer());
+        }
+        mSelectedRenderer = item;
+
         if (!wasOnRenderer && item != null) changeAudioFocus(false);
         else if (wasOnRenderer && item == null && isPlaying()) changeAudioFocus(true);
     }
 
     @MainThread
     public long getSpuDelay() {
-        return playlistManager.getPlayer().getSpuDelay();
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getSpuDelay();
+        }
+        else {
+            return playlistManager.getPlayer().getSpuDelay();
+        }
     }
 
     @MainThread
     public void setEqualizer(MediaPlayer.Equalizer equalizer) {
-        playlistManager.getPlayer().setEqualizer(equalizer);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            //noop
+        }
+        else {
+            playlistManager.getPlayer().setEqualizer(equalizer);
+        }
     }
 
     @MainThread
     public void setVideoScale(float scale) {
-        playlistManager.getPlayer().setVideoScale(scale);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            device.setVideoScale(scale);
+        }
+        else {
+            playlistManager.getPlayer().setVideoScale(scale);
+        }
     }
 
     @MainThread
     public void setVideoAspectRatio(@Nullable String aspect) {
-        playlistManager.getPlayer().setVideoAspectRatio(aspect);
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            device.setVideoAspectRatio(aspect);
+        }
+        else {
+            playlistManager.getPlayer().setVideoAspectRatio(aspect);
+        }
     }
 
     public static class Client {
-        public static final String TAG = "PlaybackService.Client";
+        private static final String TAG = "AceStream/PSC";
 
         @MainThread
         public interface Callback {
@@ -1855,8 +2928,11 @@ public class PlaybackService extends MediaBrowserServiceCompat{
                     return;
 
                 final PlaybackService service = PlaybackService.getService(iBinder);
-                if (service != null)
+                if (service != null) {
+                    // Update rendeder each time someone is connected
+                    service.updateRenderer("client.connected");
                     mCallback.onConnected(service);
+                }
             }
 
             @Override
@@ -1874,7 +2950,7 @@ public class PlaybackService extends MediaBrowserServiceCompat{
             Util.startService(context, getServiceIntent(context));
         }
 
-        private static void stopService(Context context) {
+        public static void stopService(Context context) {
             context.stopService(getServiceIntent(context));
         }
 
@@ -1958,5 +3034,365 @@ public class PlaybackService extends MediaBrowserServiceCompat{
                 pendingActions.add(r);
             }
         }
+    }
+
+    //:ace
+    public void startCurrentPlaylistInAceStreamPlayer(Bundle extras) {
+        playlistManager.startCurrentPlaylistInAceStreamPlayer(extras);
+    }
+
+    @MainThread
+    public void stopPlayer() {
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            device.stop();
+        }
+        else {
+            playlistManager.getPlayer().stop();
+        }
+    }
+
+    @MainThread
+    public void destroy() {
+        Log.d(TAG, "destroy");
+        stopSelf();
+    }
+
+    public void switchStream(int index) {
+        playlistManager.switchStream(index);
+    }
+
+    @Nullable
+    public AceStreamManager getAceStreamManager() {
+        return mAceStreamManager;
+    }
+
+    @MainThread
+    public void stop() {
+        if(isRemoteDeviceConnected()) {
+            onMediaPlayerEvent(new MediaPlayerEvent(MediaPlayerEvent.PlayerClosed));
+        }
+        stop(false, true, true);
+    }
+
+    @MainThread
+    public void stop(boolean systemExit) {
+        stop(systemExit, true, true);
+    }
+
+    @MainThread
+    public void stop(boolean systemExit, boolean clearPlaylist) {
+        stop(systemExit, clearPlaylist, true);
+    }
+
+    @MainThread
+    public void stop(boolean systemExit, boolean clearPlaylist, boolean saveMetadata) {
+        stop(systemExit, clearPlaylist, saveMetadata, false);
+    }
+
+    @MainThread
+    public void stop(boolean systemExit, boolean clearPlaylist, boolean saveMetadata, boolean keepRenderer) {
+        removePopup();
+        playlistManager.stop(systemExit, clearPlaylist, saveMetadata, keepRenderer);
+
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            device.stop(clearPlaylist);
+            if(clearPlaylist && !device.isAceCast()) {
+                mAceStreamManager.stopRemotePlayback(true);
+            }
+        }
+    }
+
+    @MainThread
+    public int getPlayerState() {
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getState();
+        }
+        else {
+            return playlistManager.getPlayer().getPlayerState();
+        }
+    }
+
+    @MainThread
+    public float getPosition() {
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getPosition();
+        }
+        else {
+            return playlistManager.getPlayer().getPosition();
+        }
+    }
+
+    public boolean hasLastPlaylist() {
+        return playlistManager.hasLastPlaylist();
+    }
+
+    @MainThread
+    public int getPlaybackState() {
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.getPlaybackState();
+        }
+        else {
+            return playlistManager.getPlayer().getPlaybackState();
+        }
+    }
+
+    public int findPositionByFileIndex(int fileIndex) {
+        return playlistManager.findPositionByFileIndex(fileIndex);
+    }
+
+    public void getEngine(final @NonNull EngineStateCallback callback) {
+        if(mAceStreamManager == null) {
+            mEngineStateCallbacksLock.lock();
+            try {
+                mEngineStateCallbacks.add(callback);
+            }
+            finally {
+                mEngineStateCallbacksLock.unlock();
+            }
+            mAceStreamManagerClient.connect();
+        }
+        else {
+            if(mEngineApi == null) {
+                mEngineStateCallbacksLock.lock();
+                try {
+                    mEngineStateCallbacks.add(callback);
+                }
+                finally {
+                    mEngineStateCallbacksLock.unlock();
+                }
+                mAceStreamManager.startEngine();
+            }
+            else {
+                callback.onEngineConnected(mAceStreamManager, mEngineApi);
+            }
+        }
+    }
+
+    private void notifyEngineConnected() {
+        mEngineStateCallbacksLock.lock();
+        try {
+            for (EngineStateCallback callback : mEngineStateCallbacks) {
+                callback.onEngineConnected(mAceStreamManager, mEngineApi);
+            }
+            mEngineStateCallbacks.clear();
+        }
+        finally {
+            mEngineStateCallbacksLock.unlock();
+        }
+    }
+
+    public boolean isRemoteDeviceSelected() {
+        return getCurrentRemoteDevice() != null;
+    }
+
+    public boolean isAceCastSelected() {
+        RemoteDevice device = getCurrentRemoteDevice();
+        return device != null && device.isAceCast();
+    }
+
+    public boolean isRemoteDeviceConnected() {
+        return getCurrentRemoteDevice() != null && getCurrentRemoteDevice().isConnected();
+    }
+
+    public boolean isAceCastConnected() {
+        RemoteDevice device = getCurrentRemoteDevice();
+        return device != null && device.isConnected() && device.isAceCast();
+    }
+
+    public RemoteDevice getCurrentRemoteDevice() {
+        return mSelectedRenderer == null ? null : mSelectedRenderer.getAceStreamRenderer();
+    }
+
+    public RendererItem getCurrentVlcRenderer() {
+        return mSelectedRenderer == null ? null : mSelectedRenderer.getVlcRenderer();
+    }
+
+    private boolean isCurrentDevice(RemoteDevice device) {
+        return mSelectedRenderer != null && device.equals(mSelectedRenderer.getAceStreamRenderer());
+    }
+
+    private void handleDeviceDisconnect(@NonNull RendererItemWrapper renderer,
+                                        boolean isGlobal,
+                                        boolean cleanShutdown) {
+        if(cleanShutdown) {
+            resetDisconnectedRemoteDevices();
+        }
+        else {
+            mLastRendererId = renderer.getId();
+            mLastRendererType = renderer.getType();
+            mLastRendererIsGlobal = isGlobal;
+            mLastMediaWrapper = getCurrentMediaWrapper();
+            stop(false, true, true);
+            VideoPlayerActivity.closePlayer(true);
+        }
+    }
+
+    private void resetDisconnectedRemoteDevices() {
+        resetDisconnectedRemoteDevices(true);
+    }
+
+    private void resetDisconnectedRemoteDevices(boolean disconnectDevice) {
+        mLastRendererType = -1;
+        mLastRendererId = null;
+        mLastRendererIsGlobal = false;
+        mLastMediaWrapper = null;
+        if(disconnectDevice && mAceStreamManager != null) {
+            mAceStreamManager.disconnectDevice();
+        }
+    }
+
+    private void restoreRemoteDeviceConnection(RemoteDevice device) {
+        if(mLastRendererType ==  RendererItemWrapper.TYPE_ACESTREAM
+                && mLastRendererId != null
+                && TextUtils.equals(device.getId(), mLastRendererId)) {
+            restoreRemoteDeviceConnection(new RendererItemWrapper(device));
+        }
+    }
+
+    private void restoreRemoteDeviceConnection(RendererItemWrapper renderer) {
+        Logger.v(TAG, "restoreRemoteDeviceConnection: renderer=" + renderer + " global=" + mLastRendererIsGlobal);
+
+        if(hasMedia()) {
+            Logger.v(TAG, "restoreRemoteDeviceConnection: skip, has media");
+            return;
+        }
+
+        setRenderer(renderer, "ps.restore-device");
+        RendererDelegate.INSTANCE.selectRenderer(false, renderer, mLastRendererIsGlobal);
+
+        if(mLastMediaWrapper != null) {
+            Logger.v(TAG, "restoreRemoteDeviceConnection: load last media: " + mLastMediaWrapper);
+            load(Collections.singletonList(mLastMediaWrapper),
+                    0, false, true, true, null);
+        }
+
+        resetDisconnectedRemoteDevices(false);
+
+        VLCApplication.postOnMainThread(new Runnable() {
+            @Override
+            public void run() {
+                Logger.v(TAG, "restoreRemoteDeviceConnection:post-check: playing=" + isPlaying());
+                if(!isPlaying()) {
+                    stop(false, true, true);
+                }
+            }
+        }, 7000);
+    }
+
+    public void discoverDevices(boolean forceInit) {
+        if(mAceStreamManager != null) {
+            mAceStreamManager.discoverDevices(forceInit);
+        }
+    }
+
+    private void handleAceStreamPlayerEvent(Intent intent) {
+        String eventName = intent.getStringExtra(AceStreamPlayer.BROADCAST_EXTRA_EVENT);
+        String url = intent.getStringExtra(AceStreamPlayer.BROADCAST_EXTRA_MEDIA_URI);
+        long mediaId = intent.getLongExtra(AceStreamPlayer.BROADCAST_EXTRA_MEDIA_ID, 0);
+
+        Uri uri = null;
+        if(url != null) {
+            uri = Uri.parse(url);
+        }
+
+        if(eventName == null) return;
+
+        switch(eventName) {
+            case AceStreamPlayer.BROADCAST_EVENT_PLAYBACK_STARTED:
+                if(uri != null) {
+                    MediaWrapper mw = new MediaWrapper(uri);
+                    if(intent.hasExtra(AceStreamPlayer.BROADCAST_EXTRA_MEDIA_FILE)) {
+                        mw.setMediaFile(MediaFilesResponse.MediaFile.fromJson(
+                                intent.getStringExtra(AceStreamPlayer.BROADCAST_EXTRA_MEDIA_FILE)));
+                    }
+                    playlistManager.increasePlayCount(mw, mediaId);
+                }
+                break;
+            case AceStreamPlayer.BROADCAST_EVENT_PLAYER_STARTED:
+                showSimplePlaybackNotification();
+                break;
+            case AceStreamPlayer.BROADCAST_EVENT_PLAYER_STOPPED:
+                hideSimplePlaybackNotification();
+                break;
+            case AceStreamPlayer.BROADCAST_EVENT_SAVE_METADATA:
+                int playlistPosition = intent.getIntExtra(AceStreamPlayer.BROADCAST_EXTRA_PLAYLIST_POSITION, 0);
+                mSettings.edit().putInt("position_in_media_list", playlistPosition).apply();
+                if(uri != null) {
+                    MediaWrapper mw = mMedialibrary.findMedia(new MediaWrapper(uri));
+                    long time = intent.getLongExtra(AceStreamPlayer.BROADCAST_EXTRA_MEDIA_TIME, 0);
+                    mw.setLongMeta(MediaWrapper.META_PROGRESS, time);
+                    mw.setLongMeta(MediaWrapper.META_DURATION, intent.getLongExtra(AceStreamPlayer.BROADCAST_EXTRA_MEDIA_DURATION, 0));
+                    //TODO: update 'seen' counter
+                }
+                break;
+            case AceStreamPlayer.BROADCAST_EVENT_CHANGE_RENDERER:
+                try {
+                    SelectedPlayer player = SelectedPlayer.fromJson(intent.getStringExtra(AceStreamPlayer.BROADCAST_EXTRA_RENDERER));
+                    RemoteDevice device = mAceStreamManager.findRemoteDevice(player);
+
+                    Logger.v(TAG, "changeRenderer: set renderer: " + device);
+                    if (device == null) {
+                        Log.e(TAG, "changeRenderer: device not found: id=" + player.id1);
+                        return;
+                    }
+
+                    RendererItemWrapper renderer = new RendererItemWrapper(device);
+                    setRenderer(renderer, "video-player-resolver");
+                    RendererDelegate.INSTANCE.selectRenderer(true, renderer, false);
+                    loadLastPlaylist(Constants.PLAYLIST_TYPE_VIDEO);
+                }
+                catch(JSONException e) {
+                    Log.e(TAG, "Failed to parse intent", e);
+                }
+                break;
+            case AceStreamPlayer.BROADCAST_EVENT_UPDATE_PREFERENCE:
+                String name = intent.getStringExtra(AceStreamPlayer.BROADCAST_EXTRA_PREF_NAME);
+
+                // Update only known prefs
+                if(TextUtils.equals(name, "mobile_network_available")) {
+                    mSettings.edit().putBoolean(
+                            "mobile_network_available",
+                            intent.getBooleanExtra(AceStreamPlayer.BROADCAST_EXTRA_PREF_VALUE, false))
+                            .apply();
+                }
+
+                break;
+            case AceStreamPlayer.BROADCAST_EVENT_SET_REPEAT_TYPE: {
+                int type = intent.getIntExtra(AceStreamPlayer.BROADCAST_EXTRA_REPEAT_TYPE, 0);
+                setRepeatType(type);
+                break;
+            }
+            case AceStreamPlayer.BROADCAST_EVENT_SET_SHUFFLE: {
+                boolean shuffle = intent.getBooleanExtra(AceStreamPlayer.BROADCAST_EXTRA_SHUFFLE, false);
+                setShuffle(shuffle);
+                break;
+            }
+            case AceStreamPlayer.BROADCAST_EVENT_SET_SLEEP_TIMER: {
+                Calendar time = (Calendar)intent.getSerializableExtra(AceStreamPlayer.BROADCAST_EXTRA_SLEEP_TIME);
+                AdvOptionsDialog.setSleep(time);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Get transport files from media library and open them with engine to see contents.
+     * Based on files inside update media type.
+     */
+    public void processTransportFiles() {
+        Context ctx = VLCApplication.getAppContext();
+        Intent intent = new Intent(
+                ctx,
+                ProcessTransportFilesService.class);
+        ctx.startService(intent);
+    }
+
+    public static boolean isStarted() {
+        return sIsStarted;
     }
 }

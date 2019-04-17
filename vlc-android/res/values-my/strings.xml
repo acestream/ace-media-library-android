@@ -9,9 +9,6 @@
     <string name="sortby_length">အလျား</string>
     <string name="searchable_hint">ရှာဖွေနေ...</string>
     <string name="history">သမိုင်း</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="other">%d ရလဒ်များတွေ့</item>
-    </plurals>
     <string name="play">ဖွင့်</string>
     <string name="play_from_start">အစမှဖွင့်</string>
     <string name="play_as_audio">အသံသာဖွင့်</string>
@@ -40,9 +37,6 @@
     </plurals>
     <plurals name="subfolders_quantity">
         <item quantity="other">%d ဖိုင်တွဲခွဲများ</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="other">%d မီဒီယာဖိုင်များ</item>
     </plurals>
     <string name="internal_memory">အတွင်းမှတ်ဉာဏ်</string>
     <string name="parent_folder">မူရင်းဖိုင်တွဲသို့</string>
@@ -119,7 +113,6 @@
     <string name="screen_orientation_landscape">အလျားလိုက်ကြည့်</string>
     <string name="screen_orientation_reverse_portrait">ဒေါင်လိုက်ပြောင်းပြန်ကြည့်</string>
     <string name="screen_orientation_reverse_landscape">အလျားလိုက်ပြောင်းပြန်ကြည့်</string>
-    <string name="enable_brightness_gesture">အရောင်တောက်ပခြင်းအမူအရာလုပ်ဆောင်စေ</string>
     <string name="enable_brightness_gesture_summary">ဗီဒီယိုပြန်ဖွင့်ချိန်အတွင်းအမှုအရာဖြင့်အရောင်တောက်ပခြင်းထိန်းချုပ်</string>
     <string name="enable_headset_detection">နားကြပ်ရှာဖွေ</string>
     <string name="enable_headset_detection_summary">နားကြပ်ဖြုတ်စဉ်ရပ်တန့်၊ နားကြပ်တပ်စဉ်ပြန်ဖွင့်</string>
@@ -145,4 +138,382 @@
     <string name="clear_log">မှတ်တမ်းတင်ခြင်းဖယ်ရှား</string>
     <string name="copy_to_clipboard">အောက်ခံကတ်ပြားသို့ကူးယူ</string>
     <string name="copied_to_clipboard">အောက်ခံကတ်ပြားသို့ကူးယူပြီး။</string>
+    <string name="torrent_files">Torrent ဖိုင်တွေ</string>
+    <string name="select_language">ဘာသာစကားကိုရွေးချယ်ပါ</string>
+    <string name="sortby_name_desc" source="google_translate">အမည် (DESC)</string>
+    <string name="sortby_artist_name" source="google_translate">အနုပညာရှင်အမည်ဖြင့်</string>
+    <string name="sortby_artist_name_desc" source="google_translate">အနုပညာရှင်အမည်အား (DESC)</string>
+    <string name="sortby_album_name" source="google_translate">အယ်လ်ဘမ်အမည်</string>
+    <string name="sortby_album_name_desc" source="google_translate">အယ်လ်ဘမ်အမည် (DESC)</string>
+    <string name="sortby_length_desc" source="google_translate">အရှည် (DESC)</string>
+    <string name="sortby_date" source="google_translate">နေ့စှဲ</string>
+    <string name="sortby_date_desc" source="google_translate">နေ့စွဲ (DESC)</string>
+    <string name="sortby_number" source="google_translate">NB ပုဒ်</string>
+    <string name="sortby_number_desc" source="google_translate">NB ပုဒ် (DESC)</string>
+    <string name="playback" source="google_translate">playback</string>
+    <string name="playback_controls" source="google_translate">playback ထိန်းချုပ်မှု</string>
+    <string name="medialibrary_scan" source="google_translate">မီဒီယာစာကြည့်တိုက်စကင်</string>
+    <string name="Medialibrary_progress" source="google_translate">မီဒီယာစာကြည့်တိုက်စကင်ဖတ်စစ်ဆေးဖို့တိုးတက်မှု updates များကို</string>
+    <string name="video_app_switch_title" source="google_translate">နောက်ခံသမိုင်း / PIP mode ကို</string>
+    <string name="video_app_switch_summary" source="google_translate">သငျသညျဗီဒီယိုပြန်လည်ပြသခြင်းကနေအခြား application ပြောင်းရန်သည့်အခါ VLC အပြုအမူကို Select လုပ်ပါ</string>
+    <string name="play_pip_title" source="google_translate">ရုပ်ပုံ-In-ရုပ်ပုံ mode မှာဗီဒီယိုများ Play</string>
+    <string name="play_as_audio_background" source="google_translate">နောက်ခံဗီဒီယိုများ Play</string>
+    <string name="insert_next" source="google_translate">လာမယ့်ထည့်ပါ</string>
+    <string name="remove" source="google_translate">Remove</string>
+    <string name="info_title" source="google_translate">VLC</string>
+    <string name="unknown_number" source="google_translate">သီချင်းများ၏အမည်မသိအရေအတွက်က</string>
+    <string name="tracks" source="google_translate">သီချင်းများ</string>
+    <string name="nomedia" source="google_translate">မျှမတွေ့မီဒီယာဖိုင်များ, သင့်ရဲ့ device ကိုမှအချို့ဖိုင်တွေလွှဲပြောင်းသို့မဟုတ်သင့်အကြိုက်များကိုချိန်ညှိပေးပါ။</string>
+    <string name="noplaylist" source="google_translate">သီချင်းစာရင်းကိုမတွေ့ပါ။</string>
+    <string name="shuffle_title" source="google_translate">shuffle mode ကို</string>
+    <string name="shuffle_on" source="google_translate">တွင်မွှေ</string>
+    <string name="repeat_title" source="google_translate">ထပ်ခါတလဲလဲ mode ကို</string>
+    <string name="repeat_single" source="google_translate">တစ်ခုတည်း Repeat</string>
+    <string name="repeat_all" source="google_translate">အားလုံးပြန်လုပ်</string>
+    <string name="firstsong" source="google_translate">ပြသစာရင်း၏ပထမဦးဆုံးသီချင်း</string>
+    <string name="lastsong" source="google_translate">ပြသစာရင်း၏နောက်ဆုံးသီချင်း</string>
+    <string name="surface_fit_screen" source="google_translate">Fit မျက်နှာပြင်</string>
+    <string name="sound_on" source="google_translate">တွင်အသံ</string>
+    <string name="sound_off" source="google_translate">ပိတ်အသံ</string>
+    <string name="navmenu" source="google_translate">အညွှန်း menu ကို</string>
+    <string name="advanced" source="google_translate">အဆင့်မြင့် options များ</string>
+    <string name="sleep_in" source="google_translate">အိပ်</string>
+    <string name="subtitle_label" source="google_translate">စာတန်းထိုးဖိုင် Add</string>
+    <string name="subtitle_select" source="google_translate">စာတန်းထိုးဖိုင်ကို Select လုပ်ပါ</string>
+    <string name="no_file_picker_found" source="google_translate">file ကိုရွေးသူ system ပေါ်တွင်ရှာတွေ့ခဲ့သည်မရှိပါ။</string>
+    <string name="server_add_title" source="google_translate">အကြိုက်ဆုံးအားအသစ်သော server ကို Add</string>
+    <string name="server_domain_hint" source="google_translate">ဆာဗာလိပ်စာ (domain name ကိုသို့မဟုတ် IP)</string>
+    <string name="server_share_hint" source="google_translate">Network မှဝေစုအမည် (သို့မဟုတ် IP လိပ်စာ)</string>
+    <string name="server_folder_hint" source="google_translate">Folder ကိုလမ်းကြောင်း (optional)</string>
+    <string name="server_username_hint" source="google_translate">username</string>
+    <string name="server_servername_hint" source="google_translate">အဆင်ပြေဘို့ဆာဗာအမည်,</string>
+    <string name="server_port" source="google_translate">ဆိပ်ကမ်း:</string>
+    <string name="login" source="google_translate">လော့ဂ်အင်</string>
+    <string name="password" source="google_translate">Password ကို</string>
+    <string name="search_results" source="google_translate">ရှာဖွေမှုရလဒ်များ</string>
+    <string name="search_no_result" source="google_translate">မီဒီယာတစ်ခုမှမတွေ့</string>
+    <string name="favorites_add" source="google_translate">အကြိုက်ဆုံးမှ Add</string>
+    <string name="favorites_remove" source="google_translate">အကြိုက်ဆုံးမှဖယ်ရှားရန်</string>
+    <string name="favorites_edit" source="google_translate">Edit ကို</string>
+    <string name="favorite_added" source="google_translate">အကြိုက်ဆုံးသိမ်းဆည်း</string>
+    <string name="favorite_removed" source="google_translate">အကြိုက်ဆုံးကနေဖယ်ရှား</string>
+    <string name="error_message_is" source="google_translate">အဆိုပါ error message ကို (debugging တဲ့အခါမှာဒီဖော်ပြထားခြင်းပါ) ဖြစ်ပါသည်: \ n</string>
+    <string name="encountered_error_message" source="google_translate">VLC ကဒီမီဒီယာနှင့်အတူမှားယွင်းမှုတစ်ခုကြုံတွေ့။ \ မီဒီယာစာကြည့်တိုက်လန်းဆန်းကြိုးစားကြ n ကျေးဇူးပြုပြီး။</string>
+    <string name="search" source="google_translate">ရှာဖှေ</string>
+    <string name="search_history" source="google_translate">ရှာရန်သမိုင်း</string>
+    <string name="playback_history_title" source="google_translate">playback သမိုင်း</string>
+    <string name="playback_history_summary" source="google_translate">Save အားလုံးမီဒီယာသမိုင်းအပိုင်းများတွင်ကစားခဲ့</string>
+    <string name="playback_speed_title" source="google_translate">ကြော်ငြာကို Save လုပ်ရန်ပြသမှုမြန်နှုန်း</string>
+    <string name="playback_speed_summary" source="google_translate">သငျသညျကိုသတ်မှတ်ပြန်ကျော့မြန်နှုန်းကိုသတိရပါ</string>
+    <string name="video_player_tips" source="google_translate">video player အကြံပေးချက်များ:</string>
+    <string name="seek" source="google_translate">ရှာကြလော့</string>
+    <string name="subtitles" source="google_translate">စာတန်းထိုး</string>
+    <string name="audio_sub" source="google_translate">audio ပုဒ် Nande စာတန်းထိုး \</string>
+    <string name="resize" source="google_translate">အရွယ်အစားပြောင်းပါ</string>
+    <string name="options" source="google_translate">options ကို</string>
+    <string name="lock" source="google_translate">သော့ခတ်</string>
+    <string name="ok_got_it" source="google_translate">က, ဒီပယ်ချတယ်</string>
+    <string name="playlist_tips" source="google_translate">playlist အကြံပေးချက်များ</string>
+    <string name="remove_song" source="google_translate">သီချင်း Remove</string>
+    <string name="rearrange_order" source="google_translate">အမိန့်ပြန်စီ</string>
+    <string name="hold_to_seek" source="google_translate">ရှာ Hold</string>
+    <string name="audio_player_tips" source="google_translate">audio player ကိုအကြံပေးချက်များ</string>
+    <string name="previous_next_song" source="google_translate">နောက်တစ်ခု / ယခင်သီချင်း</string>
+    <string name="show_playlist" source="google_translate">Show ကိုသီချင်းစာရင်းကို</string>
+    <string name="hold_to_stop" source="google_translate">ရပ်တန့်ဖို့ Hold</string>
+    <string name="general_prefs_category" source="google_translate">ယေဘုယျ</string>
+    <string name="hardware_acceleration" source="google_translate">hardware acceleration</string>
+    <string name="hardware_acceleration_summary" source="google_translate">မသန်စွမ်း: ။ ပိုကောင်းတဲ့တည်ငြိမ်ရေး \ nDecoding: စွမ်းဆောင်ရည်တိုးတက်ကောင်းမွန်လာစေခြင်းငှါ \ nFull ။ နောက်ထပ်စွမ်းဆောင်ရည်တိုးတက်ကောင်းမွန်လာစေနိုင်သည်။</string>
+    <string name="hardware_acceleration_disabled" source="google_translate">မသန်စွမ်း</string>
+    <string name="hardware_acceleration_decoding" source="google_translate">ဒီကုဒ်ဒါအရှိန်</string>
+    <string name="hardware_acceleration_full" source="google_translate">အပြည့်အဝအရှိန်</string>
+    <string name="dev_hardware_decoder" source="google_translate">အဆင့်မြင့်ဟာ့ဒ်ဝဲဒီကုဒ်ဒါ</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">သာအဆင့်မြင့်အသုံးပြုသူများအတွက်အင်အားစုဟာ့ဒ်ဝဲဒီကုဒ်ဒါ,</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">iomx</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-ဒေါက်တာ</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">mediacodec</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">mediacodec-ဒေါက်တာ</string>
+    <string name="automatic" source="google_translate">automatic</string>
+    <string name="enable_black_theme" source="google_translate">အနက်ရောင်ဆောင်ပုဒ် Enable</string>
+    <string name="enable_black_theme_summary" source="google_translate">အနိမ့်အလင်း enviroments မှာပိုကောင်းတဲ့နှစ်သိမ့်များအတွက် interface ကိုအရောင်များပြောင်းလဲပါ။</string>
+    <string name="subtitle_text_encoding" source="google_translate">စာတန်းထိုးစာသားကို encoding က</string>
+    <string name="daynight_title" source="google_translate">DayNight mode ကို</string>
+    <string name="daynight_summary" source="google_translate">အလိုအလျှောက်သင့်လျော်တဲ့အချိန်ကညဥ့် mode ကိုပြောင်းရန်</string>
+    <string name="extra_prefs_category" source="google_translate">အပို settings ကို</string>
+    <string name="interface_prefs_screen" source="google_translate">interface</string>
+    <string name="interface_gui" source="google_translate">ပြသ</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">secondary display ကို</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">အလယ်တန်း display ကိုချိတ်ဆက်သောအခါဆက်တင်များ (HDMI / Chromecast ကို) ။</string>
+    <string name="enable_clone_mode" source="google_translate">ကိုယ်ပွားမှုဦးစားပေး</string>
+    <string name="enable_clone_mode_summary" source="google_translate">ဝေးလံခေါင်သီထိန်းချုပ်မှုမပါဘဲ device ကို screen ကို Clone ။</string>
+    <string name="interface_other_category" source="google_translate">interface - အခြား</string>
+    <string name="video_prefs_category" source="google_translate">ဗီဒီယိုကို</string>
+    <string name="video_min_group_length_title" source="google_translate">Group မှဗီဒီယိုများ</string>
+    <string name="video_min_group_length_summary" source="google_translate">သူတို့ရဲ့ပထမဦးဆုံးစာလုံးတူညီလျှင် Videos ကိုအုပ်စုဖွဲ့နေကြသည်။</string>
+    <string name="video_min_group_length_disable" source="google_translate">disable</string>
+    <string name="video_min_group_length_first" source="google_translate">သာပထမဦးစွာအက္ခရာ</string>
+    <string name="video_min_group_length_short" source="google_translate">စာလုံး၏တိုတောင်းသောအရေအတွက်က (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">စာလုံး၏ Long ကနံပါတ် (9)</string>
+    <string name="media_fast_seek" source="google_translate">အစာရှောင်ခြင်း Enable option ကိုရှာခြင်းငှါ</string>
+    <string name="media_seen" source="google_translate">Show ကိုတှေ့မွငျရသောဗီဒီယိုအမှတ်အသား</string>
+    <string name="media_seen_summary" source="google_translate">မာကုကိုသင်အဆုံးတိုင်အောင်ကစားသည့်အခါမြင်ကြအဖြစ်ဗွီဒီယိုတစ်ခု</string>
+    <string name="force_list_portrait" source="google_translate">ပုံတူ mode မှာအဘယ်သူမျှမဇယားကွက်</string>
+    <string name="force_list_portrait_summary" source="google_translate">ပုံတူ mode မှာအစားဇယားကွက်များစာရင်းထဲတွင်ဗီဒီယိုများပြရန်</string>
+    <string name="force_play_all_summary" source="google_translate">သင်တို့အပေါ်မှာနှိပ်လိုက်တနှင့်အတူစတင်ဗီဒီယိုအားလုံးကို Play</string>
+    <string name="force_play_all_title" source="google_translate">ဗီဒီယိုကိုသီချင်းစာရင်းကို mode ကို</string>
+    <string name="save_brightness_summary" source="google_translate">video player တစ်ခုကိုအတွက်ရောင်ခြည်အဆင့်ကိုသတိရပါ</string>
+    <string name="save_brightness_title" source="google_translate">ဗီဒီယို brightness level ကို Save</string>
+    <string name="save_audiodelay_summary" source="google_translate">တစ်ဦးချင်းစီဗီဒီယိုအတွက်တစ်ဦးချင်းစီအသံနှောင့်နှေး Save</string>
+    <string name="save_audiodelay_title" source="google_translate">အသံနှောင့်နှေး Save</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">brightness ကိုလက်ဟန်ခြေဟန်</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Volume ကိုလက်ဟန်ခြေဟန်</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">ဗီဒီယိုပြန်လည်ပြသခြင်းစဉ်အတွင်းအမူအရာအားဖြင့်ထိန်းချုပ်ရေးအသံအတိုးအကျယ်</string>
+    <string name="enable_seek_buttons" source="google_translate">ခလုတ်ရှာအံ့သောငှါ Enable</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">ဗီဒီယို interface ပေါ်မှာ Show ကိုပြန်ရစ်နှင့်ရှေ့ဆက်ခလုတ်</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">ရှာနှစ်ချက်ကိုထိပုတ်ပါ</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">screen ပေါ်မှာနှစ်ချက်ကိုထိပုတ်ပါ 10 စက္ကန့်အားဖြင့်ရှာအနား</string>
+    <string name="popup_keepscreen_title" source="google_translate">pop-up mode မှာ ON မျက်နှာပြင်ကိုသိမ်းဆည်းထားပါ</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Pop-Up ကိုဗီဒီယိုကခဏရပ်ထားရင်တောင်ပြသနေစဉ်ကိုအမြဲတမ်းအပေါ်မျက်နှာပြင်ကိုစောင့်ရှောက်။</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">ဝှက်ထားသောဖိုင်များကိုပြရန်</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">browser များတွင်ဝှက်ထားသောဖိုင်များကိုပြရန်</string>
+    <string name="subtitles_prefs_category" source="google_translate">စာတန်းထိုး</string>
+    <string name="subtitles_size_title" source="google_translate">စာတန်းထိုး Size ကို</string>
+    <string name="subtitles_size_small" source="google_translate">သေးငယ်သော</string>
+    <string name="subtitles_size_normal" source="google_translate">သာမန်</string>
+    <string name="subtitles_size_big" source="google_translate">ကြီးမားသော</string>
+    <string name="subtitles_size_huge" source="google_translate">ကြီးမားသော</string>
+    <string name="subtitles_color_title" source="google_translate">စာတန်းထိုးအရောင်</string>
+    <string name="subtitles_color_white" source="google_translate">အဖြူ</string>
+    <string name="subtitles_color_gray" source="google_translate">မီးခိုးရောင်</string>
+    <string name="subtitles_color_pink" source="google_translate">ပန်းရောင်</string>
+    <string name="subtitles_color_blue" source="google_translate">ပြာသော</string>
+    <string name="subtitles_color_yellow" source="google_translate">ဝါသော</string>
+    <string name="subtitles_color_green" source="google_translate">စိမ်းလန်းသော</string>
+    <string name="subtitles_background_title" source="google_translate">စာတန်းထိုးနောက်ခံသမိုင်း</string>
+    <string name="subtitles_bold_title" source="google_translate">ရဲရင့်စာတန်းထိုး</string>
+    <string name="subtitles_autoload_title" source="google_translate">အော်တိုဝန်စာတန်းထိုး</string>
+    <string name="audio_prefs_category" source="google_translate">audio</string>
+    <string name="lockscreen_cover_title" source="google_translate">Lockscreen အပေါ်မီဒီယာအဖုံး</string>
+    <string name="lockscreen_cover_summary" source="google_translate">ဘယ်အချိန်မှာမရရှိနိုင်, lockscreen နောက်ခံပုံအဖြစ်လက်ရှိမီဒီယာအဖုံးအနုပညာသတ်မှတ်ထား</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">လက်ရှိသီချင်းစာရင်းကို Auto-scrolling မလှုပ်ရှားပုံများ</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">မီဒီယာအကူးအပြောင်းအပေါ် scrolling လှုပ်ရှားပုံများ</string>
+    <string name="audio_title_alignment" source="google_translate">audio ခေါင်းစဉ် alignment ကို</string>
+    <string name="audio_title_alignment_default" source="google_translate">ပျက်ကွက်</string>
+    <string name="audio_title_alignment_left" source="google_translate">လက်ဝဲ</string>
+    <string name="audio_title_alignment_centre" source="google_translate">အလယ်ဗဟို</string>
+    <string name="audio_title_alignment_right" source="google_translate">မှန်သော</string>
+    <string name="audio_title_alignment_marquee" source="google_translate">marquee</string>
+    <string name="audio_save_repeat_title" source="google_translate">ထပ် mode ကို Save</string>
+    <string name="audio_save_repeat_summary" source="google_translate">အသံဖွင့်စာရင်းများကို loading သည့်အခါထပ် mode ကိုကိုသတိရပါ</string>
+    <string name="audio_boost_title" source="google_translate">audio-ထပ်တိုး</string>
+    <string name="headset_prefs_category" source="google_translate">နားကြပ်</string>
+    <string name="enable_headset_actions_title" source="google_translate">ဝေးလံခေါင်သီထိန်းချုပ်ရေး shortcuts တွေကို</string>
+    <string name="enable_headset_actions_summary" source="google_translate">ယခင်လမ်းကြောင်းမှ skip ကအပေါ်လာမည့်နှင့်ရှည်လျားသောစာနယ်ဇင်းမှ skip မှ \'\' Play ကို \'\' အပေါ်နှစ်ချက်စာနယ်ဇင်း</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">နားကြပ်သွင်းရက်နေ့တွင်ပြန်လည်စတင်</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">မဟုတ်ရင် Pause</string>
+    <string name="audio_ducking_title" source="google_translate">အသိပေးချက်များအပေါ်အနိမ့် VLC အသံအတိုးအကျယ်</string>
+    <string name="audio_ducking_summary" source="google_translate">အသံဆိုင်ရာအသိပေးချက်များ, ရေကြောင်းသွားလာမှုညွှန်ကြားချက်သို့မဟုတ်လက်ထောက်စကားပြောစကားကိုနားထောငျဖို့ကူညီပေးသည်</string>
+    <string name="casting_category" source="google_translate">သတ္တုများပုံသွန်း</string>
+    <string name="casting_passthrough_title" source="google_translate">audio ကျော်သွားသည့်</string>
+    <string name="casting_passthrough_summary" source="google_translate">သင့် TV အသံက rendering စီမံခန့်ခွဲကြစို့</string>
+    <string name="casting_conversion_quality_title" source="google_translate">ကူးပြောင်းခြင်းအရည်အသွေးကို</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">ဝေးလံခေါင်သီ screen ပေါ်မှာ ချ. တဲ့အခါမှာပြောင်းလဲခြင်းအရည်အသွေးမြင့်ကိုရွေးချယ်ပါ</string>
+    <string name="casting_quality_high" source="google_translate">မြင့်သော</string>
+    <string name="casting_quality_medium" source="google_translate">အလယ်အလတ်</string>
+    <string name="casting_quality_low" source="google_translate">အနိမ့်</string>
+    <string name="casting_quality_lowcpu" source="google_translate">နိမ့်ဆုံး</string>
+    <string name="cast_performance_warning" source="google_translate">ဒီဗီဒီယိုကို Casting ပြောင်းလဲခြင်းလိုအပ်သည်။ ဤသည်ပြောင်းလဲခြင်းအပေါငျးတို့သရရှိနိုင်ပါပါဝါကိုသုံးနိုင်သည်နှင့်လျင်မြန်စွာသင့်ရဲ့ဘက်ထရီနိုင်ဘူး။</string>
+    <string name="artists_show_all_title" source="google_translate">အားလုံးအနုပညာရှင်တွေပြရန်</string>
+    <string name="artists_show_all_summary" source="google_translate">, အယ်လ်ဘမ်အနုပညာရှင်တွေကိုသာစာရင်းအဆိုတော်များအားလုံးကိုအနုပညာရှင်တွေပြရန်</string>
+    <string name="extensions_prefs_category" source="google_translate">extensions</string>
+    <string name="extensions_enable_category" source="google_translate">enable လုပ်ဖို့ extensions တွေကိုရှေးခယျြခဲ့</string>
+    <string name="extensions_empty" source="google_translate">extension ကိုရှာမတွေ့ပါ</string>
+    <string name="extension_prefs_activation_title" source="google_translate">ကိုသက်ဝင်</string>
+    <string name="android_auto" source="google_translate">အန်းဒရွိုက်မော်တော်ယာဉ်</string>
+    <string name="controls_prefs_category" source="google_translate">controls</string>
+    <string name="chroma_format_summary" source="google_translate">RGB 32-bit နဲ့: default အ chroma \ nRGB 16-bit နဲ့: ပိုကောင်းစွမ်းဆောင်ရည်ပေမယ့်နိမ့်အရည်အသွေးကို \ nYUV: အကောင်းဆုံးစွမ်းဆောင်ရည်ပေမယ့်ကိရိယာအားလုံးပေါ်တွင်အလုပ်မလုပ်ပါဘူး။ နောက်ပိုင်းတွင်သာ 2.3 Android နဲ့။</string>
+    <string name="deblocking" source="google_translate">filter ကို setting များကို Deblocking</string>
+    <string name="deblocking_summary" source="google_translate">အဆိုပါ deblocking filter ကို setting များကိုပြောင်းလဲပါ။ ဗွီဒီယိုအရည်အသွေးတိုးတက်ကောင်းမွန်အောင်မလုပ်နိုင်ခဲ့ပါ။ သာအဆင့်မြင့် Users ။</string>
+    <string name="deblocking_always" source="google_translate">အပြည့်အဝ deblocking (အနှေးဆုံး)</string>
+    <string name="deblocking_nonref" source="google_translate">အလတ်စား deblocking</string>
+    <string name="deblocking_nonkey" source="google_translate">အနိမျ့ deblocking</string>
+    <string name="deblocking_all" source="google_translate">အဘယ်သူမျှမ deblocking (အမြန်ဆုံး)</string>
+    <string name="enable_frame_skip" source="google_translate">ဘောင် Skip Enable</string>
+    <string name="enable_frame_skip_summary" source="google_translate">ကုဒ်ဖြုတ်အရှိန်မြှင့်ပေမယ့်ဗီဒီယိုအရည်အသွေးကိုလျှော့ချနိုင်မည်ဖြစ်သည်။</string>
+    <string name="main_prefs_category" source="google_translate">အဓိကပြင်ဆင်ချက်များ</string>
+    <string name="save_video_none" source="google_translate">မြန်နှုန်းကိုကယ်တင်မနေပါနဲ့</string>
+    <string name="save_video_session" source="google_translate">session တစ်ခုအတွင်းမှာအမြန်နှုန်းကို Save</string>
+    <string name="save_video_always" source="google_translate">အစည်းအဝေးများအနှံ့မြန်နှုန်း Save</string>
+    <string name="auto_rescan" source="google_translate">အော်တို rescan</string>
+    <string name="auto_rescan_summary" source="google_translate">လျှောက်လွှာ startup မှာအသစ်သို့မဟုတ်ဖျက်ပစ်မီဒီယာများအတွက်အလိုအလြောကျစကင်စက်ကို</string>
+    <string name="dump_media_db" source="google_translate">မီဒီယာဒေတာဘေ့စပစ်သိမ်းရန်</string>
+    <string name="dump_media_db_summary" source="google_translate">internal storage ကိုအမြစ်မှမိတ္တူဒေတာဘေ့စ</string>
+    <string name="clear_media_db_summary" source="google_translate">ရှင်းရှင်းလင်းလင်းအချက်အလက်များ Access ကိုအန်းဒရွိုက် VLC အချက်အလက်</string>
+    <string name="set_locale_popup" source="google_translate">အကျိုးသက်ရောက်မှုယူပြောင်းလဲမှုများများအတွက် VLC Quit နှင့် restart ချလိုက်ပါ။</string>
+    <string name="network_caching" source="google_translate">Network မှယာယီသိမ်းဆည်းတန်ဖိုးကို</string>
+    <string name="network_caching_summary" source="google_translate">(ms တွင်) သည်ကွန်ယက်မီဒီယာအိပ်ရေးဝြခင်းဖို့အချိန်ပမာဏကို။ ဟာ့ဒ်ဝဲဒီကုဒ်ဒါနှင့်အတူအလုပ်မလုပ်ပါဘူး။ ကို reset ကွက်လပ်ချန်ထားပါ။</string>
+    <string name="resume_playback_title" source="google_translate">ဖုန်းခေါ်ပြီးနောက်ပြန်ဖွင်ပြန်လည်စတင်</string>
+    <string name="resume_playback_summary" source="google_translate">မဟုတ်ရင်ခေတ္တနားနေ</string>
+    <string name="network_caching_popup" source="google_translate">ဤသည်တန်ဖိုးတစ်ခုပါ 0 င်ခြင်းနှင့် 6000 ms အကြားဖြစ်ရပါမည်</string>
+    <string name="quit" source="google_translate">လျှောက်လွှာ Quit နှင့်ပြန်လည်စတင်ရန်</string>
+    <string name="developer_prefs_category" source="google_translate">developer</string>
+    <string name="log_service_title" source="google_translate">VLC ကမှတ်တမ်းတင်တွင်းသို့</string>
+    <string name="log_service_text" source="google_translate">ဃ console ကိုဖွင့်ပါ</string>
+    <string name="dump_logcat" source="google_translate">logcat မှတ်တမ်းကိုပစ်သိမ်းရန်</string>
+    <string name="dump_logcat_failure" source="google_translate">logcat အရေးပေါ်သိမ်းထားရန်မအောင်မြင်ခဲ့ပါ။</string>
+    <string name="serious_crash" source="google_translate">ကံမကောင်းစွာပဲ, တစ်ဦးလေးနက်အမှားတစ်ခုဖြစ်ပွားခဲ့သည်များနှင့် VLC ကိုပိတ်လိုက်ခဲ့ရသည်။</string>
+    <string name="help_us_send_log" source="google_translate">ကျွန်တော်တို့ကိုအောက်ပါပျက်ကျမှုမှတ်တမ်းပေးပို့ခြင်းအားဖြင့် VLC တိုးတက်အောင်ကိုကူညီပါ:</string>
+    <string name="restart_vlc" source="google_translate">ပြန်လည်စတင်ပါ VLC</string>
+    <string name="send_log" source="google_translate">ဃ Send</string>
+    <string name="sending_log" source="google_translate">ဃပို့နေ ...</string>
+    <string name="drawer_open" source="google_translate">ပွင့်လင်း navigation အံဆွဲ</string>
+    <string name="drawer_close" source="google_translate">အနီးကပ် navigation အံဆွဲ</string>
+    <string name="network_browsing" source="google_translate">ဒေသခံကွန်ယက်</string>
+    <string name="browsing" source="google_translate">browsing</string>
+    <string name="file_size" source="google_translate">ဖိုင်အရွယ်အစား:</string>
+    <string name="audio_delay" source="google_translate">audio နှောင့်နှေး</string>
+    <string name="spu_delay" source="google_translate">စာတန်းထိုးနှောင့်နှေး</string>
+    <string name="sleep_time_not_set" source="google_translate">အဘယ်သူမျှမထား</string>
+    <string name="network_shares_discovery" source="google_translate">ကွန်ယက်ကိုရှယ်ယာရှာဖွေနေ ...</string>
+    <string name="network_empty" source="google_translate">ဤသည် directory ကိုအချည်းနှီးပါပဲ။</string>
+    <string name="network_connection_needed" source="google_translate">ဒေသခံကွန်ယက်ဆက်သွယ်မှုမရှိ။</string>
+    <string name="search_hint" source="google_translate">ရှာရန်မီဒီယာ</string>
+    <string name="search_list_hint" source="google_translate">လက်ရှိစာရင်းထဲတွင်ရှာရန်မီဒီယာ</string>
+    <string name="search_global" source="google_translate">အားလုံးမီဒီယာစာကြည့်တိုက်အတွက်ရှာရန်</string>
+    <string name="directory_show_medialib" source="google_translate">MediaLib အတွက်ပြရန်</string>
+    <string name="directory_hide_medialib" source="google_translate">MediaLib ကနေ Hide</string>
+    <string name="playlist_save" source="google_translate">ကြော်ငြာကို Save လုပ်ရန် Playlist ကို</string>
+    <string name="playlist_name_hint" source="google_translate">သီချင်းစာရင်းကို name ကို</string>
+    <string name="go_to_chapter" source="google_translate">အခန်းကို Go ...</string>
+    <string name="chapter" source="google_translate">အခနျး</string>
+    <string name="resume_from_position" source="google_translate">နောက်ဆုံးအနေအထားကနေပြန်လည်စတင်</string>
+    <string name="confirm_resume" source="google_translate">နောက်ဆုံးအနေအထားကနေပြန်လည်စတင်?</string>
+    <string name="confirm_resume_title" source="google_translate">ပြန်လည်စတင်ဖို့အတည်ပြုချက်ကိုမေးပါ</string>
+    <string name="confirm_resume_summary" source="google_translate">activated လျှင်သင်ဗီဒီယိုတစ်ကားကိုနောက်ဆုံးအနေအထားကနေပြန်လည်ရနိုင်သည့်အခါအတည်ပြုဖို့တောင်းပါလိမ့်မည်</string>
+    <string name="directory_empty" source="google_translate">Directory ကိုအချည်းနှီးပင်ဖြစ်သည်</string>
+    <string name="player_touch_title" source="google_translate">ဗီဒီယိုများအတွက်ထိန်းချုပ်မှုကိုထိပါ</string>
+    <string name="player_touch_enable_all" source="google_translate">Touch ကိုထိန်းချုပ်မှု Enable</string>
+    <string name="player_touch_disable_brightness" source="google_translate">အရောင်အဝါထိန်းချုပ်မှုကို Disable</string>
+    <string name="player_touch_disable_all" source="google_translate">အားလုံး Touch ကိုထိန်းချုပ်မှုကို Disable</string>
+    <string name="tv_ui_title" source="google_translate">အန်းဒရွိုက်တီဗီအင်တာဖေ့စ</string>
+    <string name="tv_ui_summary" source="google_translate">ပြောင်းလဲမှုကို UI ကိုတီဗီမှဆောင်ပုဒ်အဆင်ပြေအောင်</string>
+    <string name="medialibrary" source="google_translate">မီဒီယာစာကြည့်တိုက်</string>
+    <string name="medialibrary_directories" source="google_translate">မီဒီယာစာကြည့်တိုက်ဖိုလ်ဒါ</string>
+    <string name="more_actions" source="google_translate">နောက်ထပ်လုပ်ဆောင်ချက်များ</string>
+    <string name="move" source="google_translate">လှုပ်ရှား</string>
+    <string name="back_quit_lock" source="google_translate">ဗွီဒီယိုကိုဖြတ်ပြန်သွားရန်နောက်တဖန်စာနယ်ဇင်း</string>
+    <string name="playlist_deleted" source="google_translate">playlist ကိုဖျက်ပစ်</string>
+    <string name="file_deleted" source="google_translate">file ကိုဖျက်ပစ်</string>
+    <string name="no_subs_found" source="google_translate">ဒီ directory ထဲတွင်အဘယ်သူမျှမစာတန်းထိုး</string>
+    <string name="music_now_playing" source="google_translate">အခုတော့ကစားခြင်း</string>
+    <string name="widget_name_w" source="google_translate">VLC က White က Widget လေး</string>
+    <string name="widget_name_b" source="google_translate">VLC ကအမှောင် Widget လေး</string>
+    <string name="allow_storage_access_title" source="google_translate">Ace ကို Stream ဗွီဒီယိုနဲ့အသံဖိုင်တွေဝင်ရောက်ဖို့ Allow</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace ကို Stream ဤကိရိယာပေါ်တွင်မီဒီယာဖိုင်များကိုဝင်ရောက်ဖို့ဒီခွင့်ပြုချက်ပေးရန်သင်သည်လိုအပ်ပါသည်။</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Ace ကို Stream အဆိုပါဖုန်းမြည်သံတင်ထားရန် Allow</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace ကို Stream သင့်ဖုန်းမြည်သံအဖြစ်ဤသီချင်းကို set up ဤခွင့်ပြုချက်ပေးရန်သင်သည်လိုအပ်ပါသည်။</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Ace ကို Stream ရောင်ခြည် mode ကိုပြောင်းလဲပစ်ရန် Allow</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace ကို Stream ကသင်၏အရောင်အဝါ mode ကိုပြောင်းလဲပစ်ရန်ဤခွင့်ပြုချက်ပေးရန်သင်သည်လိုအပ်ပါသည်။</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Ace ကို Stream ကစားသမားပေါ့ပ်အပ်အခြားအက်ပ်ကျော် Allow</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace ကို Stream ဒီခွင့်ပြုချက်ကိုအခြား application များအုပ်စိုးပေါ့ပ်အပ်ထဲမှာသင့်ရဲ့ဗွီဒီယိုကိုပြသပေးသနားတော်မူရန်သင့်အားလိုအပ်နေပါသည်။</string>
+    <string name="permission_ask_again" source="google_translate">Grant ကခွင့်ပြုချက်</string>
+    <string name="exit_app" source="google_translate">အနီးကပ် VLC</string>
+    <string name="exit_app_msg" source="google_translate">သငျသညျ VLC ဆေးလိပ်ဖြတ်ချင်သင်သေချာပါသလား?</string>
+    <string name="fastscroller_track" source="google_translate">FastScroller လမ်းကြောင်းမှန်ပေါ်</string>
+    <string name="fastscroller_handle" source="google_translate">FastScroller လက်ကိုင်</string>
+    <string name="plugins" source="google_translate">plugins</string>
+    <string name="download_on_device" source="google_translate">ဒေါင်းလုပ်</string>
+    <string name="extension_empty" source="google_translate">ပြသရန်မရှိပါကို item အချို့ရဖို့သင့်ရဲ့ extension ကို setting များကိုသွားပါ။</string>
+    <string name="opengl_title" source="google_translate">OpenGL ES2 အသုံးပြုမှု</string>
+    <string name="opengl_summary" source="google_translate">(360 °ဗီဒီယိုများ) လိုအပ်တဲ့အခါပုံမှန်အားဖြင့်, OpenGL ES2 software ကိုဒီကုဒ်ဒါနှင့်ဟာ့ဒ်ဝဲဒီကုဒ်ဒါအဘို့ကိုအသုံးပြုသည်။</string>
+    <string name="opengl_automatic" source="google_translate">automatic</string>
+    <string name="opengl_on" source="google_translate">တပ်ဖွဲ့တွင်</string>
+    <string name="opengl_off" source="google_translate">အင်အားစုဟာ Off</string>
+    <string name="network_favorites" source="google_translate">Network ကိုအကြိုက်ဆုံး</string>
+    <string name="network_shared_folders" source="google_translate">shared ဖိုလ်ဒါ</string>
+    <string name="encryption_warning" source="google_translate">သတိပေး, encryption ကိုဤ Android ဗားရှင်းမရရှိနိုင်, စကားဝှက်ပုဂ္ဂလိကအာကာသထဲမှာသိမ်းထားတဲ့ပေမယ်ကို encrypt မလုပ်ထားပါလိမ့်မည်</string>
+    <string name="store_password" source="google_translate">စကားဝှက်ကိုကိုသတိရပါ</string>
+    <string name="add_to_playlist" source="google_translate">သီချင်းစာရင်းကိုပေါင်းထည့်ရန်</string>
+    <string name="popup_playback_title" source="google_translate">တစ်ဦး pop-up window ထဲမှာဗီဒီယိုက Play</string>
+    <string name="popup_playback" source="google_translate">တစ်ဦး pop-up window ထဲမှာကစား</string>
+    <string name="popup_expand" source="google_translate">ဗီဒီယိုကို Expand</string>
+    <string name="snack_subloader_sub_found" source="google_translate">ဒေါင်းလုပ်လုပ်စာတန်းထိုး</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">စာတန်းထိုးမတွေ့ရှိ</string>
+    <string name="dialog_subloader_success" source="google_translate">တွေ့ရှိစာတန်းထိုး:</string>
+    <string name="dialog_subloader_fails" source="google_translate">ဘို့မတွေ့ရှိစာတန်းထိုး:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">ချော Download</string>
+    <string name="download_subtitles" source="google_translate">ဒေါင်းလုပ်စာတန်းထိုး</string>
+    <string name="preferences_languages_download" source="google_translate">စာတန်းထိုးဘာသာစကားများ</string>
+    <string name="list_languages_download_summary" source="google_translate">စာတန်းထိုးရယူတဲ့အခါမှာဒေါင်းလုပ်လုပ်ရန်ဘာသာစကားများ</string>
+    <string name="list_languages_download_title" source="google_translate">စာတန်းထိုး download, ဘာသာစကားများ</string>
+    <string name="service_unavailable" source="google_translate">ဝန်ဆောင်မှုမရရှိနိုင်ပါ</string>
+    <string name="subs_dl_lang_fail" source="google_translate">application setting ရှိကသတ်မှတ်ထားဖို့ကြိုးစား, စာတန်းထိုးဘာသာစကားသတ်မှတ်ထားရန်မအောင်မြင်ခဲ့ပါ</string>
+    <string name="downloading_subtitles" source="google_translate">ဒေါင်းလုဒ်လုပ်ခြင်းစာတန်းထိုး</string>
+    <string name="browse_folder" source="google_translate">folder ကို Browse</string>
+    <string name="listen" source="google_translate">နားထောင်</string>
+    <string name="subtitles_download_title" source="google_translate">ငုပ်သင်္ဘောကို download</string>
+    <string name="connecting" source="google_translate">ချိတ်ဆက်ခြင်း ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">ဘလူးတုသ်စက်ပစ္စည်းအတွက်နှောင့်နှေးကယ်တင်</string>
+    <string name="episodes" source="google_translate">ဖြစ်စဉ်များ</string>
+    <string name="movies" source="google_translate">ရုပ်ရှင်များ</string>
+    <string name="videos" source="google_translate">ဗီဒီယိုများ</string>
+    <string name="streams" source="google_translate">စီး</string>
+    <string name="clear_playback_history" source="google_translate">Clear ကိုပြန်ဖွင့်သမိုင်း</string>
+    <string name="various_artists" source="google_translate">အမျိုးမျိုးသောအဆိုတော်များ</string>
+    <string name="ml_scanning" source="google_translate">မီဒီယာဖိုင်စကင်ဖတ်စစ်ဆေးဖို့</string>
+    <string name="ml_parse_media" source="google_translate">parsing မီဒီယာ</string>
+    <string name="ml_discovering" source="google_translate">ကိုတွေ့ရှိခြင်း</string>
+    <string name="resume" source="google_translate">ပြန်စသည်</string>
+    <string name="length" source="google_translate">အရှည်</string>
+    <string name="tv_settings_hint" source="google_translate">Long ကစာနယ်ဇင်း OK ကိုခလုတ် / Uncheck directory များစစ်ဆေးနိုင်ရန်</string>
+    <string name="ml_external_storage_title" source="google_translate">ရှာဖွေတွေ့ရှိနယူးပြင်ပသိုလှောင်မှု</string>
+    <string name="ml_external_storage_accept" source="google_translate">ဟုတ်ကဲ့</string>
+    <string name="ml_external_storage_decline" source="google_translate">အဘယ်သူမျှမ</string>
+    <string name="last_added_media" source="google_translate">နောက်ဆုံး ADDED</string>
+    <string name="no" source="google_translate">အဘယ်သူမျှမ</string>
+    <string name="loading_medialibrary" source="google_translate">Medialibrary Loading ...</string>
+    <string name="yes" source="google_translate">ဟုတ်ကဲ့</string>
+    <string name="custom_set_save_title" source="google_translate">မသိမ်းရသေးသောအပြောင်းအလဲများ</string>
+    <string name="custom_set_save_warning" source="google_translate">သတိပေးချက်: မသိမ်းရသေးသောအပြောင်းအလဲများ</string>
+    <string name="existing_custom_set_save_message" source="google_translate">equalizer-set အဖြစ်သိမ်းဆည်းရန် ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">အသစ်က equalizer-set အဖြစ်သိမ်းဆည်းရန် ...</string>
+    <string name="save" source="google_translate">ကြော်ငြာကို Save လုပ်ရန်</string>
+    <string name="do_not_save" source="google_translate">ကယ်တင်မနေပါနဲ့</string>
+    <string name="custom_set_wrong_input" source="google_translate">မှားနေသောအမည်ဖြစ်တယ်။</string>
+    <string name="custom_set_already_exist" source="google_translate">ဒီနာမည် equalizer-set ရှိထားပြီးသား</string>
+    <string name="custom_set_restored" source="google_translate">custom equalizer-set ကိုပြန်၏။</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">မသိမ်းရသေးသော equalizer-set ကိုဖျက်ပစ်။</string>
+    <string name="equalizer_new_preset_name" source="google_translate">နယူး</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary အခုအချိန်မှာသင့်ရဲ့ device များ scan ဖတ်နေပါတယ်</string>
+    <string name="recommendations" source="google_translate">အကြံပြုချက်များ</string>
+    <string name="recommendations_desc" source="google_translate">launcher အပေါ်အကြံပြုချက်များကတ်များ</string>
+    <string name="browser_quick_access" source="google_translate">quick Access ကို</string>
+    <string name="browser_storages" source="google_translate">သိုလှောင်မှု</string>
+    <string name="renderer_list_title" source="google_translate">displays</string>
+    <string name="feedback_player_crashed" source="google_translate">ဝမ်းနည်းပါတယ်, VLC ပဲပျက်ကျသွားသည်။ ထပ်ကြိုးစားပါ။</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">သငျသညျ VLC သင့်ရဲ့ SD ကဒ်မှဝင်ရောက်ခွင့်ရေးပေးသနားတော်မူရန်ရှိသည်</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC ကရေး access ကိုခွင့်ပြုချက်မရှိဘဲဤဖိုင်တွင်မဖျက်နိုင်ပါ။ \ သင့်ရဲ့ SD ကဒ်ကိုသွားနှင့် "ကို Select လုပ်ပါ \" \ ကို click n ကျေးဇူးပြုပြီး။ \ n ပထမဦးဆုံးအထိပ်ညာဘက် Menu ထဲမှာ \ "Show ကို SD ကဒ် \" ပေါ်တွင် click လုပ်ဖို့ရှိစေခြင်းငှါ</string>
+    <string name="dialog_sd_wizard" source="google_translate">ကျွန်တော့်ကိုပြပါ</string>
+    <string name="renderers_disconnect" source="google_translate">ခှဲခွား</string>
+    <string name="audio_digital_failed" source="google_translate">အသံဒစ်ဂျစ်တယ် Output ပြည်နယ်ကိုပြောင်းလဲရန်မအောင်မြင်ခဲ့ပါ</string>
+    <string name="audio_digital_output_enabled" source="google_translate">audio ဒစ်ဂျစ်တယ် Output enabled</string>
+    <string name="audio_digital_output_disabled" source="google_translate">audio ဒစ်ဂျစ်တယ် Output ကိုပိတ်ထားရ</string>
+    <string name="live_streams" source="google_translate">တိုက်ရိုက်စီး</string>
+    <string name="all_live_streams" source="google_translate">အားလုံးတိုက်ရိုက်ထုတ်လွှစီး</string>
+    <string name="video_torrents" source="google_translate">ဗီဒီယိုကိုရေစီးခြင်း</string>
+    <string name="audio_torrents" source="google_translate">audio ရေစီးခြင်း</string>
+    <string name="all_torrents" source="google_translate">အားလုံးရေစီးခြင်း</string>
+    <string name="main" source="google_translate">အဓိက</string>
+    <string name="media_player" source="google_translate">media player</string>
+    <string name="acestream_server" source="google_translate">Ace ကို Stream server ကို (အင်ဂျင်)</string>
+    <string name="media_player_settings" source="google_translate">media player settings ကို</string>
+    <string name="acestream_server_settings" source="google_translate">Ace ကို Stream server ကို (အင်ဂျင်) settings ကို</string>
+    <string name="sign_out" source="google_translate">ဆိုင်းအောက်</string>
+    <string name="sign_in" source="google_translate">ဆိုင်းအင်လုပ်ခြင်း</string>
+    <string name="sign_in_acestream" source="google_translate">Ace ကို Stream နဲ့ Sign</string>
+    <string name="sign_in_google" source="google_translate">Google ဖြင့်မှတ်ပုံတင်ရန်</string>
+    <string name="video_files" source="google_translate">ဗီဒီယိုဖိုင်များ</string>
+    <string name="audio_files" source="google_translate">အသံဖိုငျမြား</string>
+    <string name="retry" source="google_translate">ပြန်ကြိုးစားမည်</string>
+    <string name="failed_to_load_web_page" source="google_translate">ဝဘ်စာမျက်နှာကို load ရန်မအောင်မြင်ခဲ့ပါ</string>
 </resources>

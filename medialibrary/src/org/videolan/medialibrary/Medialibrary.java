@@ -7,16 +7,22 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import org.acestream.sdk.AceStream;
+import org.acestream.sdk.controller.api.TransportFileDescriptor;
+import org.acestream.sdk.controller.api.response.MediaFilesResponse;
+import org.acestream.sdk.errors.TransportFileParsingException;
+import org.acestream.sdk.utils.Logger;
+import org.acestream.sdk.utils.MiscUtils;
 import org.videolan.libvlc.LibVLC;
-import org.videolan.libvlc.util.VLCUtil;
 import org.videolan.medialibrary.interfaces.DevicesDiscoveryCb;
 import org.videolan.medialibrary.interfaces.EntryPointsEventsCb;
 import org.videolan.medialibrary.interfaces.MediaAddedCb;
@@ -31,13 +37,17 @@ import org.videolan.medialibrary.media.Playlist;
 import org.videolan.medialibrary.media.SearchAggregate;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Medialibrary {
 
-    private static final String TAG = "VLC/JMedialibrary";
+    private static final String TAG = "AS/ML";
 
     public static final int FLAG_MEDIA_UPDATED_AUDIO        = 1 << 0;
     public static final int FLAG_MEDIA_UPDATED_AUDIO_EMPTY  = 1 << 1;
@@ -45,6 +55,7 @@ public class Medialibrary {
     public static final int FLAG_MEDIA_ADDED_AUDIO          = 1 << 3;
     public static final int FLAG_MEDIA_ADDED_AUDIO_EMPTY    = 1 << 4;
     public static final int FLAG_MEDIA_ADDED_VIDEO          = 1 << 5;
+    public static final int FLAG_MEDIA_ADDED_TRANSPORT_FILE = 1 << 6;
 
     public static final int ML_INIT_SUCCESS = 0;
     public static final int ML_INIT_ALREADY_INITIALIZED = 1;
@@ -58,6 +69,7 @@ public class Medialibrary {
     public static final String VLC_MEDIA_DB_NAME = "/vlc_media.db";
     public static final String THUMBS_FOLDER_NAME = "/thumbs";
 
+    public final static long INTERNAL_TRANSPORT_FILE_PARENT_ID = -10;
 
     private long mInstanceID;
     private volatile boolean mIsInitiated = false;
@@ -89,6 +101,14 @@ public class Medialibrary {
                 || dbDirectory == null || !dbDirectory.canWrite())
             return ML_INIT_FAILED;
         LibVLC.loadLibraries();
+        try {
+            System.loadLibrary("c++_shared");
+            System.loadLibrary("mla");
+        } catch (UnsatisfiedLinkError ule)
+        {
+            Log.e(TAG, "Can't load mla: " + ule);
+            return ML_INIT_FAILED;
+        }
         int initCode = nativeInit(dbDirectory+ VLC_MEDIA_DB_NAME, extFilesDir+ THUMBS_FOLDER_NAME);
         mIsInitiated = initCode != ML_INIT_FAILED;
         return initCode;
@@ -152,23 +172,23 @@ public class Medialibrary {
     }
 
     @WorkerThread
-    public MediaWrapper[] getVideos() {
-        return mIsInitiated ? nativeGetVideos() : new MediaWrapper[0];
+    public MediaWrapper[] getVideos(int isP2P, int isLive) {
+        return mIsInitiated ? nativeGetVideos(isP2P, isLive) : new MediaWrapper[0];
     }
 
     @WorkerThread
-    public MediaWrapper[] getRecentVideos() {
-        return mIsInitiated ? nativeGetRecentVideos() : new MediaWrapper[0];
+    public MediaWrapper[] getRecentVideos(int isP2P, int isLive) {
+        return mIsInitiated ? nativeGetRecentVideos(isP2P, isLive) : new MediaWrapper[0];
     }
 
     @WorkerThread
-    public MediaWrapper[] getAudio() {
-        return mIsInitiated ? nativeGetAudio() : new MediaWrapper[0];
+    public MediaWrapper[] getAudio(int isP2P, int isLive) {
+        return mIsInitiated ? nativeGetAudio(isP2P, isLive) : new MediaWrapper[0];
     }
 
     @WorkerThread
-    public MediaWrapper[] getRecentAudio() {
-        return mIsInitiated ? nativeGetRecentAudio() : new MediaWrapper[0];
+    public MediaWrapper[] getRecentAudio(int isP2P, int isLive) {
+        return mIsInitiated ? nativeGetRecentAudio(isP2P, isLive) : new MediaWrapper[0];
     }
 
     public int getVideoCount() {
@@ -263,6 +283,7 @@ public class Medialibrary {
     }
 
     public boolean addToHistory(String mrl, String title) {
+        Logger.v(TAG, "addToHistory: mrl=" + mrl);
         return mIsInitiated && nativeAddToHistory(Tools.encodeVLCMrl(mrl), Tools.encodeVLCMrl(title));
     }
 
@@ -273,20 +294,83 @@ public class Medialibrary {
 
     @Nullable
     public MediaWrapper getMedia(Uri uri) {
-        final String vlcMrl = Tools.encodeVLCMrl(uri.toString());
-        return mIsInitiated && !TextUtils.isEmpty(vlcMrl) ? nativeGetMediaFromMrl(vlcMrl) : null;
+        if(uri == null) return null;
+        return getMedia(uri.toString());
     }
 
     @Nullable
     public MediaWrapper getMedia(String mrl) {
-        final String vlcMrl = Tools.encodeVLCMrl(mrl);
+        final String vlcMrl = convertMrl(Tools.encodeVLCMrl(mrl), false);
         return mIsInitiated && !TextUtils.isEmpty(vlcMrl) ? nativeGetMediaFromMrl(vlcMrl) : null;
     }
 
+    //:ace
+    @Nullable
+    public MediaWrapper addMedia(MediaWrapper mw) {
+        if(mw.isP2PItem()) {
+            TransportFileDescriptor descriptor;
+            try {
+                descriptor = mw.getDescriptor();
+            }
+            catch(TransportFileParsingException e) {
+                Log.e(TAG, "Failed to read transport file", e);
+                return null;
+            }
+
+            if(mw.getMediaFile() == null) {
+                Log.e(TAG, "addMedia: missing media file for p2p item");
+                return null;
+            }
+
+            return addP2PMedia(mw.getParentMediaId(), descriptor, mw.getMediaFile());
+        }
+        else {
+            return addMedia(Uri.decode(mw.getUri().toString()));
+        }
+    }
+    ///ace
+
     @Nullable
     public MediaWrapper addMedia(String mrl) {
-        final String vlcMrl = Tools.encodeVLCMrl(mrl);
+        final String vlcMrl = convertMrl(Tools.encodeVLCMrl(mrl), true);
         return mIsInitiated && !TextUtils.isEmpty(vlcMrl) ? nativeAddMedia(vlcMrl) : null;
+    }
+
+    @Nullable
+    public MediaWrapper addP2PMedia(long parentMediaId, TransportFileDescriptor descriptor, MediaFilesResponse.MediaFile mediaFile) {
+        if(!mIsInitiated) return null;
+
+        if(descriptor == null)
+            throw new IllegalStateException("missing descriptor");
+
+        if(mediaFile == null)
+            throw new IllegalStateException("missing media file");
+
+        if(TextUtils.isEmpty(mediaFile.filename))
+            throw new IllegalStateException("empty mediaFile.filename");
+
+        if(descriptor.getDescriptorString().startsWith("data=content%3A%2F%2F")) {
+            Logger.v(TAG, "addP2PMedia: skip item: descriptor=" + descriptor);
+            return null;
+        }
+
+        int type = mediaFile.mime.startsWith("audio/") ? MediaWrapper.TYPE_AUDIO : MediaWrapper.TYPE_VIDEO;
+        String mrl = descriptor.getMrl(mediaFile.index).toString();
+        final String vlcMrl = Tools.encodeVLCMrl(mrl);
+
+        if(parentMediaId == 0 && descriptor.isInternal()) {
+            // The means 'internal transport file' (saved in internal app storage)
+            parentMediaId = INTERNAL_TRANSPORT_FILE_PARENT_ID;
+        }
+
+        Logger.v(TAG, "addP2PMedia: parent=" + parentMediaId + " mime=" + mediaFile.mime + " type=" + type + " mrl=" + mrl);
+
+        MediaWrapper mw = nativeAddP2PMedia(parentMediaId, type, mediaFile.filename, vlcMrl);
+        if(mw != null) {
+            mw.setP2PLive(mediaFile.isLive() ? 1 : 0);
+            mw.setP2PInfo(mediaFile.infohash, mediaFile.index);
+        }
+        return mw;
     }
 
     public long getId() {
@@ -305,9 +389,13 @@ public class Medialibrary {
         return mIsInitiated && mediaId > 0 && nativeIncreasePlayCount(mediaId);
     }
 
+    public boolean deleteMedia(long mediaId) {
+        return mIsInitiated && mediaId > 0 && nativeDeleteMedia(mediaId);
+    }
+
     // If media is not in ML, find it with its path
     public MediaWrapper findMedia(MediaWrapper mw) {
-        if (mIsInitiated && mw != null && mw.getId() == 0L) {
+        if (mIsInitiated && mw != null && mw.getId() == 0L && mw.getUri() != null) {
             Uri uri = mw.getUri();
             MediaWrapper libraryMedia = getMedia(uri);
             if (libraryMedia == null && TextUtils.equals("file", uri.getScheme()) &&
@@ -315,6 +403,7 @@ public class Medialibrary {
                 uri = Tools.convertLocalUri(uri);
                 libraryMedia = getMedia(uri);
             }
+
             if (libraryMedia != null)
                 return libraryMedia;
         }
@@ -375,6 +464,7 @@ public class Medialibrary {
             Log.d(TAG, "onAlbumsDeleted: "+id);
     }
 
+    @SuppressWarnings("unused")
     public void onDiscoveryStarted(String entryPoint) {
         synchronized (devicesDiscoveryCbList) {
             if (!devicesDiscoveryCbList.isEmpty())
@@ -388,6 +478,7 @@ public class Medialibrary {
         }
     }
 
+    @SuppressWarnings("unused")
     public void onDiscoveryProgress(String entryPoint) {
         synchronized (devicesDiscoveryCbList) {
             if (!devicesDiscoveryCbList.isEmpty())
@@ -401,6 +492,7 @@ public class Medialibrary {
         }
     }
 
+    @SuppressWarnings("unused")
     public void onDiscoveryCompleted(String entryPoint) {
         synchronized (devicesDiscoveryCbList) {
             if (!devicesDiscoveryCbList.isEmpty())
@@ -414,6 +506,7 @@ public class Medialibrary {
         }
     }
 
+    @SuppressWarnings("unused")
     public void onParsingStatsUpdated(int percent) {
         synchronized (devicesDiscoveryCbList) {
             if (!devicesDiscoveryCbList.isEmpty())
@@ -633,10 +726,11 @@ public class Medialibrary {
     private native MediaWrapper nativeGetMedia(long id);
     private native MediaWrapper nativeGetMediaFromMrl(String mrl);
     private native MediaWrapper nativeAddMedia(String mrl);
-    private native MediaWrapper[] nativeGetVideos();
-    private native MediaWrapper[] nativeGetRecentVideos();
-    private native MediaWrapper[] nativeGetAudio();
-    private native MediaWrapper[] nativeGetRecentAudio();
+    private native MediaWrapper nativeAddP2PMedia(long parentMediaId, int type, String title, String mrl);
+    private native MediaWrapper[] nativeGetVideos(int isP2P, int isLive);
+    private native MediaWrapper[] nativeGetRecentVideos(int isP2P, int isLive);
+    private native MediaWrapper[] nativeGetAudio(int isP2P, int isLive);
+    private native MediaWrapper[] nativeGetRecentAudio(int isP2P, int isLive);
     private native int nativeGetVideoCount();
     private native int nativeGetAudioCount();
     private native Album[] nativeGetAlbums();
@@ -654,6 +748,7 @@ public class Medialibrary {
     private native void nativeReload(String entryPoint);
     private native void nativeForceParserRetry();
     private native void nativeForceRescan();
+    private native void nativeReinit();
     private native boolean nativeIncreasePlayCount(long mediaId);
     private native void nativeSetMediaUpdatedCbFlag(int flags);
     private native void nativeSetMediaAddedCbFlag(int flags);
@@ -684,4 +779,132 @@ public class Medialibrary {
     public interface AlbumsModifiedCb {
         void onAlbumsModified();
     }
+
+    //:ace
+    private native MediaWrapper[] nativeGetTransportFiles(int isParsed);
+    private native boolean nativeDeleteMedia(long mediaId);
+    private native MediaWrapper[] nativeFindMediaByInfohash(String infohash, int fileIndex);
+    private native MediaWrapper[] nativeFindMediaByParent(long parentId);
+    private native MediaWrapper[] nativeFindDuplicatesByInfohash();
+    private native boolean nativeCopyMetadata(long sourceId, long destId);
+    private native boolean nativeRemoveOrphanTransportFiles();
+
+    @WorkerThread
+    public MediaWrapper[] getTransportFiles(int isParsed) {
+        return mIsInitiated ? nativeGetTransportFiles(isParsed) : new MediaWrapper[0];
+    }
+
+    public MediaWrapper[] getUnparsedTransportFiles() {
+        return getTransportFiles(0);
+    }
+
+    @WorkerThread
+    public MediaWrapper[] getRegularVideos() {
+        return getVideos(0, -1);
+    }
+
+    @WorkerThread
+    public MediaWrapper[] getRecentRegularVideos() {
+        return getRecentVideos(0, -1);
+    }
+
+    @WorkerThread
+    public MediaWrapper[] getRegularAudio() {
+        return getAudio(0, -1);
+    }
+
+    @WorkerThread
+    public MediaWrapper[] getP2PVideos() {
+        return getVideos(1, 0);
+    }
+
+    @WorkerThread
+    public MediaWrapper[] getRecentP2PVideos() {
+        return getRecentVideos(1, 0);
+    }
+
+    @WorkerThread
+    public MediaWrapper[] getP2PAudio() {
+        return getAudio(1, 0);
+    }
+
+    @WorkerThread
+    public MediaWrapper[] getP2PStreams() {
+        return getVideos(1, 1);
+    }
+
+    @WorkerThread
+    public MediaWrapper[] getRecentP2PStreams() {
+        return getRecentVideos(1, 1);
+    }
+
+    @WorkerThread
+    public MediaWrapper[] findMediaByInfohash(String infohash, int fileIndex) {
+        return mIsInitiated ? nativeFindMediaByInfohash(infohash, fileIndex) : new MediaWrapper[0];
+    }
+
+    @WorkerThread
+    public MediaWrapper[] findMediaByParent(long parentId) {
+        return mIsInitiated ? nativeFindMediaByParent(parentId) : new MediaWrapper[0];
+    }
+
+    @WorkerThread
+    public MediaWrapper[] findDuplicatesByInfohash() {
+        return mIsInitiated ? nativeFindDuplicatesByInfohash() : new MediaWrapper[0];
+    }
+
+    @WorkerThread
+    public boolean copyMetadata(long sourceId, long destId) {
+        return mIsInitiated ? nativeCopyMetadata(sourceId, destId) : false;
+    }
+
+    @WorkerThread
+    public boolean removeOrphanTransportFiles() {
+        return mIsInitiated ? nativeRemoveOrphanTransportFiles() : false;
+    }
+
+    private String convertMrl(String mrl, boolean transform) {
+        if(mrl == null) return null;
+
+        Uri uri = Uri.parse(mrl);
+        if(!TextUtils.equals(uri.getScheme(), "content")) {
+            return mrl;
+        }
+
+        File dir = AceStream.getAppFilesDir("content_files",transform);
+        String filename;
+        File file;
+        String ext = MiscUtils.parseExtension(uri.getLastPathSegment());
+
+        // Need idempotent filename: the same for the same content:// URI
+        try {
+            filename = MiscUtils.sha1Hash(uri.toString()) + ext;
+            filename = filename.toLowerCase();
+        }
+        catch(NoSuchAlgorithmException|UnsupportedEncodingException e) {
+            filename = uri.getLastPathSegment();
+        }
+
+        if (TextUtils.isEmpty(filename)) {
+            Log.e(TAG, "convertMrl: failed to make filename: uri=" + uri);
+            return mrl;
+        }
+
+        file = new File(dir, filename);
+
+        if(transform) {
+            try {
+                Logger.v(TAG, "convertMrl:transform: uri=" + uri + " path=" + file.getAbsolutePath() + " exists=" + file.exists());
+                FileOutputStream output = new FileOutputStream(file);
+                output.write(MiscUtils.readBytesFromContentUri(sContext.getContentResolver(), uri));
+                output.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Failed to transform content file", e);
+                return mrl;
+            }
+        }
+
+        return file.getAbsolutePath();
+    }
+    ///ace
 }

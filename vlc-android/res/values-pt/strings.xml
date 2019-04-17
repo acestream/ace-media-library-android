@@ -19,10 +19,6 @@
     <string name="sortby_number_desc">Número de faixas (desc)</string>
     <string name="searchable_hint">Procurar ...</string>
     <string name="history">Histórico</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">Encontrado %d resultado</item>
-        <item quantity="other">Encontrados %d resultados</item>
-    </plurals>
     <string name="play">Reproduzir</string>
     <string name="playback">Reprodução</string>
     <string name="playback_controls">Controlos de reprodução</string>
@@ -71,14 +67,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 subpasta</item>
         <item quantity="other">%d subpastas</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 ficheiro media</item>
-        <item quantity="other">%d ficheiros de media</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 video</item>
-        <item quantity="other">%d videos</item>
     </plurals>
     <string name="internal_memory">Memória interna</string>
     <string name="parent_folder">Ir para a pasta original</string>
@@ -140,10 +128,6 @@
     <string name="navmenu">menu de navegação</string>
     <string name="advanced">opções avançadas</string>
     <string name="audio_boost_warning">Deslize acima novamente para subir acima de 100%</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 canal\n</item>
-        <item quantity="other">%1$d canais\n</item>
-    </plurals>
     <string name="track_samplerate_info">Frequência: %1$d Hz\n</string>
     <string name="track_resolution_info">Resolução: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Frequência: %1$.3f\n</string>
@@ -179,7 +163,7 @@
     <string name="error_not_compatible">Desculpe, atualmente o seu dispositivo não é suportado por esta versão do VLC para Android™.</string>
     <string name="error_problem">Desculpe, o VLC para Android encontrou um problema durante o carregamento e teve de ser fechado.</string>
     <string name="error_message_is">A mensagem de erro é (por favor, mencione isto durante a depuração):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Erro de reprodução</string>
     <string name="encountered_error_message">O VLC encontrou um erro com esta média.\nPor favor, tente atualizar a biblioteca de multimédia.</string>
     <string name="invalid_location">A localização %1$s não pode ser reproduzida.</string>
@@ -432,14 +416,14 @@
     <!--Widget-->
     <string name="widget_name_w">Widget claro</string>
     <string name="widget_name_b">Widget escuro</string>
-    <string name="allow_storage_access_title">Permitir que o VLC aceda a ficheiros de vídeo e áudio</string>
-    <string name="allow_storage_access_description">O VLC necessita desta permissão para aceder aos ficheiros multimédia do dispositivo.</string>
-    <string name="allow_settings_access_ringtone_title">Permitir que o VLC defina o toque</string>
-    <string name="allow_settings_access_ringtone_description">O VLC necessita desta permissão para definir uma faixa como toque de chamada.</string>
-    <string name="allow_settings_access_brightness_title">Permitir que o VLC altere o brilho</string>
-    <string name="allow_settings_access_brightness_description">O VLC necessita desta permissão para alterar o modo de brilho.</string>
-    <string name="allow_draw_overlays_title">Permitir que o VLC surja por cima das outras aplicações</string>
-    <string name="allow_sdraw_overlays_description">O VLC necessita desta permissão para mostrar os vídeos por cima das outras aplicações.</string>
+    <string name="allow_storage_access_title">Permitir que o Ace Stream aceda a ficheiros de vídeo e áudio</string>
+    <string name="allow_storage_access_description">O Ace Stream necessita desta permissão para aceder aos ficheiros multimédia do dispositivo.</string>
+    <string name="allow_settings_access_ringtone_title">Permitir que o Ace Stream defina o toque</string>
+    <string name="allow_settings_access_ringtone_description">O Ace Stream necessita desta permissão para definir uma faixa como toque de chamada.</string>
+    <string name="allow_settings_access_brightness_title">Permitir que o Ace Stream altere o brilho</string>
+    <string name="allow_settings_access_brightness_description">O Ace Stream necessita desta permissão para alterar o modo de brilho.</string>
+    <string name="allow_draw_overlays_title">Permitir que o Ace Stream surja por cima das outras aplicações</string>
+    <string name="allow_sdraw_overlays_description">O Ace Stream necessita desta permissão para mostrar os vídeos por cima das outras aplicações.</string>
     <string name="permission_ask_again">Permitir</string>
     <string name="exit_app">Fechar o VLC</string>
     <string name="exit_app_msg">Tem a certeza de que deseja fechar o VLC?</string>
@@ -516,4 +500,48 @@
     <string name="feedback_player_crashed">Desculpe, o VLC parou de funcionar. Por favor tente novamente.</string>
     <string name="sdcard_permission_dialog_title">Necessita de dar ao VLC acesso de escrita para o SD Card</string>
     <string name="dialog_sd_wizard">Mostra-me</string>
+    <string name="torrent_files">Torrent arquivos</string>
+    <string name="select_language">Selecione o idioma</string>
+    <string name="media_fast_seek" source="google_translate">Ativar opção de busca rápida</string>
+    <string name="enable_headset_actions_title" source="google_translate">Atalhos de controle remoto</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Pressione duas vezes em \'Play \' para pular para a próxima e pressione e segure para pular para a faixa anterior</string>
+    <string name="audio_ducking_summary" source="google_translate">Ajuda a ouvir notificações de áudio, instruções de navegação ou assistente de falar</string>
+    <string name="casting_category" source="google_translate">Fundição</string>
+    <string name="casting_passthrough_title" source="google_translate">Passagem de Áudio</string>
+    <string name="casting_passthrough_summary" source="google_translate">Deixe sua TV gerenciar a renderização de áudio</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Selecione a qualidade de conversão ao transmitir na tela remota</string>
+    <string name="cast_performance_warning" source="google_translate">Transmitir este vídeo requer conversão. Essa conversão pode usar toda a energia disponível e drenar rapidamente sua bateria.</string>
+    <string name="artists_show_all_summary" source="google_translate">Mostrar todos os artistas em Artistas, não só artistas de álbuns</string>
+    <string name="main_prefs_category" source="google_translate">Configurações principais</string>
+    <string name="dump_media_db" source="google_translate">Banco de dados de mídia de despejo</string>
+    <string name="dump_media_db_summary" source="google_translate">Copiar banco de dados para raiz de armazenamento interno</string>
+    <string name="network_shares_discovery" source="google_translate">Procurando por compartilhamentos de rede…</string>
+    <string name="streams" source="google_translate">córregos</string>
+    <string name="loading_medialibrary" source="google_translate">Carregando a Medialibrary…</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Salve o equalizador definido como…</string>
+    <string name="new_custom_set_save_message" source="google_translate">Salve o novo conjunto de equalizadores como…</string>
+    <string name="renderer_list_title" source="google_translate">Exibe</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">O VLC não pode excluir este arquivo sem permissão de acesso de gravação. \ NPor favor, vá para o seu cartão SD e clique em \ "Selecionar \". \ NVocê pode ter que clicar em \ "Mostrar cartão SD \" primeiro no menu superior direito</string>
+    <string name="renderers_disconnect" source="google_translate">desconectar</string>
+    <string name="audio_digital_failed" source="google_translate">Falha ao alterar o estado da saída digital de áudio</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Saída digital de áudio ativada</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Saída digital de áudio desativada</string>
+    <string name="live_streams" source="google_translate">Transmissões ao vivo</string>
+    <string name="all_live_streams" source="google_translate">Todos os transmissões ao vivo</string>
+    <string name="video_torrents" source="google_translate">Torrents de vídeo</string>
+    <string name="audio_torrents" source="google_translate">Torrents de áudio</string>
+    <string name="all_torrents" source="google_translate">Todos os torrents</string>
+    <string name="main" source="google_translate">a Principal</string>
+    <string name="media_player" source="google_translate">Reprodutor de mídia</string>
+    <string name="acestream_server" source="google_translate">Servidor Ace Stream (engine)</string>
+    <string name="media_player_settings" source="google_translate">Configurações do media player</string>
+    <string name="acestream_server_settings" source="google_translate">Configurações do servidor Ace Stream (motor)</string>
+    <string name="sign_out" source="google_translate">Sair</string>
+    <string name="sign_in" source="google_translate">assinar em</string>
+    <string name="sign_in_acestream" source="google_translate">Entre com Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Faça login no Google</string>
+    <string name="video_files" source="google_translate">Arquivos de vídeo</string>
+    <string name="audio_files" source="google_translate">Arquivos de áudio</string>
+    <string name="retry" source="google_translate">Tente novamente</string>
+    <string name="failed_to_load_web_page" source="google_translate">Falha ao carregar a página da web</string>
 </resources>

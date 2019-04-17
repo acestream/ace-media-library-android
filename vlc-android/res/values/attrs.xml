@@ -27,8 +27,14 @@
     <attr name="list_title" format="reference|color" />
     <attr name="color_menu_button" format="reference|color" />
     <attr name="audio_player_background_tint" format="reference|color" />
+    <attr name="text_color_normal" format="reference|color" />
+    <attr name="text_color_highlight" format="reference|color" />
+    <attr name="selected_item_background" format="reference|color" />
+    <attr name="seekbar_background" format="reference|color" />
+    <attr name="controls_color" format="reference|color" />
 
     <!--Main Icons-->
+    <attr name="seekbar_thumb" format="reference" />
     <attr name="ic_down_style" format="reference" />
     <attr name="ic_up_style" format="reference" />
     <attr name="ic_playlist" format="reference" />
@@ -52,20 +58,31 @@
     <attr name="gridview_progressbar" format="reference" />
     <attr name="toolbar_popup_style" format="reference" />
     <attr name="progress_mini_player" format="reference" />
+    <attr name="dialog_style" format="reference" />
+    <attr name="search_input_style" format="reference" />
+    <attr name="rci_add_selector" format="reference" />
+    <attr name="rci_remove_selector" format="reference" />
 
     <!--Advance Options Icons-->
-    <attr name="ic_speed_normal_style" format="reference" />
-    <attr name="ic_sleep_normal_style" format="reference" />
-    <attr name="ic_jumpto_normal_style" format="reference" />
-    <attr name="ic_chapter_normal_style" format="reference" />
-    <attr name="ic_equalizer_normal_style" format="reference" />
+    <attr name="ic_speed" format="reference" />
+    <attr name="ic_speed_on" format="reference" />
+    <attr name="ic_speed_reset" format="reference" />
+    <attr name="ic_sleep" format="reference" />
+    <attr name="ic_sleep_on" format="reference" />
+    <attr name="ic_jumpto" format="reference" />
+    <attr name="ic_chapter" format="reference" />
+    <attr name="ic_equalizer" format="reference" />
     <attr name="ic_audiodelay" format="reference" />
+    <attr name="ic_audiodelay_on" format="reference" />
     <attr name="ic_subtitledelay" format="reference" />
+    <attr name="ic_subtitledelay_on" format="reference" />
     <attr name="ic_playasaudio_off" format="reference" />
     <attr name="ic_playasaudio_on" format="reference" />
     <attr name="ic_popup_expand" format="reference" />
     <attr name="ic_popup_dim" format="reference" />
     <attr name="ic_passthrough" format="reference" />
+    <attr name="ic_passthrough_on" format="reference" />
+    <attr name="rci_more_vert" format="reference" />
 
     <attr name="shadow_top_9patch" format="reference"/>
     <attr name="shadow_bottom_9patch" format="reference"/>

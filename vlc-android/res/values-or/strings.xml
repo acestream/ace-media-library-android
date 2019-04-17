@@ -128,7 +128,6 @@
     <string name="screen_orientation_landscape">ଲ୍ୟାଣ୍ଡସ୍କେପ୍ </string>
     <string name="screen_orientation_reverse_portrait">ଓଲଟା ପ୍ରତିକୃତି</string>
     <string name="enable_black_theme">କଳା ପ୍ରସଙ୍ଗ ସକ୍ରିୟ କରନ୍ତୁ</string>
-    <string name="enable_brightness_gesture">ଔଜଲ୍ୟତା ଅଙ୍ଗଭଙ୍ଗୀକୁ ସକ୍ଷମ କରନ୍ତୁ</string>
     <string name="enable_headset_detection">ହେଡ୍‌ସେଟ୍ କୁ ଆବିଷ୍କାର କରନ୍ତୁ</string>
     <string name="enable_time_stretching_audio">ଅଡ଼ିଓର ସମୟ ପ୍ରସାରଣ ସକ୍ଷମ କରନ୍ତୁ</string>
     <string name="advanced_prefs_category">ଉନ୍ନତ</string>

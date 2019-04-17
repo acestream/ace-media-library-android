@@ -13,9 +13,6 @@
     <string name="sortby_date_desc">تاریخ (نزولی)</string>
     <string name="searchable_hint">جستجو...</string>
     <string name="history">سابقه</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="other">%d نتیجه جستجو</item>
-    </plurals>
     <string name="play">پخش</string>
     <string name="play_from_start">پخش از ابتدا</string>
     <string name="play_as_audio">پخش صوتی</string>
@@ -51,12 +48,6 @@
     </plurals>
     <plurals name="subfolders_quantity">
         <item quantity="other">%d زیرپوشه</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="other">%d فایل رسانه‌ای</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="other">%d تصویری</item>
     </plurals>
     <string name="internal_memory">حافظه داخلی</string>
     <string name="parent_folder">برو به پوشه اصلی</string>
@@ -116,9 +107,6 @@
     <string name="brightness">روشنایی</string>
     <string name="navmenu">کشو ناوبری</string>
     <string name="advanced">گزینه‌های پیشرفته...</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="other">%1$d مسیر\n</item>
-    </plurals>
     <string name="track_samplerate_info">نرخ نمونه: %1$d Hz\n</string>
     <string name="track_resolution_info">کیفیت: %1$dx%2$d\n</string>
     <string name="track_framerate_info">نرخ چارچوب:  %1$.3f\n</string>
@@ -365,14 +353,14 @@
     <!--Widget-->
     <string name="widget_name_w">ویجت روشن VLC</string>
     <string name="widget_name_b">ویجت تاریک VLC</string>
-    <string name="allow_storage_access_title">اجازه دهید به VLC تا به فایل های صوتی و تصویری شما دسترسی داشته باشد.</string>
-    <string name="allow_storage_access_description">VLC نیاز به اجازه دادن شما برای دسترسی به فایل های رسانه ی در این دستگاه نیاز دارد.</string>
-    <string name="allow_settings_access_ringtone_title">برای قرار دادن آهنگ زنگ به VLC اجازه داده شود</string>
-    <string name="allow_settings_access_ringtone_description">VLC نیاز به اجازه دادن شما برای قرار دادن این ترانه برای آهنگ زنگ نیاز دارد.</string>
-    <string name="allow_settings_access_brightness_title">برای تغییر حالت روشنایی به VLC اجازه داده شود</string>
-    <string name="allow_settings_access_brightness_description">VLC نیاز به اجازه دادن شما برای تغییر حالت روشنایی دارد.</string>
-    <string name="allow_draw_overlays_title">برای پخش کردن بالاتر از دیگر برنامه ها به VLC اجازه داده شود</string>
-    <string name="allow_sdraw_overlays_description">VLC نیاز به اجازه دادن شما برای پخش بالاتر از دیگر برنامه ها دارد.</string>
+    <string name="allow_storage_access_title">اجازه دهید به Ace Stream تا به فایل های صوتی و تصویری شما دسترسی داشته باشد.</string>
+    <string name="allow_storage_access_description">Ace Stream نیاز به اجازه دادن شما برای دسترسی به فایل های رسانه ی در این دستگاه نیاز دارد.</string>
+    <string name="allow_settings_access_ringtone_title">برای قرار دادن آهنگ زنگ به Ace Stream اجازه داده شود</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream نیاز به اجازه دادن شما برای قرار دادن این ترانه برای آهنگ زنگ نیاز دارد.</string>
+    <string name="allow_settings_access_brightness_title">برای تغییر حالت روشنایی به Ace Stream اجازه داده شود</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream نیاز به اجازه دادن شما برای تغییر حالت روشنایی دارد.</string>
+    <string name="allow_draw_overlays_title">برای پخش کردن بالاتر از دیگر برنامه ها به Ace Stream اجازه داده شود</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream نیاز به اجازه دادن شما برای پخش بالاتر از دیگر برنامه ها دارد.</string>
     <string name="permission_ask_again">اجازه دسترسی</string>
     <string name="exit_app">بستن VLC</string>
     <!--fast scroller-->
@@ -416,4 +404,134 @@
     <string name="ml_parse_media">تجزیه رسانه</string>
     <string name="ml_discovering">یافتن</string>
     <string name="length">طول</string>
+    <string name="torrent_files">Torrent فایل ها</string>
+    <string name="select_language">زبان را انتخاب کنید</string>
+    <string name="sortby_artist_name" source="google_translate">نام هنرمند</string>
+    <string name="sortby_artist_name_desc" source="google_translate">نام هنرمند (desc)</string>
+    <string name="sortby_album_name" source="google_translate">نام آلبوم</string>
+    <string name="sortby_album_name_desc" source="google_translate">نام آلبوم (نزولی)</string>
+    <string name="sortby_number" source="google_translate">آهنگ های Nb</string>
+    <string name="sortby_number_desc" source="google_translate">آهنگ های Nb (desc)</string>
+    <string name="playback" source="google_translate">پخش</string>
+    <string name="playback_controls" source="google_translate">کنترل پخش</string>
+    <string name="medialibrary_scan" source="google_translate">اسکن کتابخانه رسانه</string>
+    <string name="Medialibrary_progress" source="google_translate">به روز رسانی پیشرفت اسکن رسانه ها</string>
+    <string name="video_app_switch_title" source="google_translate">پس زمینه / حالت PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">هنگامی که به برنامه دیگر از پخش ویدئو منتقل می شوید رفتار VLC را انتخاب کنید</string>
+    <string name="play_pip_title" source="google_translate">پخش فیلم ها در حالت تصویر در تصویر</string>
+    <string name="insert_next" source="google_translate">بعدی را وارد کنید</string>
+    <string name="unknown_number" source="google_translate">تعداد نامشخصی از آهنگ ها</string>
+    <string name="tracks" source="google_translate">آهنگ های</string>
+    <string name="nomedia" source="google_translate">هیچ فایل رسانه ای یافت نشد، لطفا برخی از فایل ها را به دستگاه خود انتقال دهید یا تنظیمات خود را تنظیم کنید.</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">تنظیمات زمانی که صفحه نمایش ثانویه متصل است (HDMI / Chromecast).</string>
+    <string name="media_fast_seek" source="google_translate">گزینه جستجوی سریع را فعال کنید</string>
+    <string name="media_seen" source="google_translate">نشانگر ویدیو دیده شده را ببینید</string>
+    <string name="media_seen_summary" source="google_translate">علامت گذاری یک ویدیو زمانی که شما آن را تا انتها بازی می کنید</string>
+    <string name="force_play_all_summary" source="google_translate">تمام ویدیوها را بازی کنید، با شروع از آن که روی آن کلیک کرده اید</string>
+    <string name="save_audiodelay_summary" source="google_translate">صرفه جویی در تأخیر صوتی فردی برای هر ویدئو</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">دوبار ضربه بزنید تا جستجو کنید</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">دو بار در لبه های روی صفحه کلیک کنید تا 10 ثانیه جستجو کنید</string>
+    <string name="popup_keepscreen_title" source="google_translate">روی صفحه نمایش ON در حالت Pop-Up نگه دارید</string>
+    <string name="popup_keepscreen_summary" source="google_translate">همیشه روی صفحه نمایش ON در حالی که صفحه نمایش پاپ آپ ظاهر می شود، حتی اگر ویدئو متوقف شده باشد، صفحه نمایش را روشن نگه دارید.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">نمایش فایلهای مخفی</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">نمایش فایل های مخفی در مرورگرها</string>
+    <string name="subtitles_color_gray" source="google_translate">خاکستری</string>
+    <string name="subtitles_bold_title" source="google_translate">زیرنویسهای پررنگ</string>
+    <string name="subtitles_autoload_title" source="google_translate">بارگذاری خودکار زیرنویسها</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">انیمیشن پیمایش فهرست پخش فعلی را تحسین می کند</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">پیمایش ناامید کننده در انتقال رسانه ها</string>
+    <string name="audio_save_repeat_title" source="google_translate">صرفه جویی در حالت تکرار</string>
+    <string name="audio_save_repeat_summary" source="google_translate">هنگام بارگیری لیست پخش های صوتی، حالت تکرار را به یاد داشته باشید</string>
+    <string name="audio_boost_title" source="google_translate">تقویت صوتی</string>
+    <string name="enable_headset_actions_title" source="google_translate">کلید های کنترل از راه دور</string>
+    <string name="enable_headset_actions_summary" source="google_translate">دوبار بر روی \'Play \' فشار دهید تا به فشار بعدی و طولانی بر روی آن بروید تا به آهنگ قبلی بروید</string>
+    <string name="audio_ducking_title" source="google_translate">حجم VLC پایین در اطلاعیه ها</string>
+    <string name="audio_ducking_summary" source="google_translate">کمک می کند تا صداهای اعلان های صوتی، دستورالعمل های ناوبری یا دستیار صحبت کنند</string>
+    <string name="casting_category" source="google_translate">ریخته گری</string>
+    <string name="casting_passthrough_title" source="google_translate">گذرگاه صوتی</string>
+    <string name="casting_passthrough_summary" source="google_translate">اجازه دهید تلویزیون شما را مدیریت رندر صوتی</string>
+    <string name="casting_conversion_quality_title" source="google_translate">کیفیت تبدیل</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">هنگام تبدیل بر روی صفحه نمایش از راه دور، کیفیت تبدیل را انتخاب کنید</string>
+    <string name="casting_quality_high" source="google_translate">بالا</string>
+    <string name="casting_quality_medium" source="google_translate">متوسط</string>
+    <string name="casting_quality_low" source="google_translate">کم</string>
+    <string name="casting_quality_lowcpu" source="google_translate">پایین ترین</string>
+    <string name="cast_performance_warning" source="google_translate">ریختن این ویدیو نیاز به تبدیل دارد این تبدیل می تواند از تمام قدرت موجود استفاده کند و می تواند به سرعت باتری خود را تخلیه کند.</string>
+    <string name="artists_show_all_title" source="google_translate">نمایش همه هنرمندان</string>
+    <string name="artists_show_all_summary" source="google_translate">نمایش همه هنرمندان در لیست هنرمندان، نه تنها هنرمندان آلبوم</string>
+    <string name="extensions_prefs_category" source="google_translate">برنامه های افزودنی</string>
+    <string name="extensions_enable_category" source="google_translate">پسوند را انتخاب کنید تا فعال شود</string>
+    <string name="extensions_empty" source="google_translate">هیچ فرمت شناسایی نشده است</string>
+    <string name="extension_prefs_activation_title" source="google_translate">فعالسازی</string>
+    <string name="android_auto" source="google_translate">ماشین آندروید</string>
+    <string name="main_prefs_category" source="google_translate">تنظیمات اصلی</string>
+    <string name="dump_media_db" source="google_translate">پایگاه داده رسانه ها</string>
+    <string name="dump_media_db_summary" source="google_translate">کپی پایگاه داده به ریشه ذخیره سازی داخلی</string>
+    <string name="clear_media_db_summary" source="google_translate">برای پاک کردن اطلاعات، به اطلاعات Android VLC دسترسی پیدا کنید</string>
+    <string name="resume_playback_title" source="google_translate">پخش پس از یک تماس را ادامه دهید</string>
+    <string name="resume_playback_summary" source="google_translate">در غیر اینصورت مکث کنید</string>
+    <string name="network_caching_popup" source="google_translate">این مقدار باید بین 0 تا 6000 میلی ثانیه باشد</string>
+    <string name="search_list_hint" source="google_translate">جستجوی رسانه در لیست فعلی</string>
+    <string name="search_global" source="google_translate">جستجو در تمام کتابخانه رسانه</string>
+    <string name="medialibrary" source="google_translate">کتابخانه ی رسانه</string>
+    <string name="medialibrary_directories" source="google_translate">پوشه های کتابخانه رسانه</string>
+    <string name="exit_app_msg" source="google_translate">آیا مطمئن هستید که میخواهید VLC را ترک کنید؟</string>
+    <string name="fastscroller_track" source="google_translate">آهنگ FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">دسته FastScroller</string>
+    <string name="opengl_title" source="google_translate">استفاده از OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">به طور پیش فرض، OpenGL ES2 برای رمزگشایی نرم افزار و رمز گشایی سخت افزار مورد نیاز (فیلم 360 درجه) مورد استفاده قرار می گیرد.</string>
+    <string name="subs_dl_lang_fail" source="google_translate">زبان های زیرنویس را نتوانستید، سعی کنید آن را در تنظیمات برنامه تنظیم کنید</string>
+    <string name="streams" source="google_translate">جریان ها</string>
+    <string name="resume" source="google_translate">خلاصه</string>
+    <string name="tv_settings_hint" source="google_translate">برای تایید / حذف دایرکتوری ها، دکمه OK را فشار دهید</string>
+    <string name="ml_external_storage_title" source="google_translate">ذخیره سازی خارجی جدید شناسایی شد</string>
+    <string name="ml_external_storage_accept" source="google_translate">بله</string>
+    <string name="ml_external_storage_decline" source="google_translate">نه</string>
+    <string name="last_added_media" source="google_translate">آخرین اضافه شد</string>
+    <string name="no" source="google_translate">نه</string>
+    <string name="loading_medialibrary" source="google_translate">بارگیری Medialibrary ...</string>
+    <string name="yes" source="google_translate">بله</string>
+    <string name="custom_set_save_title" source="google_translate">تغییرات ذخیره نشده</string>
+    <string name="custom_set_save_warning" source="google_translate">هشدار: تغییرات ذخیره نشده</string>
+    <string name="existing_custom_set_save_message" source="google_translate">صرفه جویی در اکولایزر به عنوان ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">صرفه جویی در تنظیم اکولایزر جدید ...</string>
+    <string name="save" source="google_translate">صرفه جویی</string>
+    <string name="do_not_save" source="google_translate">ذخیره نکن</string>
+    <string name="custom_set_wrong_input" source="google_translate">نام نامعتبر.</string>
+    <string name="custom_set_already_exist" source="google_translate">اکولایزر با این نام قبلا وجود داشته است</string>
+    <string name="custom_set_restored" source="google_translate">تنظیم مجدد سفارشی تنظیم شده است.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">مجموعه تسویه نشده ذخیره شده حذف شده است</string>
+    <string name="equalizer_new_preset_name" source="google_translate">جدید</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary دستگاه شما را اسکن می کند</string>
+    <string name="recommendations" source="google_translate">توصیه ها</string>
+    <string name="recommendations_desc" source="google_translate">توصیه نامه در پرتاب</string>
+    <string name="browser_quick_access" source="google_translate">دسترسی سریع</string>
+    <string name="browser_storages" source="google_translate">ذخیره سازی</string>
+    <string name="renderer_list_title" source="google_translate">نمایش ها</string>
+    <string name="feedback_player_crashed" source="google_translate">با عرض پوزش، VLC فقط سقوط کرد لطفا دوباره تلاش کنید.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">شما مجبور به ارسال VLC به کارت SD خود کنید</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC نمی تواند این فایل را بدون اجازه دسترسی مجوز حذف کند. \ n لطفا به کارت SD خود بروید و روی \ "انتخاب \" کلیک کنید. \ n شما ممکن است ابتدا در منوی بالا سمت راست بر روی «نمایش کارت SD» کلیک کنید</string>
+    <string name="dialog_sd_wizard" source="google_translate">به من نشان بده</string>
+    <string name="renderers_disconnect" source="google_translate">قطع شدن</string>
+    <string name="audio_digital_failed" source="google_translate">وضعیت خروجی صوتی دیجیتال نتوانست تغییر کند</string>
+    <string name="audio_digital_output_enabled" source="google_translate">خروجی صوتی دیجیتالی فعال شده است</string>
+    <string name="audio_digital_output_disabled" source="google_translate">خروجی صوتی دیجیتال غیر فعال شده است</string>
+    <string name="live_streams" source="google_translate">جریان مستقیم</string>
+    <string name="all_live_streams" source="google_translate">همه جریانهای زنده</string>
+    <string name="video_torrents" source="google_translate">تورنتهای ویدئویی</string>
+    <string name="audio_torrents" source="google_translate">پخش کننده های صوتی</string>
+    <string name="all_torrents" source="google_translate">همه تورنت ها</string>
+    <string name="main" source="google_translate">اصلی</string>
+    <string name="media_player" source="google_translate">دستگاه پخش رسانه ای</string>
+    <string name="acestream_server" source="google_translate">سرور Ace Stream (موتور)</string>
+    <string name="media_player_settings" source="google_translate">تنظیمات پخش کننده رسانه</string>
+    <string name="acestream_server_settings" source="google_translate">تنظیمات سرور Ace Stream (موتور)</string>
+    <string name="sign_out" source="google_translate">خروج</string>
+    <string name="sign_in" source="google_translate">ورود</string>
+    <string name="sign_in_acestream" source="google_translate">با Ace Stream وارد شوید</string>
+    <string name="sign_in_google" source="google_translate">با Google وارد شوید</string>
+    <string name="video_files" source="google_translate">فایل های ویدئویی</string>
+    <string name="audio_files" source="google_translate">فایل های صوتی</string>
+    <string name="retry" source="google_translate">دوباره امتحان کنید</string>
+    <string name="failed_to_load_web_page" source="google_translate">صفحه وب بارگیری نشد</string>
 </resources>

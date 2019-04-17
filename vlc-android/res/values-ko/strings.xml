@@ -19,9 +19,6 @@
     <string name="sortby_number_desc">Nb 트랙 (내림차순)</string>
     <string name="searchable_hint">검색…</string>
     <string name="history">히스토리</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="other">%d 결과를 찾았습니다</item>
-    </plurals>
     <string name="play">재생</string>
     <string name="playback">재생</string>
     <string name="playback_controls">재생 제어</string>
@@ -67,12 +64,6 @@
     </plurals>
     <plurals name="subfolders_quantity">
         <item quantity="other">%d 하위 폴더</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="other">%d 미디어 파일</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="other">%d 비디오</item>
     </plurals>
     <string name="internal_memory">내부 메모리</string>
     <string name="parent_folder">상위 폴더로 이동하기</string>
@@ -134,9 +125,6 @@
     <string name="navmenu">네이게이션 메뉴</string>
     <string name="advanced">고급 옵션</string>
     <string name="audio_boost_warning">100% 넘어서 다시 밀어 올리기</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="other">%1$d 채널\n</item>
-    </plurals>
     <string name="track_samplerate_info">샘플 레이트: %1$d Hz\n</string>
     <string name="track_resolution_info">해상도: %1$dx%2$d\n</string>
     <string name="track_framerate_info">프레임 레이트: %1$.3f\n</string>
@@ -172,7 +160,7 @@
     <string name="error_not_compatible">죄송하지만, 이 버전의 안드로이드용 VLC는 현재 귀하의 기기를 지원하지 않습니다.</string>
     <string name="error_problem">죄송합니다. 안드로이드용 VLC 실행 중 문제가 생겨서 종료되었습니다.</string>
     <string name="error_message_is">오류 메시지 (디버깅 시에 이걸 알려 주세요):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">재생 오류</string>
     <string name="encountered_error_message">이 미디어에서 오류가 발생했습니다.\n미디어 라이브러리를 새로 고침 해보세요.</string>
     <string name="invalid_location">%1$s 위치를 재생할 수 없습니다.</string>
@@ -435,14 +423,14 @@
     <!--Widget-->
     <string name="widget_name_w">VLC 흰색 위젯</string>
     <string name="widget_name_b">VLC 검은색 위젯</string>
-    <string name="allow_storage_access_title">VLC에서 비디오와 오디오 파일에 접근합니다</string>
-    <string name="allow_storage_access_description">이 장치에서 VLC가 미디어 파일에 접근하려면 귀하의 승인이 필요합니다.</string>
-    <string name="allow_settings_access_ringtone_title">VLC에서 전화벨 소리 설정 허용하기</string>
-    <string name="allow_settings_access_ringtone_description">VLC에서 이 곡을 전화벨 소리로 등록하려면 귀하의 승인이 필요합니다.</string>
-    <string name="allow_settings_access_brightness_title">VLC에서 밝기 모드 변경 허용하기</string>
-    <string name="allow_settings_access_brightness_description">VLC에서 밝기 모드를 바꾸려면 귀하의 승인이 필요합니다.</string>
-    <string name="allow_draw_overlays_title">다른 앱 위로 VLC 재생기 팝업 허용하기</string>
-    <string name="allow_sdraw_overlays_description">VLC의 비디오를 다른 앱 위로 띄우려면 귀하의 승인이 필요합니다.</string>
+    <string name="allow_storage_access_title">Ace Stream에서 비디오와 오디오 파일에 접근합니다</string>
+    <string name="allow_storage_access_description">이 장치에서 Ace Stream가 미디어 파일에 접근하려면 귀하의 승인이 필요합니다.</string>
+    <string name="allow_settings_access_ringtone_title">Ace Stream에서 전화벨 소리 설정 허용하기</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream에서 이 곡을 전화벨 소리로 등록하려면 귀하의 승인이 필요합니다.</string>
+    <string name="allow_settings_access_brightness_title">Ace Stream에서 밝기 모드 변경 허용하기</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream에서 밝기 모드를 바꾸려면 귀하의 승인이 필요합니다.</string>
+    <string name="allow_draw_overlays_title">다른 앱 위로 Ace Stream 재생기 팝업 허용하기</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream의 비디오를 다른 앱 위로 띄우려면 귀하의 승인이 필요합니다.</string>
     <string name="permission_ask_again">사용 허락하기</string>
     <string name="exit_app">VLC 닫기</string>
     <string name="exit_app_msg">VLC를 정말 종료할까요?</string>
@@ -525,4 +513,34 @@
     <string name="sdcard_permission_dialog_title">SD 카드에 VLC 쓰기 권한을 부여해야 합니다</string>
     <string name="sdcard_permission_dialog_message">VLC는 쓰기 권한 없이 이 파일을 삭제할 수 없습니다.\nSD 카드로 이동해서 \"선택\"을 누르세요.\n오른쪽 상단 메뉴에서 \"SD 카드 보이기\"를 눌러야 할 수도 있습니다</string>
     <string name="dialog_sd_wizard">보여주세요</string>
+    <string name="torrent_files">Torrent 파일들</string>
+    <string name="select_language">언어 선택</string>
+    <string name="enable_headset_actions_title" source="google_translate">원격 제어 단축키</string>
+    <string name="enable_headset_actions_summary" source="google_translate">\'Play \'를 두 번 누르면 다음으로 건너 뛸 수 있고 길게 누르면 이전 트랙으로 건너 뜁니다.</string>
+    <string name="main_prefs_category" source="google_translate">주요 설정</string>
+    <string name="dump_media_db" source="google_translate">미디어 데이터베이스 덤프</string>
+    <string name="dump_media_db_summary" source="google_translate">내부 저장소 루트에 데이터베이스 복사</string>
+    <string name="streams" source="google_translate">개울</string>
+    <string name="renderers_disconnect" source="google_translate">연결 끊기</string>
+    <string name="audio_digital_failed" source="google_translate">오디오 디지털 출력 상태를 변경하지 못했습니다.</string>
+    <string name="audio_digital_output_enabled" source="google_translate">오디오 디지털 출력 사용</string>
+    <string name="audio_digital_output_disabled" source="google_translate">오디오 디지털 출력 사용 안 함</string>
+    <string name="live_streams" source="google_translate">실시간 스트리밍</string>
+    <string name="all_live_streams" source="google_translate">모든 실시간 스트림</string>
+    <string name="video_torrents" source="google_translate">비디오 급류</string>
+    <string name="audio_torrents" source="google_translate">오디오 급류</string>
+    <string name="all_torrents" source="google_translate">모든 급류</string>
+    <string name="main" source="google_translate">본관</string>
+    <string name="media_player" source="google_translate">미디어 플레이어</string>
+    <string name="acestream_server" source="google_translate">에이스 스트림 서버 (엔진)</string>
+    <string name="media_player_settings" source="google_translate">미디어 플레이어 설정</string>
+    <string name="acestream_server_settings" source="google_translate">에이스 스트림 서버 (엔진) 설정</string>
+    <string name="sign_out" source="google_translate">로그 아웃</string>
+    <string name="sign_in" source="google_translate">로그인</string>
+    <string name="sign_in_acestream" source="google_translate">에이스 스트림으로 로그인</string>
+    <string name="sign_in_google" source="google_translate">Google로 로그인</string>
+    <string name="video_files" source="google_translate">비디오 파일</string>
+    <string name="audio_files" source="google_translate">오디오 파일</string>
+    <string name="retry" source="google_translate">다시 해 보다</string>
+    <string name="failed_to_load_web_page" source="google_translate">웹 페이지를로드하지 못했습니다.</string>
 </resources>

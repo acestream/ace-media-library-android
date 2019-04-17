@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="engine_category"
+    android:title="@string/engine_preferences_short">
+
+    <CheckBoxPreference
+        android:persistent="true"
+        android:key="mobile_network_available"
+        android:title="@string/prefs_item_mobile" />
+
+    <org.videolan.vlc.gui.preferences.hack.NumberPreference
+        android:persistent="true"
+        android:key="vod_buffer"
+        android:inputType="number"
+        android:title="@string/prefs_item_vod_buffer" />
+
+    <org.videolan.vlc.gui.preferences.hack.NumberPreference
+        android:persistent="true"
+        android:key="live_buffer"
+        android:inputType="number"
+        android:title="@string/prefs_item_live_buffer" />
+
+    <org.videolan.vlc.gui.preferences.hack.NumberPreference
+        android:persistent="true"
+        android:key="download_limit"
+        android:inputType="number"
+        android:title="@string/prefs_item_download_limit" />
+
+    <org.videolan.vlc.gui.preferences.hack.NumberPreference
+        android:persistent="true"
+        android:key="upload_limit"
+        android:inputType="number"
+        android:title="@string/prefs_item_upload_limit" />
+
+    <ListPreference
+        android:persistent="true"
+        android:key="output_format_live"
+        android:entries="@array/output_format"
+        android:entryValues="@array/output_format_id"
+        android:title="@string/prefs_output_format_live" />
+
+    <ListPreference
+        android:persistent="true"
+        android:key="output_format_vod"
+        android:entries="@array/output_format"
+        android:entryValues="@array/output_format_id"
+        android:title="@string/prefs_output_format_vod" />
+
+    <CheckBoxPreference
+        android:persistent="false"
+        android:key="transcode_audio"
+        android:title="@string/prefs_transcode_audio" />
+
+    <CheckBoxPreference
+        android:persistent="true"
+        android:key="transcode_ac3"
+        android:title="@string/prefs_transcode_ac3" />
+
+    <CheckBoxPreference
+        android:persistent="true"
+        android:key="live_cache_type"
+        android:title="@string/prefs_cache_live_use_disk" />
+
+    <CheckBoxPreference
+        android:persistent="true"
+        android:key="vod_cache_type"
+        android:title="@string/prefs_cache_vod_use_disk" />
+
+    <org.videolan.vlc.gui.preferences.hack.NumberPreference
+        android:persistent="false"
+        android:key="disk_cache_limit"
+        android:inputType="number"
+        android:title="@string/prefs_item_disk_cache_limit" />
+
+    <org.videolan.vlc.gui.preferences.hack.NumberPreference
+        android:persistent="false"
+        android:key="memory_cache_limit"
+        android:inputType="number"
+        android:title="@string/prefs_item_memory_cache_limit" />
+
+    <org.videolan.vlc.gui.preferences.hack.FolderPreference
+        android:persistent="true"
+        android:key="cache_dir"
+        android:title="@string/prefs_item_cache_dir" />
+
+    <CheckBoxPreference
+        android:persistent="true"
+        android:key="allow_intranet_access"
+        android:title="@string/prefs_allow_intranet_access" />
+
+    <CheckBoxPreference
+        android:persistent="true"
+        android:key="allow_remote_access"
+        android:title="@string/prefs_allow_remote_access" />
+
+    <org.videolan.vlc.gui.preferences.hack.NumberPreference
+        android:persistent="true"
+        android:key="port"
+        android:inputType="number"
+        android:title="@string/prefs_item_port" />
+
+    <org.videolan.vlc.gui.preferences.hack.NumberPreference
+        android:persistent="true"
+        android:key="max_connections"
+        android:inputType="number"
+        android:title="@string/prefs_item_total_max_connects" />
+
+    <org.videolan.vlc.gui.preferences.hack.NumberPreference
+        android:persistent="true"
+        android:key="max_peers"
+        android:inputType="number"
+        android:title="@string/prefs_item_download_max_connects" />
+
+    <ListPreference
+        android:persistent="false"
+        android:key="selected_player"
+        android:defaultValue="_acestream_"
+        android:title="@string/selected_player" />
+
+    <CheckBoxPreference
+        android:persistent="true"
+        android:key="start_acecast_server"
+        android:title="@string/start_acecast_server" />
+
+    <EditTextPreference
+        android:persistent="false"
+        android:key="device_name"
+        android:title="@string/device_name" />
+
+    <CheckBoxPreference
+        android:persistent="true"
+        android:key="enable_debug_logging"
+        android:title="@string/enable_debug_logging" />
+
+    <CheckBoxPreference
+        android:persistent="true"
+        android:key="show_debug_info"
+        android:title="@string/show_debug_info" />
+
+</PreferenceScreen>

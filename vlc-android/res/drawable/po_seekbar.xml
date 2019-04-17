@@ -18,7 +18,7 @@
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-                <solid android:color="@color/orange500transparent" />
+                <solid android:color="?attr/seekbar_background" />
             </shape>
         </clip>
     </item>

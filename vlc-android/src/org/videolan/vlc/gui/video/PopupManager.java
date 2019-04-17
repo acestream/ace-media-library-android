@@ -30,9 +30,9 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.preference.PreferenceManager;
+import androidx.core.app.NotificationCompat;
+import androidx.core.view.GestureDetectorCompat;
+import androidx.preference.PreferenceManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -305,7 +305,7 @@ public class PopupManager implements PlaybackService.Callback, GestureDetector.O
             builder.addAction(R.drawable.ic_popup_pause, mService.getString(R.string.pause), piPlay);
         else
             builder.addAction(R.drawable.ic_popup_play, mService.getString(R.string.play), piPlay);
-        builder.addAction(R.drawable.ic_popup_expand_w, mService.getString(R.string.popup_expand), piExpand);
+        builder.addAction(R.drawable.ic_popup_expand_dark, mService.getString(R.string.popup_expand), piExpand);
         mService.startForeground(42, builder.build());
     }
 

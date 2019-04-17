@@ -24,11 +24,12 @@
 package org.videolan.vlc.gui.audio;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Message;
-import android.support.annotation.MainThread;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.MainThread;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +43,13 @@ import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.vlc.PlaybackService;
 import org.videolan.vlc.R;
 import org.videolan.vlc.VLCApplication;
-import org.videolan.vlc.databinding.PlaylistItemBinding;
 import org.videolan.vlc.gui.DiffUtilAdapter;
 import org.videolan.vlc.gui.helpers.UiTools;
 import org.videolan.vlc.interfaces.SwipeDragHelperAdapter;
 import org.videolan.vlc.media.MediaUtils;
 import org.videolan.vlc.util.MediaItemDiffCallback;
 import org.videolan.vlc.util.WeakHandler;
+import org.videolan.vlc.databinding.PlaylistItemBinding;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,6 +61,12 @@ public class PlaylistAdapter extends DiffUtilAdapter<MediaWrapper, PlaylistAdapt
     private ItemFilter mFilter = new ItemFilter();
     private PlaybackService mService = null;
     private IPlayer mAudioPlayer;
+    //:ace
+    // Dirty hack: this is set to true when playlist is scrolled with dpad.
+    // If set, then use mCurrentIndex on onclick, because we suppose that click
+    // comes from d-pad center button but focus is always on the first item (it's a bug).
+    private boolean mDpadNavigation = false;
+    ///ace
 
     private ArrayList<MediaWrapper> mOriginalDataSet;
     private int mCurrentIndex = 0;
@@ -72,6 +79,10 @@ public class PlaylistAdapter extends DiffUtilAdapter<MediaWrapper, PlaylistAdapt
 
     public PlaylistAdapter(IPlayer audioPlayer) {
         mAudioPlayer = audioPlayer;
+    }
+
+    public void setDpadNavigation(boolean enabled) {
+        mDpadNavigation = enabled;
     }
 
     @Override
@@ -189,7 +200,11 @@ public class PlaylistAdapter extends DiffUtilAdapter<MediaWrapper, PlaylistAdapt
             });
         }
         public void onClick(View v, MediaWrapper media){
-            int position = getMediaPosition(media);
+            int position;
+            if(mDpadNavigation)
+                position = mCurrentIndex;
+            else
+                position = getMediaPosition(media);
             if (mService != null)
                 mService.playIndex(position);
             if (mOriginalDataSet != null)

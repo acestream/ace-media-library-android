@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <fragment
-          android:name="android.support.v17.leanback.app.BrowseSupportFragment"
+          android:name="androidx.leanback.app.BrowseSupportFragment"
           android:id="@+id/browse_fragment"
           android:layout_width="match_parent"
           android:layout_height="match_parent" />
@@ -13,8 +13,17 @@
         android:id="@+id/tv_main_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
-        android:layout_marginRight="128dp"
+        android:layout_gravity="top|end"
+        android:layout_marginEnd="128dp"
         android:layout_marginTop="32dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_main_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginEnd="64dp"
+        android:layout_marginTop="88dp"
         android:visibility="gone" />
 </FrameLayout>

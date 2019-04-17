@@ -9,10 +9,6 @@
     <string name="sortby_length">Durada</string>
     <string name="searchable_hint">Cerca…</string>
     <string name="history">Historial</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">s\'ha trobat %d resultat</item>
-        <item quantity="other">s\'ha trobat %d resultats</item>
-    </plurals>
     <string name="play">Reprodueix</string>
     <string name="play_from_start">Reprodueix des de l\'inici</string>
     <string name="play_as_audio">Reprodueix com a àudio</string>
@@ -48,14 +44,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 subcarpeta</item>
         <item quantity="other">%d subcarpetes</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 fitxer multimèdia</item>
-        <item quantity="other">%d fitxers multimèdia</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 vídeo</item>
-        <item quantity="other">%d vídeos</item>
     </plurals>
     <string name="internal_memory">Memòria interna</string>
     <string name="parent_folder">Amunt a la carpeta pare</string>
@@ -99,10 +87,6 @@
     <string name="track_language_info">Llengua: %1$s\n</string>
     <string name="volume">Volum</string>
     <string name="brightness">Brillantor</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 canal\n</item>
-        <item quantity="other">%1$d canals\n</item>
-    </plurals>
     <string name="tools">Eines</string>
     <string name="playback_speed">Velocitat de reproducció</string>
     <string name="sleep_title">Temporitzador</string>
@@ -159,12 +143,10 @@
     <string name="subtitle_text_encoding">Codificació del text del subtítol</string>
     <string name="extra_prefs_category">Paràmetres extres</string>
     <string name="interface_prefs_screen">Interfície</string>
-    <string name="interface_secondary_display_category">Interfície - Segona pantalla</string>
     <string name="interface_secondary_display_category_summary">Configuració quan les pantalles secundaries estiguin connectades (HDMI/Miracast)</string>
     <string name="enable_clone_mode">Pereixo clonar</string>
     <string name="enable_clone_mode_summary">Clona la pantalla del dispositiu sense el control remot.</string>
     <string name="interface_other_category">Interfície - Altres</string>
-    <string name="enable_brightness_gesture">Habilita els gestos de brillantor</string>
     <string name="enable_brightness_gesture_summary">Controla la brillantor mitjançant gestos durant la reproducicó</string>
     <string name="enable_headset_detection">Detecta els auriculars</string>
     <string name="enable_headset_detection_summary">Pausa quan es treguin els auriculars; torna a reproduir quan es tornin a connectar.</string>
@@ -216,4 +198,333 @@
     <string name="sending_log">Enviat el fitxer de registre...</string>
     <!--Accessibility-->
     <!--Widget-->
+    <string name="torrent_files">Torrent fitxers</string>
+    <string name="select_language">Escolliu l\'idioma</string>
+    <string name="sortby_name_desc" source="google_translate">Nom (desc)</string>
+    <string name="sortby_artist_name" source="google_translate">Nom de l\'artista</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Nom de l\'artista (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Nom de l\'àlbum</string>
+    <string name="sortby_album_name_desc" source="google_translate">Nom de l\'àlbum (desc)</string>
+    <string name="sortby_length_desc" source="google_translate">Longitud (desc)</string>
+    <string name="sortby_date" source="google_translate">Data</string>
+    <string name="sortby_date_desc" source="google_translate">Dades (desc)</string>
+    <string name="sortby_number" source="google_translate">Pistes Nb</string>
+    <string name="sortby_number_desc" source="google_translate">Pistes Nb (desc)</string>
+    <string name="playback" source="google_translate">Reproducció</string>
+    <string name="playback_controls" source="google_translate">Controls de reproducció</string>
+    <string name="medialibrary_scan" source="google_translate">Anàlisi de la biblioteca de mitjans</string>
+    <string name="Medialibrary_progress" source="google_translate">Actualització del progrés de la cerca de mitjans de comunicació</string>
+    <string name="video_app_switch_title" source="google_translate">Mode de fons / PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">Seleccioneu el comportament de VLC quan canvieu a una altra aplicació de la reproducció de vídeo</string>
+    <string name="play_pip_title" source="google_translate">Reproduïu vídeos al mode Imatge-a-imatge</string>
+    <string name="play_as_audio_background" source="google_translate">Reproduïu vídeos en segon pla</string>
+    <string name="insert_next" source="google_translate">Insereix següent</string>
+    <string name="unknown_number" source="google_translate">Nombre desconegut de pistes</string>
+    <string name="tracks" source="google_translate">Pistes</string>
+    <string name="noplaylist" source="google_translate">No s\'ha trobat cap llista de reproducció.</string>
+    <string name="shuffle_title" source="google_translate">Mode aleatori</string>
+    <string name="shuffle" source="google_translate">Començament aleatori</string>
+    <string name="shuffle_on" source="google_translate">Reprodueix aleatòriament</string>
+    <string name="repeat_title" source="google_translate">Mode de repetició</string>
+    <string name="repeat" source="google_translate">Repeteix-ne cap</string>
+    <string name="repeat_single" source="google_translate">Repetiu un sol</string>
+    <string name="repeat_all" source="google_translate">Repeteix-ho tot</string>
+    <string name="firstsong" source="google_translate">Primera cançó de la llista de reproducció</string>
+    <string name="lastsong" source="google_translate">Última cançó de la llista de reproducció</string>
+    <string name="surface_fit_screen" source="google_translate">Fit screen</string>
+    <string name="sound_on" source="google_translate">So on</string>
+    <string name="sound_off" source="google_translate">So fora</string>
+    <string name="navmenu" source="google_translate">menú de navegació</string>
+    <string name="advanced" source="google_translate">opcions avançades</string>
+    <string name="sleep_in" source="google_translate">Dormir a</string>
+    <string name="server_add_title" source="google_translate">Afegiu un servidor nou als preferits</string>
+    <string name="server_domain_hint" source="google_translate">Adreça del servidor (nom de domini o IP)</string>
+    <string name="server_share_hint" source="google_translate">Nom compartit de la xarxa (o adreça IP)</string>
+    <string name="server_folder_hint" source="google_translate">Ruta de la carpeta (opcional)</string>
+    <string name="server_username_hint" source="google_translate">Nom d\'usuari</string>
+    <string name="server_servername_hint" source="google_translate">Nom del servidor, per comoditat</string>
+    <string name="server_port" source="google_translate">Port:</string>
+    <string name="login" source="google_translate">iniciar Sessió</string>
+    <string name="password" source="google_translate">Contrasenya</string>
+    <string name="search_results" source="google_translate">Resultats de la cerca</string>
+    <string name="search_no_result" source="google_translate">No s\'ha trobat cap mitjà</string>
+    <string name="favorites_add" source="google_translate">Afegir a preferits</string>
+    <string name="favorites_remove" source="google_translate">Elimina dels preferits</string>
+    <string name="favorites_edit" source="google_translate">Edita</string>
+    <string name="favorite_added" source="google_translate">S\'ha desat als preferits</string>
+    <string name="favorite_removed" source="google_translate">S\'ha eliminat dels preferits</string>
+    <string name="error_message_is" source="google_translate">El missatge d\'error és (si us plau, mencioneu això en depurar): \ n</string>
+    <string name="encountered_error_message" source="google_translate">VLC ha trobat un error amb aquest mitjà. \ NTesteu de restaurar la biblioteca multimèdia.</string>
+    <string name="playback_history_title" source="google_translate">Historial de reproducció</string>
+    <string name="playback_history_summary" source="google_translate">Desa tots els mitjans reproduïts a la secció d\'Història</string>
+    <string name="playback_speed_title" source="google_translate">Desa la velocitat de reproducció</string>
+    <string name="playback_speed_summary" source="google_translate">Recordeu la velocitat de reproducció que heu configurat</string>
+    <string name="video_player_tips" source="google_translate">Consells del reproductor de video:</string>
+    <string name="seek" source="google_translate">Cercar</string>
+    <string name="audio_sub" source="google_translate">Pistes d\'àudio i subtítols</string>
+    <string name="resize" source="google_translate">Canvia la mida</string>
+    <string name="ok_got_it" source="google_translate">Ho tinc, descartar això</string>
+    <string name="playlist_tips" source="google_translate">Consells de llista de reproducció</string>
+    <string name="remove_song" source="google_translate">Elimina la cançó</string>
+    <string name="rearrange_order" source="google_translate">Ordre de reorganització</string>
+    <string name="hold_to_seek" source="google_translate">Sostinguem a cercar</string>
+    <string name="audio_player_tips" source="google_translate">Consells de reproductor d\'àudio</string>
+    <string name="hold_to_stop" source="google_translate">Manteniu-ho per aturar</string>
+    <string name="hardware_acceleration_summary" source="google_translate">Deshabilitat: millor estabilitat. \ NDecodificació: pot millorar el rendiment. \ NTot: pot millorar el rendiment encara més.</string>
+    <string name="dev_hardware_decoder" source="google_translate">Decodificador de maquinari avançat</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">Forçar el descodificador de maquinari, només per als usuaris avançats</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">iomx</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-dr</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">mediacodec</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">mediacodec-dr</string>
+    <string name="daynight_title" source="google_translate">Mode DayNight</string>
+    <string name="daynight_summary" source="google_translate">Canvia automàticament a la manera nocturna en el moment adequat</string>
+    <string name="interface_gui" source="google_translate">Mostra</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">Pantalla secundària</string>
+    <string name="video_prefs_category" source="google_translate">Vídeo</string>
+    <string name="video_min_group_length_title" source="google_translate">Vídeos del grup</string>
+    <string name="video_min_group_length_summary" source="google_translate">Els vídeos s\'agrupen si les seves primeres lletres són iguals.</string>
+    <string name="video_min_group_length_disable" source="google_translate">Inhabilitar</string>
+    <string name="video_min_group_length_first" source="google_translate">Només la primera carta</string>
+    <string name="video_min_group_length_short" source="google_translate">Nombre breu de lletres (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Llarg nombre de lletres (9)</string>
+    <string name="media_fast_seek" source="google_translate">Habilita l\'opció de cerca ràpida</string>
+    <string name="media_seen" source="google_translate">Mostra el marcador de vídeo vist</string>
+    <string name="media_seen_summary" source="google_translate">Marqueu un vídeo tal com ho veieu quan ho feu fins al final</string>
+    <string name="force_list_portrait" source="google_translate">Sense quadrícula en mode vertical</string>
+    <string name="force_list_portrait_summary" source="google_translate">Mostra els vídeos a la llista en lloc de la graella en mode vertical</string>
+    <string name="force_play_all_summary" source="google_translate">Reprodueix tots els vídeos, començant pel que heu fet clic</string>
+    <string name="force_play_all_title" source="google_translate">Mode de llista de reproducció de vídeo</string>
+    <string name="save_brightness_summary" source="google_translate">Recordeu el nivell de brillantor del reproductor de vídeo</string>
+    <string name="save_brightness_title" source="google_translate">Desa el nivell de brillantor del vídeo</string>
+    <string name="save_audiodelay_summary" source="google_translate">Deseu el retard d\'àudio individual per a cada vídeo</string>
+    <string name="save_audiodelay_title" source="google_translate">Desa el retard d\'àudio</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Gest de brillantor</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Gestor de volum</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Controlar el volum per gest durant la reproducció de vídeo</string>
+    <string name="enable_seek_buttons" source="google_translate">Activa els botons de cerca</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">Mostra els botons de rebobinar i avançar a la interfície de vídeo</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Toca dues vegades per cercar</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Toqueu dos cops a la vora de la pantalla per cercar en 10 segons</string>
+    <string name="popup_keepscreen_title" source="google_translate">Mantén la pantalla en mode emergent</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Mantingueu sempre la pantalla mentre POP es mostra, fins i tot si el vídeo està en pausa.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Mostra els fitxers ocults</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Mostra fitxers ocults als navegadors</string>
+    <string name="subtitles_prefs_category" source="google_translate">Subtítols</string>
+    <string name="subtitles_size_title" source="google_translate">Mida dels subtítols</string>
+    <string name="subtitles_size_small" source="google_translate">Petit</string>
+    <string name="subtitles_size_normal" source="google_translate">Normal</string>
+    <string name="subtitles_size_big" source="google_translate">Gran</string>
+    <string name="subtitles_size_huge" source="google_translate">Enorme</string>
+    <string name="subtitles_color_title" source="google_translate">Subtítols Color</string>
+    <string name="subtitles_color_white" source="google_translate">Blanc</string>
+    <string name="subtitles_color_gray" source="google_translate">Gris</string>
+    <string name="subtitles_color_pink" source="google_translate">Rosa</string>
+    <string name="subtitles_color_blue" source="google_translate">Blau</string>
+    <string name="subtitles_color_yellow" source="google_translate">Groc</string>
+    <string name="subtitles_color_green" source="google_translate">Verd</string>
+    <string name="subtitles_background_title" source="google_translate">Subtítols de fons</string>
+    <string name="subtitles_bold_title" source="google_translate">Subtítols en negreta</string>
+    <string name="subtitles_autoload_title" source="google_translate">Subtítols de càrrega automàtica</string>
+    <string name="audio_prefs_category" source="google_translate">Àudio</string>
+    <string name="lockscreen_cover_title" source="google_translate">Tapa dels mitjans a la pantalla de bloqueig</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Quan estigui disponible, configureu l\'art de la portada de premsa actual com a fons de pantalla de fons de pantalla</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Animi la llista de reproducció automàtica actual</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Animi el desplaçament a la transició dels mitjans</string>
+    <string name="audio_title_alignment" source="google_translate">Alineació del títol de l\'àudio</string>
+    <string name="audio_title_alignment_marquee" source="google_translate">Carpa</string>
+    <string name="audio_save_repeat_title" source="google_translate">Desa el mode de repetició</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Recordeu el mode de repetició en carregar llistes de reproducció d\'àudio</string>
+    <string name="audio_boost_title" source="google_translate">Augment de l\'àudio</string>
+    <string name="headset_prefs_category" source="google_translate">Auriculars</string>
+    <string name="enable_headset_actions_title" source="google_translate">Dreceres de control remot</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Feu doble clic a \'Play \' per saltar al següent i, tot seguit, prémer-lo per saltar a la pista anterior</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Reprendre la inserció de l\'auricular</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">Pausa d\'una altra manera</string>
+    <string name="audio_ducking_title" source="google_translate">Baix de volum de VLC a les notificacions</string>
+    <string name="audio_ducking_summary" source="google_translate">Ajuda a escoltar notificacions d\'àudio, instruccions de navegació o parlant d\'assistents</string>
+    <string name="casting_category" source="google_translate">Càsting</string>
+    <string name="casting_passthrough_title" source="google_translate">Passthrough d\'àudio</string>
+    <string name="casting_passthrough_summary" source="google_translate">Permet que el televisor gestioni la reproducció d\'àudio</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Qualitat de conversió</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Seleccioneu la qualitat de conversió quan feu servir la pantalla remota</string>
+    <string name="casting_quality_high" source="google_translate">Alt</string>
+    <string name="casting_quality_medium" source="google_translate">Mitjà</string>
+    <string name="casting_quality_low" source="google_translate">baix</string>
+    <string name="casting_quality_lowcpu" source="google_translate">El més baix</string>
+    <string name="cast_performance_warning" source="google_translate">La realització d\'aquest vídeo requereix conversió. Aquesta conversió pot utilitzar tota la potència disponible i podria drenar la bateria ràpidament.</string>
+    <string name="artists_show_all_title" source="google_translate">Mostra tots els artistes</string>
+    <string name="artists_show_all_summary" source="google_translate">Mostra tots els artistes en la llista d\'artistes, no només artistes d\'àlbums</string>
+    <string name="extensions_prefs_category" source="google_translate">Extensions</string>
+    <string name="extensions_enable_category" source="google_translate">Seleccioneu les extensions per activar</string>
+    <string name="extensions_empty" source="google_translate">No s\'ha detectat cap extensió</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Activa</string>
+    <string name="android_auto" source="google_translate">Cotxe Android</string>
+    <string name="controls_prefs_category" source="google_translate">Controls</string>
+    <string name="chroma_format_summary" source="google_translate">RGB de 32 bits: croma predeterminada \ nRGB de 16 bits: millor rendiment però de menor qualitat \ nYUV: millor rendiment però no funciona en tots els dispositius. Android 2.3 i posteriors només.</string>
+    <string name="main_prefs_category" source="google_translate">Configuració principal</string>
+    <string name="save_video_none" source="google_translate">No estalvieu la velocitat</string>
+    <string name="save_video_session" source="google_translate">Desa la velocitat durant la sessió</string>
+    <string name="save_video_always" source="google_translate">Desa la velocitat a través de les sessions</string>
+    <string name="auto_rescan" source="google_translate">Rescan automàticament</string>
+    <string name="auto_rescan_summary" source="google_translate">Escaneja automàticament el dispositiu per als mitjans nous o suprimits quan s\'inicia l\'aplicació</string>
+    <string name="dump_media_db" source="google_translate">Base de dades de mitjans de comunicació</string>
+    <string name="dump_media_db_summary" source="google_translate">Copieu la base de dades a l\'arrel d\'emmagatzematge intern</string>
+    <string name="clear_media_db_summary" source="google_translate">Accediu a la informació VLC d\'Android per esborrar dades</string>
+    <string name="resume_playback_title" source="google_translate">Reprèn la reproducció després d\'una trucada</string>
+    <string name="resume_playback_summary" source="google_translate">Manténgase en pausa d\'una altra manera</string>
+    <string name="network_caching_popup" source="google_translate">Aquest valor ha de ser entre 0 i 6000 ms</string>
+    <string name="log_service_title" source="google_translate">VLC registra la gravació</string>
+    <string name="log_service_text" source="google_translate">Obriu la consola de registre</string>
+    <string name="serious_crash" source="google_translate">Malauradament, s\'ha produït un error greu i VLC ha hagut de tancar.</string>
+    <string name="drawer_open" source="google_translate">Caleta de navegació oberta</string>
+    <string name="drawer_close" source="google_translate">Tancament de navegació a prop</string>
+    <string name="network_browsing" source="google_translate">Xarxa local</string>
+    <string name="browsing" source="google_translate">Navegació</string>
+    <string name="file_size" source="google_translate">Mida de l\'arxiu:</string>
+    <string name="audio_delay" source="google_translate">Retard d\'àudio</string>
+    <string name="spu_delay" source="google_translate">Retard del subtítol</string>
+    <string name="sleep_time_not_set" source="google_translate">cap conjunt</string>
+    <string name="network_shares_discovery" source="google_translate">S\'estan cercant accions de xarxa ...</string>
+    <string name="network_empty" source="google_translate">Aquest directori està buit.</string>
+    <string name="network_connection_needed" source="google_translate">No hi ha connexió a la xarxa local.</string>
+    <string name="search_hint" source="google_translate">Cercar mitjans de comunicació</string>
+    <string name="search_list_hint" source="google_translate">Cercar mitjans a la llista actual</string>
+    <string name="search_global" source="google_translate">Cerca a tota la biblioteca multimèdia</string>
+    <string name="directory_show_medialib" source="google_translate">Mostra a MediaLib</string>
+    <string name="directory_hide_medialib" source="google_translate">Amaga de MediaLib</string>
+    <string name="playlist_save" source="google_translate">Desa llista de reproducció</string>
+    <string name="playlist_name_hint" source="google_translate">nom de llista de reproducció</string>
+    <string name="go_to_chapter" source="google_translate">Vés al capítol ...</string>
+    <string name="chapter" source="google_translate">Capítol</string>
+    <string name="resume_from_position" source="google_translate">Reprendre des de la darrera posició</string>
+    <string name="confirm_resume" source="google_translate">Reprendre des de la darrera posició?</string>
+    <string name="confirm_resume_title" source="google_translate">Demana confirmació per reprendre</string>
+    <string name="confirm_resume_summary" source="google_translate">si està activat, se us demanarà que confirmeu quan es pot reprendre un vídeo des de la darrera posició</string>
+    <string name="directory_empty" source="google_translate">El directori està buit</string>
+    <string name="player_touch_title" source="google_translate">Controls tàctils per al vídeo</string>
+    <string name="player_touch_enable_all" source="google_translate">Activa els controls tàctils</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Desactiva el control de la brillantor</string>
+    <string name="player_touch_disable_all" source="google_translate">Desactiva tots els controls Touch</string>
+    <string name="tv_ui_title" source="google_translate">Interfície d\'Android TV</string>
+    <string name="tv_ui_summary" source="google_translate">Canvi de la interfície d\'usuari a un tema adaptat per a televisió</string>
+    <string name="medialibrary" source="google_translate">Media library</string>
+    <string name="medialibrary_directories" source="google_translate">Carpetes de la biblioteca de mitjans</string>
+    <string name="more_actions" source="google_translate">Més accions</string>
+    <string name="move" source="google_translate">Moure</string>
+    <string name="back_quit_lock" source="google_translate">Torneu a prémer de nou per sortir del vídeo</string>
+    <string name="playlist_deleted" source="google_translate">S\'ha eliminat la llista de reproducció</string>
+    <string name="file_deleted" source="google_translate">Fitxer suprimit</string>
+    <string name="no_subs_found" source="google_translate">No hi ha subtítols en aquest directori</string>
+    <string name="music_now_playing" source="google_translate">Jugant ara</string>
+    <string name="widget_name_w" source="google_translate">VLC White Widget</string>
+    <string name="widget_name_b" source="google_translate">VLC Dark Widget</string>
+    <string name="allow_storage_access_title" source="google_translate">Permet que Ace Stream accedeixi als fitxers de vídeo i àudio</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace Stream necessita que concediu aquest permís per accedir als fitxers multimèdia d\'aquest dispositiu.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Permet que Ace Stream estableixi el to de trucada</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace Stream necessita que concediu aquest permís per configurar aquesta cançó com a to de trucada.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Permet que Ace Stream canviï el mode de brillantor</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace Stream necessita que concediu aquest permís per canviar el mode de brillantor.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Permet que Ace Stream reprodueixi pop-up sobre altres aplicacions</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream necessita que concediu aquest permís per mostrar el vostre vídeo en una finestra emergent per sobre d\'altres aplicacions.</string>
+    <string name="permission_ask_again" source="google_translate">Permís de subvenció</string>
+    <string name="exit_app" source="google_translate">Tanca VLC</string>
+    <string name="exit_app_msg" source="google_translate">Esteu segur que voleu sortir de VLC?</string>
+    <string name="fastscroller_track" source="google_translate">Track de FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">Controlador FastScroller</string>
+    <string name="plugins" source="google_translate">Plugins</string>
+    <string name="download_on_device" source="google_translate">descarregar</string>
+    <string name="extension_empty" source="google_translate">No hi ha cap element per mostrar, aneu a la configuració de l\'extensió per obtenir-ne una.</string>
+    <string name="opengl_title" source="google_translate">Ús OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">Per defecte, l\'OpenGL ES2 s\'utilitza per a la descodificació de programari i la descodificació de maquinari quan sigui necessari (vídeos de 360 °).</string>
+    <string name="opengl_automatic" source="google_translate">Automàtic</string>
+    <string name="opengl_on" source="google_translate">Force On</string>
+    <string name="opengl_off" source="google_translate">Força fora</string>
+    <string name="network_favorites" source="google_translate">Preferits de xarxa</string>
+    <string name="network_shared_folders" source="google_translate">Carpetes compartides</string>
+    <string name="encryption_warning" source="google_translate">Avís, el xifrat no està disponible per a aquesta versió d\'Android, la contrasenya s\'emmagatzema en un espai privat però no està encriptada</string>
+    <string name="store_password" source="google_translate">Recordar contrasenya</string>
+    <string name="add_to_playlist" source="google_translate">Afegir a la llista de reproducció</string>
+    <string name="popup_playback_title" source="google_translate">Reproduir vídeo en una finestra emergent</string>
+    <string name="popup_playback" source="google_translate">Jugant en una finestra emergent</string>
+    <string name="popup_expand" source="google_translate">Amplia el vídeo</string>
+    <string name="snack_subloader_sub_found" source="google_translate">Subtítols descarregats</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">No s\'han trobat subtítols</string>
+    <string name="dialog_subloader_success" source="google_translate">Subtítols trobats per a:</string>
+    <string name="dialog_subloader_fails" source="google_translate">No s\'han trobat subtítols per a:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">Descarregar acabat</string>
+    <string name="download_subtitles" source="google_translate">Baixar subtítols</string>
+    <string name="preferences_languages_download" source="google_translate">Llenguatges de subtítols</string>
+    <string name="list_languages_download_summary" source="google_translate">Llenguatges a descarregar quan s\'obtenen subtítols</string>
+    <string name="list_languages_download_title" source="google_translate">Subtítols descarreguen idiomes</string>
+    <string name="service_unavailable" source="google_translate">Servei no disponible</string>
+    <string name="subs_dl_lang_fail" source="google_translate">No s\'ha pogut establir l\'idioma del subtítol, intenteu configurar-lo a la configuració de l\'aplicació</string>
+    <string name="downloading_subtitles" source="google_translate">S\'estan baixant els subtítols</string>
+    <string name="browse_folder" source="google_translate">Navega per la carpeta</string>
+    <string name="listen" source="google_translate">Escoltar</string>
+    <string name="subtitles_download_title" source="google_translate">Descàrrega de subs</string>
+    <string name="connecting" source="google_translate">S\'està connectant ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">estalviar retard per a dispositius bluetooth</string>
+    <string name="episodes" source="google_translate">episodis</string>
+    <string name="movies" source="google_translate">pel·lícules</string>
+    <string name="videos" source="google_translate">vídeos</string>
+    <string name="streams" source="google_translate">corrents</string>
+    <string name="clear_playback_history" source="google_translate">Esborra l\'historial de reproducció</string>
+    <string name="various_artists" source="google_translate">Diversos artistes</string>
+    <string name="ml_scanning" source="google_translate">Escaneig per a fitxers multimèdia</string>
+    <string name="ml_parse_media" source="google_translate">Parsing mitjà</string>
+    <string name="ml_discovering" source="google_translate">Descobrint</string>
+    <string name="resume" source="google_translate">Resum</string>
+    <string name="length" source="google_translate">Llargada</string>
+    <string name="tv_settings_hint" source="google_translate">Manteniu premut el botó Acceptar per a marcar / desmarcar els directoris</string>
+    <string name="ml_external_storage_title" source="google_translate">S\'ha detectat un nou emmagatzematge extern</string>
+    <string name="ml_external_storage_accept" source="google_translate">Sí</string>
+    <string name="ml_external_storage_decline" source="google_translate">No</string>
+    <string name="last_added_media" source="google_translate">últim afegit</string>
+    <string name="no" source="google_translate">No</string>
+    <string name="loading_medialibrary" source="google_translate">S\'està carregant medialibrary ...</string>
+    <string name="yes" source="google_translate">Sí</string>
+    <string name="custom_set_save_title" source="google_translate">Canvis sense desar</string>
+    <string name="custom_set_save_warning" source="google_translate">Advertència: canvis sense desar</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Desa l\'equalizer-set com ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Desa un nou equalitzador establert com ...</string>
+    <string name="save" source="google_translate">Desa</string>
+    <string name="do_not_save" source="google_translate">No guardi</string>
+    <string name="custom_set_wrong_input" source="google_translate">Nom no vàlid.</string>
+    <string name="custom_set_already_exist" source="google_translate">El conjunt d\'equalitzacions amb aquest nom ja existeix</string>
+    <string name="custom_set_restored" source="google_translate">S\'ha restaurat l\'equalizador personalitzat restaurat.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">S\'ha eliminat el conjunt d\'equalitzacions no desat.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Nou</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary està escanejant els vostres dispositius ara mateix</string>
+    <string name="recommendations" source="google_translate">Recomanacions</string>
+    <string name="recommendations_desc" source="google_translate">Targetes de recomanacions al llançador</string>
+    <string name="browser_quick_access" source="google_translate">Accés Ràpid</string>
+    <string name="browser_storages" source="google_translate">Traster</string>
+    <string name="renderer_list_title" source="google_translate">Mostra</string>
+    <string name="feedback_player_crashed" source="google_translate">Ho sentim, VLC només s\'ha bloquejat. Siusplau torna-ho a provar.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Heu de concedir accés a escriptura VLC a la targeta SD</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC no pot esborrar aquest fitxer sense permís d\'accés a l\'escriptura. Aneu a la vostra targeta SD i feu clic a "Seleccionar". \ NPotser fer clic a \ "Mostrar targeta SD \" primer al menú superior dret</string>
+    <string name="dialog_sd_wizard" source="google_translate">Ensenya\'m</string>
+    <string name="renderers_disconnect" source="google_translate">Desconnecta</string>
+    <string name="audio_digital_failed" source="google_translate">No s\'ha pogut canviar l\'estat de sortida digital d\'àudio</string>
+    <string name="audio_digital_output_enabled" source="google_translate">S\'ha habilitat la sortida digital d\'àudio</string>
+    <string name="audio_digital_output_disabled" source="google_translate">S\'ha desactivat la sortida digital d\'àudio</string>
+    <string name="live_streams" source="google_translate">Enregistraments en directe</string>
+    <string name="all_live_streams" source="google_translate">Totes les transmissions en directe</string>
+    <string name="video_torrents" source="google_translate">Torrents de vídeo</string>
+    <string name="audio_torrents" source="google_translate">Torrents d\'àudio</string>
+    <string name="all_torrents" source="google_translate">Tots els torrents</string>
+    <string name="main" source="google_translate">Principal</string>
+    <string name="media_player" source="google_translate">Reproductor multimèdia</string>
+    <string name="acestream_server" source="google_translate">Servidor Ace Stream (motor)</string>
+    <string name="media_player_settings" source="google_translate">Configuració del reproductor multimèdia</string>
+    <string name="acestream_server_settings" source="google_translate">Configuració del servidor de l\'eix (motor)</string>
+    <string name="sign_out" source="google_translate">Tanca sessió</string>
+    <string name="sign_in" source="google_translate">Inicieu sessió</string>
+    <string name="sign_in_acestream" source="google_translate">Inicieu sessió amb Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Inicieu sessió amb Google</string>
+    <string name="video_files" source="google_translate">Fitxers de vídeo</string>
+    <string name="audio_files" source="google_translate">Arxius d\'àudio</string>
+    <string name="retry" source="google_translate">Torneu a provar</string>
+    <string name="failed_to_load_web_page" source="google_translate">No s\'ha pogut carregar la pàgina web</string>
 </resources>

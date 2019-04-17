@@ -30,9 +30,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.v17.leanback.widget.ImageCardView;
-import android.support.v17.leanback.widget.Presenter;
-import android.support.v4.content.ContextCompat;
+import androidx.leanback.widget.ImageCardView;
+import androidx.leanback.widget.Presenter;
+import androidx.core.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +61,7 @@ public class CardPresenter extends Presenter {
     public CardPresenter(Activity context){
         mContext = context;
         mRes = mContext.getResources();
-        sDefaultCardImage = ContextCompat.getDrawable(mContext, R.drawable.ic_default_cone);
+        sDefaultCardImage = ContextCompat.getDrawable(mContext, R.drawable.ic_acestream);
         mIsSeenMediaMarkerVisible = PreferenceManager.getDefaultSharedPreferences(VLCApplication.getAppContext()).getBoolean("media_seen", true);
 
     }
@@ -168,10 +168,15 @@ public class CardPresenter extends Presenter {
             holder.updateCardViewImage(mediaLibraryItem);
         } else if (item instanceof SimpleCard){
             SimpleCard card = (SimpleCard) item;
-            Bitmap image = card.getImage();
             holder.mCardView.setTitleText(card.getName());
             holder.mCardView.setContentText(card.getDescription());
-            holder.updateCardViewImage(image != null ? new BitmapDrawable(mRes, image) : ContextCompat.getDrawable(mContext, card.getImageId()));
+            if(card.getImage() != null) {
+                holder.updateCardViewImage(new BitmapDrawable(mRes, card.getImage()));
+            }
+            else if(card.getImageId() != 0) {
+                holder.updateCardViewImage(ContextCompat.getDrawable(mContext, card.getImageId()));
+            }
+
         } else if (item instanceof String){
             holder.mCardView.setTitleText((String) item);
             holder.mCardView.setContentText("");

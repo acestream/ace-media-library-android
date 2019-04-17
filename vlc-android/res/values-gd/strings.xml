@@ -9,12 +9,6 @@
     <string name="sortby_length">Faid</string>
     <string name="searchable_hint">Lorg…</string>
     <string name="history">Eachdraidh</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">Chaidh %d toradh a lorg</item>
-        <item quantity="two">Chaidh %d thoradh a lorg</item>
-        <item quantity="few">Chaidh %d toraidhean a lorg</item>
-        <item quantity="other">Chaidh %d toradh a lorg</item>
-    </plurals>
     <string name="play">Cluich</string>
     <string name="play_from_start">Cluich on toiseach</string>
     <string name="play_as_audio">Cluich mar fhuaim</string>
@@ -55,18 +49,6 @@
         <item quantity="two">%d fho-phasgan</item>
         <item quantity="few">%d fo-phasganan</item>
         <item quantity="other">%d fo-phasgan</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">%d fhaidhle meadhain</item>
-        <item quantity="two">%d fhaidhle meadhain</item>
-        <item quantity="few">%d faidhlichean meadhain</item>
-        <item quantity="other">%d faidhle meadhain</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">%d video</item>
-        <item quantity="two">%d video</item>
-        <item quantity="few">%d videothan</item>
-        <item quantity="other">%d video</item>
     </plurals>
     <string name="internal_memory">Cuimhne inntearnail</string>
     <string name="parent_folder">Suas gu pàrant a\' phasgain</string>
@@ -173,12 +155,10 @@
     <string name="subtitle_text_encoding">Còdachadh teacsa nam fo-thiotal</string>
     <string name="extra_prefs_category">Roghainnean a bharrachd</string>
     <string name="interface_prefs_screen">Eadar-aghaidh</string>
-    <string name="interface_secondary_display_category">Eadar-aghaidh - Taisbeanadh dàrnacha</string>
     <string name="interface_secondary_display_category_summary">Roghainnean a bhios an sàs ma bhios taisbeanadh dàrnach ceangailte ris (HDMI/Miracast).</string>
     <string name="enable_clone_mode">\'S fhearr clòn</string>
     <string name="enable_clone_mode_summary">Clònaich sgrìn an uidheim as aonais smachd cèin.</string>
     <string name="interface_other_category">Eadar-aghaidh - Eile</string>
-    <string name="enable_brightness_gesture">Cuir am comas smachd air an t-soilleireachd le gluasad</string>
     <string name="enable_brightness_gesture_summary">Atharraich an t-soilleireachd tro ghluasad rè a chluich</string>
     <string name="enable_headset_detection">Mothaich dha headset</string>
     <string name="enable_headset_detection_summary">Cuir \'na stad ma bheirear air falbh an headset; lean air nuair a thèid a chur a-steach a-rithist</string>
@@ -227,4 +207,328 @@
     <string name="sending_log">A\' cur an loga...</string>
     <!--Accessibility-->
     <!--Widget-->
+    <string name="torrent_files">Torrent faidhlichean</string>
+    <string name="select_language">Tagh cànan</string>
+    <string name="sortby_name_desc" source="google_translate">Ainm (desc)</string>
+    <string name="sortby_artist_name" source="google_translate">Ainm an neach-ealain</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Ainm neach-ealain (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Ainm na h-alba</string>
+    <string name="sortby_album_name_desc" source="google_translate">Ainm na h-alba (desc)</string>
+    <string name="sortby_length_desc" source="google_translate">Fad (desc)</string>
+    <string name="sortby_date" source="google_translate">Ceann-latha</string>
+    <string name="sortby_date_desc" source="google_translate">Dàta (desc)</string>
+    <string name="sortby_number" source="google_translate">Slighean Nb</string>
+    <string name="sortby_number_desc" source="google_translate">Nb trainn (desc)</string>
+    <string name="playback" source="google_translate">Playback</string>
+    <string name="playback_controls" source="google_translate">Smachd air cluich</string>
+    <string name="medialibrary_scan" source="google_translate">Sganadh leabharlann nam meadhanan</string>
+    <string name="Medialibrary_progress" source="google_translate">Leabharlann nam meadhanan a \'sgrùdadh aithrisean adhartais</string>
+    <string name="video_app_switch_title" source="google_translate">Cùl-fhiosrachadh / modh PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">Tagh giùlan VLC nuair a thèid thu gu tagradh eile bho ath-bhidio</string>
+    <string name="play_pip_title" source="google_translate">Cluich bhidio ann am modh Dealbh-ann an dealbh</string>
+    <string name="play_as_audio_background" source="google_translate">Cluich bhideothan sa chùl-raon</string>
+    <string name="insert_next" source="google_translate">Cuir a-steach an ath thuras</string>
+    <string name="info_title" source="google_translate">VLC</string>
+    <string name="unknown_number" source="google_translate">Àireamh neo-aithnichte de shlighean</string>
+    <string name="tracks" source="google_translate">Ceòl</string>
+    <string name="noplaylist" source="google_translate">Chan fhaighear clàr-ciùil sam bith.</string>
+    <string name="shuffle_title" source="google_translate">Cleachd modh</string>
+    <string name="shuffle" source="google_translate">Cuir a-mach às</string>
+    <string name="shuffle_on" source="google_translate">Sgaoileadh</string>
+    <string name="repeat_title" source="google_translate">Modh ath-aithris</string>
+    <string name="repeat" source="google_translate">Dèan ath-aithris sam bith</string>
+    <string name="repeat_single" source="google_translate">Dèan aithris a-rithist</string>
+    <string name="repeat_all" source="google_translate">Dèan a h-uile càil</string>
+    <string name="firstsong" source="google_translate">A \'chiad òran den liosta-chluiche</string>
+    <string name="lastsong" source="google_translate">An t-òran mu dheireadh den playlist</string>
+    <string name="surface_fit_screen" source="google_translate">Sgrion Fit</string>
+    <string name="sound_on" source="google_translate">Sgaoileadh</string>
+    <string name="sound_off" source="google_translate">Fuaim às</string>
+    <string name="navmenu" source="google_translate">Clàr-taice seòladh</string>
+    <string name="advanced" source="google_translate">roghainnean adhartach</string>
+    <string name="sleep_in" source="google_translate">Cadal a-steach</string>
+    <string name="server_add_title" source="google_translate">Cuir freiceadan ùr ris na roghainnean as fheàrr leat</string>
+    <string name="server_domain_hint" source="google_translate">Seòladh an t-siostaim (ainm àrainn no IP)</string>
+    <string name="server_share_hint" source="google_translate">Ainm co-roinnte lìonra (no seòladh IP)</string>
+    <string name="server_folder_hint" source="google_translate">Slighe an fhillteir (roghainneil)</string>
+    <string name="server_username_hint" source="google_translate">Ainm-cleachdaidh</string>
+    <string name="server_servername_hint" source="google_translate">Ainm an fhrithealaiche, airson cothromachd</string>
+    <string name="server_port" source="google_translate">Port:</string>
+    <string name="login" source="google_translate">Log a-steach</string>
+    <string name="password" source="google_translate">Facal-faire</string>
+    <string name="search_results" source="google_translate">Toraidhean rannsachaidh</string>
+    <string name="search_no_result" source="google_translate">Chan fhaighear meadhain sam bith</string>
+    <string name="favorites_add" source="google_translate">Cuir ri roghainnean</string>
+    <string name="favorites_remove" source="google_translate">Thoir air falbh bho na rudan as fheàrr leat</string>
+    <string name="favorites_edit" source="google_translate">Deasaich</string>
+    <string name="favorite_added" source="google_translate">Sàbhail na cleachdaidhean as fheàrr leat</string>
+    <string name="favorite_removed" source="google_translate">Air a thoirt bhon fheadhainn as fheàrr leat</string>
+    <string name="error_message_is" source="google_translate">Tha an teachdaireachd mearachd (cuir iomradh air an seo nuair a tha thu a \'dearbhadh): \ n</string>
+    <string name="encountered_error_message" source="google_translate">Choinnich VLC mearachd leis na meadhanan seo. \ N Feuch an ath-ùrachadh leabharlann nam meadhanan.</string>
+    <string name="playback_history_title" source="google_translate">Eachdraidh cluich</string>
+    <string name="playback_history_summary" source="google_translate">Sàbhail na meadhanan air fad air an cluich ann an earrann Eachdraidh</string>
+    <string name="playback_speed_title" source="google_translate">Sàbhail Speed Play</string>
+    <string name="playback_speed_summary" source="google_translate">Cuimhnich an luas ath-chluich a shuidhich thu</string>
+    <string name="audio_sub" source="google_translate">Ceòl fuaime \ n agus fo-thiotalan</string>
+    <string name="show_playlist" source="google_translate">Seall playlist</string>
+    <string name="hardware_acceleration_summary" source="google_translate">Ciorramach: seasmhachd nas fheàrr. \ NDecodadh: dh\'fhaodadh coileanadh a leasachadh. \ NFull: is dòcha gun dèanar leasachadh nas fheàrr.</string>
+    <string name="dev_hardware_decoder" source="google_translate">Decoder cruaidh adhartach</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">Deiseadair bathar cruaidh na feachd, airson luchd-cleachdaidh adhartach a-mhàin</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">iomx</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-dr</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">codecodec</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">mediacodec-Oll</string>
+    <string name="daynight_title" source="google_translate">Modh Latha-latha</string>
+    <string name="daynight_summary" source="google_translate">Cuir gu fèin-ghluasadach gu modh oidhche aig àm iomchaidh</string>
+    <string name="interface_gui" source="google_translate">Taisbeanadh</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">Taisbeanadh àrd-sgoile</string>
+    <string name="video_prefs_category" source="google_translate">Bhideo</string>
+    <string name="video_min_group_length_title" source="google_translate">Bhideothan buidhne</string>
+    <string name="video_min_group_length_summary" source="google_translate">Bidh fiolm air am buidheann ma tha a \'chiad litir aca mar an ceudna.</string>
+    <string name="video_min_group_length_disable" source="google_translate">Cuir an comas</string>
+    <string name="video_min_group_length_first" source="google_translate">A \'chiad litir a-mhàin</string>
+    <string name="video_min_group_length_short" source="google_translate">Àireamh ghoirid de litrichean (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Àireamh fhada de litrichean (9)</string>
+    <string name="media_fast_seek" source="google_translate">Dèan comas air roghainn luath</string>
+    <string name="media_seen" source="google_translate">Seall comharran video air fhaicinn</string>
+    <string name="media_seen_summary" source="google_translate">Comharraich bhideo mar a chì thu nuair a chluicheas tu e gus an deireadh</string>
+    <string name="force_list_portrait" source="google_translate">Chan eil grid ann am modh dealbhaidh</string>
+    <string name="force_list_portrait_summary" source="google_translate">Seall bhideothan ann an liosta an àite a \'ghriod ann am modh dealbhaidh</string>
+    <string name="force_play_all_summary" source="google_translate">Cluich a h-uile video, a \'tòiseachadh leis an fhear a bhriog thu air</string>
+    <string name="force_play_all_title" source="google_translate">Modh playlist air bhidio</string>
+    <string name="save_brightness_summary" source="google_translate">Cuimhnich ìre soilleireachd ann am cluicheadair bhideo</string>
+    <string name="save_brightness_title" source="google_translate">Sàbhail ìre soilleir airson video</string>
+    <string name="save_audiodelay_summary" source="google_translate">Sàbhail dàil claisneachd fa leth airson gach bhideo</string>
+    <string name="save_audiodelay_title" source="google_translate">Sàbhail dàil claisneachd</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Gnìomh glùine</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Iomradh leabhar</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Cunntas tomhais le gluasad rè an cluich bhideo</string>
+    <string name="enable_seek_buttons" source="google_translate">Cuir comas air putanan ceist</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">Seall putanan ath-nuadhachadh agus air adhart air an eadar-aghaidh bhidio</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Tap dùbailte a shireadh</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Tagh dùbailte air oirean an sgrion gus 10 diogan a shireadh</string>
+    <string name="popup_keepscreen_title" source="google_translate">Cùm an sgrìn ON air modh Pop-Up</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Cumaibh sgrion air an-còmhnaidh fhad \'sa tha Pop-Up air a thaisbeanadh, eadhon ma thèid am video a stad.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Seall faidhlichean falaichte</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Seall faidhlichean falaichte ann am brabhsairean</string>
+    <string name="subtitles_prefs_category" source="google_translate">Fo-thiotalan</string>
+    <string name="subtitles_size_title" source="google_translate">Meud Fo-thiotalan</string>
+    <string name="subtitles_size_small" source="google_translate">Beag</string>
+    <string name="subtitles_size_normal" source="google_translate">Coitcheann</string>
+    <string name="subtitles_size_big" source="google_translate">Mòr</string>
+    <string name="subtitles_size_huge" source="google_translate">Mòr</string>
+    <string name="subtitles_color_title" source="google_translate">Dath fo-thiotalan</string>
+    <string name="subtitles_color_white" source="google_translate">geal</string>
+    <string name="subtitles_color_gray" source="google_translate">liath</string>
+    <string name="subtitles_color_pink" source="google_translate">Pinc</string>
+    <string name="subtitles_color_blue" source="google_translate">Gorm</string>
+    <string name="subtitles_color_yellow" source="google_translate">Buidhe</string>
+    <string name="subtitles_color_green" source="google_translate">Uaine</string>
+    <string name="subtitles_background_title" source="google_translate">Fo-thiotalan Cùl-fhiosrachadh</string>
+    <string name="subtitles_bold_title" source="google_translate">Fo-thiotalan dubha</string>
+    <string name="subtitles_autoload_title" source="google_translate">Fo-thiotalan car fèin-ghluasadach</string>
+    <string name="audio_prefs_category" source="google_translate">Fuaim</string>
+    <string name="lockscreen_cover_title" source="google_translate">Còmhdach nam meadhanan air Lockscreen</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Nuair a bhios e ri fhaighinn, cuir an còmhdach meadhain làithreach air dòigh mar phàipear-balla le glasan</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Dèan aire air a \'chlàr-cluiche làithreach fèin-ghluasad</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Dèan mothachadh air gluasad air gluasad meadhanan</string>
+    <string name="audio_title_alignment" source="google_translate">Alineachadh tiotal fuaime</string>
+    <string name="audio_title_alignment_default" source="google_translate">Default</string>
+    <string name="audio_title_alignment_left" source="google_translate">Clì</string>
+    <string name="audio_title_alignment_centre" source="google_translate">Ionad</string>
+    <string name="audio_title_alignment_right" source="google_translate">Deas</string>
+    <string name="audio_title_alignment_marquee" source="google_translate">Marquee</string>
+    <string name="audio_save_repeat_title" source="google_translate">Sàbhail am modh ath-bhualadh</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Cuimhnich a-rithist am modh nuair a chuireas tu clàran-fuaim claisneachd air falbh</string>
+    <string name="audio_boost_title" source="google_translate">Fuaim-fuaim</string>
+    <string name="headset_prefs_category" source="google_translate">Ceangalaichean</string>
+    <string name="enable_headset_actions_title" source="google_translate">Aibhnichean smachd iomallach</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Dèan briogadh dùbailte air \'Play \' gus stad a chur air a \'phutan a tha romhainn agus an ath fhada air gus sgiobadh air an t-slighe roimhe</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Ath-thòiseachadh air cur-a-steach ceann-uidhe</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">Stad a-rithist</string>
+    <string name="audio_ducking_title" source="google_translate">Iomlan VLC ìochdrach air fiosan</string>
+    <string name="audio_ducking_summary" source="google_translate">A \'cuideachadh le bhith a\' cluinntinn fuaim claisneachd, seòladh stiùiridh no neach-cuideachaidh labhairt</string>
+    <string name="casting_category" source="google_translate">Casting</string>
+    <string name="casting_passthrough_title" source="google_translate">Fuaim Passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">Leig leis an telebhisean agad a bhith a \'dealbhadh fuaim</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Càileachd còmhraidh</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Tagh càileachd an atharrachaidh nuair a tha thu a \'cur air sgrion iomallach</string>
+    <string name="casting_quality_high" source="google_translate">Àrd</string>
+    <string name="casting_quality_medium" source="google_translate">Meadhanach</string>
+    <string name="casting_quality_low" source="google_translate">Ìosal</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Is ìsle</string>
+    <string name="cast_performance_warning" source="google_translate">A \'cur feum air a\' bhidio seo feumar tionndadh. Faodaidh an t-atharrachadh seo a bhith a \'cleachdadh a h-uile cumhachd a tha ri fhaotainn agus dh\'fhaodadh e do bataraidh a dhrèanadh.</string>
+    <string name="artists_show_all_title" source="google_translate">Seall a h-uile neach-ealain</string>
+    <string name="artists_show_all_summary" source="google_translate">Seall a h-uile neach-ealain ann an liosta luchd-ealain, chan e a-mhàin luchd-ealain alb</string>
+    <string name="extensions_prefs_category" source="google_translate">Leudachadh</string>
+    <string name="extensions_enable_category" source="google_translate">Gabh leudachaidhean gus comas a thoirt dhut</string>
+    <string name="extensions_empty" source="google_translate">Chan fhacas leudachadh sam bith</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Gnìomhach</string>
+    <string name="android_auto" source="google_translate">Càr Android</string>
+    <string name="controls_prefs_category" source="google_translate">Smachdan</string>
+    <string name="chroma_format_summary" source="google_translate">RGB 32-bit: chroma bunaiteach 16-bit GB: coileanadh nas fheàrr ach càileachd nas ìsle \ nYUV: coileanadh as fheàrr ach chan eil e ag obair air gach inneal. Android 2.3 agus nas fhaide air adhart a-mhàin.</string>
+    <string name="main_prefs_category" source="google_translate">Prìomh shuidheachaidhean</string>
+    <string name="save_video_none" source="google_translate">Na sàbhail astar</string>
+    <string name="save_video_session" source="google_translate">Sàbhail astar rè seisean</string>
+    <string name="save_video_always" source="google_translate">Sàbhail astar thairis air seiseanan</string>
+    <string name="auto_rescan" source="google_translate">Ùraichte air:</string>
+    <string name="auto_rescan_summary" source="google_translate">Inneal sganadh gu fèin-ghluasadach airson na meadhanan ùra no air an sguabadh às aig toiseach tagraidh</string>
+    <string name="dump_media_db" source="google_translate">Stòr-dàta na meadhanan dump</string>
+    <string name="dump_media_db_summary" source="google_translate">Lìbhrig stòr-dàta gu stòradh stòrais a-staigh</string>
+    <string name="clear_media_db_summary" source="google_translate">Faigh fiosrachadh Android VLC airson dàta a shoilleireachadh</string>
+    <string name="resume_playback_title" source="google_translate">Ath-thòiseachadh bogadh às dèidh gairm</string>
+    <string name="resume_playback_summary" source="google_translate">Fuirich stad ann an dòigh eile</string>
+    <string name="network_caching_popup" source="google_translate">Feumaidh an luach seo a bhith eadar 0 agus 6000 ms</string>
+    <string name="log_service_title" source="google_translate">Logaichean VLC a \'clàradh</string>
+    <string name="log_service_text" source="google_translate">Fosgail an consol log</string>
+    <string name="drawer_open" source="google_translate">Dreach seòlaidh fosgailte</string>
+    <string name="drawer_close" source="google_translate">Drathair seòlaidh dùinte</string>
+    <string name="network_browsing" source="google_translate">Lìonra Ionadail</string>
+    <string name="browsing" source="google_translate">A \'bhrabhsadh</string>
+    <string name="file_size" source="google_translate">Meud File:</string>
+    <string name="audio_delay" source="google_translate">Dàil fuaime</string>
+    <string name="spu_delay" source="google_translate">Dàil fo-thiotalan</string>
+    <string name="sleep_time_not_set" source="google_translate">aon neach air a shuidheachadh</string>
+    <string name="network_shares_discovery" source="google_translate">A \'coimhead airson earrannan lìonra ...</string>
+    <string name="network_empty" source="google_translate">Tha an seòladh seo falamh.</string>
+    <string name="network_connection_needed" source="google_translate">Chan eil ceangal sam bith ri lìonra ionadail.</string>
+    <string name="search_hint" source="google_translate">Rannsaich meadhanan</string>
+    <string name="search_list_hint" source="google_translate">Rannsaich meadhanan anns an liosta làithreach</string>
+    <string name="search_global" source="google_translate">Rannsaich anns a h-uile leabharlann mheadhanan</string>
+    <string name="directory_show_medialib" source="google_translate">Seall ann am MediaLib</string>
+    <string name="directory_hide_medialib" source="google_translate">Falaich bho MediaLib</string>
+    <string name="playlist_save" source="google_translate">Sàbhail clàran-cluiche</string>
+    <string name="playlist_name_hint" source="google_translate">Ainm playlist</string>
+    <string name="go_to_chapter" source="google_translate">Rach gu caibideil ...</string>
+    <string name="chapter" source="google_translate">Caibideil</string>
+    <string name="resume_from_position" source="google_translate">Ath-thòiseachadh bhon t-suidheachadh mu dheireadh</string>
+    <string name="confirm_resume" source="google_translate">A \'tòiseachadh bhon t-suidheachadh mu dheireadh?</string>
+    <string name="confirm_resume_title" source="google_translate">Faighnich dearbhadh a dhol air ais</string>
+    <string name="confirm_resume_summary" source="google_translate">ma tha thu air a ghnìomhachadh thèid iarraidh ort dearbhadh cuin a ghabhas bhideo a thòiseachadh bhon t-suidheachadh mu dheireadh</string>
+    <string name="directory_empty" source="google_translate">Tha an seòladh falamh</string>
+    <string name="player_touch_title" source="google_translate">Bidh smachd aig Touch airson Bhidio</string>
+    <string name="player_touch_enable_all" source="google_translate">Smachd a chumail air Touch</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Cuir stad air smachd soilleir</string>
+    <string name="player_touch_disable_all" source="google_translate">Na gabh smachd air gach smachd</string>
+    <string name="tv_ui_title" source="google_translate">Eadar-aghaidh TV Tbh</string>
+    <string name="tv_ui_summary" source="google_translate">Atharraich UI gu cuspairean air an atharrachadh le teacsa</string>
+    <string name="medialibrary" source="google_translate">Leabharlann nam meadhanan</string>
+    <string name="medialibrary_directories" source="google_translate">Filltearan leabharlann mheadhanan</string>
+    <string name="more_actions" source="google_translate">Barrachd Ghnìomhan</string>
+    <string name="move" source="google_translate">Gluais</string>
+    <string name="back_quit_lock" source="google_translate">Brùth air ais a-rithist gus stad a chur air video</string>
+    <string name="playlist_deleted" source="google_translate">Ceanglaichean playlist air a sguabadh às</string>
+    <string name="file_deleted" source="google_translate">File air a sguabadh às</string>
+    <string name="no_subs_found" source="google_translate">Chan eil fo-thiotalan anns an eòlaire seo</string>
+    <string name="music_now_playing" source="google_translate">A \'cluich a-nis</string>
+    <string name="widget_name_w" source="google_translate">VLC White Widget</string>
+    <string name="widget_name_b" source="google_translate">VLC Dark Widget</string>
+    <string name="allow_storage_access_title" source="google_translate">Leig le Ace Stream cothrom fhaighinn air faidhlichean bhidio agus claistinneach</string>
+    <string name="allow_storage_access_description" source="google_translate">Feumaidh Ace Stream dhut an cead seo a thoirt seachad gus faighinn a-steach do na faidhlichean mheadhanan air an inneal seo.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Leig le Ace Stream am putan-ciùil a shuidheachadh</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Feumaidh Ace Stream gum bu chòir dhut an cead seo a thoirt seachad gus an t-òran seo a stèidheachadh mar an ringtone agad.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Leig le Ace Stream modh soilleire atharrachadh</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Feumaidh Ace Stream gum bu chòir dhut an cead seo a thoirt seachad gus am modh soilleir agad atharrachadh.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Leig le inneal player Ace Stream thairis air aplacaidean eile</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Feumaidh Ace Stream gum bu chòir dhut an cead seo a thaisbeanadh a \'taisbeanadh do bhidio ann an crann-uidheam thairis air iarrtasan eile.</string>
+    <string name="permission_ask_again" source="google_translate">Grant cead</string>
+    <string name="exit_app" source="google_translate">Dùin VLC</string>
+    <string name="exit_app_msg" source="google_translate">A bheil thu cinnteach gu bheil thu airson stad a chur air VLC?</string>
+    <string name="fastscroller_track" source="google_translate">Ceangalaichean FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">Làrach Mobile</string>
+    <string name="plugins" source="google_translate">Plugins</string>
+    <string name="download_on_device" source="google_translate">Luchdaich sìos</string>
+    <string name="extension_empty" source="google_translate">Chan eil nì sam bith ri fhaicinn, rachaibh gu na roghainnean leudachaidh agad airson cuid fhaighinn.</string>
+    <string name="opengl_title" source="google_translate">Cleachdadh OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">Mar as trice, thèid OpenGL ES2 a chleachdadh airson dì-chnapachadh bathar-bog agus dì-chnapachadh cruaidh-cruaidh nuair a tha feum air (bhidiothan 360 °).</string>
+    <string name="opengl_automatic" source="google_translate">Gu fèin-ghluasadach</string>
+    <string name="opengl_on" source="google_translate">Force On</string>
+    <string name="opengl_off" source="google_translate">Feachd a-mach</string>
+    <string name="network_favorites" source="google_translate">Roghainnean an lìonraidh</string>
+    <string name="network_shared_folders" source="google_translate">Filltearan co-roinnte</string>
+    <string name="encryption_warning" source="google_translate">Chan eil rabhadh, encryption ri fhaighinn airson an dreach Android seo, thèid am facal-faire a chumail ann an àite prìobhaideach ach chan eil e air a chrioptachadh</string>
+    <string name="store_password" source="google_translate">Cuimhnich facal-faire</string>
+    <string name="add_to_playlist" source="google_translate">Cuir ris an liosta-chluiche</string>
+    <string name="popup_playback_title" source="google_translate">Bhidio cluich ann an uinneag Pop-Up</string>
+    <string name="popup_playback" source="google_translate">A \'cluich ann an uinneag Pop-Up</string>
+    <string name="popup_expand" source="google_translate">Leudaich bhidio</string>
+    <string name="snack_subloader_sub_found" source="google_translate">Fo-thiotalan air an luchdachadh sìos</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">Lorg fo-thiotalan</string>
+    <string name="dialog_subloader_success" source="google_translate">Lorg fo-thiotalan airson:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Lorg fo-thiotalan airson:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">Crìochnaich an luchdachadh sìos</string>
+    <string name="download_subtitles" source="google_translate">Luchdaich sìos fo-thiotalan</string>
+    <string name="preferences_languages_download" source="google_translate">Cànanan fo-thiotalan</string>
+    <string name="list_languages_download_summary" source="google_translate">Cànainean a luchdachadh sìos nuair a gheibh thu fo-thiotalan</string>
+    <string name="list_languages_download_title" source="google_translate">Fo-thiotalan a \'luchdachadh sìos chànanan</string>
+    <string name="service_unavailable" source="google_translate">Seirbheis nach eil ri fhaighinn</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Dh\'fhàillig air cànan fo-thiotalan a shuidheachadh, feuch ri a shuidheachadh ann an suidheachaidhean tagraidh</string>
+    <string name="downloading_subtitles" source="google_translate">Luchdachadh sìos fo-thiotalan</string>
+    <string name="browse_folder" source="google_translate">Rannsaich am pasgan</string>
+    <string name="listen" source="google_translate">Èist</string>
+    <string name="subtitles_download_title" source="google_translate">Luchdaich a-nuas</string>
+    <string name="connecting" source="google_translate">Ceangail ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">sàbhail dàil airson inneal bluetooth</string>
+    <string name="episodes" source="google_translate">episodes</string>
+    <string name="movies" source="google_translate">filmichean</string>
+    <string name="videos" source="google_translate">bhideothan</string>
+    <string name="streams" source="google_translate">sruthain</string>
+    <string name="clear_playback_history" source="google_translate">Geàrr eachdraidh eachdraidh</string>
+    <string name="various_artists" source="google_translate">Luchd-ealain eadar-dhealaichte</string>
+    <string name="ml_scanning" source="google_translate">A \'sgrùdadh airson faidhlichean mheadhanan</string>
+    <string name="ml_parse_media" source="google_translate">Parsadh Meadhanach</string>
+    <string name="ml_discovering" source="google_translate">A \'lorg</string>
+    <string name="resume" source="google_translate">Air ais</string>
+    <string name="length" source="google_translate">Fad</string>
+    <string name="tv_settings_hint" source="google_translate">Putan fada a \'chlò-bhualadh OK gus sùil a thoirt air seòlaidhean / neo-sgrùdadh</string>
+    <string name="ml_external_storage_title" source="google_translate">Lorg stòradh ùr bhon taobh a-muigh</string>
+    <string name="ml_external_storage_accept" source="google_translate">tha</string>
+    <string name="ml_external_storage_decline" source="google_translate">Chan eil</string>
+    <string name="last_added_media" source="google_translate">sgaoileadh</string>
+    <string name="no" source="google_translate">Chan eil</string>
+    <string name="loading_medialibrary" source="google_translate">Stiùireadh do phàrantan</string>
+    <string name="yes" source="google_translate">tha</string>
+    <string name="custom_set_save_title" source="google_translate">Atharrachaidhean gun shàbhaladh</string>
+    <string name="custom_set_save_warning" source="google_translate">Rabhadh: atharrachaidhean gun dìon</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Sàbhail equalizer-set as ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Sàbhail co-ionnan ùr-stèidhichte mar ...</string>
+    <string name="save" source="google_translate">Sàbhail</string>
+    <string name="do_not_save" source="google_translate">Na sàbhail</string>
+    <string name="custom_set_wrong_input" source="google_translate">Ainm mì-dhligheach.</string>
+    <string name="custom_set_already_exist" source="google_translate">Tha suidheachadh co-ionannas ris an ainm seo mu thràth</string>
+    <string name="custom_set_restored" source="google_translate">Seòmar co-ionnan gnàthaichte air a chur air ais.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Co-ionnanadair neo-shàbhalaidh - air a sguabadh às.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Ùr</string>
+    <string name="settings_ml_block_scan" source="google_translate">Tha Medialibrary a \'scanadh na h-innealan agad an-dràsta</string>
+    <string name="recommendations" source="google_translate">Molaidhean</string>
+    <string name="recommendations_desc" source="google_translate">Cairtean mholaidhean air an làrach-lìn</string>
+    <string name="browser_quick_access" source="google_translate">Ruigsinneachd luath</string>
+    <string name="browser_storages" source="google_translate">Storages</string>
+    <string name="renderer_list_title" source="google_translate">Taisbeanaidhean</string>
+    <string name="feedback_player_crashed" source="google_translate">Duilich, tha VLC dìreach air tuiteam. Feuch ris a-rithist.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Feumaidh tu cothrom sgrìobhaidh VLC a thoirt don chairt agad</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">Chan urrainn do VLC an fhaidhle seo a sguabadh às às aonais cead inntrigidh. \ NTha thu a \'dol gu do chairt-dearbhaidh SD agus briog air \ "Tagh \". \ NTha dòcha gum feum thu briogadh air \ "Cairt SD Taisbeanaidh \" an toiseach sa bhogsa deas</string>
+    <string name="dialog_sd_wizard" source="google_translate">Seall dhomh</string>
+    <string name="renderers_disconnect" source="google_translate">Fuasgladh</string>
+    <string name="audio_digital_failed" source="google_translate">Dh\'fhaodadh gun atharraich an stàladh Toraidhean Digiteach Fuaim</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Toraidhean Digiteach Fuaim comasach</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Toraidhean Digiteach Fuaim ciorramach</string>
+    <string name="live_streams" source="google_translate">Sruthan beò</string>
+    <string name="all_live_streams" source="google_translate">A h-uile sruthan beò</string>
+    <string name="video_torrents" source="google_translate">Torran bhideo</string>
+    <string name="audio_torrents" source="google_translate">Fuasgladh fuaim</string>
+    <string name="all_torrents" source="google_translate">Gach torrent</string>
+    <string name="main" source="google_translate">Prìomh</string>
+    <string name="media_player" source="google_translate">Cluicheadair mheadhanan</string>
+    <string name="acestream_server" source="google_translate">Frithealaiche Ace Stream (einnsean)</string>
+    <string name="media_player_settings" source="google_translate">Suidheachaidhean cluicheadair mheadhanan</string>
+    <string name="acestream_server_settings" source="google_translate">Suidhich frithealaiche Ace Stream (einnsean)</string>
+    <string name="sign_out" source="google_translate">Soidhnig a-mach</string>
+    <string name="sign_in" source="google_translate">Soidhnig a-steach</string>
+    <string name="sign_in_acestream" source="google_translate">Clàraich a-steach le Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Clàraich a-steach le Google</string>
+    <string name="video_files" source="google_translate">Faidhlichean bhidio</string>
+    <string name="audio_files" source="google_translate">Faidhlichean fuaim</string>
+    <string name="retry" source="google_translate">Feuch a-rithist</string>
+    <string name="failed_to_load_web_page" source="google_translate">Dh\'fhàillig air duilleag lìn a luchdachadh</string>
 </resources>

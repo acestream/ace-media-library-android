@@ -6,10 +6,18 @@
         <import type="org.videolan.medialibrary.Tools" />
         <variable
             name="progress"
-            type="android.databinding.ObservableInt" />
+            type="androidx.databinding.ObservableInt" />
+        <!-- //:ace -->
+        <variable
+            name="currentTime"
+            type="androidx.databinding.ObservableInt" />
+        <variable
+            name="title"
+            type="androidx.databinding.ObservableField&lt;String&gt;" />
+        <!-- ///ace -->
         <variable
             name="length"
-            type="android.databinding.ObservableLong" />
+            type="androidx.databinding.ObservableLong" />
         <variable
             name="player"
             type="org.videolan.vlc.gui.video.VideoPlayerActivity" />
@@ -24,59 +32,149 @@
     android:visibility="invisible"
     tools:visibility="visible" >
 
-    <SeekBar
-        android:id="@+id/player_overlay_seekbar"
+    <LinearLayout
+        android:id="@+id/title_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="@dimen/seekbar_height"
-        android:minHeight="@dimen/seekbar_height"
+        android:gravity="left|start"
+        android:orientation="horizontal"
+        android:visibility="visible"
         android:paddingLeft="@dimen/time_margin_sides"
         android:paddingRight="@dimen/time_margin_sides"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
         android:layout_alignParentTop="true"
-        android:progressDrawable="@drawable/po_seekbar"
-        android:thumb="@drawable/seekbar_thumb"
-        android:splitTrack="false"
-        android:focusable="true"
-        android:progress="@{progress}"
-        vlc:mediamax="@{length}"/>
+        >
+        <TextView
+            android:id="@+id/player_overlay_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|start"
+            android:textColor="@color/white"
+            android:text="@{title}"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/progress_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:layout_below="@id/title_container"
+        >
+
+        <LinearLayout
+            android:id="@+id/stream_selector_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/time_margin_sides"
+            android:paddingStart="@dimen/time_margin_sides"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/select_stream_button"
+                android:layout_width="48dp"
+                android:layout_height="24dp"
+                android:background="@drawable/button_border"
+                android:paddingBottom="0dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="0dp"
+                android:textAllCaps="false"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:onClick="@{(v) -> player.selectStream()}"
+                />
+
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/player_overlay_seekbar"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxHeight="@dimen/seekbar_height"
+            android:minHeight="@dimen/seekbar_height"
+            android:splitTrack="false"
+            android:focusable="true"
+            android:progress="@{progress}"
+            android:progressDrawable="@drawable/po_seekbar"
+            android:thumb="?attr/seekbar_thumb"
+            vlc:mediamax="@{length}"/>
+
+        <LinearLayout
+            android:id="@+id/live_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/time_margin_sides"
+            android:paddingEnd="@dimen/time_margin_sides"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/go_live_button"
+                android:layout_width="36dp"
+                android:layout_height="24dp"
+                android:background="@drawable/button_live_blue"
+                android:paddingBottom="0dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp"
+                android:paddingTop="0dp"
+                android:nextFocusDown="@id/player_overlay_play"
+                android:nextFocusRight="@id/go_live_button"
+                android:text="Live"
+                android:textAllCaps="false"
+                android:textColor="@color/controls_dark"
+                android:onClick="@{(v) -> player.goLive()}"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/player_overlay_time"
         android:layout_width="66dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/player_overlay_seekbar"
-        android:layout_alignLeft="@+id/player_overlay_seekbar"
-        android:layout_alignStart="@+id/player_overlay_seekbar"
+        android:layout_below="@id/progress_container"
+        android:layout_alignLeft="@+id/progress_container"
+        android:layout_alignStart="@+id/progress_container"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="@dimen/time_margin_sides"
         android:layout_marginStart="@dimen/time_margin_sides"
         android:gravity="left|start"
-        android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
-        android:textColor="@color/orange500"
-        android:text="@{Tools.millisToString(progress)}"
-        android:textSize="16sp"
+        android:text="@{Tools.millisToString(currentTime)}"
+        android:textSize="12sp"
+        android:focusable="false"
         android:onClick="@{(v) -> player.toggleTimeDisplay()}" />
 
     <TextView
         android:id="@+id/player_overlay_length"
         android:layout_width="66dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/player_overlay_seekbar"
+        android:layout_below="@id/progress_container"
         android:layout_alignParentRight="true"
-        android:layout_alignRight="@+id/player_overlay_seekbar"
+        android:layout_alignRight="@+id/progress_container"
         android:layout_marginRight="@dimen/time_margin_sides"
         android:gravity="right|end"
         android:text="--:--"
-        vlc:time="@{progress}"
+        vlc:player="@{player}"
         vlc:length="@{length}"
-        android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
-        android:textSize="16sp"
+        vlc:time="@{progress}"
+        android:textSize="12sp"
         android:layout_alignParentEnd="true"
-        android:layout_alignEnd="@+id/player_overlay_seekbar"
+        android:layout_alignEnd="@+id/progress_container"
         android:layout_marginEnd="@dimen/time_margin_sides"
+        android:focusable="false"
         android:onClick="@{(v) -> player.toggleTimeDisplay()}" />
 
     <!-- Media control buttons -->
@@ -93,10 +191,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_lock_circle"
+            android:src="@drawable/rci_lock_open_selector"
             android:scaleType="center"
             android:onClick="@{(v) -> player.toggleLock()}"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/player_overlay_tracks"
@@ -104,10 +203,34 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:clickable="true"
-            android:src="@drawable/ic_audiosub_circle"
+            android:src="@drawable/rci_subtitles_selector"
             android:scaleType="center"
             android:onClick="@{player::onAudioSubClick}"
+            android:focusable="true"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/select_subtitles"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:src="@drawable/rci_subtitles_selector"
+            android:scaleType="center"
+            android:onClick="@{(v) -> player.selectSubtitles()}"
             android:focusable="true"/>
+
+        <ImageView
+            android:id="@+id/select_audio_track"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:longClickable="true"
+            android:src="@drawable/rci_audiotrack_selector"
+            android:scaleType="center"
+            android:focusable="true"
+            android:onClick="@{player::onAudioOptionsClick}" />
 
         <ImageView
             android:id="@+id/playlist_previous"
@@ -119,7 +242,7 @@
             android:longClickable="true"
             android:scaleType="center"
             android:onClick="@{(v) -> player.previous()}"
-            android:src="@drawable/ic_playlist_previous_circle"
+            android:src="@drawable/rci_skip_previous_selector"
             android:visibility="gone" />
 
         <ImageView
@@ -131,16 +254,16 @@
             android:focusable="true"
             android:longClickable="true"
             android:scaleType="center"
-            android:src="@drawable/ic_rewind_circle"
+            android:src="@drawable/rci_fast_rewind_selector"
             android:visibility="gone" />
 
         <ImageView
             android:id="@+id/player_overlay_play"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:clickable="true"
-            android:src="@drawable/ic_pause_circle"
+            android:src="@drawable/rci_pause_selector"
             android:scaleType="fitCenter"
             android:focusable="true"
             android:onClick="@{(v) -> player.doPlayPause()}"
@@ -153,7 +276,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:longClickable="true"
-            android:src="@drawable/ic_forward_circle"
+            android:src="@drawable/rci_fast_forward_selector"
             android:scaleType="center"
             android:focusable="true"
             android:visibility="gone" />
@@ -165,30 +288,33 @@
             android:layout_weight="1"
             android:clickable="true"
             android:longClickable="true"
-            android:src="@drawable/ic_playlist_next_circle"
+            android:src="@drawable/rci_skip_next_selector"
             android:scaleType="center"
             android:focusable="true"
             android:onClick="@{(v) -> player.next()}"
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/player_overlay_adv_function"
+            android:id="@+id/player_overlay_stop"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:clickable="true"
-            android:src="@drawable/ic_more_circle"
+            android:longClickable="true"
+            android:src="@drawable/rci_stop_selector"
             android:scaleType="center"
-            android:onClick="@{(v) -> player.showAdvancedOptions()}"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:onClick="@{(v) -> player.stop()}"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/player_overlay_size"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_crop_circle_o"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rci_crop_selector"
             android:scaleType="center"
+            android:nextFocusRight="@id/player_overlay_size"
             android:onClick="@{(v) -> player.resizeVideo()}"
             android:focusable="true" />
     </LinearLayout>

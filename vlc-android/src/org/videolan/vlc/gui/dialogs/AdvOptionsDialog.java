@@ -35,10 +35,10 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.DialogFragment;
+import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -47,10 +47,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.videolan.vlc.R;
 
 import org.videolan.libvlc.MediaPlayer;
 import org.videolan.vlc.PlaybackService;
-import org.videolan.vlc.R;
 import org.videolan.vlc.VLCApplication;
 import org.videolan.vlc.gui.PlaybackServiceFragment;
 import org.videolan.vlc.gui.audio.EqualizerFragment;
@@ -58,7 +58,6 @@ import org.videolan.vlc.gui.helpers.UiTools;
 import org.videolan.vlc.gui.video.VideoPlayerActivity;
 import org.videolan.vlc.gui.view.AutoFitRecyclerView;
 import org.videolan.vlc.interfaces.IPlaybackSettingsController;
-import org.videolan.vlc.util.AndroidDevices;
 import org.videolan.vlc.util.Constants;
 import org.videolan.vlc.util.Strings;
 import org.videolan.vlc.util.VLCOptions;
@@ -255,19 +254,16 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
     }
 
     public void initPlaybackSpeed () {
-        if (!mService.isSeekable()) {
-            mPlaybackSpeed.setEnabled(false);
-            mPlaybackSpeed.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.ic_speed_disable, 0, 0);
-            return;
-        }
         if (mService.getRate() == 1.0f) {
             mPlaybackSpeed.setText(null);
             mPlaybackSpeed.setCompoundDrawablesWithIntrinsicBounds(0,
-                    UiTools.getResourceFromAttribute(mActivity, R.attr.ic_speed_normal_style),
+                    UiTools.getResourceFromAttribute(mActivity, R.attr.ic_speed),
                     0, 0);
         } else {
             mPlaybackSpeed.setText(Strings.formatRateString(mService.getRate()));
-            mPlaybackSpeed.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_speed_on, 0, 0);
+            mPlaybackSpeed.setCompoundDrawablesWithIntrinsicBounds(0,
+                    UiTools.getResourceFromAttribute(mActivity, R.attr.ic_speed_on),
+                    0, 0);
         }
     }
 
@@ -275,10 +271,12 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
         String text = null;
         if (VLCApplication.sPlayerSleepTime == null) {
             mSleep.setCompoundDrawablesWithIntrinsicBounds(0,
-                    UiTools.getResourceFromAttribute(mActivity, R.attr.ic_sleep_normal_style),
+                    UiTools.getResourceFromAttribute(mActivity, R.attr.ic_sleep),
                     0, 0);
         } else {
-            mSleep.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_sleep_on, 0, 0);
+            mSleep.setCompoundDrawablesWithIntrinsicBounds(0,
+                    UiTools.getResourceFromAttribute(mActivity, R.attr.ic_sleep_on),
+                    0, 0);
             text = DateFormat.getTimeFormat(mActivity).format(VLCApplication.sPlayerSleepTime.getTime());
         }
         mSleep.setText(text);
@@ -294,7 +292,7 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
         } else {
             mSpuDelay.setText(String.format("%s ms", Long.toString(spudelay)));
             mSpuDelay.setCompoundDrawablesWithIntrinsicBounds(0,
-                    R.drawable.ic_subtitledelay_on,
+                    UiTools.getResourceFromAttribute(mActivity, R.attr.ic_subtitledelay_on),
                     0, 0);
         }
     }
@@ -309,7 +307,7 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
         } else {
             mAudioDelay.setText(String.format("%s ms", Long.toString(audiodelay)));
             mAudioDelay.setCompoundDrawablesWithIntrinsicBounds(0,
-                    R.drawable.ic_audiodelay_on,
+                    UiTools.getResourceFromAttribute(mActivity, R.attr.ic_audiodelay_on),
                     0, 0);
         }
     }
@@ -317,15 +315,22 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
     public void initRepeat() {
         switch (mService.getRepeatType()) {
             case Constants.REPEAT_NONE:
-                mRepeat.setCompoundDrawablesWithIntrinsicBounds(0,
+                mRepeat.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
                         UiTools.getResourceFromAttribute(mActivity, R.attr.ic_repeat),
                         0, 0);
                 break;
             case Constants.REPEAT_ALL:
-                mRepeat.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_repeat_all, 0, 0);
+                mRepeat.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        UiTools.getResourceFromAttribute(mActivity, R.attr.ic_repeat_all),
+                        0, 0);
                 break;
             case Constants.REPEAT_ONE:
-                mRepeat.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_repeat_one, 0, 0);
+                mRepeat.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        UiTools.getResourceFromAttribute(mActivity, R.attr.ic_repeat_one),
+                        0, 0);
                 break;
         }
     }
@@ -333,22 +338,30 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
     public void setRepeatMode() {
         switch (mService.getRepeatType()) {
             case Constants.REPEAT_NONE:
-                mRepeat.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_repeat_one, 0, 0);
+                mRepeat.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        UiTools.getResourceFromAttribute(mActivity, R.attr.ic_repeat_one),
+                        0, 0);
                 mService.setRepeatType(Constants.REPEAT_ONE);
                 break;
             case Constants.REPEAT_ONE:
                 if (mService.hasPlaylist()){
-                    mRepeat.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_repeat_all, 0, 0);
+                    mRepeat.setCompoundDrawablesWithIntrinsicBounds(
+                            0,
+                            UiTools.getResourceFromAttribute(mActivity, R.attr.ic_repeat_all),
+                            0, 0);
                     mService.setRepeatType(Constants.REPEAT_ALL);
                 } else {
-                    mRepeat.setCompoundDrawablesWithIntrinsicBounds(0,
+                    mRepeat.setCompoundDrawablesWithIntrinsicBounds(
+                            0,
                             UiTools.getResourceFromAttribute(mActivity, R.attr.ic_repeat),
                             0, 0);
                     mService.setRepeatType(Constants.REPEAT_NONE);
                 }
                 break;
             case Constants.REPEAT_ALL:
-                mRepeat.setCompoundDrawablesWithIntrinsicBounds(0,
+                mRepeat.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
                         UiTools.getResourceFromAttribute(mActivity, R.attr.ic_repeat),
                         0, 0);
                 mService.setRepeatType(Constants.REPEAT_NONE);
@@ -359,7 +372,7 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
     public void initShuffle(){
         mShuffle.setCompoundDrawablesWithIntrinsicBounds(0,
                 mService.isShuffling()
-                        ? R.drawable.ic_shuffle_on
+                        ? UiTools.getResourceFromAttribute(mActivity, R.attr.ic_shuffle_on)
                         : UiTools.getResourceFromAttribute(mActivity, R.attr.ic_shuffle),
                 0, 0);
     }
@@ -368,7 +381,7 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AdvOptionsDialog.this.getContext());
         mPassThrough.setCompoundDrawablesWithIntrinsicBounds(0,
                 VLCOptions.isAudioDigitalOutputEnabled(prefs)
-                        ? R.drawable.ic_passthrough_on
+                        ? UiTools.getResourceFromAttribute(mActivity, R.attr.ic_passthrough_on)
                         : UiTools.getResourceFromAttribute(mActivity, R.attr.ic_passthrough),
                 0, 0);
     }
@@ -386,9 +399,7 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
     private void initJumpTo() {
         mJumpTitle.setEnabled(mService.isSeekable());
         mJumpTitle.setCompoundDrawablesWithIntrinsicBounds(0,
-                mService.isSeekable()
-                        ? UiTools.getResourceFromAttribute(mActivity, R.attr.ic_jumpto_normal_style)
-                        : R.drawable.ic_jumpto_disable,
+                UiTools.getResourceFromAttribute(mActivity, R.attr.ic_jumpto),
                 0, 0);
     }
 
@@ -465,9 +476,9 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
             case ID_PLAY_AS_AUDIO:
                 ((VideoPlayerActivity)getActivity()).switchToAudioMode(true);
                 break;
-            case ID_POPUP_VIDEO:
-                ((VideoPlayerActivity)getActivity()).switchToPopup();
-                break;
+           case ID_POPUP_VIDEO:
+               ((VideoPlayerActivity)getActivity()).switchToPopup();
+               break;
             case ID_EQUALIZER:
                 showFragment(ID_EQUALIZER);
                 break;
@@ -493,7 +504,7 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
         boolean enabled = !VLCOptions.isAudioDigitalOutputEnabled(prefs);
         if (mService.setAudioDigitalOutputEnabled(enabled)) {
             mPassThrough.setCompoundDrawablesWithIntrinsicBounds(0,
-                    enabled ? R.drawable.ic_passthrough_on
+                    enabled ? UiTools.getResourceFromAttribute(mActivity, R.attr.ic_passthrough_on)
                             : UiTools.getResourceFromAttribute(mActivity, R.attr.ic_passthrough)
                     , 0, 0);
             VLCOptions.setAudioDigitalOutputEnabled(prefs, enabled);
@@ -505,8 +516,11 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if (v instanceof TextView) ((TextView) v).setTextColor(v.hasFocus() ? UiTools.Resources.ITEM_FOCUS_ON : mTextColor);
-        mToast.setText(mAdapter.getSelectedAdvOptionHelp());
-        mToast.show();
+
+        if(hasFocus) {
+            mToast.setText(mAdapter.getSelectedAdvOptionHelp());
+            mToast.show();
+        }
     }
 
 
@@ -544,18 +558,28 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
         int large_items = 0;
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AdvOptionsDialog.this.getContext());
 
-        mAdapter.addOption(new Option(ID_SLEEP, R.attr.ic_sleep_normal_style, getString(R.string.sleep_title)));
-        mAdapter.addOption(new Option(ID_PLAYBACK_SPEED, R.attr.ic_speed_normal_style, getString(R.string.playback_speed)));
-        mAdapter.addOption(new Option(ID_JUMP_TO, R.attr.ic_jumpto_normal_style, getString(R.string.jump_to_time)));
-        mAdapter.addOption(new Option(ID_EQUALIZER, R.attr.ic_equalizer_normal_style, getString(R.string.equalizer)));
+        mAdapter.addOption(new Option(ID_SLEEP, R.attr.ic_sleep, getString(R.string.sleep_title)));
+        mAdapter.addOption(new Option(ID_PLAYBACK_SPEED, R.attr.ic_speed, getString(R.string.playback_speed)));
+        mAdapter.addOption(new Option(ID_JUMP_TO, R.attr.ic_jumpto, getString(R.string.jump_to_time)));
+        mAdapter.addOption(new Option(ID_EQUALIZER, R.attr.ic_equalizer, getString(R.string.equalizer)));
 
         if (mMode == MODE_VIDEO) {
-            if (primary && !tvUi && mService.getAudioTracksCount() > 0)
-                mAdapter.addOption(new Option(ID_PLAY_AS_AUDIO, R.attr.ic_playasaudio_on, getString(R.string.play_as_audio)));
+            // need to test p2p items before enabling
+            //r
+            //if (primary && !tvUi && mService.getAudioTracksCount() > 0)
+            //    mAdapter.addOption(new Option(ID_PLAY_AS_AUDIO, R.attr.ic_playasaudio_on_light, getString(R.string.play_as_audio)));
+            //--
+            //<<
             mAdapter.addOption(new Option(ID_SPU_DELAY, R.attr.ic_subtitledelay, getString(R.string.spu_delay)));
             mAdapter.addOption(new Option(ID_AUDIO_DELAY, R.attr.ic_audiodelay, getString(R.string.audio_delay)));
-            if (primary && (!tvUi || AndroidDevices.hasPiP) && !AndroidDevices.isDex(getActivity()))
-                mAdapter.addOption(new Option(ID_POPUP_VIDEO, R.attr.ic_popup_dim, getString(R.string.popup_playback_title)));
+
+            // pip button moved to player action bar
+            //r
+            //if (primary && (!tvUi || AndroidDevices.hasPiP) && !AndroidDevices.isDex(getActivity()))
+            //    mAdapter.addOption(new Option(ID_POPUP_VIDEO, R.attr.ic_popup_dim_light, getString(R.string.popup_playback_title)));
+            //--
+            //<<
+
             mAdapter.addOption(new Option(ID_REPEAT, R.attr.ic_repeat, getString(R.string.repeat_title)));
             if (mService.canShuffle())
                 mAdapter.addOption(new Option(ID_SHUFFLE, R.attr.ic_shuffle, getString(R.string.shuffle_title)));
@@ -563,7 +587,7 @@ public class AdvOptionsDialog extends DialogFragment implements View.OnClickList
             final MediaPlayer.Chapter[] chapters = mService.getChapters(-1);
             final int chaptersCount = chapters != null ? chapters.length : 0;
             if (chaptersCount > 1) {
-                mAdapter.addOption(new Option(ID_CHAPTER_TITLE, R.attr.ic_chapter_normal_style, getString(R.string.go_to_chapter)));
+                mAdapter.addOption(new Option(ID_CHAPTER_TITLE, R.attr.ic_chapter, getString(R.string.go_to_chapter)));
                 ++large_items;
             }
         } else {

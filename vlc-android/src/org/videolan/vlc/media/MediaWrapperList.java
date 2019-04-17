@@ -20,13 +20,18 @@
  *****************************************************************************/
 package org.videolan.vlc.media;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
+import org.acestream.sdk.AceStreamManager;
+import org.acestream.sdk.controller.api.response.MediaFilesResponse;
+import org.acestream.sdk.player.api.AceStreamPlayer;
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.vlc.VLCApplication;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -83,7 +88,8 @@ public class MediaWrapperList {
     /**
      * Clear the media list. (remove all media)
      */
-    public synchronized void clear() {
+    public synchronized void clear(AceStreamManager pm) {
+        resetP2PItems(pm, -1);
         // Signal to observers of media being deleted.
         for(int i = 0; i < mInternalList.size(); i++)
             signalEventListeners(EVENT_REMOVED, i, -1, mInternalList.get(i).getLocation());
@@ -155,6 +161,39 @@ public class MediaWrapperList {
         return isValid(position) ? mInternalList.get(position) : null;
     }
 
+    //:ace
+    public void resetP2PItems(AceStreamManager manager, int currentIndex) {
+        for(int i = 0; i < mInternalList.size(); i++) {
+            if(i != currentIndex) {
+                mInternalList.get(i).resetP2PItem(manager);
+            }
+        }
+    }
+
+    public int findPositionByFileIndex(int fileIndex) {
+        for(int i = 0; i < mInternalList.size(); i++) {
+            MediaFilesResponse.MediaFile mf = mInternalList.get(i).getMediaFile();
+            if(mf != null && mf.index == fileIndex) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public String toAceStreamPlaylist() {
+        AceStreamPlayer.PlaylistItem[] playlist = new AceStreamPlayer.PlaylistItem[mInternalList.size()];
+        for(int i = 0; i < mInternalList.size(); i++) {
+            MediaWrapper mw = mInternalList.get(i);
+            playlist[i] = new AceStreamPlayer.PlaylistItem(
+                    mw.getUri().toString(),
+                    mw.getTitle(),
+                    mw.getId());
+        }
+
+        return AceStreamPlayer.Playlist.toJson(playlist);
+    }
+    ///ace
+
     public synchronized List<MediaWrapper> getAll() {
         return mInternalList;
     }
@@ -177,7 +216,9 @@ public class MediaWrapperList {
         final Medialibrary ml = VLCApplication.getMLInstance();
         while (iter.hasNext()) {
             final MediaWrapper media = iter.next();
-            if (media.getId() == 0L) {
+            // Don't replace P2P items because it can overwrite playback url.
+            // Total replacement can be refactored with an update of existing item.
+            if (media.getId() == 0L && !media.isP2PItem()) {
                 final MediaWrapper mw = ml.findMedia(media);
                 if (mw.getId() != 0) iter.set(mw);
             }
@@ -196,5 +237,15 @@ public class MediaWrapperList {
         }
         sb.append("}");
         return sb.toString();
+    }
+
+    public void sort() {
+        Collections.sort(mInternalList, new Comparator<MediaWrapper>() {
+            @Override
+            public int compare(MediaWrapper a, MediaWrapper b) {
+                String title1 = a.getTitle() == null ? "" : a.getTitle();
+                return title1.compareToIgnoreCase(b.getTitle());
+            }
+        });
     }
 }

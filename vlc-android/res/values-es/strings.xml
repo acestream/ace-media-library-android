@@ -19,10 +19,6 @@
     <string name="sortby_number_desc">Pistas (desc)</string>
     <string name="searchable_hint">Buscar…</string>
     <string name="history">Historial</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d resultado encontrado</item>
-        <item quantity="other">%d resultados encontrados</item>
-    </plurals>
     <string name="play">Reproducir</string>
     <string name="playback">Reproducción</string>
     <string name="playback_controls">Controles de reproducción</string>
@@ -71,14 +67,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 subcarpeta</item>
         <item quantity="other">%d subcarpetas</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 archivo de medio</item>
-        <item quantity="other">%d archivos de medio</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 vídeo</item>
-        <item quantity="other">%d vídeos</item>
     </plurals>
     <string name="internal_memory">Memoria interna</string>
     <string name="parent_folder">Hasta la carpeta padre</string>
@@ -140,10 +128,6 @@
     <string name="navmenu">menú de navegación</string>
     <string name="advanced">opciones avanzadas</string>
     <string name="audio_boost_warning">Arrastre hacia arriba de nuevo para subir más del 100%</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 canal\n</item>
-        <item quantity="other">%1$d canales\n</item>
-    </plurals>
     <string name="track_samplerate_info">Tasa de muestreo: %1$d Hz\n</string>
     <string name="track_resolution_info">Resolución: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Tasa de fotogramas: %1$.3f\n\n</string>
@@ -179,7 +163,7 @@
     <string name="error_not_compatible">Su dispositivo no está soportado actualmente por esta versión de VLC para Android™.</string>
     <string name="error_problem">VLC para Android ha tenido un problema al cargarse y se ha cerrado.</string>
     <string name="error_message_is">El mensaje de error es (mencione esto al depurar):\n\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Error de reproducción</string>
     <string name="encountered_error_message">VLC ha encontrado un error con este medio.\nIntente refrescar la librería de medios.</string>
     <string name="invalid_location">La localización %1$s no puede reproducirse.</string>
@@ -442,14 +426,14 @@
     <!--Widget-->
     <string name="widget_name_w">Tema blanco de VLC</string>
     <string name="widget_name_b">Tema negro de VLC</string>
-    <string name="allow_storage_access_title">Permitir a VLC acceder a archivos de vídeo y audio</string>
-    <string name="allow_storage_access_description">VLC necesita que concedas este permiso para acceder a los archivos de medios en este dispositivo. </string>
-    <string name="allow_settings_access_ringtone_title">Pemitir a VLC establecer el tono de llamada</string>
-    <string name="allow_settings_access_ringtone_description">VLC necesita que concedas este permiso para establecer esta canción como tono de llamada. </string>
-    <string name="allow_settings_access_brightness_title">Permitir a VLC cambiar el modo de brillo</string>
-    <string name="allow_settings_access_brightness_description">VLC necesita que concedas este permiso para cambiar el modo de brillo.</string>
-    <string name="allow_draw_overlays_title">Permitir al reproductor de VLC mostrarse sobre otras apps</string>
-    <string name="allow_sdraw_overlays_description">VLC necesita que concedas este permiso para mostrar el vídeo sobre otras aplicaciones.</string>
+    <string name="allow_storage_access_title">Permitir a Ace Stream acceder a archivos de vídeo y audio</string>
+    <string name="allow_storage_access_description">Ace Stream necesita que concedas este permiso para acceder a los archivos de medios en este dispositivo. </string>
+    <string name="allow_settings_access_ringtone_title">Pemitir a Ace Stream establecer el tono de llamada</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream necesita que concedas este permiso para establecer esta canción como tono de llamada. </string>
+    <string name="allow_settings_access_brightness_title">Permitir a Ace Stream cambiar el modo de brillo</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream necesita que concedas este permiso para cambiar el modo de brillo.</string>
+    <string name="allow_draw_overlays_title">Permitir al reproductor de Ace Stream mostrarse sobre otras apps</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream necesita que concedas este permiso para mostrar el vídeo sobre otras aplicaciones.</string>
     <string name="permission_ask_again">Conceder permiso</string>
     <string name="exit_app">Salir de VLC</string>
     <string name="exit_app_msg">¿Desea salir de VLC?</string>
@@ -532,4 +516,34 @@
     <string name="sdcard_permission_dialog_title">Ha concedido a VLC acceso de escritura a su tarjeta SD</string>
     <string name="sdcard_permission_dialog_message">VLC no puede borrar este archivo sin permiso de acceso de escritura.\nVaya a su tarjeta SD y haga clic en «Seleccionar».\nPuede que tenga que hacer clic primero en «Mostrar tarjeta SD» en el menú superior de la derecha</string>
     <string name="dialog_sd_wizard">Mostrarme</string>
+    <string name="torrent_files">Torrent archivos</string>
+    <string name="select_language">Seleccione el idioma</string>
+    <string name="enable_headset_actions_title" source="google_translate">Atajos de control remoto</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Presione dos veces en \'Play \' para pasar al siguiente y mantenga presionado para saltar a la pista anterior</string>
+    <string name="main_prefs_category" source="google_translate">Ajustes principales</string>
+    <string name="dump_media_db" source="google_translate">Volcado de base de datos de medios</string>
+    <string name="dump_media_db_summary" source="google_translate">Copiar la base de datos a la raíz de almacenamiento interno</string>
+    <string name="streams" source="google_translate">arroyos</string>
+    <string name="renderers_disconnect" source="google_translate">Desconectar</string>
+    <string name="audio_digital_failed" source="google_translate">Error al cambiar el estado de salida digital de audio</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Salida digital de audio habilitada</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Salida digital de audio desactivada</string>
+    <string name="live_streams" source="google_translate">Transmisiones en vivo</string>
+    <string name="all_live_streams" source="google_translate">Todas las transmisiones en vivo</string>
+    <string name="video_torrents" source="google_translate">Torrents de video</string>
+    <string name="audio_torrents" source="google_translate">Torrentes de audio</string>
+    <string name="all_torrents" source="google_translate">Todos los torrents</string>
+    <string name="main" source="google_translate">Principal</string>
+    <string name="media_player" source="google_translate">Reproductor multimedia</string>
+    <string name="acestream_server" source="google_translate">Servidor Ace Stream (motor)</string>
+    <string name="media_player_settings" source="google_translate">Ajustes del reproductor de medios</string>
+    <string name="acestream_server_settings" source="google_translate">Configuración del servidor Ace Stream (motor)</string>
+    <string name="sign_out" source="google_translate">desconectar</string>
+    <string name="sign_in" source="google_translate">Registrarse</string>
+    <string name="sign_in_acestream" source="google_translate">Inicia sesión con Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Inicia sesión con Google</string>
+    <string name="video_files" source="google_translate">Archivos de video</string>
+    <string name="audio_files" source="google_translate">Archivos de sonido</string>
+    <string name="retry" source="google_translate">Procesar de nuevo</string>
+    <string name="failed_to_load_web_page" source="google_translate">Error al cargar la página web</string>
 </resources>

@@ -9,10 +9,6 @@
     <string name="sortby_length">ਲੰਬਾਈ</string>
     <string name="searchable_hint">...ਖੋਜ</string>
     <string name="history">ਅਤੀਤ</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d ਨਤੀਜਾ ਮਿਲਿਆ</item>
-        <item quantity="other">%d ਨਤੀਜੇ ਮਿਲੇ</item>
-    </plurals>
     <string name="play">ਚਲਾਓ</string>
     <string name="play_from_start">ਸ਼ੁਰੂ ਤੋਂ ਚਲਾਓ</string>
     <string name="play_as_audio">ਆਡੀਓ ਵਜੋਂ ਚਲਾਓ</string>
@@ -46,14 +42,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 ਸਬ-ਫੋਲਡਰ</item>
         <item quantity="other">%d ਸਬ-ਫੋਲਡਰ</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 ਮੀਡਿਆ ਫਾਇਲ</item>
-        <item quantity="other">%d ਮੀਡਿਆ ਫਾਇਲਾਂ</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 ਵਿਡੀਓ</item>
-        <item quantity="other">%d ਵਿਡੀਓ</item>
     </plurals>
     <string name="internal_memory">ਅੰਦਰੂਨੀ ਮੈਮੋਰੀ</string>
     <string name="parent_folder">ਮੁੱਢਲੇ ਫੋਲਡਰ ਉੱਤੇ ਜਾਓ</string>
@@ -99,10 +87,6 @@
     <string name="sound_on">ਆਵਾਜ਼ ਚਾਲੂ</string>
     <string name="sound_off">ਆਵਾਜ਼ ਬੰਦ</string>
     <string name="brightness">ਚਮਕ</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 ਚੈਨਲ\n</item>
-        <item quantity="other">%1$d ਚੈਨਲ\n</item>
-    </plurals>
     <string name="track_samplerate_info">ਸੈਂਪਲ ਰੇਟ: %1$d Hz\n</string>
     <string name="track_resolution_info">ਰੈਜ਼ੋਲੂਸ਼ਨ: %1$dx%2$d\n</string>
     <string name="track_framerate_info">ਫਰੇਮ ਰੇਟ: %1$.3f\n</string>
@@ -162,9 +146,7 @@
     <string name="enable_black_theme">ਕਾਲਾ ਥੀਮ ਸਮਰੱਥ ਕਰੋ</string>
     <string name="extra_prefs_category">ਵਾਧੂ ਸੈਟਿੰਗ</string>
     <string name="interface_prefs_screen">ਇੰਟਰਫੇਸ</string>
-    <string name="interface_secondary_display_category">ਇੰਟਰਫੇਸ - ਸੈਕੰਡਰੀ ਡਿਸਪਲੇਅ</string>
     <string name="interface_other_category">ਇੰਟਰਫੇਸ - ਹੋਰ</string>
-    <string name="enable_brightness_gesture">ਚਮਕ ਜੈਸਚਰ ਸਮਰੱਥ ਕਰੋ</string>
     <string name="audio_title_alignment_default">ਡਿਫਾਲਟ</string>
     <string name="audio_title_alignment_left">ਖੱਬੇ</string>
     <string name="audio_title_alignment_centre">ਸੈਂਟਰ</string>
@@ -192,4 +174,359 @@
     <string name="send_log">ਲਾਗ ਭੇਜੋ</string>
     <!--Accessibility-->
     <!--Widget-->
+    <string name="torrent_files">Torrent ਫਾਈਲਾਂ</string>
+    <string name="select_language">ਭਾਸ਼ਾ ਚੁਣੋ</string>
+    <string name="sortby_name_desc" source="google_translate">ਨਾਮ (ਦਾਦਾ)</string>
+    <string name="sortby_artist_name" source="google_translate">ਕਲਾਕਾਰ ਦਾ ਨਾਮ</string>
+    <string name="sortby_artist_name_desc" source="google_translate">ਕਲਾਕਾਰ ਦਾ ਨਾਮ (desc)</string>
+    <string name="sortby_album_name" source="google_translate">ਐਲਬਮ ਦਾ ਨਾਮ</string>
+    <string name="sortby_album_name_desc" source="google_translate">ਐਲਬਮ ਨਾਮ (desc)</string>
+    <string name="sortby_length_desc" source="google_translate">ਲੰਬਾਈ (ਵਰਣ)</string>
+    <string name="sortby_date" source="google_translate">ਤਾਰੀਖ</string>
+    <string name="sortby_date_desc" source="google_translate">ਡੇਟਾ (ਵਰਨਾ)</string>
+    <string name="sortby_number" source="google_translate">ਨਬ ਟ੍ਰੈਕਸ</string>
+    <string name="sortby_number_desc" source="google_translate">ਨਬ ਟ੍ਰੈਕਸ (desc)</string>
+    <string name="playback" source="google_translate">ਪਲੇਬੈਕ</string>
+    <string name="playback_controls" source="google_translate">ਪਲੇਬੈਕ ਨਿਯੰਤਰਣ</string>
+    <string name="medialibrary_scan" source="google_translate">ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਸਕੈਨ</string>
+    <string name="Medialibrary_progress" source="google_translate">ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਸਕੈਨਿੰਗ ਪ੍ਰਕਿਰਤੀ ਅਪਡੇਟ</string>
+    <string name="video_app_switch_title" source="google_translate">ਪਿਛੋਕੜ / PiP ਮੋਡ</string>
+    <string name="video_app_switch_summary" source="google_translate">ਜਦੋਂ ਤੁਸੀਂ ਵੀਡਿਓ ਪਲੇਅਬੈਕ ਤੋਂ ਦੂਜੀ ਐਪਲੀਕੇਸ਼ਨ ਤੇ ਜਾਂਦੇ ਹੋ ਤਾਂ ਵੀਐੱਲ ਸੀ ਵਰਤਾਓ ਦੀ ਚੋਣ ਕਰੋ</string>
+    <string name="play_pip_title" source="google_translate">ਤਸਵੀਰ-ਇਨ-ਪਿਕਚਰ ਮੋਡ ਵਿਚ ਵੀਡੀਓ ਚਲਾਉ</string>
+    <string name="play_as_audio_background" source="google_translate">ਪਿਛੋਕੜ ਵਿੱਚ ਵੀਡੀਓ ਚਲਾਓ</string>
+    <string name="insert_next" source="google_translate">ਅਗਲੇ ਸੰਖੇਪ ਕਰੋ</string>
+    <string name="ringtone_error" source="google_translate">ਰਿੰਗਟੋਨ ਸੈੱਟ ਕਰਨ ਵੇਲੇ ਕੋਈ ਤਰੁੱਟੀ ਹੋ ਗਈ</string>
+    <string name="unknown_number" source="google_translate">ਟ੍ਰੈਕ ਦੀ ਅਗਿਆਤ ਗਿਣਤੀ</string>
+    <string name="tracks" source="google_translate">ਟ੍ਰੈਕ</string>
+    <string name="noplaylist" source="google_translate">ਕੋਈ ਪਲੇਲਿਸਟ ਨਹੀਂ ਮਿਲੀ</string>
+    <string name="shuffle_title" source="google_translate">ਸ਼ਫਲ ਮੋਡ</string>
+    <string name="shuffle" source="google_translate">ਬੰਦ ਕਰੋ</string>
+    <string name="shuffle_on" source="google_translate">ਸ਼ਫਲ ਔਨ</string>
+    <string name="repeat_title" source="google_translate">ਰੀਪੀਟ ਮੋਡ</string>
+    <string name="repeat" source="google_translate">ਕੋਈ ਵੀ ਨਹੀਂ ਦੁਹਰਾਓ</string>
+    <string name="repeat_single" source="google_translate">ਸਿੰਗਲ</string>
+    <string name="repeat_all" source="google_translate">ਸਭ ਨੂੰ ਦੁਹਰਾਓ</string>
+    <string name="firstsong" source="google_translate">ਪਲੇਲਿਸਟ ਦਾ ਪਹਿਲਾ ਗੀਤ</string>
+    <string name="lastsong" source="google_translate">ਪਲੇਲਿਸਟ ਦੇ ਆਖਰੀ ਗੀਤ</string>
+    <string name="surface_fit_screen" source="google_translate">ਫਿੱਟ ਸਕ੍ਰੀਨ</string>
+    <string name="unseekable_stream" source="google_translate">ਅਣ-ਪ੍ਰਾਪਤ ਸਟ੍ਰੀਮ</string>
+    <string name="navmenu" source="google_translate">ਨੇਵੀਗੇਸ਼ਨ ਮੀਨੂ</string>
+    <string name="advanced" source="google_translate">ਐਡਵਾਂਸਡ ਵਿਕਲਪ</string>
+    <string name="sleep_in" source="google_translate">ਵਿਚ ਸੌਣ</string>
+    <string name="sleep_cancel" source="google_translate">ਸਲੀਪ ਟਾਈਮਰ ਰੱਦ ਕਰੋ</string>
+    <string name="server_add_title" source="google_translate">ਮਨਪਸੰਦਾਂ ਲਈ ਇੱਕ ਨਵਾਂ ਸਰਵਰ ਜੋੜੋ</string>
+    <string name="server_domain_hint" source="google_translate">ਸਰਵਰ ਐਡਰੈੱਸ (ਡੋਮੇਨ ਨਾਂ ਜਾਂ ਆਈਪੀ)</string>
+    <string name="server_share_hint" source="google_translate">ਨੈੱਟਵਰਕ ਸ਼ੇਅਰ ਨਾਮ (ਜਾਂ IP ਐਡਰੈੱਸ)</string>
+    <string name="server_folder_hint" source="google_translate">ਫੋਲਡਰ ਮਾਰਗ (ਵਿਕਲਪਿਕ)</string>
+    <string name="server_username_hint" source="google_translate">ਯੂਜ਼ਰਨਾਮ</string>
+    <string name="server_servername_hint" source="google_translate">ਸੰਚਾਲਨ ਲਈ ਸਰਵਰ ਨਾਮ,</string>
+    <string name="server_port" source="google_translate">ਪੋਰਟ:</string>
+    <string name="login" source="google_translate">ਲਾਗਿਨ</string>
+    <string name="password" source="google_translate">ਪਾਸਵਰਡ</string>
+    <string name="search_results" source="google_translate">ਖੋਜ ਨਤੀਜੇ</string>
+    <string name="search_no_result" source="google_translate">ਕੋਈ ਮੀਡੀਆ ਨਹੀਂ ਮਿਲਿਆ</string>
+    <string name="favorites_add" source="google_translate">ਮਨਪਸੰਦ ਵਿੱਚ ਜੋੜੋ</string>
+    <string name="favorites_remove" source="google_translate">ਮਨਪਸੰਦ ਵਿੱਚੋਂ ਹਟਾਓ</string>
+    <string name="favorites_edit" source="google_translate">ਸੰਪਾਦਿਤ ਕਰੋ</string>
+    <string name="favorite_added" source="google_translate">ਮਨਪਸੰਦ ਵਿੱਚ ਸੰਭਾਲੇ</string>
+    <string name="favorite_removed" source="google_translate">ਮਨਪਸੰਦਾਂ ਤੋਂ ਹਟਾ ਦਿੱਤਾ ਗਿਆ</string>
+    <string name="error_message_is" source="google_translate">ਗਲਤੀ ਸੁਨੇਹਾ ਹੈ (ਕਿਰਪਾ ਕਰਕੇ ਇਸ ਨੂੰ ਡੀਬੱਗ ਕਰਨ ਵੇਲੇ ਦੱਸੋ): \ n</string>
+    <string name="playback_history_title" source="google_translate">ਪਲੇਬੈਕ ਇਤਿਹਾਸ</string>
+    <string name="playback_history_summary" source="google_translate">ਅਤੀਤ ਭਾਗ ਵਿੱਚ ਖੇਡੇ ਗਏ ਸਾਰੇ ਮੀਡੀਆ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰੋ</string>
+    <string name="playback_speed_title" source="google_translate">ਪਲੇਬੈਕ ਸਪੀਡ ਸੁਰੱਖਿਅਤ ਕਰੋ</string>
+    <string name="playback_speed_summary" source="google_translate">ਪਲੇਬੈਕ ਦੀ ਗਤੀ ਯਾਦ ਰੱਖੋ ਜੋ ਤੁਸੀਂ ਸੈਟ ਕਰਦੇ ਹੋ</string>
+    <string name="seek" source="google_translate">ਭਾਲੋ</string>
+    <string name="audio_sub" source="google_translate">ਆਡੀਓ ਟ੍ਰੈਕ \ n ਅਤੇ ਉਪਸਿਰਲੇਖ</string>
+    <string name="rearrange_order" source="google_translate">ਮੁੜ ਆਰਡਰ ਕਰੋ</string>
+    <string name="hold_to_seek" source="google_translate">ਲੱਭਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
+    <string name="about_text" source="google_translate">ਐਂਡਰਾਇਡ ™ ਲਈ ਵੀਐਲਸੀ ਵੀਐਲਸੀ ਮੀਡੀਆ ਪਲੇਅਰ ਦਾ ਪੋਰਟ ਹੈ, ਪ੍ਰਸਿੱਧ ਓਪਨ ਸੋਰਸ ਮੀਡੀਆ ਪਲੇਅਰ ਛੁਪਾਓ ™ ਵਰਜਨ ਜ਼ਿਆਦਾਤਰ ਫਾਈਲਾਂ ਅਤੇ ਨੈਟਵਰਕ ਸਟ੍ਰੀਮਸ ਨੂੰ ਪੜ੍ਹ ਸਕਦਾ ਹੈ</string>
+    <string name="compiled_by" source="google_translate">ਵੀਐਲਸੀ ਦਾ ਇਹ ਸੰਸਕਰਣ ਕੰਪਾਇਲ ਕੀਤਾ ਗਿਆ ਹੈ:</string>
+    <string name="hardware_acceleration_summary" source="google_translate">ਅਸਮਰੱਥਾ: ਬਿਹਤਰ ਸਥਿਰਤਾ. \ N ਕਰਾਸਿੰਗ: ਕਾਰਗੁਜ਼ਾਰੀ ਵਿੱਚ ਸੁਧਾਰ ਹੋ ਸਕਦਾ ਹੈ. \ N ਫੁਲ: ਪ੍ਰਦਰਸ਼ਨ ਨੂੰ ਅੱਗੇ ਵਧਾ ਸਕਦੇ ਹਨ.</string>
+    <string name="hardware_acceleration_decoding" source="google_translate">ਡੀਕੋਡਿੰਗ ਪ੍ਰਵੇਗ</string>
+    <string name="dev_hardware_decoder" source="google_translate">ਤਕਨੀਕੀ ਹਾਰਡਵੇਅਰ ਡੀਕੋਡਰ</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">ਫੋਰਸ ਹਾਰਡਵੇਅਰ ਡੀਕੋਡਰ, ਸਿਰਫ ਤਕਨੀਕੀ ਉਪਭੋਗਤਾਵਾਂ ਲਈ</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">ਆਈਓਮੈਕਸ</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-dr</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">ਮੈਡੀਕੋਡੈੱਕ</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">mediacodec-ਡਾ</string>
+    <string name="screen_orientation_reverse_portrait" source="google_translate">ਰਿਵਰਸ ਪੋਰਟਰੇਟ</string>
+    <string name="screen_orientation_reverse_landscape" source="google_translate">ਰਿਵਰਸ ਲੈਂਡਸਪਲੇਸ</string>
+    <string name="enable_black_theme_summary" source="google_translate">ਘੱਟ ਰੋਸ਼ਨੀ ਮਾਹੌਲ ਵਿੱਚ ਬਿਹਤਰ ਆਰਾਮ ਲਈ ਇੰਟਰਫੇਸ ਰੰਗ ਬਦਲੋ.</string>
+    <string name="subtitle_text_encoding" source="google_translate">ਉਪਸਿਰਲੇਖ ਟੈਕਸਟ ਐਨਕੋਡਿੰਗ</string>
+    <string name="daynight_title" source="google_translate">ਦਿਨ ਰਾਤ ਮੋਡ</string>
+    <string name="daynight_summary" source="google_translate">ਆਟੋਮੈਟਿਕ ਸਹੀ ਸਮੇਂ ਨਾਈਟ ਮੋਡ ਤੇ ਸਵਿਚ ਕਰੋ</string>
+    <string name="interface_gui" source="google_translate">ਡਿਸਪਲੇ ਕਰੋ</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">ਸੈਕੰਡਰੀ ਡਿਸਪਲੇ</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">ਸੈੱਟਿੰਗਸ ਜਦੋਂ ਸੈਕੰਡਰੀ ਡਿਸਪਲੇਸ ਕਨੈਕਟ ਕੀਤੇ ਜਾਂਦੇ ਹਨ (HDMI / Chromecast).</string>
+    <string name="enable_clone_mode" source="google_translate">ਕਲੋਨ ਨੂੰ ਤਰਜੀਹ ਦਿਓ</string>
+    <string name="enable_clone_mode_summary" source="google_translate">ਰਿਮੋਟ ਕੰਟਰੋਲ ਤੋਂ ਬਿਨਾਂ ਡਿਵਾਈਸ ਸਕ੍ਰੀਨ ਕਲੋਨ ਕਰੋ</string>
+    <string name="video_prefs_category" source="google_translate">ਵੀਡੀਓ</string>
+    <string name="video_min_group_length_title" source="google_translate">ਗਰੁੱਪ ਦੇ ਵੀਡੀਓਜ਼</string>
+    <string name="video_min_group_length_summary" source="google_translate">ਵੀਡੀਓਜ਼ ਨੂੰ ਸਮੂਹਿਕ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ਜੇ ਉਹਨਾਂ ਦੀ ਪਹਿਲੀ ਅੱਖਰ ਇਕੋ ਜਿਹੀਆਂ ਹੁੰਦੀਆਂ ਹਨ.</string>
+    <string name="video_min_group_length_disable" source="google_translate">ਅਸਮਰੱਥ ਕਰੋ</string>
+    <string name="video_min_group_length_first" source="google_translate">ਸਿਰਫ ਪਹਿਲਾ ਅੱਖਰ</string>
+    <string name="video_min_group_length_short" source="google_translate">ਛੋਟੇ ਅੱਖਰਾਂ ਦੀ ਗਿਣਤੀ (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">ਲੰਬਾਈ ਦੀ ਗਿਣਤੀ (9)</string>
+    <string name="media_fast_seek" source="google_translate">ਫਾਸਟ ਲੌਕ ਔਪਸ਼ਨ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ</string>
+    <string name="media_seen" source="google_translate">ਵੇਖਿਆ ਵੀਡੀਓ ਮਾਰਕਰ ਵੇਖੋ</string>
+    <string name="media_seen_summary" source="google_translate">ਇੱਕ ਵੀਡਿਓ ਦੇ ਤੌਰ ਤੇ ਮਾਰਕ ਕਰੋ ਜਦੋਂ ਤੁਸੀਂ ਇਸਨੂੰ ਅੰਤ ਤੱਕ ਖੇਡਦੇ ਹੋ</string>
+    <string name="force_list_portrait" source="google_translate">ਪੋਰਟਰੇਟ ਮੋਡ ਵਿੱਚ ਕੋਈ ਗਰਿੱਡ ਨਹੀਂ</string>
+    <string name="force_list_portrait_summary" source="google_translate">ਪੋਰਟਰੇਟ ਮੋਡ ਵਿੱਚ ਗਰਿੱਡ ਦੀ ਬਜਾਏ ਸੂਚੀ ਵਿੱਚ ਵਿਡੀਓਜ਼ ਦਿਖਾਉ</string>
+    <string name="force_play_all_summary" source="google_translate">ਤੁਹਾਡੇ ਦੁਆਰਾ ਕਲਿੱਕ ਕੀਤੇ ਇੱਕ ਨਾਲ ਸ਼ੁਰੂ ਹੋਣ ਵਾਲੇ ਸਾਰੇ ਵੀਡੀਓਜ਼ ਚਲਾਉ</string>
+    <string name="force_play_all_title" source="google_translate">ਵੀਡੀਓ ਪਲੇਲਿਸਟ ਮੋਡ</string>
+    <string name="save_brightness_summary" source="google_translate">ਵੀਡੀਓ ਪਲੇਅਰ ਵਿਚ ਚਮਕ ਪੱਧਰ ਨੂੰ ਯਾਦ ਰੱਖੋ</string>
+    <string name="save_brightness_title" source="google_translate">ਵੀਡੀਓ ਲਈ ਚਮਕ ਪੱਧਰ ਸੁਰੱਖਿਅਤ ਕਰੋ</string>
+    <string name="save_audiodelay_summary" source="google_translate">ਹਰੇਕ ਵੀਡੀਓ ਦੇ ਲਈ ਵਿਅਕਤੀਗਤ ਔਡੀਓ ਦੇਰੀ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰੋ</string>
+    <string name="save_audiodelay_title" source="google_translate">ਔਡੀਓ ਦੇਰੀ ਸੁਰੱਖਿਅਤ ਕਰੋ</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">ਚਮਕ ਸੰਕੇਤ</string>
+    <string name="enable_brightness_gesture_summary" source="google_translate">ਵਿਡੀਓ ਪਲੇਬੈਕ ਦੌਰਾਨ ਸੰਕੇਤ ਦੁਆਰਾ ਨਿਯੰਤਰਣ ਚਮਕ</string>
+    <string name="enable_volume_gesture_title" source="google_translate">ਵਾਲੀਅਮ ਸੰਕੇਤ</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">ਵੀਡੀਓ ਪਲੇਬੈਕ ਦੇ ਦੌਰਾਨ ਸੰਕੇਤ ਦੁਆਰਾ ਵੋਲਯੂਮ ਨੂੰ ਕੰਟ੍ਰੋਲ ਕਰੋ</string>
+    <string name="enable_seek_buttons" source="google_translate">ਕੋਸ਼ਿਸ਼ ਬਟਨ</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">ਵੀਡੀਓ ਇੰਟਰਫੇਸ ਤੇ ਰਿਵਾਇੰਡ ਅਤੇ ਫਾਰਵਰਡ ਬਟਨ ਦਿਖਾਓ</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">ਲੱਭਣ ਲਈ ਡਬਲ ਟੈਪ ਕਰੋ</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">ਸਕ੍ਰੀਨ ਦੇ ਕਿਨਾਰੇ ਤੇ 10 ਸਕਿੰਟ ਲੰਘਣ ਲਈ ਡਬਲ ਟੈਪ ਕਰੋ</string>
+    <string name="popup_keepscreen_title" source="google_translate">ਪੌਪ-ਅਪ ਮੋਡ \'ਤੇ ਸਕ੍ਰੀਨ ਚਾਲੂ ਰੱਖੋ</string>
+    <string name="popup_keepscreen_summary" source="google_translate">ਪੌਪ-ਅਪ ਨੂੰ ਦਿਖਾਉਂਦੇ ਹੋਏ ਹਮੇਸ਼ਾਂ ਸਕ੍ਰੀਨ ਚਾਲੂ ਰੱਖੋ, ਭਾਵੇਂ ਵਿਡੀਓ ਰੁਕਿਆ ਹੋਵੇ</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">ਲੁਕੀਆਂ ਫਾਈਲਾਂ ਵੇਖੋ</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">ਬ੍ਰਾਉਜ਼ਰ ਵਿਚ ਲੁਕੀਆਂ ਫਾਈਲਾਂ ਵੇਖੋ</string>
+    <string name="subtitles_prefs_category" source="google_translate">ਉਪਸਿਰਲੇਖ</string>
+    <string name="subtitles_size_title" source="google_translate">ਉਪਸਿਰਲੇਖ ਦਾ ਆਕਾਰ</string>
+    <string name="subtitles_size_small" source="google_translate">ਛੋਟਾ</string>
+    <string name="subtitles_size_normal" source="google_translate">ਸਧਾਰਨ</string>
+    <string name="subtitles_size_big" source="google_translate">ਵੱਡਾ</string>
+    <string name="subtitles_size_huge" source="google_translate">ਵੱਡਾ</string>
+    <string name="subtitles_color_title" source="google_translate">ਉਪਸਿਰਲੇਖ ਰੰਗ</string>
+    <string name="subtitles_color_white" source="google_translate">ਸਫੈਦ</string>
+    <string name="subtitles_color_gray" source="google_translate">ਸਲੇਟੀ</string>
+    <string name="subtitles_color_pink" source="google_translate">ਗੁਲਾਬੀ</string>
+    <string name="subtitles_color_blue" source="google_translate">ਨੀਲੇ</string>
+    <string name="subtitles_color_yellow" source="google_translate">ਪੀਲਾ</string>
+    <string name="subtitles_color_green" source="google_translate">ਗ੍ਰੀਨ</string>
+    <string name="subtitles_background_title" source="google_translate">ਉਪਸਿਰਲੇਖਾਂ ਦੀ ਪਿੱਠਭੂਮੀ</string>
+    <string name="subtitles_bold_title" source="google_translate">ਬੋਡ ਉਪਸਿਰਲੇਖ</string>
+    <string name="subtitles_autoload_title" source="google_translate">ਆਟੋ ਲੋਡ ਉਪਸਿਰਲੇਖ</string>
+    <string name="audio_prefs_category" source="google_translate">ਆਡੀਓ</string>
+    <string name="lockscreen_cover_title" source="google_translate">ਲਾਕਸਕ੍ਰੀਨ ਤੇ ਮੀਡੀਆ ਕਵਰ</string>
+    <string name="lockscreen_cover_summary" source="google_translate">ਜਦੋਂ ਉਪਲਬਧ ਹੋਵੇ, ਤਾਂ ਮੌਜੂਦਾ ਮਾਧਿਅਮ ਕਵਰ ਆਰਟ ਨੂੰ ਲਾਕਸਕ੍ਰੀਨ ਵਾਲਪੇਪਰ ਵੱਢੋ</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">ਮੌਜੂਦਾ ਪਲੇਲਿਸਟ ਆਟੋ ਸਕ੍ਰੌਲਿੰਗ ਨੂੰ ਐਨੀਮੇਟ ਕਰੋ</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">ਮੀਡੀਆ ਟ੍ਰਾਂਜਿਸ਼ਨ ਤੇ ਸਕਰੋਲਿੰਗ ਨੂੰ ਐਨੀਮੇਟ ਕਰੋ</string>
+    <string name="audio_title_alignment" source="google_translate">ਔਡੀਓ ਸਿਰਲੇਖ ਅਨੁਕੂਲਤਾ</string>
+    <string name="audio_title_alignment_marquee" source="google_translate">ਮਾਰਕੀ</string>
+    <string name="audio_save_repeat_title" source="google_translate">ਦੁਹਰਾਓ ਮੋਡ ਸੁਰੱਖਿਅਤ ਕਰੋ</string>
+    <string name="audio_save_repeat_summary" source="google_translate">ਆਡੀਓ ਪਲੇਲਿਸਟ ਲੋਡ ਕਰਨ ਵੇਲੇ ਦੁਹਰਾਓ ਮੋਡ ਯਾਦ ਰੱਖੋ</string>
+    <string name="audio_boost_title" source="google_translate">ਆਡੀਓ-ਬੂਸਟ</string>
+    <string name="headset_prefs_category" source="google_translate">ਹੈਡਸੈਟ</string>
+    <string name="enable_headset_detection" source="google_translate">ਹੈਡਸੈਟ ਲੱਭੋ</string>
+    <string name="enable_headset_detection_summary" source="google_translate">ਹੈੱਡਸੈੱਟ ਸੰਮਿਲਨ ਅਤੇ ਹਟਾਉਣ ਦੀ ਖੋਜ</string>
+    <string name="enable_headset_actions_title" source="google_translate">ਰਿਮੋਟ ਕੰਟਰੋਲ ਸ਼ਾਰਟਕੱਟ</string>
+    <string name="enable_headset_actions_summary" source="google_translate">ਪਿਛਲੇ ਟ੍ਰੈਕ ਤੇ ਜਾਣ ਲਈ ਅਗਲਾ ਅਤੇ ਲੰਬਾ ਦਬਾਓ ਕਰਨ ਲਈ \'ਚਲਾਓ \' ਤੇ ਡਬਲ ਦਬਾਓ</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">ਹੈਡਸੈਟ ਸੰਮਿਲਨ ਤੇ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰੋ</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">ਹੋਰ ਰੋਕੋ</string>
+    <string name="enable_steal_remote_control" source="google_translate">ਵਿਸ਼ੇਸ਼ ਹੈੱਡਸੈੱਟ ਰਿਮੋਟ ਕੰਟਰੋਲ</string>
+    <string name="enable_steal_remote_control_summary" source="google_translate">ਹੋਰ ਐਪਸ ਤੋਂ ਰਿਮੋਟ ਕੰਟ੍ਰੋਲ ਨੂੰ ਚੋਰੀ ਕਰਦੇ ਹੋਏ ਟਕਰਾਅ ਤੋਂ ਬਚੋ ਇਹ ਐਚਟੀਐਸ ਫੋਨ \'ਤੇ ਡਬਲ ਕਲਿਕ\' ਤੇ ਡਾਇਲ ਕਰਨ ਤੋਂ ਬਚਾਉਂਦਾ ਹੈ.</string>
+    <string name="aout_summary" source="google_translate">ਉਹ ਵਿਧੀ ਬਦਲੋ ਜਿਸ ਨੂੰ VLC ਆਉਟਪੁਟ ਔਡੀਓ ਲਈ ਵਰਤਦਾ ਹੈ.</string>
+    <string name="audio_ducking_title" source="google_translate">ਸੂਚਨਾਵਾਂ ਤੇ ਲੋਅਰ ਵੀਐਲਸੀ ਵਾਲੀਅਮ</string>
+    <string name="audio_ducking_summary" source="google_translate">ਆਡੀਓ ਸੂਚਨਾਵਾਂ, ਨੇਵੀਗੇਸ਼ਨ ਨਿਰਦੇਸ਼ਾਂ ਜਾਂ ਸਹਾਇਕ ਗੱਲਾਂ ਸੁਣਨ ਵਿੱਚ ਸਹਾਇਤਾ ਕਰਦਾ ਹੈ</string>
+    <string name="casting_category" source="google_translate">ਕਾਸਟਿੰਗ</string>
+    <string name="casting_passthrough_title" source="google_translate">ਔਡੀਓ ਪਾਸਥਰੋ</string>
+    <string name="casting_passthrough_summary" source="google_translate">ਆਪਣੇ ਟੀਵੀ ਨੂੰ ਆਡੀਓ ਰੇਂਡਰ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਦਿਓ</string>
+    <string name="casting_conversion_quality_title" source="google_translate">ਪਰਿਵਰਤਨ ਗੁਣਵੱਤਾ</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">ਰਿਮੋਟ ਸਕ੍ਰੀਨ ਤੇ ਕਾਸਟ ਕਰਨ ਵੇਲੇ ਪਰਿਵਰਤਨ ਕੁਆਲਿਟੀ ਚੁਣੋ</string>
+    <string name="casting_quality_high" source="google_translate">ਉੱਚ</string>
+    <string name="casting_quality_medium" source="google_translate">ਮੱਧਮ</string>
+    <string name="casting_quality_low" source="google_translate">ਘੱਟ</string>
+    <string name="casting_quality_lowcpu" source="google_translate">ਸਭ ਤੋਂ ਘੱਟ</string>
+    <string name="cast_performance_warning" source="google_translate">ਇਸ ਵੀਡੀਓ ਨੂੰ ਕਾਸਟ ਕਰਨ ਲਈ ਪਰਿਵਰਤਨ ਦੀ ਲੋੜ ਹੈ ਇਹ ਪਰਿਵਰਤਨ ਸਾਰੀਆਂ ਉਪਲਬਧ ਸ਼ਕਤੀਆਂ ਦੀ ਵਰਤੋਂ ਕਰ ਸਕਦਾ ਹੈ ਅਤੇ ਤੁਹਾਡੀ ਬੈਟਰੀ ਨੂੰ ਜਲਦੀ ਨਾਲ ਨਿਕਾਸ ਕਰ ਸਕਦਾ ਹੈ</string>
+    <string name="artists_show_all_title" source="google_translate">ਸਾਰੇ ਕਲਾਕਾਰਾਂ ਨੂੰ ਦਿਖਾਓ</string>
+    <string name="artists_show_all_summary" source="google_translate">ਕਲਾਕਾਰਾਂ ਦੀ ਸੂਚੀ ਵਿਚ ਸਾਰੇ ਕਲਾਕਾਰਾਂ ਨੂੰ ਦਿਖਾਓ, ਨਾ ਸਿਰਫ ਐਲਬਮਾਂ ਦੇ ਕਲਾਕਾਰ</string>
+    <string name="extensions_prefs_category" source="google_translate">ਐਕਸਟੈਂਸ਼ਨਾਂ</string>
+    <string name="extensions_enable_category" source="google_translate">ਸਮਰੱਥ ਬਣਾਉਣ ਲਈ ਐਕਸਟੈਂਸ਼ਨ ਚੁਣੀ ਗਈ</string>
+    <string name="extensions_empty" source="google_translate">ਕੋਈ ਐਕਸਟੈਂਸ਼ਨ ਨਹੀਂ ਮਿਲਿਆ</string>
+    <string name="extension_prefs_activation_title" source="google_translate">ਸਰਗਰਮ ਕਰੋ</string>
+    <string name="android_auto" source="google_translate">ਛੁਪਾਓ ਕਾਰ</string>
+    <string name="controls_prefs_category" source="google_translate">ਨਿਯੰਤਰਣ</string>
+    <string name="chroma_format" source="google_translate">ਜ਼ੋਰਦਾਰ ਵੀਡੀਓ chroma</string>
+    <string name="chroma_format_summary" source="google_translate">RGB 32-bit: ਡਿਫੌਲਟ chroma \ nRGB 16-bit: ਵਧੀਆ ਕਾਰਗੁਜ਼ਾਰੀ ਪਰ ਘੱਟ ਕੁਆਲਿਟੀ \ nYUV: ਵਧੀਆ ਕਾਰਗੁਜ਼ਾਰੀ ਪਰ ਇਹ ਸਾਰੀਆਂ ਡਿਵਾਈਸਾਂ ਤੇ ਕੰਮ ਨਹੀਂ ਕਰਦੀ. ਸਿਰਫ Android 2.3 ਅਤੇ ਬਾਅਦ ਵਾਲੇ.</string>
+    <string name="deblocking" source="google_translate">ਫਿਲਟਰ ਸੈਟਿੰਗਜ਼ ਨੂੰ ਅਨਲੌਕ ਕਰ ਰਿਹਾ ਹੈ</string>
+    <string name="deblocking_summary" source="google_translate">Deblocking ਫਿਲਟਰ ਸੈਟਿੰਗਜ਼ ਨੂੰ ਬਦਲੋ. ਵੀਡੀਓ ਗੁਣਵੱਤਾ ਨੂੰ ਸੁਧਾਰ ਸਕਦੇ ਹੋ ਸਿਰਫ ਤਕਨੀਕੀ ਉਪਭੋਗਤਾ</string>
+    <string name="deblocking_always" source="google_translate">ਪੂਰੀ deblocking (ਹੌਲੀ)</string>
+    <string name="deblocking_nonref" source="google_translate">ਦਰਮਿਆਨੀ deblocking</string>
+    <string name="deblocking_nonkey" source="google_translate">ਘੱਟ deblocking</string>
+    <string name="deblocking_all" source="google_translate">ਕੋਈ deblocking (ਸਭ ਤੋਂ ਤੇਜ਼)</string>
+    <string name="enable_frame_skip" source="google_translate">ਫ੍ਰੇਮ ਨੂੰ ਸਮਰੱਥ ਕਰੋ ਛੱਡੋ</string>
+    <string name="enable_frame_skip_summary" source="google_translate">ਸਪੀਡ ਡਿਡੀਕੋਡ ਵਧਾਓ ਪਰ ਵੀਡੀਓ ਦੀ ਗੁਣਵੱਤਾ ਘੱਟ ਸਕਦੀ ਹੈ</string>
+    <string name="enable_time_stretching_audio" source="google_translate">ਟਾਈਮ-ਸਟ੍ਰੇਚਿੰਗ ਆਡੀਓ</string>
+    <string name="enable_time_stretching_audio_summary" source="google_translate">ਪਿਚ ਨੂੰ ਬਿਨਾਂ ਬਦਲੇ ਆਡੀਓ ਨੂੰ ਹੌਲੀ ਕਰੋ ਅਤੇ ਹੌਲੀ ਕਰੋ (ਇੱਕ ਤੇਜ਼ ਡਿਵਾਈਸ ਦੀ ਲੋੜ ਹੈ).</string>
+    <string name="main_prefs_category" source="google_translate">ਮੁੱਖ ਸੈਟਿੰਗਜ਼</string>
+    <string name="save_video_none" source="google_translate">ਗਤੀ ਨਾ ਬਚਾਓ</string>
+    <string name="save_video_session" source="google_translate">ਸੈਸ਼ਨ ਦੌਰਾਨ ਸਪੀਡ ਸੁਰੱਖਿਅਤ ਕਰੋ</string>
+    <string name="save_video_always" source="google_translate">ਸੈਸ਼ਨਾਂ ਵਿੱਚ ਸਪੀਡ ਸੁਰੱਖਿਅਤ ਕਰੋ</string>
+    <string name="auto_rescan" source="google_translate">ਆਟੋ ਮੁੜ ਜਾਂਚ</string>
+    <string name="auto_rescan_summary" source="google_translate">ਐਪਲੀਕੇਸ਼ਨ ਸਟਾਰਟਅੱਪ ਤੇ ਨਵੇਂ ਜਾਂ ਮਿਟਾਏ ਗਏ ਮੀਡੀਆ ਲਈ ਆਟੋਮੈਟਿਕਲੀ ਸਕੈਨ ਡਿਵਾਈਸ</string>
+    <string name="dump_media_db" source="google_translate">ਡੰਪ ਮੀਡੀਆ ਡਾਟਾਬੇਸ</string>
+    <string name="dump_media_db_summary" source="google_translate">ਡਾਟਾਬੇਸ ਨੂੰ ਅੰਦਰੂਨੀ ਸਟੋਰੇਜ ਰੂਟ ਤੇ ਨਕਲ ਕਰੋ</string>
+    <string name="clear_media_db_summary" source="google_translate">ਡਾਟਾ ਸਾਫ ਕਰਨ ਲਈ ਐਂਡ੍ਰਾਇਡ VLC ਦੀ ਜਾਣਕਾਰੀ ਐਕਸੈਸ ਕਰੋ</string>
+    <string name="network_caching_summary" source="google_translate">ਬਫਰ ਨੈਟਵਰਕ ਮੀਡੀਆ (ਮਿ.ਸ.) ਵਿੱਚ ਸਮਾਂ. ਹਾਰਡਵੇਅਰ ਡੀਕੋਡਿੰਗ ਨਾਲ ਕੰਮ ਨਹੀਂ ਕਰਦਾ ਰੀਸੈਟ ਕਰਨ ਲਈ ਖਾਲੀ ਛੱਡੋ.</string>
+    <string name="resume_playback_title" source="google_translate">ਇੱਕ ਕਾਲ ਦੇ ਬਾਅਦ ਪਲੇਬੈਕ ਨੂੰ ਮੁੜ ਅਰੰਭ ਕਰੋ</string>
+    <string name="resume_playback_summary" source="google_translate">ਹੋਰ ਵਿਰਾਮ ਵਿੱਚ ਰਹੋ</string>
+    <string name="network_caching_popup" source="google_translate">ਇਹ ਮੁੱਲ 0 ਅਤੇ 6000 ms ਵਿਚਕਾਰ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ</string>
+    <string name="enable_verbose_mode_summary" source="google_translate">ਵਰਬੋਸਟੀ ਵਧਾਓ (logcat)</string>
+    <string name="log_service_title" source="google_translate">ਵੀਐਲਸੀ ਰਿਕਾਰਡ ਰਿਕਾਰਡਿੰਗ</string>
+    <string name="log_service_text" source="google_translate">ਲਾਗ ਕੰਨਸੋਲ ਖੋਲ੍ਹੋ</string>
+    <string name="dump_logcat" source="google_translate">ਡ੍ਰੌਪ ਲੌਂਪਟ ਲੌਗ</string>
+    <string name="dump_logcat_failure" source="google_translate">ਲਾਪਕਟ ਡੰਪ ਕਰਨ ਵਿੱਚ ਅਸਫਲ</string>
+    <string name="serious_crash" source="google_translate">ਬਦਕਿਸਮਤੀ ਨਾਲ, ਇੱਕ ਗੰਭੀਰ ਗਲਤੀ ਆਈ ਹੈ ਅਤੇ ਵੀਐਲਸੀ ਨੂੰ ਬੰਦ ਕਰਨਾ ਪਿਆ ਸੀ.</string>
+    <string name="help_us_send_log" source="google_translate">ਹੇਠ ਦਿੱਤੀ ਕਰੈਸ਼ ਲਾਗ ਭੇਜ ਕੇ ਵੀ.ਐਲ. ਸੀ.</string>
+    <string name="sending_log" source="google_translate">ਲੌਗ ਭੇਜ ਰਿਹਾ ਹੈ ...</string>
+    <string name="drawer_open" source="google_translate">ਓਪਨ ਨੈਵੀਗੇਸ਼ਨ ਡ੍ਰਾਅਰ</string>
+    <string name="drawer_close" source="google_translate">ਨੇਵੀਗੇਸ਼ਨ ਦਰਾਜ਼ ਬੰਦ ਕਰੋ</string>
+    <string name="network_browsing" source="google_translate">ਸਥਾਨਕ ਨੈਟਵਰਕ</string>
+    <string name="browsing" source="google_translate">ਬਰਾਊਜ਼ਿੰਗ</string>
+    <string name="file_size" source="google_translate">ਫਾਈਲ ਆਕਾਰ:</string>
+    <string name="audio_delay" source="google_translate">ਔਡੀਓ ਦੇਰੀ</string>
+    <string name="spu_delay" source="google_translate">ਉਪਸਿਰਲੇਖ ਦੇਰੀ</string>
+    <string name="sleep_time_not_set" source="google_translate">ਕੋਈ ਵੀ ਸੈਟ ਨਹੀਂ</string>
+    <string name="network_shares_discovery" source="google_translate">ਨੈਟਵਰਕ ਸ਼ੇਅਰ ਦੀ ਖੋਜ ਕਰ ਰਿਹਾ ਹੈ ...</string>
+    <string name="network_empty" source="google_translate">ਇਹ ਡਾਇਰੈਕਟਰੀ ਖਾਲੀ ਹੈ.</string>
+    <string name="network_connection_needed" source="google_translate">ਸਥਾਨਕ ਨੈਟਵਰਕ ਤੇ ਕੋਈ ਕਨੈਕਸ਼ਨ ਨਹੀਂ.</string>
+    <string name="search_hint" source="google_translate">ਖੋਜ ਮੀਡੀਆ</string>
+    <string name="search_list_hint" source="google_translate">ਮੌਜੂਦਾ ਸੂਚੀ ਵਿੱਚ ਮੀਡੀਆ ਖੋਜੋ</string>
+    <string name="search_global" source="google_translate">ਸਾਰੇ ਮੀਡੀਆ ਲਾਇਬਰੇਰੀ ਵਿੱਚ ਖੋਜੋ</string>
+    <string name="directory_show_medialib" source="google_translate">MediaLib ਵਿੱਚ ਦਿਖਾਓ</string>
+    <string name="directory_hide_medialib" source="google_translate">MediaLib ਤੋਂ ਲੁਕਾਓ</string>
+    <string name="playlist_save" source="google_translate">ਪਲੇਲਿਸਟ ਸੁਰੱਖਿਅਤ ਕਰੋ</string>
+    <string name="playlist_name_hint" source="google_translate">ਪਲੇਲਿਸਟ ਦਾ ਨਾਮ</string>
+    <string name="go_to_chapter" source="google_translate">ਅਧਿਆਇ ਤੇ ਜਾਓ ...</string>
+    <string name="chapter" source="google_translate">ਅਧਿਆਇ</string>
+    <string name="resume_from_position" source="google_translate">ਆਖਰੀ ਸਥਿਤੀ ਤੋਂ ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ</string>
+    <string name="confirm_resume" source="google_translate">ਆਖਰੀ ਸਥਿਤੀ ਤੋਂ ਮੁੜ ਸ਼ੁਰੂ ਕਰੀਏ?</string>
+    <string name="confirm_resume_title" source="google_translate">ਮੁੜ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਪੁਸ਼ਟੀ ਕਰੋ</string>
+    <string name="confirm_resume_summary" source="google_translate">ਜੇ ਕਿਰਿਆਸ਼ੀਲ ਹੋਵੇ ਤਾਂ ਤੁਹਾਨੂੰ ਇਹ ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ ਕਿਹਾ ਜਾਵੇਗਾ ਕਿ ਇਕ ਵੀਡੀਓ ਨੂੰ ਆਖਰੀ ਪੋਜੀਸ਼ਨ ਤੋਂ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਿਵੇਂ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ</string>
+    <string name="directory_empty" source="google_translate">ਡਾਇਰੈਕਟਰੀ ਖਾਲੀ ਹੈ</string>
+    <string name="player_touch_title" source="google_translate">ਵੀਡੀਓ ਲਈ ਟਚ ਕੰਟਰੋਲ</string>
+    <string name="player_touch_enable_all" source="google_translate">ਟਚ ਕੰਟਰੋਲ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ</string>
+    <string name="player_touch_disable_brightness" source="google_translate">ਚਮਕ ਨਿਯੰਤਰਣ ਅਯੋਗ ਕਰੋ</string>
+    <string name="player_touch_disable_all" source="google_translate">ਸਾਰੇ ਟਚ ਕੰਟਰੋਲ ਅਯੋਗ ਕਰੋ</string>
+    <string name="tv_ui_title" source="google_translate">Android TV ਇੰਟਰਫੇਸ</string>
+    <string name="tv_ui_summary" source="google_translate">UI ਤੋਂ ਟੀਵੀ ਅਨੁਕੂਲ ਥੀਮ ਬਦਲੋ</string>
+    <string name="medialibrary" source="google_translate">ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ</string>
+    <string name="medialibrary_directories" source="google_translate">ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਫੋਲਡਰ</string>
+    <string name="more_actions" source="google_translate">ਹੋਰ ਕਿਰਿਆਵਾਂ</string>
+    <string name="move" source="google_translate">ਮੂਵ ਕਰੋ</string>
+    <string name="back_quit_lock" source="google_translate">ਵੀਡੀਓ ਛੱਡਣ ਲਈ ਦੁਬਾਰਾ ਪਿੱਛੇ ਦਬਾਓ</string>
+    <string name="playlist_deleted" source="google_translate">ਪਲੇਲਿਸਟ ਹਟਾਈ ਗਈ</string>
+    <string name="file_deleted" source="google_translate">ਫਾਇਲ ਮਿਟਾਈ ਗਈ</string>
+    <string name="no_subs_found" source="google_translate">ਇਸ ਡਾਇਰੈਕਟਰੀ ਵਿੱਚ ਕੋਈ ਉਪਸਿਰਲੇਖ ਨਹੀਂ</string>
+    <string name="music_now_playing" source="google_translate">ਹੁਣ ਚੱਲ ਰਿਹਾ ਹੈ</string>
+    <string name="widget_name_w" source="google_translate">ਵੀਐਲਸੀ ਵਾਈਟ ਵਿਜੇਟ</string>
+    <string name="widget_name_b" source="google_translate">ਵੀਐਲਸੀ ਡਾਰਕ ਵਿਜੇਟ</string>
+    <string name="allow_storage_access_title" source="google_translate">ਏਸ ਸਟ੍ਰੀਮ ਨੂੰ ਵੀਡੀਓ ਅਤੇ ਆਡੀਓ ਫਾਈਲਾਂ ਤੱਕ ਪਹੁੰਚ ਦੀ ਆਗਿਆ ਦਿਓ</string>
+    <string name="allow_storage_access_description" source="google_translate">ACE ਸਟ੍ਰੀਮ ਨੂੰ ਇਸ ਡਿਵਾਈਸ ਤੇ ਮੀਡੀਆ ਫਾਈਲਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਲਈ ਇਸ ਅਨੁਮਤੀ ਨੂੰ ਗ੍ਰਹਿਣ ਕਰਨ ਦੀ ਲੋੜ ਹੈ.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">ਰਿੰਗਟੋਨ ਸੈੱਟ ਕਰਨ ਲਈ ਐਸੇ ਸਟ੍ਰੀਮ ਨੂੰ ਅਨੁਮਤੀ ਦਿਓ</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">ਐੱਸ ਸਟ੍ਰੀਮ ਦੀ ਲੋੜ ਹੈ ਕਿ ਤੁਸੀਂ ਇਸ ਗੰਗ ਨੂੰ ਆਪਣੇ ਰਿੰਗਟੋਨ ਵੱਜੋਂ ਸਥਾਪਿਤ ਕਰਨ ਲਈ ਇਸ ਅਨੁਮਤੀ ਨੂੰ ਗ੍ਰਹਿਣ ਕਰੋ.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">ਚਮਕ ਮੋਡ ਨੂੰ ਬਦਲਣ ਲਈ Ace ਸਟ੍ਰੀਮ ਨੂੰ ਅਨੁਮਤੀ ਦਿਓ</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">ACE ਸਟ੍ਰੀਮ ਨੂੰ ਤੁਹਾਡੀ ਚਮਕ ਮੋਡ ਨੂੰ ਬਦਲਣ ਲਈ ਇਸ ਅਨੁਮਤੀ ਨੂੰ ਗ੍ਰਹਿਣ ਕਰਨ ਦੀ ਲੋੜ ਹੈ.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">ਏਕਸ ਸਟ੍ਰੀਮ ਪਲੇਅਰ ਨੂੰ ਹੋਰ ਐਪਸ ਤੇ ਪੌਪਅਪ ਦੀ ਆਗਿਆ ਦਿਓ</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">ACE ਸਟ੍ਰਿੱਡ ਨੂੰ ਇਹ ਉਪਯੋਗ ਕਰਨ ਦੀ ਜ਼ਰੂਰਤ ਹੁੰਦੀ ਹੈ ਕਿ ਤੁਹਾਡੇ ਅਨੁਪ੍ਰਯੋਗਾਂ ਨੂੰ ਹੋਰ ਐਪਲੀਕੇਸ਼ਨਾਂ ਉੱਤੇ ਇੱਕ ਪੌਪਅਪ ਵਿੱਚ ਡਿਸਪਲੇ ਕਰੋ.</string>
+    <string name="permission_ask_again" source="google_translate">ਅਨੁਮਤੀ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ</string>
+    <string name="exit_app" source="google_translate">VLC ਬੰਦ ਕਰੋ</string>
+    <string name="exit_app_msg" source="google_translate">ਕੀ ਤੁਸੀਂ ਨਿਸ਼ਚਤ ਹੋ ਕਿ ਤੁਸੀਂ ਵੀਐਲਸੀ ਛੱਡਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
+    <string name="fastscroller_track" source="google_translate">ਫਾਸਟ ਸਕ੍ਰੋਲਰ ਟ੍ਰੈਕ</string>
+    <string name="fastscroller_handle" source="google_translate">ਫਾਸਟ ਸਕ੍ਰੋਲਰ ਹੈਂਡਲ</string>
+    <string name="plugins" source="google_translate">ਪਲੱਗਇਨ</string>
+    <string name="download_on_device" source="google_translate">ਡਾਊਨਲੋਡ ਕਰੋ</string>
+    <string name="extension_empty" source="google_translate">ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਨ ਲਈ ਕੋਈ ਆਈਟਮ ਨਹੀਂ, ਕੁਝ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਆਪਣੀ ਐਕਸਟੈਂਸ਼ਨ ਸੈਟਿੰਗਜ਼ ਤੇ ਜਾਓ.</string>
+    <string name="opengl_title" source="google_translate">ਓਪਨਜੀਲ ES2 ਉਪਯੋਗ</string>
+    <string name="opengl_summary" source="google_translate">ਡਿਫੌਲਟ ਰੂਪ ਵਿੱਚ, ਓਪਨਜੀਲ ਈ ਐਸ 2 ਨੂੰ ਸਾਫਟਵੇਅਰ ਡੀਕੋਡਿੰਗ ਅਤੇ ਹਾਰਡਵੇਅਰ ਡੀਕੋਡਿੰਗ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ ਜਦੋਂ ਲੋੜ ਹੋਵੇ (360 ° ਵਿਡੀਓਜ਼).</string>
+    <string name="opengl_automatic" source="google_translate">ਆਟੋਮੈਟਿਕ</string>
+    <string name="opengl_on" source="google_translate">ਫੋਰਸ ਆਨ</string>
+    <string name="opengl_off" source="google_translate">ਫੋਰਸ ਔਫ</string>
+    <string name="network_favorites" source="google_translate">ਨੈੱਟਵਰਕ ਮਨਪਸੰਦ</string>
+    <string name="network_shared_folders" source="google_translate">ਸਾਂਝੇ ਫੋਲਡਰ</string>
+    <string name="encryption_warning" source="google_translate">ਚੇਤਾਵਨੀ, ਐਂਕਰਿਪਸ਼ਨ ਇਸ ਐਂਡਰੌਇਡ ਵਰਜਨ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ, ਪਾਸਵਰਡ ਕਿਸੇ ਪ੍ਰਾਈਵੇਟ ਸਪੇਸ ਵਿੱਚ ਸਟੋਰ ਕੀਤਾ ਜਾਵੇਗਾ ਪਰ ਏਨਕ੍ਰਿਪਟ ਨਹੀਂ ਕੀਤਾ ਜਾਵੇਗਾ</string>
+    <string name="store_password" source="google_translate">ਪਾਸਵਰਡ ਯਾਦ ਰੱਖੋ</string>
+    <string name="add_to_playlist" source="google_translate">ਪਲੇਲਿਸਟ ਵਿੱਚ ਜੋੜੋ</string>
+    <string name="popup_playback_title" source="google_translate">ਇੱਕ ਪੌਪ-ਅਪ ਵਿੰਡੋ ਵਿੱਚ ਵੀਡੀਓ ਚਲਾਉ</string>
+    <string name="popup_playback" source="google_translate">ਇੱਕ ਪੌਪ-ਅਪ ਵਿੰਡੋ ਵਿੱਚ ਚਲਾਉਣਾ</string>
+    <string name="popup_expand" source="google_translate">ਵੀਡੀਓ ਫੈਲਾਓ</string>
+    <string name="snack_subloader_sub_found" source="google_translate">ਉਪਸਿਰਲੇਖ ਡਾਊਨਲੋਡ ਕੀਤੇ</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">ਉਪਸਿਰਲੇਖ ਨਹੀਂ ਮਿਲੇ</string>
+    <string name="dialog_subloader_success" source="google_translate">ਇਸ ਲਈ ਉਪਸਿਰਲੇਖ ਮਿਲੇ:</string>
+    <string name="dialog_subloader_fails" source="google_translate">ਇਸ ਲਈ ਉਪਸਿਰਲੇਖ ਨਹੀਂ ਮਿਲੇ:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">ਡਾਉਨਲੋਡ ਪੂਰਾ ਹੋਇਆ</string>
+    <string name="download_subtitles" source="google_translate">ਉਪਸਿਰਲੇਖ ਡਾਊਨਲੋਡ ਕਰੋ</string>
+    <string name="preferences_languages_download" source="google_translate">ਉਪਸਿਰਲੇਖ ਭਾਸ਼ਾਵਾਂ</string>
+    <string name="list_languages_download_summary" source="google_translate">ਸਬ-ਟਾਈਟਲ ਲਿਆਉਣ ਵੇਲੇ ਭਾਸ਼ਾਵਾਂ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ</string>
+    <string name="list_languages_download_title" source="google_translate">ਉਪਸਿਰਲੇਖ ਭਾਸ਼ਾਵਾਂ ਡਾਊਨਲੋਡ ਕਰ ਰਿਹਾ ਹੈ</string>
+    <string name="service_unavailable" source="google_translate">ਸੇਵਾ ਉਪਲੱਬਧ ਨਹੀਂ</string>
+    <string name="subs_dl_lang_fail" source="google_translate">ਉਪਸਿਰਲੇਖ ਭਾਸ਼ਾ ਨੂੰ ਸੈਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ, ਐਪਲੀਕੇਸ਼ਨ ਸੈਟਿੰਗਜ਼ ਵਿੱਚ ਸੈਟ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
+    <string name="downloading_subtitles" source="google_translate">ਉਪਸਿਰਲੇਖ ਡਾਊਨਲੋਡ ਕਰ ਰਿਹਾ ਹੈ</string>
+    <string name="browse_folder" source="google_translate">ਫੋਲਡਰ ਬ੍ਰਾਉਜ਼ ਕਰੋ</string>
+    <string name="listen" source="google_translate">ਸੁਣੋ</string>
+    <string name="subtitles_download_title" source="google_translate">ਸਬ ਡਾਊਨਲੋਡ</string>
+    <string name="connecting" source="google_translate">ਕਨੈਕਟ ਕਰ ਰਿਹਾ ਹੈ ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">ਬਲਿਊਟੁੱਥ ਜੰਤਰ ਲਈ ਦੇਰੀ ਬਚਾਓ</string>
+    <string name="episodes" source="google_translate">ਐਪੀਸੋਡ</string>
+    <string name="movies" source="google_translate">ਫਿਲਮਾਂ</string>
+    <string name="videos" source="google_translate">ਵੀਡੀਓਜ਼</string>
+    <string name="streams" source="google_translate">ਸਟ੍ਰੀਮਜ਼</string>
+    <string name="clear_playback_history" source="google_translate">ਪਲੇਬੈਕ ਇਤਿਹਾਸ ਨੂੰ ਸਾਫ਼ ਕਰੋ</string>
+    <string name="various_artists" source="google_translate">ਕਈ ਕਲਾਕਾਰ</string>
+    <string name="ml_scanning" source="google_translate">ਮੀਡੀਆ ਫਾਈਲਾਂ ਲਈ ਸਕੈਨ ਕਰ ਰਿਹਾ ਹੈ</string>
+    <string name="ml_parse_media" source="google_translate">ਦਰਮਿਆਨੇ ਪਾਰਸਿੰਗ</string>
+    <string name="ml_discovering" source="google_translate">ਖੋਜ</string>
+    <string name="resume" source="google_translate">ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ</string>
+    <string name="length" source="google_translate">ਲੰਬਾਈ</string>
+    <string name="tv_settings_hint" source="google_translate">ਡਾਇਰੈਕਟਰੀਆਂ ਦੀ ਜਾਂਚ / ਅਨਚੈਕ ਕਰਨ ਲਈ ਠੀਕ ਬਟਨ ਦਬਾਓ</string>
+    <string name="ml_external_storage_title" source="google_translate">ਨਵਾਂ ਬਾਹਰੀ ਸਟੋਰੇਜ ਖੋਜੀ ਗਈ</string>
+    <string name="ml_external_storage_accept" source="google_translate">ਹਾਂ</string>
+    <string name="ml_external_storage_decline" source="google_translate">ਨਹੀਂ</string>
+    <string name="last_added_media" source="google_translate">ਆਖਰੀ ਸ਼ਾਮਿਲ</string>
+    <string name="no" source="google_translate">ਨਹੀਂ</string>
+    <string name="loading_medialibrary" source="google_translate">ਮੈਡੀਕਲ ਲਾਇਬ੍ਰੇਰੀ ਨੂੰ ਲੋਡ ਕਰ ਰਿਹਾ ਹੈ ...</string>
+    <string name="yes" source="google_translate">ਹਾਂ</string>
+    <string name="custom_set_save_title" source="google_translate">ਨਾ ਸੰਭਾਲਿਆ ਬਦਲਾਵ</string>
+    <string name="custom_set_save_warning" source="google_translate">ਚੇਤਾਵਨੀ: ਅਣਸੁਰੱਖਿਅਤ ਪਰਿਵਰਤਨ</string>
+    <string name="existing_custom_set_save_message" source="google_translate">ਬਰਾਊਜ਼ਰ ਨੂੰ ਸੈਟ ਕਰੋ ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">ਨਵੇਂ ਸਮਤੋਲ ਨੂੰ ਸੈਟ ਕਰੋ ...</string>
+    <string name="save" source="google_translate">ਸੇਵ ਕਰੋ</string>
+    <string name="do_not_save" source="google_translate">ਬਚਾਓ ਨਾ</string>
+    <string name="custom_set_wrong_input" source="google_translate">ਅਪ੍ਰਮਾਣਿਕ ਨਾਮ.</string>
+    <string name="custom_set_already_exist" source="google_translate">ਇਸ ਨਾਂ ਨਾਲ ਸਮਤੋਲ-ਸੈੱਟ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ</string>
+    <string name="custom_set_restored" source="google_translate">ਕਸਟਮ ਸਮਤੋਲ-ਸੈੱਟ ਮੁੜ ਬਹਾਲ</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">ਅਣ-ਛੁੱਟੇ ਬਰਾਬਰਤਾ-ਸੈਟ ਮਿਟਾਇਆ ਗਿਆ.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">ਨਵਾਂ</string>
+    <string name="settings_ml_block_scan" source="google_translate">ਮੇਡੀਕਲਬ੍ਰੇਰੀ ਹੁਣੇ ਤੁਹਾਡੇ ਯੰਤਰਾਂ ਨੂੰ ਸਕੈਨ ਕਰ ਰਹੀ ਹੈ</string>
+    <string name="recommendations" source="google_translate">ਸਿਫ਼ਾਰਿਸ਼ਾਂ</string>
+    <string name="recommendations_desc" source="google_translate">ਲਾਂਚਰ ਤੇ ਸਿਫਾਰਸ਼ਾਂ ਕਾਰਡ</string>
+    <string name="browser_quick_access" source="google_translate">ਤੇਜ਼ ਪਹੁੰਚ</string>
+    <string name="browser_storages" source="google_translate">ਸਟੋਰੇਜ਼</string>
+    <string name="renderer_list_title" source="google_translate">ਡਿਸਪਲੇ</string>
+    <string name="feedback_player_crashed" source="google_translate">ਮੁਆਫ ਕਰਨਾ, ਵੀਐਲ ਸੀ ਕੁਚਲਿਆ ਹੋਇਆ ਹੈ ਮੁੜ ਕੋਸ਼ਿਸ ਕਰੋ ਜੀ.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">ਤੁਹਾਨੂੰ ਆਪਣੇ ਐਸਡੀ ਕਾਰਡ ਵਿੱਚ ਵੀ ਐੱਲ ਸੀ ਲਿਖਤ ਪਹੁੰਚ ਪ੍ਰਦਾਨ ਕਰਨੀ ਪਵੇਗੀ</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC ਇਸ ਫਾਇਲ ਨੂੰ ਬਿਨਾਂ ਲਿਖਤ ਪਹੁੰਚ ਦੀ ਇਜਾਜ਼ਤ ਤੋਂ ਮਿਟਾ ਨਹੀਂ ਸਕਦਾ ਹੈ. \ N ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ SD ਕਾਰਡ ਤੇ ਜਾਓ ਅਤੇ \ "ਚੁਣੋ \" ਤੇ ਕਲਿਕ ਕਰੋ. \ N ਤੁਹਾਨੂੰ ਸਿਖਰ-ਸੱਜੇ ਮੀਨੂ ਵਿੱਚ ਪਹਿਲਾਂ \ "SD ਕਾਰਡ ਦਿਖਾਓ \" ਤੇ ਕਲਿਕ ਕਰਨਾ ਪੈ ਸਕਦਾ ਹੈ</string>
+    <string name="dialog_sd_wizard" source="google_translate">ਮੈਨੂੰ ਵਿਖਾਓ</string>
+    <string name="renderers_disconnect" source="google_translate">ਡਿਸਕਨੈਕਟ ਕਰੋ</string>
+    <string name="audio_digital_failed" source="google_translate">ਔਡੀਓ ਡਿਜੀਟਲ ਆਉਟਪੁੱਟ ਸਥਿਤੀ ਨੂੰ ਬਦਲਣ ਵਿੱਚ ਅਸਫਲ</string>
+    <string name="audio_digital_output_enabled" source="google_translate">ਆਡੀਓ ਡਿਜੀਟਲ ਆਉਟਪੁੱਟ ਸਮਰਥਿਤ</string>
+    <string name="audio_digital_output_disabled" source="google_translate">ਔਡੀਓ ਡਿਜੀਟਲ ਆਉਟਪੁੱਟ ਅਸਮਰਥਿਤ</string>
+    <string name="live_streams" source="google_translate">ਲਾਈਵ ਸਟ੍ਰੀਮਸ</string>
+    <string name="all_live_streams" source="google_translate">ਸਾਰੇ ਲਾਈਵ ਸਟ੍ਰੀਮਸ</string>
+    <string name="video_torrents" source="google_translate">ਵੀਡੀਓ ਟੋਰਰਾਂ</string>
+    <string name="audio_torrents" source="google_translate">ਔਡੀਓ ਟੋਰਰਾਂ</string>
+    <string name="all_torrents" source="google_translate">ਸਾਰੇ ਟੋਰਰਾਂ</string>
+    <string name="main" source="google_translate">ਮੁੱਖ</string>
+    <string name="media_player" source="google_translate">ਮੀਡੀਆ ਪਲੇਅਰ</string>
+    <string name="acestream_server" source="google_translate">ACE ਸਟਰੀਮ ਸਰਵਰ (ਇੰਜਨ)</string>
+    <string name="media_player_settings" source="google_translate">ਮੀਡੀਆ ਪਲੇਅਰ ਸੈਟਿੰਗਜ਼</string>
+    <string name="acestream_server_settings" source="google_translate">ACE ਸਟਰੀਮ ਸਰਵਰ (ਇੰਜਨ) ਸੈਟਿੰਗਜ਼</string>
+    <string name="sign_out" source="google_translate">ਸਾਇਨ ਆਉਟ</string>
+    <string name="sign_in" source="google_translate">ਸਾਈਨ - ਇਨ</string>
+    <string name="sign_in_acestream" source="google_translate">ਐਸੇ ਸਟ੍ਰੀਮ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ</string>
+    <string name="sign_in_google" source="google_translate">Google ਦੇ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ</string>
+    <string name="video_files" source="google_translate">ਵੀਡੀਓ ਫਾਇਲ</string>
+    <string name="audio_files" source="google_translate">ਔਡੀਓ ਫਾਇਲਾਂ</string>
+    <string name="retry" source="google_translate">ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
+    <string name="failed_to_load_web_page" source="google_translate">ਵੈਬ ਪੇਜ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ</string>
 </resources>

@@ -2,33 +2,42 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/nav_return"
+        android:title=""
+        android:icon="@drawable/ic_arrow_back"
+        android:visible="false" />
+
     <group android:id="@+id/scrollable_group"
-        android:checkableBehavior="all"
-        android:orderInCategory="1">
+        android:orderInCategory="1"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_video"
+            android:id="@+id/nav_submenu_video"
             android:title="@string/video"
-            android:icon="@drawable/ic_menu_video" />
+            android:icon="@drawable/ic_video_library_white_24dp" />
         <item
-            android:id="@+id/nav_audio"
+            android:id="@+id/nav_submenu_audio"
             android:title="@string/audio"
-            android:icon="@drawable/ic_menu_audio" />
+            android:icon="@drawable/ic_library_music_white_24dp" />
         <item
-            android:id="@+id/nav_directories"
-            android:title="@string/directories"
-            android:icon="@drawable/ic_menu_folder" />
-        <item
-            android:id="@+id/nav_network"
-            android:title="@string/network_browsing"
-            android:icon="@drawable/ic_menu_network" />
+            android:id="@+id/nav_submenu_browsing"
+            android:title="@string/browsing"
+            android:icon="@drawable/ic_library_add_white_24dp" />
         <item
             android:id="@+id/nav_mrl"
-            android:title="@string/open_mrl"
+            android:title="@string/open_link"
             android:icon="@drawable/ic_menu_stream" />
         <item
             android:id="@+id/nav_history"
             android:title="@string/history"
             android:icon="@drawable/ic_menu_history" />
+    </group>
+
+    <!-- Items in this group are always invisible -->
+    <group android:id="@+id/hidden_group">
+        <item
+            android:id="@+id/nav_request_permissions"
+            android:visible="false" />
     </group>
 
     <item
@@ -40,16 +49,107 @@
         </menu>
     </item>
 
-    <group android:id="@+id/fixed_group"
+    <group android:id="@+id/remote_control_group"
         android:orderInCategory="3">
         <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/nav_remote_control"
+            android:title="@string/remote_control"
+            android:icon="@drawable/ic_settings_remote_white_24dp"/>
+    </group>
+
+    <group android:id="@+id/fixed_group"
+        android:orderInCategory="4">
+        <item
+            android:id="@+id/nav_submenu_settings"
             android:title="@string/preferences"
             android:icon="@drawable/ic_menu_preferences" />
         <item
             android:id="@+id/nav_about"
             android:title="@string/about"
-            android:icon="@drawable/ic_menu_cone" />
+            android:icon="@drawable/ic_acestream" />
+        <item
+            android:id="@+id/nav_shutdown_engine"
+            android:title="@string/menu_quit"
+            android:icon="@drawable/ic_close_light" />
+    </group>
+
+    <group android:id="@+id/submenu_video"
+        android:visible="false"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_video_live_streams"
+            android:title="@string/live_streams"
+            android:icon="@drawable/ic_acestream" />
+        <item
+            android:id="@+id/nav_video_torrents"
+            android:title="@string/torrent_files"
+            android:icon="@drawable/ic_torrent" />
+        <item
+            android:id="@+id/nav_video_local"
+            android:title="@string/video_files"
+            android:icon="@drawable/ic_video_library_white_24dp" />
+    </group>
+
+    <group android:id="@+id/submenu_audio"
+        android:visible="false"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_audio_torrents"
+            android:title="@string/torrent_files"
+            android:icon="@drawable/ic_torrent" />
+        <item
+            android:id="@+id/nav_audio_local"
+            android:title="@string/audio_files"
+            android:icon="@drawable/ic_library_music_white_24dp" />
+    </group>
+
+    <group android:id="@+id/submenu_browsing"
+        android:visible="false"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_directories"
+            android:title="@string/directories"
+            android:icon="@drawable/ic_menu_folder" />
+        <item
+            android:id="@+id/nav_network"
+            android:title="@string/network_browsing"
+            android:icon="@drawable/ic_menu_network" />
+    </group>
+
+    <group android:id="@+id/submenu_settings" android:visible="false">
+        <item
+            android:id="@+id/nav_settings_player"
+            android:title="@string/media_player"
+            android:icon="@null" />
+        <item
+            android:id="@+id/nav_settings_engine"
+            android:title="@string/acestream_server"
+            android:icon="@null" />
+        <item
+            android:id="@+id/nav_settings_ads"
+            android:title="@string/ads_preferences_short"
+            android:icon="@null" />
+        <item
+            android:id="@+id/nav_clear_cache"
+            android:title="@string/menu_clearcache"
+            android:icon="@null" />
+        <item
+            android:id="@+id/nav_report_problem"
+            android:title="@string/report_problem"
+            android:icon="@null" />
+        <item
+            android:id="@+id/nav_restart"
+            android:title="@string/restart_application"
+            android:icon="@null" />
+    </group>
+
+    <group android:id="@+id/submenu_account_signed_in" android:visible="false">
+        <item
+            android:checkable="false"
+            android:checked="false"
+            android:id="@+id/nav_sign_out"
+            android:title="@string/sign_out"
+            android:icon="@null" />
     </group>
 
 </menu>

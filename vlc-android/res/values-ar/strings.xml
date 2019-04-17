@@ -13,14 +13,6 @@
     <string name="sortby_date_desc">التاريخ (تنازليا)</string>
     <string name="searchable_hint">ابحث...</string>
     <string name="history">التأريخ</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="zero">%d نتيجة موجودة</item>
-        <item quantity="one">%d نتيجة موجودة</item>
-        <item quantity="two">%d نتيجة موجودة</item>
-        <item quantity="few">%d نتيجة موجودة</item>
-        <item quantity="many">%d نتيجة موجودة</item>
-        <item quantity="other">%d نتيجة موجودة</item>
-    </plurals>
     <string name="play">شغّل</string>
     <string name="play_from_start">شغّل من البداية</string>
     <string name="play_as_audio">شغّل كصوت</string>
@@ -71,22 +63,6 @@
         <item quantity="few">%d مجلدات ثانويّة</item>
         <item quantity="many">%d مجلدات ثانويّة</item>
         <item quantity="other">%d مجلدات ثانويّة</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="zero">%d ملف وسائط</item>
-        <item quantity="one">%d ملف وسائط</item>
-        <item quantity="two">%d ملف وسائط</item>
-        <item quantity="few">%d ملف وسائط</item>
-        <item quantity="many">%d ملف وسائط</item>
-        <item quantity="other">%d ملف وسائط</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="zero">%d مقطع مرئي</item>
-        <item quantity="one">%d مقطع مرئي</item>
-        <item quantity="two">%d مقطع مرئي</item>
-        <item quantity="few">%d مقطع مرئي</item>
-        <item quantity="many">%d مقطع مرئي</item>
-        <item quantity="other">%d مقطع مرئي</item>
     </plurals>
     <string name="internal_memory">الذّاكرة الدّاخليّة</string>
     <string name="parent_folder">اذهب إلى المجلد الأعلى</string>
@@ -145,14 +121,6 @@
     <string name="brightness">السّطوع</string>
     <string name="navmenu">قائمة شريط التنقل</string>
     <string name="advanced">الإعدادات المتقدمة</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="zero">%1$d قناة\n</item>
-        <item quantity="one">1 قناة\n</item>
-        <item quantity="two">%1$d قنوات\n</item>
-        <item quantity="few">%1$d قنوات\n</item>
-        <item quantity="many">%1$d قناة\n</item>
-        <item quantity="other">%1$d قناة\n</item>
-    </plurals>
     <string name="track_samplerate_info">معدل الاعتيان : %1$d Hz\n</string>
     <string name="track_resolution_info">الميز : %1$dx%2$d\n</string>
     <string name="track_framerate_info">معدل الإطار : %1$.3f\n</string>
@@ -380,10 +348,10 @@
     <!--Widget-->
     <string name="widget_name_w">تطبيق مصغر VLC أبيض</string>
     <string name="widget_name_b">تطبيق مصغر VLC اسود</string>
-    <string name="allow_storage_access_title">السماح ل VLC بالدخول إلى الملفات السمعية و الفيديو</string>
-    <string name="allow_storage_access_description">VLC يحتاج إلى الحصول على تصريح للدخول إلى ملفات الوسائط هذه في هذا الجهاز</string>
-    <string name="allow_settings_access_ringtone_title">اسمح لـ VLC بتعديل نغمة الهاتف</string>
-    <string name="allow_settings_access_ringtone_description">يطلب منك VLC التصريح للسماح له لاستخدام هذه الأغنية كنغمة للهاتف.</string>
+    <string name="allow_storage_access_title">السماح ل Ace Stream بالدخول إلى الملفات السمعية و الفيديو</string>
+    <string name="allow_storage_access_description">Ace Stream يحتاج إلى الحصول على تصريح للدخول إلى ملفات الوسائط هذه في هذا الجهاز</string>
+    <string name="allow_settings_access_ringtone_title">اسمح لـ Ace Stream بتعديل نغمة الهاتف</string>
+    <string name="allow_settings_access_ringtone_description">يطلب منك Ace Stream التصريح للسماح له لاستخدام هذه الأغنية كنغمة للهاتف.</string>
     <string name="permission_ask_again">الحصول على تصريح</string>
     <string name="exit_app">أغلق VLC</string>
     <!--fast scroller-->
@@ -418,4 +386,166 @@
     <string name="various_artists">فنانون متعددون</string>
     <string name="ml_scanning">مسح من أجل العثور على ملفات الوسائط</string>
     <string name="length">الطول</string>
+    <string name="torrent_files">Torrent ملفات</string>
+    <string name="select_language">اختار اللغة</string>
+    <string name="sortby_artist_name" source="google_translate">اسم فنان</string>
+    <string name="sortby_artist_name_desc" source="google_translate">اسم الفنان (desc)</string>
+    <string name="sortby_album_name" source="google_translate">اسم الألبوم</string>
+    <string name="sortby_album_name_desc" source="google_translate">اسم الألبوم (desc)</string>
+    <string name="sortby_number" source="google_translate">ملحوظة في المسارات</string>
+    <string name="sortby_number_desc" source="google_translate">مسارات Nb (desc)</string>
+    <string name="playback" source="google_translate">تشغيل</string>
+    <string name="playback_controls" source="google_translate">ضوابط التشغيل</string>
+    <string name="medialibrary_scan" source="google_translate">مسح مكتبة الوسائط</string>
+    <string name="Medialibrary_progress" source="google_translate">مكتبة الوسائط مسح تحديثات التقدم</string>
+    <string name="video_app_switch_title" source="google_translate">الخلفية / وضع PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">حدد سلوك VLC عند التبديل إلى تطبيق آخر من تشغيل الفيديو</string>
+    <string name="play_pip_title" source="google_translate">تشغيل الفيديوهات في وضع Picture-in-picture</string>
+    <string name="insert_next" source="google_translate">أدخل التالي</string>
+    <string name="unknown_number" source="google_translate">عدد غير معروف من المسارات</string>
+    <string name="tracks" source="google_translate">المسارات</string>
+    <string name="nomedia" source="google_translate">لم يتم العثور على ملفات وسائط ، يرجى نقل بعض الملفات إلى جهازك أو ضبط تفضيلاتك.</string>
+    <string name="surface_fit_screen" source="google_translate">تناسب الشاشة</string>
+    <string name="server_servername_hint" source="google_translate">اسم الخادم ، من أجل conveniency</string>
+    <string name="daynight_title" source="google_translate">وضع DayNight</string>
+    <string name="daynight_summary" source="google_translate">التبديل تلقائيا إلى الوضع الليلي في الوقت المناسب</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">العرض الثانوي</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">الإعدادات عند اتصال الشاشات الثانوية (HDMI / Chromecast).</string>
+    <string name="video_min_group_length_summary" source="google_translate">يتم تجميع مقاطع الفيديو إذا كانت الأحرف الأولى لها هي نفسها.</string>
+    <string name="media_fast_seek" source="google_translate">تمكين خيار البحث السريع</string>
+    <string name="media_seen" source="google_translate">إظهار علامة الفيديو المرئية</string>
+    <string name="media_seen_summary" source="google_translate">ضع علامة على مقطع فيديو كما يظهر عند تشغيله حتى النهاية</string>
+    <string name="force_play_all_title" source="google_translate">وضع قائمة تشغيل الفيديو</string>
+    <string name="save_audiodelay_summary" source="google_translate">احفظ تأخير الصوت الفردي لكل فيديو</string>
+    <string name="save_audiodelay_title" source="google_translate">حفظ تأخير الصوت</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">لفتة السطوع</string>
+    <string name="enable_volume_gesture_title" source="google_translate">إيماءة الصوت</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">السيطرة على حجم عن طريق لفتة أثناء تشغيل الفيديو</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">انقر نقرًا مزدوجًا للبحث</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">انقر نقرًا مزدوجًا على حواف الشاشة للحصول على 10 ثوانٍ</string>
+    <string name="popup_keepscreen_title" source="google_translate">إبقاء الشاشة في وضع المنبثقة</string>
+    <string name="popup_keepscreen_summary" source="google_translate">استمر دائمًا في تشغيل الشاشة أثناء عرض النافذة المنبثقة ، حتى إذا تم إيقاف الفيديو مؤقتًا.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">أظهر الملفات المخفية</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">إظهار الملفات المخفية في المتصفحات</string>
+    <string name="subtitles_color_gray" source="google_translate">اللون الرمادي</string>
+    <string name="subtitles_bold_title" source="google_translate">ترجمات غامقة</string>
+    <string name="subtitles_autoload_title" source="google_translate">ترجمات الحمل التلقائي</string>
+    <string name="lockscreen_cover_title" source="google_translate">غطاء الوسائط على Lockscreen</string>
+    <string name="lockscreen_cover_summary" source="google_translate">عند توفرها ، قم بتعيين صورة غلاف الوسائط الحالية كخلفية لشاشة التأمين</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">تحريك التمرير التلقائي لقائمة التشغيل الحالية</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">تحريك التمرير على انتقال الوسائط</string>
+    <string name="audio_save_repeat_title" source="google_translate">حفظ وضع التكرار</string>
+    <string name="audio_save_repeat_summary" source="google_translate">تذكر وضع التكرار عند تحميل قوائم تشغيل الصوت</string>
+    <string name="audio_boost_title" source="google_translate">الصوت دفعة</string>
+    <string name="headset_prefs_category" source="google_translate">سماعة</string>
+    <string name="enable_headset_detection_summary" source="google_translate">اكتشاف إدراج سماعة الرأس وإزالتها</string>
+    <string name="enable_headset_actions_title" source="google_translate">اختصارات التحكم عن بعد</string>
+    <string name="enable_headset_actions_summary" source="google_translate">اضغط مرتين على \ \'تشغيل \' للانتقال إلى التالي والضغط لفترة طويلة عليه لتخطي المسار السابق</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">ايقاف خلاف ذلك</string>
+    <string name="audio_ducking_title" source="google_translate">انخفاض حجم VLC على الإخطارات</string>
+    <string name="audio_ducking_summary" source="google_translate">يساعد على سماع الإشعارات الصوتية أو تعليمات التنقل أو التحدث مع المساعد</string>
+    <string name="casting_category" source="google_translate">صب</string>
+    <string name="casting_passthrough_title" source="google_translate">العبور الصوت</string>
+    <string name="casting_passthrough_summary" source="google_translate">دع التلفزيون الخاص بك يقوم بتشغيل العرض الصوتي</string>
+    <string name="casting_conversion_quality_title" source="google_translate">جودة التحويل</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">حدد جودة التحويل عند الإرسال على الشاشة عن بعد</string>
+    <string name="casting_quality_high" source="google_translate">متوسط</string>
+    <string name="casting_quality_medium" source="google_translate">متوسط</string>
+    <string name="casting_quality_low" source="google_translate">منخفض</string>
+    <string name="casting_quality_lowcpu" source="google_translate">أدنى</string>
+    <string name="cast_performance_warning" source="google_translate">يتطلب إنشاء هذا الفيديو التحويل. يمكن أن يستخدم هذا التحويل كل الطاقة المتاحة ويمكن أن يستنزف البطارية بسرعة.</string>
+    <string name="artists_show_all_title" source="google_translate">عرض جميع الفنانين</string>
+    <string name="artists_show_all_summary" source="google_translate">عرض جميع الفنانين في قائمة الفنانين ، وليس فقط الفنانين الألبوم</string>
+    <string name="extensions_prefs_category" source="google_translate">ملحقات</string>
+    <string name="extensions_enable_category" source="google_translate">اختار التمديدات لتمكين</string>
+    <string name="extensions_empty" source="google_translate">لم يتم اكتشاف امتداد</string>
+    <string name="extension_prefs_activation_title" source="google_translate">تفعيل</string>
+    <string name="android_auto" source="google_translate">سيارة أندرويد</string>
+    <string name="main_prefs_category" source="google_translate">الإعدادات الرئيسية</string>
+    <string name="save_video_session" source="google_translate">توفير السرعة خلال الجلسة</string>
+    <string name="save_video_always" source="google_translate">توفير السرعة عبر الجلسات</string>
+    <string name="dump_media_db" source="google_translate">تفريغ قاعدة البيانات الإعلامية</string>
+    <string name="dump_media_db_summary" source="google_translate">نسخ قاعدة البيانات إلى جذر التخزين الداخلي</string>
+    <string name="clear_media_db_summary" source="google_translate">يمكنك الوصول إلى معلومات Android VLC لمسح البيانات</string>
+    <string name="resume_playback_summary" source="google_translate">البقاء في وقفة خلاف ذلك</string>
+    <string name="network_caching_popup" source="google_translate">يجب أن تكون هذه القيمة بين 0 و 6000 مللي ثانية</string>
+    <string name="player_touch_title" source="google_translate">الضوابط التي تعمل باللمس للفيديو</string>
+    <string name="player_touch_enable_all" source="google_translate">تمكين عناصر التحكم باللمس</string>
+    <string name="player_touch_disable_brightness" source="google_translate">تعطيل التحكم في درجة السطوع</string>
+    <string name="player_touch_disable_all" source="google_translate">تعطيل كل عناصر التحكم باللمس</string>
+    <string name="tv_ui_summary" source="google_translate">تغيير واجهة المستخدم إلى السمة التي تم تكييفها على التلفزيون</string>
+    <string name="medialibrary" source="google_translate">مكتبة الوسائط</string>
+    <string name="medialibrary_directories" source="google_translate">مجلدات مكتبة الوسائط</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">اسمح لـ Ace Stream بتغيير وضع السطوع</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">يحتاج Ace Stream إلى منح هذا الإذن لتغيير وضع السطوع.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">السماح بالنوافذ المنبثقة في Ace Stream فوق التطبيقات الأخرى</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">يحتاج Ace Stream إلى منح هذا الإذن عرض الفيديو الخاص بك في نافذة منبثقة عن التطبيقات الأخرى.</string>
+    <string name="exit_app_msg" source="google_translate">هل أنت متأكد من أنك تريد إنهاء VLC؟</string>
+    <string name="fastscroller_track" source="google_translate">مسار FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">مقبض FastScroller</string>
+    <string name="extension_empty" source="google_translate">لا يوجد عنصر لعرضه ، انتقل إلى إعدادات الإضافة للحصول على بعض.</string>
+    <string name="opengl_title" source="google_translate">استخدام OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">افتراضيًا ، يتم استخدام OpenGL ES2 لفك ترميز البرامج وفك تشفير الجهاز عند الحاجة (مقاطع فيديو بنطاق 360 درجة).</string>
+    <string name="opengl_on" source="google_translate">إجبار على</string>
+    <string name="opengl_off" source="google_translate">إجبار</string>
+    <string name="popup_playback_title" source="google_translate">تشغيل الفيديو في نافذة منبثقة</string>
+    <string name="popup_playback" source="google_translate">اللعب في نافذة منبثقة</string>
+    <string name="popup_expand" source="google_translate">قم بتوسيع الفيديو</string>
+    <string name="subs_dl_lang_fail" source="google_translate">أخفق تعيين لغة الترجمة ، حاول ضبطها في إعدادات التطبيق</string>
+    <string name="save_bluetooth_delay" source="google_translate">حفظ تأخير لجهاز بلوتوث</string>
+    <string name="streams" source="google_translate">تيارات</string>
+    <string name="ml_parse_media" source="google_translate">تحليل متوسط</string>
+    <string name="ml_discovering" source="google_translate">اكتشاف</string>
+    <string name="resume" source="google_translate">استئنف</string>
+    <string name="tv_settings_hint" source="google_translate">اضغط لفترة طويلة على زر موافق للتحقق / إلغاء فحص الأدلة</string>
+    <string name="ml_external_storage_title" source="google_translate">تم اكتشاف وحدة تخزين خارجية جديدة</string>
+    <string name="ml_external_storage_accept" source="google_translate">نعم فعلا</string>
+    <string name="ml_external_storage_decline" source="google_translate">لا</string>
+    <string name="last_added_media" source="google_translate">آخر يضاف</string>
+    <string name="no" source="google_translate">لا</string>
+    <string name="loading_medialibrary" source="google_translate">جارٍ تحميل مكتبة الوسائط ...</string>
+    <string name="yes" source="google_translate">نعم فعلا</string>
+    <string name="custom_set_save_title" source="google_translate">التغييرات غير المحفوظة</string>
+    <string name="custom_set_save_warning" source="google_translate">تحذير: تغييرات غير محفوظة</string>
+    <string name="existing_custom_set_save_message" source="google_translate">حفظ أداة ضبط الصوت باسم ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">حفظ مجموعة معادلة جديدة باسم ...</string>
+    <string name="save" source="google_translate">حفظ</string>
+    <string name="do_not_save" source="google_translate">لا تقم بحفظ</string>
+    <string name="custom_set_wrong_input" source="google_translate">اسم غير صالح.</string>
+    <string name="custom_set_already_exist" source="google_translate">مجموعة المعادل مع هذا الاسم موجودة بالفعل</string>
+    <string name="custom_set_restored" source="google_translate">استعادة مخصص التعادل مجموعة.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">تم حذف مجموعة التعادل غير المحفوظة.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">الجديد</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary تقوم بمسح أجهزتك الآن</string>
+    <string name="recommendations" source="google_translate">توصيات</string>
+    <string name="recommendations_desc" source="google_translate">بطاقات التوصيات على قاذفة</string>
+    <string name="browser_quick_access" source="google_translate">الوصول السريع</string>
+    <string name="browser_storages" source="google_translate">المخازن</string>
+    <string name="renderer_list_title" source="google_translate">يعرض</string>
+    <string name="feedback_player_crashed" source="google_translate">عذرا ، VLC تحطمت للتو. حاول مرة اخرى.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">لديك لمنح VLC وصول الكتابة إلى بطاقة SD الخاصة بك</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">لا يمكن لـ VLC حذف هذا الملف بدون إذن الوصول للكتابة. \ n الرجاء الانتقال إلى بطاقة SD والنقر على \ "تحديد \". \ n قد تضطر إلى النقر فوق \ "إظهار بطاقة SD \" أولاً في القائمة العلوية اليمنى</string>
+    <string name="dialog_sd_wizard" source="google_translate">أرني</string>
+    <string name="renderers_disconnect" source="google_translate">قطع الاتصال</string>
+    <string name="audio_digital_failed" source="google_translate">أخفق تغيير حالة إخراج الصوت الرقمي</string>
+    <string name="audio_digital_output_enabled" source="google_translate">تم تمكين الإخراج الصوتي الرقمي</string>
+    <string name="audio_digital_output_disabled" source="google_translate">تم تعطيل إخراج الصوت الرقمي</string>
+    <string name="live_streams" source="google_translate">يعيش تيارات</string>
+    <string name="all_live_streams" source="google_translate">جميع بث مباشر</string>
+    <string name="video_torrents" source="google_translate">السيول الفيديو</string>
+    <string name="audio_torrents" source="google_translate">السيول الصوتية</string>
+    <string name="all_torrents" source="google_translate">كل السيول</string>
+    <string name="main" source="google_translate">الأساسية</string>
+    <string name="media_player" source="google_translate">مشغل الوسائط</string>
+    <string name="acestream_server" source="google_translate">خادم Ace Stream (المحرك)</string>
+    <string name="media_player_settings" source="google_translate">إعدادات مشغل الوسائط</string>
+    <string name="acestream_server_settings" source="google_translate">إعدادات الخادم (محرك) Ace Stream</string>
+    <string name="sign_out" source="google_translate">خروج</string>
+    <string name="sign_in" source="google_translate">تسجيل الدخول</string>
+    <string name="sign_in_acestream" source="google_translate">تسجيل الدخول مع Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">الدخول مع جوجل</string>
+    <string name="video_files" source="google_translate">ملفات الفيديو</string>
+    <string name="audio_files" source="google_translate">ملفات صوتية</string>
+    <string name="retry" source="google_translate">إعادة المحاولة</string>
+    <string name="failed_to_load_web_page" source="google_translate">فشل تحميل صفحة الويب</string>
 </resources>

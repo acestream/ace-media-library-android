@@ -32,16 +32,16 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.ViewStubCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.widget.ViewStubCompat;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +49,7 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.videolan.vlc.BuildConfig;
+import org.acestream.sdk.utils.PermissionUtils;
 import org.videolan.vlc.ExternalMonitor;
 import org.videolan.vlc.MediaParsingService;
 import org.videolan.vlc.PlaybackService;
@@ -67,6 +67,10 @@ public class AudioPlayerContainerActivity extends BaseActivity implements Playba
 
     public static final String TAG = "VLC/AudioPlayerContainerActivity";
 
+    // hardcoded flags
+    private static final boolean USE_TIPS = false;
+    private static final boolean DEBUG_TIPS = false;
+
     protected static final String ID_VIDEO = "video";
     protected static final String ID_AUDIO = "audio";
     protected static final String ID_NETWORK = "network";
@@ -75,11 +79,15 @@ public class AudioPlayerContainerActivity extends BaseActivity implements Playba
     protected static final String ID_MRL = "mrl";
     protected static final String ID_PREFERENCES = "preferences";
     protected static final String ID_ABOUT = "about";
+    protected static final String ID_REQUEST_PERMISSIONS = "request_permissions";
+    protected static final String ID_P2P_VIDEO = "p2p_video";
+    protected static final String ID_P2P_AUDIO = "p2p_audio";
+    protected static final String ID_P2P_STREAMS = "p2p_streams";
     protected AppBarLayout mAppBarLayout;
     protected Toolbar mToolbar;
     protected AudioPlayer mAudioPlayer;
     private FrameLayout mAudioPlayerContainer;
-    private final PlaybackServiceActivity.Helper mHelper = new PlaybackServiceActivity.Helper(this, this);
+    protected final PlaybackServiceActivity.Helper mHelper = new PlaybackServiceActivity.Helper(this, this);
     protected PlaybackService mService;
     protected BottomSheetBehavior mBottomSheetBehavior;
     protected View mFragmentContainer;
@@ -139,10 +147,16 @@ public class AudioPlayerContainerActivity extends BaseActivity implements Playba
         progressFilter.addAction(Constants.ACTION_SERVICE_ENDED);
         progressFilter.addAction(Constants.ACTION_PROGRESS);
         progressFilter.addAction(Constants.ACTION_NEW_STORAGE);
+        progressFilter.addAction(Constants.ACTION_PTF_SERVICE_STARTED);
+        progressFilter.addAction(Constants.ACTION_PTF_SERVICE_ENDED);
+        progressFilter.addAction(Constants.ACTION_PTF_PROGRESS);
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, progressFilter);
         // super.onStart must be called after receiver registration
         super.onStart();
-        mHelper.onStart();
+
+        if(PermissionUtils.hasStorageAccess()) {
+            mHelper.onStart();
+        }
     }
 
     @Override
@@ -226,10 +240,13 @@ public class AudioPlayerContainerActivity extends BaseActivity implements Playba
      * @param settingKey the setting key to check if the view must be displayed or not.
      */
     public void showTipViewIfNeeded(final int stubId, final String settingKey) {
-        if (BuildConfig.DEBUG)
-            return;
+        if(!USE_TIPS) return;
+
         View vsc = findViewById(stubId);
-        if (vsc != null && !mSettings.getBoolean(settingKey, false) && !VLCApplication.showTvUi()) {
+        if (vsc != null
+            && (DEBUG_TIPS
+                || (!mSettings.getBoolean(settingKey, false)
+                    && !VLCApplication.showTvUi()))) {
             View v = ((ViewStubCompat)vsc).inflate();
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -326,8 +343,8 @@ public class AudioPlayerContainerActivity extends BaseActivity implements Playba
         if (vsc != null) {
             vsc.setVisibility(View.VISIBLE);
             mScanProgressLayout = findViewById(R.id.scan_progress_layout);
-            mScanProgressText = (TextView) findViewById(R.id.scan_progress_text);
-            mScanProgressBar = (ProgressBar) findViewById(R.id.scan_progress_bar);
+            mScanProgressText = findViewById(R.id.scan_progress_text);
+            mScanProgressBar = findViewById(R.id.scan_progress_bar);
             if (mBottomSheetBehavior != null && mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 updateContainerPadding(true);
                 applyMarginToProgressBar(mBottomSheetBehavior.getPeekHeight());
@@ -355,22 +372,47 @@ public class AudioPlayerContainerActivity extends BaseActivity implements Playba
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
+            if(action == null) return;
+
             if (Constants.ACTION_SHOW_PLAYER.equals(action)) {
                 showAudioPlayer();
                 return;
             }
+
             switch (action) {
                 case Constants.ACTION_NEW_STORAGE:
                     UiTools.newStorageDetected(AudioPlayerContainerActivity.this, intent.getStringExtra(Constants.EXTRA_PATH));
                     break;
                 case Constants.ACTION_SERVICE_STARTED:
                     updateProgressVisibility(View.VISIBLE);
+                    //:ace
+                    onParsingServiceStarted();
+                    ///ace
                     break;
                 case Constants.ACTION_SERVICE_ENDED:
                     mActivityHandler.removeMessages(ACTION_DISPLAY_PROGRESSBAR);
                     updateProgressVisibility(View.GONE);
+                    //:ace
+                    onParsingServiceFinished();
+                    ///ace
                     break;
                 case Constants.ACTION_PROGRESS:
+                    updateProgressVisibility(View.VISIBLE);
+                    if (mScanProgressText != null)
+                        mScanProgressText.setText(intent.getStringExtra(Constants.ACTION_PROGRESS_TEXT));
+                    if (mScanProgressBar != null)
+                        mScanProgressBar.setProgress(intent.getIntExtra(Constants.ACTION_PROGRESS_VALUE, 0));
+                    break;
+
+                // ProcessTransportFilesService
+                case Constants.ACTION_PTF_SERVICE_STARTED:
+                    updateProgressVisibility(View.VISIBLE);
+                    break;
+                case Constants.ACTION_PTF_SERVICE_ENDED:
+                    mActivityHandler.removeMessages(ACTION_DISPLAY_PROGRESSBAR);
+                    updateProgressVisibility(View.GONE);
+                    break;
+                case Constants.ACTION_PTF_PROGRESS:
                     updateProgressVisibility(View.VISIBLE);
                     if (mScanProgressText != null)
                         mScanProgressText.setText(intent.getStringExtra(Constants.ACTION_PROGRESS_TEXT));
@@ -443,4 +485,9 @@ public class AudioPlayerContainerActivity extends BaseActivity implements Playba
     public PlaybackServiceActivity.Helper getHelper() {
         return mHelper;
     }
+
+    //:ace
+    protected void onParsingServiceStarted() {}
+    protected void onParsingServiceFinished() {}
+    ///ace
 }

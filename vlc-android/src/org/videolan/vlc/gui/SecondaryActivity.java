@@ -25,9 +25,10 @@ package org.videolan.vlc.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.Fragment;
+import com.google.android.material.appbar.AppBarLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.Fragment;
+
 import android.view.MenuItem;
 import android.view.View;
 
@@ -77,7 +78,7 @@ public class SecondaryActivity extends ContentActivity {
         initAudioPlayerContainerActivity();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (getSupportFragmentManager().getFragments() == null) {
+        if (getSupportFragmentManager().getFragments() == null || getSupportFragmentManager().getFragments().size() == 0) {
             String fragmentId = getIntent().getStringExtra(KEY_FRAGMENT);
             fetchSecondaryFragment(fragmentId);
             if (mFragment == null){
@@ -139,7 +140,9 @@ public class SecondaryActivity extends ContentActivity {
                 break;
             case VIDEO_GROUP_LIST:
                 mFragment = new VideoGridFragment();
-                ((VideoGridFragment) mFragment).setGroup(getIntent().getStringExtra("param"));
+                ((VideoGridFragment) mFragment).setGroup(getIntent().getStringExtra("param1"));
+                ((VideoGridFragment) mFragment).setCategory(getIntent().getIntExtra("param2", -1));
+                ((VideoGridFragment) mFragment).setGroupParentId(getIntent().getLongExtra("param3", 0));
                 break;
             case STORAGE_BROWSER:
                 mFragment = new StorageBrowserFragment();

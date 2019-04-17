@@ -1,7 +1,7 @@
 package org.videolan.vlc;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 import org.videolan.medialibrary.Medialibrary;
@@ -39,7 +39,7 @@ public abstract class SortableAdapter<T extends MediaLibraryItem, VH extends Rec
 
     public void updateIfSortChanged() {
         final Medialibrary ml = VLCApplication.getMLInstance();
-        if (ml.isInitiated() && !ml.isWorking() && !hasPendingUpdates() && hasSortChanged()) update(new ArrayList<>(peekLast()));
+        if (ml.isInitiated() && !ml.isWorking() && !hasPendingUpdates() && hasSortChanged() && peekLast().size() > 0) update(new ArrayList<>(peekLast()));
     }
 
     private boolean hasSortChanged() {

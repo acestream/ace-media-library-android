@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:targetApi="jelly_bean" >
-    <data>
+    <data class="org.videolan.vlc.databinding.BrowserItemBinding">
         <import type="android.view.View"/>
         <import type="android.text.TextUtils"/>
         <import type="org.videolan.medialibrary.media.MediaLibraryItem"/>
@@ -29,7 +29,7 @@
             name="bgColor"
             type="int" />
     </data>
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
@@ -113,9 +113,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
-            android:background="@drawable/ic_more"
+            android:background="?attr/rci_more_vert"
             android:visibility="@{hasContextMenu ? View.VISIBLE : View.GONE, default=gone}"
             android:onClick="@{holder::onMoreClick}"
             android:clickable="@{hasContextMenu}" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -25,12 +25,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -386,16 +386,20 @@ public class AudioAlbumsSongsFragment extends BaseAudioBrowser implements SwipeR
 
     @Override
     @SuppressWarnings("unchecked")
-    public void onFabPlayClick(View view) {
-        if (mService == null) return;
-        final List<MediaWrapper> list ;
-        if (mViewPager.getCurrentItem() == 0) {
-            list = new ArrayList<>();
-            for (MediaLibraryItem item : mAlbumsAdapter.getMediaItems())
-                list.addAll(Util.arrayToArrayList(item.getTracks()));
-        } else {
-            list = (List<MediaWrapper>) (List<?>) mSongsAdapter.getMediaItems();
+    public boolean onFabPlayClick(View view) {
+        if(!super.onFabPlayClick(view)) {
+            if(mService != null) {
+                final List<MediaWrapper> list;
+                if (mViewPager.getCurrentItem() == 0) {
+                    list = new ArrayList<>();
+                    for (MediaLibraryItem item : mAlbumsAdapter.getMediaItems())
+                        list.addAll(Util.arrayToArrayList(item.getTracks()));
+                } else {
+                    list = (List<MediaWrapper>) (List<?>) mSongsAdapter.getMediaItems();
+                }
+                mService.load(list, 0);
+            }
         }
-        mService.load(list, 0);
+        return true;
     }
 }

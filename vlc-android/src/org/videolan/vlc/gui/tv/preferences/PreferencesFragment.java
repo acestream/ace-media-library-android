@@ -27,7 +27,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.widget.Toast;
 
 import org.videolan.vlc.R;
@@ -65,6 +65,7 @@ public class PreferencesFragment extends BasePreferenceFragment {
         findPreference("screen_orientation").setVisible(false);
         findPreference("extensions_category").setVisible(false);
         findPreference("casting_category").setVisible(false);
+        findPreference("enable_black_theme").setVisible(false);
         findPreference(KEY_VIDEO_APP_SWITCH).setVisible(AndroidDevices.hasPiP);
     }
 

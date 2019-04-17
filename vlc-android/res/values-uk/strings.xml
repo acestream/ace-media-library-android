@@ -19,11 +19,6 @@
     <string name="sortby_number_desc">Доріжки Nb (за спад.)</string>
     <string name="searchable_hint">Триває пошук…</string>
     <string name="history">Історія</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">знайдено %d результат</item>
-        <item quantity="few">знайдено %d результати</item>
-        <item quantity="other">знайдено %d результатів</item>
-    </plurals>
     <string name="play">Відтворити</string>
     <string name="playback">Відтворення</string>
     <string name="playback_controls">Керування відтворенням</string>
@@ -75,16 +70,6 @@
         <item quantity="one">%d підтека</item>
         <item quantity="few">%d підтеки</item>
         <item quantity="other">%d підтек</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">%d медіа файл</item>
-        <item quantity="few">%d медіа файли</item>
-        <item quantity="other">%d медіа файлів</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">%d відео</item>
-        <item quantity="few">%d відео</item>
-        <item quantity="other">%d відео</item>
     </plurals>
     <string name="internal_memory">Внутрішня пам\'ять</string>
     <string name="parent_folder">До батьківського каталогу</string>
@@ -146,11 +131,6 @@
     <string name="navmenu">меню навігації</string>
     <string name="advanced">додаткові параметри</string>
     <string name="audio_boost_warning">Проведіть вгору, щоби перевищити 100%</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 канал\n</item>
-        <item quantity="few">%1$d канали\n</item>
-        <item quantity="other">%1$d каналів\n</item>
-    </plurals>
     <string name="track_samplerate_info">Частота дискретизації: %1$d Hz\n</string>
     <string name="track_resolution_info">Роздільна здатність: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Частота кадрів: %1$.3f\n</string>
@@ -186,7 +166,7 @@
     <string name="error_not_compatible">На жаль, ваш пристрій на даний час не підтримується цією версією VLC для Android™.</string>
     <string name="error_problem">На жаль, VLC для Android мав проблему при завантаженні і він закрився.</string>
     <string name="error_message_is">Повідомлення про помилку (будь ласка, вкажіть його при налагодженні):\n\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Помилка відтворення</string>
     <string name="encountered_error_message">У VLC сталася помилка з цим медіафайлом.\nБудь ласка, спробуйте оновити медіабібліотеку.</string>
     <string name="invalid_location">Розташування %1$s не можливо відтворити.</string>
@@ -449,14 +429,14 @@
     <!--Widget-->
     <string name="widget_name_w">Білий віджет VLC</string>
     <string name="widget_name_b">Темний віджет VLC</string>
-    <string name="allow_storage_access_title">Надати VLC доступ до відео та аудіофайлів</string>
-    <string name="allow_storage_access_description">VLV потрібно, щоби ви надали цей доступ для доступу до медіафайлів на відповідному пристрої.</string>
-    <string name="allow_settings_access_ringtone_title">Дозволити VLC задавати мелодію дзвінків</string>
-    <string name="allow_settings_access_ringtone_description">VLC потрібно, що ви надали цей дозвіл для установки цієї пісні як вашої мелодії.</string>
-    <string name="allow_settings_access_brightness_title">Дозволити VLC змінювати режим яскравості</string>
-    <string name="allow_settings_access_brightness_description">VLC потрібно, щоби ви надали цей дозвіл для зміни режиму яскравості.</string>
-    <string name="allow_draw_overlays_title">Дозволити VLC спливати над іншими програмами</string>
-    <string name="allow_sdraw_overlays_description">VLC потрібно, щоби ви надали цей дозвіл для відображення вашого відео у спливному вікні над іншими програмами.</string>
+    <string name="allow_storage_access_title">Надати Ace Stream доступ до відео та аудіофайлів</string>
+    <string name="allow_storage_access_description">Ace Stream потрібно, щоби ви надали цей доступ для доступу до медіафайлів на відповідному пристрої.</string>
+    <string name="allow_settings_access_ringtone_title">Дозволити Ace Stream задавати мелодію дзвінків</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream потрібно, що ви надали цей дозвіл для установки цієї пісні як вашої мелодії.</string>
+    <string name="allow_settings_access_brightness_title">Дозволити Ace Stream змінювати режим яскравості</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream потрібно, щоби ви надали цей дозвіл для зміни режиму яскравості.</string>
+    <string name="allow_draw_overlays_title">Дозволити Ace Stream спливати над іншими програмами</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream потрібно, щоби ви надали цей дозвіл для відображення вашого відео у спливному вікні над іншими програмами.</string>
     <string name="permission_ask_again">Надати дозвіл</string>
     <string name="exit_app">Закрити VLC</string>
     <string name="exit_app_msg">Ви справді хочете вийти із VLC?</string>
@@ -539,4 +519,38 @@
     <string name="sdcard_permission_dialog_title">Ви маєте надати дозвіл VLC на запис до вашої карти SD</string>
     <string name="sdcard_permission_dialog_message">VLC не може вилучити цей файл без права на запис.\nПерейдіть на свою карту пам\'яті SD та клацніть \"Вибрати\".\nМожливо, вам доведеться натиснути кнопку \"Показати SD-карту\" спочатку в меню праворуч</string>
     <string name="dialog_sd_wizard">Показати мене</string>
+    <string name="torrent_files">Torrent файли</string>
+    <string name="select_language">Оберіть мову</string>
+    <string name="enable_headset_actions_title">Жести для пульта</string>
+    <string name="enable_headset_actions_summary">Подвійне натискання \'Play\' для переходу вперед і довге натискання для переходу назад</string>
+    <string name="main_prefs_category">Основні налаштування</string>
+    <string name="dump_media_db">Дамп медіа бази даних</string>
+    <string name="dump_media_db_summary">Копіювати базу даних в корінь внутрішнього сховища</string>
+    <string name="streams">потоки</string>
+    <string name="renderers_disconnect">Відʼєднатися</string>
+    <string name="audio_digital_failed">Не вдалося змінити стан Audio Digital Output</string>
+    <string name="audio_digital_output_enabled">Audio Digital Output увімкнено</string>
+    <string name="audio_digital_output_disabled">Audio Digital Output вимкнено</string>
+    <string name="live_streams">Трансляції</string>
+    <string name="all_live_streams">Всі трансляції</string>
+    <string name="video_torrents">Відео торренти</string>
+    <string name="audio_torrents">Аудіо торренти</string>
+    <string name="all_torrents">Всі торренти</string>
+    <string name="main">Основні</string>
+    <string name="media_player">Медіа плеєр</string>
+    <string name="acestream_server">Ace Stream сервер (движок)</string>
+    <string name="media_player_settings">Налаштування медіа плеєра</string>
+    <string name="acestream_server_settings">Налаштування сервера Ace Stream (движка)</string>
+    <string name="sign_out">Вийти</string>
+    <string name="sign_in">Увійти</string>
+    <string name="sign_in_acestream">Увійти чеерз Ace Stream</string>
+    <string name="sign_in_google">Увійти через Google</string>
+    <string name="video_files">Відео файли</string>
+    <string name="audio_files">Аудіо файли</string>
+    <string name="retry">Повторити</string>
+    <string name="failed_to_load_web_page">Не вдалося завантажити сторінку</string>
+    <string name="get_bonuses">Отримати бонуси</string>
+    <string name="bonuses">Бонуси</string>
+    <string name="open_link">Відкрити посилання</string>
+    <string name="open_link_dialog_msg">Введіть посилання: http://, content id і т.п.</string>
 </resources>

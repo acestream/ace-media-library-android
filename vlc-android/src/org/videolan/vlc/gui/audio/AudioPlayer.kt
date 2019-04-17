@@ -30,14 +30,13 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.preference.PreferenceManager
-import android.support.annotation.MainThread
-import android.support.annotation.RequiresPermission
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.Snackbar
-import android.support.v4.app.FragmentActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.PopupMenu
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.annotation.MainThread
+import androidx.annotation.RequiresPermission
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.widget.PopupMenu
+import androidx.recyclerview.widget.ItemTouchHelper
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -48,15 +47,11 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
-import kotlinx.coroutines.experimental.CoroutineStart
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.channels.Channel
-import kotlinx.coroutines.experimental.channels.actor
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.actor
 import org.videolan.libvlc.Media
 import org.videolan.libvlc.MediaPlayer
-import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.medialibrary.Tools
 import org.videolan.medialibrary.media.MediaWrapper
 import org.videolan.vlc.PlaybackService
@@ -75,14 +70,17 @@ import org.videolan.vlc.gui.view.AudioMediaSwitcher.AudioMediaSwitcherListener
 import org.videolan.vlc.util.AndroidDevices
 import org.videolan.vlc.util.Constants
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 @Suppress("UNUSED_PARAMETER")
-class AudioPlayer : PlaybackServiceFragment(), PlaybackService.Callback, PlaylistAdapter.IPlayer, TextWatcher {
+class AudioPlayer : PlaybackServiceFragment(), PlaybackService.Callback, PlaylistAdapter.IPlayer, TextWatcher, CoroutineScope {
+    override val coroutineContext = Dispatchers.Main.immediate
 
     private lateinit var mBinding: AudioPlayerBinding
     private lateinit var mPlaylistAdapter: PlaylistAdapter
     private lateinit var mSettings: SharedPreferences
     private val mHandler by lazy(LazyThreadSafetyMode.NONE) { Handler() }
-    private val updateActor = actor<Unit>(UI, capacity = Channel.CONFLATED) { for (entry in channel) doUpdate() }
+    private val updateActor = actor<Unit>(Dispatchers.Main, capacity = Channel.CONFLATED) { for (entry in channel) doUpdate() }
 
     private var mShowRemainingTime = false
     private var mPreviewingSeek = false
@@ -125,11 +123,9 @@ class AudioPlayer : PlaybackServiceFragment(), PlaybackService.Callback, Playlis
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (AndroidUtil.isJellyBeanMR1OrLater) {
-            DEFAULT_BACKGROUND_DARKER_ID = UiTools.getResourceFromAttribute(view.context, R.attr.background_default_darker)
-            DEFAULT_BACKGROUND_ID = UiTools.getResourceFromAttribute(view.context, R.attr.background_default)
-        }
-        mBinding.songsList.layoutManager = LinearLayoutManager(view.context)
+        DEFAULT_BACKGROUND_DARKER_ID = UiTools.getResourceFromAttribute(view.context, R.attr.background_default_darker)
+        DEFAULT_BACKGROUND_ID = UiTools.getResourceFromAttribute(view.context, R.attr.background_default)
+        mBinding.songsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(view.context)
         mBinding.songsList.adapter = mPlaylistAdapter
         mBinding.audioMediaSwitcher.setAudioMediaSwitcherListener(mHeaderMediaSwitcherListener)
         mBinding.coverMediaSwitcher.setAudioMediaSwitcherListener(mCoverMediaSwitcherListener)
@@ -144,10 +140,10 @@ class AudioPlayer : PlaybackServiceFragment(), PlaybackService.Callback, Playlis
 
         mBinding.next.setOnTouchListener(LongSeekListener(true,
                 UiTools.getResourceFromAttribute(view.context, R.attr.ic_next),
-                R.drawable.ic_next_pressed))
+                R.drawable.ic_next_pressed_dark))
         mBinding.previous.setOnTouchListener(LongSeekListener(false,
                 UiTools.getResourceFromAttribute(view.context, R.attr.ic_previous),
-                R.drawable.ic_previous_pressed))
+                R.drawable.ic_previous_pressed_dark))
 
         registerForContextMenu(mBinding.songsList)
         userVisibleHint = true
@@ -178,7 +174,7 @@ class AudioPlayer : PlaybackServiceFragment(), PlaybackService.Callback, Playlis
                     return@OnMenuItemClickListener true
                 }
             } else if (item.itemId == R.id.audio_player_set_song) {
-                AudioUtil.setRingtone(mw, activity as FragmentActivity)
+                AudioUtil.setRingtone(mw, activity)
                 return@OnMenuItemClickListener true
             }
             false
@@ -267,25 +263,23 @@ class AudioPlayer : PlaybackServiceFragment(), PlaybackService.Callback, Playlis
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private fun updateBackground() {
-        if (AndroidUtil.isJellyBeanMR1OrLater) {
-            launch(UI, CoroutineStart.UNDISPATCHED) {
-                val mw = mService.currentMediaWrapper
-                if (mw === null || TextUtils.equals(mCurrentCoverArt, mw.artworkMrl)) return@launch
-                mCurrentCoverArt = mw.artworkMrl
-                if (TextUtils.isEmpty(mw.artworkMrl)) {
-                    setDefaultBackground()
-                } else {
-                    val blurredCover = async { UiTools.blurBitmap(AudioUtil.readCoverBitmap(Uri.decode(mw.artworkMrl), mBinding.contentLayout.width)) }.await()
-                    if (blurredCover !== null) {
-                        val activity = activity as? AudioPlayerContainerActivity
-                        if (activity === null) return@launch
-                        mBinding.backgroundView.setColorFilter(UiTools.getColorFromAttribute(activity, R.attr.audio_player_background_tint))
-                        mBinding.backgroundView.setImageBitmap(blurredCover)
-                        mBinding.backgroundView.visibility = View.VISIBLE
-                        mBinding.songsList.setBackgroundResource(0)
-                        if (mPlayerState == BottomSheetBehavior.STATE_EXPANDED) mBinding.header.setBackgroundResource(0)
-                    } else setDefaultBackground()
-                }
+        launch {
+            val mw = mService.currentMediaWrapper
+            if (mw === null || TextUtils.equals(mCurrentCoverArt, mw.artworkMrl)) return@launch
+            mCurrentCoverArt = mw.artworkMrl
+            if (TextUtils.isEmpty(mw.artworkMrl)) {
+                setDefaultBackground()
+            } else {
+                val blurredCover = withContext(Dispatchers.IO) { UiTools.blurBitmap(AudioUtil.readCoverBitmap(Uri.decode(mw.artworkMrl), mBinding.contentLayout.width)) }
+                if (blurredCover !== null) {
+                    val activity = activity as? AudioPlayerContainerActivity
+                    if (activity === null) return@launch
+                    mBinding.backgroundView.setColorFilter(UiTools.getColorFromAttribute(activity, R.attr.audio_player_background_tint))
+                    mBinding.backgroundView.setImageBitmap(blurredCover)
+                    mBinding.backgroundView.visibility = View.VISIBLE
+                    mBinding.songsList.setBackgroundResource(0)
+                    if (mPlayerState == BottomSheetBehavior.STATE_EXPANDED) mBinding.header.setBackgroundResource(0)
+                } else setDefaultBackground()
             }
         }
         if ((activity as AudioPlayerContainerActivity).isAudioPlayerExpanded)
@@ -378,7 +372,7 @@ class AudioPlayer : PlaybackServiceFragment(), PlaybackService.Callback, Playlis
         if (!isVisible) return
         val advOptionsDialog = AdvOptionsDialog()
         advOptionsDialog.arguments = Bundle().apply { putInt(AdvOptionsDialog.MODE_KEY, AdvOptionsDialog.MODE_AUDIO) }
-        advOptionsDialog.show(activity.supportFragmentManager, "fragment_adv_options")
+        advOptionsDialog.show(activity!!.supportFragmentManager, "fragment_adv_options")
     }
 
     fun show() {

@@ -51,6 +51,6 @@ public class JumpToTimeDialog extends PickTimeFragment {
     }
 
     protected int getIcon() {
-        return R.attr.ic_jumpto_normal_style;
+        return R.attr.ic_jumpto;
     }
 }

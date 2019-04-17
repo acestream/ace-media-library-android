@@ -25,19 +25,24 @@ package org.videolan.vlc.gui.tv.preferences;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.view.MenuItem;
 
 import org.videolan.vlc.PlaybackService;
 import org.videolan.vlc.R;
+import org.videolan.vlc.VLCApplication;
+
+import androidx.fragment.app.FragmentActivity;
 
 @SuppressWarnings("deprecation")
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-public class PreferencesActivity extends Activity implements PlaybackService.Client.Callback {
+public class PreferencesActivity extends FragmentActivity implements PlaybackService.Client.Callback {
 
     public final static String TAG = "VLC/PreferencesActivity";
 
@@ -50,14 +55,23 @@ public class PreferencesActivity extends Activity implements PlaybackService.Cli
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /* Theme must be applied before super.onCreate */
-        applyTheme();
-
         super.onCreate(savedInstanceState);
+
+        BasePreferenceFragment fragment;
+        String category = getIntent().getStringExtra("category");
+        if(TextUtils.equals(category, "engine")) {
+            fragment = new PreferencesEngine();
+        }
+        else if(TextUtils.equals(category, "ads")) {
+            fragment = new PreferencesAds();
+        }
+        else {
+            fragment = new PreferencesFragment();
+        }
 
         setContentView(R.layout.tv_preferences_activity);
         getFragmentManager().beginTransaction()
-                .add(R.id.fragment_placeholder, new PreferencesFragment())
+                .add(R.id.fragment_placeholder, fragment)
                 .commit();
     }
 
@@ -81,14 +95,6 @@ public class PreferencesActivity extends Activity implements PlaybackService.Cli
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void applyTheme() {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean enableBlackTheme = pref.getBoolean("enable_black_theme", false);
-        if (enableBlackTheme) {
-            setTheme(R.style.Theme_VLC_Black);
-        }
     }
 
     @Override
@@ -125,4 +131,11 @@ public class PreferencesActivity extends Activity implements PlaybackService.Cli
         if (mService != null)
             mService.detectHeadset(detect);
     }
+
+    //:ace
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(VLCApplication.updateBaseContextLocale(base));
+    }
+    ///ace
 }

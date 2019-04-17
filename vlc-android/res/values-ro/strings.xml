@@ -17,11 +17,6 @@
     <string name="sortby_date_desc">Data (desc)</string>
     <string name="searchable_hint">Căutare…</string>
     <string name="history">Istoric</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d rezultat găsit</item>
-        <item quantity="few">%d rezultate găsite</item>
-        <item quantity="other">%d de rezultate găsite</item>
-    </plurals>
     <string name="play">Redare</string>
     <string name="playback">Redare</string>
     <string name="playback_controls">Controale redare</string>
@@ -71,16 +66,6 @@
         <item quantity="one">1 subdosar</item>
         <item quantity="few">%d subdosare</item>
         <item quantity="other">%d de subdosare</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 fișier media</item>
-        <item quantity="few">%d fișiere media</item>
-        <item quantity="other">%d de fișiere media</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 videoclip</item>
-        <item quantity="few">%d videoclipuri</item>
-        <item quantity="other">%d de videoclipuri</item>
     </plurals>
     <string name="internal_memory">Memorie internă</string>
     <string name="parent_folder">Sus la dosarul părinte</string>
@@ -142,11 +127,6 @@
     <string name="navmenu">Navigare meniu</string>
     <string name="advanced">Optiuni avansate</string>
     <string name="audio_boost_warning">Glisați din nou pentru a depăși 100%</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 canal\n</item>
-        <item quantity="few">%1$d canale\n</item>
-        <item quantity="other">%1$d de canale\n</item>
-    </plurals>
     <string name="track_samplerate_info">Rata simpla: %1$d Hz\n</string>
     <string name="track_resolution_info">Rezolutie: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Interval cadre: %1$.3f\n</string>
@@ -179,7 +159,7 @@
     <string name="error_not_compatible">Ne pare rău, dispozitivul tău nu este momentan suportat de această versiune de VLC pentru Android™.</string>
     <string name="error_problem">Ne pare rău, VLC pentru Android a întâmpinat o problemă la încărcare, și a fost închis.</string>
     <string name="error_message_is">Mesajul de eroare este (vă rugăm să îl menționați la depanare):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Eroare de redare</string>
     <string name="encountered_error_message">VLC a întâmpinat o eroare cu acest suport. \ nÎncercați să reîmprospătați biblioteca media.</string>
     <string name="invalid_location">Locaţia %1$s nu poate fi redată.</string>
@@ -413,4 +393,154 @@
     <string name="equalizer_new_preset_name">Nou</string>
     <string name="recommendations">Recomandări</string>
     <string name="browser_quick_access">Acces rapid</string>
+    <string name="torrent_files">Torrent fișiere</string>
+    <string name="select_language">Selecteaza limba</string>
+    <string name="sortby_number" source="google_translate">Nb piese</string>
+    <string name="sortby_number_desc" source="google_translate">Piesele Nb (desc)</string>
+    <string name="medialibrary_scan" source="google_translate">Scanarea bibliotecii media</string>
+    <string name="Medialibrary_progress" source="google_translate">Biblioteca media scanează actualizările progresului</string>
+    <string name="server_share_hint" source="google_translate">Numele partajării rețelei (sau adresa IP)</string>
+    <string name="server_servername_hint" source="google_translate">Numele serverului, pentru conveniență</string>
+    <string name="search_no_result" source="google_translate">Nu s-a găsit niciun material media</string>
+    <string name="ok_got_it" source="google_translate">Am înțeles, respingem asta</string>
+    <string name="hold_to_seek" source="google_translate">Ține-te să cauți</string>
+    <string name="hardware_acceleration_summary" source="google_translate">Dezactivat: stabilitate mai bună. \ NDecodare: poate îmbunătăți performanța. \ NFull: poate îmbunătăți performanța în continuare.</string>
+    <string name="dev_hardware_decoder" source="google_translate">Hardware decodor avansat</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">Force decoder hardware, numai pentru utilizatorii avansați</string>
+    <string name="enable_clone_mode" source="google_translate">Preferați clona</string>
+    <string name="video_min_group_length_short" source="google_translate">Număr scurt de litere (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Numărul mare de litere (9)</string>
+    <string name="media_fast_seek" source="google_translate">Activați opțiunea de căutare rapidă</string>
+    <string name="media_seen" source="google_translate">Afișați marcajul video vazut</string>
+    <string name="media_seen_summary" source="google_translate">Marcați un videoclip așa cum îl vedeți când îl jucați până la sfârșit</string>
+    <string name="force_list_portrait" source="google_translate">Nicio rețea în modul portret</string>
+    <string name="force_list_portrait_summary" source="google_translate">Afișați videoclipuri în listă în loc de grila în modul portret</string>
+    <string name="force_play_all_summary" source="google_translate">Redați toate videoclipurile, începând cu cea pe care ați făcut clic</string>
+    <string name="save_brightness_summary" source="google_translate">Amintiți-vă nivelul luminozității în playerul video</string>
+    <string name="save_brightness_title" source="google_translate">Salvați nivelul luminozității pentru video</string>
+    <string name="save_audiodelay_summary" source="google_translate">Salvați întârzierea audio individuală pentru fiecare videoclip</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Luminozitate</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Gest de volum</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Controlați volumul prin gest în timpul redării video</string>
+    <string name="enable_seek_buttons" source="google_translate">Activați butoanele căutării</string>
+    <string name="subtitles_color_gray" source="google_translate">gri</string>
+    <string name="subtitles_autoload_title" source="google_translate">Încărcarea automată a subtitrărilor</string>
+    <string name="lockscreen_cover_title" source="google_translate">Capacul de pe ecranul de blocare</string>
+    <string name="audio_boost_title" source="google_translate">Audio-impuls</string>
+    <string name="enable_headset_detection_summary" source="google_translate">Detectați inserarea și scoaterea căștilor</string>
+    <string name="enable_headset_actions_title" source="google_translate">Comenzi rapide de la distanță</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Apăsați dublu pe \'Play \' pentru a trece la apăsarea următoare și lungă pe ea pentru a trece la melodia anterioară</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Reluați la introducerea căștilor</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">Întrerupeți altfel</string>
+    <string name="audio_ducking_title" source="google_translate">Scăderea volumului VLC la notificări</string>
+    <string name="audio_ducking_summary" source="google_translate">Ajută la auzirea notificărilor audio, a instrucțiunilor de navigare sau a vorbirii asistentului</string>
+    <string name="casting_category" source="google_translate">piesă turnată</string>
+    <string name="casting_passthrough_title" source="google_translate">Pasul audio</string>
+    <string name="casting_passthrough_summary" source="google_translate">Permiteți televizorului să gestioneze redarea audio</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Calitatea conversiei</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Selectați calitatea conversiei la distribuirea pe ecranul la distanță</string>
+    <string name="casting_quality_high" source="google_translate">Înalt</string>
+    <string name="casting_quality_medium" source="google_translate">Mediu</string>
+    <string name="casting_quality_low" source="google_translate">Scăzut</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Cel mai mic</string>
+    <string name="cast_performance_warning" source="google_translate">Trimiterea acestui videoclip necesită conversii. Această conversie poate utiliza toată puterea disponibilă și vă poate scurge rapid bateria.</string>
+    <string name="artists_show_all_title" source="google_translate">Afișați toți artiștii</string>
+    <string name="artists_show_all_summary" source="google_translate">Afișați toți artiștii în lista de artiști, nu numai artiști de album</string>
+    <string name="extensions_enable_category" source="google_translate">Alegeți extensiile pentru activare</string>
+    <string name="extensions_empty" source="google_translate">Nu a fost detectată nicio extensie</string>
+    <string name="main_prefs_category" source="google_translate">Setări principale</string>
+    <string name="auto_rescan" source="google_translate">Rescanare automată</string>
+    <string name="dump_media_db" source="google_translate">Dump baza de date media</string>
+    <string name="dump_media_db_summary" source="google_translate">Copiați baza de date în rădăcina de stocare internă</string>
+    <string name="resume_playback_summary" source="google_translate">Rămâi în pauză altfel</string>
+    <string name="log_service_title" source="google_translate">Înregistrarea jurnalelor VLC</string>
+    <string name="log_service_text" source="google_translate">Deschideți consola jurnal</string>
+    <string name="drawer_open" source="google_translate">Deschideți sertarul de navigare</string>
+    <string name="drawer_close" source="google_translate">Inchide sertarul de navigare</string>
+    <string name="network_browsing" source="google_translate">Retea locala</string>
+    <string name="browsing" source="google_translate">Navigare</string>
+    <string name="audio_delay" source="google_translate">Întârziere audio</string>
+    <string name="spu_delay" source="google_translate">Subtitrarea este întârziată</string>
+    <string name="sleep_time_not_set" source="google_translate">niciun set</string>
+    <string name="network_shares_discovery" source="google_translate">Căutați acțiuni de rețea ...</string>
+    <string name="network_empty" source="google_translate">Acest director este gol.</string>
+    <string name="network_connection_needed" source="google_translate">Nu există nicio conexiune la rețeaua locală.</string>
+    <string name="search_list_hint" source="google_translate">Căutați conținut media în lista curentă</string>
+    <string name="search_global" source="google_translate">Căutați în toate bibliotecile media</string>
+    <string name="directory_show_medialib" source="google_translate">Afișați în MediaLib</string>
+    <string name="directory_hide_medialib" source="google_translate">Ascundeți de la MediaLib</string>
+    <string name="resume_from_position" source="google_translate">Reluați din ultima poziție</string>
+    <string name="confirm_resume" source="google_translate">Reluați de la ultima poziție?</string>
+    <string name="confirm_resume_title" source="google_translate">Cereți confirmarea pentru a relua</string>
+    <string name="confirm_resume_summary" source="google_translate">dacă este activată, vi se va cere să confirmați când un videoclip poate fi reluat din ultima poziție</string>
+    <string name="player_touch_title" source="google_translate">Atingeți comenzile pentru Video</string>
+    <string name="player_touch_enable_all" source="google_translate">Activați comenzile de atingere</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Dezactivați controlul luminozității</string>
+    <string name="player_touch_disable_all" source="google_translate">Dezactivați toate comenzile de atingere</string>
+    <string name="tv_ui_summary" source="google_translate">Schimbați interfața de utilizare la tema adaptată TV</string>
+    <string name="medialibrary_directories" source="google_translate">Dosare bibliotecă media</string>
+    <string name="move" source="google_translate">Mișcare</string>
+    <string name="back_quit_lock" source="google_translate">Apăsați din nou pe Înapoi pentru a închide videoclipul</string>
+    <string name="no_subs_found" source="google_translate">Nu există subtitrări în acest director</string>
+    <string name="allow_storage_access_title" source="google_translate">Permite Ace Stream să acceseze fișiere video și audio</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace Stream trebuie să acordați această permisiune pentru a accesa fișierele media de pe acest dispozitiv.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Permiteți Ace Stream să stabilească tonul de apel</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace Stream trebuie să acordați această permisiune pentru a configura acest cântec ca ton de sonerie.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Permiteți Ace Stream să modifice modul de luminozitate</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace Stream are nevoie de această permisiune pentru a vă schimba modul de luminozitate.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Permiteți jocului Ace Stream să se afișeze peste alte aplicații</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream are nevoie să acordați permisiunea să afișeze videoclipul într-un pop-up peste alte aplicații.</string>
+    <string name="fastscroller_track" source="google_translate">Pista FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">Mânerul FastScroller</string>
+    <string name="plugins" source="google_translate">Plugin-uri</string>
+    <string name="opengl_title" source="google_translate">Utilizarea OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">În mod implicit, OpenGL ES2 este utilizat pentru decodarea software-ului și pentru decodarea hardware atunci când este necesar (video 360 °).</string>
+    <string name="opengl_on" source="google_translate">Force On</string>
+    <string name="opengl_off" source="google_translate">Forțată oprită</string>
+    <string name="network_favorites" source="google_translate">Preferințele rețelei</string>
+    <string name="network_shared_folders" source="google_translate">Dosarele partajate</string>
+    <string name="encryption_warning" source="google_translate">Avertisment, criptarea nu este disponibilă pentru această versiune Android, parola va fi stocată într-un spațiu privat, dar nu este criptată</string>
+    <string name="popup_playback" source="google_translate">Redarea într-o fereastră pop-up</string>
+    <string name="popup_expand" source="google_translate">Extindeți videoclipul</string>
+    <string name="dialog_subloader_success" source="google_translate">Subtitrari pentru:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Subtitrările nu au fost găsite pentru:</string>
+    <string name="preferences_languages_download" source="google_translate">Subtitrare limbi</string>
+    <string name="list_languages_download_summary" source="google_translate">Limbile de descărcat la preluarea subtitrărilor</string>
+    <string name="list_languages_download_title" source="google_translate">Subtitrările descărca limbile</string>
+    <string name="connecting" source="google_translate">Conectarea ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">salvați întârziere pentru dispozitivul Bluetooth</string>
+    <string name="streams" source="google_translate">fluxuri</string>
+    <string name="loading_medialibrary" source="google_translate">Loading Medialibrary ...</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Salvați setul egalizator ca ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Salvați noul set de egalizatori ca ...</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary vă scanează dispozitivele chiar acum</string>
+    <string name="recommendations_desc" source="google_translate">Recomandări carduri pe lansator</string>
+    <string name="browser_storages" source="google_translate">Storages</string>
+    <string name="renderer_list_title" source="google_translate">Monitoare</string>
+    <string name="feedback_player_crashed" source="google_translate">Ne pare rău, VLC sa prăbușit. Vă rugăm să încercați din nou.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Trebuie să acordați permisiunea de scriere VLC pe cardul SD</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC nu poate șterge acest fișier fără permisiunea de acces la scriere. \ NVă rugăm să mergeți pe cardul SD și să faceți clic pe \ "Selectați". \ NApoi să faceți clic pe \ "Afișare card SD \" în meniul din dreapta sus</string>
+    <string name="dialog_sd_wizard" source="google_translate">Arătați-mi</string>
+    <string name="renderers_disconnect" source="google_translate">Deconecta</string>
+    <string name="audio_digital_failed" source="google_translate">Nu sa reușit modificarea stării de ieșire digitală audio</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Ieșire digitală audio activată</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Ieșirea digitală audio este dezactivată</string>
+    <string name="live_streams" source="google_translate">Live streams</string>
+    <string name="all_live_streams" source="google_translate">Toate fluxurile live</string>
+    <string name="video_torrents" source="google_translate">Video torrents</string>
+    <string name="audio_torrents" source="google_translate">Audio torrents</string>
+    <string name="all_torrents" source="google_translate">Toate torrentele</string>
+    <string name="main" source="google_translate">Principal</string>
+    <string name="media_player" source="google_translate">Media Player</string>
+    <string name="acestream_server" source="google_translate">Serverul Ace Stream (motor)</string>
+    <string name="media_player_settings" source="google_translate">Setările playerului media</string>
+    <string name="acestream_server_settings" source="google_translate">Setările serverului Ace Stream (motor)</string>
+    <string name="sign_out" source="google_translate">Sign out</string>
+    <string name="sign_in" source="google_translate">conectare</string>
+    <string name="sign_in_acestream" source="google_translate">Conectați-vă cu Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Conectați-vă la Google</string>
+    <string name="video_files" source="google_translate">Fișiere video</string>
+    <string name="audio_files" source="google_translate">Fișiere audio</string>
+    <string name="retry" source="google_translate">Reîncercați</string>
+    <string name="failed_to_load_web_page" source="google_translate">Eroare la încărcarea paginii web</string>
 </resources>

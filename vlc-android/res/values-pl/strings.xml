@@ -19,12 +19,6 @@
     <string name="sortby_number_desc">Liczba utworów (malejąco)</string>
     <string name="searchable_hint">Szukaj…</string>
     <string name="history">Historia</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">Znaleziono %d pozycję</item>
-        <item quantity="few">Znaleziono %d pozycje</item>
-        <item quantity="many">Znaleziono %d pozycji</item>
-        <item quantity="other">Znaleziono %d pozycji</item>
-    </plurals>
     <string name="play">Odtwórz</string>
     <string name="playback">Odtwarzanie</string>
     <string name="playback_controls">Regulacja odtwarzania</string>
@@ -79,18 +73,6 @@
         <item quantity="few">%d podfoldery</item>
         <item quantity="many">%d podfolderów</item>
         <item quantity="other">%d podfolderów</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 plik multimedialny</item>
-        <item quantity="few">%d pliki multimedialne</item>
-        <item quantity="many">%d plików multimedialnych</item>
-        <item quantity="other">%d plików multimedialnych</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 film</item>
-        <item quantity="few">%d filmy</item>
-        <item quantity="many">%d filmów</item>
-        <item quantity="other">%d filmów</item>
     </plurals>
     <string name="internal_memory">Pamięć wewnętrzna</string>
     <string name="parent_folder">Do folderu nadrzędnego</string>
@@ -152,12 +134,6 @@
     <string name="navmenu">menu nawigacyjne</string>
     <string name="advanced">zaawansowane opcje</string>
     <string name="audio_boost_warning">Przesuń ponownie, aby przekroczyć 100%</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 kanał\n</item>
-        <item quantity="few">%1$d kanały\n</item>
-        <item quantity="many">%1$d kanałów\n</item>
-        <item quantity="other">%1$d kanałów\n</item>
-    </plurals>
     <string name="track_samplerate_info">Częstotliwość próbkowania: %1$d Hz\n</string>
     <string name="track_resolution_info">Rozdzielczość: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Liczba klatek: %1$.3f\n\n</string>
@@ -193,7 +169,7 @@
     <string name="error_not_compatible">Przykro nam, ale twoje urządzenie nie jest obecnie obsługiwane przez tę wersję VLC dla Androida™.</string>
     <string name="error_problem">Przepraszamy, ale VLC dla Androida miał problem przy ładowaniu i został zamknięty.</string>
     <string name="error_message_is">Komunikat błędu (prosimy wspomnieć podczas debugowania):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Błąd odtwarzania</string>
     <string name="encountered_error_message">VLC napotkał błąd tego nośnika.\nSpróbuj odświeżyć bibliotekę mediów.</string>
     <string name="invalid_location">Pozycja %1$s nie może zostać odtworzona.</string>
@@ -456,14 +432,14 @@
     <!--Widget-->
     <string name="widget_name_w">Biały widżet VLC</string>
     <string name="widget_name_b">Ciemny widżet VLC</string>
-    <string name="allow_storage_access_title">Zezwól VLC na dostęp do plików audio i wideo</string>
-    <string name="allow_storage_access_description">VLC potrzebuje udzielenia pozwolenia na dostęp do plików multimedialnych na tym urządzeniu.</string>
-    <string name="allow_settings_access_ringtone_title">Zezwól VLC na ustawienie dzwonka</string>
-    <string name="allow_settings_access_ringtone_description">VLC potrzebuje udzielenia pozwolenia do skonfigurowania tego utworu jako dzwonek.</string>
-    <string name="allow_settings_access_brightness_title">Zezwól VLC na zmianę jasności</string>
-    <string name="allow_settings_access_brightness_description">VLC potrzebuje udzielenia pozwolenia do zmiany trybu jasności.</string>
-    <string name="allow_draw_overlays_title">Zezwól VLC na wyświetlanie okna nad innymi aplikacjami</string>
-    <string name="allow_sdraw_overlays_description">VLC potrzebuje udzielenia pozwolenia do wyświetlania widea w oknie nad innymi aplikacjami.</string>
+    <string name="allow_storage_access_title">Zezwól Ace Stream na dostęp do plików audio i wideo</string>
+    <string name="allow_storage_access_description">Ace Stream potrzebuje udzielenia pozwolenia na dostęp do plików multimedialnych na tym urządzeniu.</string>
+    <string name="allow_settings_access_ringtone_title">Zezwól Ace Stream na ustawienie dzwonka</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream potrzebuje udzielenia pozwolenia do skonfigurowania tego utworu jako dzwonek.</string>
+    <string name="allow_settings_access_brightness_title">Zezwól Ace Stream na zmianę jasności</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream potrzebuje udzielenia pozwolenia do zmiany trybu jasności.</string>
+    <string name="allow_draw_overlays_title">Zezwól Ace Stream na wyświetlanie okna nad innymi aplikacjami</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream potrzebuje udzielenia pozwolenia do wyświetlania widea w oknie nad innymi aplikacjami.</string>
     <string name="permission_ask_again">Udzielenie pozwolenia</string>
     <string name="exit_app">Zamknij VLC</string>
     <string name="exit_app_msg">Czy na pewno chcesz zamknąć VLC?</string>
@@ -546,4 +522,34 @@
     <string name="sdcard_permission_dialog_title">Musisz zezwolić VLC na dostęp do zapisu na karcie SD</string>
     <string name="sdcard_permission_dialog_message">VLC nie może usunąć tego pliku bez uprawnień do zapisu.\nPrzejdź do karty SD i kliknij \"Wybierz\".\nByć może będziesz musiał kliknąć najpierw na \"Pokaż kartę SD\" w prawym górnym menu</string>
     <string name="dialog_sd_wizard">Pokaż mi</string>
+    <string name="torrent_files">Torrent pliki</string>
+    <string name="select_language">Wybierz język</string>
+    <string name="enable_headset_actions_title" source="google_translate">Skróty zdalnego sterowania</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Dwukrotnie naciśnij przycisk \ "Odtwórz \", aby przejść do następnego i długo naciśnij, aby przejść do poprzedniego utworu</string>
+    <string name="main_prefs_category" source="google_translate">Ustawienia główne</string>
+    <string name="dump_media_db" source="google_translate">Zrzuć bazę danych mediów</string>
+    <string name="dump_media_db_summary" source="google_translate">Skopiuj bazę danych do katalogu głównego magazynu wewnętrznego</string>
+    <string name="streams" source="google_translate">strumienie</string>
+    <string name="renderers_disconnect" source="google_translate">Rozłączyć się</string>
+    <string name="audio_digital_failed" source="google_translate">Nie można zmienić stanu wyjścia cyfrowego audio</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Wyjście dźwięku cyfrowego włączone</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Wyjście dźwięku cyfrowego wyłączone</string>
+    <string name="live_streams" source="google_translate">Transmisja na żywo</string>
+    <string name="all_live_streams" source="google_translate">Wszystkie transmisje na żywo</string>
+    <string name="video_torrents" source="google_translate">Torrenty wideo</string>
+    <string name="audio_torrents" source="google_translate">Torrenty audio</string>
+    <string name="all_torrents" source="google_translate">Wszystkie torrenty</string>
+    <string name="main" source="google_translate">Główny</string>
+    <string name="media_player" source="google_translate">Odtwarzacz multimedialny</string>
+    <string name="acestream_server" source="google_translate">Serwer Ace Stream (silnik)</string>
+    <string name="media_player_settings" source="google_translate">Ustawienia odtwarzacza multimedialnego</string>
+    <string name="acestream_server_settings" source="google_translate">Ustawienia serwera Ace Stream (silnika)</string>
+    <string name="sign_out" source="google_translate">Wyloguj się</string>
+    <string name="sign_in" source="google_translate">Zaloguj</string>
+    <string name="sign_in_acestream" source="google_translate">Zaloguj się przy pomocy Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Zaloguj się za pomocą Google</string>
+    <string name="video_files" source="google_translate">Pliki wideo</string>
+    <string name="audio_files" source="google_translate">Pliki audio</string>
+    <string name="retry" source="google_translate">Spróbować ponownie</string>
+    <string name="failed_to_load_web_page" source="google_translate">Nie udało się załadować strony internetowej</string>
 </resources>

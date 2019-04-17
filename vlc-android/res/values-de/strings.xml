@@ -19,10 +19,6 @@
     <string name="sortby_number_desc">Titelnummern (Beschreibung)</string>
     <string name="searchable_hint">Suchen …</string>
     <string name="history">Verlauf</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d Ergebnis gefunden</item>
-        <item quantity="other">%d Ergebnisse gefunden</item>
-    </plurals>
     <string name="play">Wiedergabe</string>
     <string name="playback">Wiedergabe</string>
     <string name="playback_controls">Wiedergabesteuerungen</string>
@@ -71,14 +67,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 Unterordner</item>
         <item quantity="other">%d Unterordner</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 Mediendatei</item>
-        <item quantity="other">%d Mediendateien</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 Video</item>
-        <item quantity="other">%d Videos</item>
     </plurals>
     <string name="internal_memory">Interner Speicher</string>
     <string name="parent_folder">Zum darüberliegenden Ordner</string>
@@ -140,10 +128,6 @@
     <string name="navmenu">Navigationsmenü</string>
     <string name="advanced">Erweiterte Optionen</string>
     <string name="audio_boost_warning">Für mehr als 100% nach oben schieben</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 Kanal\n</item>
-        <item quantity="other">%1$d Kanäle\n</item>
-    </plurals>
     <string name="track_samplerate_info">Abtastrate: %1$d Hz\n</string>
     <string name="track_resolution_info">Auflösung: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Bildwiederholrate: %1$.3f\n</string>
@@ -179,7 +163,7 @@
     <string name="error_not_compatible">Entschuldigung, VLC für Android™ unterstützt dieses Gerät derzeit leider nicht.</string>
     <string name="error_problem">Es tut uns leid, VLC für Android hatte ein Problem beim Laden und musste geschlossen werden.</string>
     <string name="error_message_is">Die Fehlermeldung ist (bitte bei der Fehlersuche angeben):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Wiedergabefehler</string>
     <string name="encountered_error_message">VLC stellte einen Fehler mit diesem Medium fest.\nBitte versuchen Sie die Medienbibliothek zu aktualisieren.</string>
     <string name="invalid_location">Ort %1$s kann nicht abgespielt werden.</string>
@@ -314,7 +298,7 @@
     <string name="audio_save_repeat_title">Wiederholen-Modus speichern</string>
     <string name="audio_save_repeat_summary">Wiederholen-Modus merken wenn Audio-Wiedergabelisten geladen werden</string>
     <string name="audio_boost_title">Audio-Boost</string>
-    <string name="audio_boost_summary">Lautstärke bis zu 200% aktivieren</string>
+    <string name="audio_boost_summary" formatted="false">Lautstärke bis zu 200% aktivieren</string>
     <string name="headset_prefs_category">Kopfhörer</string>
     <string name="enable_headset_detection">Kopfhörer erkennen</string>
     <string name="enable_headset_detection_summary">An- und Abstecken des Kopfhörers erkennen</string>
@@ -442,14 +426,14 @@
     <!--Widget-->
     <string name="widget_name_w">VLC weißes Widget</string>
     <string name="widget_name_b">VLC dunkles Widget</string>
-    <string name="allow_storage_access_title">VLC Zugriff auf Video- und Audio-Dateien erlauben</string>
-    <string name="allow_storage_access_description">VLC benötigt von Ihnen die Genehmigung zum Zugriff auf die Mediendateien auf diesem Gerät.</string>
-    <string name="allow_settings_access_ringtone_title">VLC das Einstellen des Klingeltons erlauben</string>
-    <string name="allow_settings_access_ringtone_description">VLC benötigt von Ihnen die Genehmigung zum Einstellen dieses Liedes als Klingelton.</string>
-    <string name="allow_settings_access_brightness_title">VLC das Einstellen des Helligkeitsmodus erlauben</string>
-    <string name="allow_settings_access_brightness_description">VLC benötigt von Ihnen die Genehmigung zum Einstellen des Helligkeitsmodus.</string>
-    <string name="allow_draw_overlays_title">VLC-Player das Einblenden über andere Apps erlauben</string>
-    <string name="allow_sdraw_overlays_description">VLC benötigt von Ihnen die Genehmigung zum Einblenden Ihres Videos über andere Anwendungen.</string>
+    <string name="allow_storage_access_title">Ace Stream Zugriff auf Video- und Audio-Dateien erlauben</string>
+    <string name="allow_storage_access_description">Ace Stream benötigt von Ihnen die Genehmigung zum Zugriff auf die Mediendateien auf diesem Gerät.</string>
+    <string name="allow_settings_access_ringtone_title">Ace Stream das Einstellen des Klingeltons erlauben</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream benötigt von Ihnen die Genehmigung zum Einstellen dieses Liedes als Klingelton.</string>
+    <string name="allow_settings_access_brightness_title">Ace Stream das Einstellen des Helligkeitsmodus erlauben</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream benötigt von Ihnen die Genehmigung zum Einstellen des Helligkeitsmodus.</string>
+    <string name="allow_draw_overlays_title">Ace Stream-Player das Einblenden über andere Apps erlauben</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream benötigt von Ihnen die Genehmigung zum Einblenden Ihres Videos über andere Anwendungen.</string>
     <string name="permission_ask_again">Genehmigung erteilen</string>
     <string name="exit_app">VLC schließen</string>
     <string name="exit_app_msg">Möchten Sie VLC wirklich verlassen?</string>
@@ -532,4 +516,34 @@
     <string name="sdcard_permission_dialog_title">Sie müssen VLC den Schreibzugriff auf Ihre SD-Karte gewähren</string>
     <string name="sdcard_permission_dialog_message">VLC kann diese Datei nicht ohne Schreibzugriffsberechtigung löschen.\nBitte wechseln Sie auf Ihre SD-Karte und klicken Sie auf \"Auswählen\".\nSie müssen möglicherweise zuerst auf \"SD-Karte anzeigen\" im Menü oben rechts klicken</string>
     <string name="dialog_sd_wizard">Zeig es mir</string>
+    <string name="torrent_files">Torrent Dateien</string>
+    <string name="select_language">Sprache auswählen</string>
+    <string name="enable_headset_actions_title" source="google_translate">Fernbedienungsverknüpfungen</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Drücken Sie doppelt auf \'Play \', um zum nächsten zu springen, und drücken Sie lange, um zum vorherigen Titel zu springen</string>
+    <string name="main_prefs_category" source="google_translate">Haupteinstellungen</string>
+    <string name="dump_media_db" source="google_translate">Dump-Mediendatenbank</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopieren Sie die Datenbank in den internen Speicherstamm</string>
+    <string name="streams" source="google_translate">Ströme</string>
+    <string name="renderers_disconnect" source="google_translate">Trennen</string>
+    <string name="audio_digital_failed" source="google_translate">Status des Audio-Digitalausgangs konnte nicht geändert werden</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Audio-Digitalausgang aktiviert</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio-Digitalausgang deaktiviert</string>
+    <string name="live_streams" source="google_translate">Live-Streams</string>
+    <string name="all_live_streams" source="google_translate">Alle Live-Streams</string>
+    <string name="video_torrents" source="google_translate">Video-Torrents</string>
+    <string name="audio_torrents" source="google_translate">Audio-Torrents</string>
+    <string name="all_torrents" source="google_translate">Alle Torrents</string>
+    <string name="main" source="google_translate">Main</string>
+    <string name="media_player" source="google_translate">Media Player</string>
+    <string name="acestream_server" source="google_translate">Ace Stream Server (Engine)</string>
+    <string name="media_player_settings" source="google_translate">Media Player-Einstellungen</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream Server (Engine) -Einstellungen</string>
+    <string name="sign_out" source="google_translate">Ausloggen</string>
+    <string name="sign_in" source="google_translate">Einloggen</string>
+    <string name="sign_in_acestream" source="google_translate">Melden Sie sich mit Ace Stream an</string>
+    <string name="sign_in_google" source="google_translate">Anmeldung mit Google</string>
+    <string name="video_files" source="google_translate">Videodateien</string>
+    <string name="audio_files" source="google_translate">Audiodateien</string>
+    <string name="retry" source="google_translate">Wiederholen</string>
+    <string name="failed_to_load_web_page" source="google_translate">Laden der Webseite fehlgeschlagen</string>
 </resources>

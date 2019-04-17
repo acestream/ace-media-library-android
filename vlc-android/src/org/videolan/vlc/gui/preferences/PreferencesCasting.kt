@@ -41,7 +41,7 @@ class PreferencesCasting : BasePreferenceFragment(), SharedPreferences.OnSharedP
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             "casting_passthrough", "casting_quality" -> {
-                VLCInstance.restart()
+                VLCInstance.restart(true)
                 (activity as? PreferencesActivity)?.restartMediaPlayer()
             }
         }

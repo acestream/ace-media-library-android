@@ -24,13 +24,13 @@
 
 package org.videolan.vlc.util;
 
-import android.databinding.ViewDataBinding;
+import androidx.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.Nullable;
-import android.support.v4.util.SimpleArrayMap;
+import androidx.annotation.Nullable;
+import androidx.collection.SimpleArrayMap;
 import android.view.View;
 
 import org.videolan.vlc.gui.helpers.AsyncImageLoader;

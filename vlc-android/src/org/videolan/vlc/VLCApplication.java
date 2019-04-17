@@ -19,22 +19,29 @@
  *****************************************************************************/
 package org.videolan.vlc;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Application;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Process;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.util.SimpleArrayMap;
+import androidx.multidex.MultiDexApplication;
+import androidx.fragment.app.DialogFragment;
+import androidx.collection.SimpleArrayMap;
+import android.text.TextUtils;
 import android.util.Log;
 
+import org.acestream.sdk.AceStream;
+import org.acestream.sdk.utils.Logger;
 import org.videolan.libvlc.Dialog;
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.medialibrary.Medialibrary;
@@ -56,8 +63,8 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class VLCApplication extends Application {
-    public final static String TAG = "VLC/VLCApplication";
+public class VLCApplication extends MultiDexApplication {
+    public final static String TAG = "AS/VLC/App";
 
     public final static String ACTION_MEDIALIBRARY_READY = "VLC/VLCApplication";
     private static volatile VLCApplication instance;
@@ -71,7 +78,7 @@ public class VLCApplication extends Application {
     private static SimpleArrayMap<String, WeakReference<Object>> sDataMap = new SimpleArrayMap<>();
 
     /* Up to 2 threads maximum, inactive threads are killed after 2 seconds */
-    private static final int maxThreads = Math.max(AndroidUtil.isJellyBeanMR1OrLater ? Runtime.getRuntime().availableProcessors() : 2, 1);
+    private static final int maxThreads = Math.max(Runtime.getRuntime().availableProcessors(), 1);
     public static final ThreadFactory THREAD_FACTORY = new ThreadFactory() {
         @Override
         public Thread newThread(Runnable runnable) {
@@ -106,7 +113,8 @@ public class VLCApplication extends Application {
             @Override
             public void run() {
 
-                if (AndroidUtil.isOOrLater) NotificationHelper.createNotificationChannels(VLCApplication.this);
+                if (AndroidUtil.isOOrLater)
+                    NotificationHelper.createNotificationChannels(VLCApplication.this);
                 // Prepare cache folder constants
                 AudioUtil.prepareCacheFolder(instance);
 
@@ -115,8 +123,15 @@ public class VLCApplication extends Application {
             }
         });
 
-        if (sActivityCbListener != null) registerActivityLifecycleCallbacks(sActivityCbListener);
+        if (sActivityCbListener != null)
+            registerActivityLifecycleCallbacks(sActivityCbListener);
         else ExternalMonitor.register(instance);
+
+        IntentFilter filter = new IntentFilter(AceStream.ACTION_RESTART_APP);
+        registerReceiver(mBroadcastReceiver, filter);
+
+        AceStream.init(this, null, null, null);
+        Logger.enableDebugLogging(sSettings.getBoolean("enable_debug_logging", BuildConfig.enableDebugLogging));
     }
 
     @Override
@@ -167,14 +182,33 @@ public class VLCApplication extends Application {
         return sTV || (sSettings != null && sSettings.getBoolean("tv_ui", false));
     }
 
-    public static void runBackground(Runnable runnable) {
-        if (Looper.myLooper() != Looper.getMainLooper()) runnable.run();
-        else threadPool.execute(runnable);
+    public static boolean isBlackTheme() {
+        return VLCApplication.showTvUi()
+                || getSettings().getBoolean("enable_black_theme", true);
     }
+
+    public static void runBackground(Runnable runnable) {
+        threadPool.execute(runnable);
+    }
+
 
     public static void runOnMainThread(Runnable runnable) {
         if (Looper.myLooper() == Looper.getMainLooper()) runnable.run();
         else handler.post(runnable);
+    }
+
+    public static void postOnMainThread(Runnable runnable, long delay) {
+        handler.postDelayed(runnable, delay);
+    }
+
+    public static void postOnBackgroundThread(final Runnable runnable, long delay) {
+        // Use handler to schedule and thread pool to execute.
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                threadPool.execute(runnable);
+            }
+        }, delay);
     }
 
     public static boolean removeTask(Runnable runnable) {
@@ -247,7 +281,7 @@ public class VLCApplication extends Application {
     }
 
     public static void setLocale() {
-        if (sSettings == null) PreferenceManager.getDefaultSharedPreferences(instance);
+        if (sSettings == null) sSettings = PreferenceManager.getDefaultSharedPreferences(instance);
         // Are we using advanced debugging - locale?
         String p = sSettings.getString("set_locale", "");
         if (!p.equals("")) {
@@ -288,7 +322,7 @@ public class VLCApplication extends Application {
     }
 
     private static int sActivitiesCount = 0;
-    private static ActivityLifecycleCallbacks sActivityCbListener = AndroidUtil.isICSOrLater ? new ActivityLifecycleCallbacks() {
+    private static ActivityLifecycleCallbacks sActivityCbListener = new ActivityLifecycleCallbacks() {
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {}
 
@@ -305,7 +339,14 @@ public class VLCApplication extends Application {
 
         @Override
         public void onActivityStopped(Activity activity) {
-            if (--sActivitiesCount == 0)  ExternalMonitor.unregister(instance);
+            if (--sActivitiesCount == 0) {
+                ExternalMonitor.unregister(instance);
+                //:ace
+                Intent intent = new Intent(AceStream.BROADCAST_APP_IN_BACKGROUND);
+                intent.putExtra("pid", android.os.Process.myPid());
+                getAppContext().sendBroadcast(intent);
+                ///ace
+            }
         }
 
         @Override
@@ -313,5 +354,52 @@ public class VLCApplication extends Application {
 
         @Override
         public void onActivityDestroyed(Activity activity) {}
-    } : null;
+    };
+
+    public static String getSavedLanguage() {
+        return getSettings().getString("set_locale", null);
+    }
+
+    public static Context updateBaseContextLocale(Context context) {
+        String language = getSavedLanguage();
+        if(TextUtils.isEmpty(language)) {
+            return context;
+        }
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return updateResourcesLocale(context, locale);
+        }
+
+        return updateResourcesLocaleLegacy(context, locale);
+    }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    private static Context updateResourcesLocale(Context context, Locale locale) {
+        Configuration configuration = context.getResources().getConfiguration();
+        configuration.setLocale(locale);
+        return context.createConfigurationContext(configuration);
+    }
+
+    @SuppressWarnings("deprecation")
+    private static Context updateResourcesLocaleLegacy(Context context, Locale locale) {
+        Resources resources = context.getResources();
+        Configuration configuration = resources.getConfiguration();
+        configuration.locale = locale;
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        return context;
+    }
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            Log.v(TAG, "receiver: action=" + action);
+
+            if(TextUtils.equals(action, AceStream.ACTION_RESTART_APP)) {
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        }
+    };
 }

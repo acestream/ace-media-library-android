@@ -23,24 +23,33 @@
 package org.videolan.vlc.gui.browser;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ActionMode;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
+
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.acestream.sdk.AceStream;
+import org.acestream.sdk.AceStreamManager;
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.medialibrary.media.MediaLibraryItem;
@@ -48,6 +57,7 @@ import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.vlc.R;
 import org.videolan.vlc.VLCApplication;
 import org.videolan.vlc.gui.InfoActivity;
+import org.videolan.vlc.gui.MainActivity;
 import org.videolan.vlc.gui.PlaybackServiceFragment;
 import org.videolan.vlc.gui.helpers.UiTools;
 import org.videolan.vlc.gui.helpers.hf.WriteExternalDelegate;
@@ -60,7 +70,7 @@ import org.videolan.vlc.util.Permissions;
 
 import java.util.LinkedList;
 
-public abstract class MediaBrowserFragment extends PlaybackServiceFragment implements android.support.v7.view.ActionMode.Callback {
+public abstract class MediaBrowserFragment extends PlaybackServiceFragment implements androidx.appcompat.view.ActionMode.Callback {
 
     public final static String TAG = "VLC/MediaBrowserFragment";
 
@@ -69,7 +79,9 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
     protected Medialibrary mMediaLibrary;
     protected ActionMode mActionMode;
     public FloatingActionButton mFabPlay;
+    protected int mFabPlayImageResourceId = R.drawable.ic_fab_play;
     protected Menu mMenu;
+    protected boolean mCanShowBonusAds = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,6 +110,8 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
         if (!hidden) {
             updateTitle();
             if (mFabPlay != null) {
+                setFabPlayVisibility(false);
+                mFabPlay.setImageResource(mFabPlayImageResourceId);
                 setFabPlayVisibility(true);
                 mFabPlay.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -105,7 +119,19 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
                         onFabPlayClick(v);
                     }
                 });
+
+                if(mCanShowBonusAds) {
+                    final Activity activity = getActivity();
+                    if (activity instanceof MainActivity) {
+                        if (((MainActivity) activity).areBonusAdsAvailable()) {
+                            showBonusAdsButton(true);
+                        }
+                    }
+                }
             }
+        }
+        else {
+            LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mParsingServiceReceiver);
         }
         setUserVisibleHint(!hidden);
     }
@@ -130,15 +156,31 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
     public void onPause() {
         super.onPause();
         stopActionMode();
-        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mParsingServiceReceiver);
     }
 
     public void setFabPlayVisibility(boolean enable) {
         if (mFabPlay != null)
-            mFabPlay.setVisibility(enable ? View.VISIBLE : View.GONE);
+            if(enable)
+                mFabPlay.show();
+            else
+                mFabPlay.hide();
     }
 
-    public void onFabPlayClick(View view) {}
+    /**
+     * @param view
+     * @return true when click was handled
+     */
+    public boolean onFabPlayClick(View view) {
+        Object tag = mFabPlay.getTag();
+        if(mCanShowBonusAds && tag instanceof String && TextUtils.equals((String)tag, "bonus_ads")) {
+            final AceStreamManager am = mService.getAceStreamManager();
+            if(am != null) {
+                am.showBonusAds(getActivity());
+            }
+            return true;
+        }
+        return false;
+    }
 
     public void setReadyToDisplay(boolean ready) {
         if (ready && !mReadyToDisplay)
@@ -182,15 +224,25 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
             public void run() {
                 final LinkedList<String> foldersToReload = new LinkedList<>();
                 final LinkedList<String> mediaPaths = new LinkedList<>();
-                for (MediaWrapper media : mw.getTracks()) {
-                    final String path = media.getUri().getPath();
-                    final String parentPath = FileUtils.getParent(path);
-                    if (FileUtils.deleteFile(media.getUri())) {
-                        if (media.getId() > 0L && !foldersToReload.contains(parentPath)) {
-                            foldersToReload.add(parentPath);
+
+                if(mw.isP2PItem()) {
+                    if(mMediaLibrary.deleteMedia(mw.getId())) {
+                        if (mw instanceof MediaWrapper) {
+                            mediaPaths.add(((MediaWrapper) mw).getLocation());
                         }
-                        mediaPaths.add(media.getLocation());
-                    } else onDeleteFailed(media);
+                    }
+                }
+                else {
+                    for (MediaWrapper media : mw.getTracks()) {
+                        final String path = media.getUri().getPath();
+                        final String parentPath = FileUtils.getParent(path);
+                        if (FileUtils.deleteFile(media.getUri())) {
+                            if (media.getId() > 0L && !foldersToReload.contains(parentPath)) {
+                                foldersToReload.add(parentPath);
+                            }
+                            mediaPaths.add(media.getLocation());
+                        } else onDeleteFailed(media);
+                    }
                 }
                 for (String folder : foldersToReload) mMediaLibrary.reload(folder);
                 if (mService != null && getActivity() != null) {
@@ -271,6 +323,7 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
     protected void onMedialibraryReady() {
         IntentFilter parsingServiceFilter = new IntentFilter(Constants.ACTION_SERVICE_ENDED);
         parsingServiceFilter.addAction(Constants.ACTION_SERVICE_STARTED);
+        parsingServiceFilter.addAction(Constants.ACTION_MEDIALIBRARY_UPDATED);
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mParsingServiceReceiver, parsingServiceFilter);
     }
 
@@ -297,6 +350,11 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
                 case Constants.ACTION_SERVICE_STARTED:
                     onParsingServiceStarted();
                     break;
+                //:ace
+                case Constants.ACTION_MEDIALIBRARY_UPDATED:
+                    onMedialibraryUpdated();
+                    break;
+                ///ace
             }
         }
     };
@@ -304,4 +362,27 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
     protected void onParsingServiceStarted() {}
 
     protected void onParsingServiceFinished() {}
+
+    //:ace
+    protected void onMedialibraryUpdated() {}
+
+    public void showBonusAdsButton(boolean visible) {
+        if(!isHidden() && mFabPlay != null && mCanShowBonusAds) {
+            // If FAB button was visible previously (e.g. activity was stopped but not finished)
+            // then icon disappears.
+            // Seems to be a bug: https://issuetracker.google.com/issues/111316656
+            // Workaround is to set icon when button is hidden.
+            setFabPlayVisibility(false);
+            if(visible) {
+                mFabPlay.setImageResource(R.drawable.ic_bonus);
+                mFabPlay.setTag("bonus_ads");
+            }
+            else {
+                mFabPlay.setImageResource(mFabPlayImageResourceId);
+                mFabPlay.setTag(null);
+            }
+            setFabPlayVisibility(true);
+        }
+    }
+    ///ace
 }

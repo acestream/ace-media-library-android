@@ -9,12 +9,6 @@
     <string name="sortby_length">... даўжыні</string>
     <string name="searchable_hint">Пошук...</string>
     <string name="history">Гісторыя</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d вынік</item>
-        <item quantity="few">%d вынікі</item>
-        <item quantity="many">%d вынікаў</item>
-        <item quantity="other">%d вынікаў</item>
-    </plurals>
     <string name="play">Граць</string>
     <string name="play_from_start">Граць ад пачатку</string>
     <string name="play_as_audio">Граць як аўдыё</string>
@@ -56,18 +50,6 @@
         <item quantity="few">%d падкаталогі</item>
         <item quantity="many">%d падкаталогаў</item>
         <item quantity="other">%d падкаталогаў</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 медыяфайл</item>
-        <item quantity="few">%d медыяфайлы</item>
-        <item quantity="many">%d медыяфайлаў</item>
-        <item quantity="other">%d медыяфайлаў</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 відэа</item>
-        <item quantity="few">%d відэа</item>
-        <item quantity="many">%d відэа</item>
-        <item quantity="other">%d відэа</item>
     </plurals>
     <string name="internal_memory">Унутраная памяць</string>
     <string name="parent_folder">Да бацькоўскай папкі</string>
@@ -116,12 +98,6 @@
     <string name="sound_on">Гук ёсць</string>
     <string name="sound_off">Гуку няма</string>
     <string name="brightness">Яркасць</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 канал\n</item>
-        <item quantity="few">%1$d каналы\n</item>
-        <item quantity="many">%1$d каналаў\n</item>
-        <item quantity="other">%1$d каналаў\n</item>
-    </plurals>
     <string name="track_samplerate_info">Частата дыскрэтызацыі: %1$d Гц\n</string>
     <string name="track_resolution_info">Памер: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Частата кадраў: %1$.3f\n</string>
@@ -145,8 +121,6 @@
     <string name="invalid_location">Немагчыма прайграць месца %1$s</string>
     <string name="search">Шукаць</string>
     <string name="search_history">Гісторыя пошуку</string>
-    <string name="hardware_acceleration_error_title">Памылка апаратнай акселерацыі</string>
-    <string name="hardware_acceleration_error_message">Здарылася памылка апаратнай акселерацыі. Адключыць яе ці паспрабаваць зноў?</string>
     <!--Tips-->
     <string name="video_player_tips">Парады па відэаплэеры:</string>
     <string name="seek">Шукаць</string>
@@ -196,15 +170,11 @@
     <string name="subtitle_text_encoding">Кадзіроўка субтытраў</string>
     <string name="extra_prefs_category">Іншыя настаўленні</string>
     <string name="interface_prefs_screen">Інтэрфейс</string>
-    <string name="interface_secondary_display_category">Інтэрфейс - Другасны экран</string>
     <string name="interface_secondary_display_category_summary">Настаўленні пры падключаным другасным дысплеі (HDMI/Miracast).</string>
     <string name="enable_clone_mode">Кланаваць па магчымасці</string>
     <string name="enable_clone_mode_summary">Кланаваць экран прылады без аддаленага кіравання.</string>
     <string name="interface_other_category">Інтэрфейс - Іншае</string>
-    <string name="enable_brightness_gesture">Задзейнічаць жэст яркасці</string>
     <string name="enable_brightness_gesture_summary">Кантраляваць яркасць жэстам у часе прайгравання відэа.</string>
-    <string name="enable_jump_buttons">Уключыць кнопкі пераходу</string>
-    <string name="enable_jump_buttons_summary">Паказваць кнопкі назад і наперад у відэа-інтэрфейсе.</string>
     <string name="audio_title_alignment">Выраўнанне аўдыё-субтытраў</string>
     <string name="enable_headset_detection">Вызначаць навушнікі</string>
     <string name="enable_headset_detection_summary">Ставіць на паўзу пры адключэнні навушнікаў; працягваць граць пры падключэнні</string>
@@ -259,7 +229,310 @@
     <string name="sending_log">Адпраўка часапісу...</string>
     <string name="drawer_open">Адкрыць панэль навігацыі</string>
     <string name="drawer_close">Закрыць панэль навігацыі</string>
-    <string name="new_app">Даступна новая праграма</string>
-    <string name="new_app_msg">Фаза бэта-тэставання VLC скончылася. Усе наступныя абнаўленні будуць публікавацца для новай праграмы.</string>
-    <string name="new_app_go">Атрымаць</string>
+    <string name="torrent_files">Torrent файлы</string>
+    <string name="select_language">выбар мовы</string>
+    <string name="sortby_name_desc" source="google_translate">Імя (па змяншэнні)</string>
+    <string name="sortby_artist_name" source="google_translate">імя выканаўцы</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Імя выканаўцы (па змяншэнні)</string>
+    <string name="sortby_album_name" source="google_translate">назва альбома</string>
+    <string name="sortby_album_name_desc" source="google_translate">Назва альбома (па змяншэнні)</string>
+    <string name="sortby_length_desc" source="google_translate">Даўжыня (па змяншэнні)</string>
+    <string name="sortby_date" source="google_translate">дата</string>
+    <string name="sortby_date_desc" source="google_translate">Дата (па змяншэнні)</string>
+    <string name="sortby_number" source="google_translate">Nb дарожкі</string>
+    <string name="sortby_number_desc" source="google_translate">Nb дарожкі (узр)</string>
+    <string name="playback" source="google_translate">прайграванне</string>
+    <string name="playback_controls" source="google_translate">Элементы кіравання рабіць</string>
+    <string name="medialibrary_scan" source="google_translate">бібліятэка сканавання медыя</string>
+    <string name="Medialibrary_progress" source="google_translate">Медыя абнаўлення прагрэс сканавання бібліятэкі</string>
+    <string name="video_app_switch_title" source="google_translate">Перадумовы Рэжым / Ціпун</string>
+    <string name="video_app_switch_summary" source="google_translate">Выберыце паводзіны VLC пры пераключэнні на іншае прыкладанне ад прайгравання відэа</string>
+    <string name="play_pip_title" source="google_translate">Прайграванне відэа ў карцінка ў малюнку рэжыме</string>
+    <string name="play_as_audio_background" source="google_translate">Прайграванне відэа ў фонавым рэжыме</string>
+    <string name="insert_next" source="google_translate">ўстаўце наступны</string>
+    <string name="unknown_number" source="google_translate">Невядома колькасць трэкаў</string>
+    <string name="tracks" source="google_translate">дарожкі</string>
+    <string name="noplaylist" source="google_translate">Няма спісу прайгравання не знойдзена.</string>
+    <string name="shuffle_title" source="google_translate">рэжым прайгравання ў выпадковым парадку</string>
+    <string name="shuffle_on" source="google_translate">накідваць</string>
+    <string name="repeat_title" source="google_translate">рэжым паўтору</string>
+    <string name="repeat_single" source="google_translate">Паўтарыце сінгл</string>
+    <string name="repeat_all" source="google_translate">паўтарыць усё</string>
+    <string name="firstsong" source="google_translate">Першая песня плэйліст</string>
+    <string name="lastsong" source="google_translate">Апошняя песня плэйліст</string>
+    <string name="surface_fit_screen" source="google_translate">Fit экран</string>
+    <string name="navmenu" source="google_translate">навігацыйнае меню</string>
+    <string name="advanced" source="google_translate">дадатковыя опцыі</string>
+    <string name="sleep_in" source="google_translate">Спаць у</string>
+    <string name="server_add_title" source="google_translate">Дадаць новы сервер у абранае</string>
+    <string name="server_domain_hint" source="google_translate">адрас сервера (імя дамена або IP)</string>
+    <string name="server_share_hint" source="google_translate">Сеткавае імя агульнага рэсурсу (ці IP-адрас)</string>
+    <string name="server_folder_hint" source="google_translate">Шлях да тэчцы (па жаданні)</string>
+    <string name="server_username_hint" source="google_translate">імя карыстальніка</string>
+    <string name="server_servername_hint" source="google_translate">Імя сервера, для магчымасцяў і выгоды</string>
+    <string name="server_port" source="google_translate">порт:</string>
+    <string name="login" source="google_translate">Увайсці</string>
+    <string name="password" source="google_translate">пароль</string>
+    <string name="search_results" source="google_translate">Вынікі пошуку</string>
+    <string name="search_no_result" source="google_translate">Не знойдзены СМІ</string>
+    <string name="favorites_add" source="google_translate">Дадаць у абранае</string>
+    <string name="favorites_remove" source="google_translate">Выдаліць з абранага</string>
+    <string name="favorites_edit" source="google_translate">рэдагаваць</string>
+    <string name="favorite_added" source="google_translate">Дададзена у абранае</string>
+    <string name="favorite_removed" source="google_translate">Выдаленыя з абранага</string>
+    <string name="playback_history_title" source="google_translate">гісторыя прайгравання</string>
+    <string name="playback_history_summary" source="google_translate">Захаваць усе сродкі масавай інфармацыі адыгрываюць ў раздзеле Гісторыя</string>
+    <string name="playback_speed_title" source="google_translate">Захаваць Хуткасць прайгравання</string>
+    <string name="playback_speed_summary" source="google_translate">Памятаеце, хуткасць прайгравання вы ўсталюеце</string>
+    <string name="audio_sub" source="google_translate">Гукавыя дарожкі \ Nand субтытры</string>
+    <string name="dev_hardware_decoder" source="google_translate">Пашыраны апаратны дэкодэр</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">Апаратны дэкодэр Force, толькі для вопытных карыстальнікаў</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">iomx</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-інш</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">mediacodec</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">mediacodec-інш</string>
+    <string name="daynight_title" source="google_translate">рэжым DAYNIGHT</string>
+    <string name="daynight_summary" source="google_translate">Аўтаматычнае пераключэнне ў начны рэжым у патрэбны час</string>
+    <string name="interface_gui" source="google_translate">дысплей</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">дадатковы дысплей</string>
+    <string name="video_prefs_category" source="google_translate">відэа</string>
+    <string name="video_min_group_length_title" source="google_translate">група відэа</string>
+    <string name="video_min_group_length_summary" source="google_translate">Відэа згрупаваныя, калі іх першыя літары аднолькавыя.</string>
+    <string name="video_min_group_length_disable" source="google_translate">забараняць</string>
+    <string name="video_min_group_length_first" source="google_translate">Толькі першая літара</string>
+    <string name="video_min_group_length_short" source="google_translate">Кароткае лік літар (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Доўгія колькасць літар (9)</string>
+    <string name="media_fast_seek" source="google_translate">Ўключыць хуткі шукаць варыянт</string>
+    <string name="media_seen" source="google_translate">Паказаць бачыў відэа маркер</string>
+    <string name="media_seen_summary" source="google_translate">Адзначце відэа, як відаць, калі вы гуляеце яго да канца</string>
+    <string name="force_list_portrait" source="google_translate">Няма сеткі ў партрэтным рэжыме</string>
+    <string name="force_list_portrait_summary" source="google_translate">Паказаць відэа ў спісе замест сеткі ў партрэтным рэжыме</string>
+    <string name="force_play_all_summary" source="google_translate">Прайграць усё відэа, пачынаючы з аднаго вы клікнулі</string>
+    <string name="force_play_all_title" source="google_translate">Рэжым прайгравання відэа</string>
+    <string name="save_brightness_summary" source="google_translate">Памятаеце, узровень яркасці ў відэаплэера</string>
+    <string name="save_brightness_title" source="google_translate">Захаванне ўзроўню яркасці для відэа</string>
+    <string name="save_audiodelay_summary" source="google_translate">Захаваць асобныя затрымкі гуку для кожнага відэа</string>
+    <string name="save_audiodelay_title" source="google_translate">Захаванне аўдыё затрымкі</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">яркасць жэст</string>
+    <string name="enable_volume_gesture_title" source="google_translate">аб\'ём жэст</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Аб\'ём кіравання з дапамогай жэстаў падчас прайгравання відэа</string>
+    <string name="enable_seek_buttons" source="google_translate">Ўключыць шукаць кнопкі</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">Паказаць перамоткі назад і наперад кнопкі на відэаінтэрфейсаў</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Двойчы націсніце, каб шукаць</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Двойчы націсніце на краях экрана, каб шукаць на 10 секунд</string>
+    <string name="popup_keepscreen_title" source="google_translate">Трымаеце экран у рэжыме Pop-Up</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Заўсёды трымаеце экран, калі адлюстроўваецца Pop-Up, нават калі відэа прыпынена.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Паказваць схаваныя файлы</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Паказваць схаваныя файлы ў браўзэрах</string>
+    <string name="subtitles_prefs_category" source="google_translate">субтытры</string>
+    <string name="subtitles_size_title" source="google_translate">субтытры Памер</string>
+    <string name="subtitles_size_small" source="google_translate">невялікі</string>
+    <string name="subtitles_size_normal" source="google_translate">нармаль</string>
+    <string name="subtitles_size_big" source="google_translate">вялікі</string>
+    <string name="subtitles_size_huge" source="google_translate">велізарны</string>
+    <string name="subtitles_color_title" source="google_translate">субтытры Колер</string>
+    <string name="subtitles_color_white" source="google_translate">белы</string>
+    <string name="subtitles_color_gray" source="google_translate">шэры</string>
+    <string name="subtitles_color_pink" source="google_translate">ружовы</string>
+    <string name="subtitles_color_blue" source="google_translate">сіні</string>
+    <string name="subtitles_color_yellow" source="google_translate">жоўты</string>
+    <string name="subtitles_color_green" source="google_translate">зялёны</string>
+    <string name="subtitles_background_title" source="google_translate">субтытры фону</string>
+    <string name="subtitles_bold_title" source="google_translate">тоўстыя субтытры</string>
+    <string name="subtitles_autoload_title" source="google_translate">Аўто загрузкі субтытраў</string>
+    <string name="audio_prefs_category" source="google_translate">аўдыё</string>
+    <string name="lockscreen_cover_title" source="google_translate">Медыя-пакрыццё на Lockscreen</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Пры наяўнасці ўстаноўкі бягучага медыя вокладкі як LockScreen шпалеры</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Аніміраваць бягучую спіс прайгравання аўтапрагортку</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Анімацыі пракруткі пры пераходзе медыя</string>
+    <string name="audio_save_repeat_title" source="google_translate">Захаваць рэжым паўтору</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Памятаць рэжым паўтору пры загрузцы аўдыё плэйлістоў</string>
+    <string name="audio_boost_title" source="google_translate">Аўдыё-наддув</string>
+    <string name="headset_prefs_category" source="google_translate">навушнікі</string>
+    <string name="enable_headset_actions_title" source="google_translate">Спалучэння з пультам дыстанцыйнага кіравання</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Двойчы націсніце на \ "Play \», каб перайсці да наступнага і доўгай націску на яе, каб перайсці да папярэдняга трэку</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Аднавіць ўстаўкі гарнітуры</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">Паўза у адваротным выпадку</string>
+    <string name="audio_ducking_title" source="google_translate">Ніжні аб\'ём VLC на апавяшчэннях</string>
+    <string name="audio_ducking_summary" source="google_translate">Дапамагае чуць гукавыя апавяшчэння, навігацыйныя інструкцыі або памочнік казаць</string>
+    <string name="casting_category" source="google_translate">ліццё</string>
+    <string name="casting_passthrough_title" source="google_translate">аўдыё Passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">Няхай ваш тэлевізар кіраваць аўдыё рэндэрынгу</string>
+    <string name="casting_conversion_quality_title" source="google_translate">якасць пераўтварэнні</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Выберыце якасць пераўтварэнні пры закідзе на выдаленым экране</string>
+    <string name="casting_quality_high" source="google_translate">высокая</string>
+    <string name="casting_quality_medium" source="google_translate">серада</string>
+    <string name="casting_quality_low" source="google_translate">нізкі</string>
+    <string name="casting_quality_lowcpu" source="google_translate">найнізкі</string>
+    <string name="cast_performance_warning" source="google_translate">Кастынг відэа патрабуе пераўтварэнняў. Гэта пераўтварэнне можа выкарыстаць усю даступную магутнасць і можа хутка разрадзіць батарэю.</string>
+    <string name="artists_show_all_title" source="google_translate">Паказаць усе мастакі</string>
+    <string name="artists_show_all_summary" source="google_translate">Паказаць усе мастак у мастаках лістынг, не толькі альбома мастакоў</string>
+    <string name="extensions_prefs_category" source="google_translate">пашырэння</string>
+    <string name="extensions_enable_category" source="google_translate">Выберыце пашырэння для ўключэння</string>
+    <string name="extensions_empty" source="google_translate">Падаўжэнне тэрміну не выяўлена</string>
+    <string name="extension_prefs_activation_title" source="google_translate">актываваць</string>
+    <string name="android_auto" source="google_translate">Android аўто</string>
+    <string name="controls_prefs_category" source="google_translate">кіравання</string>
+    <string name="main_prefs_category" source="google_translate">асноўныя налады</string>
+    <string name="save_video_none" source="google_translate">Не захоўваць хуткасць</string>
+    <string name="save_video_session" source="google_translate">Захаваць хуткасць падчас сесіі</string>
+    <string name="save_video_always" source="google_translate">Захаваць хуткасць паміж сеансамі</string>
+    <string name="auto_rescan" source="google_translate">Аўто паўторнае сканаванне</string>
+    <string name="auto_rescan_summary" source="google_translate">Прылада аўтаматычнага сканавання для новых ці аддаленых асяроддзяў пры запуску прыкладання</string>
+    <string name="dump_media_db" source="google_translate">дамп базы дадзеных СМІ</string>
+    <string name="dump_media_db_summary" source="google_translate">Копія базы дадзеных для ўнутранага кораня захоўвання</string>
+    <string name="clear_media_db_summary" source="google_translate">Доступ Android VLC Інфармацыя выразных дадзеных</string>
+    <string name="resume_playback_title" source="google_translate">Аднаўленне прайгравання пасля званка</string>
+    <string name="resume_playback_summary" source="google_translate">Знаходжанне ў паўзе інакш</string>
+    <string name="network_caching_popup" source="google_translate">Гэта значэнне павінна быць у межах ад 0 да 6000 мс</string>
+    <string name="log_service_title" source="google_translate">VLC запісу часопісаў</string>
+    <string name="log_service_text" source="google_translate">Адкрыйце кансоль часопіса</string>
+    <string name="network_browsing" source="google_translate">лакальная сетка</string>
+    <string name="browsing" source="google_translate">прагляд</string>
+    <string name="file_size" source="google_translate">Памер файла:</string>
+    <string name="audio_delay" source="google_translate">аўдыё затрымка</string>
+    <string name="spu_delay" source="google_translate">падзагаловак затрымкі</string>
+    <string name="sleep_time_not_set" source="google_translate">ні адзін камплект</string>
+    <string name="network_shares_discovery" source="google_translate">Гледзячы на сеткавыя рэсурсы ...</string>
+    <string name="network_empty" source="google_translate">Гэты каталог пусты.</string>
+    <string name="network_connection_needed" source="google_translate">Няма падлучэння да лакальнай сеткі.</string>
+    <string name="search_hint" source="google_translate">пошук СМІ</string>
+    <string name="search_list_hint" source="google_translate">Пошук сродкаў масавай інфармацыі ў бягучым спісе</string>
+    <string name="search_global" source="google_translate">Пошук ва ўсіх медыя-бібліятэцы</string>
+    <string name="directory_show_medialib" source="google_translate">Паказаць у MediaLib</string>
+    <string name="directory_hide_medialib" source="google_translate">Схаваць ад MediaLib</string>
+    <string name="playlist_save" source="google_translate">захаваць плэйліст</string>
+    <string name="playlist_name_hint" source="google_translate">плэйліста імя</string>
+    <string name="go_to_chapter" source="google_translate">Перайсці да падзелу ...</string>
+    <string name="chapter" source="google_translate">кіраўнік</string>
+    <string name="resume_from_position" source="google_translate">Рэзюмэ з апошняй пазіцыі</string>
+    <string name="confirm_resume" source="google_translate">Рэзюмэ з апошняй пазіцыі?</string>
+    <string name="confirm_resume_title" source="google_translate">Задаць пацверджанне рэзюмэ</string>
+    <string name="confirm_resume_summary" source="google_translate">калі актываваныя вам будзе прапанавана пацвердзіць, калі відэа можа быць адноўлена з апошняй пазіцыі</string>
+    <string name="directory_empty" source="google_translate">каталог пусты</string>
+    <string name="player_touch_title" source="google_translate">Сэнсарнае кіраванне для відэа</string>
+    <string name="player_touch_enable_all" source="google_translate">Ўключэнне сэнсарнага кіравання</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Адключыць кіраванне яркасцю</string>
+    <string name="player_touch_disable_all" source="google_translate">Адключыць усе сэнсарныя элементы кіравання</string>
+    <string name="tv_ui_title" source="google_translate">Інтэрфейс Android TV</string>
+    <string name="tv_ui_summary" source="google_translate">Змена карыстацкага інтэрфейсу да тэлевізара адаптаваны тэму</string>
+    <string name="medialibrary" source="google_translate">Медыя-бібліятэка</string>
+    <string name="medialibrary_directories" source="google_translate">Медыя-бібліятэка тэчак</string>
+    <string name="more_actions" source="google_translate">іншыя дзеянні</string>
+    <string name="move" source="google_translate">рух</string>
+    <string name="back_quit_lock" source="google_translate">Націсніце кнопку Назад яшчэ раз для выхаду відэа</string>
+    <string name="playlist_deleted" source="google_translate">плэйліст выдалены</string>
+    <string name="file_deleted" source="google_translate">файл выдалены</string>
+    <string name="no_subs_found" source="google_translate">Няма субтытраў ў гэтым каталогу</string>
+    <string name="music_now_playing" source="google_translate">Зараз у праграме</string>
+    <string name="widget_name_w" source="google_translate">VLC White Widget</string>
+    <string name="widget_name_b" source="google_translate">VLC Dark Widget</string>
+    <string name="allow_storage_access_title" source="google_translate">Дазволіць Ace паток, каб атрымаць доступ да відэа і аўдыё файлаў</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace паток мае патрэбу ў вас даць гэты дазвол на доступ да файлаў мультымедыя на гэтай прыладзе.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Дазволіць Ace паток, каб усталяваць мелодыю</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace паток мае патрэбу ў вас, каб даць гэты дазвол, каб усталяваць гэтую песню ў якасці мелодыі званка.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Дазволіць Ace паток змяніць рэжым яркасці</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace паток мае патрэбу ў вас даць гэты дазвол, каб змяніць свой рэжым яркасці.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Дазволіць Ace Stream Player усплывальныя вокны ў параўнанні з іншымі прыкладаннямі</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace паток мае патрэбу ў вас, каб даць гэты дазвол адлюстравання відэа ва ўсплываючым акне над іншымі праграмамі.</string>
+    <string name="permission_ask_again" source="google_translate">дазвол Grant</string>
+    <string name="exit_app" source="google_translate">зачыніць VLC</string>
+    <string name="exit_app_msg" source="google_translate">Вы ўпэўненыя, што жадаеце выйсці VLC?</string>
+    <string name="fastscroller_track" source="google_translate">FastScroller трэк</string>
+    <string name="fastscroller_handle" source="google_translate">FastScroller ручка</string>
+    <string name="plugins" source="google_translate">убудовы</string>
+    <string name="download_on_device" source="google_translate">спампаваць</string>
+    <string name="extension_empty" source="google_translate">Няма элемент для адлюстравання, перайдзіце ў налады пашырэння, каб атрымаць некаторыя.</string>
+    <string name="opengl_title" source="google_translate">Выкарыстанне OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">Па змаўчанні, OpenGL ES2 выкарыстоўваецца для дэкадавання праграмнага забеспячэння і апаратных сродкаў дэкадавання, калі гэта неабходна (360 ° відэа).</string>
+    <string name="opengl_automatic" source="google_translate">аўтаматычная</string>
+    <string name="opengl_on" source="google_translate">Force On</string>
+    <string name="opengl_off" source="google_translate">Force Off</string>
+    <string name="network_favorites" source="google_translate">сеткавыя абранае</string>
+    <string name="network_shared_folders" source="google_translate">агульныя тэчкі</string>
+    <string name="encryption_warning" source="google_translate">Папярэджанне, шыфраванне недаступна для гэтага Android версіі, пароль будзе захаваны ў прыватным прасторы, але не зашыфраваны</string>
+    <string name="store_password" source="google_translate">запомніць пароль</string>
+    <string name="add_to_playlist" source="google_translate">Дадаць у плэйліст</string>
+    <string name="popup_playback_title" source="google_translate">Прайграванне відэа ў акне Pop-Up</string>
+    <string name="popup_playback" source="google_translate">Гуляючы ў акне Pop-Up</string>
+    <string name="popup_expand" source="google_translate">разгарнуць відэа</string>
+    <string name="snack_subloader_sub_found" source="google_translate">субтытры запампавана</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">Субтытры не знойдзены</string>
+    <string name="dialog_subloader_success" source="google_translate">Субтытры Знойдзена:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Субтытры не знойдзены:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">спампаваць скончаны</string>
+    <string name="download_subtitles" source="google_translate">спампаваць субтытры</string>
+    <string name="preferences_languages_download" source="google_translate">субтытры мовы</string>
+    <string name="list_languages_download_summary" source="google_translate">Мовы для загрузкі пры выманні субтытраў</string>
+    <string name="list_languages_download_title" source="google_translate">Субтытры спампаваць мовы</string>
+    <string name="service_unavailable" source="google_translate">Паслуга недаступная</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Не атрымалася ўсталяваць субтытры, паспрабуйце ўсталяваць яго ў наладах прыкладання</string>
+    <string name="downloading_subtitles" source="google_translate">загрузка субтытраў</string>
+    <string name="browse_folder" source="google_translate">прагляд тэчкі</string>
+    <string name="listen" source="google_translate">слухаць</string>
+    <string name="subtitles_download_title" source="google_translate">Subs спампаваць</string>
+    <string name="connecting" source="google_translate">Падключэнне ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">захаваць затрымку для прылады Bluetooth</string>
+    <string name="episodes" source="google_translate">эпізоды</string>
+    <string name="movies" source="google_translate">кіно</string>
+    <string name="videos" source="google_translate">відэа</string>
+    <string name="streams" source="google_translate">патокі</string>
+    <string name="clear_playback_history" source="google_translate">Ачысціць гісторыю прайгравання</string>
+    <string name="various_artists" source="google_translate">розныя выканаўцы</string>
+    <string name="ml_scanning" source="google_translate">Сканіраванне для медыя-файлаў</string>
+    <string name="ml_parse_media" source="google_translate">разбор СМІ</string>
+    <string name="ml_discovering" source="google_translate">выяўленне</string>
+    <string name="resume" source="google_translate">рэзюмэ</string>
+    <string name="length" source="google_translate">даўжыня</string>
+    <string name="tv_settings_hint" source="google_translate">Доўгі націск кнопкі OK для ўключэння / выключэння каталогаў</string>
+    <string name="ml_external_storage_title" source="google_translate">выяўлены новы знешні назапашвальнік</string>
+    <string name="ml_external_storage_accept" source="google_translate">ды</string>
+    <string name="ml_external_storage_decline" source="google_translate">няма</string>
+    <string name="last_added_media" source="google_translate">апошнія дададзеныя</string>
+    <string name="no" source="google_translate">няма</string>
+    <string name="loading_medialibrary" source="google_translate">Загрузка Medialibrary ...</string>
+    <string name="yes" source="google_translate">ды</string>
+    <string name="custom_set_save_title" source="google_translate">незахаваных змены</string>
+    <string name="custom_set_save_warning" source="google_translate">Увага: незахаваных змены</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Захаваць эквалайзер ўсталяваць у якасці ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Захаваць новы эквалайзер-набор як ...</string>
+    <string name="save" source="google_translate">захаваць</string>
+    <string name="do_not_save" source="google_translate">Не захоўваць</string>
+    <string name="custom_set_wrong_input" source="google_translate">Няправільнае імя.</string>
+    <string name="custom_set_already_exist" source="google_translate">Эквалайзер-набор з такой назвай ужо існуе</string>
+    <string name="custom_set_restored" source="google_translate">Карыстацкі эквалайзер-набор аднаўляецца.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Незахаваных эквалайзер пасаджаныя выдалены.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">новы</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary скануе вашыя прылады прама цяпер</string>
+    <string name="recommendations" source="google_translate">рэкамендацыі</string>
+    <string name="recommendations_desc" source="google_translate">Рэкамендацыі карт на пускавы</string>
+    <string name="browser_quick_access" source="google_translate">хуткі доступ</string>
+    <string name="browser_storages" source="google_translate">сховішчы</string>
+    <string name="renderer_list_title" source="google_translate">адлюстроўвае</string>
+    <string name="feedback_player_crashed" source="google_translate">На жаль, VLC проста разбіўся. Калі ласка, паспрабуйце яшчэ раз.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Вы павінны даць VLC доступ на запіс на карту памяці SD</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC не можа выдаліць гэты файл без дазволу доступу запісу. \ NКалі ласка перайдзіце на SD-карту і націсніце на \ "Выбраць \". \ NКалі, магчыма, прыйдзецца націснуць на \ "Паказаць SD карты \» першым у верхнім правым меню</string>
+    <string name="dialog_sd_wizard" source="google_translate">Пакажы мне</string>
+    <string name="renderers_disconnect" source="google_translate">адключаць</string>
+    <string name="audio_digital_failed" source="google_translate">Не атрымалася змяніць стан аўдыё лічбавай выхад</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Аўдыё Лічбавы выхад уключаны</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Аўдыё Лічбавы выхад адключаны</string>
+    <string name="live_streams" source="google_translate">жывыя патокі</string>
+    <string name="all_live_streams" source="google_translate">усе трансляцыі</string>
+    <string name="video_torrents" source="google_translate">відэа торэнтаў</string>
+    <string name="audio_torrents" source="google_translate">аўдыё торэнтаў</string>
+    <string name="all_torrents" source="google_translate">усе торэнты</string>
+    <string name="main" source="google_translate">галоўны</string>
+    <string name="media_player" source="google_translate">Медыя-прайгравальнік</string>
+    <string name="acestream_server" source="google_translate">сервер Стрыт Ace (рухавік)</string>
+    <string name="media_player_settings" source="google_translate">налады Медыяпрайгравальнік</string>
+    <string name="acestream_server_settings" source="google_translate">Сервер патоку Ace Налады (рухавік)</string>
+    <string name="sign_out" source="google_translate">Выйсці</string>
+    <string name="sign_in" source="google_translate">Увайсці</string>
+    <string name="sign_in_acestream" source="google_translate">Увайсці на Ace паток</string>
+    <string name="sign_in_google" source="google_translate">Увайсці з дапамогай Google</string>
+    <string name="video_files" source="google_translate">відэа файлы</string>
+    <string name="audio_files" source="google_translate">гукавыя файлы</string>
+    <string name="retry" source="google_translate">Retry</string>
+    <string name="failed_to_load_web_page" source="google_translate">Не атрымалася загрузіць вэб-старонку</string>
 </resources>

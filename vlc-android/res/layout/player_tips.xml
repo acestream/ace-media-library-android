@@ -100,42 +100,35 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/images_margin_sides"
             android:layout_marginRight="@dimen/images_margin_sides"
-            android:weightSum="5">
+            android:weightSum="4">
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="center"
-                android:src="@drawable/ic_lock_circle" />
+                android:src="@drawable/rci_audiotrack_selector" />
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="center"
-                android:src="@drawable/ic_audiosub_circle" />
+                android:src="@drawable/rci_subtitles_selector" />
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:scaleType="center"
-                android:src="@drawable/ic_pause_circle" />
+                android:src="@drawable/rci_pause_selector" />
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="center"
-                android:src="@drawable/ic_more_circle" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="center"
-                android:src="@drawable/ic_crop_circle_o" />
+                android:src="@drawable/rci_crop_selector" />
         </LinearLayout>
 
         <LinearLayout
@@ -144,7 +137,7 @@
             android:layout_above="@id/media_buttons_tips"
             android:layout_marginLeft="@dimen/images_margin_sides"
             android:layout_marginRight="@dimen/images_margin_sides"
-            android:weightSum="5">
+            android:weightSum="4">
 
             <TextView
                 style="@style/TipsFontStyle.Small"
@@ -152,7 +145,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="bottom|center_horizontal"
-                android:text="@string/lock" />
+                android:text="@string/subtitles" />
 
             <TextView
                 style="@style/TipsFontStyle.Small"
@@ -160,7 +153,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="bottom|center_horizontal"
-                android:text="@string/audio_sub" />
+                android:text="@string/track_audio" />
 
             <TextView
                 style="@style/TipsFontStyle.Small"
@@ -169,14 +162,6 @@
                 android:layout_weight="1"
                 android:gravity="bottom|center_horizontal"
                 android:text="@string/play" />
-
-            <TextView
-                style="@style/TipsFontStyle.Small"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="bottom|center_horizontal"
-                android:text="@string/options" />
 
             <TextView
                 style="@style/TipsFontStyle.Small"

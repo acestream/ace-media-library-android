@@ -13,6 +13,11 @@
     <item
         android:id="@+id/video_list_play_audio"
         android:title="@string/play_as_audio" />
+    <!-- //:ace -->
+    <item
+        android:id="@+id/video_list_select_player"
+        android:title="@string/select_player" />
+    <!-- ///ace -->
     <item
         android:id="@+id/video_list_info"
         android:title="@string/info" />

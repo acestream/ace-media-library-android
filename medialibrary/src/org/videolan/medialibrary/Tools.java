@@ -3,7 +3,7 @@ package org.videolan.medialibrary;
 
 import android.net.Uri;
 import android.os.Environment;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import org.videolan.medialibrary.media.MediaLibraryItem;
@@ -125,6 +125,12 @@ public class Tools {
 
     static String encodeVLCMrl(String mrl) {
         if (mrl.startsWith("/")) mrl = "file://"+mrl;
-        return Uri.encode(Uri.decode(mrl), ".-_~/()&!$*+,;='@:");
+        if(mrl.startsWith("acestream:"))
+            // Assume that MRL is already properly encoded
+            // Reencoding breaks URI because "?" is encoded
+            // and after that query string cannot be parsed.
+            return mrl;
+        else
+            return Uri.encode(Uri.decode(mrl), ".-_~/()&!$*+,;='@:");
     }
 }

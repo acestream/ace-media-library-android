@@ -29,7 +29,6 @@ while [ $# -gt 0 ]; do
             echo "  ARM:     (armeabi-v7a|arm)"
             echo "  ARM64:   (arm64-v8a|arm64)"
             echo "  X86:     x86, x86_64"
-            echo "  MIPS:    mips, mips64."
             echo "Use --release to build in release mode"
             echo "Use --signrelease to build in release mode and sign apk, see vlc-android/build.gradle"
             echo "Use -s to set your keystore file and -p for the password"
@@ -40,9 +39,6 @@ while [ $# -gt 0 ]; do
         a|-a)
             ANDROID_ABI=$2
             shift
-            ;;
-        -c)
-            CHROME_OS=1
             ;;
         -r|release|--release)
             RELEASE=1
@@ -63,6 +59,12 @@ while [ $# -gt 0 ]; do
             BUILD_LIBVLC=1
             NO_ML=1
             ;;
+        -aar)
+            BUILD_LIBVLC=1
+            ;;
+        -ml)
+            BUILD_MEDIALIB=1
+            ;;
         run)
             RUN=1
             ;;
@@ -71,6 +73,13 @@ while [ $# -gt 0 ]; do
             ;;
         --no-ml)
             NO_ML=1
+            ;;
+        --publish)
+            RELEASE=1
+            PUBLISH=1
+            ;;
+        --init)
+            GRADLE_SETUP=1
             ;;
         *)
             diagnostic "$0: Invalid option '$1'."
@@ -81,11 +90,13 @@ while [ $# -gt 0 ]; do
     shift
 done
 
-if [ -z "$ANDROID_NDK" -o -z "$ANDROID_SDK" ]; then
+if [ -z "$ANDROID_NDK_18" -o -z "$ANDROID_SDK" ]; then
    diagnostic "You must define ANDROID_NDK, ANDROID_SDK before starting."
    diagnostic "They must point to your NDK and SDK directories."
    exit 1
 fi
+
+export ANDROID_NDK=$ANDROID_NDK_18
 
 if [ -z "$ANDROID_ABI" ]; then
    diagnostic "*** No ANDROID_ABI defined architecture: using ARMv7"
@@ -100,10 +111,8 @@ elif [ "$ANDROID_ABI" = "x86" ]; then
     GRADLE_ABI="x86"
 elif [ "$ANDROID_ABI" = "x86_64" ]; then
     GRADLE_ABI="x86_64"
-elif [ "$ANDROID_ABI" = "mips" ]; then
-    GRADLE_ABI="MIPS"
-elif [ "$ANDROID_ABI" = "mips64" ]; then
-    GRADLE_ABI="MIPS64"
+elif [ "$ANDROID_ABI" = "all" ]; then
+    GRADLE_ABI="all"
 else
     diagnostic "Invalid arch specified: '$ANDROID_ABI'."
     diagnostic "Try --help for more information"
@@ -116,7 +125,7 @@ fi
 
 if [ ! -d "gradle/wrapper" ]; then
     diagnostic "Downloading gradle"
-    GRADLE_VERSION=4.1
+    GRADLE_VERSION=4.10.1
     GRADLE_URL=https://download.videolan.org/pub/contrib/gradle/gradle-${GRADLE_VERSION}-bin.zip
     wget ${GRADLE_URL} 2>/dev/null || curl -O ${GRADLE_URL}
     checkfail "gradle: download failed"
@@ -156,7 +165,9 @@ else
 fi
 
 if [ ! -f gradle.properties ]; then
-    echo keyStoreFile=$KEYSTORE_FILE > gradle.properties
+    echo android.enableJetifier=true > gradle.properties
+    echo android.useAndroidX=true >> gradle.properties
+    echo keyStoreFile=$KEYSTORE_FILE >> gradle.properties
     echo storealias=$STOREALIAS >> gradle.properties
     if [ -z "$PASSWORD_KEYSTORE" ]; then
         echo storepwd=android >> gradle.properties
@@ -224,16 +235,18 @@ init_local_props local.properties || { echo "Error initializing local.properties
 
 if [ ! -d "$ANDROID_SDK/licenses" ]; then
     mkdir "$ANDROID_SDK/licenses"
-    echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_SDK/licenses/android-sdk-license"
+    echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$ANDROID_SDK/licenses/android-sdk-license"
     echo "d56f5187479451eabf01fb78af6dfcb131a6481e" >> "$ANDROID_SDK/licenses/android-sdk-license"
-    echo "84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_SDK/licenses/android-sdk-preview-license"
 fi
 
+if [ "$GRADLE_SETUP" = 1 ]; then
+    exit 0
+fi
 ####################
 # Fetch VLC source #
 ####################
 
-TESTED_HASH=a0c6a1d
+TESTED_HASH=020f737
 if [ ! -d "vlc" ]; then
     diagnostic "VLC source not found, cloning"
     git clone https://git.videolan.org/git/vlc/vlc-3.0.git vlc
@@ -251,6 +264,8 @@ EOF
 fi
 if [ "$RELEASE" = 1 ]; then
     git reset --hard ${TESTED_HASH}
+    git am ../libvlc/patches/*.patch
+    git apply ../acestream-patches/*.patch
 fi
 cd ..
 
@@ -260,47 +275,80 @@ cd ..
 ############
 
 diagnostic "Configuring"
-OPTS="-a ${ANDROID_ABI}"
-if [ "$RELEASE" = 1 ]; then
-    OPTS="$OPTS release"
-fi
-if [ "$CHROME_OS" = 1 ]; then
-    OPTS="$OPTS -c"
-fi
-if [ "$ASAN" = 1 ]; then
-    OPTS="$OPTS --asan"
-fi
-if [ "$NO_ML" = 1 ]; then
-    OPTS="$OPTS --no-ml"
-fi
+compile() {
+    OPTS="-a $1"
+    if [ "$RELEASE" = 1 ]; then
+        OPTS="$OPTS release"
+    fi
+    if [ "$CHROME_OS" = 1 ]; then
+        OPTS="$OPTS -c"
+    fi
+    if [ "$ASAN" = 1 ]; then
+        OPTS="$OPTS --asan"
+    fi
 
-./compile-libvlc.sh $OPTS
+    # Build LibVLC if asked for it, or needed by medialibrary
+    if [ "$BUILD_MEDIALIB" != 1 -o ! -d "libvlc/jni/libs/$1" ]; then
+        ./compile-libvlc.sh $OPTS
+    fi
+
+    if [ "$NO_ML" != 1 ]; then
+        ./compile-medialibrary.sh $OPTS
+    fi
+}
+if [ "$ANDROID_ABI" = "all" ]; then
+    if [ -d tmp ]; then
+        rm -rf tmp
+    fi
+    mkdir tmp
+    LIB_DIR="libvlc"
+    if [ "$NO_ML" != 1 ]; then
+        LIB_DIR="medialibrary"
+    fi
+    compile armeabi-v7a
+    cp -r $LIB_DIR/jni/libs/armeabi-v7a tmp
+    compile arm64-v8a
+    cp -r $LIB_DIR/jni/libs/arm64-v8a tmp
+    compile x86
+    cp -r $LIB_DIR/jni/libs/x86 tmp
+    compile x86_64
+    mv tmp/* $LIB_DIR/jni/libs
+    rm -rf tmp
+else
+    compile $ANDROID_ABI
+fi
 
 ##################
 # Compile the UI #
 ##################
-PLATFORM="Vanilla"
 BUILDTYPE="Debug"
 if [ "$SIGNED_RELEASE" = 1 ]; then
     BUILDTYPE="signedRelease"
 elif [ "$RELEASE" = 1 ]; then
     BUILDTYPE="Release"
 fi
-if [ "$CHROME_OS" = 1 ]; then
-    PLATFORM="Chrome"
-fi
 if [ "$BUILD_LIBVLC" = 1 ];then
-    ./gradlew -p libvlc assemble${BUILDTYPE}
+    GRADLE_ABI=$GRADLE_ABI ./gradlew -p libvlc assemble${BUILDTYPE}
     RUN=0
     CHROME_OS=0
+    if [ "$PUBLISH" = 1 ];then
+        GRADLE_ABI=$GRADLE_ABI ./gradlew -p libvlc install bintrayUpload
+    fi
+elif [ "$BUILD_MEDIALIB" = 1 ]; then
+    GRADLE_ABI=$GRADLE_ABI ./gradlew -p medialibrary assemble${BUILDTYPE}
+    RUN=0
+    CHROME_OS=0
+    if [ "$PUBLISH" = 1 ];then
+        GRADLE_ABI=$GRADLE_ABI ./gradlew -p medialibrary install bintrayUpload
+    fi
 else
     if [ "$RUN" = 1 ]; then
         ACTION="install"
     else
         ACTION="assemble"
     fi
-    TARGET="${ACTION}${PLATFORM}${GRADLE_ABI}${BUILDTYPE}"
-    CLI="" ./gradlew $TARGET
+    TARGET="${ACTION}${BUILDTYPE}"
+    CLI="" GRADLE_ABI=$GRADLE_ABI ./gradlew $TARGET
 fi
 
 #######

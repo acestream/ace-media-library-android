@@ -20,7 +20,6 @@
     <string name="info">માહિતી</string>
     <string name="pause">વિરામ</string>
     <string name="not_show_again">ફરીથી આ સંદેશ બતાવશો નહીં .</string>
-    <string name="beta_warning">આ એક બીટા સંસ્કરણ છે ⏎ ⏎ આ સંસ્કરણ સ્થિર નથી ⏎! ⏎ ઉપયોગ કરશો નહિં જ્યાં સુધી તમે જાણો છો કે તમે શું કરી રહ્યા છો. ⏎ ⏎ તે તમારા બિલાડીનું બચ્ચું મારી નાંખવા માટે, તમારા ઘર નાશ કરી શકે છે અને મય સાક્ષાત્કાર શરૂ કરો. ⏎ તે તમારા પર વાપરો. પોતાના જોખમ ⏎. ⏎ ફન છે! :)</string>
     <string name="info_title">VLC બીટા</string>
     <string name="unknown_artist">અજ્ઞાત આર્ટિસ્ટ</string>
     <string name="unknown_album">અજ્ઞાત આલ્બમ</string>
@@ -92,7 +91,6 @@
     <!-- Preferences -->
     <string name="preferences">પસંદગીઓ</string>
     <string name="automatic">સ્વ્નીયાન્ત્ર્ણ</string>
-    <string name="enable_brightness_gesture">તેજ ચેષ્ટા સક્ષમ કરો</string>
     <string name="enable_headset_detection">હેડસેટ શોધો</string>
     <string name="enable_time_stretching_audio">સમય ફેલાયેલા ઓડિયો સક્ષમ કરો</string>
     <string name="advanced_prefs_category">ઉન્નત</string>

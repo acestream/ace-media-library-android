@@ -1,11 +1,12 @@
 package org.videolan.vlc.gui;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import org.videolan.vlc.R;
 import org.videolan.vlc.VLCApplication;
@@ -29,9 +30,15 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private void applyTheme() {
-        boolean enableBlackTheme = mSettings.getBoolean("enable_black_theme", false);
-        if (VLCApplication.showTvUi() || enableBlackTheme) {
+        if (VLCApplication.isBlackTheme()) {
             setTheme(R.style.Theme_VLC_Black);
         }
     }
+
+    //:ace
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(VLCApplication.updateBaseContextLocale(base));
+    }
+    ///ace
 }

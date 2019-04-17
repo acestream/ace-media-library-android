@@ -36,8 +36,8 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.preference.PreferenceManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import org.videolan.libvlc.util.AndroidUtil;
@@ -62,7 +62,7 @@ public class ExternalMonitor extends BroadcastReceiver {
     private static final ExternalMonitor instance = new ExternalMonitor();
     private static final List<NetworkObserver> networkObservers = new LinkedList<>();
     private static WeakReference<Activity> storageObserver = null;
-    private static List<Uri> devicesToAdd = AndroidUtil.isICSOrLater ? null : new LinkedList<Uri>();
+    private static List<Uri> devicesToAdd = null;
 
     public interface NetworkObserver {
         void onNetworkConnectionChanged(boolean connected);
@@ -76,8 +76,7 @@ public class ExternalMonitor extends BroadcastReceiver {
         storageFilter.addDataScheme("file");
         ctx.registerReceiver(instance, networkFilter);
         ctx.registerReceiver(instance, storageFilter);
-        if (AndroidUtil.isICSOrLater)
-            checkNewStorages(ctx);
+        checkNewStorages(ctx);
     }
 
     private static void checkNewStorages(final Context ctx) {

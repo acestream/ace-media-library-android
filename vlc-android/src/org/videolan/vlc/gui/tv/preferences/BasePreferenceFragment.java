@@ -27,11 +27,19 @@ import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v17.preference.LeanbackPreferenceFragment;
+import androidx.preference.MultiSelectListPreference;
+import androidx.leanback.preference.LeanbackPreferenceFragment;
+import androidx.preference.Preference;
+import android.app.DialogFragment;
 
 import org.videolan.vlc.R;
+import org.videolan.vlc.gui.preferences.hack.FolderPreference;
+import org.videolan.vlc.gui.preferences.hack.FolderPreferenceDialogFragment;
+import org.videolan.vlc.gui.preferences.hack.MultiSelectListPreferenceDialogFragment;
 
 public abstract class BasePreferenceFragment extends LeanbackPreferenceFragment {
+
+    private static final String DIALOG_FRAGMENT_TAG = "android.support.v7.preference.PreferenceFragment.DIALOG";
 
     protected abstract int getXml();
     protected abstract int getTitleId();
@@ -46,5 +54,25 @@ public abstract class BasePreferenceFragment extends LeanbackPreferenceFragment 
         getActivity().getFragmentManager().beginTransaction().replace(R.id.fragment_placeholder, fragment)
                 .addToBackStack("main")
                 .commit();
+    }
+
+    @Override
+    public void onDisplayPreferenceDialog(Preference preference) {
+        DialogFragment dialogFragment = null;
+        if (preference instanceof MultiSelectListPreference) {
+            dialogFragment = MultiSelectListPreferenceDialogFragment.newInstance(preference.getKey());
+        }
+        else if(preference instanceof FolderPreference) {
+            dialogFragment = FolderPreferenceDialogFragment.newInstance(preference.getKey());
+        }
+
+        if(dialogFragment != null) {
+            // Show custom dialog
+            dialogFragment.setTargetFragment(this, 0);
+            dialogFragment.show(getFragmentManager(), DIALOG_FRAGMENT_TAG);
+        }
+        else {
+            super.onDisplayPreferenceDialog(preference);
+        }
     }
 }

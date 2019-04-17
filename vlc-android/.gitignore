@@ -6,3 +6,5 @@ obj/
 
 assets/lua/
 assets/*.so
+
+/release/

@@ -32,7 +32,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.content.LocalBroadcastManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import android.view.KeyEvent;
 
 import org.videolan.medialibrary.Medialibrary;
@@ -73,6 +74,7 @@ public abstract class BaseTvActivity extends PlaybackServiceActivity implements 
         parsingServiceFilter.addAction(Constants.ACTION_SERVICE_STARTED);
         parsingServiceFilter.addAction(Constants.ACTION_PROGRESS);
         parsingServiceFilter.addAction(Constants.ACTION_NEW_STORAGE);
+        parsingServiceFilter.addAction(Constants.ACTION_MEDIALIBRARY_UPDATED);
 
         mRegistering = true;
         LocalBroadcastManager.getInstance(this).registerReceiver(mParsingServiceReceiver, parsingServiceFilter);
@@ -108,6 +110,7 @@ public abstract class BaseTvActivity extends PlaybackServiceActivity implements 
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
+            if(action == null) return;
             switch (action) {
                 case Constants.ACTION_SERVICE_ENDED:
                     onParsingServiceFinished();
@@ -121,6 +124,11 @@ public abstract class BaseTvActivity extends PlaybackServiceActivity implements 
                 case Constants.ACTION_NEW_STORAGE:
                     UiTools.newStorageDetected(BaseTvActivity.this, intent.getStringExtra(Constants.EXTRA_PATH));
                     break;
+                //:ace
+                case Constants.ACTION_MEDIALIBRARY_UPDATED:
+                    onMedialibraryUpdated();
+                    break;
+                ///ace
             }
         }
     };
@@ -132,4 +140,8 @@ public abstract class BaseTvActivity extends PlaybackServiceActivity implements 
     protected void onParsingServiceStarted() {}
     protected void onParsingServiceProgress() {}
     protected void onParsingServiceFinished() {}
+
+    //:ace
+    protected void onMedialibraryUpdated() {}
+    ///ace
 }

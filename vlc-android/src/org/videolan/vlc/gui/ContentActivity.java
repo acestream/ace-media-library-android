@@ -26,15 +26,14 @@ package org.videolan.vlc.gui;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.SearchView;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.core.view.MenuItemCompat;
+import androidx.appcompat.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import org.videolan.libvlc.RendererItem;
 import org.videolan.vlc.R;
 import org.videolan.vlc.RendererDelegate;
 import org.videolan.vlc.gui.audio.AudioBrowserFragment;
@@ -46,6 +45,7 @@ import org.videolan.vlc.gui.helpers.UiTools;
 import org.videolan.vlc.gui.video.VideoGridFragment;
 import org.videolan.vlc.interfaces.Filterable;
 import org.videolan.vlc.util.AndroidDevices;
+import org.videolan.vlc.util.RendererItemWrapper;
 
 public class ContentActivity extends AudioPlayerContainerActivity implements SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener, RendererDelegate.RendererListener, RendererDelegate.RendererPlayer {
     public static final String TAG = "VLC/ContentActivity";
@@ -116,11 +116,11 @@ public class ContentActivity extends AudioPlayerContainerActivity implements Sea
             case R.id.ml_menu_renderers:
                 if (mService != null && !mService.hasRenderer()
                         && RendererDelegate.INSTANCE.getRenderers().size() == 1) {
-                    final RendererItem renderer = RendererDelegate.INSTANCE.getRenderers().get(0);
-                    RendererDelegate.INSTANCE.selectRenderer(renderer);
-                    mService.setRenderer(renderer);
+                    final RendererItemWrapper renderer = RendererDelegate.INSTANCE.getRenderers().get(0);
+                    RendererDelegate.INSTANCE.selectRenderer(true, renderer, true);
+                    mService.setRenderer(renderer, "select-single-renderer");
                     final View v = findViewById(R.id.audio_player_container);
-                    if (v != null) UiTools.snacker(v, getString(R.string.casting_connected_renderer, renderer.displayName));
+                    if (v != null) UiTools.snacker(v, getString(R.string.casting_connected_renderer, renderer.displayName()));
                 } else if (getSupportFragmentManager().findFragmentByTag("renderers") == null)
                     new RenderersDialog().show(getSupportFragmentManager(), "renderers");
                 return true;
@@ -207,14 +207,14 @@ public class ContentActivity extends AudioPlayerContainerActivity implements Sea
         if (showRenderers != empty) return;
         showRenderers = !empty;
         if (empty && !AndroidDevices.isChromeBook) {
-            RendererDelegate.INSTANCE.selectRenderer(null);
-            if (mService != null) mService.setRenderer(null);
+            RendererDelegate.INSTANCE.selectRenderer(false, null, true);
+            if (mService != null) mService.setRenderer(null, "ContentActivity.onRenderersChanged");
         }
         supportInvalidateOptionsMenu();
     }
 
     @Override
-    public void onRendererChanged(@Nullable RendererItem renderer) {
+    public void onRendererChanged(boolean fromUser, @Nullable RendererItemWrapper renderer) {
         supportInvalidateOptionsMenu();
     }
 }

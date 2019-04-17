@@ -47,7 +47,7 @@
             type="org.videolan.vlc.gui.video.VideoListAdapter.ViewHolder" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -108,7 +108,7 @@
             android:contentDescription="@string/more_actions"
             android:onClick="@{holder::onMoreClick}"
             android:scaleType="center"
-            android:src="@drawable/ic_more" />
+            android:src="?attr/rci_more_vert" />
 
         <TextView
             android:id="@+id/ml_item_time"
@@ -160,5 +160,5 @@
             android:progress="@{progress}"
             android:progressDrawable="?attr/gridview_progressbar"
             android:visibility="@{max == 0 ? View.INVISIBLE : View.VISIBLE}" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

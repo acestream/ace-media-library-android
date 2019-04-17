@@ -26,8 +26,8 @@ package org.videolan.vlc.gui.helpers.hf
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 
 open class BaseHeadlessFragment : Fragment() {
     protected var mActivity: FragmentActivity? = null
@@ -37,7 +37,7 @@ open class BaseHeadlessFragment : Fragment() {
         retainInstance = true
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is FragmentActivity) mActivity = context
     }

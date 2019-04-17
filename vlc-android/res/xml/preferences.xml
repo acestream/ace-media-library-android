@@ -2,6 +2,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/preferences">
 
+    <ListPreference
+        android:key="set_locale"
+        android:entries="@array/locale_entries"
+        android:entryValues="@array/locale_values"
+        android:title="@string/select_language" />
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:key="enable_black_theme"
+        android:summary="@string/enable_black_theme_summary"
+        android:title="@string/enable_black_theme"
+        android:disableDependentsState="true" />
+
     <PreferenceCategory android:title="@string/medialibrary" >
         <PreferenceScreen
             android:key="directories"

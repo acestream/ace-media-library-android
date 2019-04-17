@@ -9,9 +9,6 @@
     <string name="sortby_length">Độ dài</string>
     <string name="searchable_hint">Tìm kiếm…</string>
     <string name="history">Nhật Ký Xem</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="other">%d kết quả được tìm thấy</item>
-    </plurals>
     <string name="play">Bật</string>
     <string name="play_from_start">Bật từ đầu</string>
     <string name="play_as_audio">Bật dưới dạng audio</string>
@@ -40,12 +37,6 @@
     </plurals>
     <plurals name="subfolders_quantity">
         <item quantity="other">%d thư mục con</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="other">%d tập tin media</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="other">%d video</item>
     </plurals>
     <string name="internal_memory">Bộ nhớ trong</string>
     <string name="parent_folder">Di chuyển lên thư mục gốc</string>
@@ -124,10 +115,7 @@
     <string name="screen_orientation_landscape">Chế độ màn hình xem dạng nằm ngang</string>
     <string name="screen_orientation_reverse_portrait">Đảo ngược chế độ xem đứng</string>
     <string name="screen_orientation_reverse_landscape">Đảo ngược chế độ xem ngang</string>
-    <string name="enable_brightness_gesture">Bật tính năng tăng chỉnh độ sáng</string>
     <string name="enable_brightness_gesture_summary">Điều chỉnh độ sáng bằng cử động chạm nhẹ trong thời gian bật tập tin media</string>
-    <string name="enable_jump_buttons">Bật tính năng nút nhảy</string>
-    <string name="enable_jump_buttons_summary">Hiển thị nút điều khiển lùi lại và tiến tới trên giao diện video</string>
     <string name="enable_headset_detection">Phát hiện Tai Nghe được thêm vào</string>
     <string name="enable_headset_detection_summary">Tạm dừng khi tai nghe được rút khỏi máy; bật trở lại khi gắn tai nghe vào</string>
     <string name="enable_steal_remote_control">Điều khiển tai nghe đặc biệt</string>
@@ -163,4 +151,370 @@
     <string name="copy_to_clipboard">Lưu vào bộ nhớ ảo</string>
     <string name="copied_to_clipboard">Đã sao chép Nhật Ký vào bộ nhớ ảo.</string>
     <!--Accessibility-->
+    <string name="torrent_files">Torrent tập tin</string>
+    <string name="select_language">Chọn ngôn ngữ</string>
+    <string name="sortby_name_desc" source="google_translate">Tên (giải thích)</string>
+    <string name="sortby_artist_name" source="google_translate">Tên nghệ sĩ</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Tên nghệ sĩ (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Tên album</string>
+    <string name="sortby_album_name_desc" source="google_translate">Tên album (desc)</string>
+    <string name="sortby_length_desc" source="google_translate">Chiều dài (desc)</string>
+    <string name="sortby_date" source="google_translate">Ngày</string>
+    <string name="sortby_date_desc" source="google_translate">Dữ liệu (mô tả)</string>
+    <string name="sortby_number" source="google_translate">Nb bài hát</string>
+    <string name="sortby_number_desc" source="google_translate">Nb track (desc)</string>
+    <string name="playback" source="google_translate">Phát lại</string>
+    <string name="playback_controls" source="google_translate">Điều khiển phát lại</string>
+    <string name="medialibrary_scan" source="google_translate">Quét thư viện phương tiện</string>
+    <string name="Medialibrary_progress" source="google_translate">Thư viện phương tiện cập nhật tiến trình quét</string>
+    <string name="video_app_switch_title" source="google_translate">Chế độ nền / PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">Chọn hành vi VLC khi bạn chuyển sang ứng dụng khác từ phát lại video</string>
+    <string name="play_pip_title" source="google_translate">Phát video ở chế độ Ảnh trong ảnh</string>
+    <string name="play_as_audio_background" source="google_translate">Phát video ở chế độ nền</string>
+    <string name="insert_next" source="google_translate">Chèn tiếp</string>
+    <string name="remove" source="google_translate">Tẩy</string>
+    <string name="info_title" source="google_translate">VLC</string>
+    <string name="unknown_number" source="google_translate">Số lượng bản nhạc không xác định</string>
+    <string name="tracks" source="google_translate">Bài hát</string>
+    <string name="nomedia" source="google_translate">Không tìm thấy tệp phương tiện, vui lòng chuyển một số tệp vào thiết bị của bạn hoặc điều chỉnh tùy chọn của bạn.</string>
+    <string name="noplaylist" source="google_translate">Không tìm thấy danh sách phát.</string>
+    <string name="shuffle_title" source="google_translate">Chế độ xáo trộn</string>
+    <string name="shuffle" source="google_translate">Tắt</string>
+    <string name="shuffle_on" source="google_translate">Xáo trộn</string>
+    <string name="repeat_title" source="google_translate">Lặp lại các chế độ</string>
+    <string name="repeat" source="google_translate">Không lặp lại</string>
+    <string name="repeat_single" source="google_translate">Lặp lại đơn</string>
+    <string name="repeat_all" source="google_translate">Lặp lại tất cả</string>
+    <string name="firstsong" source="google_translate">Bài hát đầu tiên của danh sách phát</string>
+    <string name="lastsong" source="google_translate">Bài hát cuối cùng của danh sách nhạc</string>
+    <string name="surface_fit_screen" source="google_translate">Màn hình vừa vặn</string>
+    <string name="sound_on" source="google_translate">Bật âm thanh</string>
+    <string name="sound_off" source="google_translate">Tắt âm thanh</string>
+    <string name="navmenu" source="google_translate">Chức năng điều hướng</string>
+    <string name="advanced" source="google_translate">tùy chọn nâng cao</string>
+    <string name="sleep_in" source="google_translate">Ngủ trong</string>
+    <string name="server_add_title" source="google_translate">Thêm một máy chủ mới vào mục yêu thích</string>
+    <string name="server_domain_hint" source="google_translate">Địa chỉ máy chủ (tên miền hoặc IP)</string>
+    <string name="server_share_hint" source="google_translate">Tên chia sẻ mạng (hoặc địa chỉ IP)</string>
+    <string name="server_folder_hint" source="google_translate">Đường dẫn thư mục (tùy chọn)</string>
+    <string name="server_username_hint" source="google_translate">Tên đăng nhập</string>
+    <string name="server_servername_hint" source="google_translate">Tên máy chủ, để triệu tập</string>
+    <string name="server_port" source="google_translate">Hải cảng:</string>
+    <string name="login" source="google_translate">Đăng nhập</string>
+    <string name="password" source="google_translate">Mật khẩu</string>
+    <string name="search_results" source="google_translate">Kết quả tìm kiếm</string>
+    <string name="search_no_result" source="google_translate">Không tìm thấy phương tiện truyền thông</string>
+    <string name="favorites_add" source="google_translate">Thêm vào mục yêu thích</string>
+    <string name="favorites_remove" source="google_translate">Loại bỏ khỏi mục ưa thích</string>
+    <string name="favorites_edit" source="google_translate">Chỉnh sửa</string>
+    <string name="favorite_added" source="google_translate">Lưu vào mục yêu thích</string>
+    <string name="favorite_removed" source="google_translate">Đã xóa khỏi mục yêu thích</string>
+    <string name="error_message_is" source="google_translate">Thông báo lỗi là (vui lòng đề cập đến điều này khi gỡ lỗi): \ n</string>
+    <string name="encountered_error_message" source="google_translate">VLC đã gặp lỗi với phương tiện này. \ NVui lòng thử làm mới thư viện phương tiện.</string>
+    <string name="search" source="google_translate">Tìm kiếm</string>
+    <string name="search_history" source="google_translate">Lịch sử tìm kiếm</string>
+    <string name="playback_history_title" source="google_translate">Lịch sử phát lại</string>
+    <string name="playback_history_summary" source="google_translate">Lưu tất cả các phương tiện được phát trong phần Lịch sử</string>
+    <string name="playback_speed_title" source="google_translate">Tiết kiệm tốc độ phát lại</string>
+    <string name="playback_speed_summary" source="google_translate">Ghi nhớ tốc độ phát lại bạn đặt</string>
+    <string name="video_player_tips" source="google_translate">Mẹo chơi video:</string>
+    <string name="seek" source="google_translate">Tìm kiếm</string>
+    <string name="subtitles" source="google_translate">Phụ đề</string>
+    <string name="audio_sub" source="google_translate">Bản nhạc âm thanh \ nand phụ đề</string>
+    <string name="resize" source="google_translate">Thay đổi kích thước</string>
+    <string name="options" source="google_translate">Tùy chọn</string>
+    <string name="lock" source="google_translate">Khóa</string>
+    <string name="ok_got_it" source="google_translate">Hiểu rồi</string>
+    <string name="playlist_tips" source="google_translate">Mẹo chơi</string>
+    <string name="remove_song" source="google_translate">Xóa bài hát</string>
+    <string name="rearrange_order" source="google_translate">Sắp xếp lại thứ tự</string>
+    <string name="hold_to_seek" source="google_translate">Giữ để tìm kiếm</string>
+    <string name="audio_player_tips" source="google_translate">Mẹo chơi nhạc</string>
+    <string name="previous_next_song" source="google_translate">Bài hát trước / tiếp theo</string>
+    <string name="show_playlist" source="google_translate">Hiển thị danh sách phát</string>
+    <string name="hold_to_stop" source="google_translate">Giữ để dừng lại</string>
+    <string name="general_prefs_category" source="google_translate">Chung</string>
+    <string name="hardware_acceleration" source="google_translate">Tăng tốc phần cứng</string>
+    <string name="hardware_acceleration_summary" source="google_translate">Đã tắt: ổn định tốt hơn. \ NPecoding: có thể cải thiện hiệu suất. \ NFull: có thể cải thiện hiệu suất hơn nữa.</string>
+    <string name="hardware_acceleration_disabled" source="google_translate">Tàn tật</string>
+    <string name="hardware_acceleration_decoding" source="google_translate">Giải mã gia tốc</string>
+    <string name="hardware_acceleration_full" source="google_translate">Tăng tốc hoàn toàn</string>
+    <string name="dev_hardware_decoder" source="google_translate">Bộ giải mã phần cứng tiên tiến</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">Buộc bộ giải mã phần cứng, chỉ dành cho người dùng nâng cao</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">iomx</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-dr</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">mediacodec</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">MediaCodec-dr</string>
+    <string name="enable_black_theme" source="google_translate">Kích hoạt chủ đề màu đen</string>
+    <string name="enable_black_theme_summary" source="google_translate">Thay đổi màu giao diện để thoải mái hơn trong môi trường ánh sáng yếu.</string>
+    <string name="subtitle_text_encoding" source="google_translate">Mã hóa văn bản phụ đề</string>
+    <string name="daynight_title" source="google_translate">Chế độ ban ngày</string>
+    <string name="daynight_summary" source="google_translate">Tự động chuyển sang chế độ ban đêm vào thời điểm thích hợp</string>
+    <string name="extra_prefs_category" source="google_translate">Cài đặt bổ sung</string>
+    <string name="interface_prefs_screen" source="google_translate">Giao diện</string>
+    <string name="interface_gui" source="google_translate">Trưng bày</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">Màn hình phụ</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">Cài đặt khi màn hình phụ được kết nối (HDMI / Chromecast).</string>
+    <string name="enable_clone_mode" source="google_translate">Thích nhân bản</string>
+    <string name="enable_clone_mode_summary" source="google_translate">Sao chép màn hình thiết bị mà không cần điều khiển từ xa.</string>
+    <string name="interface_other_category" source="google_translate">Giao diện - Khác</string>
+    <string name="video_prefs_category" source="google_translate">Video</string>
+    <string name="video_min_group_length_title" source="google_translate">Video nhóm</string>
+    <string name="video_min_group_length_summary" source="google_translate">Video được nhóm nếu các chữ cái đầu tiên của chúng giống nhau.</string>
+    <string name="video_min_group_length_disable" source="google_translate">Vô hiệu hóa</string>
+    <string name="video_min_group_length_first" source="google_translate">Chữ cái đầu tiên</string>
+    <string name="video_min_group_length_short" source="google_translate">Số lượng chữ cái ngắn (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Số lượng chữ dài (9)</string>
+    <string name="media_fast_seek" source="google_translate">Cho phép tùy chọn tìm kiếm nhanh</string>
+    <string name="media_seen" source="google_translate">Hiển thị đánh dấu video đã xem</string>
+    <string name="media_seen_summary" source="google_translate">Đánh dấu một video như đã thấy khi bạn phát nó cho đến khi kết thúc</string>
+    <string name="force_list_portrait" source="google_translate">Không có lưới ở chế độ dọc</string>
+    <string name="force_list_portrait_summary" source="google_translate">Hiển thị video trong danh sách thay vì lưới ở chế độ dọc</string>
+    <string name="force_play_all_summary" source="google_translate">Phát tất cả các video, bắt đầu với video bạn đã nhấp vào</string>
+    <string name="force_play_all_title" source="google_translate">Chế độ danh sách phát video</string>
+    <string name="save_brightness_summary" source="google_translate">Ghi nhớ mức độ sáng trong trình phát video</string>
+    <string name="save_brightness_title" source="google_translate">Lưu mức độ sáng cho video</string>
+    <string name="save_audiodelay_summary" source="google_translate">Lưu độ trễ âm thanh riêng cho từng video</string>
+    <string name="save_audiodelay_title" source="google_translate">Lưu độ trễ âm thanh</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Cử chỉ sáng</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Cử chỉ âm lượng</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Điều khiển âm lượng bằng cử chỉ trong khi phát lại video</string>
+    <string name="enable_seek_buttons" source="google_translate">Kích hoạt các nút tìm kiếm</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">Hiển thị các nút tua lại và chuyển tiếp trên giao diện video</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Nhấn đúp để tìm kiếm</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Chạm hai lần vào các cạnh màn hình để tìm kiếm trong 10 giây</string>
+    <string name="popup_keepscreen_title" source="google_translate">Giữ màn hình BẬT ở chế độ Pop-Up</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Luôn giữ màn hình BẬT trong khi Pop-Up được hiển thị, ngay cả khi video bị tạm dừng.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Hiển thị cac file bị ẩn</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Hiển thị tập tin ẩn trong trình duyệt</string>
+    <string name="subtitles_prefs_category" source="google_translate">Phụ đề</string>
+    <string name="subtitles_size_title" source="google_translate">Kích thước phụ đề</string>
+    <string name="subtitles_size_small" source="google_translate">Nhỏ bé</string>
+    <string name="subtitles_size_normal" source="google_translate">Bình thường</string>
+    <string name="subtitles_size_big" source="google_translate">Lớn</string>
+    <string name="subtitles_size_huge" source="google_translate">Khổng lồ</string>
+    <string name="subtitles_color_title" source="google_translate">Phụ đề màu</string>
+    <string name="subtitles_color_white" source="google_translate">trắng</string>
+    <string name="subtitles_color_gray" source="google_translate">Xám</string>
+    <string name="subtitles_color_pink" source="google_translate">Hồng</string>
+    <string name="subtitles_color_blue" source="google_translate">Màu xanh da trời</string>
+    <string name="subtitles_color_yellow" source="google_translate">Màu vàng</string>
+    <string name="subtitles_color_green" source="google_translate">màu xanh lá</string>
+    <string name="subtitles_background_title" source="google_translate">Phụ đề nền</string>
+    <string name="subtitles_bold_title" source="google_translate">Phụ đề in đậm</string>
+    <string name="subtitles_autoload_title" source="google_translate">Tự động tải phụ đề</string>
+    <string name="audio_prefs_category" source="google_translate">Âm thanh</string>
+    <string name="lockscreen_cover_title" source="google_translate">Bìa phương tiện trên Lockscreen</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Khi khả dụng, hãy đặt ảnh bìa phương tiện hiện tại làm hình nền màn hình khóa</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Tự động cuộn danh sách phát hiện tại</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Cuộn animate trên quá trình chuyển đổi phương tiện truyền thông</string>
+    <string name="audio_title_alignment" source="google_translate">Căn chỉnh tiêu đề âm thanh</string>
+    <string name="audio_title_alignment_default" source="google_translate">Mặc định</string>
+    <string name="audio_title_alignment_left" source="google_translate">Trái</string>
+    <string name="audio_title_alignment_centre" source="google_translate">Trung tâm</string>
+    <string name="audio_title_alignment_right" source="google_translate">Đúng</string>
+    <string name="audio_title_alignment_marquee" source="google_translate">Hầu tước</string>
+    <string name="audio_save_repeat_title" source="google_translate">Lưu chế độ lặp lại</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Nhớ chế độ lặp lại khi tải danh sách phát âm thanh</string>
+    <string name="audio_boost_title" source="google_translate">Tăng cường âm thanh</string>
+    <string name="headset_prefs_category" source="google_translate">Tai nghe</string>
+    <string name="enable_headset_actions_title" source="google_translate">Phím tắt điều khiển từ xa</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Nhấn đúp vào \'Play \' để chuyển sang tiếp theo và nhấn lâu vào nó để bỏ qua bài hát trước đó</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Tiếp tục khi chèn tai nghe</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">Tạm dừng</string>
+    <string name="audio_ducking_title" source="google_translate">Âm lượng VLC thấp hơn trên các thông báo</string>
+    <string name="audio_ducking_summary" source="google_translate">Giúp nghe thông báo âm thanh, hướng dẫn điều hướng hoặc trợ lý nói chuyện</string>
+    <string name="casting_category" source="google_translate">Vật đúc</string>
+    <string name="casting_passthrough_title" source="google_translate">Truyền âm thanh</string>
+    <string name="casting_passthrough_summary" source="google_translate">Hãy để TV của bạn quản lý kết xuất âm thanh</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Chất lượng chuyển đổi</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Chọn chất lượng chuyển đổi khi truyền trên màn hình từ xa</string>
+    <string name="casting_quality_high" source="google_translate">Cao</string>
+    <string name="casting_quality_medium" source="google_translate">Trung bình</string>
+    <string name="casting_quality_low" source="google_translate">Thấp</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Thấp nhất</string>
+    <string name="cast_performance_warning" source="google_translate">Truyền video này yêu cầu chuyển đổi. Chuyển đổi này có thể sử dụng tất cả năng lượng có sẵn và có thể nhanh chóng làm cạn kiệt pin của bạn.</string>
+    <string name="artists_show_all_title" source="google_translate">Hiển thị tất cả các nghệ sĩ</string>
+    <string name="artists_show_all_summary" source="google_translate">Hiển thị tất cả các nghệ sĩ trong danh sách Nghệ sĩ, không chỉ các nghệ sĩ album</string>
+    <string name="extensions_prefs_category" source="google_translate">Tiện ích mở rộng</string>
+    <string name="extensions_enable_category" source="google_translate">Chọn tiện ích mở rộng để bật</string>
+    <string name="extensions_empty" source="google_translate">Không có phần mở rộng được phát hiện</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Kích hoạt</string>
+    <string name="android_auto" source="google_translate">Xe Android</string>
+    <string name="controls_prefs_category" source="google_translate">Kiểm soát</string>
+    <string name="chroma_format_summary" source="google_translate">RGB 32-bit: sắc độ mặc định \ nRGB 16-bit: hiệu suất tốt hơn nhưng chất lượng thấp hơn \ nYUV: hiệu suất tốt nhất nhưng không hoạt động trên tất cả các thiết bị. Chỉ dành cho Android 2.3 trở lên.</string>
+    <string name="main_prefs_category" source="google_translate">Cài đặt chính</string>
+    <string name="save_video_none" source="google_translate">Đừng tiết kiệm tốc độ</string>
+    <string name="save_video_session" source="google_translate">Tiết kiệm tốc độ trong phiên</string>
+    <string name="save_video_always" source="google_translate">Tiết kiệm tốc độ qua các phiên</string>
+    <string name="auto_rescan" source="google_translate">Tự động quét lại</string>
+    <string name="auto_rescan_summary" source="google_translate">Tự động quét thiết bị cho phương tiện mới hoặc đã xóa khi khởi động ứng dụng</string>
+    <string name="dump_media_db" source="google_translate">Cơ sở dữ liệu phương tiện truyền thông</string>
+    <string name="dump_media_db_summary" source="google_translate">Sao chép cơ sở dữ liệu vào root lưu trữ nội bộ</string>
+    <string name="clear_media_db_summary" source="google_translate">Truy cập thông tin VLC của Android để xóa dữ liệu</string>
+    <string name="set_locale_popup" source="google_translate">Thoát và khởi động lại VLC để các thay đổi có hiệu lực.</string>
+    <string name="resume_playback_title" source="google_translate">Tiếp tục phát lại sau một cuộc gọi</string>
+    <string name="resume_playback_summary" source="google_translate">Ở lại tạm dừng nếu không</string>
+    <string name="network_caching_popup" source="google_translate">Giá trị này phải nằm trong khoảng từ 0 đến 6000 ms</string>
+    <string name="quit" source="google_translate">Thoát và khởi động lại ứng dụng</string>
+    <string name="developer_prefs_category" source="google_translate">Nhà phát triển</string>
+    <string name="log_service_title" source="google_translate">Ghi nhật ký VLC</string>
+    <string name="log_service_text" source="google_translate">Mở bảng điều khiển đăng nhập</string>
+    <string name="dump_logcat" source="google_translate">Đăng nhập logcat</string>
+    <string name="dump_logcat_failure" source="google_translate">Không thể đổ logcat.</string>
+    <string name="serious_crash" source="google_translate">Thật không may, một lỗi nghiêm trọng đã xảy ra và VLC đã phải đóng cửa.</string>
+    <string name="help_us_send_log" source="google_translate">Hãy giúp chúng tôi cải thiện VLC bằng cách gửi nhật ký sự cố sau:</string>
+    <string name="restart_vlc" source="google_translate">Khởi động lại VLC</string>
+    <string name="send_log" source="google_translate">Gửi nhật ký</string>
+    <string name="sending_log" source="google_translate">Gửi log log</string>
+    <string name="drawer_open" source="google_translate">Mở ngăn kéo điều hướng</string>
+    <string name="drawer_close" source="google_translate">Đóng ngăn điều hướng</string>
+    <string name="network_browsing" source="google_translate">Mạng nội bộ</string>
+    <string name="browsing" source="google_translate">Đang duyệt</string>
+    <string name="file_size" source="google_translate">Kích thước tập tin:</string>
+    <string name="audio_delay" source="google_translate">Sự chậm trễ âm thanh</string>
+    <string name="spu_delay" source="google_translate">Phụ đề chậm trễ</string>
+    <string name="sleep_time_not_set" source="google_translate">không có bộ nào</string>
+    <string name="network_shares_discovery" source="google_translate">Tìm kiếm cổ phiếu mạng</string>
+    <string name="network_empty" source="google_translate">Thư mục này trống</string>
+    <string name="network_connection_needed" source="google_translate">Không có kết nối với mạng cục bộ.</string>
+    <string name="search_hint" source="google_translate">Tìm kiếm phương tiện truyền thông</string>
+    <string name="search_list_hint" source="google_translate">Tìm kiếm phương tiện trong danh sách hiện tại</string>
+    <string name="search_global" source="google_translate">Tìm kiếm trong tất cả các thư viện phương tiện</string>
+    <string name="directory_show_medialib" source="google_translate">Hiển thị trên MediaLib</string>
+    <string name="directory_hide_medialib" source="google_translate">Ẩn khỏi MediaLib</string>
+    <string name="playlist_save" source="google_translate">Lưu danh sách phát</string>
+    <string name="playlist_name_hint" source="google_translate">tên danh sách phát</string>
+    <string name="go_to_chapter" source="google_translate">Chuyển đến chương</string>
+    <string name="chapter" source="google_translate">Chương</string>
+    <string name="resume_from_position" source="google_translate">Tiếp tục từ vị trí cuối cùng</string>
+    <string name="confirm_resume" source="google_translate">Tiếp tục từ vị trí cuối cùng?</string>
+    <string name="confirm_resume_title" source="google_translate">Yêu cầu xác nhận để tiếp tục</string>
+    <string name="confirm_resume_summary" source="google_translate">nếu được kích hoạt, bạn sẽ được yêu cầu xác nhận khi video có thể được nối lại từ vị trí cuối cùng</string>
+    <string name="directory_empty" source="google_translate">Thư mục trống</string>
+    <string name="player_touch_title" source="google_translate">Điều khiển cảm ứng cho video</string>
+    <string name="player_touch_enable_all" source="google_translate">Bật điều khiển cảm ứng</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Vô hiệu hóa điều khiển độ sáng</string>
+    <string name="player_touch_disable_all" source="google_translate">Vô hiệu hóa tất cả các điều khiển cảm ứng</string>
+    <string name="tv_ui_title" source="google_translate">Giao diện TV Android</string>
+    <string name="tv_ui_summary" source="google_translate">Thay đổi giao diện người dùng sang chủ đề TV</string>
+    <string name="medialibrary" source="google_translate">Thư viện phương tiện</string>
+    <string name="medialibrary_directories" source="google_translate">Thư mục thư viện phương tiện</string>
+    <string name="more_actions" source="google_translate">Nhiêu hanh động hơn</string>
+    <string name="move" source="google_translate">Di chuyển</string>
+    <string name="back_quit_lock" source="google_translate">Nhấn Back lần nữa để thoát video</string>
+    <string name="playlist_deleted" source="google_translate">Danh sách phát đã bị xóa</string>
+    <string name="file_deleted" source="google_translate">Tệp đã bị xóa</string>
+    <string name="no_subs_found" source="google_translate">Không có phụ đề trong thư mục này</string>
+    <string name="music_now_playing" source="google_translate">Đang chơi</string>
+    <string name="widget_name_w" source="google_translate">Widget trắng VLC</string>
+    <string name="widget_name_b" source="google_translate">Tiện ích tối VLC</string>
+    <string name="allow_storage_access_title" source="google_translate">Cho phép Ace Stream truy cập các tệp video và âm thanh</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace Stream cần bạn cấp quyền này để truy cập các tệp phương tiện trên thiết bị này.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Cho phép Ace Stream đặt nhạc chuông</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace Stream cần bạn cấp quyền này để thiết lập bài hát này làm nhạc chuông.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Cho phép Ace Stream thay đổi chế độ độ sáng</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace Stream cần bạn cấp quyền này để thay đổi chế độ sáng của bạn.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Cho phép cửa sổ bật lên Ace Stream trên các ứng dụng khác</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream cần bạn cấp quyền này để hiển thị video của bạn trong một cửa sổ bật lên trên các ứng dụng khác.</string>
+    <string name="permission_ask_again" source="google_translate">Cấp phép</string>
+    <string name="exit_app" source="google_translate">Đóng VLC</string>
+    <string name="exit_app_msg" source="google_translate">Bạn có chắc chắn muốn bỏ VLC?</string>
+    <string name="fastscroller_track" source="google_translate">Theo dõi FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">Xử lý FastScroller</string>
+    <string name="plugins" source="google_translate">bổ sung</string>
+    <string name="download_on_device" source="google_translate">Tải về</string>
+    <string name="extension_empty" source="google_translate">Không có mục nào để hiển thị, hãy vào cài đặt tiện ích mở rộng của bạn để lấy một số.</string>
+    <string name="opengl_title" source="google_translate">Sử dụng OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">Theo mặc định, OpenGL ES2 được sử dụng để giải mã phần mềm và giải mã phần cứng khi cần (video 360 °).</string>
+    <string name="opengl_automatic" source="google_translate">Tự động</string>
+    <string name="opengl_on" source="google_translate">Buộc</string>
+    <string name="opengl_off" source="google_translate">Buộc tắt</string>
+    <string name="network_favorites" source="google_translate">Mạng yêu thích</string>
+    <string name="network_shared_folders" source="google_translate">Thư mục chia sẻ</string>
+    <string name="encryption_warning" source="google_translate">Cảnh báo, mã hóa không có sẵn cho phiên bản Android này, mật khẩu sẽ được lưu trữ trong một không gian riêng nhưng không được mã hóa</string>
+    <string name="store_password" source="google_translate">Nhớ mật khẩu</string>
+    <string name="add_to_playlist" source="google_translate">Thêm vào danh sách phát</string>
+    <string name="popup_playback_title" source="google_translate">Phát video trong cửa sổ bật lên</string>
+    <string name="popup_playback" source="google_translate">Chơi trong cửa sổ bật lên</string>
+    <string name="popup_expand" source="google_translate">Mở rộng video</string>
+    <string name="snack_subloader_sub_found" source="google_translate">Phụ đề được tải xuống</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">Không tìm thấy phụ đề</string>
+    <string name="dialog_subloader_success" source="google_translate">Phụ đề được tìm thấy cho:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Không tìm thấy phụ đề cho:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">Tải xong</string>
+    <string name="download_subtitles" source="google_translate">Tải xuống phụ đề</string>
+    <string name="preferences_languages_download" source="google_translate">Ngôn ngữ phụ đề</string>
+    <string name="list_languages_download_summary" source="google_translate">Ngôn ngữ để tải xuống khi tìm nạp phụ đề</string>
+    <string name="list_languages_download_title" source="google_translate">Ngôn ngữ tải xuống phụ đề</string>
+    <string name="service_unavailable" source="google_translate">Dịch vụ Không sẵn có</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Không thể đặt ngôn ngữ phụ đề, hãy thử đặt nó trong cài đặt ứng dụng</string>
+    <string name="downloading_subtitles" source="google_translate">Đang tải phụ đề</string>
+    <string name="browse_folder" source="google_translate">Thư mục trình duyệt</string>
+    <string name="listen" source="google_translate">Nghe</string>
+    <string name="subtitles_download_title" source="google_translate">Tải xuống dự phòng</string>
+    <string name="connecting" source="google_translate">Kết nối</string>
+    <string name="save_bluetooth_delay" source="google_translate">tiết kiệm độ trễ cho thiết bị bluetooth</string>
+    <string name="episodes" source="google_translate">tập phim</string>
+    <string name="movies" source="google_translate">phim</string>
+    <string name="videos" source="google_translate">video</string>
+    <string name="streams" source="google_translate">dòng</string>
+    <string name="clear_playback_history" source="google_translate">Xóa lịch sử phát lại</string>
+    <string name="various_artists" source="google_translate">Nhiều nghệ sĩ</string>
+    <string name="ml_scanning" source="google_translate">Quét các tập tin phương tiện</string>
+    <string name="ml_parse_media" source="google_translate">Phân tích cú pháp trung bình</string>
+    <string name="ml_discovering" source="google_translate">Khám phá</string>
+    <string name="resume" source="google_translate">Tiếp tục</string>
+    <string name="length" source="google_translate">Chiều dài</string>
+    <string name="tv_settings_hint" source="google_translate">Nhấn và giữ nút OK để kiểm tra / bỏ chọn thư mục</string>
+    <string name="ml_external_storage_title" source="google_translate">Bộ nhớ ngoài mới được phát hiện</string>
+    <string name="ml_external_storage_accept" source="google_translate">Vâng</string>
+    <string name="ml_external_storage_decline" source="google_translate">Không</string>
+    <string name="last_added_media" source="google_translate">thêm lần cuối</string>
+    <string name="no" source="google_translate">Không</string>
+    <string name="loading_medialibrary" source="google_translate">Đang tải thư viện Medial Library</string>
+    <string name="yes" source="google_translate">Vâng</string>
+    <string name="custom_set_save_title" source="google_translate">Thay đổi chưa lưu</string>
+    <string name="custom_set_save_warning" source="google_translate">Cảnh báo: những thay đổi chưa được lưu</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Lưu bộ chỉnh âm thành tập hợp</string>
+    <string name="new_custom_set_save_message" source="google_translate">Lưu bộ cân bằng mới được thiết lập là trên mạng</string>
+    <string name="save" source="google_translate">Tiết kiệm</string>
+    <string name="do_not_save" source="google_translate">Không lưu</string>
+    <string name="custom_set_wrong_input" source="google_translate">Tên không hợp lệ.</string>
+    <string name="custom_set_already_exist" source="google_translate">Bộ chỉnh âm với tên này đã tồn tại</string>
+    <string name="custom_set_restored" source="google_translate">Bộ chỉnh âm tùy chỉnh được khôi phục.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Bộ chỉnh âm chưa được xóa đã bị xóa.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Mới</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medial Library đang quét các thiết bị của bạn ngay bây giờ</string>
+    <string name="recommendations" source="google_translate">khuyến nghị</string>
+    <string name="recommendations_desc" source="google_translate">Thẻ khuyến nghị trên launcher</string>
+    <string name="browser_quick_access" source="google_translate">Truy cập nhanh</string>
+    <string name="browser_storages" source="google_translate">Lưu trữ</string>
+    <string name="renderer_list_title" source="google_translate">Hiển thị</string>
+    <string name="feedback_player_crashed" source="google_translate">Xin lỗi, VLC vừa bị sập. Vui lòng thử lại.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Bạn phải cấp quyền truy cập ghi VLC vào Thẻ SD của bạn</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC không thể xóa tệp này mà không có quyền truy cập ghi. \ NVui lòng truy cập Thẻ SD của bạn và nhấp vào \ "Chọn \". \ N Bạn có thể phải nhấp vào \ "Hiển thị thẻ SD \" trong menu trên cùng bên phải</string>
+    <string name="dialog_sd_wizard" source="google_translate">Cho tôi xem</string>
+    <string name="renderers_disconnect" source="google_translate">Ngắt kết nối</string>
+    <string name="audio_digital_failed" source="google_translate">Không thể thay đổi trạng thái Đầu ra Kỹ thuật số Âm thanh</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Đầu ra âm thanh kỹ thuật số được kích hoạt</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Đầu ra âm thanh kỹ thuật số bị vô hiệu hóa</string>
+    <string name="live_streams" source="google_translate">Phát sóng trực tiếp</string>
+    <string name="all_live_streams" source="google_translate">Tất cả các luồng trực tiếp</string>
+    <string name="video_torrents" source="google_translate">Video torrent</string>
+    <string name="audio_torrents" source="google_translate">Âm thanh torrent</string>
+    <string name="all_torrents" source="google_translate">Tất cả torrent</string>
+    <string name="main" source="google_translate">Chủ yếu</string>
+    <string name="media_player" source="google_translate">Media Player</string>
+    <string name="acestream_server" source="google_translate">Máy chủ Ace Stream (động cơ)</string>
+    <string name="media_player_settings" source="google_translate">Cài đặt trình phát phương tiện</string>
+    <string name="acestream_server_settings" source="google_translate">Cài đặt máy chủ Ace Stream (động cơ)</string>
+    <string name="sign_out" source="google_translate">Đăng xuất</string>
+    <string name="sign_in" source="google_translate">Đăng nhập</string>
+    <string name="sign_in_acestream" source="google_translate">Đăng nhập bằng Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Đăng nhập bằng Google</string>
+    <string name="video_files" source="google_translate">Tập video</string>
+    <string name="audio_files" source="google_translate">Tập tin âm thanh</string>
+    <string name="retry" source="google_translate">Thử lại</string>
+    <string name="failed_to_load_web_page" source="google_translate">Không thể tải trang web</string>
 </resources>

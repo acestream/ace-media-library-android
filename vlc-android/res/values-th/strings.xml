@@ -13,9 +13,6 @@
     <string name="sortby_date_desc">วันเวลา (ใหม่ไปเก่า)</string>
     <string name="searchable_hint">ค้นหา…</string>
     <string name="history">ประวัติ</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="other">พบ %d รายการ</item>
-    </plurals>
     <string name="play">เล่น</string>
     <string name="play_from_start">เล่นจากตำแหน่งเริ่ม</string>
     <string name="play_as_audio">เล่นแต่เสียง</string>
@@ -51,12 +48,6 @@
     </plurals>
     <plurals name="subfolders_quantity">
         <item quantity="other">%d โฟลเดอร์ย่อย</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="other">%d แฟ้มสื่อ</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="other">%d วีดิทัศน์</item>
     </plurals>
     <string name="internal_memory">ความจำภายใน</string>
     <string name="parent_folder">กลับไปยังโฟลเดอร์ก่อนหน้านี้</string>
@@ -117,9 +108,6 @@
     <string name="brightness">ความสว่าง</string>
     <string name="navmenu">เมนูผังรวม</string>
     <string name="advanced">ตัวเลือกขั้นสูง</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="other">%1$d ช่อง\n</item>
-    </plurals>
     <string name="track_samplerate_info">อัตราวัด: %1$d Hz\n</string>
     <string name="track_resolution_info">ความละเอียดหน้าจอ: %1$dx%2$d\n</string>
     <string name="track_framerate_info">อัตราเฟรม: %1$.3f\n</string>
@@ -313,8 +301,8 @@
     <string name="no_subs_found">ไม่มีบทบรรยายในที่ตั้งนี้</string>
     <string name="music_now_playing">กำลังเล่น</string>
     <!--Widget-->
-    <string name="allow_settings_access_ringtone_title">อนุญาตให้ VLC สามารถตั้งเสียงเรียกเข้าได้</string>
-    <string name="allow_settings_access_ringtone_description">VLC ต้องได้รับการอนุญาตจากคุณเสียก่อน จึงจะสามารถเลือกเพลงตั้งเป็นเสียงเรียกเข้าได้</string>
+    <string name="allow_settings_access_ringtone_title">อนุญาตให้ Ace Stream สามารถตั้งเสียงเรียกเข้าได้</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream ต้องได้รับการอนุญาตจากคุณเสียก่อน จึงจะสามารถเลือกเพลงตั้งเป็นเสียงเรียกเข้าได้</string>
     <string name="exit_app">ปิด VLC</string>
     <!--fast scroller-->
     <!--Plugins-->
@@ -332,4 +320,217 @@
     <string name="downloading_subtitles">กำลังดาวน์โหลดบทบรรยาย</string>
     <string name="browse_folder">เรียกดูจากโฟลเดอร์</string>
     <string name="connecting">กำลังเชื่อมต่อ...</string>
+    <string name="torrent_files">Torrent ไฟล์</string>
+    <string name="select_language">เลือกภาษา</string>
+    <string name="sortby_artist_name" source="google_translate">ชื่อศิลปิน</string>
+    <string name="sortby_artist_name_desc" source="google_translate">ชื่อศิลปิน (เรียง)</string>
+    <string name="sortby_album_name" source="google_translate">ชื่ออัลบั้ม</string>
+    <string name="sortby_album_name_desc" source="google_translate">ชื่ออัลบั้ม (เรียง)</string>
+    <string name="sortby_number" source="google_translate">แทร็ก Nb</string>
+    <string name="sortby_number_desc" source="google_translate">แทร็ก Nb (เรียง)</string>
+    <string name="playback" source="google_translate">การเล่น</string>
+    <string name="playback_controls" source="google_translate">ตัวควบคุมการเล่น</string>
+    <string name="medialibrary_scan" source="google_translate">สแกนไลบรารีสื่อ</string>
+    <string name="Medialibrary_progress" source="google_translate">อัปเดตความคืบหน้าการสแกนไลบรารีสื่อ</string>
+    <string name="video_app_switch_title" source="google_translate">โหมดพื้นหลัง / PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">เลือกลักษณะการทำงาน VLC เมื่อคุณสลับไปที่แอปพลิเคชันอื่นจากการเล่นวิดีโอ</string>
+    <string name="play_pip_title" source="google_translate">เล่นวิดีโอในโหมด Picture-in-picture</string>
+    <string name="insert_next" source="google_translate">แทรกถัดไป</string>
+    <string name="unknown_number" source="google_translate">จำนวนแทร็กที่ไม่รู้จัก</string>
+    <string name="tracks" source="google_translate">เพลง</string>
+    <string name="hardware_acceleration_summary" source="google_translate">ปิดการใช้งาน: เสถียรภาพที่ดีขึ้น \ n การเข้ารหัส: อาจปรับปรุงประสิทธิภาพ \ n เต็ม: อาจปรับปรุงประสิทธิภาพเพิ่มเติม</string>
+    <string name="daynight_title" source="google_translate">โหมดกลางวัน</string>
+    <string name="enable_clone_mode" source="google_translate">ชอบโคลน</string>
+    <string name="enable_clone_mode_summary" source="google_translate">โคลนหน้าจออุปกรณ์โดยไม่มีการควบคุมระยะไกล</string>
+    <string name="video_min_group_length_summary" source="google_translate">วิดีโอจะถูกจัดกลุ่มหากตัวอักษรตัวแรกเหมือนกัน</string>
+    <string name="video_min_group_length_first" source="google_translate">ตัวอักษรตัวแรกเท่านั้น</string>
+    <string name="video_min_group_length_short" source="google_translate">จำนวนตัวอักษรสั้น (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">จำนวนตัวอักษรยาว (9)</string>
+    <string name="media_fast_seek" source="google_translate">เปิดใช้งานตัวเลือกการค้นหาอย่างรวดเร็ว</string>
+    <string name="media_seen" source="google_translate">แสดงเครื่องหมายวิดีโอที่เห็น</string>
+    <string name="media_seen_summary" source="google_translate">ทำเครื่องหมายวิดีโอตามที่คุณเห็นเมื่อเล่นจนจบ</string>
+    <string name="force_play_all_summary" source="google_translate">เล่นวิดีโอทั้งหมดเริ่มจากวิดีโอที่คุณคลิก</string>
+    <string name="force_play_all_title" source="google_translate">โหมดเพลย์ลิสต์วิดีโอ</string>
+    <string name="save_audiodelay_summary" source="google_translate">บันทึกความล่าช้าของแต่ละเสียงสำหรับแต่ละวิดีโอ</string>
+    <string name="save_audiodelay_title" source="google_translate">บันทึกความล่าช้าเสียง</string>
+    <string name="enable_seek_buttons" source="google_translate">เปิดใช้งานปุ่มค้นหา</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">แสดงปุ่มย้อนกลับและไปข้างหน้าบนอินเทอร์เฟซวิดีโอ</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">แตะสองครั้งเพื่อค้นหา</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">แตะสองครั้งที่ขอบหน้าจอเพื่อค้นหา 10 วินาที</string>
+    <string name="popup_keepscreen_title" source="google_translate">เปิดหน้าจอไว้ในโหมดป๊อปอัพ</string>
+    <string name="popup_keepscreen_summary" source="google_translate">เปิดหน้าจอทุกครั้งขณะที่ป๊อปอัปปรากฏขึ้นแม้ว่าวิดีโอจะหยุดชั่วคราว</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">แสดงไฟล์ที่ซ่อน</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">แสดงไฟล์ที่ซ่อนอยู่ในเบราว์เซอร์</string>
+    <string name="subtitles_prefs_category" source="google_translate">คำบรรยาย</string>
+    <string name="subtitles_color_gray" source="google_translate">สีเทา</string>
+    <string name="subtitles_bold_title" source="google_translate">คำบรรยายตัวหนา</string>
+    <string name="subtitles_autoload_title" source="google_translate">คำบรรยายโหลดอัตโนมัติ</string>
+    <string name="audio_prefs_category" source="google_translate">เสียง</string>
+    <string name="lockscreen_cover_title" source="google_translate">ฝาครอบสื่อบน Lockscreen</string>
+    <string name="lockscreen_cover_summary" source="google_translate">เมื่อมีให้ตั้งค่าภาพปกสื่อปัจจุบันเป็นภาพพื้นหลังหน้าจอล็อก</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">เลื่อนเพลย์ลิสต์ปัจจุบันเคลื่อนไหวโดยอัตโนมัติ</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">เลื่อนภาพเคลื่อนไหวบนการเปลี่ยนสื่อ</string>
+    <string name="audio_title_alignment" source="google_translate">การจัดตำแหน่งชื่อเสียง</string>
+    <string name="audio_title_alignment_marquee" source="google_translate">ปะรำ</string>
+    <string name="audio_save_repeat_title" source="google_translate">บันทึกโหมดการทำซ้ำ</string>
+    <string name="audio_save_repeat_summary" source="google_translate">จำโหมดซ้ำเมื่อโหลดเพลย์ลิสต์เสียง</string>
+    <string name="audio_boost_title" source="google_translate">เสียงเพิ่ม</string>
+    <string name="headset_prefs_category" source="google_translate">ชุดหูฟัง</string>
+    <string name="enable_headset_detection_summary" source="google_translate">ตรวจสอบการแทรกและการถอดชุดหูฟัง</string>
+    <string name="enable_headset_actions_title" source="google_translate">ทางลัดการควบคุมระยะไกล</string>
+    <string name="enable_headset_actions_summary" source="google_translate">กดสองครั้งที่ \'Play \' เพื่อข้ามไปยังถัดไปและกดแบบยาวเพื่อข้ามไปยังแทร็กก่อนหน้า</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">ดำเนินการต่อกับการแทรกชุดหูฟัง</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">หยุดเป็นอย่างอื่น</string>
+    <string name="audio_ducking_title" source="google_translate">ลดระดับเสียง VLC ในการแจ้งเตือน</string>
+    <string name="audio_ducking_summary" source="google_translate">ช่วยฟังการแจ้งเตือนด้วยเสียงคำแนะนำการนำทางหรือผู้ช่วยพูดคุย</string>
+    <string name="casting_category" source="google_translate">การคัดเลือกนักแสดง</string>
+    <string name="casting_passthrough_title" source="google_translate">เสียง Passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">ให้ทีวีของคุณจัดการการเรนเดอร์เสียง</string>
+    <string name="casting_conversion_quality_title" source="google_translate">คุณภาพการแปลง</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">เลือกคุณภาพการแปลงเมื่อส่งสัญญาณบนหน้าจอระยะไกล</string>
+    <string name="casting_quality_high" source="google_translate">สูง</string>
+    <string name="casting_quality_medium" source="google_translate">กลาง</string>
+    <string name="casting_quality_low" source="google_translate">ต่ำ</string>
+    <string name="casting_quality_lowcpu" source="google_translate">ต่ำที่สุด</string>
+    <string name="cast_performance_warning" source="google_translate">กำลังส่งวิดีโอนี้ต้องมีการแปลง การแปลงนี้สามารถใช้พลังงานทั้งหมดที่มีอยู่และอาจทำให้แบตเตอรี่หมด</string>
+    <string name="artists_show_all_title" source="google_translate">แสดงศิลปินทั้งหมด</string>
+    <string name="artists_show_all_summary" source="google_translate">แสดงศิลปินทั้งหมดในรายชื่อศิลปินไม่ใช่เฉพาะศิลปินอัลบั้ม</string>
+    <string name="extensions_prefs_category" source="google_translate">ส่วนขยาย</string>
+    <string name="extensions_enable_category" source="google_translate">เลือกส่วนขยายเพื่อเปิดใช้งาน</string>
+    <string name="extensions_empty" source="google_translate">ไม่พบส่วนขยาย</string>
+    <string name="extension_prefs_activation_title" source="google_translate">กระตุ้น</string>
+    <string name="android_auto" source="google_translate">รถยนต์ Android</string>
+    <string name="controls_prefs_category" source="google_translate">การควบคุม</string>
+    <string name="chroma_format_summary" source="google_translate">RGB 32 บิต: Chroma \ nRGB เริ่มต้น 16 บิต: ประสิทธิภาพที่ดีขึ้น แต่คุณภาพต่ำกว่า \ nYUV: ประสิทธิภาพที่ดีที่สุด แต่ไม่สามารถใช้งานได้กับอุปกรณ์ทั้งหมด Android 2.3 และใหม่กว่าเท่านั้น</string>
+    <string name="main_prefs_category" source="google_translate">การตั้งค่าหลัก</string>
+    <string name="save_video_session" source="google_translate">ประหยัดความเร็วในระหว่างเซสชั่น</string>
+    <string name="save_video_always" source="google_translate">ประหยัดความเร็วในทุกเซสชั่น</string>
+    <string name="dump_media_db" source="google_translate">ฐานข้อมูลสื่อบันทึกข้อมูล</string>
+    <string name="dump_media_db_summary" source="google_translate">คัดลอกฐานข้อมูลไปยังรูทหน่วยเก็บข้อมูลภายใน</string>
+    <string name="clear_media_db_summary" source="google_translate">เข้าถึงข้อมูล Android VLC เพื่อล้างข้อมูล</string>
+    <string name="resume_playback_title" source="google_translate">เล่นต่อหลังจากรับสาย</string>
+    <string name="resume_playback_summary" source="google_translate">หยุดพักเป็นอย่างอื่น</string>
+    <string name="network_caching_popup" source="google_translate">ค่านี้ต้องอยู่ระหว่าง 0 ถึง 6000 ms</string>
+    <string name="log_service_title" source="google_translate">VLC บันทึกการบันทึก</string>
+    <string name="log_service_text" source="google_translate">เปิดคอนโซลการบันทึก</string>
+    <string name="dump_logcat" source="google_translate">ดัมพ์ logcat log</string>
+    <string name="dump_logcat_failure" source="google_translate">การถ่ายโอนข้อมูล logcat ล้มเหลว</string>
+    <string name="drawer_open" source="google_translate">เปิดลิ้นชักการนำทาง</string>
+    <string name="drawer_close" source="google_translate">ปิดลิ้นชักการนำทาง</string>
+    <string name="network_browsing" source="google_translate">เครือข่ายท้องถิ่น</string>
+    <string name="browsing" source="google_translate">การท่องเว็บ</string>
+    <string name="sleep_time_not_set" source="google_translate">ไม่มีชุด</string>
+    <string name="network_shares_discovery" source="google_translate">กำลังมองหาเครือข่ายที่ใช้ร่วมกัน ...</string>
+    <string name="network_empty" source="google_translate">ไดเรกทอรีนี้ว่างเปล่า</string>
+    <string name="network_connection_needed" source="google_translate">ไม่มีการเชื่อมต่อกับเครือข่ายท้องถิ่น</string>
+    <string name="search_list_hint" source="google_translate">ค้นหาสื่อในรายการปัจจุบัน</string>
+    <string name="search_global" source="google_translate">ค้นหาในไลบรารีสื่อทั้งหมด</string>
+    <string name="directory_show_medialib" source="google_translate">แสดงใน MediaLib</string>
+    <string name="directory_hide_medialib" source="google_translate">ซ่อนจาก MediaLib</string>
+    <string name="go_to_chapter" source="google_translate">ไปที่บทที่ ...</string>
+    <string name="chapter" source="google_translate">บท</string>
+    <string name="resume_from_position" source="google_translate">ดำเนินการต่อจากตำแหน่งสุดท้าย</string>
+    <string name="confirm_resume" source="google_translate">ดำเนินการต่อจากตำแหน่งสุดท้าย?</string>
+    <string name="confirm_resume_title" source="google_translate">ขอคำยืนยันเพื่อดำเนินการต่อ</string>
+    <string name="confirm_resume_summary" source="google_translate">หากเปิดใช้งานระบบจะขอให้คุณยืนยันเมื่อวิดีโอสามารถดำเนินการต่อจากตำแหน่งสุดท้าย</string>
+    <string name="directory_empty" source="google_translate">ไดเรกทอรีว่างเปล่า</string>
+    <string name="tv_ui_title" source="google_translate">อินเตอร์เฟซ Android TV</string>
+    <string name="tv_ui_summary" source="google_translate">เปลี่ยน UI เป็นธีมที่ปรับใช้กับทีวี</string>
+    <string name="medialibrary" source="google_translate">ไลบรารีสื่อ</string>
+    <string name="medialibrary_directories" source="google_translate">โฟลเดอร์ไลบรารีสื่อ</string>
+    <string name="more_actions" source="google_translate">การดำเนินการมากขึ้น</string>
+    <string name="move" source="google_translate">ย้าย</string>
+    <string name="widget_name_w" source="google_translate">วิดเจ็ต VLC สีขาว</string>
+    <string name="widget_name_b" source="google_translate">วิดเจ็ต VLC Dark</string>
+    <string name="allow_storage_access_title" source="google_translate">อนุญาตให้ Ace Stream เข้าถึงไฟล์วิดีโอและไฟล์เสียง</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace Stream ต้องการให้คุณให้สิทธิ์ในการเข้าถึงไฟล์สื่อบนอุปกรณ์นี้</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">อนุญาตให้ Ace Stream เปลี่ยนโหมดความสว่าง</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace Stream ต้องการให้คุณให้สิทธิ์นี้เพื่อเปลี่ยนโหมดความสว่างของคุณ</string>
+    <string name="allow_draw_overlays_title" source="google_translate">อนุญาตให้ป๊อปอัป Ace Stream player เหนือแอพอื่น ๆ</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream ต้องการให้คุณให้สิทธิ์นี้แสดงวิดีโอของคุณในป๊อปอัพมากกว่าแอปพลิเคชันอื่น</string>
+    <string name="permission_ask_again" source="google_translate">ให้สิทธิ์</string>
+    <string name="exit_app_msg" source="google_translate">คุณแน่ใจหรือว่าต้องการออกจาก VLC</string>
+    <string name="fastscroller_track" source="google_translate">ติดตาม FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">จัดการ FastScroller</string>
+    <string name="extension_empty" source="google_translate">ไม่มีรายการที่จะแสดงไปที่การตั้งค่าส่วนขยายของคุณเพื่อรับบางอย่าง</string>
+    <string name="opengl_title" source="google_translate">การใช้ OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">ตามค่าเริ่มต้น OpenGL ES2 ใช้สำหรับการถอดรหัสซอฟต์แวร์และการถอดรหัสฮาร์ดแวร์เมื่อจำเป็น (วิดีโอ 360 °)</string>
+    <string name="opengl_automatic" source="google_translate">อัตโนมัติ</string>
+    <string name="opengl_on" source="google_translate">บังคับใช้</string>
+    <string name="opengl_off" source="google_translate">บังคับให้ปิด</string>
+    <string name="network_favorites" source="google_translate">รายการโปรดของเครือข่าย</string>
+    <string name="network_shared_folders" source="google_translate">โฟลเดอร์ที่แชร์</string>
+    <string name="encryption_warning" source="google_translate">คำเตือนการเข้ารหัสไม่พร้อมใช้งานสำหรับรุ่น Android นี้รหัสผ่านจะถูกเก็บไว้ในพื้นที่ส่วนตัว แต่ไม่เข้ารหัส</string>
+    <string name="store_password" source="google_translate">จดจำรหัสผ่าน</string>
+    <string name="popup_playback_title" source="google_translate">เล่นวิดีโอในหน้าต่างป๊อปอัพ</string>
+    <string name="popup_playback" source="google_translate">เล่นในหน้าต่างป๊อปอัพ</string>
+    <string name="popup_expand" source="google_translate">ขยายวิดีโอ</string>
+    <string name="snack_subloader_sub_found" source="google_translate">ดาวน์โหลดคำบรรยาย</string>
+    <string name="service_unavailable" source="google_translate">ไม่สามารถให้บริการได้</string>
+    <string name="subs_dl_lang_fail" source="google_translate">ไม่สามารถตั้งค่าภาษาคำบรรยายพยายามตั้งค่าในแอปพลิเคชัน</string>
+    <string name="listen" source="google_translate">ฟัง</string>
+    <string name="subtitles_download_title" source="google_translate">ดาวน์โหลด Subs</string>
+    <string name="save_bluetooth_delay" source="google_translate">บันทึกความล่าช้าสำหรับอุปกรณ์บลูทู ธ</string>
+    <string name="episodes" source="google_translate">เอพ</string>
+    <string name="movies" source="google_translate">ภาพยนตร์</string>
+    <string name="videos" source="google_translate">วิดีโอ</string>
+    <string name="streams" source="google_translate">ลำธาร</string>
+    <string name="clear_playback_history" source="google_translate">ล้างประวัติการเล่น</string>
+    <string name="various_artists" source="google_translate">ศิลปินต่าง ๆ</string>
+    <string name="ml_scanning" source="google_translate">กำลังสแกนหาไฟล์มีเดีย</string>
+    <string name="ml_parse_media" source="google_translate">การแยกขนาดกลาง</string>
+    <string name="ml_discovering" source="google_translate">การค้นพบ</string>
+    <string name="resume" source="google_translate">ประวัติย่อ</string>
+    <string name="length" source="google_translate">ความยาว</string>
+    <string name="tv_settings_hint" source="google_translate">กดปุ่ม OK ค้างไว้เพื่อตรวจสอบ / ยกเลิกการเลือกไดเรกทอรี</string>
+    <string name="ml_external_storage_title" source="google_translate">ตรวจพบที่จัดเก็บข้อมูลภายนอกใหม่</string>
+    <string name="ml_external_storage_accept" source="google_translate">ใช่</string>
+    <string name="ml_external_storage_decline" source="google_translate">ไม่</string>
+    <string name="last_added_media" source="google_translate">เพิ่มล่าสุด</string>
+    <string name="no" source="google_translate">ไม่</string>
+    <string name="loading_medialibrary" source="google_translate">กำลังโหลด Medialibrary ...</string>
+    <string name="yes" source="google_translate">ใช่</string>
+    <string name="custom_set_save_title" source="google_translate">การเปลี่ยนแปลงที่ไม่ได้บันทึก</string>
+    <string name="custom_set_save_warning" source="google_translate">คำเตือน: การเปลี่ยนแปลงที่ไม่ได้บันทึก</string>
+    <string name="existing_custom_set_save_message" source="google_translate">บันทึกอีควอไลเซอร์ตั้งเป็น ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">บันทึกตัวปรับแต่งเสียงใหม่เป็น ...</string>
+    <string name="save" source="google_translate">บันทึก</string>
+    <string name="do_not_save" source="google_translate">ไม่บันทึก</string>
+    <string name="custom_set_wrong_input" source="google_translate">ชื่อไม่ถูกต้อง.</string>
+    <string name="custom_set_already_exist" source="google_translate">มีอีควอไลเซอร์ที่ใช้ชื่อนี้แล้ว</string>
+    <string name="custom_set_restored" source="google_translate">ชุดอีควอไลเซอร์ที่กำหนดเองคืนค่า</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">ลบชุดอีควอไลเซอร์ที่ยังไม่ได้บันทึก</string>
+    <string name="equalizer_new_preset_name" source="google_translate">ใหม่</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary กำลังสแกนอุปกรณ์ของคุณตอนนี้</string>
+    <string name="recommendations" source="google_translate">ข้อเสนอแนะ</string>
+    <string name="recommendations_desc" source="google_translate">การ์ดแนะนำบนตัวเรียกใช้งาน</string>
+    <string name="browser_quick_access" source="google_translate">เข้าถึงด่วน</string>
+    <string name="browser_storages" source="google_translate">การเก็บรักษา</string>
+    <string name="renderer_list_title" source="google_translate">แสดง</string>
+    <string name="feedback_player_crashed" source="google_translate">ขออภัย VLC ขัดข้อง กรุณาลองอีกครั้ง.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">คุณต้องให้สิทธิ์การเขียน VLC ใน SD Card ของคุณ</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC ไม่สามารถลบไฟล์นี้โดยไม่ได้รับอนุญาตให้เขียน \ n โปรดไปที่ SD Card ของคุณแล้วคลิกที่ \ "เลือก \" \ n คุณอาจต้องคลิกที่ \ "แสดงการ์ด SD \" ก่อนในเมนูด้านบนขวา</string>
+    <string name="dialog_sd_wizard" source="google_translate">แสดงให้ฉัน</string>
+    <string name="renderers_disconnect" source="google_translate">ปลด</string>
+    <string name="audio_digital_failed" source="google_translate">ไม่สามารถเปลี่ยนสถานะเอาต์พุตเสียงดิจิตอล</string>
+    <string name="audio_digital_output_enabled" source="google_translate">เปิดใช้งานเอาต์พุตเสียงดิจิตอล</string>
+    <string name="audio_digital_output_disabled" source="google_translate">เอาต์พุตเสียงดิจิตอลถูกปิดใช้งาน</string>
+    <string name="live_streams" source="google_translate">สตรีมสด</string>
+    <string name="all_live_streams" source="google_translate">สตรีมสดทั้งหมด</string>
+    <string name="video_torrents" source="google_translate">torrents วิดีโอ</string>
+    <string name="audio_torrents" source="google_translate">torrents เสียง</string>
+    <string name="all_torrents" source="google_translate">เพลงทั้งหมด</string>
+    <string name="main" source="google_translate">หลัก</string>
+    <string name="media_player" source="google_translate">เครื่องเล่นสื่อ</string>
+    <string name="acestream_server" source="google_translate">เซิร์ฟเวอร์ Ace Stream (เอ็นจิ้น)</string>
+    <string name="media_player_settings" source="google_translate">การตั้งค่าเครื่องเล่นสื่อ</string>
+    <string name="acestream_server_settings" source="google_translate">การตั้งค่าเซิร์ฟเวอร์ Ace Stream (เอ็นจิ้น)</string>
+    <string name="sign_out" source="google_translate">ออกจากระบบ</string>
+    <string name="sign_in" source="google_translate">ลงชื่อเข้าใช้</string>
+    <string name="sign_in_acestream" source="google_translate">ลงชื่อเข้าใช้ด้วย Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">เข้าสู่ระบบด้วย Google</string>
+    <string name="video_files" source="google_translate">ไฟล์วิดีโอ</string>
+    <string name="audio_files" source="google_translate">ไฟล์เสียง</string>
+    <string name="retry" source="google_translate">ลองใหม่อีกครั้ง</string>
+    <string name="failed_to_load_web_page" source="google_translate">ไม่สามารถโหลดหน้าเว็บ</string>
 </resources>

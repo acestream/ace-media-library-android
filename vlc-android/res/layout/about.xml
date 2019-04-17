@@ -6,7 +6,7 @@
     android:paddingBottom="@dimen/actionBarSize">
 
     <include layout="@layout/tab_layout" />
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -14,7 +14,9 @@
 
             <include layout="@layout/about_main" />
             <include layout="@layout/about_licence" />
-        </android.support.v4.view.ViewPager>
+            <include layout="@layout/about_licence_agreement" />
+            <include layout="@layout/about_privacy_policy" />
+        </androidx.viewpager.widget.ViewPager>
 
     <include layout="@layout/shadow_top"
         android:layout_width="match_parent"

@@ -23,22 +23,19 @@
 
 package org.videolan.vlc.gui.tv.preferences;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.preference.EditTextPreference;
-import android.support.v7.preference.Preference;
+import androidx.preference.EditTextPreference;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.vlc.BuildConfig;
 import org.videolan.vlc.R;
 import org.videolan.vlc.VLCApplication;
@@ -61,11 +58,7 @@ public class PreferencesAdvanced extends BasePreferenceFragment implements Share
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (TextUtils.equals(BuildConfig.FLAVOR_target, "chrome")) {
-            findPreference("quit_app").setEnabled(false);
-        }
-        findPreference("debug_logs").setVisible(AndroidUtil.isJellyBeanOrLater ||
-                (BuildConfig.DEBUG && getActivity().checkCallingOrSelfPermission(Manifest.permission.READ_LOGS) == PackageManager.PERMISSION_GRANTED));
+        findPreference("debug_logs").setVisible(true);
     }
 
     @Override
@@ -138,7 +131,7 @@ public class PreferencesAdvanced extends BasePreferenceFragment implements Share
             case "enable_frame_skip":
             case "enable_time_stretching_audio":
             case "enable_verbose_mode":
-                VLCInstance.restart();
+                VLCInstance.restart(true);
                 if (getActivity() != null )
                     ((PreferencesActivity)getActivity()).restartMediaPlayer();
                 break;

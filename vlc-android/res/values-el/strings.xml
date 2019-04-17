@@ -13,10 +13,6 @@
     <string name="sortby_date_desc">Ημερομηνία (φθιν.)</string>
     <string name="searchable_hint">Εύρεση...</string>
     <string name="history">Ιστορικό</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d αποτέλεσμα βρέθηκε</item>
-        <item quantity="other">%d αποτελέσματα βρέθηκαν</item>
-    </plurals>
     <string name="play">Αναπαραγωγή</string>
     <string name="play_from_start">Αναπαραγωγή από την αρχή</string>
     <string name="play_as_audio">Αναπαραγωγή ως ήχος</string>
@@ -60,14 +56,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 υποφάκελος</item>
         <item quantity="other">%d υποφάκελοι</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 αρχείο μέσων</item>
-        <item quantity="other">%d αρχεία μέσων</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 βίντεο</item>
-        <item quantity="other">%d βίντεο</item>
     </plurals>
     <string name="internal_memory">Εσωτερική μνήμη</string>
     <string name="parent_folder">Πάνω στον αρχικό φάκελο</string>
@@ -128,10 +116,6 @@
     <string name="brightness">Φωτεινότητα</string>
     <string name="navmenu">μενού πλοήγησης</string>
     <string name="advanced">επιλογές για προχωρημένους</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 κανάλι\n</item>
-        <item quantity="other">%1$d κανάλια\n</item>
-    </plurals>
     <string name="track_samplerate_info">Ρυθμός δειγματοληψίας: %1$d Hz\n</string>
     <string name="track_resolution_info">Ανάλυση: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Ρυθμός καρέ: %1$.3f\n</string>
@@ -399,14 +383,14 @@
     <!--Widget-->
     <string name="widget_name_w">Λευκό γραφικό στοιχείο VLC </string>
     <string name="widget_name_b">Σκοτεινό γραφικό στοιχείο VLC </string>
-    <string name="allow_storage_access_title">Δώστε πρόσβαση στο VLC στα αρχεία βίντεο και ήχου</string>
-    <string name="allow_storage_access_description">Το VLC  σας ζητάει να του δώσετε πρόσβαση στα αρχεία μέσων σε αυτή τη συσκευή.</string>
-    <string name="allow_settings_access_ringtone_title">Επιτρέψτε στο VLC να ορίσει τον ήχο κλήσης</string>
-    <string name="allow_settings_access_ringtone_description">Το VLC  σας ζητάει να του επιτρέψετε να ορίσει αυτό το τραγούδι ως ήχο κλήσης.</string>
-    <string name="allow_settings_access_brightness_title">Επιτρέψτε στο VLC να ορίσει το επίπεδο φωτεινότητας</string>
-    <string name="allow_settings_access_brightness_description">Το VLC  σας ζητάει να του επιτρέψετε να ορίσει το επίπεδο φωτεινότητας.</string>
-    <string name="allow_draw_overlays_title">Επιτρέψτε το VLC να εμφανίζεται πάνω από άλλες εφαρμογές</string>
-    <string name="allow_sdraw_overlays_description">Το VLC σας ζητάει να του επιτρέψετε να παίζει το βίντεο αναδυόμενο πάνω από άλλες εφαρμογές.</string>
+    <string name="allow_storage_access_title">Δώστε πρόσβαση στο Ace Stream στα αρχεία βίντεο και ήχου</string>
+    <string name="allow_storage_access_description">Το Ace Stream  σας ζητάει να του δώσετε πρόσβαση στα αρχεία μέσων σε αυτή τη συσκευή.</string>
+    <string name="allow_settings_access_ringtone_title">Επιτρέψτε στο Ace Stream να ορίσει τον ήχο κλήσης</string>
+    <string name="allow_settings_access_ringtone_description">Το Ace Stream  σας ζητάει να του επιτρέψετε να ορίσει αυτό το τραγούδι ως ήχο κλήσης.</string>
+    <string name="allow_settings_access_brightness_title">Επιτρέψτε στο Ace Stream να ορίσει το επίπεδο φωτεινότητας</string>
+    <string name="allow_settings_access_brightness_description">Το Ace Stream  σας ζητάει να του επιτρέψετε να ορίσει το επίπεδο φωτεινότητας.</string>
+    <string name="allow_draw_overlays_title">Επιτρέψτε το Ace Stream να εμφανίζεται πάνω από άλλες εφαρμογές</string>
+    <string name="allow_sdraw_overlays_description">Το Ace Stream σας ζητάει να του επιτρέψετε να παίζει το βίντεο αναδυόμενο πάνω από άλλες εφαρμογές.</string>
     <string name="permission_ask_again">Δώστε άδεια</string>
     <string name="exit_app">Κλείσιμο του VLC</string>
     <!--fast scroller-->
@@ -463,4 +447,95 @@
     <string name="no">Όχι</string>
     <string name="loading_medialibrary">Φόρτωση βιβλιοθήκης μέσων</string>
     <string name="yes">ναι</string>
+    <string name="torrent_files">Torrent αρχεία</string>
+    <string name="select_language">Επιλέξτε γλώσσα</string>
+    <string name="sortby_artist_name" source="google_translate">Όνομα καλλιτέχνη</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Όνομα καλλιτέχνη (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Όνομα άλμπουμ</string>
+    <string name="sortby_album_name_desc" source="google_translate">Όνομα άλμπουμ (σε μορφή desc)</string>
+    <string name="sortby_number" source="google_translate">Nb κομμάτια</string>
+    <string name="sortby_number_desc" source="google_translate">Nb κομμάτια (φθίνουσα)</string>
+    <string name="playback" source="google_translate">Αναπαραγωγή</string>
+    <string name="playback_controls" source="google_translate">Έλεγχοι αναπαραγωγής</string>
+    <string name="medialibrary_scan" source="google_translate">Σάρωση βιβλιοθήκης πολυμέσων</string>
+    <string name="Medialibrary_progress" source="google_translate">Η βιβλιοθήκη πολυμέσων σαρώνει τις ενημερώσεις προόδου</string>
+    <string name="unknown_number" source="google_translate">Άγνωστος αριθμός τραγουδιών</string>
+    <string name="media_fast_seek" source="google_translate">Ενεργοποιήστε την επιλογή γρήγορης αναζήτησης</string>
+    <string name="media_seen" source="google_translate">Εμφάνιση δείκτη βίντεο</string>
+    <string name="media_seen_summary" source="google_translate">Σημειώστε ένα βίντεο όπως φαίνεται όταν το αναπαράγετε μέχρι το τέλος του</string>
+    <string name="subtitles_color_gray" source="google_translate">Γκρί</string>
+    <string name="subtitles_bold_title" source="google_translate">Έντονοι υπότιτλοι</string>
+    <string name="subtitles_autoload_title" source="google_translate">Αυτόματη φόρτωση υπότιτλων</string>
+    <string name="audio_boost_title" source="google_translate">Αναβάθμιση ήχου</string>
+    <string name="enable_headset_actions_title" source="google_translate">Συντομεύσεις απομακρυσμένου ελέγχου</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Πατήστε δύο φορές το πλήκτρο \'Play \' για να μεταβείτε στο επόμενο και πατημένο πλήκτρο για να μεταβείτε στο προηγούμενο κομμάτι</string>
+    <string name="audio_ducking_title" source="google_translate">Χαμηλότερος όγκος VLC στις ειδοποιήσεις</string>
+    <string name="audio_ducking_summary" source="google_translate">Βοηθά στην ακρόαση ειδοποιήσεων ήχου, οδηγιών πλοήγησης ή συνομιλίας βοηθού</string>
+    <string name="casting_category" source="google_translate">Χύσιμο</string>
+    <string name="casting_passthrough_title" source="google_translate">Μετάδοση ήχου</string>
+    <string name="casting_passthrough_summary" source="google_translate">Αφήστε την τηλεόρασή σας να διαχειρίζεται την απόδοση ήχου</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Ποιότητα μετατροπής</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Επιλέξτε την ποιότητα μετατροπής όταν μεταδίδετε σε απομακρυσμένη οθόνη</string>
+    <string name="casting_quality_high" source="google_translate">Υψηλός</string>
+    <string name="casting_quality_medium" source="google_translate">Μεσαίο</string>
+    <string name="casting_quality_low" source="google_translate">Χαμηλός</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Χαμηλότερο</string>
+    <string name="cast_performance_warning" source="google_translate">Η μετάδοση αυτού του βίντεο απαιτεί μετατροπή. Αυτή η μετατροπή μπορεί να χρησιμοποιήσει όλη την διαθέσιμη ισχύ και μπορεί να αποστραγγίσει γρήγορα την μπαταρία σας.</string>
+    <string name="artists_show_all_title" source="google_translate">Εμφάνιση όλων των καλλιτεχνών</string>
+    <string name="artists_show_all_summary" source="google_translate">Δείξτε όλους τους καλλιτέχνες στην λίστα καλλιτεχνών, όχι μόνο καλλιτέχνες άλμπουμ</string>
+    <string name="extensions_prefs_category" source="google_translate">Επεκτάσεις</string>
+    <string name="extensions_enable_category" source="google_translate">Επιλέξτε επεκτάσεις για ενεργοποίηση</string>
+    <string name="extensions_empty" source="google_translate">Δεν εντοπίστηκε επέκταση</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Θέτω εις ενέργειαν</string>
+    <string name="android_auto" source="google_translate">Android αυτοκίνητο</string>
+    <string name="main_prefs_category" source="google_translate">Βασικές ρυθμίσεις</string>
+    <string name="dump_media_db" source="google_translate">Βάση δεδομένων μέσων εκτύπωσης</string>
+    <string name="dump_media_db_summary" source="google_translate">Αντιγραφή βάσης δεδομένων σε εσωτερική μνήμη αποθήκευσης</string>
+    <string name="exit_app_msg" source="google_translate">Είστε βέβαιοι ότι θέλετε να κλείσετε το VLC;</string>
+    <string name="streams" source="google_translate">ροές</string>
+    <string name="ml_external_storage_accept" source="google_translate">Ναί</string>
+    <string name="ml_external_storage_decline" source="google_translate">Οχι</string>
+    <string name="custom_set_save_title" source="google_translate">Μη αποθηκευμένες αλλαγές</string>
+    <string name="custom_set_save_warning" source="google_translate">Προειδοποίηση: μη αποθηκευμένες αλλαγές</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Αποθήκευση του ισοσταθμιστή ως ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Αποθήκευση νέου ισοσταθμιστή ως ...</string>
+    <string name="save" source="google_translate">Αποθηκεύσετε</string>
+    <string name="do_not_save" source="google_translate">Μην σώσεις</string>
+    <string name="custom_set_wrong_input" source="google_translate">Μη έγκυρο όνομα.</string>
+    <string name="custom_set_already_exist" source="google_translate">Το σύνολο ισοσταθμιστή με αυτό το όνομα υπάρχει ήδη</string>
+    <string name="custom_set_restored" source="google_translate">Το προσαρμοσμένο σύνολο ισοσταθμιστή αποκαταστάθηκε.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Η μη αποθηκευμένη ρύθμιση ισοσταθμιστή διαγράφηκε.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Νέος</string>
+    <string name="settings_ml_block_scan" source="google_translate">Το Medialibrary σαρώνει τις συσκευές σας αυτή τη στιγμή</string>
+    <string name="recommendations" source="google_translate">Συστάσεις</string>
+    <string name="recommendations_desc" source="google_translate">Συστάσεις κάρτες στο εκτοξευτή</string>
+    <string name="browser_quick_access" source="google_translate">Γρήγορη πρόσβαση</string>
+    <string name="browser_storages" source="google_translate">Αποθήκες</string>
+    <string name="renderer_list_title" source="google_translate">Οθόνες</string>
+    <string name="feedback_player_crashed" source="google_translate">Συγγνώμη, η VLC μόλις συνέτριψε. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Πρέπει να παρέχετε πρόσβαση εγγραφής VLC στην κάρτα SD σας</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">Το VLC δεν μπορεί να διαγράψει αυτό το αρχείο χωρίς άδεια πρόσβασης για εγγραφή. \ NΠαρακαλώ πηγαίνετε στην κάρτα SD σας και κάντε κλικ στο \ "Επιλογή \". \ NΜπορεί να χρειαστεί να κάνετε κλικ στο \ "Εμφάνιση κάρτας SD \" πρώτα στο επάνω δεξιά</string>
+    <string name="dialog_sd_wizard" source="google_translate">Δείξε μου</string>
+    <string name="renderers_disconnect" source="google_translate">Αποσυνδέω</string>
+    <string name="audio_digital_failed" source="google_translate">Δεν ήταν δυνατή η αλλαγή της κατάστασης ψηφιακής εξόδου ήχου</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Η ψηφιακή έξοδος ήχου είναι ενεργοποιημένη</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Η ψηφιακή έξοδος ήχου είναι απενεργοποιημένη</string>
+    <string name="live_streams" source="google_translate">Ζωντανές ροές</string>
+    <string name="all_live_streams" source="google_translate">Όλα τα ζωντανά ρεύματα</string>
+    <string name="video_torrents" source="google_translate">Βίντεο torrents</string>
+    <string name="audio_torrents" source="google_translate">Ήχου torrents</string>
+    <string name="all_torrents" source="google_translate">Όλα τα torrents</string>
+    <string name="main" source="google_translate">Κύριος</string>
+    <string name="media_player" source="google_translate">Αναπαραγωγή πολυμέσων</string>
+    <string name="acestream_server" source="google_translate">Ο διακομιστής Ace Stream (κινητήρας)</string>
+    <string name="media_player_settings" source="google_translate">Ρυθμίσεις αναπαραγωγής πολυμέσων</string>
+    <string name="acestream_server_settings" source="google_translate">Ρυθμίσεις εξυπηρετητή Ace Stream (κινητήρα)</string>
+    <string name="sign_out" source="google_translate">Αποσύνδεση</string>
+    <string name="sign_in" source="google_translate">Συνδεθείτε</string>
+    <string name="sign_in_acestream" source="google_translate">Συνδεθείτε με το Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Συνδεθείτε με την Google</string>
+    <string name="video_files" source="google_translate">Αρχεία βίντεο</string>
+    <string name="audio_files" source="google_translate">Αρχεία ήχου</string>
+    <string name="retry" source="google_translate">Ξαναδοκιμάσετε</string>
+    <string name="failed_to_load_web_page" source="google_translate">Η φόρτωση της ιστοσελίδας απέτυχε</string>
 </resources>

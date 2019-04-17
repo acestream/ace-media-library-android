@@ -24,7 +24,7 @@
 package org.videolan.vlc.gui.browser;
 
 
-import android.support.v7.view.ActionMode;
+import androidx.appcompat.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 

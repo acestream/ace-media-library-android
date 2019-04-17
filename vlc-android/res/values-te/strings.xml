@@ -1,7 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <!--Main VLC Interface-->
-    <string name="filebrowser_title">ప్రదర్శించుటకు మాధ్యమాన్ని ఎంచుకోండి</string>
     <string name="sortby">క్రమబద్ధీకరణ...</string>
     <string name="sortby_name">పేరు</string>
     <string name="sortby_length">పొడవు</string>
@@ -13,10 +12,9 @@
     <string name="append_all">అన్నీ జోడించు</string>
     <string name="delete">తొలగించు</string>
     <string name="info">సమాచారం</string>
-    <string name="confirm_delete">ఈ దస్త్రాన్ని తొలగించాలా?</string>
+    <string name="confirm_delete">ఈ దస్త్రాన్ని తొలగించాలా %1$s?</string>
     <string name="pause">నిలిపివేయి</string>
     <string name="not_show_again">ఈ సందేశాన్ని మరలా చూపించవద్దు.</string>
-    <string name="beta_warning">ఇది బీటా సంస్కరణ.\n\nఈ సంస్కరణ స్థిరమైనది కాదు.\n\nదీని గురించి మీకు సరిగా తెలియకపోతే, దయచేసి వాడవద్దు.\n\nఇది మీ వ్యవస్థను నాశనం చెయ్యవచ్చు.\nదీనిని మీ స్వంత రిస్కుతో వాడండి.\n\nపండగ చేసుకోండి! :)</string>
     <string name="info_title">వియల్సీ బీటా</string>
     <string name="unknown_artist">తెలియని కళాకారుడు</string>
     <string name="unknown_album">తెలియని ఆల్బమ్</string>
@@ -64,10 +62,6 @@
     <string name="track_unknown">తెలియని ట్రాక్</string>
     <string name="track_codec_info">కొడెక్: %1$s\n</string>
     <string name="track_language_info">భాష: %1$s\n</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 వాహిక\n</item>
-        <item quantity="other">%1$d వాహికలు\n</item>
-    </plurals>
     <string name="track_samplerate_info">మాదిరి రేటు: %1$d Hz</string>
     <string name="track_resolution_info">విభాజకత: %1$dx%2$d\n</string>
     <string name="track_framerate_info">చట్రం రేటు: %1$.3f\n</string>
@@ -76,7 +70,6 @@
     <string name="open_mrl_dialog_title">నెట్‌వర్కు ప్రవాహాన్ని తెరువు</string>
     <string name="open_mrl_dialog_msg">నెట్‌వర్క్ MRL ప్రవేశపెట్టండి: ఉదా. http://, mms:// or rtsp://</string>
     <string name="error_not_compatible">క్షమించండి, ఈ వియల్సీ సంస్కరణ ప్రస్తుతం మీ ఆండ్రాయిడ్™ పరికరానికి మద్ధతు అందించుటలేదు.</string>
-
     <!--About-->
     <string name="app_name_full">ఆండ్రాయిడ్™ కోసం వియల్సీ</string>
     <string name="licence">లైసెన్స్</string>
@@ -84,20 +77,451 @@
     <string name="about">గురించి</string>
     <string name="about_text">ఆండ్రాయిడ్™ కోసం వియల్సీ అనేది అత్యంత ప్రజాదరణ పొందిన ఒపెన్ సోర్సు మాధ్యమ ప్రదర్శకం అయిన వియల్సీ మాధ్యమ ప్రదర్శకం నుండి రూపొందించబడింది. ఆండ్రాయిడ్™ సంస్కరణ చాలా దస్త్రాలను మరియు నెట్వర్క్ ప్రవాహాలను చదవగలదు.</string>
     <string name="compiled_by">ఈ వీయల్సీ యొక్క సంస్కరణను సంకలనం చేసినవారు:</string>
-
     <!--Preferences-->
     <string name="preferences">ప్రాధాన్యతలు</string>
     <string name="main_prefs_category">ప్రధానం</string>
     <string name="clear_history">శోధన చరిత్రను చెరిపివేయి</string>
     <string name="advanced_prefs_category">అధునాతనం</string>
-    <string name="enable_iomx">హార్డ్‍వేర్ త్వరణ డీకోడింగును చేతనపరుచు</string>
-    <string name="advanced_debugging">అధునాతన దోషశోధన</string>
     <string name="quit">అనువర్తనమును నిష్క్రమించు</string>
     <string name="clear_media_db">మాధ్యమ డేటాబేసును శుభ్రపరుచు</string>
     <string name="enable_headset_detection">హెడ్‌సెట్‌ను కనిపెట్టు</string>
     <string name="enable_headset_detection_summary">హెడ్‌సెట్‌ను తీసివేసినపుడు నిలిపివేయి; హెడ్‌సెట్‌ను చొప్పించినపుడు తిరిగి ప్రారంభించు</string>
-    <string name="enable_wheel_bar">వీల్ పట్టీని చేతనించు</string>
     <string name="enable_verbose_mode">వెర్బోస్</string>
     <string name="enable_verbose_mode_summary">వెర్బోసిటీని పెంచు (logcat)</string>
     <string name="aout">ఆడియో అవుట్‌పుట్</string>
+    <string name="torrent_files">Torrent ఫైళ్లు</string>
+    <string name="select_language">భాషను ఎంచుకోండి</string>
+    <string name="ok" source="google_translate">అలాగే</string>
+    <string name="cancel" source="google_translate">రద్దు</string>
+    <string name="other" source="google_translate">ఇతర</string>
+    <string name="sortby_name_desc" source="google_translate">పేరు (DESIGN)</string>
+    <string name="sortby_artist_name" source="google_translate">కళాకారుని పేరు</string>
+    <string name="sortby_artist_name_desc" source="google_translate">కళాకారుని పేరు (DESIGN)</string>
+    <string name="sortby_album_name" source="google_translate">ఆల్బమ్ పేరు</string>
+    <string name="sortby_album_name_desc" source="google_translate">ఆల్బమ్ పేరు (DESIGN)</string>
+    <string name="sortby_length_desc" source="google_translate">పొడవు (desc)</string>
+    <string name="sortby_date" source="google_translate">తేదీ</string>
+    <string name="sortby_date_desc" source="google_translate">డేటా (DESC)</string>
+    <string name="sortby_number" source="google_translate">Nb ట్రాక్స్</string>
+    <string name="sortby_number_desc" source="google_translate">Nb ట్రాక్స్ (DESC)</string>
+    <string name="playback" source="google_translate">ప్లేబ్యాక్</string>
+    <string name="playback_controls" source="google_translate">ప్లేబ్యాక్ నియంత్రణలు</string>
+    <string name="medialibrary_scan" source="google_translate">మీడియా లైబ్రరీ స్కాన్</string>
+    <string name="Medialibrary_progress" source="google_translate">పురోగతి నవీకరణలను స్కానింగ్ మీడియా లైబ్రరీ</string>
+    <string name="play_from_start" source="google_translate">ప్రారంభం నుండి ప్లే</string>
+    <string name="play_as_audio" source="google_translate">ఆడియోగా ప్లే చేయండి</string>
+    <string name="play_as_video" source="google_translate">వీడియోగా ప్లే చేయండి</string>
+    <string name="video_app_switch_title" source="google_translate">నేపధ్యం / పైప్ మోడ్</string>
+    <string name="video_app_switch_summary" source="google_translate">మీరు వీడియో ప్లేబ్యాక్ నుండి ఇతర అనువర్తనానికి మారినప్పుడు VLC ప్రవర్తనను ఎంచుకోండి</string>
+    <string name="play_pip_title" source="google_translate">పిక్చర్-ఇన్-పిక్చర్ రీతిలో వీడియోలను ప్లే చేయండి</string>
+    <string name="play_as_audio_background" source="google_translate">నేపథ్యంలో వీడియోలను ప్లే చేయండి</string>
+    <string name="insert_next" source="google_translate">తదుపరి చొప్పించు</string>
+    <string name="last_playlist" source="google_translate">చివరి ప్లేజాబితా</string>
+    <string name="remove" source="google_translate">తొలగించు</string>
+    <string name="set_song" source="google_translate">రింగు టోనుగా ఏర్పాటు చేయు</string>
+    <string name="ringtone_error" source="google_translate">రింగ్టోన్ని సెట్ చేస్తున్నప్పుడు లోపం సంభవించింది.</string>
+    <string name="unknown_number" source="google_translate">తెలియని ట్రాక్ల సంఖ్య</string>
+    <string name="tracks" source="google_translate">ట్రాక్స్</string>
+    <string name="internal_memory" source="google_translate">అంతర్గత జ్ఞాపక శక్తి</string>
+    <string name="audio" source="google_translate">ఆడియో</string>
+    <string name="video" source="google_translate">వీడియో</string>
+    <string name="bookmarks" source="google_translate">బుక్ మార్క్స్</string>
+    <string name="equalizer" source="google_translate">సమం</string>
+    <string name="please_wait" source="google_translate">దయచేసి వేచి ఉండండి ...</string>
+    <string name="noplaylist" source="google_translate">ప్లేజాబితా కనుగొనబడలేదు.</string>
+    <string name="nohistory" source="google_translate">మీకు ఇంకా ప్లేబ్యాక్ చరిత్ర లేదు.</string>
+    <string name="cover_art" source="google_translate">కళ కవర్</string>
+    <string name="shuffle_title" source="google_translate">షఫుల్ మోడ్</string>
+    <string name="shuffle" source="google_translate">షఫుల్ ఆఫ్</string>
+    <string name="shuffle_on" source="google_translate">షఫుల్ ఆన్</string>
+    <string name="repeat_title" source="google_translate">రిపీట్ మోడ్</string>
+    <string name="repeat" source="google_translate">ఏదీ పునరావృతం కాదు</string>
+    <string name="repeat_single" source="google_translate">సింగిల్ పునరావృతం</string>
+    <string name="repeat_all" source="google_translate">అన్నింటినీ పునరావృతం చేయండి</string>
+    <string name="previous" source="google_translate">మునుపటి</string>
+    <string name="stop" source="google_translate">ఆపు</string>
+    <string name="next" source="google_translate">తరువాత</string>
+    <string name="firstsong" source="google_translate">ప్లేజాబితా యొక్క మొదటి పాట</string>
+    <string name="lastsong" source="google_translate">ప్లేజాబితా యొక్క చివరి పాట</string>
+    <string name="surface_fit_screen" source="google_translate">ఫిట్ స్క్రీన్</string>
+    <string name="unseekable_stream" source="google_translate">అప్రియమైన ప్రసారం</string>
+    <string name="volume" source="google_translate">వాల్యూమ్</string>
+    <string name="sound_on" source="google_translate">సౌండ్ ఆన్</string>
+    <string name="sound_off" source="google_translate">శబ్దము ఆపు</string>
+    <string name="brightness" source="google_translate">ప్రకాశం</string>
+    <string name="navmenu" source="google_translate">నావిగేషన్ మెను</string>
+    <string name="advanced" source="google_translate">అధునాతన ఎంపికలు</string>
+    <string name="tools" source="google_translate">పరికరములు</string>
+    <string name="playback_speed" source="google_translate">ప్లేబ్యాక్ వేగం</string>
+    <string name="sleep_title" source="google_translate">స్లీప్ టైమర్</string>
+    <string name="sleep_in" source="google_translate">స్లీప్ ఇన్</string>
+    <string name="sleep_cancel" source="google_translate">నిద్ర టైమర్ను రద్దు చేయండి</string>
+    <string name="jump_to_time" source="google_translate">సమయం ఇక్కడికి గెంతు</string>
+    <string name="subtitle_label" source="google_translate">ఉపశీర్షిక ఫైలుని జోడించండి</string>
+    <string name="subtitle_select" source="google_translate">ఉపశీర్షిక ఫైల్ను ఎంచుకోండి</string>
+    <string name="no_file_picker_found" source="google_translate">సిస్టమ్లో ఫైల్ ఫైకర్ కనుగొనబడలేదు.</string>
+    <string name="server_add_title" source="google_translate">ఇష్టాలకు క్రొత్త సర్వర్ను జోడించండి</string>
+    <string name="server_domain_hint" source="google_translate">సర్వర్ చిరునామా (డొమైన్ పేరు లేదా IP)</string>
+    <string name="server_share_hint" source="google_translate">నెట్వర్క్ వాటా పేరు (లేదా IP చిరునామా)</string>
+    <string name="server_folder_hint" source="google_translate">ఫోల్డర్ మార్గం (ఐచ్ఛికం)</string>
+    <string name="server_username_hint" source="google_translate">యూజర్ పేరు</string>
+    <string name="server_servername_hint" source="google_translate">సర్వర్ పేరు, సౌలభ్యం కోసం</string>
+    <string name="server_port" source="google_translate">పోర్ట్:</string>
+    <string name="login" source="google_translate">లాగిన్</string>
+    <string name="password" source="google_translate">పాస్వర్డ్</string>
+    <string name="search_results" source="google_translate">శోధన ఫలితాలు</string>
+    <string name="search_no_result" source="google_translate">మీడియా ఏదీ కనుగొనబడలేదు</string>
+    <string name="favorites_add" source="google_translate">ఇష్టమైనవికి జోడించు</string>
+    <string name="favorites_remove" source="google_translate">ఇష్టాల నుండి తీసివేయండి</string>
+    <string name="favorites_edit" source="google_translate">మార్చు</string>
+    <string name="favorite_added" source="google_translate">ఇష్టమైనవారికి సేవ్ చేయబడింది</string>
+    <string name="favorite_removed" source="google_translate">ఇష్టాల నుండి తీసివేయబడింది</string>
+    <string name="error_problem" source="google_translate">క్షమించండి, ఆండ్రాయిడ్ కోసం VLC సమస్యను లోడ్ చేస్తోంది మరియు మూసివేయాలి.</string>
+    <string name="error_message_is" source="google_translate">దోష సందేశము (డీబగ్ చేయునప్పుడు దీనిని సూచించండి): \ n</string>
+    <string name="encountered_error_title" source="google_translate">ప్లేబ్యాక్ లోపం</string>
+    <string name="encountered_error_message" source="google_translate">VLC ఈ మీడియాతో లోపాన్ని ఎదుర్కొంది. \ N దయచేసి మీడియా లైబ్రరీని రిఫ్రెష్ చెయ్యండి.</string>
+    <string name="search" source="google_translate">శోధన</string>
+    <string name="search_history" source="google_translate">శోధన చరిత్ర</string>
+    <string name="playback_history_title" source="google_translate">ప్లేబ్యాక్ చరిత్ర</string>
+    <string name="playback_history_summary" source="google_translate">చరిత్ర విభాగంలో ప్రదర్శించిన అన్ని మీడియాని సేవ్ చేయండి</string>
+    <string name="playback_speed_title" source="google_translate">ప్లేబ్యాక్ వేగం సేవ్ చేయండి</string>
+    <string name="playback_speed_summary" source="google_translate">మీరు సెట్ ప్లేబ్యాక్ వేగం గుర్తుంచుకో</string>
+    <string name="video_player_tips" source="google_translate">వీడియో ప్లేయర్ చిట్కాలు:</string>
+    <string name="seek" source="google_translate">కోరుకుంటారు</string>
+    <string name="subtitles" source="google_translate">ఉపశీర్షికలు</string>
+    <string name="audio_sub" source="google_translate">ఆడియో ట్రాక్లు మరియు ఉపశీర్షికలు</string>
+    <string name="resize" source="google_translate">పునఃపరిమాణం</string>
+    <string name="options" source="google_translate">ఎంపికలు</string>
+    <string name="lock" source="google_translate">లాక్</string>
+    <string name="ok_got_it" source="google_translate">దీన్ని అర్థమైంది, దీన్ని తీసివేయి</string>
+    <string name="playlist_tips" source="google_translate">ప్లేజాబితా చిట్కాలు</string>
+    <string name="remove_song" source="google_translate">పాటను తొలగించండి</string>
+    <string name="rearrange_order" source="google_translate">క్రమంలో క్రమాన్ని మార్చండి</string>
+    <string name="hold_to_seek" source="google_translate">కోరుకుంటారు పట్టుకోండి</string>
+    <string name="audio_player_tips" source="google_translate">ఆడియో ప్లేయర్ చిట్కాలు</string>
+    <string name="previous_next_song" source="google_translate">మునుపటి / తదుపరి పాట</string>
+    <string name="show_playlist" source="google_translate">ప్లేజాబితాని చూపించు</string>
+    <string name="hold_to_stop" source="google_translate">ఆపడానికి పట్టుకోండి</string>
+    <string name="vlc_authors" source="google_translate">మరియు VLC రచయితలు.</string>
+    <string name="general_prefs_category" source="google_translate">జనరల్</string>
+    <string name="directories_summary" source="google_translate">మీడియా లైబ్రరీలో చేర్చడానికి డైరెక్టరీలను ఎంచుకోండి</string>
+    <string name="add_custom_path" source="google_translate">అనుకూల మార్గాన్ని జోడించండి</string>
+    <string name="add_custom_path_description" source="google_translate">స్కాన్ చేయడానికి అదనపు కస్టమ్ డైరెక్టరీని ఎంటర్ చెయ్యండి:</string>
+    <string name="remove_custom_path" source="google_translate">కస్టమ్ మార్గం తొలగించు</string>
+    <string name="hardware_acceleration" source="google_translate">హార్డ్వేర్ త్వరణం</string>
+    <string name="hardware_acceleration_summary" source="google_translate">నిలిపివేయబడింది: మెరుగైన స్థిరత్వం. \ N డికోడింగ్: పనితీరును మెరుగుపరుస్తుంది. \ N పూర్తి: పనితీరును మరింత మెరుగుపరచవచ్చు.</string>
+    <string name="hardware_acceleration_disabled" source="google_translate">డిసేబుల్</string>
+    <string name="hardware_acceleration_decoding" source="google_translate">డీకోడింగ్ త్వరణం</string>
+    <string name="hardware_acceleration_full" source="google_translate">పూర్తి త్వరణం</string>
+    <string name="dev_hardware_decoder" source="google_translate">అధునాతన హార్డ్వేర్ డీకోడర్</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">ఫోర్స్ హార్డ్వేర్ డీకోడర్, ఆధునిక వినియోగదారులకు మాత్రమే</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">iomx</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-DR</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">mediacodec</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">mediacodec-DR</string>
+    <string name="automatic" source="google_translate">స్వయంచాలక</string>
+    <string name="screen_orientation" source="google_translate">వీడియో స్క్రీన్ ధోరణి</string>
+    <string name="screen_orientation_sensor" source="google_translate">స్వయంచాలక (సెన్సార్)</string>
+    <string name="screen_orientation_start_lock" source="google_translate">ప్రారంభంలో లాక్ చేయబడింది</string>
+    <string name="screen_orientation_portrait" source="google_translate">చిత్తరువు</string>
+    <string name="screen_orientation_landscape" source="google_translate">ప్రకృతి దృశ్యం</string>
+    <string name="screen_orientation_reverse_portrait" source="google_translate">రివర్స్ పోర్ట్రెయిట్</string>
+    <string name="screen_orientation_reverse_landscape" source="google_translate">రివర్స్ ల్యాండ్స్కేప్</string>
+    <string name="enable_black_theme" source="google_translate">నలుపు థీమ్ను ప్రారంభించండి</string>
+    <string name="enable_black_theme_summary" source="google_translate">తక్కువ కాంతి పరిసరాలలో మెరుగైన సౌలభ్యం కోసం ఇంటర్ఫేస్ రంగులను మార్చండి.</string>
+    <string name="subtitle_text_encoding" source="google_translate">ఉపశీర్షిక వచన ఎన్కోడింగ్</string>
+    <string name="daynight_title" source="google_translate">DayNight మోడ్</string>
+    <string name="daynight_summary" source="google_translate">తగిన సమయంలో రాత్రి మోడ్కి స్వయంచాలకంగా మారండి</string>
+    <string name="extra_prefs_category" source="google_translate">అదనపు అమర్పులు</string>
+    <string name="interface_prefs_screen" source="google_translate">ఇంటర్ఫేస్</string>
+    <string name="interface_gui" source="google_translate">ప్రదర్శన</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">సెకండరీ ప్రదర్శన</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">ద్వితీయ డిస్ప్లేలు కనెక్ట్ అయినప్పుడు సెట్టింగ్లు (HDMI / Chromecast).</string>
+    <string name="enable_clone_mode" source="google_translate">ప్రాధాన్యత ఉన్న క్లోన్</string>
+    <string name="enable_clone_mode_summary" source="google_translate">రిమోట్ కంట్రోల్ లేకుండా పరికరం స్క్రీన్ క్లోన్.</string>
+    <string name="interface_other_category" source="google_translate">ఇంటర్ఫేస్ - ఇతర</string>
+    <string name="video_prefs_category" source="google_translate">వీడియో</string>
+    <string name="video_min_group_length_title" source="google_translate">సమూహం వీడియోలు</string>
+    <string name="video_min_group_length_summary" source="google_translate">వారి మొదటి అక్షరాలు ఒకేలా ఉంటే వీడియోలు సమూహం చేయబడతాయి.</string>
+    <string name="video_min_group_length_disable" source="google_translate">డిసేబుల్</string>
+    <string name="video_min_group_length_first" source="google_translate">మొదటి లేఖ మాత్రమే</string>
+    <string name="video_min_group_length_short" source="google_translate">అక్షరాల సంఖ్య (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">అక్షరాల యొక్క దీర్ఘ సంఖ్య (9)</string>
+    <string name="media_fast_seek" source="google_translate">శీఘ్ర కోరుకునే ఎంపికను ప్రారంభించండి</string>
+    <string name="media_seen" source="google_translate">చూసిన వీడియో మార్కర్ చూపించు</string>
+    <string name="media_seen_summary" source="google_translate">మీరు చివరి వరకు ప్లే చేసేటప్పుడు వీడియోను గుర్తించండి</string>
+    <string name="force_list_portrait" source="google_translate">పోర్ట్రెయిట్ మోడ్లో గ్రిడ్ లేదు</string>
+    <string name="force_list_portrait_summary" source="google_translate">చిత్రపటంలో మోడ్లో గ్రిడ్కు బదులుగా వీడియోలను చూపించు</string>
+    <string name="force_play_all_summary" source="google_translate">మీరు క్లిక్ చేసిన వాటితో ప్రారంభించి, అన్ని వీడియోలను ప్లే చేయండి</string>
+    <string name="force_play_all_title" source="google_translate">వీడియో ప్లేజాబితా మోడ్</string>
+    <string name="save_brightness_summary" source="google_translate">వీడియో ప్లేయర్లో ప్రకాశం స్థాయి గుర్తుంచుకో</string>
+    <string name="save_brightness_title" source="google_translate">వీడియో కోసం ప్రకాశం స్థాయిని సేవ్ చేయండి</string>
+    <string name="save_audiodelay_summary" source="google_translate">ప్రతి వీడియో కోసం వ్యక్తిగత ఆడియో ఆలస్యం సేవ్ చేయండి</string>
+    <string name="save_audiodelay_title" source="google_translate">ఆడియో ఆలస్యం సేవ్ చేయండి</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">ప్రకాశం సంజ్ఞ</string>
+    <string name="enable_brightness_gesture_summary" source="google_translate">వీడియో ప్లేబ్యాక్ సమయంలో సంజ్ఞ ద్వారా ప్రకాశాన్ని నియంత్రించండి</string>
+    <string name="enable_volume_gesture_title" source="google_translate">వాల్యూమ్ సంజ్ఞ</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">వీడియో ప్లేబ్యాక్ సమయంలో సంజ్ఞ ద్వారా నియంత్రణ వాల్యూమ్</string>
+    <string name="enable_seek_buttons" source="google_translate">శోధన బటన్లను ప్రారంభించు</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">వీడియో ఇంటర్ఫేస్లో రివైండ్ మరియు ముందుకు బటన్లను చూపించు</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">వెతుకుటకు రెండుసార్లు నొక్కండి</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">స్క్రీన్ అంచులలో డబుల్ ట్యాప్ 10 సెకన్ల కోరుకుంటుంది</string>
+    <string name="popup_keepscreen_title" source="google_translate">పాప్-అప్ రీతిలో స్క్రీన్ను ఉంచండి</string>
+    <string name="popup_keepscreen_summary" source="google_translate">వీడియో పాజ్ అయినప్పటికీ పాప్-అప్ ప్రదర్శించబడుతున్నప్పుడు ఎల్లప్పుడూ స్క్రీన్ను ఉంచండి.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">దాచిన ఫైళ్లు చూపించు</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">బ్రౌజర్లలో దాచిన ఫైళ్లు చూపించు</string>
+    <string name="subtitles_prefs_category" source="google_translate">ఉపశీర్షికలు</string>
+    <string name="subtitles_size_title" source="google_translate">ఉప శీర్షికలు</string>
+    <string name="subtitles_size_small" source="google_translate">చిన్న</string>
+    <string name="subtitles_size_normal" source="google_translate">సాధారణ</string>
+    <string name="subtitles_size_big" source="google_translate">బిగ్</string>
+    <string name="subtitles_size_huge" source="google_translate">భారీ</string>
+    <string name="subtitles_color_title" source="google_translate">ఉప శీర్షికలు రంగు</string>
+    <string name="subtitles_color_white" source="google_translate">వైట్</string>
+    <string name="subtitles_color_gray" source="google_translate">గ్రే</string>
+    <string name="subtitles_color_pink" source="google_translate">పింక్</string>
+    <string name="subtitles_color_blue" source="google_translate">బ్లూ</string>
+    <string name="subtitles_color_yellow" source="google_translate">పసుపు</string>
+    <string name="subtitles_color_green" source="google_translate">గ్రీన్</string>
+    <string name="subtitles_background_title" source="google_translate">ఉపశీర్షికలు నేపధ్యం</string>
+    <string name="subtitles_bold_title" source="google_translate">బోల్డ్ ఉపశీర్షికలు</string>
+    <string name="subtitles_autoload_title" source="google_translate">ఆటో లోడ్ ఉపశీర్షికలు</string>
+    <string name="audio_prefs_category" source="google_translate">ఆడియో</string>
+    <string name="lockscreen_cover_title" source="google_translate">Lockscreen పై మీడియా కవర్</string>
+    <string name="lockscreen_cover_summary" source="google_translate">అందుబాటులో ఉన్నప్పుడు, ప్రస్తుత మీడియా కవర్ ఆర్ట్ను lockscreen వాల్పేపర్గా సెట్ చేయండి</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">ప్రస్తుత ప్లేజాబితా స్వీయ-స్క్రోలింగ్ను యానిమేట్ చేయండి</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">మీడియా మార్పుపై యానిమేట్ స్క్రోలింగ్</string>
+    <string name="audio_title_alignment" source="google_translate">ఆడియో శీర్షిక అమరిక</string>
+    <string name="audio_title_alignment_default" source="google_translate">డిఫాల్ట్</string>
+    <string name="audio_title_alignment_left" source="google_translate">ఎడమ</string>
+    <string name="audio_title_alignment_centre" source="google_translate">సెంటర్</string>
+    <string name="audio_title_alignment_right" source="google_translate">కుడి</string>
+    <string name="audio_title_alignment_marquee" source="google_translate">మార్క్యూ</string>
+    <string name="audio_save_repeat_title" source="google_translate">రిపీట్ రీతిని సేవ్ చేయండి</string>
+    <string name="audio_save_repeat_summary" source="google_translate">ఆడియో ప్లేజాబితాలను లోడ్ చేస్తున్నప్పుడు రిపీట్ మోడ్ను గుర్తుంచుకో</string>
+    <string name="audio_boost_title" source="google_translate">ఆడియో బూస్ట్</string>
+    <string name="headset_prefs_category" source="google_translate">హెడ్సెట్</string>
+    <string name="enable_headset_actions_title" source="google_translate">రిమోట్ కంట్రోల్ సత్వరమార్గాలు</string>
+    <string name="enable_headset_actions_summary" source="google_translate">మునుపటి ట్రాక్కి దాటవేయడానికి దానిపై తదుపరి మరియు ఎక్కువసేపు ప్రెస్కు దాటవేయడానికి \'ప్లే \' నొక్కండి</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">హెడ్సెట్ చొప్పింపులో పునఃప్రారంభించండి</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">లేకపోతే పాజ్ చేయండి</string>
+    <string name="enable_steal_remote_control" source="google_translate">ప్రత్యేక హెడ్సెట్ రిమోట్ కంట్రోల్</string>
+    <string name="enable_steal_remote_control_summary" source="google_translate">ఇతర అనువర్తనాల నుండి రిమోట్ నియంత్రణను దొంగిలించడం ద్వారా వైరుధ్యాలను నివారించండి. ఇది హెచ్టీసీ ఫోన్ల్లో డబుల్ క్లిక్పై డయల్ చేయడాన్ని నిరోధిస్తుంది.</string>
+    <string name="aout_summary" source="google_translate">VLC అవుట్పుట్ ఆడియోకు ఉపయోగించే పద్ధతిని మార్చండి.</string>
+    <string name="audio_ducking_title" source="google_translate">నోటిఫికేషన్లలో దిగువ VLC వాల్యూమ్</string>
+    <string name="audio_ducking_summary" source="google_translate">ఆడియో నోటిఫికేషన్లు, నావిగేషన్ సూచనలు లేదా సహాయకుడు మాట్లాడటం వినడానికి సహాయపడుతుంది</string>
+    <string name="casting_category" source="google_translate">కాస్టింగ్</string>
+    <string name="casting_passthrough_title" source="google_translate">ఆడియో పాస్ట్రూ</string>
+    <string name="casting_passthrough_summary" source="google_translate">మీ టీవీ ఆడియో రెండరింగ్ను నిర్వహించండి</string>
+    <string name="casting_conversion_quality_title" source="google_translate">మార్పిడి నాణ్యత</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">రిమోట్ స్క్రీన్పై ప్రసారం చేసేటప్పుడు మార్పిడి నాణ్యతను ఎంచుకోండి</string>
+    <string name="casting_quality_high" source="google_translate">అధిక</string>
+    <string name="casting_quality_medium" source="google_translate">మీడియం</string>
+    <string name="casting_quality_low" source="google_translate">తక్కువ</string>
+    <string name="casting_quality_lowcpu" source="google_translate">అత్యల్ప</string>
+    <string name="cast_performance_warning" source="google_translate">ఈ వీడియోను ప్రసారం చేయడానికి మార్పిడి అవసరం. ఈ మార్పిడి అందుబాటులో ఉన్న అన్ని శక్తిని ఉపయోగించుకోవచ్చు మరియు మీ బ్యాటరీని త్వరగా తొలగించవచ్చు.</string>
+    <string name="artists_show_all_title" source="google_translate">అన్ని కళాకారులను చూపించు</string>
+    <string name="artists_show_all_summary" source="google_translate">కళాకారుల జాబితాలో అన్ని కళాకారులను మాత్రమే చూపించు, ఆల్బమ్ ఆల్బమ్లకు మాత్రమే</string>
+    <string name="extensions_prefs_category" source="google_translate">పొడిగింపులు</string>
+    <string name="extensions_enable_category" source="google_translate">ఎనేబుల్ చేయడానికి పొడిగింపులను ఎంచుకున్నారు</string>
+    <string name="extensions_empty" source="google_translate">పొడిగింపు కనుగొనబడలేదు</string>
+    <string name="extension_prefs_activation_title" source="google_translate">సక్రియం</string>
+    <string name="android_auto" source="google_translate">Android కారు</string>
+    <string name="controls_prefs_category" source="google_translate">నియంత్రణలు</string>
+    <string name="performance_prefs_category" source="google_translate">ప్రదర్శన</string>
+    <string name="chroma_format" source="google_translate">వీడియో క్రోమాను బలవంతం చేయండి</string>
+    <string name="chroma_format_summary" source="google_translate">RGB 32-bit: డిఫాల్ట్ క్రోమ \ nRGB 16-బిట్: మెరుగైన పనితీరు కానీ తక్కువ నాణ్యత \ nYUV: ఉత్తమ ప్రదర్శన కానీ అన్ని పరికరాల్లో పనిచేయదు. Android 2.3 మరియు తర్వాత మాత్రమే.</string>
+    <string name="deblocking" source="google_translate">వడపోత సెట్టింగ్ల ఉపసంహరణ</string>
+    <string name="deblocking_summary" source="google_translate">Deblocking ఫిల్టర్ సెట్టింగులను మార్చండి. వీడియో నాణ్యతను మెరుగుపరచవచ్చు. ఆధునిక వినియోగదారులు మాత్రమే.</string>
+    <string name="deblocking_always" source="google_translate">పూర్తి deblocking (నెమ్మదిగా)</string>
+    <string name="deblocking_nonref" source="google_translate">మీడియం deblocking</string>
+    <string name="deblocking_nonkey" source="google_translate">తక్కువ deblocking</string>
+    <string name="deblocking_all" source="google_translate">డీబ్లాకింగ్ (వేగవంతమైనది)</string>
+    <string name="enable_frame_skip" source="google_translate">ఫ్రేమ్ స్కిప్ని ప్రారంభించండి</string>
+    <string name="enable_frame_skip_summary" source="google_translate">డీకోడింగ్ వేగవంతం కాని వీడియో నాణ్యతను తగ్గిస్తుంది.</string>
+    <string name="enable_time_stretching_audio" source="google_translate">సమయం సాగదీయడం ఆడియో</string>
+    <string name="enable_time_stretching_audio_summary" source="google_translate">పిచ్ను మార్చకుండా ఆడియోను వేగవంతం చేయండి మరియు నెమ్మదిగా పని చేయండి (వేగవంతమైన పరికరం అవసరం).</string>
+    <string name="save_video_none" source="google_translate">వేగం సేవ్ చేయవద్దు</string>
+    <string name="save_video_session" source="google_translate">సెషన్ సమయంలో వేగాన్ని ఆదా చేయండి</string>
+    <string name="save_video_always" source="google_translate">సెషన్లలో వేగాన్ని వేగవంతం చేయండి</string>
+    <string name="auto_rescan" source="google_translate">ఆటో రికాన్</string>
+    <string name="auto_rescan_summary" source="google_translate">అప్లికేషన్ ప్రారంభంలో కొత్త లేదా తొలగించిన మీడియా కోసం పరికరాన్ని స్వయంచాలకంగా స్కాన్ చేయండి</string>
+    <string name="dump_media_db" source="google_translate">మీడియా డేటాబేస్ను డంప్ చేయండి</string>
+    <string name="dump_media_db_summary" source="google_translate">అంతర్గత నిల్వ రూట్కు డేటాబేస్ను కాపీ చేయండి</string>
+    <string name="clear_media_db_summary" source="google_translate">డేటా క్లియర్ చేయడానికి Android VLC సమాచారాన్ని యాక్సెస్ చేయండి</string>
+    <string name="media_db_cleared" source="google_translate">మీడియా డేటాబేస్ క్లియర్ చేయబడింది!</string>
+    <string name="set_locale" source="google_translate">లొకేల్ను సెట్ చేయండి</string>
+    <string name="set_locale_detail" source="google_translate">రీసెట్ చెయ్యడానికి ఖాళీని వదిలేయండి</string>
+    <string name="set_locale_popup" source="google_translate">మార్పులను ప్రభావితం చేయడానికి VLC ను క్విట్ చేసి పునఃప్రారంభించండి.</string>
+    <string name="network_caching" source="google_translate">నెట్వర్క్ కాషింగ్ విలువ</string>
+    <string name="network_caching_summary" source="google_translate">నెట్వర్క్ మాధ్యమంను బఫర్ సమయము (మిసెలో). హార్డ్వేర్ డీకోడింగ్తో పనిచేయదు. రీసెట్ చెయ్యడానికి ఖాళీని వదిలేయండి.</string>
+    <string name="resume_playback_title" source="google_translate">కాల్ తర్వాత ప్లేబ్యాక్ను పునఃప్రారంభించండి</string>
+    <string name="resume_playback_summary" source="google_translate">విరామం లో ఉండండి</string>
+    <string name="network_caching_popup" source="google_translate">ఈ విలువ తప్పనిసరిగా 0 మరియు 6000 ms మధ్య ఉండాలి</string>
+    <string name="developer_prefs_category" source="google_translate">డెవలపర్</string>
+    <string name="debug_logs" source="google_translate">లాగ్లను డీబగ్ చేయండి</string>
+    <string name="start_logging" source="google_translate">లాగింగ్ చేయడాన్ని ప్రారంభించండి</string>
+    <string name="stop_logging" source="google_translate">లాగింగ్ ఆపివేయి</string>
+    <string name="clear_log" source="google_translate">లాగ్ క్లియర్ చేయండి</string>
+    <string name="log_service_title" source="google_translate">VLC రికార్డింగ్ను లాగ్ చేస్తుంది</string>
+    <string name="log_service_text" source="google_translate">లాగ్ కన్సోల్ తెరవండి</string>
+    <string name="copy_to_clipboard" source="google_translate">క్లిప్బోర్డ్కు కాపీ చేయండి</string>
+    <string name="copied_to_clipboard" source="google_translate">క్లిప్బోర్డ్కు లాగ్ కాపీ చేయబడింది.</string>
+    <string name="dump_logcat" source="google_translate">లాగ్క్ లాగ్ను డంప్ చేయండి</string>
+    <string name="dump_logcat_failure" source="google_translate">లాగ్ కాక్ డంప్ చేయడంలో విఫలమైంది.</string>
+    <string name="serious_crash" source="google_translate">దురదృష్టవశాత్తు, ఒక తీవ్రమైన లోపం సంభవించింది మరియు VLC మూసివేయవలసి వచ్చింది.</string>
+    <string name="help_us_send_log" source="google_translate">క్రింది క్రాష్ లాగ్ పంపడం ద్వారా VLC ను మెరుగుపరచడంలో మాకు సహాయపడండి:</string>
+    <string name="restart_vlc" source="google_translate">VLC పునఃప్రారంభించండి</string>
+    <string name="send_log" source="google_translate">లాగ్ పంపండి</string>
+    <string name="sending_log" source="google_translate">లాగ్ను పంపుతోంది ...</string>
+    <string name="drawer_open" source="google_translate">నావిగేషన్ డ్రాయర్ తెరవండి</string>
+    <string name="drawer_close" source="google_translate">నావిగేషన్ డ్రాయర్ను మూసివేయి</string>
+    <string name="network_browsing" source="google_translate">స్థానిక నెట్వర్క్</string>
+    <string name="browsing" source="google_translate">బ్రౌజింగ్</string>
+    <string name="file_size" source="google_translate">ఫైల్ పరిమాణం:</string>
+    <string name="audio_delay" source="google_translate">ఆడియో ఆలస్యం</string>
+    <string name="spu_delay" source="google_translate">ఉపశీర్షిక ఆలస్యం</string>
+    <string name="sleep_time_not_set" source="google_translate">ఏదీ సెట్ చేయలేదు</string>
+    <string name="network_shares_discovery" source="google_translate">నెట్వర్క్ షేర్ల కోసం వెతుకుతోంది ...</string>
+    <string name="network_empty" source="google_translate">ఈ డైరెక్టరీ ఖాళీగా ఉంది.</string>
+    <string name="network_connection_needed" source="google_translate">స్థానిక నెట్వర్క్కి కనెక్షన్ లేదు.</string>
+    <string name="search_hint" source="google_translate">మీడియాను శోధించండి</string>
+    <string name="search_list_hint" source="google_translate">ప్రస్తుత జాబితాలో మీడియాను శోధించండి</string>
+    <string name="search_global" source="google_translate">అన్ని మీడియా లైబ్రరీలో శోధించండి</string>
+    <string name="directory_show_medialib" source="google_translate">MediaLib లో చూపించు</string>
+    <string name="directory_hide_medialib" source="google_translate">MediaLib నుండి దాచు</string>
+    <string name="playlist_save" source="google_translate">ప్లేజాబితాను సేవ్ చేయండి</string>
+    <string name="playlist_name_hint" source="google_translate">ప్లేజాబితా పేరు</string>
+    <string name="go_to_chapter" source="google_translate">అధ్యాయం వెళ్ళండి ...</string>
+    <string name="chapter" source="google_translate">అధ్యాయము</string>
+    <string name="resume_from_position" source="google_translate">చివరి స్థానం నుండి పునఃప్రారంభించండి</string>
+    <string name="confirm_resume" source="google_translate">చివరి స్థానం నుండి పునఃప్రారంభించాలా?</string>
+    <string name="confirm_resume_title" source="google_translate">పునఃప్రారంభం కోసం నిర్ధారణను అడగండి</string>
+    <string name="confirm_resume_summary" source="google_translate">సక్రియం చేయబడి ఉంటే, వీడియోను చివరి స్థానం నుండి పునఃప్రారంభించినప్పుడు మీరు నిర్ధారించమని అడుగుతారు</string>
+    <string name="directory_empty" source="google_translate">డైరెక్టరీ ఖాళీగా ఉంది</string>
+    <string name="player_touch_title" source="google_translate">వీడియో కోసం టచ్ నియంత్రణలు</string>
+    <string name="player_touch_enable_all" source="google_translate">టచ్ నియంత్రణలను ప్రారంభించండి</string>
+    <string name="player_touch_disable_brightness" source="google_translate">ప్రకాశాన్ని నియంత్రణను నిలిపివేయండి</string>
+    <string name="player_touch_disable_all" source="google_translate">అన్ని టచ్ నియంత్రణలను నిలిపివేయి</string>
+    <string name="tv_ui_title" source="google_translate">Android టీవీ ఇంటర్ఫేస్</string>
+    <string name="tv_ui_summary" source="google_translate">టీవీకి అనుగుణమైన థీమ్కు UI ని మార్చండి</string>
+    <string name="medialibrary" source="google_translate">మీడియా లైబ్రరీ</string>
+    <string name="medialibrary_directories" source="google_translate">మీడియా లైబ్రరీ ఫోల్డర్లు</string>
+    <string name="more_actions" source="google_translate">మరిన్ని చర్యలు</string>
+    <string name="move" source="google_translate">కదలిక</string>
+    <string name="back_quit_lock" source="google_translate">వీడియోను నిష్క్రమించడానికి మళ్లీ మళ్లీ నొక్కండి</string>
+    <string name="playlist_deleted" source="google_translate">ప్లేజాబితా తొలగించబడింది</string>
+    <string name="file_deleted" source="google_translate">ఫైల్ తొలగించబడింది</string>
+    <string name="no_subs_found" source="google_translate">ఈ డైరెక్టరీలో ఉపశీర్షికలు లేవు</string>
+    <string name="music_now_playing" source="google_translate">ఇప్పుడు ఆడుతున్నారు</string>
+    <string name="widget_name_w" source="google_translate">VLC వైట్ విడ్జెట్</string>
+    <string name="widget_name_b" source="google_translate">VLC డార్క్ విడ్జెట్</string>
+    <string name="allow_storage_access_title" source="google_translate">వీడియో మరియు ఆడియో ఫైల్లను ప్రాప్యత చేయడానికి Ace స్ట్రీమ్ని అనుమతించండి</string>
+    <string name="allow_storage_access_description" source="google_translate">ఈ పరికరంలోని మీడియా ఫైల్లను ప్రాప్యత చేయడానికి ఏస్ ప్రసారం ఈ అనుమతిని మంజూరు చేయవలసిన అవసరం ఉంది.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">రింగ్టోన్ను సెట్ చేయడానికి ఏస్ స్ట్రీమ్ను అనుమతించండి</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">ఈ పాటను మీ రింగ్టోన్గా సెటప్ చేయడానికి ఈ అనుమతిని ఏస్ ప్రసారం అవసరం.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">ఏస్ స్ట్రీమ్ను ప్రకాశం మోడ్ని మార్చడానికి అనుమతించండి</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">మీ ప్రకాశం మోడ్ని మార్చడానికి ఏస్ ప్రసారం ఈ అనుమతిని మంజూరు చేయవలసి ఉంది.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">ఇతర అనువర్తనాలపై ఏస్ స్ట్రీమ్ ప్లేయర్ పాపప్ను అనుమతించండి</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">ఇతర అనువర్తనాలపై పాపప్లో ఈ వీడియోను మీ వీడియోను ప్రదర్శించడానికి ఏస్ స్ట్రీమ్ మీకు అవసరం.</string>
+    <string name="permission_ask_again" source="google_translate">అనుమతి ఇవ్వండి</string>
+    <string name="exit_app" source="google_translate">VLC ను మూసివేయి</string>
+    <string name="exit_app_msg" source="google_translate">మీరు ఖచ్చితంగా VLC నుండి నిష్క్రమించాలనుకుంటున్నారా?</string>
+    <string name="fastscroller_track" source="google_translate">FastScroller ట్రాక్</string>
+    <string name="fastscroller_handle" source="google_translate">FastScroller హ్యాండిల్</string>
+    <string name="plugins" source="google_translate">ప్లగిన్లు</string>
+    <string name="download_on_device" source="google_translate">డౌన్లోడ్</string>
+    <string name="extension_empty" source="google_translate">ప్రదర్శించడానికి ఏ అంశం లేదు, కొన్ని పొందడానికి మీ పొడిగింపు సెట్టింగ్లు వెళ్ళండి.</string>
+    <string name="opengl_title" source="google_translate">OpenGL ES2 వినియోగం</string>
+    <string name="opengl_summary" source="google_translate">డిఫాల్ట్గా, ఓపెన్ GL ES2 అవసరమైనప్పుడు సాఫ్ట్వేర్ డీకోడింగ్ మరియు హార్డ్వేర్ డీకోడింగ్ కోసం ఉపయోగించబడుతుంది (360 ° వీడియోలు).</string>
+    <string name="opengl_automatic" source="google_translate">స్వయంచాలక</string>
+    <string name="opengl_on" source="google_translate">బలవంతంగా</string>
+    <string name="opengl_off" source="google_translate">బలవంతం</string>
+    <string name="network_favorites" source="google_translate">నెట్వర్క్ ఇష్టమైనవి</string>
+    <string name="network_shared_folders" source="google_translate">భాగస్వామ్య ఫోల్డర్లు</string>
+    <string name="encryption_warning" source="google_translate">హెచ్చరిక, ఈ Android సంస్కరణకు ఎన్క్రిప్షన్ అందుబాటులో లేదు, పాస్వర్డ్ ఖాళీ స్థలంలో నిల్వ చేయబడుతుంది కానీ గుప్తీకరించబడదు</string>
+    <string name="store_password" source="google_translate">పాస్వర్డ్ను గుర్తుంచుకో</string>
+    <string name="add_to_playlist" source="google_translate">పాటల క్రమంలో చేర్చు</string>
+    <string name="popup_playback_title" source="google_translate">పాప్-అప్ విండోలో వీడియోను ప్లే చేయండి</string>
+    <string name="popup_playback" source="google_translate">పాప్-అప్ విండోలో ప్లే చేస్తోంది</string>
+    <string name="popup_expand" source="google_translate">వీడియోను విస్తరించండి</string>
+    <string name="snack_subloader_sub_found" source="google_translate">ఉపశీర్షికలు డౌన్లోడ్ చేయబడ్డాయి</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">ఉపశీర్షికలు కనుగొనబడలేదు</string>
+    <string name="dialog_subloader_success" source="google_translate">దీనికి ఉపశీర్షికలు కనుగొనబడ్డాయి:</string>
+    <string name="dialog_subloader_fails" source="google_translate">దీనికి ఉపశీర్షికలు కనుగొనబడలేదు:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">డౌన్లోడ్ పూర్తయింది</string>
+    <string name="download_subtitles" source="google_translate">ఉపశీర్షికలను డౌన్లోడ్ చేయండి</string>
+    <string name="preferences_languages_download" source="google_translate">ఉప శీర్షికలు</string>
+    <string name="list_languages_download_summary" source="google_translate">ఉపశీర్షికలను పొందుతున్నప్పుడు డౌన్లోడ్ చేసే భాషలు</string>
+    <string name="list_languages_download_title" source="google_translate">ఉపశీర్షికలు భాషలను డౌన్లోడ్ చేస్తాయి</string>
+    <string name="service_unavailable" source="google_translate">సహాయము అందించుట వీలుకాదు</string>
+    <string name="subs_dl_lang_fail" source="google_translate">ఉప శీర్షికల సెట్ను సెట్ చేయడం విఫలమైంది, అనువర్తన సెట్టింగ్ల్లో దీన్ని సెట్ చేయడానికి ప్రయత్నించండి</string>
+    <string name="downloading_subtitles" source="google_translate">ఉప శీర్షికలను డౌన్లోడ్ చేస్తోంది</string>
+    <string name="browse_folder" source="google_translate">ఫోల్డర్ను బ్రౌజ్ చేయండి</string>
+    <string name="listen" source="google_translate">వినండి</string>
+    <string name="subtitles_download_title" source="google_translate">సబ్స్ డౌన్లోడ్</string>
+    <string name="connecting" source="google_translate">కనెక్ట్ అవుతోంది ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">బ్లూటూత్ పరికరం కోసం ఆలస్యం సేవ్ చేయండి</string>
+    <string name="episodes" source="google_translate">భాగాలు</string>
+    <string name="movies" source="google_translate">సినిమాలు</string>
+    <string name="videos" source="google_translate">వీడియోలను</string>
+    <string name="streams" source="google_translate">ప్రవాహాలు</string>
+    <string name="clear_playback_history" source="google_translate">ప్లేబ్యాక్ చరిత్రను క్లియర్ చేయండి</string>
+    <string name="various_artists" source="google_translate">వివిధ కళాకారుల</string>
+    <string name="ml_scanning" source="google_translate">మీడియా ఫైళ్ళ కోసం స్కాన్ చేస్తోంది</string>
+    <string name="ml_parse_media" source="google_translate">మధ్యస్థ పార్సింగ్</string>
+    <string name="ml_discovering" source="google_translate">డిస్కవరింగ్</string>
+    <string name="resume" source="google_translate">పునఃప్రారంభం</string>
+    <string name="length" source="google_translate">పొడవు</string>
+    <string name="tv_settings_hint" source="google_translate">సరిచూడండి / సరిచేసిన డైరెక్టరీలను సరిచూడండి</string>
+    <string name="ml_external_storage_title" source="google_translate">కొత్త బాహ్య నిల్వ కనుగొనబడింది</string>
+    <string name="ml_external_storage_accept" source="google_translate">అవును</string>
+    <string name="ml_external_storage_decline" source="google_translate">తోబుట్టువుల</string>
+    <string name="last_added_media" source="google_translate">చివరిగా జోడించారు</string>
+    <string name="no" source="google_translate">తోబుట్టువుల</string>
+    <string name="loading_medialibrary" source="google_translate">Medialibrary లోడ్ అవుతోంది ...</string>
+    <string name="yes" source="google_translate">అవును</string>
+    <string name="custom_set_save_title" source="google_translate">సేవ్ చేయని మార్పులు</string>
+    <string name="custom_set_save_warning" source="google_translate">హెచ్చరిక: సేవ్ చేయని మార్పులు</string>
+    <string name="existing_custom_set_save_message" source="google_translate">ఈక్సిజర్-సెట్ను ఇలా సేవ్ చేయండి ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">కొత్త ఈక్సిజర్-సెట్ను ఇలా సేవ్ చేయండి ...</string>
+    <string name="save" source="google_translate">సేవ్</string>
+    <string name="do_not_save" source="google_translate">భద్రపరచవద్దు</string>
+    <string name="custom_set_wrong_input" source="google_translate">చెల్లని పేరు.</string>
+    <string name="custom_set_already_exist" source="google_translate">ఈ పేరుతో సమం-సెట్ ఇప్పటికే ఉంది</string>
+    <string name="custom_set_restored" source="google_translate">కస్టమ్ సమీకరణ-సెట్ పునరుద్ధరించబడింది.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">సేవ్ చేయని సమీకరణ-సెట్ తొలగించబడింది.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">న్యూ</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary ప్రస్తుతం మీ పరికరాలు స్కాన్ చేస్తోంది</string>
+    <string name="recommendations" source="google_translate">సిఫార్సులు</string>
+    <string name="recommendations_desc" source="google_translate">లాంచర్లో సిఫార్సులు కార్డులు</string>
+    <string name="browser_quick_access" source="google_translate">త్వరిత ప్రాప్తి</string>
+    <string name="browser_storages" source="google_translate">గిడ్డంగుల</string>
+    <string name="renderer_list_title" source="google_translate">చూపిస్తుంది</string>
+    <string name="feedback_player_crashed" source="google_translate">క్షమించాలి, VLC క్రాష్ అయ్యింది. దయచేసి మళ్లీ ప్రయత్నించండి.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">మీరు మీ SD కార్డుకు VLC వ్రాసే యాక్సెస్ను మంజూరు చేయాలి</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC వ్రాసే ప్రాప్యత అనుమతి లేకుండా ఈ ఫైల్ను తొలగించలేరు. \ N దయచేసి మీ SD కార్డ్కి వెళ్లి, \ "ఎంచుకోండి \" పై క్లిక్ చేయండి. \ N మీరు కుడి ఎగువ మెనులో మొదటిసారి \ "SD కార్డును చూపు \" పై క్లిక్ చేయాలి</string>
+    <string name="dialog_sd_wizard" source="google_translate">నాకు చూపించు</string>
+    <string name="renderers_disconnect" source="google_translate">డిస్కనెక్ట్</string>
+    <string name="audio_digital_failed" source="google_translate">ఆడియో డిజిటల్ అవుట్పుట్ స్థితిని మార్చడంలో విఫలమైంది</string>
+    <string name="audio_digital_output_enabled" source="google_translate">ఆడియో డిజిటల్ అవుట్పుట్ ప్రారంభించబడింది</string>
+    <string name="audio_digital_output_disabled" source="google_translate">ఆడియో డిజిటల్ అవుట్పుట్ నిలిపివేయబడింది</string>
+    <string name="live_streams" source="google_translate">ప్రత్యక్ష ప్రసారాలు</string>
+    <string name="all_live_streams" source="google_translate">అన్ని ప్రత్యక్ష ప్రసారాలు</string>
+    <string name="video_torrents" source="google_translate">వీడియో టోరెంట్స్</string>
+    <string name="audio_torrents" source="google_translate">ఆడియో టోరెంట్స్</string>
+    <string name="all_torrents" source="google_translate">అన్ని టోరెంట్స్</string>
+    <string name="main" source="google_translate">ప్రధాన</string>
+    <string name="media_player" source="google_translate">మీడియా ప్లేయర్</string>
+    <string name="acestream_server" source="google_translate">ఏస్ స్ట్రీమ్ సర్వర్ (ఇంజిన్)</string>
+    <string name="media_player_settings" source="google_translate">మీడియా ప్లేయర్ సెట్టింగులు</string>
+    <string name="acestream_server_settings" source="google_translate">ఏస్ స్ట్రీమ్ సర్వర్ (ఇంజన్) సెట్టింగులు</string>
+    <string name="sign_out" source="google_translate">సైన్ ఔట్ చేయండి</string>
+    <string name="sign_in" source="google_translate">సైన్ ఇన్ చేయండి</string>
+    <string name="sign_in_acestream" source="google_translate">ఏస్ స్ట్రీమ్తో సైన్ ఇన్ చేయండి</string>
+    <string name="sign_in_google" source="google_translate">Google తో సైన్ ఇన్ చేయండి</string>
+    <string name="video_files" source="google_translate">వీడియో ఫైల్లు</string>
+    <string name="audio_files" source="google_translate">ఆడియో ఫైళ్లు</string>
+    <string name="retry" source="google_translate">మళ్ళీ ప్రయత్నించు</string>
+    <string name="failed_to_load_web_page" source="google_translate">వెబ్ పేజీని లోడ్ చేయడంలో విఫలమైంది</string>
 </resources>

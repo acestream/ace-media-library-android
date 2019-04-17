@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <data>
+    <data class="org.videolan.vlc.databinding.TvAudioPlayerBinding">
         <variable
             name="progress"
             type="org.videolan.vlc.gui.tv.audioplayer.AudioPlayerActivity.Progress" />
     </data>
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -112,8 +112,8 @@
             android:focusable="true"
             android:nextFocusDown="@+id/playlist"
             android:onClick="onClick"
-            android:src="@drawable/ic_repeat_w"
-            tools:src="@drawable/ic_repeat" />
+            android:src="@drawable/ic_repeat_dark"
+            tools:src="@drawable/ic_repeat_light" />
 
         <ImageView
             android:id="@+id/button_previous"
@@ -127,8 +127,8 @@
             android:focusable="true"
             android:nextFocusDown="@+id/playlist"
             android:onClick="onClick"
-            android:src="@drawable/ic_previous_w"
-            tools:src="@drawable/ic_previous" />
+            android:src="@drawable/ic_previous_dark"
+            tools:src="@drawable/ic_previous_light" />
 
         <ImageView
             android:id="@+id/button_play"
@@ -142,8 +142,8 @@
             android:focusable="true"
             android:nextFocusDown="@+id/playlist"
             android:onClick="onClick"
-            android:src="@drawable/ic_play_w"
-            tools:src="@drawable/ic_play" >
+            android:src="@drawable/ic_play_dark"
+            tools:src="@drawable/ic_play_light" >
             <requestFocus/>
         </ImageView>
 
@@ -159,8 +159,8 @@
             android:focusable="true"
             android:nextFocusDown="@+id/playlist"
             android:onClick="onClick"
-            android:src="@drawable/ic_next_w"
-            tools:src="@drawable/ic_next" />
+            android:src="@drawable/ic_next_dark"
+            tools:src="@drawable/ic_next_light" />
 
         <ImageView
             android:id="@+id/button_shuffle"
@@ -175,11 +175,11 @@
             android:nextFocusDown="@+id/button_shuffle"
             android:nextFocusRight="@id/playlist"
             android:onClick="onClick"
-            android:src="@drawable/ic_shuffle_w"
-            tools:src="@drawable/ic_shuffle" />
+            android:src="@drawable/ic_shuffle_dark"
+            tools:src="@drawable/ic_shuffle_light" />
 
         <!-- Playlist -->
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/playlist"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -192,5 +192,5 @@
             android:nextFocusRight="@+id/playlist"
             android:nextFocusDown="@+id/playlist"
             android:layout_margin="@dimen/half_default_margin" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

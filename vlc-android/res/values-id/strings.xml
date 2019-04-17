@@ -13,15 +13,11 @@
     <string name="sortby_date_desc">Tanggal (deskripsi)</string>
     <string name="searchable_hint">Mencari...</string>
     <string name="history">Riwayat</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="other">%d hasil ditemukan</item>
-    </plurals>
     <string name="play">Putar</string>
     <string name="play_from_start">Putar dari awal</string>
     <string name="play_as_audio">Putar sebagai audio</string>
     <string name="play_as_video">Putar sebagai video</string>
     <string name="play_as_audio_background">Putar video di latar belakang</string>
-    <string name="play_as_audio_background_summary">Lanjutkan pemutaran video di latar belakang ketika mematikan layar perangkat atau mengklik tombol HOME.</string>
     <string name="append">Tambahkan</string>
     <string name="play_all">Putar semua</string>
     <string name="append_all">Tambahkan semua</string>
@@ -52,12 +48,6 @@
     </plurals>
     <plurals name="subfolders_quantity">
         <item quantity="other">%d subfolder</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="other">%d berkas media</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="other">%d video</item>
     </plurals>
     <string name="internal_memory">Memori internal</string>
     <string name="parent_folder">Naik ke folder induk</string>
@@ -112,9 +102,6 @@
     <string name="brightness">Kecerahan</string>
     <string name="navmenu">menu navigasi</string>
     <string name="advanced">opsi tingkat lanjut</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="other">%1$d kanal\n</item>
-    </plurals>
     <string name="track_samplerate_info">Laju sampel: %1$d Hz\n</string>
     <string name="track_resolution_info">Resolusi: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Laju gambar: %1$.3f\n</string>
@@ -291,4 +278,258 @@
     <string name="widget_name_b">VLC Widget Gelap</string>
     <!--fast scroller-->
     <!--Plugins-->
+    <string name="torrent_files">Torrent file</string>
+    <string name="select_language">Pilih bahasa</string>
+    <string name="sortby_artist_name" source="google_translate">Nama artis</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Nama artis (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Nama album</string>
+    <string name="sortby_album_name_desc" source="google_translate">Nama album (desc)</string>
+    <string name="sortby_number" source="google_translate">Nb trek</string>
+    <string name="sortby_number_desc" source="google_translate">Nb track (desc)</string>
+    <string name="playback" source="google_translate">Pemutaran</string>
+    <string name="playback_controls" source="google_translate">Kontrol pemutaran</string>
+    <string name="medialibrary_scan" source="google_translate">Pemindaian perpustakaan media</string>
+    <string name="Medialibrary_progress" source="google_translate">Pustaka media memindai pembaruan kemajuan</string>
+    <string name="video_app_switch_title" source="google_translate">Mode Background / PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">Pilih perilaku VLC ketika Anda beralih ke aplikasi lain dari pemutaran video</string>
+    <string name="play_pip_title" source="google_translate">Putar video dalam mode Gambar-dalam-gambar</string>
+    <string name="insert_next" source="google_translate">Sisipkan selanjutnya</string>
+    <string name="unknown_number" source="google_translate">Jumlah Track yang tidak diketahui</string>
+    <string name="tracks" source="google_translate">Lagu</string>
+    <string name="shuffle_title" source="google_translate">Mode acak</string>
+    <string name="repeat_title" source="google_translate">Mode ulangi</string>
+    <string name="firstsong" source="google_translate">Lagu pertama daftar putar</string>
+    <string name="lastsong" source="google_translate">Lagu terakhir daftar putar</string>
+    <string name="surface_fit_screen" source="google_translate">Layar pas</string>
+    <string name="server_add_title" source="google_translate">Tambahkan server baru ke favorit</string>
+    <string name="server_domain_hint" source="google_translate">Alamat server (nama domain atau IP)</string>
+    <string name="server_share_hint" source="google_translate">Nama berbagi jaringan (atau alamat IP)</string>
+    <string name="server_folder_hint" source="google_translate">Jalur folder (opsional)</string>
+    <string name="server_username_hint" source="google_translate">Nama pengguna</string>
+    <string name="server_servername_hint" source="google_translate">Nama server, untuk kemudahan</string>
+    <string name="server_port" source="google_translate">Pelabuhan:</string>
+    <string name="login" source="google_translate">Masuk</string>
+    <string name="password" source="google_translate">Kata sandi</string>
+    <string name="search_results" source="google_translate">Hasil Pencarian</string>
+    <string name="search_no_result" source="google_translate">Tidak ada media yang ditemukan</string>
+    <string name="favorites_add" source="google_translate">Tambahkan ke Favorit</string>
+    <string name="favorites_remove" source="google_translate">Hapus dari favorit</string>
+    <string name="favorites_edit" source="google_translate">Edit</string>
+    <string name="favorite_added" source="google_translate">Disimpan ke favorit</string>
+    <string name="favorite_removed" source="google_translate">Dihapus dari favorit</string>
+    <string name="playback_history_title" source="google_translate">Riwayat pemutaran</string>
+    <string name="playback_history_summary" source="google_translate">Simpan semua media yang diputar di bagian Riwayat</string>
+    <string name="playback_speed_title" source="google_translate">Simpan Kecepatan Putar</string>
+    <string name="playback_speed_summary" source="google_translate">Ingat kecepatan pemutaran yang Anda tetapkan</string>
+    <string name="daynight_title" source="google_translate">Mode siang malam</string>
+    <string name="daynight_summary" source="google_translate">Secara otomatis beralih ke mode malam pada waktu yang tepat</string>
+    <string name="interface_gui" source="google_translate">Tampilan</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">Tampilan sekunder</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">Pengaturan saat monitor sekunder terhubung (HDMI / Chromecast).</string>
+    <string name="video_prefs_category" source="google_translate">Video</string>
+    <string name="video_min_group_length_title" source="google_translate">Video grup</string>
+    <string name="video_min_group_length_summary" source="google_translate">Video dikelompokkan jika huruf pertamanya sama.</string>
+    <string name="video_min_group_length_disable" source="google_translate">Nonaktifkan</string>
+    <string name="video_min_group_length_first" source="google_translate">Huruf pertama saja</string>
+    <string name="video_min_group_length_short" source="google_translate">Jumlah huruf pendek (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Jumlah huruf yang panjang (9)</string>
+    <string name="media_fast_seek" source="google_translate">Aktifkan opsi pencarian cepat</string>
+    <string name="media_seen" source="google_translate">Tampilkan penanda video yang terlihat</string>
+    <string name="media_seen_summary" source="google_translate">Tandai video seperti yang terlihat saat Anda memutarnya hingga akhir</string>
+    <string name="force_play_all_summary" source="google_translate">Putar semua video, dimulai dengan yang Anda klik</string>
+    <string name="force_play_all_title" source="google_translate">Mode daftar putar video</string>
+    <string name="save_brightness_summary" source="google_translate">Ingat tingkat kecerahan di pemutar video</string>
+    <string name="save_brightness_title" source="google_translate">Simpan tingkat kecerahan untuk video</string>
+    <string name="save_audiodelay_summary" source="google_translate">Simpan penundaan audio individu untuk setiap video</string>
+    <string name="save_audiodelay_title" source="google_translate">Simpan penundaan audio</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Gerakan kecerahan</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Volume gerakan</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Kontrol volume dengan gerakan selama pemutaran video</string>
+    <string name="enable_seek_buttons" source="google_translate">Aktifkan tombol cari</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">Tampilkan tombol mundur dan maju pada antarmuka video</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Ketuk dua kali untuk mencari</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Ketuk dua kali pada tepi layar untuk mencari 10 detik</string>
+    <string name="popup_keepscreen_title" source="google_translate">Jaga layar AKTIF dalam mode Pop-Up</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Selalu jaga layar AKTIF selama Munculan ditampilkan, meskipun video dijeda.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Tampilkan file tersembunyi</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Tampilkan file tersembunyi di browser</string>
+    <string name="subtitles_prefs_category" source="google_translate">Teks</string>
+    <string name="subtitles_size_title" source="google_translate">Ukuran Teks</string>
+    <string name="subtitles_size_small" source="google_translate">Kecil</string>
+    <string name="subtitles_size_normal" source="google_translate">Normal</string>
+    <string name="subtitles_size_big" source="google_translate">Besar</string>
+    <string name="subtitles_size_huge" source="google_translate">Sangat besar</string>
+    <string name="subtitles_color_title" source="google_translate">Warna Teks</string>
+    <string name="subtitles_color_white" source="google_translate">putih</string>
+    <string name="subtitles_color_gray" source="google_translate">Abu-abu</string>
+    <string name="subtitles_color_pink" source="google_translate">Berwarna merah muda</string>
+    <string name="subtitles_color_blue" source="google_translate">Biru</string>
+    <string name="subtitles_color_yellow" source="google_translate">Kuning</string>
+    <string name="subtitles_color_green" source="google_translate">hijau</string>
+    <string name="subtitles_background_title" source="google_translate">Latar Belakang Teks</string>
+    <string name="subtitles_bold_title" source="google_translate">Teks tebal</string>
+    <string name="subtitles_autoload_title" source="google_translate">Teks terjemahan otomatis</string>
+    <string name="audio_prefs_category" source="google_translate">Audio</string>
+    <string name="lockscreen_cover_title" source="google_translate">Penutup media pada Lockscreen</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Jika tersedia, atur sampul media saat ini sebagai wallpaper layar kunci</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Menggerakkan gulir daftar putar saat ini</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Menggerakkan gulir pada transisi media</string>
+    <string name="audio_save_repeat_title" source="google_translate">Simpan mode ulangi</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Ingat mode pengulangan saat memuat daftar putar audio</string>
+    <string name="audio_boost_title" source="google_translate">Audio-boost</string>
+    <string name="headset_prefs_category" source="google_translate">Headset</string>
+    <string name="enable_headset_detection_summary" source="google_translate">Mendeteksi penyisipan dan penghapusan headset</string>
+    <string name="enable_headset_actions_title" source="google_translate">Pintasan kendali jarak jauh</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Tekan dua kali pada \'Mainkan \' untuk melompat ke berikutnya dan tekan lama untuk melompat ke trek sebelumnya</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Lanjutkan pada penyisipan headset</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">Hentikan sebaliknya</string>
+    <string name="audio_ducking_title" source="google_translate">Volume VLC lebih rendah pada notifikasi</string>
+    <string name="audio_ducking_summary" source="google_translate">Membantu mendengar pemberitahuan audio, instruksi navigasi, atau asisten berbicara</string>
+    <string name="casting_category" source="google_translate">Pengecoran</string>
+    <string name="casting_passthrough_title" source="google_translate">Audio Passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">Biarkan TV Anda mengelola rendering audio</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Kualitas konversi</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Pilih kualitas konversi saat casting di layar jarak jauh</string>
+    <string name="casting_quality_high" source="google_translate">Tinggi</string>
+    <string name="casting_quality_medium" source="google_translate">Medium</string>
+    <string name="casting_quality_low" source="google_translate">Rendah</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Terendah</string>
+    <string name="cast_performance_warning" source="google_translate">Casting video ini membutuhkan konversi. Konversi ini dapat menggunakan semua daya yang tersedia dan dapat dengan cepat menghabiskan baterai Anda.</string>
+    <string name="artists_show_all_title" source="google_translate">Tampilkan semua artis</string>
+    <string name="artists_show_all_summary" source="google_translate">Tampilkan semua artis di daftar Artis, tidak hanya artis album</string>
+    <string name="extensions_prefs_category" source="google_translate">Ekstensi</string>
+    <string name="extensions_enable_category" source="google_translate">Pilih ekstensi untuk diaktifkan</string>
+    <string name="extensions_empty" source="google_translate">Tidak ada ekstensi yang terdeteksi</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Mengaktifkan</string>
+    <string name="android_auto" source="google_translate">Mobil Android</string>
+    <string name="controls_prefs_category" source="google_translate">Kontrol</string>
+    <string name="main_prefs_category" source="google_translate">Pengaturan utama</string>
+    <string name="save_video_none" source="google_translate">Jangan menghemat kecepatan</string>
+    <string name="save_video_session" source="google_translate">Hemat kecepatan selama sesi</string>
+    <string name="save_video_always" source="google_translate">Hemat kecepatan antar sesi</string>
+    <string name="dump_media_db" source="google_translate">Basis data media sampah</string>
+    <string name="dump_media_db_summary" source="google_translate">Salin database ke root penyimpanan internal</string>
+    <string name="clear_media_db_summary" source="google_translate">Akses info VLC Android untuk menghapus data</string>
+    <string name="resume_playback_title" source="google_translate">Lanjutkan pemutaran setelah panggilan</string>
+    <string name="resume_playback_summary" source="google_translate">Tetap diam jika tidak</string>
+    <string name="network_caching_popup" source="google_translate">Nilai ini harus antara 0 dan 6000 ms</string>
+    <string name="browsing" source="google_translate">Menjelajah</string>
+    <string name="search_list_hint" source="google_translate">Cari media dalam daftar saat ini</string>
+    <string name="search_global" source="google_translate">Cari di semua perpustakaan media</string>
+    <string name="player_touch_title" source="google_translate">Kontrol sentuh untuk Video</string>
+    <string name="player_touch_enable_all" source="google_translate">Aktifkan kontrol Sentuh</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Nonaktifkan kontrol kecerahan</string>
+    <string name="player_touch_disable_all" source="google_translate">Nonaktifkan semua kontrol Sentuh</string>
+    <string name="tv_ui_title" source="google_translate">Antarmuka TV Android</string>
+    <string name="tv_ui_summary" source="google_translate">Ubah UI ke TV tema yang disesuaikan</string>
+    <string name="medialibrary" source="google_translate">Perpustakaan media</string>
+    <string name="medialibrary_directories" source="google_translate">Folder perpustakaan media</string>
+    <string name="allow_storage_access_title" source="google_translate">Izinkan Ace Stream untuk mengakses file video dan audio</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace Stream mengharuskan Anda untuk memberikan izin ini untuk mengakses file media pada perangkat ini.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Izinkan Ace Stream untuk mengatur nada dering</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace Stream mengharuskan Anda untuk memberikan izin ini untuk mengatur lagu ini sebagai nada dering Anda.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Izinkan Ace Stream untuk mengubah mode kecerahan</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace Stream mengharuskan Anda untuk memberikan izin ini untuk mengubah mode kecerahan Anda.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Izinkan popup pemutar Ace Stream di atas aplikasi lain</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream mengharuskan Anda memberikan izin ini untuk menampilkan video Anda di sembulan atas aplikasi lain.</string>
+    <string name="permission_ask_again" source="google_translate">Memberikan ijin</string>
+    <string name="exit_app" source="google_translate">Tutup VLC</string>
+    <string name="exit_app_msg" source="google_translate">Anda yakin ingin keluar dari VLC?</string>
+    <string name="fastscroller_track" source="google_translate">Jalur FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">Pegangan FastScroller</string>
+    <string name="plugins" source="google_translate">Plugin</string>
+    <string name="download_on_device" source="google_translate">Unduh</string>
+    <string name="extension_empty" source="google_translate">Tidak ada item untuk ditampilkan, buka pengaturan ekstensi Anda untuk mendapatkan beberapa.</string>
+    <string name="opengl_title" source="google_translate">Penggunaan OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">Secara default, OpenGL ES2 digunakan untuk decoding perangkat lunak dan decoding perangkat keras saat diperlukan (video 360 °).</string>
+    <string name="opengl_automatic" source="google_translate">Otomatis</string>
+    <string name="opengl_on" source="google_translate">Paksa Aktif</string>
+    <string name="opengl_off" source="google_translate">Matikan</string>
+    <string name="network_favorites" source="google_translate">Jaringan favorit</string>
+    <string name="network_shared_folders" source="google_translate">Folder bersama</string>
+    <string name="encryption_warning" source="google_translate">Peringatan, enkripsi tidak tersedia untuk versi Android ini, kata sandi akan disimpan di ruang pribadi tetapi tidak dienkripsi</string>
+    <string name="store_password" source="google_translate">Ingat kata Sandi</string>
+    <string name="add_to_playlist" source="google_translate">Tambahkan ke Daftar Putar</string>
+    <string name="popup_playback_title" source="google_translate">Putar video di jendela Pop-Up</string>
+    <string name="popup_playback" source="google_translate">Bermain di jendela sembul</string>
+    <string name="popup_expand" source="google_translate">Luaskan video</string>
+    <string name="snack_subloader_sub_found" source="google_translate">Teks diunduh</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">Teks tidak ditemukan</string>
+    <string name="dialog_subloader_success" source="google_translate">Teks ditemukan untuk:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Teks tidak ditemukan untuk:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">Pengunduhan selesai</string>
+    <string name="download_subtitles" source="google_translate">Unduh subtitle</string>
+    <string name="preferences_languages_download" source="google_translate">Bahasa terjemahan</string>
+    <string name="list_languages_download_summary" source="google_translate">Bahasa yang akan diunduh saat mengambil subtitle</string>
+    <string name="list_languages_download_title" source="google_translate">Teks unduhan subtitle</string>
+    <string name="service_unavailable" source="google_translate">Layanan tidak tersedia</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Gagal mengatur bahasa terjemahan, coba atur dalam pengaturan aplikasi</string>
+    <string name="downloading_subtitles" source="google_translate">Mengunduh subtitle</string>
+    <string name="browse_folder" source="google_translate">Jelajahi folder</string>
+    <string name="listen" source="google_translate">Mendengarkan</string>
+    <string name="subtitles_download_title" source="google_translate">Subs unduhan</string>
+    <string name="connecting" source="google_translate">Menghubungkan ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">menghemat penundaan untuk perangkat bluetooth</string>
+    <string name="episodes" source="google_translate">episode</string>
+    <string name="movies" source="google_translate">film</string>
+    <string name="videos" source="google_translate">video</string>
+    <string name="streams" source="google_translate">stream</string>
+    <string name="clear_playback_history" source="google_translate">Hapus riwayat pemutaran</string>
+    <string name="various_artists" source="google_translate">bermacam-macam artis</string>
+    <string name="ml_scanning" source="google_translate">Memindai file media</string>
+    <string name="ml_parse_media" source="google_translate">Parsing Sedang</string>
+    <string name="ml_discovering" source="google_translate">Menemukan</string>
+    <string name="resume" source="google_translate">Lanjut</string>
+    <string name="length" source="google_translate">Panjangnya</string>
+    <string name="tv_settings_hint" source="google_translate">Tekan lama tombol OK untuk memeriksa / menghapus centang direktori</string>
+    <string name="ml_external_storage_title" source="google_translate">Penyimpanan eksternal baru terdeteksi</string>
+    <string name="ml_external_storage_accept" source="google_translate">iya nih</string>
+    <string name="ml_external_storage_decline" source="google_translate">Tidak</string>
+    <string name="last_added_media" source="google_translate">terakhir ditambahkan</string>
+    <string name="no" source="google_translate">Tidak</string>
+    <string name="loading_medialibrary" source="google_translate">Memuat Perpustakaan Medial ...</string>
+    <string name="yes" source="google_translate">iya nih</string>
+    <string name="custom_set_save_title" source="google_translate">Perubahan yang belum disimpan</string>
+    <string name="custom_set_save_warning" source="google_translate">Peringatan: perubahan yang belum disimpan</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Simpan equalizer-set sebagai ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Simpan equalizer-set baru sebagai ...</string>
+    <string name="save" source="google_translate">Menyimpan</string>
+    <string name="do_not_save" source="google_translate">Jangan simpan</string>
+    <string name="custom_set_wrong_input" source="google_translate">Salah nama.</string>
+    <string name="custom_set_already_exist" source="google_translate">Setel ekualiser dengan nama ini sudah ada</string>
+    <string name="custom_set_restored" source="google_translate">Setel equaliser khusus dipulihkan.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Set equalizer yang belum disimpan dihapus.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Baru</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary sedang memindai perangkat Anda sekarang</string>
+    <string name="recommendations" source="google_translate">Rekomendasi</string>
+    <string name="recommendations_desc" source="google_translate">Kartu rekomendasi pada peluncur</string>
+    <string name="browser_quick_access" source="google_translate">Akses Cepat</string>
+    <string name="browser_storages" source="google_translate">Penyimpanan</string>
+    <string name="renderer_list_title" source="google_translate">Menampilkan</string>
+    <string name="feedback_player_crashed" source="google_translate">Maaf, VLC baru saja mogok. Silakan coba lagi.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Anda harus memberikan akses tulis VLC ke Kartu SD Anda</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC tidak dapat menghapus file ini tanpa izin akses tulis. \ NSilakan buka SD Card Anda dan klik \ "Pilih \". \ NAnda mungkin harus mengklik \ "Tampilkan kartu SD \" terlebih dahulu di menu kanan atas.</string>
+    <string name="dialog_sd_wizard" source="google_translate">Perlihatkan pada saya</string>
+    <string name="renderers_disconnect" source="google_translate">Memutuskan</string>
+    <string name="audio_digital_failed" source="google_translate">Gagal mengubah status Output Digital Audio</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Audio Digital Output diaktifkan</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio Digital Output dinonaktifkan</string>
+    <string name="live_streams" source="google_translate">Streaming langsung</string>
+    <string name="all_live_streams" source="google_translate">Semua aliran langsung</string>
+    <string name="video_torrents" source="google_translate">Video torrents</string>
+    <string name="audio_torrents" source="google_translate">Torrent audio</string>
+    <string name="all_torrents" source="google_translate">Semua torrents</string>
+    <string name="main" source="google_translate">Utama</string>
+    <string name="media_player" source="google_translate">Pemutar media</string>
+    <string name="acestream_server" source="google_translate">Server Ace Stream (engine)</string>
+    <string name="media_player_settings" source="google_translate">Pengaturan pemutar media</string>
+    <string name="acestream_server_settings" source="google_translate">Pengaturan server Ace Stream (engine)</string>
+    <string name="sign_out" source="google_translate">Keluar</string>
+    <string name="sign_in" source="google_translate">Masuk</string>
+    <string name="sign_in_acestream" source="google_translate">Masuk dengan Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Masuk dengan Google</string>
+    <string name="video_files" source="google_translate">File video</string>
+    <string name="audio_files" source="google_translate">File audio</string>
+    <string name="retry" source="google_translate">Mencoba kembali</string>
+    <string name="failed_to_load_web_page" source="google_translate">Gagal memuat laman web</string>
 </resources>

@@ -23,14 +23,14 @@
 
 package org.videolan.vlc.gui.browser;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.util.SimpleArrayMap;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.collection.SimpleArrayMap;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -75,6 +75,7 @@ public class StorageBrowserFragment extends FileBrowserFragment implements Entry
         VLCApplication.clearData();
         super.onCreate(bundle);
         mAdapter = new StorageBrowserAdapter(this);
+        mFabPlayImageResourceId = R.drawable.ic_fab_add;
         if (bundle == null)
             bundle = getArguments();
         if (bundle != null){

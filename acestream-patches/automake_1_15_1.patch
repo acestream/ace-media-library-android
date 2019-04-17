@@ -1,0 +1,35 @@
+diff --git a/extras/tools/SHA512SUMS b/extras/tools/SHA512SUMS
+index abc6410fe0..ae8ebbeea8 100644
+--- a/extras/tools/SHA512SUMS
++++ b/extras/tools/SHA512SUMS
+@@ -17,3 +17,4 @@ e9785f3d620a204b7d20222888917dc065c2036cae28667065bf7862dfa1b25235095a12fd04efdb
+ 8d23dde18525dccaa648ca01df40151e7f00cec4846bd611c8970dbcfc1fb57a453facfe4d41462e7c3c8bb548d44b961a04e4fc3073ab6b65063e53f42bf6fd  nasm-2.14.tar.gz
+ ba4921530049f002c362bc420bd87181074893109ce4b1fedb18545227d27ea96c09798eb02f1f8fabbf6ac5c185b0b7eca42df2a34ad0559f95a97d78811702  meson-0.48.1.tar.gz
+ 1650bf9e3eddeb0b0fbb415c2b8e0a7c094421e991fa8139fd77fae0f6ee7ee980b7cf5e98d883c3a884f99abcb06fa26e3980af3a3a5bb6dd655124755782c2  ninja-1.8.2.tar.gz
++f0d4717ebe2c76cec5d487de090f6e1c0f784b0d382fd964ffa846287e2a364a52531a26ab98b7033ac04ed302a247b3b114299def54819a03439bfc962ff61b  automake-1.15.1.tar.gz
+diff --git a/extras/tools/bootstrap b/extras/tools/bootstrap
+index c4bd50d08f..d8bfc251a4 100755
+--- a/extras/tools/bootstrap
++++ b/extras/tools/bootstrap
+@@ -90,7 +90,7 @@ fi
+ }
+ 
+ check autoconf 2.69
+-check automake 1.15
++check automake 1.15.1
+ check m4 1.4.16
+ check libtool 2.4
+ check pkg-config
+diff --git a/extras/tools/packages.mak b/extras/tools/packages.mak
+index ffe91ee980..d2222cecd6 100644
+--- a/extras/tools/packages.mak
++++ b/extras/tools/packages.mak
+@@ -18,7 +18,7 @@ LIBTOOL_URL=$(GNU)/libtool/libtool-$(LIBTOOL_VERSION).tar.gz
+ AUTOCONF_VERSION=2.69
+ AUTOCONF_URL=$(GNU)/autoconf/autoconf-$(AUTOCONF_VERSION).tar.gz
+ 
+-AUTOMAKE_VERSION=1.15
++AUTOMAKE_VERSION=1.15.1
+ AUTOMAKE_URL=$(GNU)/automake/automake-$(AUTOMAKE_VERSION).tar.gz
+ 
+ M4_VERSION=1.4.18

@@ -1,0 +1,38 @@
+diff --git a/include/vlc/libvlc_renderer_discoverer.h b/include/vlc/libvlc_renderer_discoverer.h
+index e63a8c9c2a..28ab8d78fc 100644
+--- a/include/vlc/libvlc_renderer_discoverer.h
++++ b/include/vlc/libvlc_renderer_discoverer.h
+@@ -120,6 +120,16 @@ libvlc_renderer_item_type(const libvlc_renderer_item_t *p_item);
+ LIBVLC_API const char *
+ libvlc_renderer_item_icon_uri(const libvlc_renderer_item_t *p_item);
+ 
++/**
++ * Get the SOUT a renderer item
++ *
++ * \version LibVLC 3.0.0 or later
++ *
++ * \return the item's SOUT string (can't be NULL, must *not* be freed)
++ */
++LIBVLC_API const char *
++libvlc_renderer_item_sout(const libvlc_renderer_item_t *p_item);
++
+ /**
+  * Get the flags of a renderer item
+  *
+diff --git a/lib/renderer_discoverer.c b/lib/renderer_discoverer.c
+index 67b81f4bf1..9b412de013 100644
+--- a/lib/renderer_discoverer.c
++++ b/lib/renderer_discoverer.c
+@@ -121,6 +121,12 @@ libvlc_renderer_item_icon_uri( const libvlc_renderer_item_t *p_item )
+     return vlc_renderer_item_icon_uri( (const vlc_renderer_item_t *) p_item );
+ }
+ 
++const char *
++libvlc_renderer_item_sout( const libvlc_renderer_item_t *p_item )
++{
++    return vlc_renderer_item_sout( (const vlc_renderer_item_t *) p_item );
++}
++
+ int
+ libvlc_renderer_item_flags( const libvlc_renderer_item_t *p_item )
+ {

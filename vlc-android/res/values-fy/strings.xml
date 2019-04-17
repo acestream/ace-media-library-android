@@ -13,10 +13,6 @@
     <string name="sortby_date_desc">Namme (beskr)</string>
     <string name="searchable_hint">Sykje…</string>
     <string name="history">Skiednis</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d resultaat gevonden</item>
-        <item quantity="other">%d resultaten fûn</item>
-    </plurals>
     <string name="play">Ofspylje</string>
     <string name="play_from_start">Fan begjin ôf ôfspylje</string>
     <string name="play_as_audio">As audio ôfspylje</string>
@@ -59,14 +55,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 submap</item>
         <item quantity="other">%d submappen</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 mediabestand</item>
-        <item quantity="other">%d mediabestannen</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 video</item>
-        <item quantity="other">%d fideo\'s</item>
     </plurals>
     <string name="internal_memory">Yntern ûnthâld</string>
     <string name="parent_folder">Nei boppelizzende map</string>
@@ -126,10 +114,6 @@
     <string name="brightness">Helderheid</string>
     <string name="navmenu">navigaasjemenu</string>
     <string name="advanced">avansearre opsjes</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 kanaal\n</item>
-        <item quantity="other">%1$d kanalen\n</item>
-    </plurals>
     <string name="track_samplerate_info">Samplerate: %1$d Hz\n</string>
     <string name="track_resolution_info">Resolúsje: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Byldfaasje: %1$.3f\n</string>
@@ -383,14 +367,14 @@
     <!--Widget-->
     <string name="widget_name_w">VLC Widget ljocht</string>
     <string name="widget_name_b">VLC Widget donker</string>
-    <string name="allow_storage_access_title">VLC tagong jaan ta fideo- en audiobestannen</string>
-    <string name="allow_storage_access_description">VLC moat jo tastimming hawwe om tagong te krijen ta de mediabestannen op dit apparaat.</string>
-    <string name="allow_settings_access_ringtone_title">VLC tastean om de ringtone yn te stellen</string>
-    <string name="allow_settings_access_ringtone_description">VLC moat jo tastimming hawwe om dit nûmer yn te stellen as jo ringtone.</string>
-    <string name="allow_settings_access_brightness_title">VLC tastean om helderheidsmoadus te wizigjen</string>
-    <string name="allow_settings_access_brightness_description">VLC moat jo tastimming hawwe om jo helderheidsmoadus te wizigjen</string>
-    <string name="allow_draw_overlays_title">Pop-up fan VLC-spiler tastean oer oare apps</string>
-    <string name="allow_sdraw_overlays_description">VLC moat jo tastimming hawwe om jo fideo wer te jaan yn in pop-up boppe-op oare tapassingen.</string>
+    <string name="allow_storage_access_title">Ace Stream tagong jaan ta fideo- en audiobestannen</string>
+    <string name="allow_storage_access_description">Ace Stream moat jo tastimming hawwe om tagong te krijen ta de mediabestannen op dit apparaat.</string>
+    <string name="allow_settings_access_ringtone_title">Ace Stream tastean om de ringtone yn te stellen</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream moat jo tastimming hawwe om dit nûmer yn te stellen as jo ringtone.</string>
+    <string name="allow_settings_access_brightness_title">Ace Stream tastean om helderheidsmoadus te wizigjen</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream moat jo tastimming hawwe om jo helderheidsmoadus te wizigjen</string>
+    <string name="allow_draw_overlays_title">Pop-up fan Ace Stream-spiler tastean oer oare apps</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream moat jo tastimming hawwe om jo fideo wer te jaan yn in pop-up boppe-op oare tapassingen.</string>
     <string name="permission_ask_again">Tagong tastean</string>
     <string name="exit_app">VLC slute</string>
     <!--fast scroller-->
@@ -444,4 +428,114 @@
     <string name="no">Nee</string>
     <string name="loading_medialibrary">Mediabiblioteek lade...</string>
     <string name="yes">ja</string>
+    <string name="torrent_files">Torrent bestannen</string>
+    <string name="select_language">Selektearje taal</string>
+    <string name="sortby_artist_name" source="google_translate">Keunstnernamme</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Artistnamme (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Albumnamme</string>
+    <string name="sortby_album_name_desc" source="google_translate">Albumnamme (desc)</string>
+    <string name="sortby_number" source="google_translate">Nb-tracks</string>
+    <string name="sortby_number_desc" source="google_translate">Nb-tracks (desc)</string>
+    <string name="playback" source="google_translate">Playback</string>
+    <string name="playback_controls" source="google_translate">Play-kontrôles</string>
+    <string name="medialibrary_scan" source="google_translate">Mediabiblioteken scan</string>
+    <string name="Medialibrary_progress" source="google_translate">Mediabibliotheek scans de fernijings updates</string>
+    <string name="video_app_switch_summary" source="google_translate">Selektearje VLC-gedrach as jo nei oare applikaasje wikselje fan fideoperspieling</string>
+    <string name="unknown_number" source="google_translate">Unbekend nûmer fan Tracks</string>
+    <string name="nomedia" source="google_translate">Gjin media bestannen fûn, befapje wat bestannen op jo apparaat of jo foarkar oanpasse.</string>
+    <string name="media_fast_seek" source="google_translate">Aktivearje fluch sykje opsje</string>
+    <string name="media_seen" source="google_translate">Lit de fideo\'s markearje sjen</string>
+    <string name="media_seen_summary" source="google_translate">Markearje in fideo as sjoen as jo it spielje oant it ein</string>
+    <string name="save_audiodelay_summary" source="google_translate">Spesjale perioaden foar elke fideo individueel ferwachtsje</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Dûbele knip op skermkanten om 10 sekonden te sykjen</string>
+    <string name="popup_keepscreen_title" source="google_translate">Hâld screen yn \'e pop-up-modus</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Altyd it skerm hâlde, wylst Pop-Up werjaan sil, ek as it fideo foarkomt.</string>
+    <string name="subtitles_color_gray" source="google_translate">griis</string>
+    <string name="subtitles_bold_title" source="google_translate">Bold ûndertitels</string>
+    <string name="subtitles_autoload_title" source="google_translate">Auto laden subtitles</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Animearje aktive playlist auto-scrolling</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Oanwinst scrollen op medias oergong</string>
+    <string name="audio_save_repeat_title" source="google_translate">Meitsje werhelling modus</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Tsjinje werhelling modus by it laden fan audio playlists</string>
+    <string name="audio_boost_title" source="google_translate">Audio-boost</string>
+    <string name="enable_headset_actions_title" source="google_translate">Remote Control fluchtoetsen</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Druk druk op \'Play \' om nei de folgjende en lange druk te gean nei it skip nei foarige track</string>
+    <string name="audio_ducking_title" source="google_translate">Lege VLC-fermogen op notifikaasjes</string>
+    <string name="audio_ducking_summary" source="google_translate">Helpt om audio-notifikaasjes te harkjen, navigaasje-ynstruksjes of assistint te praten</string>
+    <string name="casting_category" source="google_translate">Casting</string>
+    <string name="casting_passthrough_title" source="google_translate">Audio Passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">Lit jo TV audio-rendering beheare</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Conversion quality</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Selektearje de konvertearring kwaliteit by it opjaan op it ôfstânskerm</string>
+    <string name="casting_quality_high" source="google_translate">Heech</string>
+    <string name="casting_quality_medium" source="google_translate">Medium</string>
+    <string name="casting_quality_low" source="google_translate">Leech</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Leechst</string>
+    <string name="cast_performance_warning" source="google_translate">It fertellen fan dit fideo moat konvertearje. Dizze konvertearje kin alle beskikbere enerzjy brûke en kin jo batterij snel drage.</string>
+    <string name="artists_show_all_title" source="google_translate">Lit alle artysten sjen</string>
+    <string name="artists_show_all_summary" source="google_translate">Lit alle artysten yn Artists listje sjen, net allinich keunstners</string>
+    <string name="extensions_prefs_category" source="google_translate">Extensions</string>
+    <string name="extensions_enable_category" source="google_translate">Selektearje taheaksels om te aktivearjen</string>
+    <string name="extensions_empty" source="google_translate">Gjin taheaksel fûn</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Aktivearje</string>
+    <string name="android_auto" source="google_translate">Android-auto</string>
+    <string name="main_prefs_category" source="google_translate">Main ynstellings</string>
+    <string name="dump_media_db" source="google_translate">Dump media database</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopie de databank nei ynterne opslachwurden</string>
+    <string name="clear_media_db_summary" source="google_translate">Befestigje Android VLC info om gegevens te heljen</string>
+    <string name="resume_playback_title" source="google_translate">Resume spieling nei in oprop</string>
+    <string name="resume_playback_summary" source="google_translate">Bliuw yninoar stil</string>
+    <string name="network_caching_popup" source="google_translate">Dizze wearde moat tusken 0 en 6000 ms wêze</string>
+    <string name="search_list_hint" source="google_translate">Sykje medias yn aktive list</string>
+    <string name="search_global" source="google_translate">Sykje yn alle mediabibleteek</string>
+    <string name="exit_app_msg" source="google_translate">Binne jo wis dat jo VLC fuortsmite wolle?</string>
+    <string name="fastscroller_track" source="google_translate">FastScroller-track</string>
+    <string name="fastscroller_handle" source="google_translate">FastScroller behannelje</string>
+    <string name="opengl_summary" source="google_translate">Standert is OpenGL ES2 brûkt foar software dekodearring en hardware dekodearring as jo gebrûk meitsje (360 ° videos).</string>
+    <string name="streams" source="google_translate">streams</string>
+    <string name="ml_external_storage_accept" source="google_translate">Ja</string>
+    <string name="ml_external_storage_decline" source="google_translate">Nee</string>
+    <string name="custom_set_save_title" source="google_translate">Unbeheindlike feroaringen</string>
+    <string name="custom_set_save_warning" source="google_translate">Warskôging: ûnbewurke wizigingen</string>
+    <string name="existing_custom_set_save_message" source="google_translate">As equalizer-set bewarje as ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Besparje nije equalizer-set as ...</string>
+    <string name="save" source="google_translate">Rêde</string>
+    <string name="do_not_save" source="google_translate">Net bewarje</string>
+    <string name="custom_set_wrong_input" source="google_translate">Unjildich namme.</string>
+    <string name="custom_set_already_exist" source="google_translate">Equalizer-set mei dizze namme bestiet al</string>
+    <string name="custom_set_restored" source="google_translate">Oanpaste equalizer-set restaurearre.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Net-befettje equalizer-set wiske.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Nij</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary scanner jo apparaten no direkt</string>
+    <string name="recommendations" source="google_translate">Oanbefellings</string>
+    <string name="recommendations_desc" source="google_translate">Oanbefellings kaarten op \'e finster</string>
+    <string name="browser_quick_access" source="google_translate">Quick Access</string>
+    <string name="browser_storages" source="google_translate">Storages</string>
+    <string name="renderer_list_title" source="google_translate">Displays</string>
+    <string name="feedback_player_crashed" source="google_translate">Sorry, VLC just crashe. Besykje it nochris.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Jo moatte VLC skriuwtagong jaan oan jo SD-kaart</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC kin dizze triem net wiskje sûnder tagongsrjochten om te skriuwen. \ NSkriuw nei jo SD-kaart en klikje op \ "selekteare \". \ NMo kinne jo klikke op \ "SD-kaart sjen litte" earst yn it top-rjochtermenu</string>
+    <string name="dialog_sd_wizard" source="google_translate">Lit my sjen</string>
+    <string name="renderers_disconnect" source="google_translate">Ferbinje</string>
+    <string name="audio_digital_failed" source="google_translate">It mislearre de status fan audio digitaal útfier</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Audio Digital Output ynskeakele</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio Digital Output is útskeakele</string>
+    <string name="live_streams" source="google_translate">Live streams</string>
+    <string name="all_live_streams" source="google_translate">Alle libjende streamingen</string>
+    <string name="video_torrents" source="google_translate">Video torrents</string>
+    <string name="audio_torrents" source="google_translate">Audio torrents</string>
+    <string name="all_torrents" source="google_translate">Alle torrents</string>
+    <string name="main" source="google_translate">Foarnaamste</string>
+    <string name="media_player" source="google_translate">Media Spiler</string>
+    <string name="acestream_server" source="google_translate">Ace Stream-tsjinner (motor)</string>
+    <string name="media_player_settings" source="google_translate">Media-ynstellings</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream-tsjinners (motor) ynstellings</string>
+    <string name="sign_out" source="google_translate">Út logge</string>
+    <string name="sign_in" source="google_translate">Ynlogge</string>
+    <string name="sign_in_acestream" source="google_translate">Oanmelde by Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Ynlogge mei Google</string>
+    <string name="video_files" source="google_translate">Video bestannen</string>
+    <string name="audio_files" source="google_translate">Audio files</string>
+    <string name="retry" source="google_translate">Gean op \'e nij</string>
+    <string name="failed_to_load_web_page" source="google_translate">Failed to load web page</string>
 </resources>

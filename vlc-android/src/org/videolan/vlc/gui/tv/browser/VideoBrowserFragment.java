@@ -26,9 +26,9 @@ package org.videolan.vlc.gui.tv.browser;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v17.leanback.widget.Presenter;
-import android.support.v17.leanback.widget.Row;
-import android.support.v17.leanback.widget.RowPresenter;
+import androidx.leanback.widget.Presenter;
+import androidx.leanback.widget.Row;
+import androidx.leanback.widget.RowPresenter;
 
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.medialibrary.Tools;
@@ -36,6 +36,7 @@ import org.videolan.medialibrary.interfaces.MediaAddedCb;
 import org.videolan.medialibrary.interfaces.MediaUpdatedCb;
 import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.vlc.VLCApplication;
+import org.videolan.vlc.gui.tv.MainTvActivity;
 import org.videolan.vlc.media.MediaUtils;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -43,6 +44,10 @@ public class VideoBrowserFragment extends SortedBrowserFragment implements Media
 
     private MediaWrapper[] mVideos;
     private Medialibrary mMediaLibrary;
+
+    //:ace
+    private long mCategory = -1;
+    ///ace
 
     @Override
     protected String getKey() {
@@ -60,7 +65,15 @@ public class VideoBrowserFragment extends SortedBrowserFragment implements Media
         VLCApplication.runBackground(new Runnable() {
             @Override
             public void run() {
-                mVideos = VLCApplication.getMLInstance().getVideos();
+                if(mCategory == MainTvActivity.HEADER_P2P_VIDEO) {
+                    mVideos = VLCApplication.getMLInstance().getP2PVideos();
+                }
+                else if(mCategory == MainTvActivity.HEADER_P2P_STREAM) {
+                    mVideos = VLCApplication.getMLInstance().getP2PStreams();
+                }
+                else {
+                    mVideos = VLCApplication.getMLInstance().getRegularVideos();
+                }
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -110,4 +123,10 @@ public class VideoBrowserFragment extends SortedBrowserFragment implements Media
         for (MediaWrapper mw : mediaList)
             updateItem(mw);
     }
+
+    //:ace
+    public void setCategory(long category) {
+        mCategory = category;
+    }
+    ///ace
 }

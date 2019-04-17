@@ -27,10 +27,10 @@ import android.annotation.TargetApi;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v17.leanback.widget.OnItemViewClickedListener;
-import android.support.v17.leanback.widget.Presenter;
-import android.support.v17.leanback.widget.Row;
-import android.support.v17.leanback.widget.RowPresenter;
+import androidx.leanback.widget.OnItemViewClickedListener;
+import androidx.leanback.widget.Presenter;
+import androidx.leanback.widget.Row;
+import androidx.leanback.widget.RowPresenter;
 import android.text.TextUtils;
 
 import org.videolan.medialibrary.media.Artist;
@@ -61,6 +61,9 @@ public class MusicFragment extends MediaLibBrowserFragment implements OnItemView
     public static final long CATEGORY_ALBUMS = 2;
     public static final long CATEGORY_GENRES = 3;
     public static final long CATEGORY_SONGS = 4;
+    //:ace
+    public static final long CATEGORY_P2P_SONGS = 5;
+    ///ace
 
     private volatile AsyncAudioUpdate mUpdater = null;
     MediaLibraryItem[] mDataList;
@@ -86,7 +89,12 @@ public class MusicFragment extends MediaLibBrowserFragment implements OnItemView
         super.onResume();
         if (mUpdater == null) {
             mUpdater = new AsyncAudioUpdate();
-            mUpdater.execute();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                mUpdater.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            }
+            else {
+                mUpdater.execute();
+            }
         }
     }
 
@@ -107,7 +115,12 @@ public class MusicFragment extends MediaLibBrowserFragment implements OnItemView
     public void updateList() {
         if (mUpdater == null) {
             mUpdater = new AsyncAudioUpdate();
-            mUpdater.execute();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                mUpdater.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            }
+            else {
+                mUpdater.execute();
+            }
         }
     }
 
@@ -134,7 +147,7 @@ public class MusicFragment extends MediaLibBrowserFragment implements OnItemView
 
         @Override
         protected void onPreExecute() {
-            setTitle(getString(R.string.app_name_full));
+            setTitle(getString(R.string.app_title));
             mAdapter.clear();
             ((BrowserActivityInterface)getActivity()).showProgress(true);
         }
@@ -161,7 +174,10 @@ public class MusicFragment extends MediaLibBrowserFragment implements OnItemView
                 mDataList = mMediaLibrary.getGenres();
             } else if (CATEGORY_SONGS == mCategory){
                 title = getString(R.string.songs);
-                mDataList = mMediaLibrary.getAudio();
+                mDataList = mMediaLibrary.getRegularAudio();
+            } else if (CATEGORY_P2P_SONGS == mCategory){
+                title = getString(R.string.songs);
+                mDataList = mMediaLibrary.getP2PAudio();
             } else {
                 title = getString(R.string.app_name_full);
             }
@@ -170,6 +186,9 @@ public class MusicFragment extends MediaLibBrowserFragment implements OnItemView
         }
 
         protected void onProgressUpdate(MediaLibraryItem[]... datalist){
+            if(datalist == null || datalist.length == 0 || datalist[0] == null) {
+                return;
+            }
             List<Object> list = Arrays.asList(((Object[]) datalist[0]));
             if (list.size() > 1 && TextUtils.isEmpty(((MediaLibraryItem)list.get(0)).getTitle()))
                 list = list.subList(1, list.size());

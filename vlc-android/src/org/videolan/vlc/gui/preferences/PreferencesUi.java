@@ -25,11 +25,10 @@ package org.videolan.vlc.gui.preferences;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.SwitchPreferenceCompat;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreferenceCompat;
 
-import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.vlc.R;
 import org.videolan.vlc.gui.helpers.UiTools;
 
@@ -61,7 +60,7 @@ public class PreferencesUi extends BasePreferenceFragment implements SharedPrefe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        findPreference("tv_ui").setVisible(AndroidUtil.isJellyBeanMR1OrLater);
+        findPreference("tv_ui").setVisible(true);
     }
 
     @Override

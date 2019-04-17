@@ -19,10 +19,6 @@
     <string name="sortby_number_desc">Számok száma (csökk.)</string>
     <string name="searchable_hint">Keresés…</string>
     <string name="history">Előzmények</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d találat</item>
-        <item quantity="other">%d találat</item>
-    </plurals>
     <string name="play">Lejátszás</string>
     <string name="playback">Lejátszás</string>
     <string name="playback_controls">Lejátszásvezérlők</string>
@@ -71,14 +67,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 almappa</item>
         <item quantity="other">%d almappa</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 médiafájl</item>
-        <item quantity="other">%d médiafájl</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 videó</item>
-        <item quantity="other">%d videó</item>
     </plurals>
     <string name="internal_memory">Belső memória</string>
     <string name="parent_folder">Vissza a szülőmappához</string>
@@ -139,11 +127,7 @@
     <string name="brightness">Fényerő</string>
     <string name="navmenu">navigációs menü</string>
     <string name="advanced">speciális beállítások</string>
-    <string name="audio_boost_warning">Húzza fel újra, hogy 100% fölé menjen</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 csatorna\n</item>
-        <item quantity="other">%1$d csatorna\n</item>
-    </plurals>
+    <string name="audio_boost_warning" formatted="false">Húzza fel újra, hogy 100% fölé menjen</string>
     <string name="track_samplerate_info">Mintavételi frekvencia: %1$d Hz\n\n</string>
     <string name="track_resolution_info">Felbontás: %1$dx%2$d\n\n</string>
     <string name="track_framerate_info">Képkockasebesség: %1$.3f\n</string>
@@ -179,7 +163,7 @@
     <string name="error_not_compatible">Sajnáljuk, a készüléke jelenleg nem támogatott ebben a VLC for Android™ verzióban.</string>
     <string name="error_problem">Sajnáljuk, a VLC for Android™ a problémába ütközött a betöltés közben és bezárult.</string>
     <string name="error_message_is">A hibaüzenet (kérjük említse meg hibakeresésnél):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Lejátszási hiba</string>
     <string name="encountered_error_message">A VLC hibát tapasztalt ezzel a médiával.\nKérjük próbálja meg frissíteni a médiatárat.</string>
     <string name="invalid_location">A(z) %1$s helyet nem lehet lejátszani.</string>
@@ -314,7 +298,7 @@
     <string name="audio_save_repeat_title">Ismétlés mód mentése</string>
     <string name="audio_save_repeat_summary">Az ismétlés mód megjegyzése a hang lejátszólisták betöltésekor</string>
     <string name="audio_boost_title">Hangerő-növelés</string>
-    <string name="audio_boost_summary">Hangerő növelésének engedélyezése 200% fölé</string>
+    <string name="audio_boost_summary" formatted="false">Hangerő növelésének engedélyezése 200% fölé</string>
     <string name="headset_prefs_category">Fejhallgató</string>
     <string name="enable_headset_detection">Fejhallgató észlelése</string>
     <string name="enable_headset_detection_summary">Fejhallgató eltávolításakor szünet; visszahelyezésekor folytatás</string>
@@ -442,14 +426,14 @@
     <!--Widget-->
     <string name="widget_name_w">VLC fehér ablakelem</string>
     <string name="widget_name_b">VLC sötét ablakelem</string>
-    <string name="allow_storage_access_title">A VLC hozzáférhet a videó és hangfájllokhoz</string>
-    <string name="allow_storage_access_description">A VLC-nek szüksége van erre az engedélyre a médiafájlok eléréséhez az eszközén.</string>
-    <string name="allow_settings_access_ringtone_title">A VLC beállíthatja a csengőhangot</string>
-    <string name="allow_settings_access_ringtone_description">A VLC-nek szüksége van erre az engedélyre a számok csengőhangként beállításához.</string>
-    <string name="allow_settings_access_brightness_title">A VLC beállíthatja a fényerősséget</string>
-    <string name="allow_settings_access_brightness_description">A VLC-nek szüksége van erre az engedélyre a fényerősség beállításához.</string>
-    <string name="allow_draw_overlays_title">A VLC felugró engedélyezése más appok felett</string>
-    <string name="allow_sdraw_overlays_description">A VLC-nek szüksége van erre az engedélyre a videók más appok feletti felugró ablakban megjelenítéshez.</string>
+    <string name="allow_storage_access_title">A Ace Stream hozzáférhet a videó és hangfájllokhoz</string>
+    <string name="allow_storage_access_description">A Ace Stream-nek szüksége van erre az engedélyre a médiafájlok eléréséhez az eszközén.</string>
+    <string name="allow_settings_access_ringtone_title">A Ace Stream beállíthatja a csengőhangot</string>
+    <string name="allow_settings_access_ringtone_description">A Ace Stream-nek szüksége van erre az engedélyre a számok csengőhangként beállításához.</string>
+    <string name="allow_settings_access_brightness_title">A Ace Stream beállíthatja a fényerősséget</string>
+    <string name="allow_settings_access_brightness_description">A Ace Stream-nek szüksége van erre az engedélyre a fényerősség beállításához.</string>
+    <string name="allow_draw_overlays_title">A Ace Stream felugró engedélyezése más appok felett</string>
+    <string name="allow_sdraw_overlays_description">A Ace Stream-nek szüksége van erre az engedélyre a videók más appok feletti felugró ablakban megjelenítéshez.</string>
     <string name="permission_ask_again">Engedély megadása</string>
     <string name="exit_app">VLC bezárása</string>
     <string name="exit_app_msg">Biztosan kilép a VLC-ből?</string>
@@ -532,4 +516,34 @@
     <string name="sdcard_permission_dialog_title">Írási engedélyt kell adnia a VLC-nek az SD kártyához hozzáféréshez</string>
     <string name="sdcard_permission_dialog_message">A VLC írási jogosultság nélkül nem törölheti a fájlt.\nMenjen az SD kártyához és válassza a „Kiválasztás” lehetőséget.\nLehet hogy rá kell kattintania az „SD kártya megjelenítése” lehetőségre a jobb felső menüben.</string>
     <string name="dialog_sd_wizard">Megjelenítés</string>
+    <string name="torrent_files">Torrent fájlok</string>
+    <string name="select_language">Válasszon nyelvet</string>
+    <string name="enable_headset_actions_title" source="google_translate">Távirányító parancsikonjai</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Nyomja meg kétszer a „Play” gombot a következő és hosszabb</string>
+    <string name="main_prefs_category" source="google_translate">Fő beállítások</string>
+    <string name="dump_media_db" source="google_translate">Dump media adatbázis</string>
+    <string name="dump_media_db_summary" source="google_translate">Adatbázis másolása belső tárológyökérbe</string>
+    <string name="streams" source="google_translate">patakok</string>
+    <string name="renderers_disconnect" source="google_translate">szétkapcsol</string>
+    <string name="audio_digital_failed" source="google_translate">Nem sikerült megváltoztatni az audio digitális kimenet állapotát</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Audio digitális kimenet engedélyezve</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio digitális kimenet le van tiltva</string>
+    <string name="live_streams" source="google_translate">Élő folyamok</string>
+    <string name="all_live_streams" source="google_translate">Minden élő stream</string>
+    <string name="video_torrents" source="google_translate">Videó torrentek</string>
+    <string name="audio_torrents" source="google_translate">Audió torrentek</string>
+    <string name="all_torrents" source="google_translate">Minden torrent</string>
+    <string name="main" source="google_translate">Fő</string>
+    <string name="media_player" source="google_translate">Médialejátszó</string>
+    <string name="acestream_server" source="google_translate">Ace Stream szerver (motor)</string>
+    <string name="media_player_settings" source="google_translate">Médialejátszó beállításai</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream kiszolgáló (motor) beállításai</string>
+    <string name="sign_out" source="google_translate">Kijelentkezés</string>
+    <string name="sign_in" source="google_translate">Bejelentkezés</string>
+    <string name="sign_in_acestream" source="google_translate">Jelentkezzen be az Ace Stream segítségével</string>
+    <string name="sign_in_google" source="google_translate">Jelentkezzen be a Google-lal</string>
+    <string name="video_files" source="google_translate">Videofájlok</string>
+    <string name="audio_files" source="google_translate">Hangfájlok</string>
+    <string name="retry" source="google_translate">Próbálja újra</string>
+    <string name="failed_to_load_web_page" source="google_translate">Nem sikerült betölteni a weboldalt</string>
 </resources>

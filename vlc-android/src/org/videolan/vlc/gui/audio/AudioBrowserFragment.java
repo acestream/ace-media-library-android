@@ -27,12 +27,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.MainThread;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.MainThread;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,6 +43,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.TextView;
 
+import org.acestream.sdk.utils.Logger;
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.medialibrary.interfaces.MediaAddedCb;
 import org.videolan.medialibrary.interfaces.MediaUpdatedCb;
@@ -72,7 +74,7 @@ import java.util.List;
 import java.util.Random;
 
 public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefreshLayout.OnRefreshListener, ViewPager.OnPageChangeListener, Medialibrary.ArtistsAddedCb, Medialibrary.ArtistsModifiedCb, Medialibrary.AlbumsAddedCb, Medialibrary.AlbumsModifiedCb, MediaAddedCb, MediaUpdatedCb, TabLayout.OnTabSelectedListener {
-    public final static String TAG = "VLC/AudioBrowserFragment";
+    public final static String TAG = "AS/VLC/ABF";
 
     private AudioBrowserAdapter mSongsAdapter;
     private AudioBrowserAdapter mArtistsAdapter;
@@ -85,6 +87,12 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
     private TextView mEmptyView;
     private final ContextMenuRecyclerView[] mLists = new ContextMenuRecyclerView[MODE_TOTAL];
     private FastScroller mFastScroller;
+
+    //:ace
+    private int mCategory = 1;
+
+    private final static String KEY_CATEGORY = "key_category";
+    ///ace
 
     private static final int REFRESH = 101;
     private static final int UPDATE_LIST = 102;
@@ -103,16 +111,34 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFabPlayImageResourceId = R.drawable.ic_fab_shuffle;
         mSongsAdapter = new AudioBrowserAdapter(MediaLibraryItem.TYPE_MEDIA, this, true);
         mArtistsAdapter = new AudioBrowserAdapter(MediaLibraryItem.TYPE_ARTIST, this, true);
         mAlbumsAdapter = new AudioBrowserAdapter(MediaLibraryItem.TYPE_ALBUM, this, true);
         mGenresAdapter = new AudioBrowserAdapter(MediaLibraryItem.TYPE_GENRE, this, true);
         mPlaylistAdapter = new AudioBrowserAdapter(MediaLibraryItem.TYPE_PLAYLIST, this, true);
         mAdapters = new AudioBrowserAdapter[]{mArtistsAdapter, mAlbumsAdapter, mSongsAdapter, mGenresAdapter, mPlaylistAdapter};
+
+        //:ace
+        if (savedInstanceState != null) {
+            setCategory(savedInstanceState.getInt(KEY_CATEGORY));
+        }
+        ///ace
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //:ace
+        Bundle args = getArguments();
+        if(args != null) {
+            mCategory = args.getInt("category");
+        }
+        else {
+            mCategory = -1;
+        }
+        Logger.v(TAG, "onCreateView: category=" + mCategory);
+        ///ace
+
         return inflater.inflate(R.layout.audio_browser, container, false);
     }
 
@@ -142,7 +168,12 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
         };
         mViewPager.setOffscreenPageLimit(MODE_TOTAL - 1);
         mViewPager.setAdapter(new AudioPagerAdapter(mLists, titles));
-        mViewPager.setCurrentItem(VLCApplication.getSettings().getInt(Constants.KEY_AUDIO_CURRENT_TAB, 0));
+        if(mCategory == MediaWrapper.CATEGORY_P2P_AUDIO) {
+            mViewPager.setCurrentItem(MODE_SONG);
+        }
+        else {
+            mViewPager.setCurrentItem(VLCApplication.getSettings().getInt(Constants.KEY_AUDIO_CURRENT_TAB, 0));
+        }
         final RecyclerView.RecycledViewPool rvp = new RecyclerView.RecycledViewPool();
         for (int i = 0; i< MODE_TOTAL; ++i) {
             final LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -167,7 +198,6 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
             for (View rv : mLists)
                 registerForContextMenu(rv);
             mViewPager.addOnPageChangeListener(this);
-            mFabPlay.setImageResource(R.drawable.ic_fab_shuffle);
             setFabPlayShuffleAllVisibility();
         } else {
             mMediaLibrary.removeMediaUpdatedCb();
@@ -346,18 +376,21 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
     }
 
     @Override
-    public void onFabPlayClick(View view) {
-        final List<MediaWrapper> list = ((List<MediaWrapper>)(List<?>) mSongsAdapter.getMediaItems());
-        int count = list.size();
-        if (count > 0) {
-            Random rand = new Random();
-            int randomSong = rand.nextInt(count);
-            if (mService != null) {
-                mService.load(list, randomSong);
-                if (!mService.isShuffling())
-                    mService.shuffle();
+    public boolean onFabPlayClick(View view) {
+        if(!super.onFabPlayClick(view)) {
+            final List<MediaWrapper> list = ((List<MediaWrapper>) (List<?>) mSongsAdapter.getMediaItems());
+            int count = list.size();
+            if (count > 0) {
+                Random rand = new Random();
+                int randomSong = rand.nextInt(count);
+                if (mService != null) {
+                    mService.load(list, randomSong);
+                    if (!mService.isShuffling())
+                        mService.shuffle();
+                }
             }
         }
+        return true;
     }
 
     @Override
@@ -588,16 +621,42 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
     @MainThread
     private void updateLists() {
         mTabLayout.setVisibility(View.VISIBLE);
-        mHandler.sendEmptyMessageDelayed(SET_REFRESHING, 300);
         mHandler.removeMessages(UPDATE_LIST);
-        updateArtists();
-        updateAlbums();
-        updateSongs();
-        updateGenres();
-        updatePlaylists();
+
+        boolean setRefreshing = false;
+        final int currentTabId = mViewPager.getCurrentItem();
+
+        if(updateArtists() && currentTabId == MODE_ARTIST)
+            setRefreshing = true;
+
+        if(updateAlbums() && currentTabId == MODE_ALBUM)
+            setRefreshing = true;
+
+        if(updateSongs() && currentTabId == MODE_SONG)
+            setRefreshing = true;
+
+        if(updateGenres() && currentTabId == MODE_GENRE)
+            setRefreshing = true;
+
+        if(updatePlaylists() && currentTabId == MODE_PLAYLIST)
+            setRefreshing = true;
+
+        if(setRefreshing) {
+            mHandler.sendEmptyMessageDelayed(SET_REFRESHING, 300);
+        }
+        else {
+            mHandler.sendEmptyMessage(UNSET_REFRESHING);
+        }
     }
 
-    public void updateArtists() {
+    public boolean updateArtists() {
+        //:ace
+        if(mCategory == MediaWrapper.CATEGORY_P2P_AUDIO) {
+            // p2p items currently have no metadata
+            return false;
+        }
+        ///ace
+
         VLCApplication.runBackground(new Runnable() {
             @Override
             public void run() {
@@ -610,9 +669,18 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
                 });
             }
         });
+
+        return true;
     }
 
-    private void updateAlbums() {
+    private boolean updateAlbums() {
+        //:ace
+        if(mCategory == MediaWrapper.CATEGORY_P2P_AUDIO) {
+            // p2p items currently have no metadata
+            return false;
+        }
+        ///ace
+
         VLCApplication.runBackground(new Runnable() {
             @Override
             public void run() {
@@ -625,24 +693,37 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
                 });
             }
         });
+
+        return true;
     }
 
-    private void updateSongs() {
+    private boolean updateSongs() {
         VLCApplication.runBackground(new Runnable() {
             @Override
             public void run() {
-                final List<MediaLibraryItem> media = Util.arrayToMediaArrayList(mMediaLibrary.getAudio());
+                final MediaWrapper[] media = (mCategory == MediaWrapper.CATEGORY_P2P_AUDIO)
+                        ? mMediaLibrary.getP2PAudio()
+                        : mMediaLibrary.getRegularAudio();
                 VLCApplication.runOnMainThread(new Runnable() {
                     @Override
                     public void run() {
-                        mSongsAdapter.update(media);
+                        mSongsAdapter.update(Arrays.asList(media));
                     }
                 });
             }
         });
+
+        return true;
     }
 
-    private void updateGenres() {
+    private boolean updateGenres() {
+        //:ace
+        if(mCategory == MediaWrapper.CATEGORY_P2P_AUDIO) {
+            // p2p items currently have no metadata
+            return false;
+        }
+        ///ace
+
         VLCApplication.runBackground(new Runnable() {
             @Override
             public void run() {
@@ -655,9 +736,11 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
                 });
             }
         });
+
+        return true;
     }
 
-    private void updatePlaylists() {
+    private boolean updatePlaylists() {
         VLCApplication.runBackground(new Runnable() {
             @Override
             public void run() {
@@ -670,6 +753,8 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
                 });
             }
         });
+
+        return true;
     }
 
     protected boolean playlistModeSelected() {
@@ -706,4 +791,14 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
     public int sortDirection(int sortby) {
         return getCurrentAdapter().sortDirection(sortby);
     }
+
+    //:ace
+    public void setCategory(int category) {
+        Logger.v(TAG, "setCategory: category=" + category);
+        mCategory = category;
+        if(mCategory == MediaWrapper.CATEGORY_P2P_AUDIO) {
+            mViewPager.setCurrentItem(MODE_SONG);
+        }
+    }
+    ///ace
 }

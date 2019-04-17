@@ -5,23 +5,16 @@
     android:layout_height="fill_parent"
     android:layout_alignParentTop="true"
     android:background="@color/transparent"
+    android:gravity="right"
     android:paddingLeft="5dp"
     android:paddingRight="5dp" >
-
-    <TextView
-        android:id="@+id/player_overlay_title"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/player_overlay_battery"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/player_action_bar_icon_gap"
+        android:layout_marginEnd="@dimen/player_action_bar_icon_gap"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:gravity="center"
@@ -39,11 +32,43 @@
         android:id="@+id/playlist_toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/player_action_bar_icon_gap"
+        android:layout_marginEnd="@dimen/player_action_bar_icon_gap"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_playlist_circle"
+        android:src="@drawable/rci_featured_play_list_selector"
         android:focusable="true"
         android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/pip_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/player_action_bar_icon_gap"
+        android:layout_marginEnd="@dimen/player_action_bar_icon_gap"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/rci_picture_in_picture_alt_selector"
+        android:focusable="true"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/switch_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/player_action_bar_icon_gap"
+        android:layout_marginEnd="@dimen/player_action_bar_icon_gap"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/rci_acecast_selector"
+        android:focusable="true"/>
+
+    <ImageView
+        android:id="@+id/player_overlay_adv_function"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/player_action_bar_icon_gap"
+        android:layout_marginEnd="@dimen/player_action_bar_icon_gap"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/rci_more_vert_selector"
+        android:focusable="true"/>
 
     <ImageView
         android:id="@+id/player_overlay_navmenu"

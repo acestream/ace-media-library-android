@@ -100,7 +100,6 @@
     <!-- Preferences -->
     <string name="preferences">পছন্দ</string>
     <string name="automatic">স্বয়ংক্রিয়</string>
-    <string name="enable_brightness_gesture">উজ্জ্বলতা অঙ্গভঙ্গি সক্ষম করুন</string>
     <string name="enable_headset_detection">হেডসেট সনাক্ত করুন</string>
     <string name="enable_time_stretching_audio">সময় প্রসারিত করছে অডিও সক্ষম করুন</string>
     <string name="advanced_prefs_category">নিশুতি</string>

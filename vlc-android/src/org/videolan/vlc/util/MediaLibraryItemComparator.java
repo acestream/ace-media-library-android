@@ -101,7 +101,7 @@ public class MediaLibraryItemComparator implements Comparator<MediaLibraryItem> 
                 if (item1.getItemType() == MediaLibraryItem.TYPE_ALBUM) {
                     compare = ((Album)item1).getDuration() - (((Album)item2).getDuration());
                 } else if (item1.getItemType() == MediaLibraryItem.TYPE_MEDIA) {
-                    compare = ((Long) ((MediaWrapper)item1).getLength()).compareTo(((MediaWrapper)item2).getLength());
+                    compare = ((Long) ((MediaWrapper)item2).getComparableLength()).compareTo(((MediaWrapper)item1).getComparableLength());
                 }
                 break;
             case SORT_BY_DATE:
@@ -113,7 +113,7 @@ public class MediaLibraryItemComparator implements Comparator<MediaLibraryItem> 
                         int date2 = (((MediaWrapper) item2).getDate() == null) ? 0 : Integer.valueOf(((MediaWrapper) item2).getDate());
                         compare = date1 - date2;
                     } else if (adapterType == ADAPTER_FILE || adapterType == ADAPTER_VIDEO)
-                        compare = ((Long) ((MediaWrapper)item1).getLastModified()).compareTo(((MediaWrapper)item2).getLastModified());
+                        compare = ((Long) ((MediaWrapper)item2).getLastModified()).compareTo(((MediaWrapper)item1).getLastModified());
                 }
                 break;
             case SORT_BY_NUMBER:

@@ -21,18 +21,17 @@
 package org.videolan.vlc.gui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import org.videolan.libvlc.util.AndroidUtil;
-import org.videolan.vlc.BuildConfig;
 import org.videolan.vlc.R;
 import org.videolan.vlc.VLCApplication;
 import org.videolan.vlc.gui.audio.AudioPagerAdapter;
@@ -43,8 +42,10 @@ public class AboutFragment extends Fragment {
     public final static String TAG = "VLC/AboutActivity";
 
     public final static int MODE_ABOUT = 0;
-    public final static int MODE_LICENCE = 1;
-    public final static int MODE_TOTAL = 2; // Number of audio browser modes
+    public final static int MODE_VLC_LICENCE = 1;
+    public final static int MODE_LICENCE_AGREEMENT = 1;
+    public final static int MODE_PRIVACY_POLICY = 1;
+    public final static int MODE_TOTAL = 4; // Number of tabs
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
@@ -58,26 +59,40 @@ public class AboutFragment extends Fragment {
     public void onViewCreated(final View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         if (getActivity() instanceof AppCompatActivity)
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("VLC " + BuildConfig.VERSION_NAME);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.app_name));
         //Fix android 7 Locale problem with webView
         //https://stackoverflow.com/questions/40398528/android-webview-locale-changes-abruptly-on-android-n
         if (AndroidUtil.isNougatOrLater)
             VLCApplication.setLocale();
 
         final View aboutMain = v.findViewById(R.id.about_main);
-        final WebView webView = v.findViewById(R.id.webview);
+        final WebView vlcLicenseWebView = v.findViewById(R.id.vlc_license_webview);
+        final WebView licenseAgreementWebView = v.findViewById(R.id.license_agreement_webview);
+        final WebView privacyPolicyWebView = v.findViewById(R.id.privacy_policy_webview);
         final String revision = getString(R.string.build_revision);
 
-
-
-        View[] lists = new View[]{aboutMain, webView};
-        String[] titles = new String[] {getString(R.string.about), getString(R.string.licence)};
+        View[] lists = new View[]{
+                aboutMain,
+                vlcLicenseWebView,
+                licenseAgreementWebView,
+                privacyPolicyWebView,
+        };
+        String[] titles = new String[] {
+                getString(R.string.about),
+                getString(R.string.licence),
+                getString(R.string.user_agreement),
+                getString(R.string.privacy_policy),
+        };
         mViewPager = v.findViewById(R.id.pager);
         mViewPager.setOffscreenPageLimit(MODE_TOTAL-1);
         mViewPager.setAdapter(new AudioPagerAdapter(lists, titles));
 
         mTabLayout = v.findViewById(R.id.sliding_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
+
+        licenseAgreementWebView.loadUrl("http://acestream.org/about/license");
+        privacyPolicyWebView.loadUrl("http://acestream.org/about/privacy-policy");
+
         VLCApplication.runBackground(new Runnable() {
             @Override
             public void run() {
@@ -86,7 +101,12 @@ public class AboutFragment extends Fragment {
                     @Override
                     public void run() {
                         UiTools.fillAboutView(v);
-                        webView.loadData(asset, "text/html", "UTF8");
+                        vlcLicenseWebView.loadDataWithBaseURL(
+                                null,
+                                asset,
+                                "text/html",
+                                "UTF8",
+                                null);
                     }
                 });
             }

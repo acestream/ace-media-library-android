@@ -22,11 +22,11 @@
  */
 package org.videolan.vlc.gui.browser;
 
-import android.databinding.ViewDataBinding;
+import androidx.databinding.ViewDataBinding;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -376,7 +376,7 @@ public class BaseBrowserAdapter extends SortableAdapter<MediaLibraryItem, BaseBr
         mMediaCount = 0;
         for (MediaLibraryItem item : list) {
             if (item.getItemType() == MediaLibraryItem.TYPE_MEDIA
-                    && (((MediaWrapper)item).getType() == MediaWrapper.TYPE_AUDIO|| (AndroidUtil.isHoneycombOrLater && ((MediaWrapper)item).getType() == MediaWrapper.TYPE_VIDEO)))
+                    && (((MediaWrapper)item).getType() == MediaWrapper.TYPE_AUDIO|| ((MediaWrapper)item).getType() == MediaWrapper.TYPE_VIDEO))
                 ++mMediaCount;
         }
         return (List<MediaLibraryItem>) list;

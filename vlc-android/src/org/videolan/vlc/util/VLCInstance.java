@@ -24,8 +24,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.text.TextUtils;
 import android.util.Log;
 
+import org.videolan.vlc.BuildConfig;
 import org.videolan.libvlc.LibVLC;
 import org.videolan.libvlc.util.VLCUtil;
 import org.videolan.vlc.VLCApplication;
@@ -33,9 +35,10 @@ import org.videolan.vlc.VLCCrashHandler;
 import org.videolan.vlc.gui.CompatErrorActivity;
 
 public class VLCInstance {
-    public final static String TAG = "VLC/UiTools/VLCInstance";
+    public final static String TAG = "AceStream/VLC/I";
 
     private static LibVLC sLibVLC = null;
+    private static String sUserAgent = null;
 
     private static Runnable sCopyLua = new Runnable() {
         @Override
@@ -47,9 +50,23 @@ public class VLCInstance {
         }
     };
 
+    public synchronized static void setUserAgent(String userAgent) {
+        if(BuildConfig.DEBUG) {
+            Log.v(TAG, "set user agent: " + userAgent);
+        }
+        sUserAgent = userAgent;
+        if(sLibVLC != null) {
+            sLibVLC.setUserAgent(sUserAgent, sUserAgent);
+        }
+    }
+
     /** A set of utility functions for the VLC application */
-    public synchronized static LibVLC get() throws IllegalStateException {
-        if (sLibVLC == null) {
+    public synchronized static LibVLC get() {
+        return get(true);
+    }
+
+    public synchronized static LibVLC get(boolean autoInit) {
+        if (sLibVLC == null && autoInit) {
             Thread.setDefaultUncaughtExceptionHandler(new VLCCrashHandler());
 
             final Context context = VLCApplication.getAppContext();
@@ -60,15 +77,50 @@ public class VLCInstance {
 
             // TODO change LibVLC signature to accept a List instead of an ArrayList
             sLibVLC = new LibVLC(context, VLCOptions.getLibOptions());
+
+            if(BuildConfig.DEBUG) {
+                Log.v(TAG, "init: ua=" + sUserAgent);
+            }
+            if(sUserAgent != null) {
+                sLibVLC.setUserAgent(sUserAgent, sUserAgent);
+            }
+
             VLCApplication.runBackground(sCopyLua);
         }
         return sLibVLC;
     }
 
-    public static synchronized void restart() throws IllegalStateException {
+    public static synchronized void restart() {
+        restart(true);
+    }
+
+    public static synchronized void restart(boolean force) {
+        Log.v(TAG, "restart");
         if (sLibVLC != null) {
             sLibVLC.release();
-            sLibVLC = new LibVLC(VLCApplication.getAppContext(), VLCOptions.getLibOptions());
+            sLibVLC = null;
+        }
+        if(force) {
+            // init new instance
+            get();
+        }
+    }
+
+    public static synchronized void destroy() {
+        Log.v(TAG, "destroy");
+        if (sLibVLC != null) {
+            sLibVLC.release();
+            sLibVLC = null;
+            sUserAgent = null;
+        }
+    }
+
+    public static synchronized void setDeinterlace(String mode, boolean forceRestart) {
+        String curretMode = VLCOptions.getDeinterlaceMode(VLCApplication.getAppContext());
+        if(!TextUtils.equals(mode, curretMode)) {
+            Log.d(TAG, "setDeinterlace: mode changed: " + curretMode + "->" + mode);
+            VLCOptions.setDeinterlaceMode(VLCApplication.getAppContext(), mode);
+            restart(forceRestart);
         }
     }
 

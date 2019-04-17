@@ -35,12 +35,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.vlc.R;
@@ -74,8 +74,6 @@ public class Permissions {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public static boolean canReadStorage(Context context) {
-        if (!AndroidUtil.isICSOrLater)
-            return context.getExternalFilesDir(null) != null;
         return !AndroidUtil.isMarshMallowOrLater || ContextCompat.checkSelfPermission(context,
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
@@ -85,8 +83,7 @@ public class Permissions {
     }
 
     private static boolean canWriteStorage(Context context) {
-        return ContextCompat.checkSelfPermission(context,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        return !AndroidUtil.isMarshMallowOrLater || ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
     public static boolean checkReadStoragePermission(FragmentActivity activity, boolean exit) {

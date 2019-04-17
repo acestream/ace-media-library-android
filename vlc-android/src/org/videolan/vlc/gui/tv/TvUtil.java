@@ -29,11 +29,11 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v17.leanback.app.BackgroundManager;
-import android.support.v17.leanback.widget.Row;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.util.LruCache;
+import androidx.annotation.RequiresApi;
+import androidx.leanback.app.BackgroundManager;
+import androidx.leanback.widget.Row;
+import androidx.core.content.ContextCompat;
+import androidx.collection.LruCache;
 import android.text.TextUtils;
 
 import org.videolan.medialibrary.media.MediaLibraryItem;
@@ -95,8 +95,9 @@ public class TvUtil {
                 activity.startActivity(new Intent(activity, DialogActivity.class).setAction(DialogActivity.KEY_STREAM)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             } else {
+                long category = ((CardPresenter.SimpleCard) item).getId();
                 Intent intent = new Intent(activity, VerticalGridActivity.class);
-                intent.putExtra(MainTvActivity.BROWSER_TYPE, ((CardPresenter.SimpleCard) item).getId());
+                intent.putExtra(MainTvActivity.BROWSER_TYPE, category);
                 intent.setData(((CardPresenter.SimpleCard) item).getUri());
                 activity.startActivity(intent);
             }
@@ -106,7 +107,15 @@ public class TvUtil {
     public static void showMediaDetail(Context activity, MediaWrapper mediaWrapper) {
         Intent intent = new Intent(activity, DetailsActivity.class);
         intent.putExtra("media", mediaWrapper);
-        intent.putExtra("item", new MediaItemDetails(mediaWrapper.getTitle(), mediaWrapper.getArtist(), mediaWrapper.getAlbum(), mediaWrapper.getLocation(), mediaWrapper.getArtworkURL()));
+
+        String path;
+        if(mediaWrapper.isP2PItem()) {
+            path = mediaWrapper.getMetaString(MediaWrapper.META_TRANSPORT_FILE_PATH);
+        }
+        else {
+            path = mediaWrapper.getLocation();
+        }
+        intent.putExtra("item", new MediaItemDetails(mediaWrapper.getTitle(), mediaWrapper.getArtist(), mediaWrapper.getAlbum(), path, mediaWrapper.getArtworkURL()));
         activity.startActivity(intent);
     }
 

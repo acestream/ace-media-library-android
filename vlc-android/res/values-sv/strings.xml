@@ -19,10 +19,6 @@
     <string name="sortby_number_desc">Antal spår (fallande)</string>
     <string name="searchable_hint">Sök…</string>
     <string name="history">Historik</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d resultat hittades</item>
-        <item quantity="other">%d resultat hittades</item>
-    </plurals>
     <string name="play">Spela upp</string>
     <string name="playback">Uppspelning</string>
     <string name="playback_controls">Uppspelningskontroller</string>
@@ -71,14 +67,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 undermapp</item>
         <item quantity="other">%d undermappar</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 mediafil</item>
-        <item quantity="other">%d mediafiler</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 video</item>
-        <item quantity="other">%d videor</item>
     </plurals>
     <string name="internal_memory">Internt minne</string>
     <string name="parent_folder">Upp till överordnad mapp</string>
@@ -140,10 +128,6 @@
     <string name="navmenu">navigeringsmeny</string>
     <string name="advanced">avancerade alternativ</string>
     <string name="audio_boost_warning">Dra upp för att gå över 100%</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 kanal\n</item>
-        <item quantity="other">%1$d kanaler\n</item>
-    </plurals>
     <string name="track_samplerate_info">Samplingsfrekvens: %1$d Hz\n</string>
     <string name="track_resolution_info">Upplösning: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Bildfrekvens: %1$.3f\n</string>
@@ -179,7 +163,7 @@
     <string name="error_not_compatible">Tyvärr, din enhet stödjer för tillfället inte denna version av VLC för Android™.</string>
     <string name="error_problem">Tyvärr, VLC för Andriod fick ett problem med inläsning och blev tvungen att stängas ned.</string>
     <string name="error_message_is">Felmeddelandet är (nämn detta när du felsöker):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Uppspelningsfel</string>
     <string name="encountered_error_message">VLC stötte på ett fel med denna mediafil.\nVar god försök att uppdatera mediebiblioteket.</string>
     <string name="invalid_location">Platsen %1$s kan inte spelas upp.</string>
@@ -442,14 +426,14 @@
     <!--Widget-->
     <string name="widget_name_w">VLC - ljus widget</string>
     <string name="widget_name_b">VLC - mörk widget</string>
-    <string name="allow_storage_access_title">Tillåt VLC att få åtkomst till video- och ljudfiler</string>
-    <string name="allow_storage_access_description">Du måste bevilja detta tillstånd för att VLC ska kunna komma åt mediafilerna på denna enhet.</string>
-    <string name="allow_settings_access_ringtone_title">Tillåt VLC att ändra ringsignalen</string>
-    <string name="allow_settings_access_ringtone_description">Du måste bevilja detta tillstånd för att VLC ska kunna ändra din ringsignal till denna låt.</string>
-    <string name="allow_settings_access_brightness_title">Tillåt VLC att ändra ljusstyrkeläge</string>
-    <string name="allow_settings_access_brightness_description">Du måste bevilja detta tillstånd för att VLC ska kunna ändra ditt ljusstyrkeläge.</string>
-    <string name="allow_draw_overlays_title">Tillåt VLC att visa spelaren ovanpå andra appar</string>
-    <string name="allow_sdraw_overlays_description">Du måste bevilja detta tillstånd för att VLC ska kunna visa din video i ett popupp över andra applikationer.</string>
+    <string name="allow_storage_access_title">Tillåt Ace Stream att få åtkomst till video- och ljudfiler</string>
+    <string name="allow_storage_access_description">Du måste bevilja detta tillstånd för att Ace Stream ska kunna komma åt mediafilerna på denna enhet.</string>
+    <string name="allow_settings_access_ringtone_title">Tillåt Ace Stream att ändra ringsignalen</string>
+    <string name="allow_settings_access_ringtone_description">Du måste bevilja detta tillstånd för att Ace Stream ska kunna ändra din ringsignal till denna låt.</string>
+    <string name="allow_settings_access_brightness_title">Tillåt Ace Stream att ändra ljusstyrkeläge</string>
+    <string name="allow_settings_access_brightness_description">Du måste bevilja detta tillstånd för att Ace Stream ska kunna ändra ditt ljusstyrkeläge.</string>
+    <string name="allow_draw_overlays_title">Tillåt Ace Stream att visa spelaren ovanpå andra appar</string>
+    <string name="allow_sdraw_overlays_description">Du måste bevilja detta tillstånd för att Ace Stream ska kunna visa din video i ett popupp över andra applikationer.</string>
     <string name="permission_ask_again">Bevilja tillstånd</string>
     <string name="exit_app">Avsluta VLC</string>
     <string name="exit_app_msg">Är du säker på att du vill avsluta VLC?</string>
@@ -532,4 +516,34 @@
     <string name="sdcard_permission_dialog_title">Du måste bevilja VLC skrivåtkomst till ditt SD-kort</string>
     <string name="sdcard_permission_dialog_message">VLC kan inte radera denna fil utan behörighet för skrivåtkomst.\nGå till ditt SD-kort och tryck på \"Välj\".\nDu kanske måste trycka på \"Visa SD-kort\" först i menyn längst upp till höger</string>
     <string name="dialog_sd_wizard">Visa mig</string>
+    <string name="torrent_files">Torrent filer</string>
+    <string name="select_language">Välj språk</string>
+    <string name="enable_headset_actions_title" source="google_translate">Snabbkommandon på fjärrkontrollen</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Dubbelklicka på \'Play \' för att hoppa till nästa och långa tryck på den för att hoppa över till föregående spår</string>
+    <string name="main_prefs_category" source="google_translate">Huvudinställningar</string>
+    <string name="dump_media_db" source="google_translate">Dump media databas</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopiera databas till intern lagringsrots</string>
+    <string name="streams" source="google_translate">strömmar</string>
+    <string name="renderers_disconnect" source="google_translate">Koppla från</string>
+    <string name="audio_digital_failed" source="google_translate">Misslyckades med att ändra Audio Digital Output-tillstånd</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Audio Digital Output aktiverat</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio Digital Output inaktiverad</string>
+    <string name="live_streams" source="google_translate">Levande strömmar</string>
+    <string name="all_live_streams" source="google_translate">Alla levande strömmar</string>
+    <string name="video_torrents" source="google_translate">Videokorrenter</string>
+    <string name="audio_torrents" source="google_translate">Ljud torrenter</string>
+    <string name="all_torrents" source="google_translate">Alla torrenter</string>
+    <string name="main" source="google_translate">Huvudsaklig</string>
+    <string name="media_player" source="google_translate">Mediaspelare</string>
+    <string name="acestream_server" source="google_translate">Ace Stream-server (motor)</string>
+    <string name="media_player_settings" source="google_translate">Mediaspelarens inställningar</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream server (motor) inställningar</string>
+    <string name="sign_out" source="google_translate">Logga ut</string>
+    <string name="sign_in" source="google_translate">Logga in</string>
+    <string name="sign_in_acestream" source="google_translate">Logga in med Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Logga in med Google</string>
+    <string name="video_files" source="google_translate">Videofiler</string>
+    <string name="audio_files" source="google_translate">Ljudfiler</string>
+    <string name="retry" source="google_translate">Försök igen</string>
+    <string name="failed_to_load_web_page" source="google_translate">Det gick inte att ladda webbsidan</string>
 </resources>

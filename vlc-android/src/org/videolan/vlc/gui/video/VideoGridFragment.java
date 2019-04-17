@@ -22,7 +22,9 @@ package org.videolan.vlc.gui.video;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -32,11 +34,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.support.annotation.MainThread;
-import android.support.annotation.Nullable;
-import android.support.v7.view.ActionMode;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.MainThread;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ActionMode;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -47,7 +50,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 
-import org.videolan.libvlc.util.AndroidUtil;
+import org.acestream.sdk.AceStream;
+import org.acestream.sdk.AceStreamManager;
+import org.acestream.sdk.utils.Logger;
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.medialibrary.interfaces.MediaAddedCb;
 import org.videolan.medialibrary.interfaces.MediaUpdatedCb;
@@ -68,10 +73,12 @@ import org.videolan.vlc.interfaces.Filterable;
 import org.videolan.vlc.interfaces.IEventsHandler;
 import org.videolan.vlc.media.MediaGroup;
 import org.videolan.vlc.media.MediaUtils;
+import org.videolan.vlc.util.AceStreamUtils;
 import org.videolan.vlc.util.Constants;
 import org.videolan.vlc.util.Util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class VideoGridFragment extends SortableFragment<VideoListAdapter> implements MediaUpdatedCb, SwipeRefreshLayout.OnRefreshListener, MediaAddedCb, Filterable, IEventsHandler {
@@ -79,10 +86,17 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
     private final static String TAG = "VLC/VideoListFragment";
 
     private final static String KEY_GROUP = "key_group";
+    private final static String KEY_GROUP_PARENT_ID = "key_group_parent_id";
+    private final static String KEY_CATEGORY = "key_category";
+
+    // hardcoded debug flag
+    private final static boolean DEBUG_LIST = false;
 
     private AutoFitRecyclerView mGridView;
     private View mViewNomedia;
     private String mGroup;
+    private long mGroupParentId = 0;
+    private int mCategory = -1;
     private View mSearchButtonView;
     private DividerItemDecoration mDividerItemDecoration;
 
@@ -93,9 +107,14 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAdapter = new VideoListAdapter(this);
+        mFabPlayImageResourceId = R.drawable.ic_fab_play;
+        mCanShowBonusAds = true;
 
-        if (savedInstanceState != null)
+        if (savedInstanceState != null) {
             setGroup(savedInstanceState.getString(KEY_GROUP));
+            setGroupParentId(savedInstanceState.getLong(KEY_GROUP_PARENT_ID));
+            setCategory(savedInstanceState.getInt(KEY_CATEGORY));
+        }
     }
 
 
@@ -122,6 +141,14 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        Bundle args = getArguments();
+        if(mCategory == -1) {
+            if (args != null) {
+                mCategory = args.getInt("category");
+            }
+        }
+        Logger.v(TAG, "onCreateView: category=" + mCategory);
+
         return inflater.inflate(R.layout.video_grid, container, false);
     }
 
@@ -148,6 +175,11 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
         mGridView.setAdapter(mAdapter);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
     private boolean restart = false;
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -160,9 +192,9 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
             registerForContextMenu(mGridView);
             setSearchVisibility(false);
             updateViewMode();
-            mFabPlay.setImageResource(R.drawable.ic_fab_play);
-            setFabPlayVisibility(true);
-            if (restart && !mMediaLibrary.isWorking()) updateList();
+            if (restart && !mMediaLibrary.isWorking()) {
+                updateListDelayed();
+            }
         } else {
             mMediaLibrary.removeMediaUpdatedCb();
             mMediaLibrary.removeMediaAddedCb();
@@ -175,6 +207,8 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(KEY_GROUP, mGroup);
+        outState.putLong(KEY_GROUP_PARENT_ID, mGroupParentId);
+        outState.putInt(KEY_CATEGORY, mCategory);
         VLCApplication.storeData("list"+getTitle(), mAdapter.getAll());
     }
 
@@ -184,12 +218,22 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
             mMediaLibrary.setMediaUpdatedCb(this, Medialibrary.FLAG_MEDIA_UPDATED_VIDEO);
             mMediaLibrary.setMediaAddedCb(this, Medialibrary.FLAG_MEDIA_ADDED_VIDEO);
         }
-        if (!isHidden())
-            mHandler.sendEmptyMessage(UPDATE_LIST);
+        if (!isHidden()) {
+            updateListDelayed();
+        }
     }
 
     public String getTitle() {
-        return mGroup == null ? getString(R.string.video) : mGroup + "\u2026";
+        if(mGroup != null)
+            return mGroup + "\u2026";
+        else if (mCategory == MediaWrapper.CATEGORY_P2P_VIDEO)
+            return getString(R.string.torrent_files);
+        else if (mCategory == MediaWrapper.CATEGORY_P2P_AUDIO)
+            return getString(R.string.torrent_files);
+        else if (mCategory == MediaWrapper.CATEGORY_P2P_STREAM)
+            return getString(R.string.live_streams);
+        else
+            return getString(R.string.video);
     }
 
     private void updateViewMode() {
@@ -225,7 +269,17 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
         if (activity instanceof PlaybackService.Callback)
             mService.removeCallback((PlaybackService.Callback) activity);
         media.removeFlags(MediaWrapper.MEDIA_FORCE_AUDIO);
-        VideoPlayerActivity.start(getActivity(), media.getUri(), fromStart);
+        if(AceStreamUtils.shouldStartAceStreamPlayer(media)) {
+            Bundle extras = null;
+            if(fromStart) {
+                extras = new Bundle(1);
+                extras.putBoolean("playFromStart", true);
+            }
+            mService.load(media, true, false, extras);
+        }
+        else {
+            VideoPlayerActivity.start(getActivity(), media.getUri(), media.getTitle(), fromStart);
+        }
     }
 
     protected void playAudio(MediaWrapper media) {
@@ -269,17 +323,14 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
             case R.id.video_download_subtitles:
                 MediaUtils.getSubs(getActivity(), media);
                 return true;
+            case R.id.video_list_select_player:
+                MediaUtils.showPlayerSelector(getActivity(), media);
+                return true;
         }
         return false;
     }
 
     private void removeVideo(final MediaWrapper media) {
-        if (!checkWritePermission(media, new Runnable() {
-            @Override
-            public void run() {
-                removeVideo(media);
-            }
-        })) return;
         final int position = mAdapter.remove(media);
         final View view = getView();
         if (position != -1 && view != null) {
@@ -307,26 +358,25 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
         if (media == null) return;
         final MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(media instanceof MediaGroup ? R.menu.video_group_contextual : R.menu.video_list, menu);
-        if (media instanceof MediaGroup) {
-            if (!AndroidUtil.isHoneycombOrLater) {
-                menu.findItem(R.id.video_list_append).setVisible(false);
-                menu.findItem(R.id.video_group_play).setVisible(false);
-            }
-        } else setContextMenuItems(menu, media);
+        if (!(media instanceof MediaGroup)) {
+            setContextMenuItems(menu, media);
+        }
     }
 
     private void setContextMenuItems(Menu menu, MediaWrapper mediaWrapper) {
         menu.findItem(R.id.video_list_play_from_start).setVisible(mediaWrapper.getTime() > 0);
-        if (!AndroidUtil.isHoneycombOrLater) {
-            menu.findItem(R.id.video_list_play_all).setVisible(false);
-            menu.findItem(R.id.video_list_append).setVisible(false);
+        if(!mediaWrapper.isP2PItem()) {
+            menu.findItem(R.id.video_list_select_player).setVisible(false);
         }
     }
 
     @Override
-    public void onFabPlayClick(View view) {
-        List<MediaWrapper> playList = new ArrayList<>();
-        MediaUtils.openList(getActivity(), playList, mAdapter.getListWithPosition(playList, 0));
+    public boolean onFabPlayClick(View view) {
+        if(!super.onFabPlayClick(view)) {
+            List<MediaWrapper> playList = new ArrayList<>();
+            MediaUtils.openList(getActivity(), playList, mAdapter.getListWithPosition(playList, 0));
+        }
+        return true;
     }
 
     @Override
@@ -341,18 +391,47 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
 
     @MainThread
     public void updateList() {
-        mHandler.sendEmptyMessageDelayed(SET_REFRESHING, 300);
-        final Context ctx = getActivity();
+        // Show progress circle only on first update
+        if(mAdapter.getItemCount() == 0) {
+            mHandler.sendEmptyMessageDelayed(SET_REFRESHING, 300);
+        }
 
+        final Context ctx = getActivity();
         VLCApplication.runBackground(new Runnable() {
             @Override
             public void run() {
-                final MediaWrapper[] itemList = mMediaLibrary.getVideos();
+                final MediaWrapper[] itemList;
+                if(mGroupParentId != 0) {
+                    itemList = mMediaLibrary.findMediaByParent(mGroupParentId);
+                }
+                else if(mCategory == MediaWrapper.CATEGORY_P2P_VIDEO) {
+                    itemList = mMediaLibrary.getP2PVideos();
+                }
+                else if(mCategory == MediaWrapper.CATEGORY_P2P_STREAM) {
+                    itemList = mMediaLibrary.getP2PStreams();
+                }
+                else {
+                    itemList = mMediaLibrary.getRegularVideos();
+                }
+
+                if(DEBUG_LIST) {
+                    for (MediaWrapper item : itemList) {
+                        Logger.v(TAG, "updateList: " + item);
+                    }
+                }
+
                 final List<MediaWrapper> displayList = new ArrayList<>();
-                if (mGroup != null) {
+                if(mGroupParentId != 0) {
+                    // Items are already filtered so just add all of them.
+                    displayList.addAll(Arrays.asList(itemList));
+                }
+                else if (mGroup != null) {
+                    int groupOffset = mGroup.startsWith("the") ? 4 : 0;
+                    final String groupTitle = mGroup.substring(groupOffset);
+
                     for (MediaWrapper item : itemList) {
                         String title = item.getTitle().substring(item.getTitle().toLowerCase().startsWith("the") ? 4 : 0);
-                        if (mGroup == null || title.toLowerCase().startsWith(mGroup.toLowerCase()))
+                        if (title.toLowerCase().startsWith(groupTitle.toLowerCase()) || TextUtils.equals(mGroup, item.getMetaString(MediaWrapper.META_GROUP_NAME)))
                             displayList.add(item);
                     }
                 } else {
@@ -379,6 +458,15 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
         mGroup = prefix;
     }
 
+    public void setGroupParentId(long parentId) {
+        mGroupParentId = parentId;
+    }
+
+    public void setCategory(int category) {
+        Logger.v(TAG, "setCategory: category=" + category);
+        mCategory = category;
+    }
+
     @Override
     public void onRefresh() {
         getActivity().startService(new Intent(Constants.ACTION_RELOAD, null, getActivity(), MediaParsingService.class));
@@ -398,15 +486,23 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
 
     @Override
     protected void onParsingServiceStarted() {
-        mHandler.sendEmptyMessageDelayed(SET_REFRESHING, 300);
     }
 
     @Override
     protected void onParsingServiceFinished() {
         mMediaLibrary.removeMediaUpdatedCb();
         mMediaLibrary.removeMediaAddedCb();
+        if (!isHidden()) {
+            updateListDelayed();
+        }
+    }
+
+    //:ace
+    @Override
+    protected void onMedialibraryUpdated() {
         if (!isHidden()) mHandler.sendEmptyMessage(UPDATE_LIST);
     }
+    ///ace
 
     @Override
     public boolean enableSearchOption() {
@@ -443,8 +539,8 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
             return false;
         }
         menu.findItem(R.id.action_video_info).setVisible(count == 1);
-        menu.findItem(R.id.action_video_play).setVisible(AndroidUtil.isHoneycombOrLater || count == 1);
-        menu.findItem(R.id.action_video_append).setVisible(mService != null && mService.hasMedia() && AndroidUtil.isHoneycombOrLater);
+        menu.findItem(R.id.action_video_play).setVisible(true);
+        menu.findItem(R.id.action_video_append).setVisible(mService != null && mService.hasMedia());
         return true;
     }
 
@@ -533,9 +629,17 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
             return;
         }
         final Activity activity = getActivity();
+
         if (media instanceof MediaGroup) {
-            final String title = media.getTitle().substring(media.getTitle().toLowerCase().startsWith("the") ? 4 : 0);
-            ((MainActivity)activity).showSecondaryFragment(SecondaryActivity.VIDEO_GROUP_LIST, title);
+            String groupName = media.getGroupTitle();
+            if(TextUtils.isEmpty(groupName)) {
+                groupName = media.getTitle().substring(media.getTitle().toLowerCase().startsWith("the") ? 4 : 0);
+            }
+            ((MainActivity)activity).showSecondaryFragment(
+                    SecondaryActivity.VIDEO_GROUP_LIST,
+                    groupName,
+                    mCategory,
+                    media.getParentMediaId());
         } else {
             media.removeFlags(MediaWrapper.MEDIA_FORCE_AUDIO);
             final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(VLCApplication.getAppContext());
@@ -577,4 +681,11 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
         mAdapter.setSeenMediaMarkerVisible(PreferenceManager.getDefaultSharedPreferences(VLCApplication.getAppContext()).getBoolean("media_seen", true));
         mAdapter.notifyItemRangeChanged(0, mAdapter.getItemCount()-1, VideoListAdapter.UPDATE_SEEN);
     }
+
+    //:ace
+    private void updateListDelayed() {
+        mHandler.removeMessages(UPDATE_LIST);
+        mHandler.sendEmptyMessage(UPDATE_LIST);
+    }
+    ///ace
 }

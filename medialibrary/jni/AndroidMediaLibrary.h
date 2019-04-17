@@ -46,7 +46,9 @@ public:
     void reload( const std::string& entryPoint );
     void forceParserRetry();
     void forceRescan();
+    void reinit();
     bool increasePlayCount(int64_t mediaId);
+    bool deleteMedia(int64_t mediaId);
     /* History */
     std::vector<medialibrary::MediaPtr> lastMediaPlayed();
     bool addToHistory( const std::string& mrl, const std::string& title );
@@ -62,8 +64,10 @@ public:
     medialibrary::MediaPtr media(long id);
     medialibrary::MediaPtr media(const std::string& mrl);
     medialibrary::MediaPtr addMedia(const std::string& mrl);
-    std::vector<medialibrary::MediaPtr> videoFiles( medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false );
-    std::vector<medialibrary::MediaPtr> audioFiles( medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false );
+    medialibrary::MediaPtr addP2PMedia( int64_t parentMediaId, uint8_t type, const std::string& title, const std::string& mrl);
+    std::vector<medialibrary::MediaPtr> videoFiles( int is_p2p, int is_live, medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false );
+    std::vector<medialibrary::MediaPtr> transportFiles( int is_parsed, medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false );
+    std::vector<medialibrary::MediaPtr> audioFiles( int is_p2p, int is_live, medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false );
     std::vector<medialibrary::AlbumPtr> albums();
     medialibrary::AlbumPtr album(int64_t albumId);
     std::vector<medialibrary::ArtistPtr> artists(bool includeAll);
@@ -116,6 +120,14 @@ public:
     void onEntryPointRemoved( const std::string& entryPoint, bool success );
     void onParsingStatsUpdated( uint32_t percent);
     void onBackgroundTasksIdleChanged( bool isIdle );
+
+    //:ace
+    std::vector<medialibrary::MediaPtr> findMediaByInfohash( const std::string& infohash, int fileIndex, medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false );
+    std::vector<medialibrary::MediaPtr> findMediaByParent( int64_t parentId, medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false );
+    std::vector<medialibrary::MediaPtr> findDuplicatesByInfohash();
+    bool copyMetadata( int64_t sourceId, int64_t destId );
+    bool removeOrphanTransportFiles();
+    ///ace
 
 private:
     void jni_detach_thread(void *data);

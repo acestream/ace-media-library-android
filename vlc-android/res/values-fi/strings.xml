@@ -13,10 +13,6 @@
     <string name="sortby_date_desc">Päivämäärä (seloste)</string>
     <string name="searchable_hint">Etsi...</string>
     <string name="history">Historia</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d hakutulos</item>
-        <item quantity="other">%d hakutulosta</item>
-    </plurals>
     <string name="play">Toista</string>
     <string name="play_from_start">Toista alusta</string>
     <string name="play_as_audio">Toista äänenä</string>
@@ -55,14 +51,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 alihakemisto</item>
         <item quantity="other">%d alihakemistoa</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 mediatiedosto</item>
-        <item quantity="other">%d mediatiedostot</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 video</item>
-        <item quantity="other">%d videot</item>
     </plurals>
     <string name="internal_memory">Sisäinen muisti</string>
     <string name="parent_folder">Ylempään hakemistoon</string>
@@ -121,10 +109,6 @@
     <string name="brightness">Kirkkaus</string>
     <string name="navmenu">navigointivalikko</string>
     <string name="advanced">edistyneet asetukset</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 kanava\n</item>
-        <item quantity="other">%1$d kanavaa\n</item>
-    </plurals>
     <string name="track_samplerate_info">Näytteenottotaajuus: %1$d Hz\n</string>
     <string name="track_resolution_info">Resoluutio: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Ruudunpäivitysnopeus: %1$.3f\n</string>
@@ -351,12 +335,12 @@
     <!--Widget-->
     <string name="widget_name_w">VLC vaalea pienoisohjelma</string>
     <string name="widget_name_b">VLC tumma pienoisohjelma</string>
-    <string name="allow_storage_access_title">Salli VLC:lle pääsy video- ja äänitiedostoihin</string>
-    <string name="allow_storage_access_description">Sinun tarvitsee myöntää oikeudet VLC:lle siirtyä tämän laitteen mediatiedostoihin.</string>
-    <string name="allow_settings_access_ringtone_title">Salli VLC:n asettaa soittoääni</string>
-    <string name="allow_settings_access_ringtone_description">Sinun tarvitsee myöntää VLC:lle oikeudet asettaa tämä kappale soittoääneksi.</string>
-    <string name="allow_settings_access_brightness_title">Salli VLC:n muuttaa kirkkaustilaa</string>
-    <string name="allow_settings_access_brightness_description">Sinun tarvitsee myöntää VLC:lle oikeudet vaihtaa kirkkaustilaa.</string>
+    <string name="allow_storage_access_title">Salli Ace Stream:lle pääsy video- ja äänitiedostoihin</string>
+    <string name="allow_storage_access_description">Sinun tarvitsee myöntää oikeudet Ace Stream:lle siirtyä tämän laitteen mediatiedostoihin.</string>
+    <string name="allow_settings_access_ringtone_title">Salli Ace Stream:n asettaa soittoääni</string>
+    <string name="allow_settings_access_ringtone_description">Sinun tarvitsee myöntää Ace Stream:lle oikeudet asettaa tämä kappale soittoääneksi.</string>
+    <string name="allow_settings_access_brightness_title">Salli Ace Stream:n muuttaa kirkkaustilaa</string>
+    <string name="allow_settings_access_brightness_description">Sinun tarvitsee myöntää Ace Stream:lle oikeudet vaihtaa kirkkaustilaa.</string>
     <string name="permission_ask_again">Myönnä oikeudet</string>
     <string name="exit_app">Sulje VLC</string>
     <!--fast scroller-->
@@ -383,4 +367,173 @@
     <string name="listen">Kuuntele</string>
     <string name="subtitles_download_title">Tekstitysten lataus</string>
     <string name="connecting">Yhdistetään...</string>
+    <string name="torrent_files">Torrent tiedostojen</string>
+    <string name="select_language">Valitse kieli</string>
+    <string name="sortby_artist_name" source="google_translate">Taiteilijan nimi</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Taiteilijan nimi (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Albumin nimi</string>
+    <string name="sortby_album_name_desc" source="google_translate">Albumin nimi (desc)</string>
+    <string name="sortby_number" source="google_translate">Nb-raidat</string>
+    <string name="sortby_number_desc" source="google_translate">Nb-raidat (desc)</string>
+    <string name="playback" source="google_translate">Toisto</string>
+    <string name="playback_controls" source="google_translate">Toiston ohjaimet</string>
+    <string name="medialibrary_scan" source="google_translate">Mediakirjaston skannaus</string>
+    <string name="Medialibrary_progress" source="google_translate">Mediakirjaston skannauksen edistymispäivitykset</string>
+    <string name="video_app_switch_title" source="google_translate">Taustaa / PiP-tilaa</string>
+    <string name="video_app_switch_summary" source="google_translate">Valitse VLC-käyttäytyminen, kun vaihdat toiseen sovellukseen videon toiston aikana</string>
+    <string name="play_pip_title" source="google_translate">Toista videoita kuvassa -kuva-tilassa</string>
+    <string name="insert_next" source="google_translate">Lisää seuraava</string>
+    <string name="unknown_number" source="google_translate">Tuntematon määrä kappaleita</string>
+    <string name="tracks" source="google_translate">raidat</string>
+    <string name="nomedia" source="google_translate">Mitään mediatiedostoja ei löydy, siirrä joitakin tiedostoja laitteeseesi tai muokkaa asetuksiasi.</string>
+    <string name="surface_fit_screen" source="google_translate">Sovita näyttö</string>
+    <string name="server_servername_hint" source="google_translate">Palvelimen nimi, mukavuus</string>
+    <string name="search_no_result" source="google_translate">Mediaa ei löytynyt</string>
+    <string name="playback_history_summary" source="google_translate">Tallenna kaikki Media -osiossa toistetut tiedot</string>
+    <string name="daynight_title" source="google_translate">DayNight-tila</string>
+    <string name="daynight_summary" source="google_translate">Vaihda automaattisesti yötilaan sopivana ajankohtana</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">Asetukset, kun toissijaiset näytöt on kytketty (HDMI / Chromecast).</string>
+    <string name="video_prefs_category" source="google_translate">Video</string>
+    <string name="video_min_group_length_summary" source="google_translate">Videot ryhmitellään, jos niiden ensimmäiset kirjaimet ovat samat.</string>
+    <string name="video_min_group_length_short" source="google_translate">Lyhyt määrä kirjeitä (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Pitkä määrä kirjeitä (9)</string>
+    <string name="media_fast_seek" source="google_translate">Ota nopea hakutoiminto käyttöön</string>
+    <string name="media_seen" source="google_translate">Näytä näkyvä videomerkki</string>
+    <string name="media_seen_summary" source="google_translate">Merkitse video, kun näet sen loppuun asti</string>
+    <string name="force_play_all_summary" source="google_translate">Toista kaikki videot alkaen siitä, jonka olet napsauttanut</string>
+    <string name="force_play_all_title" source="google_translate">Videoiden soittolistan tila</string>
+    <string name="save_audiodelay_summary" source="google_translate">Tallenna yksittäinen ääniviive jokaiselle videolle</string>
+    <string name="save_audiodelay_title" source="google_translate">Tallenna äänen viive</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Kaksoisnapauta hakeaksesi</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Napauta näytön reunoja kaksoisnapauttamalla 10 sekuntia</string>
+    <string name="popup_keepscreen_title" source="google_translate">Pidä näyttö päällä PÄÄLLE-tilassa</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Pidä näyttö aina päällä, kun ponnahdusikkuna tulee näyttöön, vaikka video olisi pysäytetty.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Näytä piilotetut tiedostot</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Näytä piilotetut tiedostot selaimissa</string>
+    <string name="subtitles_prefs_category" source="google_translate">tekstitys</string>
+    <string name="subtitles_color_gray" source="google_translate">harmaa</string>
+    <string name="subtitles_bold_title" source="google_translate">Lihavoitu tekstitys</string>
+    <string name="subtitles_autoload_title" source="google_translate">Lataa tekstitykset automaattisesti</string>
+    <string name="audio_prefs_category" source="google_translate">Audio</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Aseta nykyinen mediakansi taulu-taustakuvaksi, kun se on käytettävissä</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Animoi nykyinen soittolistan automaattinen vieritys</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Animoi mediansiirron vieritys</string>
+    <string name="audio_save_repeat_title" source="google_translate">Tallenna toistotila</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Muista toistotila, kun asetat äänilistoja</string>
+    <string name="audio_boost_title" source="google_translate">Audio-boost</string>
+    <string name="headset_prefs_category" source="google_translate">kuulokkeet</string>
+    <string name="enable_headset_actions_title" source="google_translate">Kauko-ohjaimen pikavalinnat</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Siirry edelliseen kappaleeseen siirtymällä kaksoisnapsauttamalla Toista \ t</string>
+    <string name="audio_ducking_title" source="google_translate">Vähennä VLC-äänenvoimakkuutta ilmoituksissa</string>
+    <string name="audio_ducking_summary" source="google_translate">Auttaa kuulemaan ääni-ilmoituksia, navigointiohjeita tai avustajan puhumista</string>
+    <string name="casting_category" source="google_translate">Valu</string>
+    <string name="casting_passthrough_title" source="google_translate">Audio Passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">Anna television hallita äänenmuodostusta</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Tuloksen laatu</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Valitse muunnoksen laatu kauko-ohjaimessa</string>
+    <string name="casting_quality_high" source="google_translate">Korkea</string>
+    <string name="casting_quality_medium" source="google_translate">keskikokoinen</string>
+    <string name="casting_quality_low" source="google_translate">Matala</string>
+    <string name="casting_quality_lowcpu" source="google_translate">alin</string>
+    <string name="cast_performance_warning" source="google_translate">Tämän videon näyttäminen edellyttää muuntamista. Tämä muuntaminen voi käyttää kaikkia käytettävissä olevia tehoja ja voi nopeasti tyhjentää akun.</string>
+    <string name="artists_show_all_title" source="google_translate">Näytä kaikki artistit</string>
+    <string name="artists_show_all_summary" source="google_translate">Näytä kaikki artistit Taiteilijat-luettelossa, ei vain albumin artistit</string>
+    <string name="extensions_prefs_category" source="google_translate">laajennukset</string>
+    <string name="extensions_enable_category" source="google_translate">Valitut laajennukset käyttöön</string>
+    <string name="extensions_empty" source="google_translate">Laajennusta ei havaittu</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Aktivoida</string>
+    <string name="android_auto" source="google_translate">Android-auto</string>
+    <string name="controls_prefs_category" source="google_translate">ohjaimet</string>
+    <string name="main_prefs_category" source="google_translate">Tärkeimmät asetukset</string>
+    <string name="save_video_session" source="google_translate">Säästä nopeutta istunnon aikana</string>
+    <string name="save_video_always" source="google_translate">Säästä nopeutta istuntojen aikana</string>
+    <string name="dump_media_db" source="google_translate">Dump media -tietokanta</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopioi tietokanta sisäiseen tallennusjuureen</string>
+    <string name="clear_media_db_summary" source="google_translate">Tyhjennä tiedot Android VLC -tietojen avulla</string>
+    <string name="resume_playback_title" source="google_translate">Jatka toistoa puhelun jälkeen</string>
+    <string name="resume_playback_summary" source="google_translate">Pysy muuten taukotilassa</string>
+    <string name="network_caching_popup" source="google_translate">Tämän arvon on oltava välillä 0 - 6000 ms</string>
+    <string name="search_list_hint" source="google_translate">Etsi media nykyisestä luettelosta</string>
+    <string name="search_global" source="google_translate">Hae kaikista mediakirjastoista</string>
+    <string name="tv_ui_summary" source="google_translate">Vaihda käyttöliittymä televisioon mukautetuksi teeksi</string>
+    <string name="medialibrary" source="google_translate">Mediakirjasto</string>
+    <string name="medialibrary_directories" source="google_translate">Mediakirjaston kansiot</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Salli Ace Stream -soittimen ponnahdusikkuna muihin sovelluksiin</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream tarvitsee, että annat tämän luvan näyttää videosi muissa sovelluksissa.</string>
+    <string name="exit_app_msg" source="google_translate">Haluatko varmasti lopettaa VLC: n?</string>
+    <string name="fastscroller_track" source="google_translate">FastScroller-raita</string>
+    <string name="fastscroller_handle" source="google_translate">FastScrollerin kahva</string>
+    <string name="opengl_title" source="google_translate">OpenGL ES2 -käyttö</string>
+    <string name="opengl_summary" source="google_translate">Oletuksena OpenGL ES2 -ohjelmaa käytetään ohjelmiston dekoodaamiseen ja laitteiston dekoodaukseen tarvittaessa (360 ° videot).</string>
+    <string name="opengl_automatic" source="google_translate">Automaattinen</string>
+    <string name="opengl_on" source="google_translate">Pakota</string>
+    <string name="opengl_off" source="google_translate">Pakota</string>
+    <string name="encryption_warning" source="google_translate">Varoitus, salaus ei ole käytettävissä tässä Android-versiossa, salasana tallennetaan yksityiseen tilaan, mutta sitä ei salata</string>
+    <string name="popup_playback_title" source="google_translate">Toista video ponnahdusikkunassa</string>
+    <string name="popup_playback" source="google_translate">Toisto ponnahdusikkunassa</string>
+    <string name="list_languages_download_title" source="google_translate">Tekstitysten latauskielet</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Tekstityskielen määrittäminen epäonnistui, yritä asettaa sen sovellusasetuksiin</string>
+    <string name="save_bluetooth_delay" source="google_translate">tallenna viive Bluetooth-laitteelle</string>
+    <string name="episodes" source="google_translate">jaksot</string>
+    <string name="movies" source="google_translate">elokuvat</string>
+    <string name="videos" source="google_translate">Videot</string>
+    <string name="streams" source="google_translate">virtoja</string>
+    <string name="clear_playback_history" source="google_translate">Tyhjennä toiston historia</string>
+    <string name="various_artists" source="google_translate">useita esittäjiä</string>
+    <string name="ml_scanning" source="google_translate">Mediatiedostojen skannaus</string>
+    <string name="ml_parse_media" source="google_translate">Medium Parsing</string>
+    <string name="ml_discovering" source="google_translate">löytämässä</string>
+    <string name="resume" source="google_translate">Jatkaa</string>
+    <string name="length" source="google_translate">Pituus</string>
+    <string name="tv_settings_hint" source="google_translate">Paina OK-painiketta tarkistaaksesi / poistaaksesi luettelot</string>
+    <string name="ml_external_storage_title" source="google_translate">Uusi ulkoinen tallennus havaittu</string>
+    <string name="ml_external_storage_accept" source="google_translate">Joo</string>
+    <string name="ml_external_storage_decline" source="google_translate">Ei</string>
+    <string name="last_added_media" source="google_translate">viimeksi lisätty</string>
+    <string name="no" source="google_translate">Ei</string>
+    <string name="loading_medialibrary" source="google_translate">Ladataan Medialibrary…</string>
+    <string name="yes" source="google_translate">Joo</string>
+    <string name="custom_set_save_title" source="google_translate">Tallentamattomat muutokset</string>
+    <string name="custom_set_save_warning" source="google_translate">Varoitus: tallentamattomat muutokset</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Tallenna taajuuskorjain asetettuna…</string>
+    <string name="new_custom_set_save_message" source="google_translate">Tallenna uusi taajuuskorjain-asetus…</string>
+    <string name="save" source="google_translate">Tallentaa</string>
+    <string name="do_not_save" source="google_translate">Älä säästä</string>
+    <string name="custom_set_wrong_input" source="google_translate">Epäkelpo nimi.</string>
+    <string name="custom_set_already_exist" source="google_translate">Taajuuskorjain, jolla on tämä nimi, on jo olemassa</string>
+    <string name="custom_set_restored" source="google_translate">Mukautettu taajuuskorjain asetettu.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Tallentamaton taajuuskorjain-asetus on poistettu.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Uusi</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary skannaa laitteesi juuri nyt</string>
+    <string name="recommendations" source="google_translate">suositukset</string>
+    <string name="recommendations_desc" source="google_translate">Suositukset kortit kantoraketissa</string>
+    <string name="browser_quick_access" source="google_translate">Nopea pääsy</string>
+    <string name="browser_storages" source="google_translate">varastot</string>
+    <string name="renderer_list_title" source="google_translate">näytöt</string>
+    <string name="feedback_player_crashed" source="google_translate">VLC vain kaatui. Yritä uudelleen.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Sinun täytyy myöntää VLC-kirjoitusoikeus SD-kortille</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC ei voi poistaa tätä tiedostoa ilman kirjoitusoikeuslupaa, vaan siirry SD-korttiin ja klikkaa "Valitse" .Voit joutua napsauttamaan ensin "Näytä SD-kortti" ensin oikeassa yläkulmassa.</string>
+    <string name="dialog_sd_wizard" source="google_translate">Näytä minulle</string>
+    <string name="renderers_disconnect" source="google_translate">Katkaista</string>
+    <string name="audio_digital_failed" source="google_translate">Äänen digitaalisen lähdön tilan muuttaminen epäonnistui</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Äänen digitaalinen lähtö on käytössä</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Äänen digitaalinen lähtö on pois käytöstä</string>
+    <string name="live_streams" source="google_translate">Live-virrat</string>
+    <string name="all_live_streams" source="google_translate">Kaikki live-virrat</string>
+    <string name="video_torrents" source="google_translate">Video-torrentit</string>
+    <string name="audio_torrents" source="google_translate">Äänen torrentit</string>
+    <string name="all_torrents" source="google_translate">Kaikki torrentit</string>
+    <string name="main" source="google_translate">tärkein</string>
+    <string name="media_player" source="google_translate">Mediasoitin</string>
+    <string name="acestream_server" source="google_translate">Ace Stream -palvelin (moottori)</string>
+    <string name="media_player_settings" source="google_translate">Mediasoittimen asetukset</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream -palvelimen (moottorin) asetukset</string>
+    <string name="sign_out" source="google_translate">Kirjaudu ulos</string>
+    <string name="sign_in" source="google_translate">Kirjaudu sisään</string>
+    <string name="sign_in_acestream" source="google_translate">Kirjaudu sisään Ace Streamin avulla</string>
+    <string name="sign_in_google" source="google_translate">Kirjaudu sisään Googleen</string>
+    <string name="video_files" source="google_translate">Videotiedostot</string>
+    <string name="audio_files" source="google_translate">Äänitiedostot</string>
+    <string name="retry" source="google_translate">yritä uudelleen</string>
+    <string name="failed_to_load_web_page" source="google_translate">Web-sivun lataaminen epäonnistui</string>
 </resources>

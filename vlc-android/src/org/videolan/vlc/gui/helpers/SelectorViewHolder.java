@@ -22,11 +22,14 @@
  */
 package org.videolan.vlc.gui.helpers;
 
-import android.databinding.ViewDataBinding;
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
+import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 
 import org.videolan.vlc.BR;
+import org.videolan.vlc.R;
 
 public class SelectorViewHolder<T extends ViewDataBinding> extends RecyclerView.ViewHolder implements View.OnFocusChangeListener {
 
@@ -43,7 +46,12 @@ public class SelectorViewHolder<T extends ViewDataBinding> extends RecyclerView.
     }
 
     private void setViewBackground(boolean focus, boolean selected) {
-        final int color = focus ? UiTools.Resources.ITEM_FOCUS_ON : selected ? UiTools.Resources.ITEM_SELECTION_ON : UiTools.Resources.ITEM_FOCUS_OFF;
+        Context context = binding.getRoot().getContext();
+        final int color = focus
+                ? UiTools.Resources.ITEM_FOCUS_ON
+                : selected
+                    ? UiTools.getColorFromAttribute(context, R.attr.selected_item_background)
+                    : UiTools.Resources.ITEM_FOCUS_OFF;
         binding.setVariable(BR.bgColor, color);
     }
 

@@ -1,6 +1,6 @@
 package org.videolan.vlc.util
 
-import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.*
 import java.io.File
 import java.net.URI
 import java.net.URISyntaxException

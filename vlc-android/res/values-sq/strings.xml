@@ -13,16 +13,11 @@
     <string name="sortby_date_desc">Rëndit sipas datës</string>
     <string name="searchable_hint">Kërko</string>
     <string name="history">Historia</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">Një</item>
-        <item quantity="other">Tjera</item>
-    </plurals>
     <string name="play">Luaj</string>
     <string name="play_from_start">Luaj nga fillimi</string>
     <string name="play_as_audio">Luaj si audio</string>
     <string name="play_as_video">Luaj si video</string>
     <string name="play_as_audio_background">Luaj videot ne background</string>
-    <string name="play_as_audio_background_summary">Vazhdo luajtjen e videos ne background kur te fik ekranin ose te klikoj butonin HOME</string>
     <string name="append">Shto</string>
     <string name="play_all">Luaj te gjithe</string>
     <string name="append_all">Shto të gjitha</string>
@@ -31,7 +26,7 @@
     <string name="remove">Hiq</string>
     <string name="set_song">Vendose si zile</string>
     <string name="info">Informacion</string>
-    <string name="confirm_delete">Konfirmo fshirjen</string>
+    <string name="confirm_delete">Konfirmo fshirjen %1$s</string>
     <string name="ringtone_set">Skedari \'%1$s\' u vendos si zile.</string>
     <string name="ringtone_error">Një error ndodhi gjatë vendosjes së ziles.</string>
     <string name="pause">Pusho</string>
@@ -52,14 +47,6 @@
         <item quantity="other">Tjera</item>
     </plurals>
     <plurals name="subfolders_quantity">
-        <item quantity="one">Një</item>
-        <item quantity="other">Tjera</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">Një</item>
-        <item quantity="other">Tjera</item>
-    </plurals>
-    <plurals name="videos_quantity">
         <item quantity="one">Një</item>
         <item quantity="other">Tjera</item>
     </plurals>
@@ -84,7 +71,7 @@
     <string name="mediafiles">Skedarë Media</string>
     <string name="notavailable">I paarritshëm</string>
     <string name="nosubdirectory">S\'ka nënregjistra</string>
-    <string name="directorynotfound">Regjistri nuk është gjetur</string>
+    <string name="directorynotfound">Regjistri %1$s nuk është gjetur</string>
     <string name="nohistory">S\'ka histori</string>
     <string name="validation">Jeni të sigurtë ?</string>
     <string name="cover_art">Figura e koverit</string>
@@ -116,10 +103,6 @@
     <string name="brightness">Bardhesia</string>
     <string name="navmenu">menuja e navigimit</string>
     <string name="advanced">Të avancuara</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">Një</item>
-        <item quantity="other">Tjera</item>
-    </plurals>
     <string name="track_samplerate_info">Norma e shballonit: %1$d Hz\n</string>
     <string name="track_resolution_info">Rezolucioni: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Frame rate: %1$.3f\n</string>
@@ -140,7 +123,7 @@
     <string name="error_message_is">Mesazhi i errorit është (ju lutem përmendeni këtë gjatë debugging):\n</string>
     <string name="encountered_error_title">Error ne luajtje</string>
     <string name="encountered_error_message">VLC hasi një error me këtë media.\nJu lutem provoni te rifreskoni librarin tuaj.</string>
-    <string name="invalid_location">Lokacion jo i drejt</string>
+    <string name="invalid_location">Lokacion %1$s jo i drejt</string>
     <string name="search">Kërko</string>
     <string name="search_history">Kërko historinë</string>
     <!--Tips-->
@@ -285,4 +268,268 @@
     <string name="back_quit_lock">Shtypni prapa eshe një here për të dalë nga videoja</string>
     <!--Widget-->
     <!--PLugins-->
+    <string name="torrent_files">Torrent fotografi</string>
+    <string name="select_language">Zgjidh gjuhen</string>
+    <string name="sortby_artist_name" source="google_translate">Emri i artistit</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Emri i artistit (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Emri i albumit</string>
+    <string name="sortby_album_name_desc" source="google_translate">Emri i albumit (desc)</string>
+    <string name="sortby_number" source="google_translate">Nb gjurmët</string>
+    <string name="sortby_number_desc" source="google_translate">Nb track (desc)</string>
+    <string name="playback" source="google_translate">rishikim</string>
+    <string name="playback_controls" source="google_translate">Kontrollet e riprodhimit</string>
+    <string name="medialibrary_scan" source="google_translate">Skanimi i bibliotekës së medias</string>
+    <string name="Medialibrary_progress" source="google_translate">Biblioteka e mediave përditëson progresin e përparimit</string>
+    <string name="video_app_switch_title" source="google_translate">Historiku / modaliteti PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">Zgjidh sjelljen e VLC kur kaloni në aplikacione të tjera nga rishikimet e videos</string>
+    <string name="play_pip_title" source="google_translate">Luaj videot në modalitetin Picture-in-picture</string>
+    <string name="insert_next" source="google_translate">Vendos tjetër</string>
+    <string name="unknown_number" source="google_translate">Numri i panjohur i Tracks</string>
+    <string name="tracks" source="google_translate">Tracks</string>
+    <string name="shuffle_title" source="google_translate">Modaliteti i përzierjes</string>
+    <string name="repeat_title" source="google_translate">Modaliteti përsëritet</string>
+    <string name="firstsong" source="google_translate">Kënga e parë e listës për luajtje</string>
+    <string name="lastsong" source="google_translate">Kënga e fundit e listës për luajtje</string>
+    <string name="surface_fit_screen" source="google_translate">Ekran i përshtatshëm</string>
+    <string name="sleep_in" source="google_translate">Fle në</string>
+    <string name="server_add_title" source="google_translate">Shtoni një server të ri në të preferuarat</string>
+    <string name="server_domain_hint" source="google_translate">Adresa e serverit (emri i domenit ose IP)</string>
+    <string name="server_share_hint" source="google_translate">Emri i rrjetit të shpërndarjes (ose adresa IP)</string>
+    <string name="server_folder_hint" source="google_translate">Rruga e dosjes (opsionale)</string>
+    <string name="server_username_hint" source="google_translate">Emri i përdoruesit</string>
+    <string name="server_servername_hint" source="google_translate">Emrin e serverit, për lehtësi</string>
+    <string name="server_port" source="google_translate">Port:</string>
+    <string name="login" source="google_translate">hyrje</string>
+    <string name="password" source="google_translate">fjalëkalim</string>
+    <string name="search_results" source="google_translate">Rezultatet e kërkimit</string>
+    <string name="search_no_result" source="google_translate">Asnjë media nuk u gjet</string>
+    <string name="favorites_add" source="google_translate">Shto te të preferuarat</string>
+    <string name="favorites_remove" source="google_translate">Hiq nga të preferuarit</string>
+    <string name="favorites_edit" source="google_translate">redaktoj</string>
+    <string name="favorite_added" source="google_translate">Ruhen në të preferuarat</string>
+    <string name="favorite_removed" source="google_translate">Hequr nga të preferuarit</string>
+    <string name="playback_history_title" source="google_translate">Historia e riprodhimit</string>
+    <string name="playback_history_summary" source="google_translate">Ruaj të gjitha mediat e luajtura në seksionin Historia</string>
+    <string name="playback_speed_title" source="google_translate">Ruaj shpejtësinë e riprodhimit</string>
+    <string name="playback_speed_summary" source="google_translate">Mos harroni shpejtësinë e rishikimit që keni vendosur</string>
+    <string name="daynight_title" source="google_translate">Mënyra DayNight</string>
+    <string name="daynight_summary" source="google_translate">Kaloni automatikisht në regjimin e natës në kohën e duhur</string>
+    <string name="interface_gui" source="google_translate">ekran</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">Ekran i mesëm</string>
+    <string name="video_prefs_category" source="google_translate">video</string>
+    <string name="video_min_group_length_title" source="google_translate">Video në grup</string>
+    <string name="video_min_group_length_summary" source="google_translate">Videot grupohen nëse letrat e tyre të para janë të njëjta.</string>
+    <string name="video_min_group_length_disable" source="google_translate">disable</string>
+    <string name="video_min_group_length_first" source="google_translate">Vetëm letra e parë</string>
+    <string name="video_min_group_length_short" source="google_translate">Numri i shkurtër i shkronjave (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Numri i gjatë i shkronjave (9)</string>
+    <string name="media_fast_seek" source="google_translate">Aktivizo opsionin e kërkimit të shpejtë</string>
+    <string name="media_seen" source="google_translate">Trego pamjen e videove të parë</string>
+    <string name="media_seen_summary" source="google_translate">Shënoni një video siç shihet kur e luani deri në fund</string>
+    <string name="force_play_all_summary" source="google_translate">Luaj të gjitha videot, duke filluar me atë që klikuat</string>
+    <string name="force_play_all_title" source="google_translate">Modaliteti i luajtjes së videove</string>
+    <string name="save_brightness_summary" source="google_translate">Mos harroni nivelin e ndriçimit në lojtarin video</string>
+    <string name="save_brightness_title" source="google_translate">Ruaj nivelin e ndriçimit për videon</string>
+    <string name="save_audiodelay_summary" source="google_translate">Ruaj vonesat individuale të audios për çdo video</string>
+    <string name="save_audiodelay_title" source="google_translate">Ruaj vonesën e audios</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Gjest ndriçimi</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Gjeste e volumit</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Vëllimi i kontrollit nga gjesti gjatë riprodhimit të videos</string>
+    <string name="enable_seek_buttons" source="google_translate">Aktivizo butonat kërkimi</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">Trego butonat Rewind dhe përpara në ndërfaqen e videos</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Trokitje e lehtë dy herë për të kërkuar</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Shtypni dy herë në skajet e ekranit për të kërkuar me 10 sekonda</string>
+    <string name="popup_keepscreen_title" source="google_translate">Mbani ekranin në ON në Mënyrën Pop-Up</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Gjithmonë mbajeni ekranin e ndezur ndërsa Pop-Up shfaqet, edhe nëse video është ndaluar.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Shfaq skedarët e fshehur</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Shfaq skedarët e fshehur në shfletues</string>
+    <string name="subtitles_prefs_category" source="google_translate">titra</string>
+    <string name="subtitles_size_title" source="google_translate">Madhësia e Teksteve</string>
+    <string name="subtitles_size_small" source="google_translate">i vogël</string>
+    <string name="subtitles_size_normal" source="google_translate">normal</string>
+    <string name="subtitles_size_big" source="google_translate">i madh</string>
+    <string name="subtitles_size_huge" source="google_translate">i madh</string>
+    <string name="subtitles_color_title" source="google_translate">Titra Ngjyra</string>
+    <string name="subtitles_color_white" source="google_translate">e bardhë</string>
+    <string name="subtitles_color_gray" source="google_translate">gri</string>
+    <string name="subtitles_color_pink" source="google_translate">rozë</string>
+    <string name="subtitles_color_blue" source="google_translate">blu</string>
+    <string name="subtitles_color_yellow" source="google_translate">E verdhe</string>
+    <string name="subtitles_color_green" source="google_translate">e gjelbër</string>
+    <string name="subtitles_background_title" source="google_translate">Titrat Sfondi</string>
+    <string name="subtitles_bold_title" source="google_translate">Titra të bukura</string>
+    <string name="subtitles_autoload_title" source="google_translate">Titra e ngarkimit automatik</string>
+    <string name="audio_prefs_category" source="google_translate">Audio</string>
+    <string name="lockscreen_cover_title" source="google_translate">Mbulon mediat në Lockscreen</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Kur është e mundur, vendosni artin aktual të mbulimit të medias si sfond të skanimit të skanimit</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Animimi i listës aktuale të luajtjes së auto-scrolling</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Animate scrolling në tranzicion media</string>
+    <string name="audio_save_repeat_title" source="google_translate">Ruaj mënyrën e përsëritjes</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Mbani në mend regjimin e përsëritjes kur ngarkoni listat e dëgjimit audio</string>
+    <string name="audio_boost_title" source="google_translate">Audio-rritur</string>
+    <string name="headset_prefs_category" source="google_translate">kufje</string>
+    <string name="enable_headset_detection_summary" source="google_translate">Zbuloni futjen dhe heqjen e kufjeve</string>
+    <string name="enable_headset_actions_title" source="google_translate">Shkurtesat e Kontrollit të Largët</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Shtypni dy herë në \'Luaj \' për të kaluar në shtypin e ardhshëm dhe të gjatë mbi të për të kaluar në rrugën e mëparshme</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Resume në futjen e kufjeve</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">Ndaloni ndryshe</string>
+    <string name="audio_ducking_title" source="google_translate">Vëllimi më i ulët VLC në njoftimet</string>
+    <string name="audio_ducking_summary" source="google_translate">Ndihmon për të dëgjuar njoftimet audio, udhëzimet e navigimit ose asistentin duke folur</string>
+    <string name="casting_category" source="google_translate">Që hedh</string>
+    <string name="casting_passthrough_title" source="google_translate">Passthrough Audio</string>
+    <string name="casting_passthrough_summary" source="google_translate">Lëreni televizorin tuaj të menaxhojë interpretimin audio</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Cilësia e konvertimit</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Zgjidhni cilësinë e konvertimit kur hedh në ekran të largët</string>
+    <string name="casting_quality_high" source="google_translate">i lartë</string>
+    <string name="casting_quality_medium" source="google_translate">medium</string>
+    <string name="casting_quality_low" source="google_translate">ulët</string>
+    <string name="casting_quality_lowcpu" source="google_translate">më i ulët</string>
+    <string name="cast_performance_warning" source="google_translate">Duke hedhur këtë video kërkon konvertim. Ky konvertim mund të përdorë të gjithë fuqinë e disponueshme dhe mund të shkarkojë shpejt baterinë tuaj.</string>
+    <string name="artists_show_all_title" source="google_translate">Trego të gjithë artistët</string>
+    <string name="artists_show_all_summary" source="google_translate">Trego të gjithë artistët në listën e Artistëve, jo vetëm artistët e albumit</string>
+    <string name="extensions_prefs_category" source="google_translate">Zgjerime</string>
+    <string name="extensions_enable_category" source="google_translate">Zgjodhi zgjerimet për të mundësuar</string>
+    <string name="extensions_empty" source="google_translate">Nuk u gjet asnjë zgjatje</string>
+    <string name="extension_prefs_activation_title" source="google_translate">aktivizoj</string>
+    <string name="android_auto" source="google_translate">Makinë Android</string>
+    <string name="controls_prefs_category" source="google_translate">Controls</string>
+    <string name="main_prefs_category" source="google_translate">Cilësimet kryesore</string>
+    <string name="save_video_none" source="google_translate">Mos kurseni shpejtësi</string>
+    <string name="save_video_session" source="google_translate">Ruaj shpejtësinë gjatë seancës</string>
+    <string name="save_video_always" source="google_translate">Ruaj shpejtësinë në të gjitha seancat</string>
+    <string name="auto_rescan" source="google_translate">Auto rescan</string>
+    <string name="auto_rescan_summary" source="google_translate">Automatikisht skanoni pajisjen për median e re ose të fshirë në fillimin e aplikacionit</string>
+    <string name="dump_media_db" source="google_translate">Baza e të dhënave të mediave të hedhura</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopjoni bazën e të dhënave në rrënjën e ruajtjes së brendshme</string>
+    <string name="clear_media_db_summary" source="google_translate">Qasja e informacioneve të Android VLC për të pastruar të dhënat</string>
+    <string name="resume_playback_title" source="google_translate">Rifillimi i riprodhimit pas një telefonate</string>
+    <string name="resume_playback_summary" source="google_translate">Qëndroni në pauzë ndryshe</string>
+    <string name="network_caching_popup" source="google_translate">Kjo vlerë duhet të jetë midis 0 dhe 6000 ms</string>
+    <string name="browsing" source="google_translate">Browsing</string>
+    <string name="sleep_time_not_set" source="google_translate">asnjë set</string>
+    <string name="search_list_hint" source="google_translate">Kërko media në listën aktuale</string>
+    <string name="search_global" source="google_translate">Kërkoni në të gjithë bibliotekën e medias</string>
+    <string name="chapter" source="google_translate">kapitull</string>
+    <string name="player_touch_title" source="google_translate">Kontrollo prekni për Video</string>
+    <string name="player_touch_enable_all" source="google_translate">Aktivizo kontrollet e prekjes</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Çaktivizo kontrollin e ndriçimit</string>
+    <string name="player_touch_disable_all" source="google_translate">Çaktivizo të gjitha kontrollet me prekje</string>
+    <string name="tv_ui_title" source="google_translate">Ndërfaqja e Android TV</string>
+    <string name="tv_ui_summary" source="google_translate">Ndrysho UI në temën e adaptuar të televizorit</string>
+    <string name="medialibrary" source="google_translate">Biblioteka e Medias</string>
+    <string name="medialibrary_directories" source="google_translate">Dosjet e bibliotekës së medias</string>
+    <string name="playlist_deleted" source="google_translate">Lista e luajtjes fshihet</string>
+    <string name="file_deleted" source="google_translate">Skeda fshihet</string>
+    <string name="no_subs_found" source="google_translate">Nuk ka titra në këtë direktori</string>
+    <string name="music_now_playing" source="google_translate">Duke luajtur</string>
+    <string name="widget_name_w" source="google_translate">VLC White Widget</string>
+    <string name="widget_name_b" source="google_translate">VLC Dark Widget</string>
+    <string name="allow_storage_access_title" source="google_translate">Lejoni Ace Stream të aksesojë skedarë video dhe audio</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace Stream ju nevojitet për të dhënë këtë leje për të hyrë në skedarët e medias në këtë pajisje.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Lejo Stream Ace të caktojë zile</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace Stream ju nevojitet për të dhënë këtë leje për të vendosur këtë këngë si zile tuaj.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Lejo Ace Stream të ndryshojë mënyrën e ndriçimit</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace Stream ju nevojitet për të dhënë këtë leje për të ndryshuar mënyrën tuaj të ndriçimit.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Lejo Apo Stream Player popup mbi aplikacione të tjera</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream ju nevojitet për të dhënë këtë leje për të shfaqur videon tuaj në një popup mbi aplikacionet e tjera.</string>
+    <string name="permission_ask_again" source="google_translate">Jepni leje</string>
+    <string name="exit_app" source="google_translate">Mbylle VLC</string>
+    <string name="exit_app_msg" source="google_translate">Jeni i sigurt se doni te lini VLC?</string>
+    <string name="fastscroller_track" source="google_translate">Pista e FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">Trajtimi i FastScroller</string>
+    <string name="plugins" source="google_translate">plugins</string>
+    <string name="download_on_device" source="google_translate">Shkarko</string>
+    <string name="extension_empty" source="google_translate">Asnjë artikull për t\'u shfaqur, mos shkoni në cilësimet e shtesës suaj për të marrë disa.</string>
+    <string name="opengl_title" source="google_translate">Përdorimi i OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">By default, OpenGL ES2 përdoret për dekodimin e softuerit dhe për dekodimin e pajisjeve kur nevojitet (360 ° video).</string>
+    <string name="opengl_automatic" source="google_translate">automatik</string>
+    <string name="opengl_on" source="google_translate">Forcë</string>
+    <string name="opengl_off" source="google_translate">Forcohu</string>
+    <string name="network_favorites" source="google_translate">Preferencat e rrjetit</string>
+    <string name="network_shared_folders" source="google_translate">Dosjet e përbashkëta</string>
+    <string name="encryption_warning" source="google_translate">Paralajmërim, enkriptimi nuk është i disponueshëm për këtë version Android, fjalëkalimi do të ruhet në një hapësirë private por jo të koduar</string>
+    <string name="store_password" source="google_translate">Mos harroni fjalëkalimin</string>
+    <string name="add_to_playlist" source="google_translate">Shtoni në listë për luajtje</string>
+    <string name="popup_playback_title" source="google_translate">Luaj video në një dritare pop-up</string>
+    <string name="popup_playback" source="google_translate">Duke luajtur në një dritare pop-up</string>
+    <string name="popup_expand" source="google_translate">Zgjero videon</string>
+    <string name="snack_subloader_sub_found" source="google_translate">Tekstet e shkarkuara</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">Titrat nuk u gjetën</string>
+    <string name="dialog_subloader_success" source="google_translate">Regjistri i gjetur për:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Nuk u gjet për:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">Shkarko përfunduar</string>
+    <string name="download_subtitles" source="google_translate">Shkarko titrat</string>
+    <string name="preferences_languages_download" source="google_translate">Titra gjuhësh</string>
+    <string name="list_languages_download_summary" source="google_translate">Gjuhët që duhet të shkarkohen gjatë marrjes së titrave</string>
+    <string name="list_languages_download_title" source="google_translate">Tekstet e shkarkimit të gjuhëve</string>
+    <string name="service_unavailable" source="google_translate">Sherbim i padisponueshem</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Dështoi në përcaktimin e titrave, përpiquni ta vendosni në cilësimet e aplikacioneve</string>
+    <string name="downloading_subtitles" source="google_translate">Shkarkimi i titrave</string>
+    <string name="browse_folder" source="google_translate">Shfletoni dosjen</string>
+    <string name="listen" source="google_translate">dëgjoj</string>
+    <string name="subtitles_download_title" source="google_translate">Shkarkoni</string>
+    <string name="connecting" source="google_translate">Duke u lidhur ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">ruani vonesën për pajisjen Bluetooth</string>
+    <string name="episodes" source="google_translate">episode</string>
+    <string name="movies" source="google_translate">kinema</string>
+    <string name="videos" source="google_translate">videos</string>
+    <string name="streams" source="google_translate">streams</string>
+    <string name="clear_playback_history" source="google_translate">Pastro historinë e rishikimit</string>
+    <string name="various_artists" source="google_translate">Artistë të ndryshëm</string>
+    <string name="ml_scanning" source="google_translate">Skanimi i skedarëve medialë</string>
+    <string name="ml_parse_media" source="google_translate">Parsing mesatar</string>
+    <string name="ml_discovering" source="google_translate">Zbulimi</string>
+    <string name="resume" source="google_translate">Vazhdoj</string>
+    <string name="length" source="google_translate">gjatësi</string>
+    <string name="tv_settings_hint" source="google_translate">Shtypni gjatë butonin OK për të kontrolluar / ç\'kyçni dosjet</string>
+    <string name="ml_external_storage_title" source="google_translate">U zbulua ruajtja e re e jashtme</string>
+    <string name="ml_external_storage_accept" source="google_translate">po</string>
+    <string name="ml_external_storage_decline" source="google_translate">jo</string>
+    <string name="last_added_media" source="google_translate">e fundit shtoi</string>
+    <string name="no" source="google_translate">jo</string>
+    <string name="loading_medialibrary" source="google_translate">Loading Medialibrary ...</string>
+    <string name="yes" source="google_translate">po</string>
+    <string name="custom_set_save_title" source="google_translate">Ndryshimet e paqëndrueshme</string>
+    <string name="custom_set_save_warning" source="google_translate">Paralajmërim: ndryshime të ruajtura</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Ruaj barazimin e vendosur si ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Ruaj barazimin e ri të vendosur si ...</string>
+    <string name="save" source="google_translate">Save</string>
+    <string name="do_not_save" source="google_translate">Mos kurseni</string>
+    <string name="custom_set_wrong_input" source="google_translate">Emri i pavlefshëm.</string>
+    <string name="custom_set_already_exist" source="google_translate">Barazuesi i vendosur me këtë emër tashmë ekziston</string>
+    <string name="custom_set_restored" source="google_translate">Riparimi i rregullimit të barazimit personal.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Grumbulluesi i barazuar i pashlyeruar fshihet.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">I ri</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary po skanon pajisjet tuaja tani</string>
+    <string name="recommendations" source="google_translate">rekomandime</string>
+    <string name="recommendations_desc" source="google_translate">Kartat e rekomandimeve në lëshues</string>
+    <string name="browser_quick_access" source="google_translate">Qasje e shpejte</string>
+    <string name="browser_storages" source="google_translate">depo</string>
+    <string name="renderer_list_title" source="google_translate">Displays</string>
+    <string name="feedback_player_crashed" source="google_translate">Na vjen keq, VLC u rrëzua vetëm. Ju lutemi provoni përsëri.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Ju duhet t\'i jepni VLC qasje të shkruar në kartën tuaj SD</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC nuk mund ta fshijë këtë skedar pa lejen e qasjes në shkrim. \ NJu lutemi të shkoni në kartën tuaj SD dhe klikoni në \ "Zgjidh \". \ NJu mund të duhet të klikoni në \ "Shfaq kartën SD \" së pari në menynë e sipërme të djathtë</string>
+    <string name="dialog_sd_wizard" source="google_translate">Me trego</string>
+    <string name="renderers_disconnect" source="google_translate">shqit</string>
+    <string name="audio_digital_failed" source="google_translate">Dështoi në ndryshimin e gjendjes së Daljes Audio Digjitale</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Dalja audio dixhitale është e aktivizuar</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Dalja audio dixhitale është çaktivizuar</string>
+    <string name="live_streams" source="google_translate">Transmetimet e drejtpërdrejta</string>
+    <string name="all_live_streams" source="google_translate">Të gjitha transmetimet e drejtpërdrejta</string>
+    <string name="video_torrents" source="google_translate">Video torrents</string>
+    <string name="audio_torrents" source="google_translate">Torrente audio</string>
+    <string name="all_torrents" source="google_translate">Të gjitha torrents</string>
+    <string name="main" source="google_translate">kryesor</string>
+    <string name="media_player" source="google_translate">Media player</string>
+    <string name="acestream_server" source="google_translate">Serveri i Ace Stream (motor)</string>
+    <string name="media_player_settings" source="google_translate">Cilësimet e media player</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream server (motor) settings</string>
+    <string name="sign_out" source="google_translate">Dilni jashtë</string>
+    <string name="sign_in" source="google_translate">Hyni</string>
+    <string name="sign_in_acestream" source="google_translate">Hyni me Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Identifikohu me Google</string>
+    <string name="video_files" source="google_translate">Fotografi video</string>
+    <string name="audio_files" source="google_translate">Fotografi audio</string>
+    <string name="retry" source="google_translate">rigjykoj</string>
+    <string name="failed_to_load_web_page" source="google_translate">Dështoi në ngarkimin e faqes së uebit</string>
 </resources>

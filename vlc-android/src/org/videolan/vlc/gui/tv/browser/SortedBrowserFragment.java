@@ -29,20 +29,20 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.v17.leanback.app.BackgroundManager;
-import android.support.v17.leanback.app.BrowseSupportFragment;
-import android.support.v17.leanback.widget.ArrayObjectAdapter;
-import android.support.v17.leanback.widget.HeaderItem;
-import android.support.v17.leanback.widget.ListRow;
-import android.support.v17.leanback.widget.ListRowPresenter;
-import android.support.v17.leanback.widget.OnItemViewClickedListener;
-import android.support.v17.leanback.widget.OnItemViewSelectedListener;
-import android.support.v17.leanback.widget.Presenter;
-import android.support.v17.leanback.widget.Row;
-import android.support.v17.leanback.widget.RowPresenter;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.util.ArrayMap;
-import android.support.v4.util.SimpleArrayMap;
+import androidx.leanback.app.BackgroundManager;
+import androidx.leanback.app.BrowseSupportFragment;
+import androidx.leanback.widget.ArrayObjectAdapter;
+import androidx.leanback.widget.HeaderItem;
+import androidx.leanback.widget.ListRow;
+import androidx.leanback.widget.ListRowPresenter;
+import androidx.leanback.widget.OnItemViewClickedListener;
+import androidx.leanback.widget.OnItemViewSelectedListener;
+import androidx.leanback.widget.Presenter;
+import androidx.leanback.widget.Row;
+import androidx.leanback.widget.RowPresenter;
+import androidx.core.content.ContextCompat;
+import androidx.collection.ArrayMap;
+import androidx.collection.SimpleArrayMap;
 
 import org.videolan.libvlc.Media;
 import org.videolan.medialibrary.media.MediaWrapper;
@@ -68,10 +68,11 @@ import java.util.TreeMap;
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public abstract class SortedBrowserFragment extends BrowseSupportFragment implements BrowserFragmentInterface, OnItemViewSelectedListener, OnItemViewClickedListener, DetailsFragment {
 
-    public static final String TAG = "VLC/SortedBrowserFragment";
+    public static final String TAG = "AS/VLC/SortedBF";
 
     public static final String KEY_URI = "uri";
-    public static final String SELECTED_ITEM = "selected";
+    public static final String SELECTED_ROW = "selected_row";
+    public static final String SELECTED_ITEM = "selected_item";
     public static final String CURRENT_BROWSER_LIST = "CURRENT_BROWSER_LIST";
     public static final String CURRENT_BROWSER_MAP = "CURRENT_BROWSER_MAP";
 
@@ -81,6 +82,7 @@ public abstract class SortedBrowserFragment extends BrowseSupportFragment implem
 
 
     protected ArrayObjectAdapter mAdapter = new ArrayObjectAdapter(new ListRowPresenter());
+    private long mRowSelected = -1;
     protected MediaWrapper mItemSelected;
     protected Map<String, ListItem> mMediaItemMap = new ArrayMap<>(), mTempMap;
     protected final SimpleArrayMap<String, Integer> mMediaIndex = new SimpleArrayMap<>();
@@ -94,8 +96,10 @@ public abstract class SortedBrowserFragment extends BrowseSupportFragment implem
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null)
+        if (savedInstanceState != null) {
+            mRowSelected = savedInstanceState.getLong(SELECTED_ROW, -1);
             mItemSelected = savedInstanceState.getParcelable(SELECTED_ITEM);
+        }
         else {
             setOnItemViewClickedListener(this);
             setAdapter(mAdapter);
@@ -136,7 +140,8 @@ public abstract class SortedBrowserFragment extends BrowseSupportFragment implem
     @Override
     public void onResume() {
         super.onResume();
-        VLCApplication.storeData(CURRENT_BROWSER_LIST, mVideosList);
+        //anton: mVideosList is always empty
+        //VLCApplication.storeData(CURRENT_BROWSER_LIST, mVideosList);
         if (!mBackgroundManager.isAttached())
             mBackgroundManager.attachToView(getView());
     }
@@ -150,6 +155,8 @@ public abstract class SortedBrowserFragment extends BrowseSupportFragment implem
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        if(mRowSelected != -1)
+            outState.putLong(SELECTED_ROW, mRowSelected);
         if (mItemSelected != null)
             outState.putParcelable(SELECTED_ITEM, mItemSelected);
         VLCApplication.storeData(getKey(), mMediaItemMap);
@@ -160,6 +167,7 @@ public abstract class SortedBrowserFragment extends BrowseSupportFragment implem
             return;
         final Intent intent = new Intent(getActivity(),
                 DetailsActivity.class);
+
         // pass the item information
         intent.putExtra("media", mItemSelected);
         intent.putExtra("item", new MediaItemDetails(mItemSelected.getTitle(),
@@ -171,6 +179,12 @@ public abstract class SortedBrowserFragment extends BrowseSupportFragment implem
     @Override
     public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
         mItemSelected = (MediaWrapper)item;
+        if(mRowSelected != row.getId()) {
+            // Remember current row's playlist.
+            // It will be played on 'Play all' button click in details.
+            mRowSelected = row.getId();
+            rememberCurrentRow();
+        }
         TvUtil.updateBackground(mBackgroundManager, item);
     }
 
@@ -209,7 +223,8 @@ public abstract class SortedBrowserFragment extends BrowseSupportFragment implem
                 for (ListItem item : mMediaItemMap.values())
                     Collections.sort(item.mediaList, MediaComparators.byFileType);
                 mHandler.sendEmptyMessage(UPDATE_DISPLAY);
-                VLCApplication.storeData(CURRENT_BROWSER_LIST, mVideosList);
+                //anton: mVideosList is always empty
+                //VLCApplication.storeData(CURRENT_BROWSER_LIST, mVideosList);
             }
         });
     }
@@ -227,11 +242,13 @@ public abstract class SortedBrowserFragment extends BrowseSupportFragment implem
             if (mTempMap != null)
                 mMediaItemMap = mTempMap;
         }
+        int rowIndex = 0;
         for (ListItem item : mMediaItemMap.values()) {
             adapter = new ArrayObjectAdapter(new CardPresenter(activity));
-            header = new HeaderItem(0, item.Letter);
+            header = new HeaderItem(rowIndex, item.Letter);
             adapter.addAll(0, item.mediaList);
             mAdapter.add(new ListRow(header, adapter));
+            ++rowIndex;
         }
         mHandler.sendEmptyMessageDelayed(HIDE_LOADING, 3000);
     }
@@ -310,6 +327,18 @@ public abstract class SortedBrowserFragment extends BrowseSupportFragment implem
                     }
                     break;
             }
+        }
+    }
+
+    private void rememberCurrentRow() {
+        if(mRowSelected == -1) return;
+        int idx = 0;
+        for(ListItem item: mMediaItemMap.values()) {
+            if(idx == mRowSelected) {
+                VLCApplication.storeData(CURRENT_BROWSER_LIST, item.mediaList);
+                break;
+            }
+            ++idx;
         }
     }
 }

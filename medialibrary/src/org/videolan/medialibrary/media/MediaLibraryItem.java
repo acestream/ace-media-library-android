@@ -24,6 +24,12 @@ public abstract class MediaLibraryItem implements Parcelable {
 
     long mId;
     protected String mTitle;
+    //:ace
+    protected boolean mIsP2P = false;
+    protected String mInfohash = null;
+    protected int mFileIndex = 0;
+    protected int mIsLive = -1;
+    ///ace
     String mDescription;
     private int mFlags;
 
@@ -115,4 +121,10 @@ public abstract class MediaLibraryItem implements Parcelable {
             return TextUtils.equals(((Storage)this).getName(), ((Storage)other).getName());
         return false;
     }
+
+    //:ace
+    public boolean isP2PItem() {
+        return mIsP2P;
+    }
+    ///ace
 }

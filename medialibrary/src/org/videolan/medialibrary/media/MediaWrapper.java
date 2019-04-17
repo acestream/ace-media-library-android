@@ -24,9 +24,28 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
+import org.acestream.engine.controller.Callback;
+import org.acestream.sdk.AceStream;
+import org.acestream.sdk.AceStreamManager;
+import org.acestream.sdk.controller.EngineApi;
+import org.acestream.sdk.interfaces.IAceStreamManager;
+import org.acestream.sdk.utils.Logger;
+import org.acestream.sdk.utils.MiscUtils;
+
+import org.acestream.sdk.EngineSession;
+import org.acestream.sdk.EngineSessionStartListener;
+import org.acestream.sdk.P2PItemStartListener;
+import org.acestream.sdk.PlaybackData;
+import org.acestream.sdk.controller.api.response.MediaFilesResponse;
+import org.acestream.sdk.controller.api.TransportFileDescriptor;
+import org.acestream.sdk.errors.TransportFileParsingException;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.videolan.libvlc.Media;
 import org.videolan.libvlc.Media.Meta;
 import org.videolan.libvlc.Media.VideoTrack;
@@ -36,10 +55,12 @@ import org.videolan.libvlc.util.VLCUtil;
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.medialibrary.Tools;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 
+@SuppressWarnings("JniMissingFunction")
 public class MediaWrapper extends MediaLibraryItem implements Parcelable {
-    public final static String TAG = "VLC/MediaWrapper";
+    public final static String TAG = "AS/MW";
 
     public final static int TYPE_ALL = -1;
     public final static int TYPE_VIDEO = 0;
@@ -49,6 +70,7 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
     public final static int TYPE_SUBTITLE = 4;
     public final static int TYPE_PLAYLIST = 5;
     public final static int TYPE_STREAM = 6;
+    public final static int TYPE_TRANSPORT_FILE = 7;
 
     public final static int MEDIA_VIDEO = 0x01;
     public final static int MEDIA_NO_HWACCEL = 0x02;
@@ -80,6 +102,22 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
     public final static int META_SUBTITLE_DELAY = 201;
     //Various
     public final static int META_APPLICATION_SPECIFIC = 250;
+    //:ace
+    public final static int META_GROUP_NAME = 5000;
+    public final static int META_DURATION = 5002;
+    public final static int META_FILE_SIZE = 5003;
+    public final static int META_TRANSPORT_FILE_PATH = 5004;
+    public final static int META_LAST_MODIFIED = 5005;
+    ///ace
+
+    //:ace
+    // Categories
+    public final static int CATEGORY_REGULAR_VIDEO = 0;
+    public final static int CATEGORY_REGULAR_AUDIO = 1;
+    public final static int CATEGORY_P2P_VIDEO = 2;
+    public final static int CATEGORY_P2P_AUDIO = 3;
+    public final static int CATEGORY_P2P_STREAM = 4;
+    ///ace
 
     // threshold lentgh between song and podcast ep, set to 15 minutes
     private static final long PODCAST_THRESHOLD = 900000L;
@@ -100,8 +138,20 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
     private String mEncodedBy;
     private String mTrackID;
     private String mArtworkURL;
-
     private final Uri mUri;
+
+    //:ace
+    private TransportFileDescriptor mDescriptor = null;
+    private MediaFilesResponse.MediaFile mMediaFile = null;
+    private EngineSession mEngineSession = null;
+    private boolean mIsParsed = false;
+    private long mParentMediaId = 0;
+    private Uri mPlaybackUri = null;
+    private P2PItemStartListener mEngineSessionListener = null;
+    protected String mGroupTitle = null;
+    private String mUserAgent = null;
+    ///ace
+
     private String mFilename;
     private long mTime = 0;
     /* -1 is a valid track (Disabled) */
@@ -119,6 +169,50 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
 
     private long mSeen = 0l;
 
+    //:ace
+    private AceStreamManager.PlaybackStateCallback mPlaybackStateCallback = new AceStreamManager.PlaybackStateCallback() {
+        @Override
+        public void onPlaylistUpdated() {
+        }
+
+        @Override
+        public void onStart(@Nullable EngineSession session) {
+        }
+
+        @Override
+        public void onPrebuffering(@Nullable EngineSession session, int progress) {
+        }
+
+        @Override
+        public void onPlay(@Nullable EngineSession session) {
+            if(mEngineSession == null) {
+                Logger.v(TAG, "pstate:play: no current engine session");
+                return;
+            }
+
+            if(session == null) {
+                Logger.v(TAG, "pstate:play: null engine session");
+                return;
+            }
+
+            if(!TextUtils.equals(mEngineSession.playbackSessionId, session.playbackSessionId)) {
+                Logger.v(TAG, "pstate:play: session id mismatch: this=" + mEngineSession.playbackSessionId + " that=" + session.playbackSessionId);
+                return;
+            }
+
+            Logger.v(TAG, "pstate:play");
+
+            if(mEngineSessionListener != null) {
+                mEngineSessionListener.onPrebufferingDone();
+            }
+        }
+
+        @Override
+        public void onStop() {
+        }
+    };
+    ///ace
+
     /**
      * Create a new MediaWrapper
      * @param mrl Should not be null.
@@ -126,7 +220,9 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
     public MediaWrapper(long id, String mrl, long time, long length, int type, String title,
                         String artist, String genre, String album, String albumArtist, int width,
                         int height, String artworkURL, int audio, int spu, int trackNumber,
-                        int discNumber, long lastModified, long seen) {
+                        int discNumber, long lastModified, long seen, boolean isParsed,
+                        boolean isP2P, long parentMediaId, String infohash, int fileIndex,
+                        int isP2PLive) {
         super();
         if (TextUtils.isEmpty(mrl))
             throw new IllegalArgumentException("uri was empty");
@@ -135,9 +231,11 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
             mrl = "file://"+mrl;
         mUri = Uri.parse(mrl);
         mId = id;
+
         init(time, length, type, null, title, artist, genre, album, albumArtist, width, height,
                 artworkURL != null ? VLCUtil.UriFromMrl(artworkURL).getPath() : null, audio, spu,
-                trackNumber, discNumber, lastModified, seen, null);
+                trackNumber, discNumber, lastModified, seen, isParsed, isP2P, parentMediaId,
+                infohash, fileIndex, isP2PLive, null);
         final StringBuilder sb = new StringBuilder();
         if (type == TYPE_AUDIO) {
             boolean hasArtistMeta = !TextUtils.isEmpty(artist);
@@ -167,7 +265,21 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
         if (uri == null)
             throw new NullPointerException("uri was null");
 
-        mUri = uri;
+        mUri = TransportFileDescriptor.processAceStreamUri(uri);;
+        init(null);
+    }
+
+    public MediaWrapper(
+            TransportFileDescriptor descriptor,
+            MediaFilesResponse.MediaFile mediaFile) {
+        super();
+        if (mediaFile == null)
+            throw new NullPointerException("mediaFile was null");
+
+        mUri = descriptor.getMrl(mediaFile.index);
+        mDescriptor = descriptor;
+        mMediaFile = mediaFile;
+        mTitle = mediaFile.filename;
         init(null);
     }
 
@@ -232,12 +344,41 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
                 }
             mSlaves = media.getSlaves();
         }
+
+        //:ace
+        if(mDescriptor != null) {
+            mIsP2P = true;
+        }
+        else if(mUri != null && TextUtils.equals(mUri.getScheme(), "acestream")) {
+            mIsP2P = true;
+        }
+
+        if(mIsP2P) {
+            initP2PItem();
+        }
+        ///ace
+
         defineType();
     }
 
     public void defineType() {
-        if (mType != TYPE_ALL)
+        defineType(false);
+    }
+
+    public void defineType(boolean force) {
+        if (mType != TYPE_ALL && !force)
             return;
+
+        //:ace
+        if(mMediaFile != null) {
+            mType = mMediaFile.mime.startsWith("audio/") ? TYPE_AUDIO : TYPE_VIDEO;
+            return;
+        }
+        else if(mIsP2P) {
+            mType = TYPE_VIDEO;
+            return;
+        }
+        ///ace
 
         String fileExt = null, filename = mUri.getLastPathSegment();
         if (TextUtils.isEmpty(filename))
@@ -269,7 +410,9 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
     private void init(long time, long length, int type,
                       Bitmap picture, String title, String artist, String genre, String album, String albumArtist,
                       int width, int height, String artworkURL, int audio, int spu, int trackNumber, int discNumber, long lastModified,
-                      long seen, Media.Slave[] slaves) {
+                      long seen, boolean isParsed, boolean isP2P, long parentMediaId,
+                      String infohash, int fileIndex, int isP2PLive,
+                      Media.Slave[] slaves) {
         mFilename = null;
         mTime = time;
         mAudioTrack = audio;
@@ -279,6 +422,12 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
         mPicture = picture;
         mWidth = width;
         mHeight = height;
+        mIsParsed = isParsed;
+        mIsP2P = isP2P;
+        mParentMediaId = parentMediaId;
+        mInfohash = infohash;
+        mFileIndex = fileIndex;
+        mIsLive = isP2PLive;
 
         mTitle = title != null ? Uri.decode(title.trim()) : null;
         mArtist = artist != null ? artist.trim() : null;
@@ -291,14 +440,31 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
         mLastModified = lastModified;
         mSeen = seen;
         mSlaves = slaves;
+
+        if(mUri != null && TextUtils.equals(mUri.getScheme(), "acestream")) {
+            mIsP2P = true;
+        }
+
+        if(mIsP2P) {
+            initP2PItem();
+        }
+    }
+
+    private void initP2PItem() {
+        mTime = getMetaLong(META_PROGRESS);
+        mLength = getMetaLong(META_DURATION);
     }
 
     public MediaWrapper(Uri uri, long time, long length, int type,
                  Bitmap picture, String title, String artist, String genre, String album, String albumArtist,
-                 int width, int height, String artworkURL, int audio, int spu, int trackNumber, int discNumber, long lastModified, long seen) {
+                 int width, int height, String artworkURL, int audio, int spu, int trackNumber, int discNumber, long lastModified, long seen,
+                 boolean isParsed, boolean isP2P, long parentMediaId, String infohash, int fileIndex,
+                 int isP2PLive) {
+
         mUri = uri;
         init(time, length, type, picture, title, artist, genre, album, albumArtist,
-             width, height, artworkURL, audio, spu, trackNumber, discNumber, lastModified, seen, null);
+             width, height, artworkURL, audio, spu, trackNumber, discNumber, lastModified, seen, isParsed, isP2P, parentMediaId,
+             infohash, fileIndex, isP2PLive, null);
     }
 
     @Override
@@ -321,6 +487,14 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
 
     public Uri getUri() {
         return mUri;
+    }
+
+    public Uri getPlaybackUri() {
+        return mIsP2P ? mPlaybackUri : mUri;
+    }
+
+    public void setPlaybackUri(Uri uri) {
+        mPlaybackUri = uri;
     }
 
     private static String getMetaId(Media media, String defaultMeta, int id, boolean trim) {
@@ -362,7 +536,12 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
 
     public String getFileName() {
         if (mFilename == null) {
-            mFilename = mUri.getLastPathSegment();
+            if(mMediaFile != null) {
+                mFilename = mMediaFile.filename;
+            }
+            else {
+                mFilename = mUri.getLastPathSegment();
+            }
         }
         return mFilename;
     }
@@ -561,7 +740,13 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
     }
 
     public long getLastModified() {
-        return mLastModified;
+        if(mLastModified != 0) {
+            return mLastModified;
+        }
+        else {
+            // For p2p items last modified is stored in metadata
+            return getMetaLong(META_LAST_MODIFIED);
+        }
     }
 
     public void setLastModified(long mLastModified) {
@@ -598,6 +783,7 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
     }
     public String getMetaString(int metaDataType) {
         Medialibrary ml = Medialibrary.getInstance();
+
         return mId == 0 || !ml.isInitiated() ? null : nativeGetMediaStringMetadata(ml, mId, metaDataType);
     }
 
@@ -619,6 +805,12 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
     private native String nativeGetMediaStringMetadata(Medialibrary ml, long id, int metaDataType);
     private native void nativeSetMediaStringMetadata(Medialibrary ml, long id, int metaDataType, String metadataValue);
     private native void nativeSetMediaLongMetadata(Medialibrary ml, long id, int metaDataType, long metadataValue);
+    private native void nativeSetMediaType(Medialibrary ml, long id, int mediaType);
+    //:ace
+    private native void nativeSetParsed(Medialibrary ml, long id, boolean parsed);
+    private native void nativeSetP2PInfo(Medialibrary ml, long id, String infohash, int fileIndex);
+    private native void nativeSetP2PLive(Medialibrary ml, long id, int value);
+    ///ace
 
     @Nullable
     public Media.Slave[] getSlaves() {
@@ -651,7 +843,21 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
                 in.readInt(),
                 in.readLong(),
                 in.readLong(),
+                int2bool(in.readInt()),
+                int2bool(in.readInt()),
+                in.readLong(),
+                in.readString(),
+                in.readInt(),
+                in.readInt(),
                 in.createTypedArray(PSlave.CREATOR));
+    }
+
+    private static int bool2int(boolean value) {
+        return value ? 1 : 0;
+    }
+
+    private static boolean int2bool(int value) {
+        return value == 1;
     }
 
     @Override
@@ -676,6 +882,12 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
         dest.writeInt(getDiscNumber());
         dest.writeLong(getLastModified());
         dest.writeLong(getSeen());
+        dest.writeInt(bool2int(mIsParsed));
+        dest.writeInt(bool2int(mIsP2P));
+        dest.writeLong(mParentMediaId);
+        dest.writeString(mInfohash);
+        dest.writeInt(mFileIndex);
+        dest.writeInt(mIsLive);
 
         if (mSlaves != null) {
             PSlave pslaves[] = new PSlave[mSlaves.length];
@@ -731,4 +943,368 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
             parcel.writeString(uri);
         }
     }
+
+    //:ace
+    @NonNull
+    public String getGroupTitle() {
+        if(!TextUtils.isEmpty(mGroupTitle)) {
+            return mGroupTitle;
+        }
+        else {
+            return getMetaString(META_GROUP_NAME);
+        }
+    }
+
+    public void updateType(int type) {
+        // Set type and update type in media library
+        setType(type);
+        Medialibrary ml = Medialibrary.getInstance();
+        if (mId != 0 && ml.isInitiated())
+            nativeSetMediaType(ml, mId, type);
+    }
+
+    public void setParsed(boolean parsed) {
+        mIsParsed = parsed;
+        Medialibrary ml = Medialibrary.getInstance();
+        if (mId != 0 && ml.isInitiated())
+            nativeSetParsed(ml, mId, parsed);
+    }
+
+    public void setP2PLive(int value) {
+        mIsLive = value;
+        Medialibrary ml = Medialibrary.getInstance();
+        if (mId != 0 && ml.isInitiated())
+            nativeSetP2PLive(ml, mId, value);
+    }
+
+    public void setP2PInfo(String infohash, int fileIndex) {
+        mInfohash = infohash;
+        mFileIndex = fileIndex;
+        Medialibrary ml = Medialibrary.getInstance();
+        if (mId != 0 && ml.isInitiated())
+            nativeSetP2PInfo(ml, mId, infohash, fileIndex);
+    }
+
+    public void resetP2PItem(AceStreamManager playbackManager) {
+        mPlaybackUri = null;
+        mEngineSession = null;
+        if(playbackManager != null) {
+            playbackManager.removePlaybackStateCallback(mPlaybackStateCallback);
+        }
+    }
+
+    public void startP2P(
+            @NonNull AceStreamManager manager,
+            @NonNull final P2PItemStartListener listener,
+            int[] nextFileIndexes) {
+        startP2P(manager, listener, nextFileIndexes, -1);
+    }
+
+    public void setMediaFile(MediaFilesResponse.MediaFile mediaFile) {
+        mMediaFile = mediaFile;
+        defineType(true);
+    }
+
+    public void startP2P(
+            @NonNull final IAceStreamManager manager,
+            @NonNull final P2PItemStartListener listener,
+            final int[] nextFileIndexes,
+            final int streamIndex) {
+        mEngineSessionListener = listener;
+
+        final TransportFileDescriptor descriptor;
+        try {
+            descriptor = getDescriptor();
+        }
+        catch(TransportFileParsingException e) {
+            Log.e(TAG, "Failed to read transport file", e);
+            listener.onError(e.getMessage());
+            return;
+        }
+
+        if(mMediaFile == null) {
+            Log.v(TAG, "startP2P: no media file, get from engine");
+            if(mUri == null) {
+                throw new IllegalStateException("missing descriptor and MRL");
+            }
+
+            final int fileIndex = getP2PFileIndex();
+
+            manager.getEngine(new IAceStreamManager.EngineStateCallback() {
+                @Override
+                public void onEngineConnected(final @NonNull IAceStreamManager manager, @NonNull EngineApi engineApi) {
+                    engineApi.getMediaFiles(descriptor, new Callback<MediaFilesResponse>() {
+                        @Override
+                        public void onSuccess(MediaFilesResponse result) {
+                            for(MediaFilesResponse.MediaFile mf: result.files) {
+                                if(mf.index == fileIndex) {
+                                    mMediaFile = mf;
+                                    startP2P(manager, listener, nextFileIndexes, streamIndex);
+                                    return;
+                                }
+                            }
+                            Log.e(TAG, "Bad file index: index=" + fileIndex);
+                        }
+
+                        @Override
+                        public void onError(String err) {
+                            listener.onError(err);
+                        }
+                    });
+                }
+            });
+
+            return;
+        }
+
+        PlaybackData pb = new PlaybackData();
+        pb.mediaFile = mMediaFile;
+        pb.descriptor = descriptor;
+        pb.streamIndex = streamIndex;
+        pb.nextFileIndexes = nextFileIndexes;
+
+        pb.outputFormat = manager.getOutputFormatForContent(
+                mMediaFile.type,
+                mMediaFile.mime,
+                null,
+                false,
+                true);
+        pb.useFixedSid = true;
+        pb.stopPrevReadThread = 1;
+        pb.resumePlayback = false;
+        pb.useTimeshift = true;
+
+        manager.addPlaybackStateCallback(mPlaybackStateCallback);
+        manager.initEngineSession(pb, new EngineSessionStartListener() {
+            @Override
+            public void onSuccess(EngineSession session) {
+                mPlaybackUri = Uri.parse(session.playbackUrl);
+                mEngineSession = session;
+                listener.onSessionStarted(session);
+            }
+
+            @Override
+            public void onError(String error) {
+                listener.onError(error);
+            }
+        });
+    }
+
+    public Uri getMetaUri() {
+        if(mMediaFile != null) {
+            return Uri.parse("acestream:?infohash=" + mMediaFile.infohash + "&file_index=" + mMediaFile.index);
+        }
+        else {
+            return mUri;
+        }
+    }
+
+    public TransportFileDescriptor getDescriptor() throws TransportFileParsingException {
+        if(mDescriptor == null) {
+            Log.v(TAG, "getDescriptor: no descriptor, parse from MRL");
+            if(mUri == null) {
+                throw new TransportFileParsingException("missing descriptor and MRL");
+            }
+            mDescriptor = TransportFileDescriptor.fromMrl(AceStream.context().getContentResolver(), mUri);
+        }
+        return mDescriptor;
+    }
+
+    public MediaFilesResponse.MediaFile getMediaFile() {
+        return mMediaFile;
+    }
+
+    public String getMime(){
+        return mMediaFile == null ? null : mMediaFile.mime;
+    }
+
+    public static MediaWrapper fromJson(String data) {
+        try {
+            JSONObject root = new JSONObject(data);
+            MediaWrapper mw;
+            if(root.has("uri")) {
+                mw = new MediaWrapper(Uri.parse(root.getString("uri")));
+            }
+            else if(root.has("mediaFile") && root.has("transportDescriptor")) {
+                mw = new MediaWrapper(
+                        TransportFileDescriptor.fromJson(root.getString("transportDescriptor")),
+                        MediaFilesResponse.MediaFile.fromJson(root.getString("mediaFile")));
+            }
+            else {
+                throw new IllegalStateException("malformed encoded data");
+            }
+            if(root.has("title")) {
+                mw.setTitle(root.getString("title"));
+            }
+            return mw;
+        }
+        catch(JSONException e) {
+            throw new IllegalStateException("failed to decode from JSON", e);
+        }
+    }
+
+    public String toJson() {
+        JSONObject root = new JSONObject();
+        try {
+            if (mMediaFile != null) {
+                root.put("mediaFile", mMediaFile.toJson());
+                root.put("transportDescriptor", mDescriptor.toJson());
+            } else {
+                root.put("uri", mUri.toString());
+            }
+            root.put("title", getTitle());
+        }
+        catch(JSONException e) {
+            throw new IllegalStateException("failed to encode to JSON", e);
+        }
+        return root.toString();
+    }
+
+    public boolean isParsed() {
+        return mIsParsed;
+    }
+
+    public long getParentMediaId() {
+        return mParentMediaId;
+    }
+
+    public boolean isLive() {
+        if(mIsLive == -1) {
+            // init
+            int live;
+            if(mMediaFile != null) {
+                live = mMediaFile.isLive() ? 1 : 0;
+            }
+            else {
+                live = 0;
+            }
+            setP2PLive(live);
+        }
+
+        // return cached value
+        return mIsLive == 1;
+    }
+
+    public boolean isVideo() {
+        return getType() == TYPE_VIDEO;
+    }
+
+    /**
+     * Get P2P item without "index" query param
+     *
+     * @return Uri
+     */
+    public Uri getP2PBaseUri() {
+        if(!isP2PItem()) {
+            return null;
+        }
+
+        if(mUri == null) {
+            return null;
+        }
+
+        try {
+            return MiscUtils.removeQueryParameter(mUri, "index");
+        }
+        catch(UnsupportedEncodingException e) {
+            return mUri;
+        }
+    }
+
+    public int getP2PFileIndex() {
+        if(mMediaFile != null) {
+            return mMediaFile.index;
+        }
+
+        if(mUri == null) {
+            return 0;
+        }
+
+        int index;
+        try {
+            index = Integer.parseInt(MiscUtils.getQueryParameter(mUri, "index"));
+        }
+        catch(NumberFormatException|UnsupportedEncodingException e) {
+            index = 0;
+        }
+        return index;
+    }
+
+    public void setUserAgent(String value) {
+        mUserAgent = value;
+    }
+
+    public String getUserAgent() {
+        return mUserAgent;
+    }
+
+    public boolean isRemote() {
+        return mUri != null
+                && !TextUtils.equals(mUri.getScheme(), "file")
+                && !TextUtils.equals(mUri.getScheme(), "content")
+                && !TextUtils.equals(mUri.getScheme(), "acestream");
+    }
+
+    @Override
+    public String toString() {
+        return String.format(Locale.getDefault(),
+                "<MediaWrapper: type=%d id=%d parent=%d p2p=%b uri=%s this=%d title=%s>",
+                mType,
+                mId,
+                mParentMediaId,
+                mIsP2P,
+                mUri,
+                this.hashCode(),
+                getTitle());
+    }
+
+    public String getInfohash() {
+        return mInfohash;
+    }
+
+    public int getFileIndex() {
+        return mFileIndex;
+    }
+
+    /**
+     * Return length to use for sorting.
+     *
+     * @return duration (for reguar items) or file length (for p2p items)
+     */
+    public long getComparableLength() {
+        if(isP2PItem()) {
+            return getMetaLong(META_FILE_SIZE);
+        }
+        else {
+            return mLength;
+        }
+    }
+
+    public void updateFromMediaLibrary() {
+        if(mId != 0) {
+            // Already from ML
+            return;
+        }
+
+        Medialibrary ml = Medialibrary.getInstance();
+        if(ml == null || !ml.isInitiated()) {
+            return;
+        }
+
+        MediaWrapper mediaFromLibrary = ml.findMedia(this);
+        if(mediaFromLibrary.getId() == 0) {
+            return;
+        }
+
+        //TODO: copy all metadata
+        mId = mediaFromLibrary.getId();
+        mParentMediaId = mediaFromLibrary.getParentMediaId();
+        mIsParsed = mediaFromLibrary.isParsed();
+        mInfohash = mediaFromLibrary.getInfohash();
+        mFileIndex = mediaFromLibrary.getP2PFileIndex();
+        mType = mediaFromLibrary.getType();
+        mTime = mediaFromLibrary.getTime();
+        mLength = mediaFromLibrary.getLength();
+    }
+    ///ace
 }

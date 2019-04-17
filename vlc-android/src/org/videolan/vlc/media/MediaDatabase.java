@@ -30,8 +30,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.annotation.Nullable;
-import android.support.v4.util.ArrayMap;
+import androidx.annotation.Nullable;
+import androidx.collection.ArrayMap;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -830,7 +830,14 @@ public class MediaDatabase {
                                     cursor.getInt(14),      // MEDIA_TRACKNUMBER
                                     cursor.getInt(15),     // MEDIA_DISCNUMBER
                                     cursor.getLong(16),    // MEDIA_LAST_MODIFIED
-                                    0L);     // MEDIA_SEEN
+                                    0L,
+                                    false,
+                                    false,    // is p2p
+                                    0, // parent media id
+                                    null,  // p2p infohash
+                                    -1,     // p2p file index
+                                    -1
+                            );
                             medias.put(media.getUri().toString(), media);
 
                             count++;
@@ -937,7 +944,14 @@ public class MediaDatabase {
                         cursor.getInt(13),
                         cursor.getInt(14),
                         cursor.getLong(15),
-                        0L);
+                        0L,
+                        false,
+                        false,
+                        0,
+                        null,
+                        -1,
+                        -1
+                );
             }
             cursor.close();
         }

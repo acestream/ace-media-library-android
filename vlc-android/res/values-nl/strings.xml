@@ -19,10 +19,6 @@
     <string name="sortby_number_desc">Aantal tracks (beschr)</string>
     <string name="searchable_hint">Zoeken…</string>
     <string name="history">Geschiedenis</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d resultaat gevonden</item>
-        <item quantity="other">%d resultaten gevonden</item>
-    </plurals>
     <string name="play">Afspelen</string>
     <string name="playback">Afspelen</string>
     <string name="playback_controls">Afspeelbesturing</string>
@@ -71,14 +67,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 submap</item>
         <item quantity="other">%d submappen</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 mediabestand</item>
-        <item quantity="other">%d mediabestanden</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 video</item>
-        <item quantity="other">%d video\'s</item>
     </plurals>
     <string name="internal_memory">Intern geheugen</string>
     <string name="parent_folder">Naar bovenliggende map</string>
@@ -140,10 +128,6 @@
     <string name="navmenu">navigatiemenu</string>
     <string name="advanced">geavanceerde opties</string>
     <string name="audio_boost_warning">Nogmaals omhoog slepen om boven 100 % te gaan</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 kanaal\n</item>
-        <item quantity="other">%1$d kanalen\n</item>
-    </plurals>
     <string name="track_samplerate_info">Samplerate: %1$d Hz\n</string>
     <string name="track_resolution_info">Resolutie: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Beeldsnelheid: %1$.3f\n</string>
@@ -179,7 +163,7 @@
     <string name="error_not_compatible">Sorry, uw toestel wordt op dit moment niet ondersteund door deze versie van VLC voor Android™.</string>
     <string name="error_problem">Sorry, VLC voor Android had een probleem bij het laden en moest afgesloten worden.</string>
     <string name="error_message_is">De foutmelding is (vermeld dit bij het debuggen):\n\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Fout bij afspelen</string>
     <string name="encountered_error_message">VLC heeft een fout aangetroffen bij dit mediabestand.\nProbeer de mediabibliotheek te vernieuwen.</string>
     <string name="invalid_location">De locatie %1$s kan niet afgespeeld worden.</string>
@@ -442,14 +426,14 @@
     <!--Widget-->
     <string name="widget_name_w">VLC Widget licht</string>
     <string name="widget_name_b">VLC Widget donker</string>
-    <string name="allow_storage_access_title">VLC toegang geven tot video- en audiobestanden</string>
-    <string name="allow_storage_access_description">VLC moet uw toestemming hebben om toegang te krijgen tot de mediabestanden op dit apparaat.</string>
-    <string name="allow_settings_access_ringtone_title">VLC toelaten om de ringtone in te stellen</string>
-    <string name="allow_settings_access_ringtone_description">VLC moet uw toestemming hebben om dit nummer in te stellen als uw ringtone.</string>
-    <string name="allow_settings_access_brightness_title">VLC toelaten om helderheidsmodus te wijzigen</string>
-    <string name="allow_settings_access_brightness_description">VLC moet uw toestemming hebben om uw helderheidsmodus te wijzigen</string>
-    <string name="allow_draw_overlays_title">Popup van VLC-speler toestaan over andere apps</string>
-    <string name="allow_sdraw_overlays_description">VLC moet uw toestemming hebben om uw video weer te geven in een popup bovenop andere toepassingen.</string>
+    <string name="allow_storage_access_title">Ace Stream toegang geven tot video- en audiobestanden</string>
+    <string name="allow_storage_access_description">Ace Stream moet uw toestemming hebben om toegang te krijgen tot de mediabestanden op dit apparaat.</string>
+    <string name="allow_settings_access_ringtone_title">Ace Stream toelaten om de ringtone in te stellen</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream moet uw toestemming hebben om dit nummer in te stellen als uw ringtone.</string>
+    <string name="allow_settings_access_brightness_title">Ace Stream toelaten om helderheidsmodus te wijzigen</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream moet uw toestemming hebben om uw helderheidsmodus te wijzigen</string>
+    <string name="allow_draw_overlays_title">Popup van Ace Stream-speler toestaan over andere apps</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream moet uw toestemming hebben om uw video weer te geven in een popup bovenop andere toepassingen.</string>
     <string name="permission_ask_again">Toegang toestaan</string>
     <string name="exit_app">VLC sluiten</string>
     <string name="exit_app_msg">Weet u zeker dat u VLC wilt afsluiten?</string>
@@ -532,4 +516,34 @@
     <string name="sdcard_permission_dialog_title">U moet VLC machtiging geven om te schrijven naar uw sd-kaart</string>
     <string name="sdcard_permission_dialog_message">VLC kan dit bestand niet verwijderen zonder machtiging voor schrijftoegang.\nGa naar uw sd-kaart en klik op \"selecteren\".\nHet kan zijn dat u eerst op \"sd-kaart weergeven\" moet klikken in het menu rechtsboven</string>
     <string name="dialog_sd_wizard">Toon het mij</string>
+    <string name="torrent_files">Torrent bestanden</string>
+    <string name="select_language">Selecteer taal</string>
+    <string name="enable_headset_actions_title" source="google_translate">Afstandsbediening snelkoppelingen</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Druk tweemaal op \'Play \' om naar volgende te gaan en druk er lang op om naar de vorige track te gaan</string>
+    <string name="main_prefs_category" source="google_translate">Belangrijkste instellingen</string>
+    <string name="dump_media_db" source="google_translate">Dump mediadatabase</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopieer de database naar de root van de interne opslag</string>
+    <string name="streams" source="google_translate">streams</string>
+    <string name="renderers_disconnect" source="google_translate">Loskoppelen</string>
+    <string name="audio_digital_failed" source="google_translate">Kan de status van de digitale audio-uitvoer niet wijzigen</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Audio digitale uitvoer ingeschakeld</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio digitale uitvoer uitgeschakeld</string>
+    <string name="live_streams" source="google_translate">Livestreams</string>
+    <string name="all_live_streams" source="google_translate">Alle livestreams</string>
+    <string name="video_torrents" source="google_translate">Videobrons</string>
+    <string name="audio_torrents" source="google_translate">Audio torrents</string>
+    <string name="all_torrents" source="google_translate">Alle torrents</string>
+    <string name="main" source="google_translate">Hoofd</string>
+    <string name="media_player" source="google_translate">Mediaspeler</string>
+    <string name="acestream_server" source="google_translate">Ace Stream-server (engine)</string>
+    <string name="media_player_settings" source="google_translate">Instellingen voor mediaspeler</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream-server (motor) instellingen</string>
+    <string name="sign_out" source="google_translate">Afmelden</string>
+    <string name="sign_in" source="google_translate">Aanmelden</string>
+    <string name="sign_in_acestream" source="google_translate">Log in met Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Log in met Google</string>
+    <string name="video_files" source="google_translate">Videobestanden</string>
+    <string name="audio_files" source="google_translate">Geluidsbestanden</string>
+    <string name="retry" source="google_translate">opnieuw proberen</string>
+    <string name="failed_to_load_web_page" source="google_translate">Kan webpagina niet laden</string>
 </resources>

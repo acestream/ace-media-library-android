@@ -24,14 +24,15 @@
 package org.videolan.vlc.gui.preferences;
 
 import android.os.Bundle;
-import android.support.v14.preference.MultiSelectListPreference;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
+import androidx.preference.MultiSelectListPreference;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
-import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.vlc.R;
+import org.videolan.vlc.gui.preferences.hack.FolderPreference;
+import org.videolan.vlc.gui.preferences.hack.FolderPreferenceDialogFragmentCompat;
 import org.videolan.vlc.gui.preferences.hack.MultiSelectListPreferenceDialogFragmentCompat;
 
 public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
@@ -65,12 +66,21 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onDisplayPreferenceDialog(Preference preference) {
-        if (AndroidUtil.isHoneycombOrLater && preference instanceof MultiSelectListPreference) {
-            DialogFragment dialogFragment = MultiSelectListPreferenceDialogFragmentCompat.newInstance(preference.getKey());
+        DialogFragment dialogFragment = null;
+        if (preference instanceof MultiSelectListPreference) {
+            dialogFragment = MultiSelectListPreferenceDialogFragmentCompat.newInstance(preference.getKey());
+        }
+        else if(preference instanceof FolderPreference) {
+            dialogFragment = FolderPreferenceDialogFragmentCompat.newInstance(preference.getKey());
+        }
+
+        if(dialogFragment != null) {
+            // Show custom dialog
             dialogFragment.setTargetFragment(this, 0);
             dialogFragment.show(getFragmentManager(), DIALOG_FRAGMENT_TAG);
-            return;
         }
-        super.onDisplayPreferenceDialog(preference);
+        else {
+            super.onDisplayPreferenceDialog(preference);
+        }
     }
 }

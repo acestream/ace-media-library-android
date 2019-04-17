@@ -1,6 +1,18 @@
+// #include <stdlib.h>
+// #include <string>
+// #include "jniloader.h"
+// #include <medialibrary/IDeviceLister.h>
+// #define LOG_TAG "VLC/JNI/MediaLibrary"
+// #include "log.h"
+// #include "utils.h"
+// #include "AndroidMediaLibrary.h"
+
 #include <stdlib.h>
+
+#include <algorithm>
 #include <string>
-#include "jniloader.h"
+
+#include <jni.h>
 #include <medialibrary/IDeviceLister.h>
 #define LOG_TAG "VLC/JNI/MediaLibrary"
 #include "log.h"
@@ -198,10 +210,23 @@ forceRescan(JNIEnv* env, jobject thiz)
     aml->forceRescan();
 }
 
+void
+reinit(JNIEnv* env, jobject thiz)
+{
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, thiz);
+    aml->reinit();
+}
+
 jboolean
 increasePlayCount(JNIEnv* env, jobject thiz, jlong id)
 {
     return MediaLibrary_getInstance(env, thiz)->increasePlayCount((int64_t)id);
+}
+
+jboolean
+deleteMedia(JNIEnv* env, jobject thiz, jlong id)
+{
+    return MediaLibrary_getInstance(env, thiz)->deleteMedia((int64_t)id);
 }
 
 jobjectArray
@@ -254,10 +279,10 @@ bool clearHistory(JNIEnv* env, jobject thiz)
 }
 
 static jobjectArray
-getInternalVideos(JNIEnv* env, jobject thiz, medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false)
+getInternalVideos(JNIEnv* env, jobject thiz, jint is_p2p, jint is_live, medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false)
 {
     AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, thiz);
-    std::vector<medialibrary::MediaPtr> videoFiles = aml->videoFiles(sort, desc);
+    std::vector<medialibrary::MediaPtr> videoFiles = aml->videoFiles(is_p2p, is_live, sort, desc);
     jobjectArray videoRefs = (jobjectArray) env->NewObjectArray(videoFiles.size(), ml_fields.MediaWrapper.clazz, NULL);
     int index = -1, drops = 0;
     for(medialibrary::MediaPtr const& media : videoFiles) {
@@ -270,23 +295,113 @@ getInternalVideos(JNIEnv* env, jobject thiz, medialibrary::SortingCriteria sort 
     return filteredArray(env, &ml_fields, videoRefs, drops);
 }
 
-jobjectArray
-getVideos(JNIEnv* env, jobject thiz)
+static jobjectArray
+getInternalTransportFiles(JNIEnv* env, jobject thiz, jint is_parsed, medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false)
 {
-    return getInternalVideos(env, thiz);
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, thiz);
+    std::vector<medialibrary::MediaPtr> transportFiles = aml->transportFiles(is_parsed, sort, desc);
+    jobjectArray refs = (jobjectArray) env->NewObjectArray(transportFiles.size(), ml_fields.MediaWrapper.clazz, NULL);
+    int index = -1, drops = 0;
+    for(medialibrary::MediaPtr const& media : transportFiles) {
+        jobject item = mediaToMediaWrapper(env, &ml_fields, media);
+        env->SetObjectArrayElement(refs, ++index, item);
+        if (item == nullptr)
+            ++drops;
+        env->DeleteLocalRef(item);
+    }
+    return filteredArray(env, &ml_fields, refs, drops);
 }
 
 jobjectArray
-getRecentVideos(JNIEnv* env, jobject thiz)
+findMediaByInfohash(JNIEnv* env, jobject thiz, jstring infohash, jint fileIndex)
 {
-    return getInternalVideos(env, thiz, medialibrary::SortingCriteria::InsertionDate, true);
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, thiz);
+    const char *infohashChar = env->GetStringUTFChars(infohash, JNI_FALSE);
+    std::vector<medialibrary::MediaPtr> result = aml->findMediaByInfohash(infohashChar, fileIndex);
+    env->ReleaseStringUTFChars(infohash, infohashChar);
+    jobjectArray refs = (jobjectArray) env->NewObjectArray(result.size(), ml_fields.MediaWrapper.clazz, NULL);
+    int index = -1, drops = 0;
+    for(medialibrary::MediaPtr const& media : result) {
+        jobject item = mediaToMediaWrapper(env, &ml_fields, media);
+        env->SetObjectArrayElement(refs, ++index, item);
+        if (item == nullptr)
+            ++drops;
+        env->DeleteLocalRef(item);
+    }
+    return filteredArray(env, &ml_fields, refs, drops);
+}
+
+jobjectArray
+findMediaByParent(JNIEnv* env, jobject thiz, jlong parentId)
+{
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, thiz);
+    std::vector<medialibrary::MediaPtr> result = aml->findMediaByParent(parentId);
+    jobjectArray refs = (jobjectArray) env->NewObjectArray(result.size(), ml_fields.MediaWrapper.clazz, NULL);
+    int index = -1, drops = 0;
+    for(medialibrary::MediaPtr const& media : result) {
+        jobject item = mediaToMediaWrapper(env, &ml_fields, media);
+        env->SetObjectArrayElement(refs, ++index, item);
+        if (item == nullptr)
+            ++drops;
+        env->DeleteLocalRef(item);
+    }
+    return filteredArray(env, &ml_fields, refs, drops);
+}
+
+jobjectArray
+findDuplicatesByInfohash(JNIEnv* env, jobject thiz)
+{
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, thiz);
+    std::vector<medialibrary::MediaPtr> result = aml->findDuplicatesByInfohash();
+    jobjectArray refs = (jobjectArray) env->NewObjectArray(result.size(), ml_fields.MediaWrapper.clazz, NULL);
+    int index = -1, drops = 0;
+    for(medialibrary::MediaPtr const& media : result) {
+        jobject item = mediaToMediaWrapper(env, &ml_fields, media);
+        env->SetObjectArrayElement(refs, ++index, item);
+        if (item == nullptr)
+            ++drops;
+        env->DeleteLocalRef(item);
+    }
+    return filteredArray(env, &ml_fields, refs, drops);
+}
+
+jboolean
+copyMetadata(JNIEnv* env, jobject thiz, jlong sourceId, jlong destId)
+{
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, thiz);
+    return aml->copyMetadata(sourceId, destId);
+}
+
+jboolean
+removeOrphanTransportFiles(JNIEnv* env, jobject thiz)
+{
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, thiz);
+    return aml->removeOrphanTransportFiles();
+}
+
+jobjectArray
+getVideos(JNIEnv* env, jobject thiz, jint is_p2p, jint is_live)
+{
+    return getInternalVideos(env, thiz, is_p2p, is_live);
+}
+
+jobjectArray
+getTransportFiles(JNIEnv* env, jobject thiz, jint is_parsed)
+{
+    return getInternalTransportFiles(env, thiz, is_parsed);
+}
+
+jobjectArray
+getRecentVideos(JNIEnv* env, jobject thiz, jint is_p2p, jint is_live)
+{
+    return getInternalVideos(env, thiz, is_p2p, is_live, medialibrary::SortingCriteria::InsertionDate, true);
 }
 
 static jobjectArray
-getInternalAudio(JNIEnv* env, jobject thiz, medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false)
+getInternalAudio(JNIEnv* env, jobject thiz, jint is_p2p, jint is_live, medialibrary::SortingCriteria sort = medialibrary::SortingCriteria::Default, bool desc = false)
 {
     AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, thiz);
-    std::vector<medialibrary::MediaPtr> audioFiles = aml->audioFiles(sort, desc);
+    std::vector<medialibrary::MediaPtr> audioFiles = aml->audioFiles(is_p2p, is_live, sort, desc);
     jobjectArray audioRefs = (jobjectArray) env->NewObjectArray(audioFiles.size(), ml_fields.MediaWrapper.clazz, NULL);
     int index = -1, drops = 0;
     for(medialibrary::MediaPtr const& media : audioFiles) {
@@ -300,15 +415,15 @@ getInternalAudio(JNIEnv* env, jobject thiz, medialibrary::SortingCriteria sort =
 }
 
 jobjectArray
-getAudio(JNIEnv* env, jobject thiz)
+getAudio(JNIEnv* env, jobject thiz, jint is_p2p, jint is_live)
 {
-    return getInternalAudio(env, thiz);
+    return getInternalAudio(env, thiz, is_p2p, is_live);
 }
 
 jobjectArray
-getRecentAudio(JNIEnv* env, jobject thiz)
+getRecentAudio(JNIEnv* env, jobject thiz, jint is_p2p, jint is_live)
 {
-    return getInternalAudio(env, thiz, medialibrary::SortingCriteria::InsertionDate, true);
+    return getInternalAudio(env, thiz, is_p2p, is_live, medialibrary::SortingCriteria::InsertionDate, true);
 }
 
 jobject
@@ -401,12 +516,12 @@ searchPlaylist(JNIEnv* env, jobject thiz, jstring query)
 
 jint
 getVideoCount(JNIEnv* env, jobject thiz) {
-    return MediaLibrary_getInstance(env, thiz)->videoFiles().size();
+    return MediaLibrary_getInstance(env, thiz)->videoFiles(-1, -1).size();
 }
 
 jint
 getAudioCount(JNIEnv* env, jobject thiz) {
-    return MediaLibrary_getInstance(env, thiz)->audioFiles().size();
+    return MediaLibrary_getInstance(env, thiz)->audioFiles(-1, -1).size();
 }
 
 jobject
@@ -429,6 +544,18 @@ addMedia(JNIEnv* env, jobject thiz, jstring mrl) {
     AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, thiz);
     const char *char_mrl = env->GetStringUTFChars(mrl, JNI_FALSE);
     jobject mw = mediaToMediaWrapper(env, &ml_fields, aml->addMedia(char_mrl));
+    env->ReleaseStringUTFChars(mrl, char_mrl);
+    return mw;
+}
+
+jobject
+addP2PMedia(JNIEnv* env, jobject thiz, jlong parentMediaId, jint type, jstring title, jstring mrl) {
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, thiz);
+    const char *char_title = env->GetStringUTFChars(title, JNI_FALSE);
+    const char *char_mrl = env->GetStringUTFChars(mrl, JNI_FALSE);
+    uint8_t mediaType = (uint8_t)mediaWrapperTypeToMediaType(type);
+    jobject mw = mediaToMediaWrapper(env, &ml_fields, aml->addP2PMedia( parentMediaId, mediaType, char_title, char_mrl));
+    env->ReleaseStringUTFChars(title, char_title);
     env->ReleaseStringUTFChars(mrl, char_mrl);
     return mw;
 }
@@ -695,6 +822,51 @@ setMediaLongMetadata(JNIEnv* env, jobject thiz, jobject medialibrary, jlong id, 
     media->setMetadata((medialibrary::IMedia::MetadataType)metadataType, meta);
 }
 
+void
+setMediaType(JNIEnv* env, jobject thiz, jobject medialibrary, jlong id, jint type)
+{
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, medialibrary);
+    medialibrary::MediaPtr media = aml->media(id);
+    if (media == nullptr)
+        return;
+    media->setType((medialibrary::IMedia::Type)mediaWrapperTypeToMediaType(type));
+    media->save();
+}
+
+void
+setParsed(JNIEnv* env, jobject thiz, jobject medialibrary, jlong id, jboolean parsed)
+{
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, medialibrary);
+    medialibrary::MediaPtr media = aml->media(id);
+    if (media == nullptr)
+        return;
+    media->setParsed( parsed );
+    media->save();
+}
+
+void
+setP2PLive(JNIEnv* env, jobject thiz, jobject medialibrary, jlong id, jint value)
+{
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, medialibrary);
+    medialibrary::MediaPtr media = aml->media(id);
+    if (media == nullptr)
+        return;
+    media->setP2PLive( value );
+    media->save();
+}
+
+void
+setP2PInfo(JNIEnv* env, jobject thiz, jobject medialibrary, jlong id, jstring infohash, jint file_index)
+{
+    AndroidMediaLibrary *aml = MediaLibrary_getInstance(env, medialibrary);
+    medialibrary::MediaPtr media = aml->media(id);
+    if (media == nullptr)
+        return;
+    const char *char_infohash = env->GetStringUTFChars(infohash, JNI_FALSE);
+    media->setP2PInfo( char_infohash, file_index );
+    media->save();
+    env->ReleaseStringUTFChars(infohash, char_infohash);
+}
 /*
  * Playlist methods
  */
@@ -783,10 +955,11 @@ static JNINativeMethod methods[] = {
     {"nativeLastStreamsPlayed", "()[Lorg/videolan/medialibrary/media/HistoryItem;", (void*)lastStreamsPlayed },
     {"nativeAddToHistory", "(Ljava/lang/String;Ljava/lang/String;)Z", (void*)addToHistory },
     {"nativeClearHistory", "()Z", (void*)clearHistory },
-    {"nativeGetVideos", "()[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)getVideos },
-    {"nativeGetRecentVideos", "()[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)getRecentVideos },
-    {"nativeGetAudio", "()[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)getAudio },
-    {"nativeGetRecentAudio", "()[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)getRecentAudio },
+    {"nativeGetVideos", "(II)[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)getVideos },
+    {"nativeGetTransportFiles", "(I)[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)getTransportFiles },
+    {"nativeGetRecentVideos", "(II)[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)getRecentVideos },
+    {"nativeGetAudio", "(II)[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)getAudio },
+    {"nativeGetRecentAudio", "(II)[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)getRecentAudio },
     {"nativeSearch", "(Ljava/lang/String;)Lorg/videolan/medialibrary/media/SearchAggregate;", (void*)search},
     {"nativeSearchMedia", "(Ljava/lang/String;)Lorg/videolan/medialibrary/media/MediaSearchAggregate;", (void*)searchMedia},
     {"nativeSearchAlbum", "(Ljava/lang/String;)[Lorg/videolan/medialibrary/media/Album;", (void*)searchAlbum },
@@ -796,6 +969,7 @@ static JNINativeMethod methods[] = {
     {"nativeGetMedia", "(J)Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)getMedia },
     {"nativeGetMediaFromMrl", "(Ljava/lang/String;)Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)getMediaFromMrl },
     {"nativeAddMedia", "(Ljava/lang/String;)Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)addMedia },
+    {"nativeAddP2PMedia", "(JILjava/lang/String;Ljava/lang/String;)Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)addP2PMedia },
     {"nativeGetVideoCount", "()I", (void*)getVideoCount },
     {"nativeGetAudioCount", "()I", (void*)getAudioCount },
     {"nativeGetAlbums", "()[Lorg/videolan/medialibrary/media/Album;", (void*)getAlbums },
@@ -812,10 +986,17 @@ static JNINativeMethod methods[] = {
     {"nativeReload", "(Ljava/lang/String;)V", (void*)reloadEntryPoint },
     {"nativeForceParserRetry", "()V", (void*)forceParserRetry },
     {"nativeForceRescan", "()V", (void*)forceRescan },
+    {"nativeReinit", "()V", (void*)reinit },
     {"nativeIncreasePlayCount", "(J)Z", (void*)increasePlayCount },
     {"nativeSetMediaUpdatedCbFlag", "(I)V", (void*)setMediaUpdatedCbFlag },
     {"nativeSetMediaAddedCbFlag", "(I)V", (void*)setMediaAddedCbFlag },
     {"nativePlaylistCreate", "(Ljava/lang/String;)Lorg/videolan/medialibrary/media/Playlist;", (void*)playlistCreate },
+    {"nativeDeleteMedia", "(J)Z", (void*)deleteMedia },
+    {"nativeFindMediaByInfohash", "(Ljava/lang/String;I)[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)findMediaByInfohash },
+    {"nativeFindMediaByParent", "(J)[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)findMediaByParent },
+    {"nativeFindDuplicatesByInfohash", "()[Lorg/videolan/medialibrary/media/MediaWrapper;", (void*)findDuplicatesByInfohash },
+    {"nativeCopyMetadata", "(JJ)Z", (void*)copyMetadata },
+    {"nativeRemoveOrphanTransportFiles", "()Z", (void*)removeOrphanTransportFiles },
 };
 
 static JNINativeMethod media_methods[] = {
@@ -823,6 +1004,10 @@ static JNINativeMethod media_methods[] = {
     {"nativeGetMediaStringMetadata", "(Lorg/videolan/medialibrary/Medialibrary;JI)Ljava/lang/String;", (void*)getMediaStringMetadata },
     {"nativeSetMediaStringMetadata", "(Lorg/videolan/medialibrary/Medialibrary;JILjava/lang/String;)V", (void*)setMediaStringMetadata },
     {"nativeSetMediaLongMetadata", "(Lorg/videolan/medialibrary/Medialibrary;JIJ)V", (void*)setMediaLongMetadata },
+    {"nativeSetMediaType", "(Lorg/videolan/medialibrary/Medialibrary;JI)V", (void*)setMediaType },
+    {"nativeSetParsed", "(Lorg/videolan/medialibrary/Medialibrary;JZ)V", (void*)setParsed },
+    {"nativeSetP2PInfo", "(Lorg/videolan/medialibrary/Medialibrary;JLjava/lang/String;I)V", (void*)setP2PInfo },
+    {"nativeSetP2PLive", "(Lorg/videolan/medialibrary/Medialibrary;JI)V", (void*)setP2PLive },
 };
 
 static JNINativeMethod album_methods[] = {
@@ -858,10 +1043,13 @@ static void jni_detach_thread(void *data)
     myVm->DetachCurrentThread();
 }
 
-extern "C" {
-int MediaLibraryJNI_OnLoad(JavaVM *vm, JNIEnv* env)
+jint JNI_OnLoad(JavaVM *vm, void *reserved)
 {
+    JNIEnv* env = NULL;
     myVm = vm;
+
+    if (vm->GetEnv((void**) &env, VLC_JNI_VERSION) != JNI_OK)
+        return -1;
 
 #define GET_CLASS(clazz, str, b_globlal) do { \
     (clazz) = env->FindClass((str)); \
@@ -955,7 +1143,7 @@ int MediaLibraryJNI_OnLoad(JavaVM *vm, JNIEnv* env)
     GET_ID(GetMethodID,
            ml_fields.MediaWrapper.initID,
            ml_fields.MediaWrapper.clazz,
-           "<init>", "(JLjava/lang/String;JJILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IILjava/lang/String;IIIIJJ)V");
+           "<init>", "(JLjava/lang/String;JJILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IILjava/lang/String;IIIIJJZZJLjava/lang/String;II)V");
 
     ///
     GET_CLASS(ml_fields.HistoryItem.clazz,
@@ -1090,16 +1278,20 @@ int MediaLibraryJNI_OnLoad(JavaVM *vm, JNIEnv* env)
 #undef GET_CLASS
 #undef GET_ID
 
-    return 0;
+    return VLC_JNI_VERSION;
 }
 
-void MediaLibraryJNI_OnUnload(JavaVM *vm, JNIEnv* env)
+void JNI_OnUnload(JavaVM* vm, void* reserved)
 {
+    JNIEnv* env = NULL;
+
+    if (vm->GetEnv((void**) &env, VLC_JNI_VERSION) != JNI_OK)
+        return;
+
     env->DeleteGlobalRef(ml_fields.IllegalArgumentException.clazz);
     env->DeleteGlobalRef(ml_fields.IllegalStateException.clazz);
     env->DeleteGlobalRef(ml_fields.MediaLibrary.clazz);
     env->DeleteGlobalRef(ml_fields.MediaWrapper.clazz);
-}
 }
 
 static inline void throw_IllegalStateException(JNIEnv *env, const char *p_error)

@@ -19,9 +19,6 @@
     <string name="sortby_number_desc">Trek Nb (turun)</string>
     <string name="searchable_hint">Gelintar...</string>
     <string name="history">Sejarah</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="other">%d keputusan ditemui</item>
-    </plurals>
     <string name="play">Main</string>
     <string name="playback">Mainbalik</string>
     <string name="playback_controls">Kawalan mainbalik</string>
@@ -67,12 +64,6 @@
     </plurals>
     <plurals name="subfolders_quantity">
         <item quantity="other">%d subfolder</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="other">%d fail media</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="other">%d video</item>
     </plurals>
     <string name="internal_memory">Ingatan dalaman</string>
     <string name="parent_folder">Naik ke folder induk</string>
@@ -134,9 +125,6 @@
     <string name="navmenu">menu navigasi</string>
     <string name="advanced">pilihan lanjutan</string>
     <string name="audio_boost_warning">Leret ke atas sekali lagi untuk melangkaui 100%</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="other">%1$d saluran\n</item>
-    </plurals>
     <string name="track_samplerate_info">Kadar sampel: %1$d Hz\n</string>
     <string name="track_resolution_info">Resolusi: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Kadar bingkai: %1$.3f\n</string>
@@ -172,7 +160,7 @@
     <string name="error_not_compatible">Maaf, peranti anda belum lagi menyokong versi VLC untuk Android™ ini. </string>
     <string name="error_problem">Maaf, VLC untuk Android mengalami masalah memuatkan dan perlu ditutup.</string>
     <string name="error_message_is">Ralat mesej ialah (sila jelaskan perkara ini bila menyahpepijat):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Ralat mainbalik</string>
     <string name="encountered_error_message">VLC menghadapi ralat dengan media ini.\nSila segar semula pustaka media.</string>
     <string name="invalid_location">Lokasi %1$s tidak dapat dimainkan.</string>
@@ -435,14 +423,14 @@
     <!--Widget-->
     <string name="widget_name_w">Widjet Putih VLC</string>
     <string name="widget_name_b">Widjet Gelap VLC</string>
-    <string name="allow_storage_access_title">Benarkan VLC mencapai fail video dan audio</string>
-    <string name="allow_storage_access_description">VLC perlu kebenaran anda untuk mencapai fail media dalam peranti ini.</string>
-    <string name="allow_settings_access_ringtone_title">Benarkan VLC tetapkan nada dering</string>
-    <string name="allow_settings_access_ringtone_description">VLC perlu kebenaran anda untuk memasang lagu ini sebagai nada dering anda.</string>
-    <string name="allow_settings_access_brightness_title">Benarkan VLC mengubah mod kecerahan</string>
-    <string name="allow_settings_access_brightness_description">VLC perlu kebenaran anda untuk mengubah mod kecerahan anda.</string>
-    <string name="allow_draw_overlays_title">Benarkan pemain VLC timbul berbanding apl lain</string>
-    <string name="allow_sdraw_overlays_description">VLC perlu kebenaran anda untuk paparkan video anda secara timbul berbanding aplikasi lain.</string>
+    <string name="allow_storage_access_title">Benarkan Ace Stream mencapai fail video dan audio</string>
+    <string name="allow_storage_access_description">Ace Stream perlu kebenaran anda untuk mencapai fail media dalam peranti ini.</string>
+    <string name="allow_settings_access_ringtone_title">Benarkan Ace Stream tetapkan nada dering</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream perlu kebenaran anda untuk memasang lagu ini sebagai nada dering anda.</string>
+    <string name="allow_settings_access_brightness_title">Benarkan Ace Stream mengubah mod kecerahan</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream perlu kebenaran anda untuk mengubah mod kecerahan anda.</string>
+    <string name="allow_draw_overlays_title">Benarkan pemain Ace Stream timbul berbanding apl lain</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream perlu kebenaran anda untuk paparkan video anda secara timbul berbanding aplikasi lain.</string>
     <string name="permission_ask_again">Beri keizinan</string>
     <string name="exit_app">Tutup VLC</string>
     <string name="exit_app_msg">Anda pasti mahu menutup VLC?</string>
@@ -525,4 +513,34 @@
     <string name="sdcard_permission_dialog_title">Anda telah memberi kebenaran VLC capaian tulis ke Kad SD anda</string>
     <string name="sdcard_permission_dialog_message">VLC tidak dapat memadam fail ini tanpa keizinan capaian tulis.\nSila pergi ke Kad SD anda dan klik pada \"Pilih\".\nAnda boleh klik pada \"Tunjuk kad SD\" dauhlu dalam menu kanan-atas</string>
     <string name="dialog_sd_wizard">Tunjuk saya</string>
+    <string name="torrent_files">Torrent fail</string>
+    <string name="select_language">Pilih Bahasa</string>
+    <string name="enable_headset_actions_title" source="google_translate">Pintasan kawalan jauh</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Tekan dua kali pada \'Main \' untuk melangkau ke depan dan tekan lama untuk melangkau ke trek sebelumnya</string>
+    <string name="main_prefs_category" source="google_translate">Tetapan utama</string>
+    <string name="dump_media_db" source="google_translate">Pangkalan data media dump</string>
+    <string name="dump_media_db_summary" source="google_translate">Salin pangkalan data ke akar storan dalaman</string>
+    <string name="streams" source="google_translate">sungai</string>
+    <string name="renderers_disconnect" source="google_translate">Putuskan sambungan</string>
+    <string name="audio_digital_failed" source="google_translate">Gagal menukar keadaan Audio Digital Output</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Output Digital Audio diaktifkan</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Output Digital Audio dilumpuhkan</string>
+    <string name="live_streams" source="google_translate">Aliran langsung</string>
+    <string name="all_live_streams" source="google_translate">Semua aliran langsung</string>
+    <string name="video_torrents" source="google_translate">Torrents video</string>
+    <string name="audio_torrents" source="google_translate">Tayar audio</string>
+    <string name="all_torrents" source="google_translate">Semua torrents</string>
+    <string name="main" source="google_translate">Main</string>
+    <string name="media_player" source="google_translate">Pemain media</string>
+    <string name="acestream_server" source="google_translate">Pelayan Ace Stream (enjin)</string>
+    <string name="media_player_settings" source="google_translate">Tetapan pemain media</string>
+    <string name="acestream_server_settings" source="google_translate">Seting pelayan Ace (enjin)</string>
+    <string name="sign_out" source="google_translate">Keluar</string>
+    <string name="sign_in" source="google_translate">Masuk</string>
+    <string name="sign_in_acestream" source="google_translate">Log masuk dengan Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Log masuk dengan Google</string>
+    <string name="video_files" source="google_translate">Fail video</string>
+    <string name="audio_files" source="google_translate">Fail audio</string>
+    <string name="retry" source="google_translate">Cuba semula</string>
+    <string name="failed_to_load_web_page" source="google_translate">Gagal memuat halaman web</string>
 </resources>

@@ -23,15 +23,15 @@
 
 package org.videolan.vlc.gui.helpers;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.TypedArray;
-import android.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -44,14 +44,14 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.FragmentActivity;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.DragAndDropPermissions;
@@ -67,16 +67,17 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.videolan.vlc.R;
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.medialibrary.media.MediaLibraryItem;
 import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.vlc.BuildConfig;
 import org.videolan.vlc.MediaParsingService;
-import org.videolan.vlc.R;
 import org.videolan.vlc.VLCApplication;
 import org.videolan.vlc.gui.audio.BaseAudioBrowser;
 import org.videolan.vlc.gui.browser.SortableFragment;
 import org.videolan.vlc.gui.dialogs.SavePlaylistDialog;
+import org.videolan.vlc.media.MediaGroup;
 import org.videolan.vlc.media.MediaUtils;
 import org.videolan.vlc.util.Constants;
 import org.videolan.vlc.util.FileUtils;
@@ -89,8 +90,7 @@ public class UiTools {
 
     public static class Resources {
         public static final int ITEM_FOCUS_OFF = ContextCompat.getColor(VLCApplication.getAppContext(), R.color.transparent);
-        public static final int ITEM_FOCUS_ON = ContextCompat.getColor(VLCApplication.getAppContext(), R.color.orange500transparent);
-        public static final int ITEM_SELECTION_ON = ContextCompat.getColor(VLCApplication.getAppContext(), R.color.orange200transparent);
+        public static final int ITEM_FOCUS_ON = ContextCompat.getColor(VLCApplication.getAppContext(), R.color.highlight_blue);
     }
 
     private static final Handler sHandler = new Handler(Looper.getMainLooper());
@@ -98,7 +98,7 @@ public class UiTools {
 
     /** Print an on-screen message to alert the user */
     public static void snacker(@NonNull View view, @NonNull int stringId) {
-        Snackbar.make(view, stringId, Snackbar.LENGTH_SHORT).show();
+        showSnacker(Snackbar.make(view, stringId, Snackbar.LENGTH_SHORT));
     }
 
     /** Print an on-screen message to alert the user */
@@ -107,7 +107,7 @@ public class UiTools {
         Snackbar snack = Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
         if (AndroidUtil.isLolliPopOrLater)
             snack.getView().setElevation(view.getResources().getDimensionPixelSize(R.dimen.audio_player_elevation));
-        snack.show();
+        showSnacker(snack);
     }
 
     /** Print an on-screen message to alert the user, with undo action */
@@ -130,9 +130,18 @@ public class UiTools {
                 });
         if (AndroidUtil.isLolliPopOrLater)
             snack.getView().setElevation(view.getResources().getDimensionPixelSize(R.dimen.audio_player_elevation));
-        snack.show();
+        showSnacker(snack);
         if (action != null)
             sHandler.postDelayed(action, DELETE_DURATION);
+    }
+
+    private static void showSnacker(@NonNull Snackbar snacker) {
+        if(VLCApplication.isBlackTheme()) {
+            snacker.getView().setBackgroundColor(
+                    ContextCompat.getColor(VLCApplication.getAppContext(),
+                            R.color.selected_item_bg_dark));
+        }
+        snacker.show();
     }
 
     /**
@@ -190,23 +199,21 @@ public class UiTools {
             v.setVisibility(visibility);
     }
 
-    public static boolean isBlackThemeEnabled() {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(VLCApplication.getAppContext());
-        return pref.getBoolean("enable_black_theme", false);
+    public static boolean isViewVisible(View v) {
+        return v != null && v.getVisibility() == View.VISIBLE;
     }
 
     public static void fillAboutView(View v) {
+        final TextView version = v.findViewById(R.id.main_version);
+        version.setText(BuildConfig.VERSION_NAME);
+
         final TextView link = v.findViewById(R.id.main_link);
-        link.setText(Html.fromHtml(VLCApplication.getAppResources().getString(R.string.about_link)));
+        link.setText(Html.fromHtml(VLCApplication.getAppResources().getString(R.string.ace_about_link)));
 
-        final String revision = VLCApplication.getAppResources().getString(R.string.build_revision)+" VLC: "+VLCApplication.getAppResources().getString(R.string.build_vlc_revision);
-        final String builddate = VLCApplication.getAppResources().getString(R.string.build_time);
-        final String builder = VLCApplication.getAppResources().getString(R.string.build_host);
+        final String revision = VLCApplication.getAppResources().getString(R.string.build_revision);
 
-        final TextView compiled = v.findViewById(R.id.main_compiled);
-        compiled.setText(builder + " (" + builddate + ")");
         final TextView textview_rev = v.findViewById(R.id.main_revision);
-        textview_rev.setText(VLCApplication.getAppResources().getString(R.string.revision) + " " + revision + " (" + builddate + ") " + BuildConfig.FLAVOR_abi);
+        textview_rev.setText(VLCApplication.getAppResources().getString(R.string.revision) + " " + revision);
 
         final ImageView logo = v.findViewById(R.id.logo);
         logo.setOnClickListener(new View.OnClickListener() {
@@ -267,7 +274,9 @@ public class UiTools {
                 return AsyncImageLoader.DEFAULT_COVER_ALBUM_DRAWABLE;
             case MediaLibraryItem.TYPE_MEDIA:
                 if (((MediaWrapper)item).getType() == MediaWrapper.TYPE_VIDEO)
-                    return AsyncImageLoader.DEFAULT_COVER_VIDEO_DRAWABLE;
+                    return item instanceof MediaGroup
+                            ? AsyncImageLoader.DEFAULT_COVER_VIDEO_GROUP_DRAWABLE
+                            : AsyncImageLoader.DEFAULT_COVER_VIDEO_SINGLE_DRAWABLE;
             default:
                 return AsyncImageLoader.DEFAULT_COVER_AUDIO_DRAWABLE;
         }
@@ -446,6 +455,7 @@ public class UiTools {
         }
     }
 
+    @SuppressLint("NewApi")
     public static void setOnDragListener(final Activity activity) {
         final View view = AndroidUtil.isNougatOrLater ? activity.getWindow().peekDecorView() : null;
         if (view != null) view.setOnDragListener(new View.OnDragListener() {
@@ -478,5 +488,20 @@ public class UiTools {
                 }
             }
         });
+    }
+
+    /**
+     * Set background drawable.
+     * After calling setBackgroundResource() padding disappears for unknown reason.
+     * The workaround is to save padding and then resore it manually.
+     */
+    public static void setBackgroundWithPadding(View v, int drawableId) {
+        int left = v.getPaddingLeft();
+        int right = v.getPaddingRight();
+        int top = v.getPaddingTop();
+        int bottom = v.getPaddingBottom();
+
+        v.setBackgroundResource(drawableId);
+        v.setPadding(left, top, right, bottom);
     }
 }

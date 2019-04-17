@@ -26,7 +26,7 @@ import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.preference.CheckBoxPreference;
+import androidx.preference.CheckBoxPreference;
 
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.libvlc.util.HWDecoderUtil;
@@ -84,7 +84,7 @@ public class PreferencesAudio extends BasePreferenceFragment implements SharedPr
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key){
             case "aout":
-                VLCInstance.restart();
+                VLCInstance.restart(true);
                 if (getActivity() != null ) ((PreferencesActivity)getActivity()).restartMediaPlayer();
                 final boolean opensles = "1".equals(getPreferenceManager().getSharedPreferences().getString("aout", "0"));
                 if (opensles) ((CheckBoxPreference)findPreference("audio_digital_output")).setChecked(false);

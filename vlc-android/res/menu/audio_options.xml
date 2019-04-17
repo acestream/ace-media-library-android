@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_audio_track"
+        android:title="@string/track_audio" />
+    <item
+        android:id="@+id/menu_audio_output"
+        android:title="@string/aout" />
+</menu>

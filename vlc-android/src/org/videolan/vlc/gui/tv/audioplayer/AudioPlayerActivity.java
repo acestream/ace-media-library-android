@@ -22,16 +22,16 @@ package org.videolan.vlc.gui.tv.audioplayer;
 
 import android.annotation.TargetApi;
 import android.content.SharedPreferences;
-import android.databinding.DataBindingUtil;
-import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableInt;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.InputDevice;
 import android.view.KeyEvent;
@@ -129,7 +129,7 @@ public class AudioPlayerActivity extends BaseTvActivity implements PlaybackServi
     @Override
     public void update() {
         if (mService == null || !mService.hasMedia()) return;
-        mBinding.buttonPlay.setImageResource(mService.isPlaying() ? R.drawable.ic_pause_w : R.drawable.ic_play_w);
+        mBinding.buttonPlay.setImageResource(mService.isPlaying() ? R.drawable.ic_pause_dark : R.drawable.ic_play_dark);
         final SharedPreferences mSettings= PreferenceManager.getDefaultSharedPreferences(this);
         if (mSettings.getBoolean(PreferencesActivity.VIDEO_RESTORE, false)) {
             mSettings.edit().putBoolean(PreferencesActivity.VIDEO_RESTORE, false).apply();
@@ -289,8 +289,8 @@ public class AudioPlayerActivity extends BaseTvActivity implements PlaybackServi
     private void setShuffleMode(boolean shuffle) {
         if (mService == null) return;
         mShuffling = shuffle;
-        mBinding.buttonShuffle.setImageResource(shuffle ? R.drawable.ic_shuffle_on :
-                R.drawable.ic_shuffle_w);
+        mBinding.buttonShuffle.setImageResource(shuffle ? R.drawable.ic_shuffle_on_dark :
+                R.drawable.ic_shuffle_dark);
         final List<MediaWrapper> medias = mService.getMedias();
         if (shuffle) Collections.shuffle(medias);
         else Collections.sort(medias, MediaComparators.byTrackNumber);
@@ -304,13 +304,13 @@ public class AudioPlayerActivity extends BaseTvActivity implements PlaybackServi
         int type = mService.getRepeatType();
         if (type == Constants.REPEAT_NONE){
             mService.setRepeatType(Constants.REPEAT_ALL);
-            mBinding.buttonRepeat.setImageResource(R.drawable.ic_repeat_all);
+            mBinding.buttonRepeat.setImageResource(R.drawable.ic_repeat_all_dark);
         } else if (type == Constants.REPEAT_ALL) {
             mService.setRepeatType(Constants.REPEAT_ONE);
-            mBinding.buttonRepeat.setImageResource(R.drawable.ic_repeat_one);
+            mBinding.buttonRepeat.setImageResource(R.drawable.ic_repeat_one_dark);
         } else if (type == Constants.REPEAT_ONE) {
             mService.setRepeatType(Constants.REPEAT_NONE);
-            mBinding.buttonRepeat.setImageResource(R.drawable.ic_repeat_w);
+            mBinding.buttonRepeat.setImageResource(R.drawable.ic_repeat_dark);
         }
     }
 

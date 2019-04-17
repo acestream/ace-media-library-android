@@ -125,8 +125,6 @@
     <string name="error_problem">Sentímoslo, VLC p\'Android tuvo un fallu al cargar y zarróse.</string>
     <string name="search">Guetar</string>
     <string name="search_history">Guetar nel historial</string>
-    <string name="hardware_acceleration_error_title">Fallu n\'aceleración hardware</string>
-    <string name="hardware_acceleration_error_message">Hebo un fallu cola aceleración por hardware. ¿Quies deshabilitala y probar otra vuelta?</string>
     <!--Tips-->
     <string name="video_player_tips">Conseyos del reproductor de videu:</string>
     <string name="seek">Guetar</string>
@@ -154,7 +152,6 @@
     <string name="general_prefs_category">Xeneral</string>
     <string name="automatic">Automática</string>
     <string name="screen_orientation_portrait">Retratu</string>
-    <string name="enable_brightness_gesture">Activar xestu de brillu</string>
     <string name="enable_headset_detection">Deteutar auriculares</string>
     <string name="enable_time_stretching_audio">Habilitar espansión de tiempu d\'audio</string>
     <string name="advanced_prefs_category">Avanzaes</string>

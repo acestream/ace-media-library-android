@@ -47,6 +47,9 @@ public class Constants {
     public static final int REPEAT_ONE = 1;
     public static final int REPEAT_ALL = 2;
 
+    // Register this broadcast action to receive events from Ace Stream Player
+    public static final String ACTION_ACE_STREAM_PLAYER_EVENT = "org.acestream.player.EVENT";
+
     // AudioPlayerContainerActivity
     public static final String ACTION_SHOW_PLAYER = Strings.buildPkgString("gui.ShowPlayer");
 
@@ -67,9 +70,20 @@ public class Constants {
     public final static String ACTION_PROGRESS_TEXT = "action_progress_text";
     public final static String ACTION_PROGRESS_VALUE = "action_progress_value";
 
+    public final static String ACTION_PTF_SERVICE_STARTED = "action_ptf_service_started";
+    public final static String ACTION_PTF_SERVICE_ENDED = "action_ptf_service_ended";
+    public final static String ACTION_PTF_PROGRESS = "action_ptf_progress";
+
     // VideoPlayerActivity
     public final static String PLAY_FROM_VIDEOGRID = Strings.buildPkgString("gui.video.PLAY_FROM_VIDEOGRID");
     public final static String PLAY_FROM_SERVICE = Strings.buildPkgString("gui.video.PLAY_FROM_SERVICE");
+    //:ace
+    public final static String PLAY_REMOTE_DEVICE = Strings.buildPkgString("gui.video.PLAY_REMOTE_DEVICE");
+    ///ace
+    public final static String ACTION_P2P_STARTING = Strings.buildPkgString("ACTION_P2P_STARTING");
+    public final static String ACTION_P2P_SESSION_STARTED = Strings.buildPkgString("ACTION_P2P_SESSION_STARTED");
+    public final static String ACTION_P2P_STARTED = Strings.buildPkgString("ACTION_P2P_STARTED");
+    public final static String ACTION_P2P_FAILED = Strings.buildPkgString("ACTION_P2P_FAILED");
     public final static String EXIT_PLAYER = Strings.buildPkgString("gui.video.EXIT_PLAYER");
     public final static String PLAY_EXTRA_ITEM_LOCATION = "item_location";
     public final static String PLAY_EXTRA_SUBTITLES_LOCATION = "subtitles_location";
@@ -78,6 +92,11 @@ public class Constants {
     public final static String PLAY_EXTRA_START_TIME = "position";
     public final static String PLAY_EXTRA_OPENED_POSITION = "opened_position";
     public final static String PLAY_DISABLE_HARDWARE = "disable_hardware";
+    //:ace
+    public final static String PLAY_EXTRA_MEDIA_WRAPPER = "media_wrapper";
+    public final static String PLAY_EXTRA_SELECTED_PLAYER = "selected_player";
+    public final static String PLAY_EXTRA_STOP_AFTER_DEVICE_DISCONNECT = "stop_after_device";
+    ///ace
 
     // AudioPlayer
     public final static String PREF_PLAYLIST_TIPS_SHOWN = "playlist_tips_shown";
@@ -88,4 +107,8 @@ public class Constants {
 
     // AUDIO category
     public final static String KEY_AUDIO_CURRENT_TAB = "key_audio_current_tab";
+
+    //:ace
+    public final static String ACTION_MEDIALIBRARY_UPDATED = "action_ml_updated";
+    ///ace
 }

@@ -407,4 +407,124 @@
         <item>YUV</item>
     </string-array>
 
+    <string-array name="locale_entries" translatable="false">
+        <item>English</item>
+        <item>Albanian (Shqip)</item>
+        <item>Arabic (العربية)</item>
+        <item>Belarusian (Беларуская)</item>
+        <item>Bosnian (bosanski)</item>
+        <item>Catalan (català)</item>
+        <item>Corsican (Corse)</item>
+        <item>Czech (čeština)</item>
+        <item>Welsh (Cymraeg)</item>
+        <item>Danish (Dansk)</item>
+        <item>German (Deutsch)</item>
+        <item>Greek (Ελληνικά)</item>
+        <item>Spanish (español)</item>
+        <item>Estonian (eesti)</item>
+        <item>Basque (euskara)</item>
+        <item>Persian (فارسی)</item>
+        <item>Finnish (suomi)</item>
+        <item>French (Français)</item>
+        <item>Frisian (Frysk)</item>
+        <item>Scots Gaelic (Gàidhlig)</item>
+        <item>Galician (galego)</item>
+        <item>Hindi (हिन्दी)</item>
+        <item>Croatian (hrvatski)</item>
+        <item>Hungarian (magyar)</item>
+        <item>Indonesian (Indonesia)</item>
+        <item>Icelandic (íslenska)</item>
+        <item>Italian (Italiano)</item>
+        <item>Hebrew (עברית)</item>
+        <item>Japanese (日本語)</item>
+        <item>Khmer (ខ្មែរ)</item>
+        <item>Kannada (ಕನ್ನಡ)</item>
+        <item>Korean (한국어)</item>
+        <item>Lithuanian (lietuvių)</item>
+        <item>Latvian (latviešu)</item>
+        <item>Malayalam (മലയാളം)</item>
+        <item>Marathi (मराठी)</item>
+        <item>Malay (Melayu)</item>
+        <item>Myanmar (Burmese) (မြန်မာ (မြန်မာ))</item>
+        <item>Dutch (Nederlands)</item>
+        <item>Punjabi (ਪੰਜਾਬੀ)</item>
+        <item>Polish (polski)</item>
+        <item>Portuguese (Portuguese)</item>
+        <item>Romanian (Română)</item>
+        <item>Russian (русский)</item>
+        <item>Sinhala (සිංහල)</item>
+        <item>Slovak (slovenčina)</item>
+        <item>Slovenian (slovenščina)</item>
+        <item>Serbian (српски)</item>
+        <item>Swedish (svenska)</item>
+        <item>Tamil (தமிழ்)</item>
+        <item>Telugu (తెలుగు)</item>
+        <item>Thai (ภาษาไทย)</item>
+        <item>Turkish (Türkçe)</item>
+        <item>Ukrainian (українська)</item>
+        <item>Urdu (اردو)</item>
+        <item>Uzbek (O‘zbek)</item>
+        <item>Vietnamese (Tiếng Việt)</item>
+    </string-array>
+
+    <string-array name="locale_values" translatable="false">
+        <item>en</item>
+        <item>sq</item>
+        <item>ar</item>
+        <item>be</item>
+        <item>bs</item>
+        <item>ca</item>
+        <item>co</item>
+        <item>cs</item>
+        <item>cy</item>
+        <item>da</item>
+        <item>de</item>
+        <item>el</item>
+        <item>es</item>
+        <item>et</item>
+        <item>eu</item>
+        <item>fa</item>
+        <item>fi</item>
+        <item>fr</item>
+        <item>fy</item>
+        <item>gd</item>
+        <item>gl</item>
+        <item>hi</item>
+        <item>hr</item>
+        <item>hu</item>
+        <item>id</item>
+        <item>is</item>
+        <item>it</item>
+        <item>iw</item>
+        <item>ja</item>
+        <item>km</item>
+        <item>kn</item>
+        <item>ko</item>
+        <item>lt</item>
+        <item>lv</item>
+        <item>ml</item>
+        <item>mr</item>
+        <item>ms</item>
+        <item>my</item>
+        <item>nl</item>
+        <item>pa</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ro</item>
+        <item>ru</item>
+        <item>si</item>
+        <item>sk</item>
+        <item>sl</item>
+        <item>sr</item>
+        <item>sv</item>
+        <item>ta</item>
+        <item>te</item>
+        <item>th</item>
+        <item>tr</item>
+        <item>uk</item>
+        <item>ur</item>
+        <item>uz</item>
+        <item>vi</item>
+    </string-array>
+
 </resources>

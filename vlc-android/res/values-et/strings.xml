@@ -9,10 +9,6 @@
     <string name="sortby_length">Kestus</string>
     <string name="searchable_hint">Otsi…</string>
     <string name="history">Ajalugu</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">Leiti %d vaste</item>
-        <item quantity="other">Leiti %d vastet</item>
-    </plurals>
     <string name="play">Esita</string>
     <string name="play_from_start">Esita algusest</string>
     <string name="play_as_audio">Esita kui audio</string>
@@ -47,14 +43,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 alamkataloog</item>
         <item quantity="other">%d alamkataloogi</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 meediafail</item>
-        <item quantity="other">%d meediafaili</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 video</item>
-        <item quantity="other">%d videod</item>
     </plurals>
     <string name="internal_memory">Sisemine mälu</string>
     <string name="parent_folder">Ülemisse kataloogi</string>
@@ -145,7 +133,6 @@
     <string name="extra_prefs_category">Lisaseaded</string>
     <string name="interface_prefs_screen">Kasutajaliides</string>
     <string name="interface_other_category">Kasutajaliides - Muu</string>
-    <string name="enable_brightness_gesture">Võimalda heleduse žestid</string>
     <string name="enable_brightness_gesture_summary">Halda heledust video taasesitamise ajala žestide abil</string>
     <string name="enable_headset_detection">Tuvasta kõrvaklapid</string>
     <string name="enable_headset_detection_summary">Kõrvaklapide eemaldamisel pausi ja jätka klappide ühendamisel</string>
@@ -177,4 +164,364 @@
     <string name="restart_vlc">Taaskäivita VLC</string>
     <!--Accessibility-->
     <!--Widget-->
+    <string name="torrent_files">Torrent faile</string>
+    <string name="select_language">Vali keel</string>
+    <string name="sortby_name_desc" source="google_translate">Nimi (desc)</string>
+    <string name="sortby_artist_name" source="google_translate">Esitaja nimi</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Kunstniku nimi (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Albumi nimi</string>
+    <string name="sortby_album_name_desc" source="google_translate">Albumi nimi (desc)</string>
+    <string name="sortby_length_desc" source="google_translate">Pikkus (desc)</string>
+    <string name="sortby_date" source="google_translate">Kuupäev</string>
+    <string name="sortby_date_desc" source="google_translate">Andmed (desc)</string>
+    <string name="sortby_number" source="google_translate">Nb lugusid</string>
+    <string name="sortby_number_desc" source="google_translate">Nb rajad (desc)</string>
+    <string name="playback" source="google_translate">Taasesitus</string>
+    <string name="playback_controls" source="google_translate">Taasesituse juhtelemendid</string>
+    <string name="medialibrary_scan" source="google_translate">Meediumikogu skannimine</string>
+    <string name="Medialibrary_progress" source="google_translate">Meediumikogu skaneerimise edenemise uuendused</string>
+    <string name="video_app_switch_title" source="google_translate">Taust / PiP režiim</string>
+    <string name="video_app_switch_summary" source="google_translate">Video taasesitusest teise rakendusele lülitumisel valige VLC-käitumine</string>
+    <string name="play_pip_title" source="google_translate">Videote esitamine pildistamisrežiimis</string>
+    <string name="play_as_audio_background" source="google_translate">Videote esitamine taustal</string>
+    <string name="insert_next" source="google_translate">Sisestage järgmine</string>
+    <string name="info_title" source="google_translate">VLC</string>
+    <string name="unknown_number" source="google_translate">Tundmatu arv lugusid</string>
+    <string name="tracks" source="google_translate">Rajad</string>
+    <string name="noplaylist" source="google_translate">Esitusloendit ei leitud.</string>
+    <string name="shuffle_title" source="google_translate">Shuffle-režiim</string>
+    <string name="shuffle" source="google_translate">Segage välja</string>
+    <string name="shuffle_on" source="google_translate">Segage sisse</string>
+    <string name="repeat_title" source="google_translate">Korda režiimi</string>
+    <string name="repeat" source="google_translate">Korda ühtegi</string>
+    <string name="repeat_single" source="google_translate">Korda ühte</string>
+    <string name="repeat_all" source="google_translate">Korda kõiki</string>
+    <string name="firstsong" source="google_translate">Esitusloendi esimene laul</string>
+    <string name="lastsong" source="google_translate">Esitusloendi viimane laul</string>
+    <string name="surface_fit_screen" source="google_translate">Sobita ekraan</string>
+    <string name="sound_on" source="google_translate">Heli sisse lülitatud</string>
+    <string name="sound_off" source="google_translate">Heli välja lülitatud</string>
+    <string name="navmenu" source="google_translate">navigeerimismenüü</string>
+    <string name="advanced" source="google_translate">lisavalikud</string>
+    <string name="sleep_in" source="google_translate">Sisse magama</string>
+    <string name="server_add_title" source="google_translate">Lisa uus server lemmikutesse</string>
+    <string name="server_domain_hint" source="google_translate">Serveri aadress (domeeninimi või IP)</string>
+    <string name="server_share_hint" source="google_translate">Võrgu jagamise nimi (või IP-aadress)</string>
+    <string name="server_folder_hint" source="google_translate">Kausta tee (valikuline)</string>
+    <string name="server_username_hint" source="google_translate">Kasutajanimi</string>
+    <string name="server_servername_hint" source="google_translate">Serveri nimi, mugavuse huvides</string>
+    <string name="server_port" source="google_translate">Port:</string>
+    <string name="login" source="google_translate">Logi sisse</string>
+    <string name="password" source="google_translate">Parool</string>
+    <string name="search_results" source="google_translate">Otsingu tulemused</string>
+    <string name="search_no_result" source="google_translate">Meediat ei leitud</string>
+    <string name="favorites_add" source="google_translate">Lisa lemmikutesse</string>
+    <string name="favorites_remove" source="google_translate">Eemalda lemmikutest</string>
+    <string name="favorites_edit" source="google_translate">Muuda</string>
+    <string name="favorite_added" source="google_translate">Salvestatud lemmikutesse</string>
+    <string name="favorite_removed" source="google_translate">Eemaldatud lemmikutest</string>
+    <string name="error_message_is" source="google_translate">Veateade on (palun märkige seda silumise ajal): n</string>
+    <string name="encountered_error_message" source="google_translate">VLC leidis selle meediumiga vea.Palun proovige meediakogu värskendada.</string>
+    <string name="playback_history_title" source="google_translate">Taasesituse ajalugu</string>
+    <string name="playback_history_summary" source="google_translate">Salvestage kõik ajaloos olevad meediumid</string>
+    <string name="playback_speed_title" source="google_translate">Salvesta taasesituse kiirus</string>
+    <string name="playback_speed_summary" source="google_translate">Mäleta salvestatud kiirust</string>
+    <string name="video_player_tips" source="google_translate">Video mängija nõuanded:</string>
+    <string name="seek" source="google_translate">Otsige</string>
+    <string name="subtitles" source="google_translate">Subtiitrid</string>
+    <string name="audio_sub" source="google_translate">Helirajad ja subtiitrid</string>
+    <string name="resize" source="google_translate">Suuruse muutmine</string>
+    <string name="options" source="google_translate">Valikud</string>
+    <string name="lock" source="google_translate">Lukusta</string>
+    <string name="ok_got_it" source="google_translate">Sain selle, jätke see</string>
+    <string name="playlist_tips" source="google_translate">Esitusloendi nõuanded</string>
+    <string name="remove_song" source="google_translate">Laulu eemaldamine</string>
+    <string name="rearrange_order" source="google_translate">Järjesta ümber</string>
+    <string name="hold_to_seek" source="google_translate">Püüdke otsida</string>
+    <string name="audio_player_tips" source="google_translate">Audio mängija nõuanded</string>
+    <string name="previous_next_song" source="google_translate">Eelmine / Järgmine laul</string>
+    <string name="show_playlist" source="google_translate">Kuva esitusloend</string>
+    <string name="hold_to_stop" source="google_translate">Hoidke peatamiseks</string>
+    <string name="hardware_acceleration_summary" source="google_translate">Keelatud: parem stabiilsus, dekodeerimine: võib parandada jõudlust.Väike: võib täiustada jõudlust veelgi.</string>
+    <string name="hardware_acceleration_decoding" source="google_translate">Kiirenduse dekodeerimine</string>
+    <string name="hardware_acceleration_full" source="google_translate">Täielik kiirendus</string>
+    <string name="dev_hardware_decoder" source="google_translate">Täiustatud riistvara dekooder</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">Jõudke riistvara dekooder ainult täiustatud kasutajatele</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">iomx</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-dr</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">mediacodec</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">mediacodec-dr</string>
+    <string name="subtitle_text_encoding" source="google_translate">Subtiitrite teksti kodeerimine</string>
+    <string name="daynight_title" source="google_translate">DayNight režiim</string>
+    <string name="daynight_summary" source="google_translate">Lülitub automaatselt sobival ajal öösrežiimi</string>
+    <string name="interface_gui" source="google_translate">Ekraan</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">Sekundaarne ekraan</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">Seaded sekundaarsete kuvarite ühendamisel (HDMI / Chromecast).</string>
+    <string name="enable_clone_mode" source="google_translate">Eelista kloon</string>
+    <string name="enable_clone_mode_summary" source="google_translate">Kloonige seadme ekraan ilma kaugjuhtimispuldita.</string>
+    <string name="video_prefs_category" source="google_translate">Video</string>
+    <string name="video_min_group_length_title" source="google_translate">Grupeeri videod</string>
+    <string name="video_min_group_length_summary" source="google_translate">Videod rühmitatakse, kui nende esimesed tähed on samad.</string>
+    <string name="video_min_group_length_disable" source="google_translate">Keela</string>
+    <string name="video_min_group_length_first" source="google_translate">Ainult esimene täht</string>
+    <string name="video_min_group_length_short" source="google_translate">Lühike kirjade arv (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Pikk tähtede arv (9)</string>
+    <string name="media_fast_seek" source="google_translate">Luba kiirotsing</string>
+    <string name="media_seen" source="google_translate">Näita nähtavat videomarkerit</string>
+    <string name="media_seen_summary" source="google_translate">Märkige video, kui näete seda kuni lõpuni</string>
+    <string name="force_list_portrait" source="google_translate">Ei ole portrežiimis võrku</string>
+    <string name="force_list_portrait_summary" source="google_translate">Näidake portree režiimis ruudustiku asemel videoid</string>
+    <string name="force_play_all_summary" source="google_translate">Esita kõik videod, alustades sellest, mida klõpsasite</string>
+    <string name="force_play_all_title" source="google_translate">Video esitusloendi režiim</string>
+    <string name="save_brightness_summary" source="google_translate">Mäleta helitugevuse taset videopleieris</string>
+    <string name="save_brightness_title" source="google_translate">Salvestage video heleduse tase</string>
+    <string name="save_audiodelay_summary" source="google_translate">Salvestage iga video jaoks eraldi heli viivitus</string>
+    <string name="save_audiodelay_title" source="google_translate">Salvestage heli viivitus</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Heleduse žest</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Helitugevuse žest</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Video taasesituse ajal reguleerige helitugevust žestiga</string>
+    <string name="enable_seek_buttons" source="google_translate">Luba otsingunupud</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">Näita videoliidese tagasikerimise ja edasisuunamise nuppe</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Kahekordne puudutus otsimiseks</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Topeltpuudutage ekraani servasid, et otsida 10 sekundit</string>
+    <string name="popup_keepscreen_title" source="google_translate">Hoidke ekraanil hüpik-režiimis ON</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Hoidke alati ekraanil ON, kui hüpikaken kuvatakse, isegi kui video on peatatud.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Näita peidetud faile</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Näita peidetud faile brauserites</string>
+    <string name="subtitles_prefs_category" source="google_translate">Subtiitrid</string>
+    <string name="subtitles_size_title" source="google_translate">Subtiitrite suurus</string>
+    <string name="subtitles_size_small" source="google_translate">Väike</string>
+    <string name="subtitles_size_normal" source="google_translate">Tavaline</string>
+    <string name="subtitles_size_big" source="google_translate">Suur</string>
+    <string name="subtitles_size_huge" source="google_translate">Suur</string>
+    <string name="subtitles_color_title" source="google_translate">Subtiitrite värv</string>
+    <string name="subtitles_color_white" source="google_translate">Valge</string>
+    <string name="subtitles_color_gray" source="google_translate">Hall</string>
+    <string name="subtitles_color_pink" source="google_translate">Roosa</string>
+    <string name="subtitles_color_blue" source="google_translate">Sinine</string>
+    <string name="subtitles_color_yellow" source="google_translate">Kollane</string>
+    <string name="subtitles_color_green" source="google_translate">Roheline</string>
+    <string name="subtitles_background_title" source="google_translate">Subtiitrite taust</string>
+    <string name="subtitles_bold_title" source="google_translate">Bold subtiitrid</string>
+    <string name="subtitles_autoload_title" source="google_translate">Subtiitrite automaatne laadimine</string>
+    <string name="audio_prefs_category" source="google_translate">Heli</string>
+    <string name="lockscreen_cover_title" source="google_translate">Lukustusekraani kate</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Kui see on saadaval, määrake praegune meediumikate kui lukustusekraani taustapilt</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Animeeri aktiivne esitusloendi automaatne kerimine</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Looge liikumine meedia üleminekul</string>
+    <string name="audio_title_alignment" source="google_translate">Heli pealkirja joondamine</string>
+    <string name="audio_title_alignment_default" source="google_translate">Vaikimisi</string>
+    <string name="audio_title_alignment_left" source="google_translate">Vasak</string>
+    <string name="audio_title_alignment_centre" source="google_translate">Keskus</string>
+    <string name="audio_title_alignment_right" source="google_translate">Õige</string>
+    <string name="audio_title_alignment_marquee" source="google_translate">Marquee</string>
+    <string name="audio_save_repeat_title" source="google_translate">Salvesta kordusrežiim</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Ära esita kordusrežiimi, kui laadite audio esitusloendeid</string>
+    <string name="audio_boost_title" source="google_translate">Audio-võimendus</string>
+    <string name="headset_prefs_category" source="google_translate">Peakomplekt</string>
+    <string name="enable_headset_actions_title" source="google_translate">Kaugjuhtimispuldi otseteed</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Järgmise ja pika vajuta- mise jätkamiseks vajutage eelmise loo juurde liikumiseks kaks korda nuppu „Esita“</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Jätka peakomplekti sisestamist</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">Peatage muidu</string>
+    <string name="enable_steal_remote_control_summary" source="google_translate">Vältige konflikte, kui varastate kaugjuhtimispuldi teistest rakendustest. See takistab topeltklõpsamist HTC telefonidel.</string>
+    <string name="audio_ducking_title" source="google_translate">Teadete korral vähendage VLC mahtu</string>
+    <string name="audio_ducking_summary" source="google_translate">Aitab kuulda helisignaale, navigeerimisjuhiseid või assistenti</string>
+    <string name="casting_category" source="google_translate">Valamine</string>
+    <string name="casting_passthrough_title" source="google_translate">Audio Passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">Laske teleril hallata heli esitamist</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Konversioonide kvaliteet</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Valige kaugekraanil valimisel konversiooni kvaliteet</string>
+    <string name="casting_quality_high" source="google_translate">Kõrge</string>
+    <string name="casting_quality_medium" source="google_translate">Keskmine</string>
+    <string name="casting_quality_low" source="google_translate">Madal</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Madalaim</string>
+    <string name="cast_performance_warning" source="google_translate">Selle video valimine nõuab konversiooni. See konversioon võib kasutada kogu olemasolevat võimsust ja võib kiiresti aku tühjendada.</string>
+    <string name="artists_show_all_title" source="google_translate">Näita kõiki kunstnikke</string>
+    <string name="artists_show_all_summary" source="google_translate">Näita kõiki kunstnike loendeid, mitte ainult albumi esitajaid</string>
+    <string name="extensions_prefs_category" source="google_translate">Laiendused</string>
+    <string name="extensions_enable_category" source="google_translate">Valiku tegemiseks vali laiendused</string>
+    <string name="extensions_empty" source="google_translate">Laiendit ei leitud</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Aktiveeri</string>
+    <string name="android_auto" source="google_translate">Android-auto</string>
+    <string name="controls_prefs_category" source="google_translate">Kontrollid</string>
+    <string name="chroma_format_summary" source="google_translate">RGB 32-bitine: vaikevärv iRGB 16-bitine: parem jõudlus, kuid madalam kvaliteet YUV: parim jõudlus, kuid ei tööta kõigis seadmetes. Ainult Android 2.3 ja uuemad.</string>
+    <string name="deblocking" source="google_translate">Filtri filtreerimise seadistused</string>
+    <string name="deblocking_summary" source="google_translate">Muutke filtreerimisfiltri seadeid. Võiks parandada video kvaliteeti. Ainult täiustatud kasutajad.</string>
+    <string name="deblocking_always" source="google_translate">Täielik deblocking (aeglasem)</string>
+    <string name="deblocking_nonref" source="google_translate">Keskmine deblocking</string>
+    <string name="deblocking_nonkey" source="google_translate">Madal deblocking</string>
+    <string name="deblocking_all" source="google_translate">Pole deblokeerimist (kiireim)</string>
+    <string name="enable_frame_skip_summary" source="google_translate">Kiirendada dekodeerimist, kuid see võib vähendada video kvaliteeti.</string>
+    <string name="main_prefs_category" source="google_translate">Peamised seaded</string>
+    <string name="save_video_none" source="google_translate">Ärge säästke kiirust</string>
+    <string name="save_video_session" source="google_translate">Salvestage kiirus seansi ajal</string>
+    <string name="save_video_always" source="google_translate">Salvestage kiirus seansside vahel</string>
+    <string name="auto_rescan" source="google_translate">Automaatkäivitamine</string>
+    <string name="auto_rescan_summary" source="google_translate">Skannige automaatselt uute või kustutatud kandjate seade rakenduse käivitamisel</string>
+    <string name="dump_media_db" source="google_translate">Dump meedia andmebaas</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopeeri andmebaas sisemällu</string>
+    <string name="clear_media_db_summary" source="google_translate">Andmete kustutamiseks kasutage Android VLC infot</string>
+    <string name="network_caching" source="google_translate">Võrgu vahemällu salvestamise väärtus</string>
+    <string name="network_caching_summary" source="google_translate">Võrkmeedia puhverdamise aeg (ms). Ei tööta riistvara dekodeerimisega. Lähtestamiseks jätke tühjaks.</string>
+    <string name="resume_playback_title" source="google_translate">Taasesituse jätkamine pärast kõnet</string>
+    <string name="resume_playback_summary" source="google_translate">Peatuge muidu pausi</string>
+    <string name="network_caching_popup" source="google_translate">See väärtus peab olema vahemikus 0 kuni 6000 ms</string>
+    <string name="log_service_title" source="google_translate">VLC logib salvestust</string>
+    <string name="log_service_text" source="google_translate">Avage logikonsool</string>
+    <string name="dump_logcat" source="google_translate">Dump logcat log</string>
+    <string name="dump_logcat_failure" source="google_translate">Logcati tühjendamine nurjus.</string>
+    <string name="serious_crash" source="google_translate">Kahjuks tekkis tõsine viga ja VLC pidi sulgema.</string>
+    <string name="help_us_send_log" source="google_translate">Aita meil parandada VLC-i, saates järgmise krahhi logi:</string>
+    <string name="send_log" source="google_translate">Saada logi</string>
+    <string name="sending_log" source="google_translate">Logi saatmine ...</string>
+    <string name="drawer_open" source="google_translate">Avage navigeerimissahtel</string>
+    <string name="drawer_close" source="google_translate">Sulgege navigatsiooni sahtel</string>
+    <string name="network_browsing" source="google_translate">Kohalik võrk</string>
+    <string name="browsing" source="google_translate">Sirvimine</string>
+    <string name="file_size" source="google_translate">Faili suurus:</string>
+    <string name="audio_delay" source="google_translate">Heli viivitus</string>
+    <string name="spu_delay" source="google_translate">Subtiitrite viivitus</string>
+    <string name="sleep_time_not_set" source="google_translate">pole ühtegi seadistatud</string>
+    <string name="network_shares_discovery" source="google_translate">Otsite võrgus olevaid aktsiaid ...</string>
+    <string name="network_empty" source="google_translate">See kataloog on tühi.</string>
+    <string name="network_connection_needed" source="google_translate">Ei ole ühendust kohaliku võrguga.</string>
+    <string name="search_hint" source="google_translate">Otsi meediat</string>
+    <string name="search_list_hint" source="google_translate">Otsi meediat praeguses nimekirjas</string>
+    <string name="search_global" source="google_translate">Otsi kõigist meediateekidest</string>
+    <string name="directory_show_medialib" source="google_translate">Näita MediaLibis</string>
+    <string name="directory_hide_medialib" source="google_translate">Peida MediaLibist</string>
+    <string name="playlist_save" source="google_translate">Salvesta esitusloend</string>
+    <string name="playlist_name_hint" source="google_translate">esitusloendi nimi</string>
+    <string name="go_to_chapter" source="google_translate">Mine peatükki…</string>
+    <string name="chapter" source="google_translate">Peatükk</string>
+    <string name="resume_from_position" source="google_translate">Jätka viimasest positsioonist</string>
+    <string name="confirm_resume" source="google_translate">Jätka viimasest positsioonist?</string>
+    <string name="confirm_resume_title" source="google_translate">Küsi kinnituse jätkamist</string>
+    <string name="confirm_resume_summary" source="google_translate">kui see on aktiveeritud, palutakse teil kinnitada, kui videot saab viimasest asendist jätkata</string>
+    <string name="directory_empty" source="google_translate">Kataloog on tühi</string>
+    <string name="player_touch_title" source="google_translate">Puudutage Video juhtelemente</string>
+    <string name="player_touch_enable_all" source="google_translate">Luba puutetundlik kontroll</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Keela heleduse reguleerimine</string>
+    <string name="player_touch_disable_all" source="google_translate">Keela kõik Touch-juhtelemendid</string>
+    <string name="tv_ui_title" source="google_translate">Android TV liides</string>
+    <string name="tv_ui_summary" source="google_translate">Muutke kasutajaliidese teleriga kohandatud teemat</string>
+    <string name="medialibrary" source="google_translate">Meediumiteek</string>
+    <string name="medialibrary_directories" source="google_translate">Meediumiteegi kaustad</string>
+    <string name="more_actions" source="google_translate">Rohkem toiminguid</string>
+    <string name="move" source="google_translate">Liiguta</string>
+    <string name="back_quit_lock" source="google_translate">Video sulgemiseks vajutage uuesti nuppu Back</string>
+    <string name="playlist_deleted" source="google_translate">Esitusloend kustutatud</string>
+    <string name="file_deleted" source="google_translate">Fail kustutatud</string>
+    <string name="no_subs_found" source="google_translate">Selles kataloogis pole subtiitreid</string>
+    <string name="music_now_playing" source="google_translate">Nüüd mängib</string>
+    <string name="widget_name_w" source="google_translate">VLC valge vidin</string>
+    <string name="widget_name_b" source="google_translate">VLC Dark Widget</string>
+    <string name="allow_storage_access_title" source="google_translate">Luba Ace Streamil juurdepääsu video- ja helifailidele</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace Stream vajab teie luba selle seadme meediumifailide kasutamiseks.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Luba Ace Streamil helin määrata</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace Stream vajab seda luba selle laulu seadmiseks oma helinaks.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Laske Ace Streamil muuta heleduse režiimi</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace Stream vajab teie luba heleduse režiimi muutmiseks.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Luba Ace Streami mängija hüpata teiste rakenduste üle</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream vajab seda luba, et näidata oma videot muude rakenduste hüpikaknas.</string>
+    <string name="permission_ask_again" source="google_translate">Loa andmine</string>
+    <string name="exit_app" source="google_translate">Sulgege VLC</string>
+    <string name="exit_app_msg" source="google_translate">Kas olete kindel, et soovite VLC-st väljuda?</string>
+    <string name="fastscroller_track" source="google_translate">FastScrolleri rada</string>
+    <string name="fastscroller_handle" source="google_translate">FastScrolleri käepide</string>
+    <string name="plugins" source="google_translate">Pluginad</string>
+    <string name="download_on_device" source="google_translate">Lae alla</string>
+    <string name="extension_empty" source="google_translate">Mitte ükski üksus, mida kuvada, minge mõne laienduse seadete juurde.</string>
+    <string name="opengl_title" source="google_translate">OpenGL ES2 kasutamine</string>
+    <string name="opengl_summary" source="google_translate">Vaikimisi kasutatakse OpenGL ES2 tarkvara dekodeerimiseks ja vajadusel riistvara dekodeerimiseks (360 ° videod).</string>
+    <string name="opengl_automatic" source="google_translate">Automaatne</string>
+    <string name="opengl_on" source="google_translate">Force On</string>
+    <string name="opengl_off" source="google_translate">Jäta välja</string>
+    <string name="network_favorites" source="google_translate">Võrgu lemmikud</string>
+    <string name="network_shared_folders" source="google_translate">Jagatud kaustad</string>
+    <string name="encryption_warning" source="google_translate">Hoiatus, selle Android-versiooni jaoks pole krüpteerimist võimalik, parool salvestatakse privaatsesse ruumi, kuid mitte krüpteeritult</string>
+    <string name="store_password" source="google_translate">Jäta salasõna meelde</string>
+    <string name="add_to_playlist" source="google_translate">Lisa esitusloendisse</string>
+    <string name="popup_playback_title" source="google_translate">Video esitamine hüpikaknas</string>
+    <string name="popup_playback" source="google_translate">Esitamine hüpikaknas</string>
+    <string name="popup_expand" source="google_translate">Laienda videot</string>
+    <string name="snack_subloader_sub_found" source="google_translate">Allalaaditud subtiitrid</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">Subtiitreid ei leitud</string>
+    <string name="dialog_subloader_success" source="google_translate">Subtiitrid leiti:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Subtiitreid ei leitud:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">Allalaadimine on lõpetatud</string>
+    <string name="download_subtitles" source="google_translate">Laadige subtiitrid alla</string>
+    <string name="preferences_languages_download" source="google_translate">Subtiitrite keeled</string>
+    <string name="list_languages_download_summary" source="google_translate">Subtiitrite toomisel laaditavad keeled</string>
+    <string name="list_languages_download_title" source="google_translate">Subtiitrid allalaadimise keeled</string>
+    <string name="service_unavailable" source="google_translate">Teenus pole saadaval</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Subtiitrite keele seadmine ebaõnnestus, proovige seda rakenduse seadetes seadistada</string>
+    <string name="downloading_subtitles" source="google_translate">Subtiitrite allalaadimine</string>
+    <string name="browse_folder" source="google_translate">Sirvi kausta</string>
+    <string name="listen" source="google_translate">Kuula</string>
+    <string name="subtitles_download_title" source="google_translate">Allalaadimine</string>
+    <string name="connecting" source="google_translate">Ühendamine ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">bluetooth-seadme viivitus</string>
+    <string name="episodes" source="google_translate">episoode</string>
+    <string name="movies" source="google_translate">filme</string>
+    <string name="videos" source="google_translate">videod</string>
+    <string name="streams" source="google_translate">ojad</string>
+    <string name="clear_playback_history" source="google_translate">Tühjendage taasesituse ajalugu</string>
+    <string name="various_artists" source="google_translate">Erinevad kunstnikud</string>
+    <string name="ml_scanning" source="google_translate">Meediumifailide skannimine</string>
+    <string name="ml_parse_media" source="google_translate">Keskmine parsimine</string>
+    <string name="ml_discovering" source="google_translate">Avastamine</string>
+    <string name="resume" source="google_translate">Jätka</string>
+    <string name="length" source="google_translate">Pikkus</string>
+    <string name="tv_settings_hint" source="google_translate">Kataloogide kontrollimiseks / tühistamiseks vajutage nuppu OK</string>
+    <string name="ml_external_storage_title" source="google_translate">Avastati uus välismälu</string>
+    <string name="ml_external_storage_accept" source="google_translate">Jah</string>
+    <string name="ml_external_storage_decline" source="google_translate">Ei</string>
+    <string name="last_added_media" source="google_translate">viimati lisatud</string>
+    <string name="no" source="google_translate">Ei</string>
+    <string name="loading_medialibrary" source="google_translate">Laadige Medialibrary…</string>
+    <string name="yes" source="google_translate">Jah</string>
+    <string name="custom_set_save_title" source="google_translate">Salvestamata muudatused</string>
+    <string name="custom_set_save_warning" source="google_translate">Hoiatus: salvestamata muudatused</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Salvestage ekvalaiseri seadistus ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Salvesta uus ekvalaiseri seadistus…</string>
+    <string name="save" source="google_translate">Salvesta</string>
+    <string name="do_not_save" source="google_translate">Ära salvesta</string>
+    <string name="custom_set_wrong_input" source="google_translate">Kehtetu nimi.</string>
+    <string name="custom_set_already_exist" source="google_translate">Selle nimega ekvalaiser on juba olemas</string>
+    <string name="custom_set_restored" source="google_translate">Kohandatud ekvalaiseri seadistus taastati.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Salvestamata ekvalaiserikomplekt on kustutatud.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Uus</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary skaneerib teie seadmeid praegu</string>
+    <string name="recommendations" source="google_translate">Soovitused</string>
+    <string name="recommendations_desc" source="google_translate">Soovituskaardid käivitajas</string>
+    <string name="browser_quick_access" source="google_translate">Kiire juurdepääs</string>
+    <string name="browser_storages" source="google_translate">Salvestused</string>
+    <string name="renderer_list_title" source="google_translate">Kuvab</string>
+    <string name="feedback_player_crashed" source="google_translate">Vabandust, VLC lihtsalt kukkus. Palun proovi uuesti.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Sa pead andma VLC kirjutusõiguse oma SD-kaardile</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC ei saa seda faili ilma kirjutusõiguse loata kustutada, palun külastage oma SD-kaarti ja klõpsa "Vali" .Võib-olla tuleb klõpsata ülalt paremas menüüs "Näita SD-kaarti".</string>
+    <string name="dialog_sd_wizard" source="google_translate">Näita mulle</string>
+    <string name="renderers_disconnect" source="google_translate">Katkesta ühendus</string>
+    <string name="audio_digital_failed" source="google_translate">Heli digitaalse väljundi oleku muutmine ebaõnnestus</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Heli digitaalne väljund on lubatud</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Heli digitaalne väljund on keelatud</string>
+    <string name="live_streams" source="google_translate">Otsevood</string>
+    <string name="all_live_streams" source="google_translate">Kõik elavad vooged</string>
+    <string name="video_torrents" source="google_translate">Video torrentid</string>
+    <string name="audio_torrents" source="google_translate">Audio torrents</string>
+    <string name="all_torrents" source="google_translate">Kõik torrentsid</string>
+    <string name="main" source="google_translate">Main</string>
+    <string name="media_player" source="google_translate">Meediumimängija</string>
+    <string name="acestream_server" source="google_translate">Ace Stream server (mootor)</string>
+    <string name="media_player_settings" source="google_translate">Meediumimängija seaded</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream serveri (mootori) seaded</string>
+    <string name="sign_out" source="google_translate">Logi välja</string>
+    <string name="sign_in" source="google_translate">Logi sisse</string>
+    <string name="sign_in_acestream" source="google_translate">Logi sisse Ace Streami abil</string>
+    <string name="sign_in_google" source="google_translate">Logige Google\'iga sisse</string>
+    <string name="video_files" source="google_translate">Videofailid</string>
+    <string name="audio_files" source="google_translate">Helifailid</string>
+    <string name="retry" source="google_translate">Uuesti proovima</string>
+    <string name="failed_to_load_web_page" source="google_translate">Veebilehe laadimine ebaõnnestus</string>
 </resources>

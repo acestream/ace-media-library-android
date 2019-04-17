@@ -32,8 +32,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Process;
-import android.support.annotation.NonNull;
-import android.support.v7.preference.PreferenceManager;
+import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
 
 import org.videolan.libvlc.Media;
 import org.videolan.libvlc.util.MediaBrowser;

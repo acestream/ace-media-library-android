@@ -28,35 +28,31 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 
-import org.videolan.libvlc.util.AndroidUtil;
+import org.acestream.sdk.utils.PermissionUtils;
 import org.videolan.vlc.gui.MainActivity;
 import org.videolan.vlc.gui.SearchActivity;
-import org.videolan.vlc.gui.helpers.hf.StoragePermissionsDelegate;
 import org.videolan.vlc.gui.tv.MainTvActivity;
 import org.videolan.vlc.gui.tv.audioplayer.AudioPlayerActivity;
 import org.videolan.vlc.gui.video.VideoPlayerActivity;
 import org.videolan.vlc.media.MediaUtils;
-import org.videolan.vlc.util.AndroidDevices;
 import org.videolan.vlc.util.Constants;
-import org.videolan.vlc.util.Permissions;
 import org.videolan.vlc.util.Util;
 
-public class StartActivity extends FragmentActivity implements StoragePermissionsDelegate.CustomActionController {
+public class StartActivity extends FragmentActivity {
 
-    public final static String TAG = "VLC/StartActivity";
+    public final static String TAG = "AS/VLC/Start";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Intent intent = getIntent();
-        final boolean tv =  showTvUi();
+        final boolean tv =  VLCApplication.showTvUi();
         final String action = intent != null ? intent.getAction(): null;
 
         if (Intent.ACTION_VIEW.equals(action) && intent.getData() != null) {
-            if (Permissions.checkReadStoragePermission(this, true))
-                startPlaybackFromApp(intent);
+            startPlaybackFromApp(intent);
             return;
         }
 
@@ -99,19 +95,9 @@ public class StartActivity extends FragmentActivity implements StoragePermission
     }
 
     private void startMedialibrary(final boolean firstRun, final boolean upgrade) {
-        if (!VLCApplication.getMLInstance().isInitiated() && Permissions.canReadStorage(StartActivity.this))
+        if (!VLCApplication.getMLInstance().isInitiated() && PermissionUtils.hasStorageAccess())
             startService(new Intent(Constants.ACTION_INIT, null, StartActivity.this, MediaParsingService.class)
                     .putExtra(Constants.EXTRA_FIRST_RUN, firstRun)
                     .putExtra(Constants.EXTRA_UPGRADE, upgrade));
-    }
-
-    private boolean showTvUi() {
-        return AndroidUtil.isJellyBeanMR1OrLater && (AndroidDevices.isAndroidTv || (!AndroidDevices.isChromeBook && !AndroidDevices.hasTsp) ||
-                PreferenceManager.getDefaultSharedPreferences(this).getBoolean("tv_ui", false));
-    }
-
-    @Override
-    public void onStorageAccessGranted() {
-        startPlaybackFromApp(getIntent());
     }
 }

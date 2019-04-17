@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="ads_category"
+    android:title="@string/ads_preferences_short">
+
+    <CheckBoxPreference
+        android:key="gdpr_consent"
+        android:summary="@string/gdpr_consent_pref_summary"
+        android:title="@string/gdpr_consent_pref_title" />
+
+    <CheckBoxPreference
+        android:key="show_rewarded_ads"
+        android:title="@string/show_rewarded_ads" />
+
+    <CheckBoxPreference
+        android:key="show_ads_on_main_screen"
+        android:title="@string/show_ads_on_main_screen" />
+
+    <CheckBoxPreference
+        android:key="show_ads_on_preroll"
+        android:title="@string/show_ads_on_preroll" />
+
+    <CheckBoxPreference
+        android:key="show_ads_on_pause"
+        android:title="@string/show_ads_on_pause" />
+
+    <CheckBoxPreference
+        android:key="show_ads_on_close"
+        android:title="@string/show_ads_on_close" />
+
+</PreferenceScreen>

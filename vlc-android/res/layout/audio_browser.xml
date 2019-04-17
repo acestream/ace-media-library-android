@@ -23,7 +23,7 @@
         android:layout_below="@+id/searchButton"
         android:layout_centerHorizontal="true">
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -32,7 +32,7 @@
             <include layout="@layout/audio_recyclerview" />
             <include layout="@layout/audio_recyclerview" />
             <include layout="@layout/audio_recyclerview" />
-        </android.support.v4.view.ViewPager>
+        </androidx.viewpager.widget.ViewPager>
     </org.videolan.vlc.gui.view.SwipeRefreshLayout>
 
     <TextView
@@ -42,8 +42,6 @@
         android:layout_below="@+id/header"
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/default_margin"
-        android:drawableBottom="@drawable/ic_no_media"
-        android:drawablePadding="@dimen/default_margin"
         android:gravity="center"
         android:maxWidth="600dp"
         android:text="@string/nomedia"

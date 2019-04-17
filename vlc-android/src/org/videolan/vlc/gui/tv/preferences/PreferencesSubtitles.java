@@ -54,7 +54,7 @@ public class PreferencesSubtitles extends BasePreferenceFragment implements Shar
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        findPreference("languages_download_list").setVisible(AndroidUtil.isHoneycombOrLater);
+        findPreference("languages_download_list").setVisible(true);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class PreferencesSubtitles extends BasePreferenceFragment implements Shar
             case "subtitles_color":
             case "subtitles_background":
             case "subtitle_text_encoding":
-                VLCInstance.restart();
+                VLCInstance.restart(true);
                 if (getActivity() != null )
                     ((PreferencesActivity)getActivity()).restartMediaPlayer();
         }

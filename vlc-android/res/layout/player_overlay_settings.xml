@@ -7,7 +7,7 @@
         android:id="@+id/player_delay_plus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_plus_circle"
+        android:src="?attr/rci_add_selector"
         android:focusable="true"
         android:visibility="invisible"/>
     <ImageView
@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin"
-        android:src="@drawable/ic_minus_circle"
+        android:src="?attr/rci_remove_selector"
         android:focusable="true"
         android:visibility="invisible"/>
 </LinearLayout>

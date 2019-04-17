@@ -13,10 +13,10 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.PowerManager;
-import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.preference.PreferenceManager;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -37,8 +37,11 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.videolan.vlc.BuildConfig;
+import org.videolan.vlc.R;
+
 public class MediaParsingService extends Service implements DevicesDiscoveryCb {
-    public final static String TAG = "VLC/MediaParsingService";
+    public final static String TAG = "AS/VLC/MPS";
 
     private static final long NOTIFICATION_DELAY = 1000L;
     private PowerManager.WakeLock mWakeLock;
@@ -85,6 +88,7 @@ public class MediaParsingService extends Service implements DevicesDiscoveryCb {
     @Override
     public void onCreate() {
         super.onCreate();
+
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
         mMedialibrary = VLCApplication.getMLInstance();
         mMedialibrary.addDeviceDiscoveryCb(MediaParsingService.this);

@@ -25,10 +25,10 @@ package org.videolan.vlc.gui.browser;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatEditText;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatEditText;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -51,7 +51,6 @@ import org.videolan.vlc.util.Strings;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FileBrowserFragment extends BaseBrowserFragment {
 
@@ -168,9 +167,6 @@ public class FileBrowserFragment extends BaseBrowserFragment {
         final Context context = getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         final AppCompatEditText input = new AppCompatEditText(context);
-        if (!AndroidUtil.isHoneycombOrLater) {
-            input.setTextColor(getResources().getColor(R.color.grey50));
-        }
         input.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         builder.setTitle(R.string.add_custom_path);
         builder.setMessage(R.string.add_custom_path_description);

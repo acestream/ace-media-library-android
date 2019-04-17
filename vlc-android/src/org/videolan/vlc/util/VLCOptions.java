@@ -25,9 +25,12 @@ import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
+import android.text.TextUtils;
 import android.util.Log;
 
+import org.acestream.sdk.AceStream;
+import org.acestream.sdk.utils.Logger;
 import org.videolan.libvlc.Media;
 import org.videolan.libvlc.MediaPlayer;
 import org.videolan.libvlc.util.AndroidUtil;
@@ -41,9 +44,17 @@ import org.videolan.vlc.VLCApplication;
 import java.io.File;
 import java.util.ArrayList;
 
+import static org.acestream.sdk.Constants.DEFAULT_DEINTERLACE_MODE;
+import static org.acestream.sdk.Constants.DEINTERLACE_MODE_DISABLED;
+import static org.acestream.sdk.Constants.PREF_KEY_DEINTERLACE_MODE;
 
 public class VLCOptions {
     private static final String TAG = "VLCConfig";
+
+    // Disable this feature with hardcoded flag.
+    // Currently it causes problems when player is switching from non-avi to avi: got sound,
+    // but no video. Need to do some deep player reinitialization in such case.
+    private static final boolean DISABLE_HW_FOR_AVI = false;
 
     public static final int AOUT_AUDIOTRACK = 0;
     public static final int AOUT_OPENSLES = 1;
@@ -83,7 +94,12 @@ public class VLCOptions {
             deblocking = getDeblocking(Integer.parseInt(pref.getString("deblocking", "-1")));
         } catch (NumberFormatException ignored) {}
 
-        int networkCaching = pref.getInt("network_caching_value", 0);
+        int networkCaching = 0;
+        try {
+            networkCaching = pref.getInt("network_caching_value", 0);
+        }
+        catch(ClassCastException ignored) {}
+
         if (networkCaching > 60000)
             networkCaching = 60000;
         else if (networkCaching < 0)
@@ -114,6 +130,23 @@ public class VLCOptions {
         options.add("--audio-resampler");
         options.add(getResampler());
         options.add("--audiotrack-session-id=" + AUDIOTRACK_SESSION_ID);
+
+        //:ace
+        options.add("--http-reconnect");
+
+        // deinterlace
+        String deinterlaceMode = pref.getString(PREF_KEY_DEINTERLACE_MODE, DEINTERLACE_MODE_DISABLED);
+        Log.v(TAG, "options: deinterlace=" + deinterlaceMode);
+        if(TextUtils.equals(deinterlaceMode, DEFAULT_DEINTERLACE_MODE)) {
+			// disable
+			options.add("--deinterlace=0");
+		}
+		else {
+			options.add("--deinterlace=-1");
+			options.add("--deinterlace-mode=" + deinterlaceMode); // discard,blend,mean,bob,linear,x,yadif,yadif2x,phosphor,ivtc
+			options.add("--video-filter=deinterlace");
+		}
+        ///ace
 
         options.add("--freetype-rel-fontsize=" + freetypeRelFontsize);
         if (freetypeBold)
@@ -158,18 +191,27 @@ public class VLCOptions {
     }
 
     public static String getAout(SharedPreferences pref) {
+        return getAout(pref.getString("aout", "-1"));
+    }
+
+    public static String getAout(String value) {
         int aout = -1;
         try {
-            aout = Integer.parseInt(pref.getString("aout", "-1"));
+            aout = Integer.parseInt(value);
         } catch (NumberFormatException ignored) {}
         final HWDecoderUtil.AudioOutput hwaout = HWDecoderUtil.getAudioOutputFromDevice();
-        if (hwaout == HWDecoderUtil.AudioOutput.AUDIOTRACK || hwaout == HWDecoderUtil.AudioOutput.OPENSLES)
+        if (hwaout == HWDecoderUtil.AudioOutput.AUDIOTRACK || hwaout == HWDecoderUtil.AudioOutput.OPENSLES) {
             aout = hwaout == HWDecoderUtil.AudioOutput.OPENSLES ? AOUT_OPENSLES : AOUT_AUDIOTRACK;
+            Log.v(TAG, "getAout: use value from hw config: aout=" + aout);
+        }
+        else {
+            Log.v(TAG, "getAout: use value from prefs: aout=" + aout);
+        }
 
         return aout == AOUT_OPENSLES ? "opensles_android" : null /* audiotrack is the default */;
     }
 
-    private static int getDeblocking(int deblocking) {
+    public static int getDeblocking(int deblocking) {
         int ret = deblocking;
         if (deblocking < 0) {
             /**
@@ -197,17 +239,32 @@ public class VLCOptions {
         return ret;
     }
 
-    private static String getResampler() {
+    public static String getResampler() {
         final VLCUtil.MachineSpecs m = VLCUtil.getMachineSpecs();
         return (m == null || m.processors > 2) ? "soxr" : "ugly";
     }
 
-    public static void setMediaOptions(Media media, Context context, int flags) {
+    public static void setMediaOptions(Media media, Context context, int flags, String mime) {
         boolean noHardwareAcceleration = (flags & MediaWrapper.MEDIA_NO_HWACCEL) != 0;
         boolean noVideo = (flags & MediaWrapper.MEDIA_VIDEO) == 0;
         final boolean paused = (flags & MediaWrapper.MEDIA_PAUSED) != 0;
         int hardwareAcceleration = HW_ACCELERATION_DISABLED;
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        if(Logger.verbose()) {
+            Logger.v(TAG, "setMediaOptions: uri=" + media.getUri());
+            Logger.v(TAG, "setMediaOptions: mime=" + mime);
+            Logger.v(TAG, "setMediaOptions: noHardwareAcceleration=" + noHardwareAcceleration);
+            Logger.v(TAG, "setMediaOptions: noVideo=" + noVideo);
+            Logger.v(TAG, "setMediaOptions: paused=" + paused);
+        }
+
+        //:ace
+        if(DISABLE_HW_FOR_AVI && TextUtils.equals(mime, "video/x-msvideo")) {
+            Log.d(TAG, "setMediaOptions: force disable hw: uri=" + media.getUri() + " mime=" + mime);
+            noHardwareAcceleration = true;
+        }
+        ///ace
 
         if (!noHardwareAcceleration) {
             try {
@@ -347,5 +404,17 @@ public class VLCOptions {
 
     public static int getAudiotrackSessionId() {
         return AUDIOTRACK_SESSION_ID;
+    }
+
+    public static String getDeinterlaceMode(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(PREF_KEY_DEINTERLACE_MODE, DEFAULT_DEINTERLACE_MODE);
+    }
+
+    public static void setDeinterlaceMode(Context context, String mode) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString(PREF_KEY_DEINTERLACE_MODE, mode)
+                .apply();
     }
 }

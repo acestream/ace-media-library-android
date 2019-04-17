@@ -19,10 +19,6 @@
     <string name="sortby_number_desc">Nb pistak (beherantz)</string>
     <string name="searchable_hint">Bilatu…</string>
     <string name="history">Historia</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">Emaitza %d aurkitu da</item>
-        <item quantity="other">%d emaitza aurkitu dira</item>
-    </plurals>
     <string name="play">Erreproduzitu</string>
     <string name="playback">Erreprodukzioa</string>
     <string name="playback_controls">Erreprodukzio-kontrolak</string>
@@ -71,14 +67,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">Azpikarpeta bat</item>
         <item quantity="other">%d azpikarpeta</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">Multimedia-fitxategi bat</item>
-        <item quantity="other">%d multimedia-fitxategi</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">Bideo bat</item>
-        <item quantity="other">%d bideo</item>
     </plurals>
     <string name="internal_memory">Barne-memoria</string>
     <string name="parent_folder">Gorantz karpeta gurasora</string>
@@ -140,10 +128,6 @@
     <string name="navmenu">nabigazio-menua</string>
     <string name="advanced">aukera aurreratuak</string>
     <string name="audio_boost_warning">Irristatu berriro gora %100-etik harago joateko</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">kanal 1\n</item>
-        <item quantity="other">%1$d kanal\n</item>
-    </plurals>
     <string name="track_samplerate_info">Lagin-emaria: %1$d Hz\n</string>
     <string name="track_resolution_info">Bereizmena: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Marko-emaria: %1$.3f\n</string>
@@ -179,7 +163,7 @@
     <string name="error_not_compatible">Sentitzen dugu, Android™-erako VLCren bertsio honek ez du zure gailua onartzen.</string>
     <string name="error_problem">Sentitzen dugu, Android-erako VLCk arazoa izan du kargatzean eta itxi egin behar da.</string>
     <string name="error_message_is">Errore-mezua ondorengoa da (aipa ezazu hau arazterakoan):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Erreprodukzio-errorea</string>
     <string name="encountered_error_message">VLCk errore bat aurkitu du multimedia honekin.\nSaiatu multimedia-liburutegia berritzen.</string>
     <string name="invalid_location">Ezin da %1$s kokalekua erreproduzitu.</string>
@@ -440,14 +424,14 @@
     <!--Widget-->
     <string name="widget_name_w">VLC trepeta zuria</string>
     <string name="widget_name_b">VLC trepeta iluna</string>
-    <string name="allow_storage_access_title">Baimendu VLCri bideo- eta audio-fitxategiak atzitzea</string>
-    <string name="allow_storage_access_description">VLCk baimen hauek behar ditu gailu honetako multimedia-fitxategietarako sarbidea izateko.</string>
-    <string name="allow_settings_access_ringtone_title">Baimendu VLCri dei-tonua ezartzea</string>
-    <string name="allow_settings_access_ringtone_description">VLCk baimen hauek behar ditu abesti hau zure dei-tonu gisa ezartzeko.</string>
-    <string name="allow_settings_access_brightness_title">Baimendu VLCri distiraren modua aldatzea</string>
-    <string name="allow_settings_access_brightness_description">VLCk baimen hauek behar ditu zure distiraren modua aldatzeko.</string>
-    <string name="allow_draw_overlays_title">Baimendu VLCren laster-leihoa beste aplikazioen gainean</string>
-    <string name="allow_sdraw_overlays_description">VLCk baimen hauek behar ditu zure bideoa beste aplikazioen gaineko laster-leiho batean bistaratzeko.</string>
+    <string name="allow_storage_access_title">Baimendu Ace Streamri bideo- eta audio-fitxategiak atzitzea</string>
+    <string name="allow_storage_access_description">Ace Streamk baimen hauek behar ditu gailu honetako multimedia-fitxategietarako sarbidea izateko.</string>
+    <string name="allow_settings_access_ringtone_title">Baimendu Ace Streamri dei-tonua ezartzea</string>
+    <string name="allow_settings_access_ringtone_description">Ace Streamk baimen hauek behar ditu abesti hau zure dei-tonu gisa ezartzeko.</string>
+    <string name="allow_settings_access_brightness_title">Baimendu Ace Streamri distiraren modua aldatzea</string>
+    <string name="allow_settings_access_brightness_description">Ace Streamk baimen hauek behar ditu zure distiraren modua aldatzeko.</string>
+    <string name="allow_draw_overlays_title">Baimendu Ace Streamren laster-leihoa beste aplikazioen gainean</string>
+    <string name="allow_sdraw_overlays_description">Ace Streamk baimen hauek behar ditu zure bideoa beste aplikazioen gaineko laster-leiho batean bistaratzeko.</string>
     <string name="permission_ask_again">Eman baimena</string>
     <string name="exit_app">Itxi VLC</string>
     <string name="exit_app_msg">Ziur zaude VLCtik irten nahi duzula?</string>
@@ -527,4 +511,39 @@
     <string name="msg_delete_failed">Huts egin du %1$s multimedia ezabatzea</string>
     <string name="renderer_list_title">Pantailak</string>
     <string name="feedback_player_crashed">Barkatu, VLC kraskatu da. Mesedez, saiatu berriz.</string>
+    <string name="torrent_files">Torrent fitxategiak</string>
+    <string name="select_language">Hautatu hizkuntza</string>
+    <string name="enable_headset_actions_title" source="google_translate">Urruneko kontrol lasterbideak</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Egin klik bikoitza \'Play \' erreproduzitzeko hurrengo botoian eta luze sakatu aurreko pistara joateko</string>
+    <string name="artists_show_all_title" source="google_translate">Erakutsi artista guztiak</string>
+    <string name="artists_show_all_summary" source="google_translate">Artista guztiak erakutsi Artistak zerrendan, ez bakarrik album artistek</string>
+    <string name="main_prefs_category" source="google_translate">Ezarpen nagusiak</string>
+    <string name="dump_media_db" source="google_translate">Irauli multimedia datu-basea</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopiatu datu basea barneko biltegiratze-raino</string>
+    <string name="streams" source="google_translate">erreka</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">VLC idazteko sarbidea eman behar diozu SD txartelari</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC-k ezin du fitxategia idazteko sarbide baimenik gabe ezabatu. \ NSortatu SD txartelera eta egin klik \ "Hautatu \". \ N "" \ "Erakutsi SD txartela \" lehenbailehen egin klik "" goiko eskuineko menuan.</string>
+    <string name="dialog_sd_wizard" source="google_translate">Erakutsi niri</string>
+    <string name="renderers_disconnect" source="google_translate">Deskonektatu</string>
+    <string name="audio_digital_failed" source="google_translate">Irteera digitalaren audio egoera aldatzean huts egin du</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Audioa Irteera Digitala gaituta</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio digitalaren irteera desgaituta dago</string>
+    <string name="live_streams" source="google_translate">Zuzeneko korronteak</string>
+    <string name="all_live_streams" source="google_translate">Zuzeneko erreka guztiak</string>
+    <string name="video_torrents" source="google_translate">Bideoaren torrentak</string>
+    <string name="audio_torrents" source="google_translate">Audioaren torrentak</string>
+    <string name="all_torrents" source="google_translate">Torrent guztiak</string>
+    <string name="main" source="google_translate">Main</string>
+    <string name="media_player" source="google_translate">Multimedia erreproduzitzailea</string>
+    <string name="acestream_server" source="google_translate">Ace Stream zerbitzaria (motorea)</string>
+    <string name="media_player_settings" source="google_translate">Multimedia erreproduzitzailearen ezarpenak</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream zerbitzaria (motorea) ezarpenak</string>
+    <string name="sign_out" source="google_translate">Amaitu saioa</string>
+    <string name="sign_in" source="google_translate">Hasi saioa</string>
+    <string name="sign_in_acestream" source="google_translate">Hasi saioa Ace Stream-ekin</string>
+    <string name="sign_in_google" source="google_translate">Hasi saioa Google-n</string>
+    <string name="video_files" source="google_translate">Bideo-fitxategiak</string>
+    <string name="audio_files" source="google_translate">Audio fitxategiak</string>
+    <string name="retry" source="google_translate">Saiatu berriro</string>
+    <string name="failed_to_load_web_page" source="google_translate">Ezin izan da web orria kargatu</string>
 </resources>

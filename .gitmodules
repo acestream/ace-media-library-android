@@ -1,0 +1,6 @@
+[submodule "acestream-android-sdk"]
+	path = acestream-android-sdk
+	url = https://github.com/acestream/acestream-android-sdk.git
+[submodule "acestream-engine-client"]
+	path = acestream-engine-client
+	url = https://github.com/acestream/acestream-engine-client.git

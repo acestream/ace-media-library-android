@@ -24,9 +24,14 @@
 package org.videolan.vlc.gui.preferences;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.preference.Preference;
+import androidx.annotation.Nullable;
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import android.text.TextUtils;
 import android.view.View;
 
 import org.videolan.vlc.BuildConfig;
@@ -35,9 +40,11 @@ import org.videolan.vlc.VLCApplication;
 import org.videolan.vlc.gui.SecondaryActivity;
 import org.videolan.vlc.gui.helpers.UiTools;
 
-public class PreferencesFragment extends BasePreferenceFragment {
+import java.util.Locale;
 
-    public final static String TAG = "VLC/PreferencesFragment";
+public class PreferencesFragment extends BasePreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+
+    public final static String TAG = "AS/Prefs";
 
     public final static String PLAYBACK_HISTORY = "playback_history";
 
@@ -54,17 +61,50 @@ public class PreferencesFragment extends BasePreferenceFragment {
     @Override
     public void onStart() {
         super.onStart();
+        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getPreferenceScreen().getSharedPreferences()
+                .unregisterOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Preference p;
+
+        p = findPreference("set_locale");
+        initSummary(p);
+
+        // Set default value from system settings
+        if(TextUtils.isEmpty(p.getSummary())) {
+            p.setSummary(Locale.getDefault().getDisplayLanguage());
+        }
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findPreference("extensions_category").setVisible(BuildConfig.DEBUG);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        String category = null;
+        Bundle arguments = getArguments();
+        if(arguments != null) {
+            category = arguments.getString("category");
+        }
+
+        if(TextUtils.equals(category, "engine")) {
+            loadFragment(new PreferencesEngine());
+        }
     }
 
     @Override
@@ -104,9 +144,46 @@ public class PreferencesFragment extends BasePreferenceFragment {
             case PLAYBACK_HISTORY:
                 getActivity().setResult(PreferencesActivity.RESULT_RESTART);
                 return true;
+            case "enable_black_theme":
+                ((PreferencesActivity) getActivity()).exitAndRescan();
+                return true;
             default:
                 return super.onPreferenceTreeClick(preference);
         }
         return true;
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (TextUtils.equals(key, "set_locale")) {
+            updatePrefSummary(findPreference(key));
+            ((PreferencesActivity) getActivity()).exitAndRescan();
+        }
+    }
+
+    private void initSummary(Preference p) {
+        if (p instanceof PreferenceGroup) {
+            PreferenceGroup pGrp = (PreferenceGroup) p;
+            for (int i = 0; i < pGrp.getPreferenceCount(); i++) {
+                initSummary(pGrp.getPreference(i));
+            }
+        } else {
+            updatePrefSummary(p);
+        }
+    }
+
+    private void updatePrefSummary(Preference p) {
+        if (p instanceof ListPreference) {
+            ListPreference listPref = (ListPreference) p;
+            p.setSummary(listPref.getEntry());
+        }
+        if (p instanceof EditTextPreference) {
+            String value = VLCApplication.getSettings().getString(p.getKey(), "");
+            if(!p.isPersistent()) {
+                // Non-persistent prefs don't update automatically
+                ((EditTextPreference)p).setText(value);
+            }
+            p.setSummary(value);
+        }
     }
 }

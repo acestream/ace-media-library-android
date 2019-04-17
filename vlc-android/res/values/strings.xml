@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" translatable="false">Ace Media Library</string>
 
     <!-- Main VLC Interface -->
-    <string name="app_name" translatable="false">VLC</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="other">Other</string>
@@ -148,7 +148,7 @@
     <string name="brightness">Brightness</string>
     <string name="navmenu">navigation menu</string>
     <string name="advanced">advanced options</string>
-    <string name="audio_boost_warning">Slide up again to go beyond 100%</string>
+    <string name="audio_boost_warning" formatted="false">Slide up again to go beyond 100%</string>
 
     <plurals name="track_channels_info_quantity">
         <item quantity="one">1 channel\n</item>
@@ -249,6 +249,14 @@
     <string name="about_link" translatable="false">        &lt;a href=&quot;https://www.videolan.org/vlc/&quot;&gt;https://www.videolan.org/vlc/&lt;/a&gt;</string>
     <string name="about_copyright" translatable="false">Copyleft &#169; 1996&#8211;2018 by VideoLAN.\n</string>
     <string name="authors" translatable="false">Edward&#160;Wang, Sébastien&#160;Toque, Adrien&#160;Maglo, Jean-Baptiste&#160;Kempf, Ludovic&#160;Fauvet, Rafaël&#160;Carré, Alexandre&#160;Perraud, Michael&#160;Merg, Martin&#160;Storsjö, Rémi&#160;Duraffort, Dominique&#160;Martinet, Jean-Philippe&#160;André, Felix&#160;Abecassis, Christoph&#160;Miebach, Hugo&#160;Beauzée-Luyssen, Felix&#160;Paul&#160;Kühne, John&#160;Mooring, Pavol&#160;Rusnak, Rohit&#160;Yadav, Tanguy&#160;Pruvot, Thomas&#160;Clavier, Asad&#160;Mehmood, Garret&#160;Kelly, Philipp&#160;Dreimann, Walter&#160;Heck, Thomas&#160;Guillem, Geoffrey&#160;Métais.</string>
+    <string name="ace_about_link" translatable="false">&lt;a href=&quot;http://acestrea.org&quot;&gt;http://acestream.org&lt;/a&gt;</string>
+    <string name="ace_about_copyright" translatable="false">
+        Copyleft &#169; 2019 by Ace Stream
+        \nCopyleft &#169; 1996-2018 by VideoLAN, VLC Authors
+    </string>
+    <string name="ace_about_text" translatable="false">
+        Ace Media Library is a media application based on VLC for Android™. It provides all the features of VLC and adds an ability to play torrents via Ace Stream Engine application.
+    </string>
 
     <!-- Preferences -->
     <string name="preferences">Settings</string>
@@ -355,7 +363,7 @@
     <string name="audio_save_repeat_title">Save repeat mode</string>
     <string name="audio_save_repeat_summary">Remember repeat mode when loading audio playlists</string>
     <string name="audio_boost_title">Audio-boost</string>
-    <string name="audio_boost_summary">Enable volume up to 200%</string>
+    <string name="audio_boost_summary" formatted="false">Enable volume up to 200%</string>
     <string name="headset_prefs_category">Headset</string>
     <string name="enable_headset_detection">Detect headset</string>
     <string name="enable_headset_detection_summary">Detect headset insertion and removal</string>
@@ -409,6 +417,7 @@
     <string name="enable_time_stretching_audio">Time-stretching audio</string>
     <string name="enable_time_stretching_audio_summary">Speed up and slow down audio without changing the pitch (requires a fast device).</string>
 
+    <string name="main_prefs_category">Main settings</string>
     <string name="advanced_prefs_category">Advanced</string>
     <string name="save_video_none">Do not save speed</string>
     <string name="save_video_session">Save speed during session</string>
@@ -501,14 +510,14 @@
     <string name="widget_default_text" translatable="false">VLC mini player</string>
     <string name="widget_name_w">VLC White Widget</string>
     <string name="widget_name_b">VLC Dark Widget</string>
-    <string name="allow_storage_access_title">Allow VLC to access video and audio files</string>
-    <string name="allow_storage_access_description">VLC needs you to grant this permission to access the media files on this device.</string>
-    <string name="allow_settings_access_ringtone_title">Allow VLC to set the ringtone</string>
-    <string name="allow_settings_access_ringtone_description">VLC needs you to grant this permission to set up this song as your ringtone.</string>
-    <string name="allow_settings_access_brightness_title">Allow VLC to change brightness mode</string>
-    <string name="allow_settings_access_brightness_description">VLC needs you to grant this permission to change your brightness mode.</string>
-    <string name="allow_draw_overlays_title">Allow VLC player popup over other apps</string>
-    <string name="allow_sdraw_overlays_description">VLC needs you to grant this permission display your video in a popup over other applications.</string>
+    <string name="allow_storage_access_title">Allow Ace Stream to access video and audio files</string>
+    <string name="allow_storage_access_description">Ace Stream needs you to grant this permission to access the media files on this device.</string>
+    <string name="allow_settings_access_ringtone_title">Allow Ace Stream to set the ringtone</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream needs you to grant this permission to set up this song as your ringtone.</string>
+    <string name="allow_settings_access_brightness_title">Allow Ace Stream to change brightness mode</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream needs you to grant this permission to change your brightness mode.</string>
+    <string name="allow_draw_overlays_title">Allow Ace Stream player popup over other apps</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream needs you to grant this permission display your video in a popup over other applications.</string>
     <string name="permission_ask_again">Grant permission</string>
     <string name="exit_app">Close VLC</string>
     <string name="exit_app_msg">Are you sure you want to quit VLC?</string>
@@ -556,6 +565,7 @@
     <string name="episodes">episodes</string>
     <string name="movies">movies</string>
     <string name="videos">videos</string>
+    <string name="streams">streams</string>
     <string name="clear_playback_history">Clear playback history</string>
     <string name="various_artists">Various Artists</string>
     <string name="ml_scanning">Scanning for media files</string>
@@ -600,5 +610,11 @@
     <string name="audio_digital_failed">Failed to change Audio Digital Output state</string>
     <string name="audio_digital_output_enabled">Audio Digital Output enabled</string>
     <string name="audio_digital_output_disabled">Audio Digital Output disabled</string>
-    <string name="audio_digital_title">Digital audio output (passthrough)</string>
+    <string name="audio_digital_title" translatable="false">Digital audio output (passthrough)</string>
+    <string name="playing_video">Playing video</string>
+    <string name="get_bonuses">Get bonuses</string>
+    <string name="bonuses">Bonuses</string>
+
+    <string name="open_link">Open link</string>
+    <string name="open_link_dialog_msg">Enter link: http://, content id etc.</string>
 </resources>

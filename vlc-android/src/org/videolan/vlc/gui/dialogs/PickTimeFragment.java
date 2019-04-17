@@ -23,15 +23,15 @@
 package org.videolan.vlc.gui.dialogs;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.videolan.vlc.PlaybackService;
 import org.videolan.vlc.R;
+import org.videolan.vlc.PlaybackService;
 import org.videolan.vlc.gui.PlaybackServiceFragment;
 import org.videolan.vlc.gui.helpers.UiTools;
 
@@ -113,7 +113,7 @@ public abstract class PickTimeFragment extends DialogFragment implements View.On
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        ((TextView)v).setTextColor(hasFocus ? getResources().getColor(R.color.orange500) : mTextColor);
+        ((TextView)v).setTextColor(hasFocus ? getResources().getColor(R.color.highlight_blue) : mTextColor);
     }
 
     @Override

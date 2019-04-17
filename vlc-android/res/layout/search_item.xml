@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:vlc="http://schemas.android.com/tools">
-    <data>
+    <data class="org.videolan.vlc.databinding.SearchItemBinding">
         <import type="android.view.View" />
         <variable
             name="cover"

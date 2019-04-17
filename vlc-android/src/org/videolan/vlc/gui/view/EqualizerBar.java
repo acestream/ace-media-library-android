@@ -60,9 +60,7 @@ public class EqualizerBar extends LinearLayout {
 
         mSeek = (VerticalSeekBar) findViewById(R.id.equalizer_seek);
         //Force LTR to fix VerticalSeekBar background problem with RTL layout
-        if (AndroidUtil.isJellyBeanMR1OrLater){
-            mSeek.setLayoutDirection(LAYOUT_DIRECTION_LTR);
-        }
+        mSeek.setLayoutDirection(LAYOUT_DIRECTION_LTR);
         mSeek.setMax(2 * RANGE);
         mSeek.setProgress(RANGE);
         mSeek.setOnSeekBarChangeListener(mSeekListener);

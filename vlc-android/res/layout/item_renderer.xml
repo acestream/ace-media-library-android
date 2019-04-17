@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <data>
+    <data class="org.videolan.vlc.databinding.ItemRendererBinding">
         <variable
             name="renderer"
-            type="org.videolan.libvlc.RendererItem" />
+            type="org.videolan.vlc.util.RendererItemWrapper" />
         <variable
-            name="clicHandler"
+            name="clickHandler"
             type="org.videolan.vlc.gui.dialogs.RenderersDialog.RendererClickhandler" />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,6 +20,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{() -> clicHandler.connect(renderer)}"/>
+            android:onClick="@{() -> clickHandler.connect(renderer)}"/>
     </LinearLayout>
 </layout>

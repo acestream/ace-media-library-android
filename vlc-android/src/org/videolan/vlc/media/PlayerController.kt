@@ -1,11 +1,12 @@
 package org.videolan.vlc.media
 
 import android.net.Uri
-import android.support.annotation.MainThread
+import androidx.annotation.MainThread
 import android.support.v4.media.session.PlaybackStateCompat
 import android.widget.Toast
-import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import org.videolan.libvlc.*
 import org.videolan.medialibrary.media.MediaWrapper
 import org.videolan.vlc.BuildConfig
@@ -15,8 +16,13 @@ import org.videolan.vlc.gui.preferences.PreferencesActivity
 import org.videolan.vlc.util.VLCInstance
 import org.videolan.vlc.util.VLCOptions
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 @Suppress("EXPERIMENTAL_FEATURE_WARNING")
-class PlayerController : IVLCVout.Callback, MediaPlayer.EventListener {
+class PlayerController : IVLCVout.Callback, MediaPlayer.EventListener, CoroutineScope {
+    override val coroutineContext = Dispatchers.Main.immediate
+
+    private val TAG = "AceStream/VLC/PC"
 
 //    private val exceptionHandler by lazy(LazyThreadSafetyMode.NONE) { CoroutineExceptionHandler { _, _ -> onPlayerError() } }
     private val playerContext by lazy(LazyThreadSafetyMode.NONE) { newSingleThreadContext("vlc-player") }
@@ -26,6 +32,7 @@ class PlayerController : IVLCVout.Callback, MediaPlayer.EventListener {
     var switchToVideo = false
     var seekable = false
     var pausable = false
+    //var isInBackground = false
     var previousMediaStats: Media.Stats? = null
         private set
     @Volatile var playbackState = PlaybackStateCompat.STATE_STOPPED
@@ -125,6 +132,10 @@ class PlayerController : IVLCVout.Callback, MediaPlayer.EventListener {
 
     fun setAudioDigitalOutputEnabled(enabled: Boolean) = mediaplayer.setAudioDigitalOutputEnabled(enabled)
 
+    fun setAudioOutput(aout: String?) = mediaplayer.setAudioOutput(aout)
+
+    fun setAudioOutputDevice(id: String?) = mediaplayer.setAudioOutputDevice(id)
+
     fun getAudioDelay() = mediaplayer.audioDelay
 
     fun getSpuDelay() = mediaplayer.spuDelay
@@ -173,7 +184,7 @@ class PlayerController : IVLCVout.Callback, MediaPlayer.EventListener {
                 try {
                     withTimeout(5000, { player.release() })
                 } catch (exception: TimeoutCancellationException) {
-                    launch(UI) { Toast.makeText(VLCApplication.getAppContext(), "media stop has timeouted!", Toast.LENGTH_LONG).show() }
+                    launch { Toast.makeText(VLCApplication.getAppContext(), "media stop has timeouted!", Toast.LENGTH_LONG).show() }
                 }
             } else player.release()
         }
@@ -189,7 +200,7 @@ class PlayerController : IVLCVout.Callback, MediaPlayer.EventListener {
         return MediaPlayer(VLCInstance.get()).apply {
             setAudioDigitalOutputEnabled(VLCOptions.isAudioDigitalOutputEnabled(VLCApplication.getSettings()));
             VLCOptions.getAout(VLCApplication.getSettings())?.let { setAudioOutput(it) }
-            setRenderer(RendererDelegate.selectedRenderer)
+            setRenderer(RendererDelegate.selectedRenderer?.vlcRenderer)
             this.vlcVout.addCallback(this@PlayerController)
         }
     }
@@ -201,6 +212,14 @@ class PlayerController : IVLCVout.Callback, MediaPlayer.EventListener {
     }
 
     fun getTime() = currentTime
+
+    fun getPosition(): Float {
+        return mediaplayer.position
+    }
+
+    fun getPlayerState(): Int {
+        return mediaplayer.playerState
+    }
 
     fun setRate(rate: Float, save: Boolean) {
         mediaplayer.rate = rate

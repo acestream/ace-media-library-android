@@ -30,6 +30,8 @@ import android.util.Log;
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.vlc.util.AndroidDevices;
 
+import org.videolan.vlc.BuildConfig;
+
 public class BootupReceiver extends BroadcastReceiver {
     public BootupReceiver() {
     }

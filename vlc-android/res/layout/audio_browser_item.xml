@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:vlc="http://schemas.android.com/apk/res-auto">
-    <data>
+    <data class="org.videolan.vlc.databinding.AudioBrowserItemBinding">
         <import type="android.view.View"/>
         <import type="android.text.TextUtils"/>
         <import type="org.videolan.medialibrary.media.MediaLibraryItem"/>
@@ -22,7 +22,7 @@
             type="org.videolan.vlc.gui.audio.AudioBrowserAdapter.MediaItemViewHolder" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
@@ -93,8 +93,8 @@
             vlc:layout_constraintTop_toTopOf="parent"
             vlc:layout_constraintBottom_toBottomOf="parent"
             android:scaleType="center"
-            android:src="@drawable/ic_more"
+            android:src="?attr/rci_more_vert"
             android:contentDescription="@string/more_actions"
             android:onClick="@{holder::onMoreClick}" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

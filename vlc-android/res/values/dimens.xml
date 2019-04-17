@@ -24,7 +24,8 @@
     <dimen name="seekbar_height">1dip</dimen>
     <dimen name="images_margin_sides">10dp</dimen>
     <dimen name="time_margin_sides">12dp</dimen>
-
+    <dimen name="time_margin_with_live_button">60dp</dimen>
+    <dimen name="time_margin_with_stream_selector">72dp</dimen>
 
     <dimen name="media_ctrl_margin_top">20dp</dimen>
     <dimen name="tv_overscan_vertical">27dp</dimen>
@@ -74,4 +75,6 @@
     <dimen name="progress_layout_height">24dp</dimen>
     <dimen name="dialog_sd_wisard_width">320dp</dimen>
     <dimen name="dialog_sd_wisard_height">420dp</dimen>
+
+    <dimen name="player_action_bar_icon_gap">5dp</dimen>
 </resources>

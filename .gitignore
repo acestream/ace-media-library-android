@@ -65,3 +65,9 @@ libvlc.pc
 libvlc.pc.backup
 libvlcpp.pc
 lib/
+
+#aar build
+/build_aar/
+/releases/
+/vlc-android/armv7Atv/
+/vlc-android/armv7Regular/

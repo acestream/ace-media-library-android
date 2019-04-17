@@ -8,6 +8,8 @@
     Material color swatches
     The main color is always xxx500
 -->
+    <!-- VLC -->
+    <!--
     <color name="orange50">#fff3e0</color>
     <color name="orange100">#ffdfae</color>
     <color name="orange200">#ffca7d</color>
@@ -18,10 +20,55 @@
     <color name="orange700">#ff7200</color>
     <color name="orange800">#ff610a</color>
     <color name="orange900">#ff5014</color>
+    -->
+    <!-- /VLC -->
+
+    <!-- //:ace -->
+    <!-- blue gray -->
+    <color name="orange50">#ECEFF1</color>
+    <color name="orange100">#CFD8DC</color>
+    <color name="orange200">#B0BEC5</color>
+    <color name="orange300">#90A4AE</color>
+    <color name="orange400">#78909C</color>
+    <color name="orange500">#607D8B</color>
+    <color name="orange600">#546E7A</color>
+    <color name="orange700">#455A64</color>
+    <color name="orange800">#37474F</color>
+    <color name="orange900">#263238</color>
+
+    <color name="orange200transparent">#64B0BEC5</color>
+    <color name="orange500transparent">#b4607D8B</color>
+    <color name="orange900transparent">#80263238</color>
+    <color name="orange900transparent_darker">#b4263238</color>
+
+    <color name="main_accent">@color/orange600</color>
+    <color name="background_dark">@color/orange900</color>
+    <color name="background_dark_transparent">@color/orange900transparent_darker</color>
+    <color name="background_light">@color/orange100</color>
+
+    <color name="selected_item_bg_dark">#203643</color>
+    <color name="selected_item_bg_light">@color/orange100</color>
+
+    <color name="highlight_blue">#0E7ABA</color>
+    <color name="highlight_blue_transparent_25">#400E7ABA</color>
+    <color name="highlight_blue_transparent_50">#800E7ABA</color>
+    <color name="highlight_blue_pressed">#1badf0</color>
+
+    <color name="controls_light">@color/orange600</color>
+    <color name="controls_light_transparent_25">#40546E7A</color>
+    <color name="controls_light_transparent_50">#80546E7A</color>
+    <color name="controls_light_focused">@color/controls_light_transparent_50</color>
+    <color name="controls_light_pressed">@color/controls_light_transparent_25</color>
+
+    <color name="controls_dark">@color/orange300</color>
+    <color name="controls_dark_transparent_25">#4090A4AE</color>
+    <color name="controls_dark_transparent_50">#8090A4AE</color>
+    <color name="controls_dark_focused">@color/controls_dark_transparent_50</color>
+    <color name="controls_dark_pressed">@color/controls_dark_transparent_25</color>
+
+    <!-- ///ace -->
 
     <color name="red500transparent">#b4ff0000</color>
-    <color name="orange500transparent">#b4ff8800</color>
-    <color name="orange200transparent">#64ffca7d</color>
 
     <color name="grey50">#fafafa</color>
     <color name="grey100">#f5f5f5</color>
@@ -45,6 +92,7 @@
     <color name="transparent">#00000000</color>
 
 
-    <color name="tv_bg">#235f69</color>
+    <color name="tv_brand">#34434B</color>
+    <color name="tv_bg">#242F35</color>
     <color name="tv_card_content">#0a6e96</color>
 </resources>

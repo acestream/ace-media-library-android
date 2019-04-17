@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -11,6 +12,7 @@ import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.util.Log;
 
+import org.acestream.sdk.AceStream;
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.medialibrary.Tools;
 import org.videolan.medialibrary.media.MediaWrapper;
@@ -142,28 +144,67 @@ public class MediaUtils {
 
     public static String getMediaArtist(Context ctx, MediaWrapper media) {
         final String artist = media != null ? media.getArtist() : null;
-        return artist != null ? artist : getMediaString(ctx, R.string.unknown_artist);
+        if (artist != null) {
+            return artist;
+        }
+        else if(media != null && media.isVideo()) {
+            return null;
+        }
+        else {
+            return getMediaString(ctx, R.string.unknown_artist);
+        }
     }
 
     public static String getMediaReferenceArtist(Context ctx, MediaWrapper media) {
         final String artist = media != null ? media.getReferenceArtist() : null;
-        return artist != null ? artist : getMediaString(ctx, R.string.unknown_artist);
+        if (artist != null) {
+            return artist;
+        }
+        else if(media != null && media.isVideo()) {
+            return null;
+        }
+        else {
+            return getMediaString(ctx, R.string.unknown_artist);
+        }
     }
 
     public static String getMediaAlbumArtist(Context ctx, MediaWrapper media) {
         final String albumArtist = media != null ? media.getAlbumArtist() : null;
-        return albumArtist != null ? albumArtist : getMediaString(ctx, R.string.unknown_artist);
+        if (albumArtist != null) {
+            return albumArtist;
+        }
+        else if(media != null && media.isVideo()) {
+            return null;
+        }
+        else {
+            return getMediaString(ctx, R.string.unknown_artist);
+        }
     }
 
     public static String getMediaAlbum(Context ctx, MediaWrapper media) {
         final String album = media != null ? media.getAlbum() : null;
-        return album != null ? album : getMediaString(ctx, R.string.unknown_album);
-
+        if (album != null) {
+            return album;
+        }
+        else if(media != null && media.isVideo()) {
+            return null;
+        }
+        else {
+            return getMediaString(ctx, R.string.unknown_album);
+        }
     }
 
     public static String getMediaGenre(Context ctx, MediaWrapper media) {
         final String genre = media != null ? media.getGenre() : null;
-        return genre != null ? genre : getMediaString(ctx, R.string.unknown_genre);
+        if (genre != null) {
+            return genre;
+        }
+        else if(media != null && media.isVideo()) {
+            return null;
+        }
+        else {
+            return getMediaString(ctx, R.string.unknown_genre);
+        }
     }
 
     public static String getMediaSubtitle(MediaWrapper media) {
@@ -295,4 +336,24 @@ public class MediaUtils {
             if (cursor != null && !cursor.isClosed()) cursor.close();
         }
     }
+
+    //:ace
+    public static void showPlayerSelector(Activity activity, MediaWrapper media) {
+        if(activity == null) {
+            return;
+        }
+
+        if(!media.isP2PItem()) {
+            return;
+        }
+
+        Intent intent = AceStream.makeIntentFromUri(
+                activity,
+                media.getUri(),
+                null,
+                false,
+                true);
+        activity.startActivity(intent);
+    }
+    ///ace
 }

@@ -20,40 +20,60 @@
 
 package org.videolan.vlc.gui;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.internal.NavigationMenuView;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.util.SimpleArrayMap;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.view.ActionMode;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.google.android.material.internal.NavigationMenuView;
+import com.google.android.material.navigation.NavigationView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.collection.SimpleArrayMap;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.view.ActionMode;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FilterQueryProvider;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import org.acestream.sdk.AceStream;
+import org.acestream.sdk.AceStreamManager;
+import org.acestream.sdk.controller.api.response.AuthData;
+import org.acestream.sdk.utils.AuthUtils;
+import org.acestream.sdk.utils.Logger;
+import org.acestream.sdk.utils.PermissionUtils;
+import org.acestream.sdk.utils.VlcBridge;
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.vlc.BuildConfig;
+import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.vlc.MediaParsingService;
 import org.videolan.vlc.R;
+import org.videolan.vlc.PlaybackService;
 import org.videolan.vlc.StartActivity;
 import org.videolan.vlc.VLCApplication;
 import org.videolan.vlc.extensions.ExtensionListing;
@@ -66,6 +86,7 @@ import org.videolan.vlc.gui.browser.ExtensionBrowser;
 import org.videolan.vlc.gui.browser.FileBrowserFragment;
 import org.videolan.vlc.gui.browser.MediaBrowserFragment;
 import org.videolan.vlc.gui.browser.NetworkBrowserFragment;
+import org.videolan.vlc.gui.helpers.MainActivityHelper;
 import org.videolan.vlc.gui.helpers.UiTools;
 import org.videolan.vlc.gui.network.MRLPanelFragment;
 import org.videolan.vlc.gui.preferences.PreferencesActivity;
@@ -75,25 +96,38 @@ import org.videolan.vlc.gui.view.HackyDrawerLayout;
 import org.videolan.vlc.interfaces.IRefreshable;
 import org.videolan.vlc.media.MediaUtils;
 import org.videolan.vlc.util.Constants;
-import org.videolan.vlc.util.Permissions;
 import org.videolan.vlc.util.VLCInstance;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class MainActivity extends ContentActivity implements FilterQueryProvider, NavigationView.OnNavigationItemSelectedListener, ExtensionManagerService.ExtensionManagerActivity {
-    public final static String TAG = "VLC/MainActivity";
+public class MainActivity
+        extends ContentActivity
+        implements
+            FilterQueryProvider,
+            NavigationView.OnNavigationItemSelectedListener,
+            ExtensionManagerService.ExtensionManagerActivity
+{
+    public final static String TAG = "AS/VLC/Main";
 
     private static final int ACTIVITY_RESULT_PREFERENCES = 1;
     private static final int ACTIVITY_RESULT_OPEN = 2;
     private static final int ACTIVITY_RESULT_SECONDARY = 3;
+
+    public static final int REQUEST_CODE_REQUEST_PERMISSIONS = 1;
+
+    //:ace
+    private static final int UPGRADE_BUTTON_ROTATE_INTERVAL = 10000;
+    ///ace
 
     private Medialibrary mMediaLibrary;
     private ExtensionsManager mExtensionsManager;
     private HackyDrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private ActionBarDrawerToggle mDrawerToggle;
+    private Drawable mDrawerDrawable;
 
     private int mCurrentFragmentId;
     private Fragment mCurrentFragment = null;
@@ -105,6 +139,62 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
     private ServiceConnection mExtensionServiceConnection;
     private ExtensionManagerService mExtensionManagerService;
 
+    //:ace
+    private ImageView mAccountBalanceButton = null;
+    private TextView mAccountBalanceText = null;
+    private ImageView mAccountProfileButton = null;
+    private TextView mAccountProfileText = null;
+    private ImageView mAccountUpgradeButton = null;
+    private TextView mAccountUpgradeText = null;
+    private Handler mHandler = new Handler();
+    private MainActivityHelper mMainActivityHelper;
+    private boolean mGotStorageAccess = false;
+
+    private MainActivityHelper.Callback mMainActivityHelperCallback = new MainActivityHelper.Callback() {
+        @Override
+        public void showProgress(int category, String message) {
+            AceStream.toast(message);
+        }
+
+        @Override
+        public void hideProgress(int category) {
+        }
+
+        @Override
+        public void onAuthUpdated(AuthData authData, String login) {
+            updateNavigationHeader(authData, login);
+        }
+
+        @Override
+        public void onBonusAdsAvailable(boolean available) {
+            showBonusAdsButton(available);
+        }
+    };
+
+    private Runnable mRotateUpgradeButton = new Runnable() {
+        @Override
+        public void run() {
+            // Rotate: upgrade/disable_ads
+            if(mAccountUpgradeText != null) {
+                String name = (String) mAccountUpgradeText.getTag(R.id.tag_name);
+                if (TextUtils.equals(name, "upgrade")) {
+                    mAccountUpgradeText.setText(R.string.disable_ads);
+                    mAccountUpgradeText.setTag(R.id.tag_name, "disable_ads");
+                    mAccountUpgradeButton.setImageDrawable(
+                            getResources().getDrawable(R.drawable.ic_no_ads));
+                } else {
+                    mAccountUpgradeText.setText(R.string.upgrade);
+                    mAccountUpgradeText.setTag(R.id.tag_name, "upgrade");
+                    mAccountUpgradeButton.setImageDrawable(
+                            getResources().getDrawable(R.drawable.ic_upgrade));
+                }
+            }
+            mHandler.removeCallbacks(mRotateUpgradeButton);
+            mHandler.postDelayed(mRotateUpgradeButton, UPGRADE_BUTTON_ROTATE_INTERVAL);
+        }
+    };
+    ///ace
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,8 +203,6 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
             finish();
             return;
         }
-
-        Permissions.checkReadStoragePermission(this, false);
 
         /*** Start initializing the UI ***/
 
@@ -130,7 +218,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
             mCurrentFragment = fm.getFragment(savedInstanceState, "current_fragment");
             //Restore fragments stack
             restoreFragmentsStack(savedInstanceState, fm);
-            mCurrentFragmentId = savedInstanceState.getInt("current", mSettings.getInt("fragment_id", R.id.nav_video));
+            mCurrentFragmentId = savedInstanceState.getInt("current", mSettings.getInt("fragment_id", R.id.nav_video_local));
         } else {
             if (getIntent().getBooleanExtra(Constants.EXTRA_UPGRADE, false)) {
             /*
@@ -157,6 +245,12 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+
+                // If account submenu is visible when drawer is closed - collapse it.
+                if(isAccountDropDownVisible()) {
+                    switchAccountDropDown();
+                }
+
                 final Fragment current = getCurrentFragment();
                 if (current instanceof MediaBrowserFragment)
                     ((MediaBrowserFragment) current).setReadyToDisplay(true);
@@ -182,6 +276,10 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
         mScanNeeded = savedInstanceState == null && mSettings.getBoolean("auto_rescan", true);
         mExtensionsManager = ExtensionsManager.getInstance();
         mMediaLibrary = VLCApplication.getMLInstance();
+
+        //:ace
+        mMainActivityHelper = new MainActivityHelper(this, mMainActivityHelperCallback);
+        ///ace
     }
 
     private void restoreFragmentsStack(Bundle savedInstanceState, FragmentManager fm) {
@@ -204,11 +302,127 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
 
     private void setupNavigationView() {
         mNavigationView = (NavigationView) findViewById(R.id.navigation);
-        if (TextUtils.equals(BuildConfig.FLAVOR_target, "chrome")) {
-            MenuItem item = mNavigationView.getMenu().findItem(R.id.nav_directories);
-            item.setTitle(R.string.open);
-        }
         mNavigationView.getMenu().findItem(R.id.nav_history).setVisible(mSettings.getBoolean(PreferencesFragment.PLAYBACK_HISTORY, true));
+
+        //:ace
+        final View headerLayout = mNavigationView.getHeaderView(0); // 0-index header
+
+        final LinearLayout dropDownSwitch = headerLayout.findViewById(R.id.account_dropdown_switch);
+        if(dropDownSwitch != null) {
+            dropDownSwitch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    switchAccountDropDown();
+                }
+            });
+        }
+
+        final LinearLayout signInButton = headerLayout.findViewById(R.id.account_sign_in);
+        if(signInButton != null) {
+            signInButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(checkAceStream()) {
+                        AceStream.openProfileActivity(MainActivity.this);
+                    }
+                    closeDrawer();
+                }
+            });
+        }
+
+        mAccountBalanceButton = headerLayout.findViewById(R.id.nav_header_balance_button);
+        mAccountBalanceText = headerLayout.findViewById(R.id.nav_header_balance_text);
+        if(mAccountBalanceButton != null) {
+            mAccountBalanceButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(checkAceStream()) {
+                        if (mMainActivityHelper.isUserLoggedIn()) {
+                            AceStream.openTopupActivity(MainActivity.this);
+                        } else {
+                            AceStream.openProfileActivity(MainActivity.this);
+                        }
+                    }
+                    closeDrawer();
+                }
+            });
+        }
+
+        mAccountProfileButton = headerLayout.findViewById(R.id.nav_header_account_button);
+        mAccountProfileText = headerLayout.findViewById(R.id.nav_header_account_text);
+        if(mAccountProfileButton != null) {
+            mAccountProfileButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(checkAceStream()) {
+                        AceStream.openProfileActivity(MainActivity.this);
+                    }
+                    closeDrawer();
+                }
+            });
+        }
+
+        mAccountUpgradeButton = headerLayout.findViewById(R.id.nav_header_upgrade_button);
+        mAccountUpgradeText = headerLayout.findViewById(R.id.nav_header_upgrade_text);
+        if(mAccountUpgradeButton != null) {
+            mAccountUpgradeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(checkAceStream()) {
+                        if (mMainActivityHelper.isUserLoggedIn()) {
+                            AceStream.openUpgradeActivity(MainActivity.this);
+                        } else {
+                            AceStream.openProfileActivity(MainActivity.this);
+                        }
+                    }
+                    closeDrawer();
+                }
+            });
+        }
+
+        View getBonusAdsButton = headerLayout.findViewById(R.id.nav_header_bonus_ads_button);
+        if(getBonusAdsButton != null) {
+            getBonusAdsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(checkAceStream()) {
+                        mMainActivityHelper.showBonusAds();
+                    }
+                    closeDrawer();
+                }
+            });
+        }
+        ///ace
+    }
+
+    private boolean isAccountDropDownVisible() {
+        final View headerLayout = mNavigationView.getHeaderView(0); // 0-index header
+        final LinearLayout dropDownSwitch = headerLayout.findViewById(R.id.account_dropdown_switch);
+        return dropDownSwitch.getTag() != null;
+    }
+
+    private void switchAccountDropDown() {
+        final View headerLayout = mNavigationView.getHeaderView(0); // 0-index header
+        final LinearLayout dropDownSwitch = headerLayout.findViewById(R.id.account_dropdown_switch);
+
+        ImageView dropDownSwitchImage =
+                headerLayout.findViewById(R.id.account_dropdown_image);
+
+        int drawableId;
+        if(dropDownSwitch.getTag() == null) {
+            drawableId = R.drawable.ic_arrow_drop_up_black_24dp;
+            dropDownSwitch.setTag(true);
+            showAccountDrawerMenu();
+        }
+        else {
+            drawableId = R.drawable.ic_arrow_drop_down_black_24dp;
+            dropDownSwitch.setTag(null);
+            showTopLevelDrawerMenu();
+        }
+
+        if(dropDownSwitchImage != null) {
+            dropDownSwitchImage.setImageDrawable(getResources().getDrawable(drawableId));
+        }
     }
 
     @Override
@@ -228,11 +442,21 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
     @Override
     protected void onStart() {
         super.onStart();
+
+        if(!PermissionUtils.hasStorageAccess()) {
+            Log.v(TAG, "onStart: request storage access");
+            PermissionUtils.requestStoragePermissions(this, REQUEST_CODE_REQUEST_PERMISSIONS);
+            mCurrentFragmentId = R.id.nav_request_permissions;
+        }
+        else {
+            mGotStorageAccess = true;
+        }
+
         if (mCurrentFragment == null && !currentIdIsExtension())
             showFragment(mCurrentFragmentId);
         if (mMediaLibrary.isInitiated()) {
             /* Load media items from database and storage */
-            if (mScanNeeded && Permissions.canReadStorage(this))
+            if (mScanNeeded && PermissionUtils.hasStorageAccess())
                 startService(new Intent(Constants.ACTION_RELOAD, null,this, MediaParsingService.class));
             else if (!currentIdIsExtension())
                 restoreCurrentList();
@@ -266,6 +490,95 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
                     .apply();
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMainActivityHelper.onResume();
+
+        // Additional check on resume: access can be granted from system settings
+        if(!mGotStorageAccess && PermissionUtils.hasStorageAccess()) {
+            onStorageAccessGranted();
+        }
+        else if(mGotStorageAccess && !PermissionUtils.hasStorageAccess()) {
+            onStorageAccessDenied();
+        }
+
+        Intent intent = getIntent();
+        String fragmentId = (intent == null) ? null : intent.getStringExtra(VlcBridge.EXTRA_FRAGMENT_ID);
+
+        if(fragmentId != null) {
+            // consume once
+            getIntent().removeExtra(VlcBridge.EXTRA_FRAGMENT_ID);
+            switch(fragmentId) {
+                case VlcBridge.FRAGMENT_VIDEO_LOCAL:
+                    showFragment(R.id.nav_video_local);
+                    break;
+                case VlcBridge.FRAGMENT_VIDEO_TORRENTS:
+                    showFragment(R.id.nav_video_torrents);
+                    break;
+                case VlcBridge.FRAGMENT_VIDEO_LIVE_STREAMS:
+                    showFragment(R.id.nav_video_live_streams);
+                    break;
+                case VlcBridge.FRAGMENT_AUDIO_LOCAL:
+                    showFragment(R.id.nav_audio_local);
+                    break;
+                case VlcBridge.FRAGMENT_AUDIO_TORRENTS:
+                    showFragment(R.id.nav_audio_torrents);
+                    break;
+                case VlcBridge.FRAGMENT_BROWSING_DIRECTORIES:
+                    showFragment(R.id.nav_directories);
+                    break;
+                case VlcBridge.FRAGMENT_BROWSING_LOCAL_NETWORKS:
+                    showFragment(R.id.nav_network);
+                    break;
+                case VlcBridge.FRAGMENT_HISTORY:
+                    showFragment(R.id.nav_history);
+                    break;
+                case VlcBridge.FRAGMENT_ABOUT:
+                    showSecondaryFragment(SecondaryActivity.ABOUT);
+                    break;
+                case VlcBridge.FRAGMENT_BROWSING_STREAM:
+                    new MRLPanelFragment().show(getSupportFragmentManager(), "fragment_mrl");
+                    break;
+                case VlcBridge.FRAGMENT_SETTINGS_ADS:
+                    openSettings("ads");
+                    break;
+                case VlcBridge.FRAGMENT_SETTINGS_ENGINE:
+                    openSettings("engine");
+                    break;
+                case VlcBridge.FRAGMENT_SETTINGS_PLAYER:
+                    openSettings("player");
+                    break;
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mMainActivityHelper.onPause();
+        mHandler.removeCallbacks(mRotateUpgradeButton);
+    }
+
+    @Override
+    public void onConnected(PlaybackService service) {
+        Log.v(TAG, "connected playback service");
+        super.onConnected(service);
+        mMainActivityHelper.onStart();
+    }
+
+    @Override
+    public void onDisconnected() {
+        Log.v(TAG, "disconnected playback service");
+        super.onDisconnected();
+        mMainActivityHelper.onStop();
+    }
+
     private void loadPlugins() {
         List<ExtensionListing> plugins = mExtensionsManager.getExtensions(this, true);
         if (plugins.isEmpty()) {
@@ -296,7 +609,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
             if (mExtensionsManager.previousExtensionIsEnabled(getApplication()))
                 mExtensionManagerService.openExtension(mCurrentFragmentId);
             else
-                showFragment(R.id.nav_video);
+                showFragment(R.id.nav_video_local);
     }
 
     private void createExtensionServiceConnection() {
@@ -334,11 +647,12 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
         reloadPreferences();
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void onBackPressed() {
         /* Close the menu first */
         if (mDrawerLayout.isDrawerOpen(mNavigationView)) {
-            mDrawerLayout.closeDrawer(mNavigationView);
+            closeDrawer();
             return;
         }
 
@@ -364,7 +678,8 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
     @NonNull
     private Fragment getNewFragment(int id) {
         switch (id) {
-            case R.id.nav_audio:
+            case R.id.nav_audio_local:
+            case R.id.nav_audio_torrents:
                 return new AudioBrowserFragment();
             case R.id.nav_directories:
                 return new FileBrowserFragment();
@@ -372,6 +687,8 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
                 return new HistoryFragment();
             case R.id.nav_network:
                 return new NetworkBrowserFragment();
+            case R.id.nav_request_permissions:
+                return new RequestPermissionsFragment();
             default:
                 return new VideoGridFragment();
         }
@@ -423,14 +740,18 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
      * Show a secondary fragment.
      */
     public void showSecondaryFragment(String fragmentTag) {
-        showSecondaryFragment(fragmentTag, null);
+        showSecondaryFragment(fragmentTag, null, -1, 0);
     }
 
-    public void showSecondaryFragment(String fragmentTag, String param) {
+    public void showSecondaryFragment(String fragmentTag, String param1, int param2, long param3) {
         Intent i = new Intent(this, SecondaryActivity.class);
         i.putExtra("fragment", fragmentTag);
-        if (param != null)
-            i.putExtra("param", param);
+        if (param1 != null)
+            i.putExtra("param1", param1);
+        if (param2 != -1)
+            i.putExtra("param2", param2);
+        if (param3 != -1)
+            i.putExtra("param3", param3);
         startActivityForResult(i, ACTIVITY_RESULT_SECONDARY);
         // Slide down the audio player if needed.
         slideDownAudioPlayer();
@@ -448,7 +769,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        mDrawerLayout.closeDrawer(mNavigationView);
+        closeDrawer();
         UiTools.setKeyboardVisibility(mDrawerLayout, false);
 
         // Handle item selection
@@ -503,6 +824,13 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
                 case PreferencesActivity.RESULT_UPDATE_ARTISTS:
                     final Fragment fragment = getCurrentFragment();
                     if (fragment instanceof AudioBrowserFragment) ((AudioBrowserFragment) fragment).updateArtists();
+                    break;
+                case PreferencesActivity.RESULT_CLEAR_CACHE:
+                    mMainActivityHelper.clearEngineCache();
+                    break;
+                case PreferencesActivity.RESULT_SHUTDOWN_ENGINE:
+                    mMainActivityHelper.shutdown();
+                    break;
             }
         } else if (requestCode == ACTIVITY_RESULT_OPEN && resultCode == RESULT_OK){
             MediaUtils.openUri(this, data.getData());
@@ -542,7 +870,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
     }
 
     private void reloadPreferences() {
-        mCurrentFragmentId = mSettings.getInt("fragment_id", R.id.nav_video);
+        mCurrentFragmentId = mSettings.getInt("fragment_id", R.id.nav_video_local);
     }
 
     @Override
@@ -556,18 +884,110 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
         return false;
     }
 
+    private void showTopLevelDrawerMenu() {
+        for (int i = 0; i < mNavigationView.getMenu().size(); i++) {
+            MenuItem mi = mNavigationView.getMenu().getItem(i);
+            mi.setVisible(mi.getGroupId() == R.id.scrollable_group
+                    || mi.getGroupId() == R.id.fixed_group
+                    || mi.getGroupId() == R.id.remote_control_group
+                    || mi.getItemId() == R.id.extensions_group);
+        }
+    }
+
+    private void showAccountDrawerMenu() {
+        int groupId = R.id.submenu_account_signed_in;
+        for (int i = 0; i < mNavigationView.getMenu().size(); i++) {
+            MenuItem mi = mNavigationView.getMenu().getItem(i);
+            mi.setVisible(mi.getGroupId() == groupId);
+        }
+    }
+
+    private void openSettings(String category) {
+        Intent intent = new Intent(this, PreferencesActivity.class);
+        intent.putExtra("category", category);
+        startActivityForResult(intent, ACTIVITY_RESULT_PREFERENCES);
+    }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        //NOTE: return false for items that should not remain selected after click
+        boolean makeItemChecked = false;
         // This should not happen
         if(item == null)
             return false;
 
         int id = item.getItemId();
+
+        // For certain menu items check that AceStream is installed
+        switch(id) {
+            case R.id.nav_audio_torrents:
+            case R.id.nav_video_torrents:
+            case R.id.nav_video_live_streams:
+            case R.id.nav_remote_control:
+            case R.id.nav_report_problem:
+                if(!checkAceStream()) {
+                    return false;
+                }
+                break;
+        }
+
+        // Submenu triggers
+        switch(id) {
+            case R.id.nav_submenu_video:
+                for (int i = 0; i < mNavigationView.getMenu().size(); i++) {
+                    MenuItem mi = mNavigationView.getMenu().getItem(i);
+                    mi.setVisible(mi.getGroupId() == R.id.submenu_video || mi.getItemId() == R.id.nav_return);
+
+                    if (mi.getItemId() == R.id.nav_return) {
+                        mi.setTitle(getString(R.string.video));
+                    }
+                }
+                return false;
+            case R.id.nav_submenu_audio:
+                for (int i = 0; i < mNavigationView.getMenu().size(); i++) {
+                    MenuItem mi = mNavigationView.getMenu().getItem(i);
+                    mi.setVisible(mi.getGroupId() == R.id.submenu_audio || mi.getItemId() == R.id.nav_return);
+
+                    if (mi.getItemId() == R.id.nav_return) {
+                        mi.setTitle(getString(R.string.audio));
+                    }
+                }
+                return false;
+            case R.id.nav_submenu_browsing:
+                for (int i = 0; i < mNavigationView.getMenu().size(); i++) {
+                    MenuItem mi = mNavigationView.getMenu().getItem(i);
+                    mi.setVisible(mi.getGroupId() == R.id.submenu_browsing || mi.getItemId() == R.id.nav_return);
+
+                    if (mi.getItemId() == R.id.nav_return) {
+                        mi.setTitle(getString(R.string.browsing));
+                    }
+                }
+                return false;
+            case R.id.nav_submenu_settings:
+                for (int i = 0; i < mNavigationView.getMenu().size(); i++) {
+                    MenuItem mi = mNavigationView.getMenu().getItem(i);
+                    mi.setVisible(mi.getGroupId() == R.id.submenu_settings || mi.getItemId() == R.id.nav_return);
+
+                    if (mi.getItemId() == R.id.nav_return) {
+                        mi.setTitle(getString(R.string.preferences));
+                    }
+                }
+                return false;
+            case R.id.nav_return:
+                showTopLevelDrawerMenu();
+                return false;
+            case R.id.nav_sign_out:
+                signOut();
+                switchAccountDropDown();
+                closeDrawer();
+                return false;
+        }
+
         final Fragment current = getCurrentFragment();
         if (item.getGroupId() == R.id.extensions_group)  {
             if(mCurrentFragmentId == id) {
                 clearBackstackFromClass(ExtensionBrowser.class);
-                mDrawerLayout.closeDrawer(mNavigationView);
+                closeDrawer();
                 return false;
             }
             else
@@ -577,7 +997,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
                 mExtensionManagerService.disconnect();
 
             if (current == null) {
-                mDrawerLayout.closeDrawer(mNavigationView);
+                closeDrawer();
                 return false;
             }
 
@@ -586,51 +1006,121 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
                 if (current instanceof BaseBrowserFragment && !((BaseBrowserFragment) current).isRootDirectory()) {
                     getSupportFragmentManager().popBackStackImmediate(getTag(id), FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 } else {
-                    mDrawerLayout.closeDrawer(mNavigationView);
+                    closeDrawer();
                     return false;
                 }
             } else switch (id) {
                 case R.id.nav_about:
                     showSecondaryFragment(SecondaryActivity.ABOUT);
                     break;
-                case R.id.nav_settings:
-                    startActivityForResult(new Intent(this, PreferencesActivity.class), ACTIVITY_RESULT_PREFERENCES);
+                case R.id.nav_settings_ads:
+                    openSettings("ads");
+                    showTopLevelDrawerMenu();
+                    break;
+                case R.id.nav_settings_player:
+                    openSettings("player");
+                    showTopLevelDrawerMenu();
+                    break;
+                case R.id.nav_settings_engine:
+                    openSettings("engine");
+                    showTopLevelDrawerMenu();
                     break;
                 case R.id.nav_mrl:
                     new MRLPanelFragment().show(getSupportFragmentManager(), "fragment_mrl");
                     break;
+                case R.id.nav_shutdown_engine:
+                    mMainActivityHelper.shutdown();
+                    break;
+                case R.id.nav_clear_cache:
+                    mMainActivityHelper.clearEngineCache();
+                    showTopLevelDrawerMenu();
+                    break;
+                case R.id.nav_restart:
+                    mMainActivityHelper.restartApp();
+                    showTopLevelDrawerMenu();
+                    break;
+                case R.id.nav_report_problem:
+                    AceStream.openReportProblemActivity(this);
+                    showTopLevelDrawerMenu();
+                    break;
+                case R.id.nav_remote_control:
+                    MediaWrapper mw = getLastP2PMedia();
+                    Uri uri = mw != null ? mw.getUri() : null;
+                    AceStream.openRemoteControlActivity(this, uri);
+                    break;
                 case R.id.nav_directories:
-                    if (TextUtils.equals(BuildConfig.FLAVOR_target, "chrome")) {
-                        final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("audio/* video/*");
-                        startActivityForResult(intent, ACTIVITY_RESULT_OPEN);
-                        mDrawerLayout.closeDrawer(mNavigationView);
-                        return true;
-                    }
+                // WARN: all new items must be added above nav_directories because it doesn't break
                 default:
+                    makeItemChecked = true;
                 /* Slide down the audio player */
                     slideDownAudioPlayer();
                 /* Switch the fragment */
                     showFragment(id);
             }
         }
-        mDrawerLayout.closeDrawer(mNavigationView);
-        return true;
+        closeDrawer();
+        return makeItemChecked;
+    }
+
+    private MediaWrapper getLastP2PMedia() {
+        if(mService == null) return null;
+
+        MediaWrapper media = mService.getCurrentMediaWrapper();
+        if(media != null) {
+            return media.isP2PItem() ? media : null;
+        }
+
+        // Get first p2p item from last playlist
+        List<MediaWrapper> lastPlaylist = mService.getLastPlaylist(Constants.PLAYLIST_TYPE_VIDEO);
+        if (lastPlaylist == null) {
+            Log.v(TAG, "getLastP2PMedia: no last playlist");
+            return null;
+        }
+        if (lastPlaylist.size() == 0) {
+            Log.v(TAG, "getLastP2PMedia: empty last playlist");
+            return null;
+        }
+
+        // Get first p2p item
+        for (MediaWrapper mw : lastPlaylist) {
+            if (mw.isP2PItem()) {
+                media = mw;
+                break;
+            }
+        }
+        if (media == null) {
+            Log.v(TAG, "getLastP2PMedia: no p2p items in last playlist");
+        }
+
+        return media;
+    }
+
+    private void closeDrawer() {
+        if(mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mNavigationView)) {
+            mDrawerLayout.closeDrawer(mNavigationView);
+        }
     }
 
     public void updateCheckedItem(int id) {
         switch (id) {
             case R.id.nav_mrl:
-            case R.id.nav_settings:
+            case R.id.nav_settings_ads:
+            case R.id.nav_settings_player:
+            case R.id.nav_settings_engine:
             case R.id.nav_about:
+            case R.id.nav_sign_out:
                 return;
             default:
-                if (id != mCurrentFragmentId && mNavigationView.getMenu().findItem(id) != null) {
-                    if (mNavigationView.getMenu().findItem(mCurrentFragmentId) != null)
-                        mNavigationView.getMenu().findItem(mCurrentFragmentId).setChecked(false);
+                if (mNavigationView.getMenu().findItem(id) != null) {
                     mNavigationView.getMenu().findItem(id).setChecked(true);
-                    /* Save the tab status in pref */
-                    mSettings.edit().putInt("fragment_id", id).apply();
+
+                    if (id != mCurrentFragmentId) {
+                        if (mNavigationView.getMenu().findItem(mCurrentFragmentId) != null)
+                            mNavigationView.getMenu().findItem(mCurrentFragmentId).setChecked(false);
+
+                        /* Save the tab status in pref */
+                        mSettings.edit().putInt("fragment_id", id).apply();
+                    }
                 }
         }
     }
@@ -646,6 +1136,35 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
             fragment = getNewFragment(id);
             mFragmentsStack.put(tag, new WeakReference<>(fragment));
         }
+
+        if(fragment instanceof VideoGridFragment) {
+            Bundle bundle = new Bundle(1);
+            int category;
+            if(id == R.id.nav_video_torrents) {
+                category = MediaWrapper.CATEGORY_P2P_VIDEO;
+            }
+            else if(id == R.id.nav_video_live_streams) {
+                category = MediaWrapper.CATEGORY_P2P_STREAM;
+            }
+            else {
+                category = MediaWrapper.CATEGORY_REGULAR_VIDEO;
+            }
+            bundle.putInt("category", category);
+            fragment.setArguments(bundle);
+        }
+        else if(fragment instanceof AudioBrowserFragment) {
+            Bundle bundle = new Bundle(1);
+            int category;
+            if(id == R.id.nav_audio_torrents) {
+                category = MediaWrapper.CATEGORY_P2P_AUDIO;
+            }
+            else {
+                category = MediaWrapper.CATEGORY_REGULAR_AUDIO;
+            }
+            bundle.putInt("category", category);
+            fragment.setArguments(bundle);
+        }
+
         if (mCurrentFragment != null)
             if (mCurrentFragment instanceof ExtensionBrowser)
                 fm.beginTransaction().remove(mCurrentFragment).commit();
@@ -678,9 +1197,11 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
         switch (id){
             case R.id.nav_about:
                 return ID_ABOUT;
-            case R.id.nav_settings:
+            case R.id.nav_settings_ads:
+            case R.id.nav_settings_player:
+            case R.id.nav_settings_engine:
                 return ID_PREFERENCES;
-            case R.id.nav_audio:
+            case R.id.nav_audio_local:
                 return ID_AUDIO;
             case R.id.nav_directories:
                 return ID_DIRECTORIES;
@@ -690,6 +1211,14 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
                 return ID_MRL;
             case R.id.nav_network:
                 return ID_NETWORK;
+            case R.id.nav_request_permissions:
+                return ID_REQUEST_PERMISSIONS;
+            case R.id.nav_video_torrents:
+                return ID_P2P_VIDEO;
+            case R.id.nav_audio_torrents:
+                return ID_P2P_AUDIO;
+            case R.id.nav_video_live_streams:
+                return ID_P2P_STREAMS;
             default:
                 return ID_VIDEO;
         }
@@ -728,4 +1257,244 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
         mCurrentFragmentId = id;
     }
 
+    private void onStorageAccessGranted() {
+        Log.v(TAG, "onStorageAccessGranted");
+        boolean firstRun = false;
+        boolean upgrade = false;
+
+        Intent intent = getIntent();
+        if(intent != null && intent.getBooleanExtra(Constants.EXTRA_UPGRADE, false)) {
+            upgrade = true;
+            firstRun = intent.getBooleanExtra(Constants.EXTRA_FIRST_RUN, false);
+            intent.removeExtra(Constants.EXTRA_UPGRADE);
+            intent.removeExtra(Constants.EXTRA_FIRST_RUN);
+        }
+
+        Intent serviceIntent = new Intent(Constants.ACTION_INIT, null, this, MediaParsingService.class);
+        serviceIntent.putExtra(Constants.EXTRA_FIRST_RUN, firstRun);
+        serviceIntent.putExtra(Constants.EXTRA_UPGRADE, upgrade);
+        startService(serviceIntent);
+
+        AceStream.onStorageAccessGranted();
+        mGotStorageAccess = true;
+        mHelper.onStart();
+
+        showUi();
+        showFragment(R.id.nav_video_local);
+
+        // Show drawer
+        mDrawerLayout.openDrawer(mNavigationView);
+    }
+
+    private void onStorageAccessDenied() {
+        Log.v(TAG, "onStorageAccessDenied");
+        mGotStorageAccess = false;
+        hideUi();
+        showFragment(R.id.nav_request_permissions);
+    }
+
+    private void showUi() {
+        // Restore drawer icon
+        if(mDrawerDrawable != null) {
+            mToolbar.setNavigationIcon(mDrawerDrawable);
+        }
+    }
+
+    private void hideUi() {
+        // Hide drawer icon. Save it to restore later.
+        if(mToolbar.getNavigationIcon() != null) {
+            mDrawerDrawable = mToolbar.getNavigationIcon();
+        }
+        mToolbar.setNavigationIcon(null);
+
+        MenuItem mi;
+        Menu menu = mToolbar.getMenu();
+
+        mi = menu.findItem(R.id.ml_menu_renderers);
+        if(mi != null) mi.setVisible(false);
+
+        closeDrawer();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        Logger.v(TAG, "onRequestPermissionsResult: requestCode=" + requestCode);
+        if(requestCode == REQUEST_CODE_REQUEST_PERMISSIONS) {
+            // If request is cancelled, the result arrays are empty.
+
+            int i;
+            for(i=0; i<permissions.length; i++) {
+                Log.d(TAG, "grant: i=" + i + " permission=" + permissions[i]);
+            }
+            for(i=0; i<grantResults.length; i++) {
+                Log.d(TAG, "grant: i=" + i + " result=" + grantResults[i]);
+            }
+
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Log.d(TAG, "user granted permission");
+                onStorageAccessGranted();
+
+            } else {
+                Log.d(TAG, "user denied permission");
+                onStorageAccessDenied();
+            }
+        }
+    }
+
+    //:ace
+    @Override
+    protected void onParsingServiceFinished() {
+        super.onParsingServiceFinished();
+    }
+
+    private void updateNavigationHeader(final AuthData authData, String text) {
+        final boolean userSignedIn;
+
+        if(TextUtils.isEmpty(text)) {
+            text = "";
+            userSignedIn = false;
+        }
+        else {
+            userSignedIn = true;
+        }
+
+        final String fText = text;
+        VLCApplication.runOnMainThread(new Runnable() {
+            @Override
+            public void run() {
+                int balance = -1;
+                int color = R.color.orange100;
+                int icon = R.drawable.ic_account_circle_24dp_bluegrey100;
+                String accountText = getResources().getString(R.string.user_profile);
+                if(authData != null && authData.auth_level > 0 && authData.package_color != null) {
+                    accountText = authData.package_name;
+                    balance = authData.purse_amount;
+                    switch (authData.package_color) {
+                        case "red":
+                            icon = R.drawable.ic_account_circle_24dp_red;
+                            color = R.color.ace_red;
+                            break;
+                        case "yellow":
+                            icon = R.drawable.ic_account_circle_24dp_yellow;
+                            color = R.color.ace_yellow;
+                            break;
+                        case "green":
+                            icon = R.drawable.ic_account_circle_24dp_green;
+                            color = R.color.ace_green;
+                            break;
+                        case "blue":
+                            icon = R.drawable.ic_account_circle_24dp_blue;
+                            color = R.color.ace_blue;
+                            break;
+                    }
+                }
+
+                if(mAccountProfileButton != null) {
+                    mAccountProfileButton.setImageDrawable(getResources().getDrawable(icon));
+                }
+
+                if(mAccountProfileText != null) {
+                    mAccountProfileText.setText(accountText);
+                    mAccountProfileText.setTextColor(getResources().getColor(color));
+                }
+
+                if(mAccountBalanceText != null) {
+                    String balanceText;
+                    if(balance == -1) {
+                        balanceText = getResources().getString(R.string.account_balance);
+                    }
+                    else {
+                        balanceText = getResources().getString(
+                                R.string.topup_button_title_short, balance / 100.0);
+                    }
+                    mAccountBalanceText.setText(balanceText);
+                }
+
+                if(mAccountUpgradeButton != null && mAccountUpgradeText != null) {
+                    if(authData != null && AuthUtils.hasNoAds(authData.auth_level)) {
+                        mAccountUpgradeText.setText(R.string.upgrade);
+                        mAccountUpgradeText.setTag(R.id.tag_name, "upgrade");
+                        mAccountUpgradeButton.setImageDrawable(
+                                getResources().getDrawable(R.drawable.ic_upgrade));
+                        mHandler.removeCallbacks(mRotateUpgradeButton);
+                    }
+                    else {
+                        // Initial value 50/50
+                        if (new Random().nextInt(100) > 50) {
+                            mAccountUpgradeText.setText(R.string.disable_ads);
+                            mAccountUpgradeText.setTag(R.id.tag_name, "disable_ads");
+                            mAccountUpgradeButton.setImageDrawable(
+                                    getResources().getDrawable(R.drawable.ic_no_ads));
+                        } else {
+                            mAccountUpgradeText.setText(R.string.upgrade);
+                            mAccountUpgradeText.setTag(R.id.tag_name, "upgrade");
+                            mAccountUpgradeButton.setImageDrawable(
+                                    getResources().getDrawable(R.drawable.ic_upgrade));
+                        }
+                        mHandler.removeCallbacks(mRotateUpgradeButton);
+                        mHandler.postDelayed(mRotateUpgradeButton, UPGRADE_BUTTON_ROTATE_INTERVAL);
+                    }
+                }
+
+                final View headerLayout = mNavigationView.getHeaderView(0); // 0-index header
+                if(headerLayout != null) {
+                    if (userSignedIn) {
+                        headerLayout.findViewById(R.id.account_dropdown_switch).setVisibility(View.VISIBLE);
+                        headerLayout.findViewById(R.id.account_sign_in).setVisibility(View.GONE);
+                    } else {
+                        headerLayout.findViewById(R.id.account_dropdown_switch).setVisibility(View.GONE);
+                        headerLayout.findViewById(R.id.account_sign_in).setVisibility(View.VISIBLE);
+                    }
+
+                    TextView v = headerLayout.findViewById(R.id.account_dropdown_text);
+                    if (v != null) {
+                        v.setText(fText);
+                    }
+                }
+            }
+        });
+    }
+
+    private AceStreamManager getPlaybackManager() {
+        if(mService != null) {
+            return mService.getAceStreamManager();
+        }
+        else {
+            return null;
+        }
+    }
+
+    public void signOut() {
+        AceStreamManager pm = getPlaybackManager();
+        if(pm == null) {
+            Log.w(TAG, "signOut: missing pm");
+            return;
+        }
+        pm.signOut();
+    }
+
+    private boolean checkAceStream() {
+        if(!AceStream.isInstalled()) {
+            //TODO: show rich alert dialog with ability to install AceStream
+            AceStream.toast("Ace Stream Engine is not installed");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean areBonusAdsAvailable() {
+        return mMainActivityHelper.areBonusAdsAvailable();
+    }
+
+    private void showBonusAdsButton(boolean visible) {
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            if (fragment instanceof MediaBrowserFragment) {
+                ((MediaBrowserFragment) fragment).showBonusAdsButton(visible);
+            }
+        }
+    }
+    ///ace
 }

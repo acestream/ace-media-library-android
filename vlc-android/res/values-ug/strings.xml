@@ -175,7 +175,6 @@
     <string name="extra_prefs_category">قۇشۇمچە تەڭشەكلەر</string>
     <string name="interface_prefs_screen">ئارايۈز</string>
     <string name="interface_other_category">ئارا يۈز_باشقىلار</string>
-    <string name="enable_brightness_gesture">يورۇقلۇق قول ئىشارىتىنى قوزغات</string>
     <string name="enable_brightness_gesture_summary">سىن قويۇۋاتقاندا قول ئىشارىتى بىلەن يورۇقلۇقنى تىزگىنلىگىلى بولىدۇ</string>
     <string name="enable_headset_detection">قۇلاقلىق بايقاشنى قوزغات</string>
     <string name="enable_headset_detection_summary">قۇلاقلىقنى چىقىرىۋەتكەندە ۋاقىتلىق توختىتىدۇ؛ قىستۇرغاندا چېلىشنى داۋاملاشتۇرىدۇ</string>
@@ -225,7 +224,6 @@
     <string name="drawer_close">يولباشچى تىزىملىكىنى تاقا</string>
     <string name="network_browsing">يەرلىك تور</string>
     <string name="file_size">ھۆججەت چوڭلۇقى:</string>
-    <string name="file_other">يولباشچى تىزىملىكىنى تاقا</string>
     <string name="sleep_time_not_set">تەڭشەلمىگەن</string>
     <string name="network_shares_discovery">توردائورتاقلىشىشنى ئىزلەۋاتىدۇ...</string>
     <string name="network_empty">مۇندەرىجە قۇرۇق</string>

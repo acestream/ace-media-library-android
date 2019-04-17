@@ -12,10 +12,6 @@
     <string name="sortby_date_desc">Data (desc.)</string>
     <string name="searchable_hint">Buscar…</string>
     <string name="history">Historial</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">encontrouse %d resultado</item>
-        <item quantity="other">encontráronse %d resultados</item>
-    </plurals>
     <string name="play">Reproducir</string>
     <string name="play_from_start">Reproducir desde o inicio</string>
     <string name="play_as_audio">Reproducir como audio</string>
@@ -54,14 +50,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 subcartafol</item>
         <item quantity="other">%d subcartafoles</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 ficheiro de media</item>
-        <item quantity="other">%d ficheiros de media</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 vídeo</item>
-        <item quantity="other">%d vídeos</item>
     </plurals>
     <string name="internal_memory">memoria interna</string>
     <string name="parent_folder">Ir arriba ao cartafol pai</string>
@@ -272,4 +260,278 @@
     <string name="music_now_playing">A reproducir</string>
     <!--Widget-->
     <!--PLugins-->
+    <string name="torrent_files">Torrent ficheiros</string>
+    <string name="select_language">Seleccionar idioma</string>
+    <string name="sortby_artist_name" source="google_translate">Nome do artista</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Nome do artista (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Nome do álbum</string>
+    <string name="sortby_album_name_desc" source="google_translate">Nome do álbum (desc)</string>
+    <string name="sortby_length_desc" source="google_translate">Lonxitude (desc)</string>
+    <string name="sortby_number" source="google_translate">Pistas de Nb</string>
+    <string name="sortby_number_desc" source="google_translate">Pistas de Nb (desc)</string>
+    <string name="playback" source="google_translate">Reprodución</string>
+    <string name="playback_controls" source="google_translate">Controis de reprodución</string>
+    <string name="medialibrary_scan" source="google_translate">Examinación da biblioteca de medios</string>
+    <string name="Medialibrary_progress" source="google_translate">Actualizacións de progreso na exploración da biblioteca de medios</string>
+    <string name="video_app_switch_title" source="google_translate">Modo de fondo / PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">Seleccione o comportamento de VLC cando cambie a outra aplicación desde a reprodución de vídeo</string>
+    <string name="play_pip_title" source="google_translate">Reproduce vídeos no modo Picture-in-picture</string>
+    <string name="insert_next" source="google_translate">Inserir a continuación</string>
+    <string name="unknown_number" source="google_translate">Número descoñecido de pistas</string>
+    <string name="tracks" source="google_translate">Pistas</string>
+    <string name="shuffle_title" source="google_translate">Modo aleatorio</string>
+    <string name="repeat_title" source="google_translate">Modo de repetición</string>
+    <string name="firstsong" source="google_translate">Primeira canción da lista de reprodución</string>
+    <string name="lastsong" source="google_translate">Última canción da lista de reprodución</string>
+    <string name="surface_fit_screen" source="google_translate">Pantalla axustada</string>
+    <string name="sleep_in" source="google_translate">Durmir</string>
+    <string name="server_add_title" source="google_translate">Engade un servidor novo aos favoritos</string>
+    <string name="server_domain_hint" source="google_translate">Enderezo do servidor (nome de dominio ou IP)</string>
+    <string name="server_share_hint" source="google_translate">Nome compartido de rede (ou enderezo IP)</string>
+    <string name="server_folder_hint" source="google_translate">Ruta do cartafol (opcional)</string>
+    <string name="server_username_hint" source="google_translate">Nome de usuario</string>
+    <string name="server_servername_hint" source="google_translate">Nome do servidor, por conveniencia</string>
+    <string name="server_port" source="google_translate">Porto:</string>
+    <string name="login" source="google_translate">Acceder</string>
+    <string name="password" source="google_translate">Contrasinal</string>
+    <string name="search_results" source="google_translate">Resultados da busca</string>
+    <string name="search_no_result" source="google_translate">Non se atopou ningún medio</string>
+    <string name="favorites_add" source="google_translate">Engadir aos favoritos</string>
+    <string name="favorites_remove" source="google_translate">Eliminar dos favoritos</string>
+    <string name="favorites_edit" source="google_translate">Editar</string>
+    <string name="favorite_added" source="google_translate">Gardouse nos favoritos</string>
+    <string name="favorite_removed" source="google_translate">Eliminado dos favoritos</string>
+    <string name="playback_history_title" source="google_translate">Historial de reprodución</string>
+    <string name="playback_history_summary" source="google_translate">Garda todos os medios reproducidos na sección Historia</string>
+    <string name="playback_speed_title" source="google_translate">Gardar a velocidade de reprodución</string>
+    <string name="playback_speed_summary" source="google_translate">Teña en conta que a velocidade de reprodución que configurou</string>
+    <string name="dev_hardware_decoder" source="google_translate">Decodificador de hardware avanzado</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">Forzar o descodificador de hardware, só para usuarios avanzados</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">iomx</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-dr</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">mediacodec</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">mediacodec-DR</string>
+    <string name="daynight_title" source="google_translate">Modo DayNight</string>
+    <string name="daynight_summary" source="google_translate">Cambia automaticamente ao modo nocturno no momento axeitado</string>
+    <string name="interface_gui" source="google_translate">Mostrar</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">Pantalla secundaria</string>
+    <string name="video_prefs_category" source="google_translate">Vídeo</string>
+    <string name="video_min_group_length_title" source="google_translate">Vídeos do grupo</string>
+    <string name="video_min_group_length_summary" source="google_translate">Os vídeos agrúpanse se as súas primeiras letras son iguais.</string>
+    <string name="video_min_group_length_disable" source="google_translate">Desactivar</string>
+    <string name="video_min_group_length_first" source="google_translate">Primeira carta só</string>
+    <string name="video_min_group_length_short" source="google_translate">Número curto de letras (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Número longo de letras (9)</string>
+    <string name="media_fast_seek" source="google_translate">Activar a opción de busca rápida</string>
+    <string name="media_seen" source="google_translate">Mostrar o marcador de vídeo visto</string>
+    <string name="media_seen_summary" source="google_translate">Marque un vídeo como se o vexas ata o final</string>
+    <string name="force_list_portrait" source="google_translate">Sen grilla en modo vertical</string>
+    <string name="force_list_portrait_summary" source="google_translate">Amosar vídeos na lista en lugar da reixa en modo vertical</string>
+    <string name="force_play_all_summary" source="google_translate">Reproduce todos os vídeos, comezando co que fixeches clic</string>
+    <string name="force_play_all_title" source="google_translate">Modo de lista de reprodución de video</string>
+    <string name="save_brightness_summary" source="google_translate">Recorda o nivel de brillo no reprodutor de video</string>
+    <string name="save_brightness_title" source="google_translate">Garda o nivel de brillo do vídeo</string>
+    <string name="save_audiodelay_summary" source="google_translate">Garda o atraso de audio individual para cada vídeo</string>
+    <string name="save_audiodelay_title" source="google_translate">Gardar atraso de son</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Xesto de brillo</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Xesto de volume</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Volume de control por xesto durante a reprodución de video</string>
+    <string name="enable_seek_buttons" source="google_translate">Activar os botóns de busca</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">Mostrar os botóns de rebobinar e retroceder na interface de vídeo</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Toca dúas veces para buscar</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Toca dúas veces os bordos da pantalla para buscar por 10 segundos</string>
+    <string name="popup_keepscreen_title" source="google_translate">Mantén a pantalla en modo Pop-Up</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Sempre mantén a pantalla ON mentres se amosará Pop-Up, aínda que o vídeo estea detido.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Amosar ficheiros ocultos</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Mostrar os ficheiros ocultos nos navegadores</string>
+    <string name="subtitles_prefs_category" source="google_translate">Subtítulos</string>
+    <string name="subtitles_size_title" source="google_translate">Tamaño dos subtítulos</string>
+    <string name="subtitles_size_small" source="google_translate">Pequeno</string>
+    <string name="subtitles_size_normal" source="google_translate">Normal</string>
+    <string name="subtitles_size_big" source="google_translate">Grande</string>
+    <string name="subtitles_size_huge" source="google_translate">Enorme</string>
+    <string name="subtitles_color_title" source="google_translate">Subtítulos Cor</string>
+    <string name="subtitles_color_white" source="google_translate">Branco</string>
+    <string name="subtitles_color_gray" source="google_translate">Gris</string>
+    <string name="subtitles_color_pink" source="google_translate">Rosa</string>
+    <string name="subtitles_color_blue" source="google_translate">Azul</string>
+    <string name="subtitles_color_yellow" source="google_translate">Amarelo</string>
+    <string name="subtitles_color_green" source="google_translate">Verde</string>
+    <string name="subtitles_background_title" source="google_translate">Subtítulos de fondo</string>
+    <string name="subtitles_bold_title" source="google_translate">Subtítulos en negra</string>
+    <string name="subtitles_autoload_title" source="google_translate">Subtítulos de carga automática</string>
+    <string name="audio_prefs_category" source="google_translate">Audio</string>
+    <string name="lockscreen_cover_title" source="google_translate">Cubrir multimedia en Lockscreen</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Cando estea dispoñible, configure a arte da cobertura multimedia actual como fondo de pantalla de bloqueo</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Animar a desprazamento automático actual da lista de reprodución</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Animar o desprazamento na transición de medios</string>
+    <string name="audio_save_repeat_title" source="google_translate">Gardar o modo de repetición</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Lembre o modo de repetición ao cargar as listas de reprodución de audio</string>
+    <string name="audio_boost_title" source="google_translate">Impulso de audio</string>
+    <string name="headset_prefs_category" source="google_translate">Auriculares</string>
+    <string name="enable_headset_actions_title" source="google_translate">Atallos de control remoto</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Prema dúas veces en \'Play \' para saltar ao seguinte e longo e prema nel para saltar á pista anterior</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Reanudar a inserción de auriculares</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">Pausa doutro xeito</string>
+    <string name="audio_ducking_title" source="google_translate">Menor volume de VLC nas notificacións</string>
+    <string name="audio_ducking_summary" source="google_translate">Axuda a escoitar notificacións de audio, instrucións de navegación ou conversación de asistentes</string>
+    <string name="casting_category" source="google_translate">Fundición</string>
+    <string name="casting_passthrough_title" source="google_translate">Audio Passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">Deixa que a túa televisión xestione a renderización de audio</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Calidade de conversión</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Selecciona a calidade da conversión cando fas na pantalla remota</string>
+    <string name="casting_quality_high" source="google_translate">Alta</string>
+    <string name="casting_quality_medium" source="google_translate">Medio</string>
+    <string name="casting_quality_low" source="google_translate">Baixo</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Menor</string>
+    <string name="cast_performance_warning" source="google_translate">Producir este vídeo require conversión. Esta conversión pode usar toda a enerxía dispoñible e pode escapar a batería rapidamente.</string>
+    <string name="artists_show_all_title" source="google_translate">Amosar todos os artistas</string>
+    <string name="artists_show_all_summary" source="google_translate">Amosar todos os artistas na lista de artistas, non só artistas de álbumes</string>
+    <string name="extensions_prefs_category" source="google_translate">Extensións</string>
+    <string name="extensions_enable_category" source="google_translate">Escolle extensións para habilitar</string>
+    <string name="extensions_empty" source="google_translate">Non se detectou ningunha extensión</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Activar</string>
+    <string name="android_auto" source="google_translate">Coche con Android</string>
+    <string name="controls_prefs_category" source="google_translate">Controis</string>
+    <string name="main_prefs_category" source="google_translate">Configuración principal</string>
+    <string name="save_video_none" source="google_translate">Non aforras a velocidade</string>
+    <string name="save_video_session" source="google_translate">Gardar a velocidade durante a sesión</string>
+    <string name="save_video_always" source="google_translate">Gardar velocidade nas sesións</string>
+    <string name="auto_rescan" source="google_translate">Rescan automaticamente</string>
+    <string name="auto_rescan_summary" source="google_translate">Automaticamente escanee o dispositivo para os medios novos ou eliminados no inicio da aplicación</string>
+    <string name="dump_media_db" source="google_translate">Base de datos de medios de descarga</string>
+    <string name="dump_media_db_summary" source="google_translate">Copiar base de datos á raíz de almacenamento interno</string>
+    <string name="clear_media_db_summary" source="google_translate">Accede á información de Android VLC para borrar datos</string>
+    <string name="resume_playback_title" source="google_translate">Restableza a reprodución despois dunha chamada</string>
+    <string name="resume_playback_summary" source="google_translate">Quédate en pausa doutro xeito</string>
+    <string name="network_caching_popup" source="google_translate">Este valor debe estar entre 0 e 6000 m</string>
+    <string name="log_service_title" source="google_translate">VLC rexistra a gravación</string>
+    <string name="browsing" source="google_translate">Navegando</string>
+    <string name="sleep_time_not_set" source="google_translate">ningún conxunto</string>
+    <string name="search_list_hint" source="google_translate">Buscar medios na lista actual</string>
+    <string name="search_global" source="google_translate">Busca en toda a biblioteca de medios</string>
+    <string name="chapter" source="google_translate">Capítulo</string>
+    <string name="confirm_resume_summary" source="google_translate">Se está activado pediráselle que confirme cando se poida continuar un vídeo desde a última posición</string>
+    <string name="player_touch_title" source="google_translate">Controis táctiles para o vídeo</string>
+    <string name="player_touch_enable_all" source="google_translate">Activar controis táctiles</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Desactivar o control de brillo</string>
+    <string name="player_touch_disable_all" source="google_translate">Desactivar todos os controis táctiles</string>
+    <string name="tv_ui_title" source="google_translate">Interface de Android TV</string>
+    <string name="tv_ui_summary" source="google_translate">Cambiar a interface de usuario para o tema adaptado a televisión</string>
+    <string name="medialibrary" source="google_translate">Mediateca</string>
+    <string name="medialibrary_directories" source="google_translate">Cartafoles multimedia</string>
+    <string name="back_quit_lock" source="google_translate">Prema de novo para saír de vídeo</string>
+    <string name="playlist_deleted" source="google_translate">Lista de reprodución eliminada</string>
+    <string name="file_deleted" source="google_translate">Ficheiro eliminado</string>
+    <string name="no_subs_found" source="google_translate">Non hai subtítulos neste directorio</string>
+    <string name="widget_name_w" source="google_translate">Widget branco de VLC</string>
+    <string name="widget_name_b" source="google_translate">VLC Dark Widget</string>
+    <string name="allow_storage_access_title" source="google_translate">Permitir a Ace Stream acceder a arquivos de vídeo e audio</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace Stream precisa que outorgas este permiso para acceder aos ficheiros multimedia deste dispositivo.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Permitir a Ace Stream configurar o ton de chamada</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace Stream precisa que outorgas este permiso para configurar esta canción como tonalidade.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Permitir que Ace Stream cambie o modo de brillo</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace Stream precisa que outorgas este permiso para cambiar o teu modo de brillo.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Permitir que Ace Stream reprodúzase ao popo sobre outras aplicacións</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream precisa que outorgue este permiso para mostrar o seu vídeo nun popup sobre outras aplicacións.</string>
+    <string name="permission_ask_again" source="google_translate">Permiso de concesión</string>
+    <string name="exit_app" source="google_translate">Pecha VLC</string>
+    <string name="exit_app_msg" source="google_translate">Estás seguro de que queres saír de VLC?</string>
+    <string name="fastscroller_track" source="google_translate">Rastro FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">Controlador FastScroller</string>
+    <string name="plugins" source="google_translate">Complementos</string>
+    <string name="download_on_device" source="google_translate">Descarga</string>
+    <string name="extension_empty" source="google_translate">Non hai ningún elemento para mostrar, vai á súa configuración de extensión para obter algúns.</string>
+    <string name="opengl_title" source="google_translate">Uso OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">Por defecto, OpenGL ES2 úsase para a descodificación de software e a descodificación de hardware cando sexa necesario (vídeos 360 °).</string>
+    <string name="opengl_automatic" source="google_translate">Automático</string>
+    <string name="opengl_on" source="google_translate">Force On</string>
+    <string name="opengl_off" source="google_translate">Afastar</string>
+    <string name="network_favorites" source="google_translate">Rede favoritos</string>
+    <string name="network_shared_folders" source="google_translate">Cartafoles compartidos</string>
+    <string name="encryption_warning" source="google_translate">Advertencia: o cifrado non está dispoñible para esta versión de Android, o contrasinal almacenarase nun espazo privado pero non está cifrado</string>
+    <string name="store_password" source="google_translate">Recorda o contrasinal</string>
+    <string name="add_to_playlist" source="google_translate">Engadir á lista de reprodución</string>
+    <string name="popup_playback_title" source="google_translate">Reproducir vídeo nunha ventá emerxente</string>
+    <string name="popup_playback" source="google_translate">Xogando nunha fiestra Pop-Up</string>
+    <string name="popup_expand" source="google_translate">Expande o vídeo</string>
+    <string name="snack_subloader_sub_found" source="google_translate">Subtítulos descargados</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">Non se atoparon os subtítulos</string>
+    <string name="dialog_subloader_success" source="google_translate">Subtítulos atopados para:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Non se atoparon subtítulos para:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">Descarga rematada</string>
+    <string name="download_subtitles" source="google_translate">Descargar subtítulos</string>
+    <string name="preferences_languages_download" source="google_translate">Linguas de subtítulos</string>
+    <string name="list_languages_download_summary" source="google_translate">Idiomas para descargar ao buscar subtítulos</string>
+    <string name="list_languages_download_title" source="google_translate">Subtítulos descarga idiomas</string>
+    <string name="service_unavailable" source="google_translate">Servizo non dispoñíbel</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Non se puido configurar o idioma dos subtítulos, intente configuralo na configuración da aplicación</string>
+    <string name="downloading_subtitles" source="google_translate">Descarga de subtítulos</string>
+    <string name="browse_folder" source="google_translate">Buscar cartafol</string>
+    <string name="listen" source="google_translate">Escoite</string>
+    <string name="subtitles_download_title" source="google_translate">Descarga de subs</string>
+    <string name="connecting" source="google_translate">Conectando ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">gardar atraso para o dispositivo Bluetooth</string>
+    <string name="episodes" source="google_translate">episodios</string>
+    <string name="movies" source="google_translate">películas</string>
+    <string name="videos" source="google_translate">videos</string>
+    <string name="streams" source="google_translate">fluxos</string>
+    <string name="clear_playback_history" source="google_translate">Borrar o historial de reprodución</string>
+    <string name="various_artists" source="google_translate">Varios artistas</string>
+    <string name="ml_scanning" source="google_translate">Escaneando ficheiros multimedia</string>
+    <string name="ml_parse_media" source="google_translate">Interpretación media</string>
+    <string name="ml_discovering" source="google_translate">Descubrindo</string>
+    <string name="resume" source="google_translate">Resume</string>
+    <string name="length" source="google_translate">Lonxitude</string>
+    <string name="tv_settings_hint" source="google_translate">Preme o botón Aceptar para comprobar / desmarcar os directorios</string>
+    <string name="ml_external_storage_title" source="google_translate">Novo almacenamento externo detectado</string>
+    <string name="ml_external_storage_accept" source="google_translate">Si</string>
+    <string name="ml_external_storage_decline" source="google_translate">Non</string>
+    <string name="last_added_media" source="google_translate">engadido por última vez</string>
+    <string name="no" source="google_translate">Non</string>
+    <string name="loading_medialibrary" source="google_translate">Cargando Medialibr ...</string>
+    <string name="yes" source="google_translate">Si</string>
+    <string name="custom_set_save_title" source="google_translate">Cambios non gardados</string>
+    <string name="custom_set_save_warning" source="google_translate">Aviso: cambios sen gardar</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Garda o ecualizador definido como ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Gardar novo ecualizador definido como ...</string>
+    <string name="save" source="google_translate">Gardar</string>
+    <string name="do_not_save" source="google_translate">Non gardar</string>
+    <string name="custom_set_wrong_input" source="google_translate">Nome non válido.</string>
+    <string name="custom_set_already_exist" source="google_translate">O ecualizador-conxunto con este nome xa existe</string>
+    <string name="custom_set_restored" source="google_translate">Reiniciar o ecualizador personalizado restaurado.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">O ecualizador non gardado eliminouse.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Novo</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary está explorando os teus dispositivos agora mesmo</string>
+    <string name="recommendations" source="google_translate">Recomendacións</string>
+    <string name="recommendations_desc" source="google_translate">Tarxetas de recomendacións no lanzador</string>
+    <string name="browser_quick_access" source="google_translate">Acceso Rápido</string>
+    <string name="browser_storages" source="google_translate">Almacéns</string>
+    <string name="renderer_list_title" source="google_translate">Mostra</string>
+    <string name="feedback_player_crashed" source="google_translate">Sentímolo, a VLC só fallou. Por favor intentao de novo.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Debes conceder acceso de escritura de VLC á túa tarxeta SD</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC non pode borrar este ficheiro sen permiso de acceso á escrita. \ NAte á súa tarxeta SD e prema en \ "Seleccionar \". \ NPode ter que premer en \ "Mostrar tarxeta SD \" primeiro no menú superior dereito</string>
+    <string name="dialog_sd_wizard" source="google_translate">Móstrame</string>
+    <string name="renderers_disconnect" source="google_translate">Desconectar</string>
+    <string name="audio_digital_failed" source="google_translate">Non se puido cambiar o estado da saída dixital de audio</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Saída dixital de audio activada</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Saída dixital de audio desactivada</string>
+    <string name="live_streams" source="google_translate">Fluxos en directo</string>
+    <string name="all_live_streams" source="google_translate">Todas as transmisións en directo</string>
+    <string name="video_torrents" source="google_translate">Torrents de vídeo</string>
+    <string name="audio_torrents" source="google_translate">Torrents de audio</string>
+    <string name="all_torrents" source="google_translate">Todos os torrents</string>
+    <string name="main" source="google_translate">Principal</string>
+    <string name="media_player" source="google_translate">Reprodutor multimedia</string>
+    <string name="acestream_server" source="google_translate">Servidor Ace Stream (motor)</string>
+    <string name="media_player_settings" source="google_translate">Configuración do reprodutor multimedia</string>
+    <string name="acestream_server_settings" source="google_translate">Configuración do servidor de Ace Stream (motor)</string>
+    <string name="sign_out" source="google_translate">Saír</string>
+    <string name="sign_in" source="google_translate">Rexístrate</string>
+    <string name="sign_in_acestream" source="google_translate">Inicia sesión con Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Inicia sesión con Google</string>
+    <string name="video_files" source="google_translate">Arquivos de vídeo</string>
+    <string name="audio_files" source="google_translate">Arquivos de audio</string>
+    <string name="retry" source="google_translate">Tente de novo</string>
+    <string name="failed_to_load_web_page" source="google_translate">Non se puido cargar a páxina web</string>
 </resources>

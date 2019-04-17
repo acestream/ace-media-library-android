@@ -19,12 +19,6 @@
     <string name="sortby_number_desc">Nifer traciau (disg.)</string>
     <string name="searchable_hint">Chwilio…</string>
     <string name="history">Hanes</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">Canfuwyd %d canlyniad</item>
-        <item quantity="two">Canfuwyd %d canlyniad</item>
-        <item quantity="many">Canfuwyd %d o ganlyniadau</item>
-        <item quantity="other">Canfuwyd %d canlyniad</item>
-    </plurals>
     <string name="play">Chwarae</string>
     <string name="playback">Chwarae</string>
     <string name="playback_controls">Rheolaeth chwarae</string>
@@ -79,18 +73,6 @@
         <item quantity="two">%d is-ffolder</item>
         <item quantity="many">%d o is-ffolderi</item>
         <item quantity="other">%d is-ffolder</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 ffeil cyfrwng</item>
-        <item quantity="two">%d ffeil cyfrwng</item>
-        <item quantity="many">%d o ffeiliau cyfrwng</item>
-        <item quantity="other">%d ffeil cyfrwng</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 fideo</item>
-        <item quantity="two">%d fideo</item>
-        <item quantity="many">%d o fideos</item>
-        <item quantity="other">%d fideo</item>
     </plurals>
     <string name="internal_memory">Cof mewnol</string>
     <string name="parent_folder">Fyny i\'r ffolder rhiant</string>
@@ -152,12 +134,6 @@
     <string name="navmenu">dewislen llywio</string>
     <string name="advanced">dewisiadau uwch</string>
     <string name="audio_boost_warning">Llusga fyny eto i fynd dros 100%</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 sianel\n</item>
-        <item quantity="two">%1$d sianel\n</item>
-        <item quantity="many">%1$d sianel\n</item>
-        <item quantity="other">%1$d sianel\n</item>
-    </plurals>
     <string name="track_samplerate_info">Didradd sampl: %1$d Hz\n</string>
     <string name="track_resolution_info">Cymhareb agwedd: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Fframiau: %1$.3f\n</string>
@@ -193,7 +169,7 @@
     <string name="error_not_compatible">Nid yw\'r fersiwn hon o VLC ar gyfer Android™ yn gweithio ar eich dyfais chi ar hyn o\'r bryd.</string>
     <string name="error_problem">Roedd problem wrth llwytho VLC ar gyfer Android™ a buodd rhaid ei gau.</string>
     <string name="error_message_is">Y neges gwall yw (cofiwch grybwyll hwn wrth ddadfygio):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Gwall chwarae</string>
     <string name="encountered_error_message">Cafodd VLC wall gyda\'r cyfrwng hwn.\nCeisiwch ail-lwytho\'r llyfrgell cyfryngau.</string>
     <string name="invalid_location">Ni all chwarae\'r lleoliad %1$s.</string>
@@ -438,14 +414,14 @@
     <!--Widget-->
     <string name="widget_name_w">Teclyn VLC Gwyn</string>
     <string name="widget_name_b">Teclyn VLC Tywyll</string>
-    <string name="allow_storage_access_title">Caniatáu VLC i gael at ffeiliau fideo a sain</string>
-    <string name="allow_storage_access_description">Mae VLC angen eich caniatâd er mwyn cael at ffeiliau cyfryngau ar y ddyfais hon.</string>
-    <string name="allow_settings_access_ringtone_title">Caniatáu VLC i osod y sain canu</string>
-    <string name="allow_settings_access_ringtone_description">Mae angen eich caniatâd ar VLC i osod y trac hwn fel sain canu eich ffôn.</string>
-    <string name="allow_settings_access_brightness_title">Caniatáu VLC i newid modd disgleirdeb</string>
-    <string name="allow_settings_access_brightness_description">Mae VLC angen ichi ganiatáu hyn er mwyn newid modd disgleirdeb eich dyfais.</string>
-    <string name="allow_draw_overlays_title">Caniatáu VLC mewn ffenestr llaim dros aplenni eraill</string>
-    <string name="allow_sdraw_overlays_description">Mae VLC angen ichi ganiatáu hyn er mwyn dangos eich fideo mewn ffenestr dros ben aplenni eraill.</string>
+    <string name="allow_storage_access_title">Caniatáu Ace Stream i gael at ffeiliau fideo a sain</string>
+    <string name="allow_storage_access_description">Mae Ace Stream angen eich caniatâd er mwyn cael at ffeiliau cyfryngau ar y ddyfais hon.</string>
+    <string name="allow_settings_access_ringtone_title">Caniatáu Ace Stream i osod y sain canu</string>
+    <string name="allow_settings_access_ringtone_description">Mae angen eich caniatâd ar Ace Stream i osod y trac hwn fel sain canu eich ffôn.</string>
+    <string name="allow_settings_access_brightness_title">Caniatáu Ace Stream i newid modd disgleirdeb</string>
+    <string name="allow_settings_access_brightness_description">Mae Ace Stream angen ichi ganiatáu hyn er mwyn newid modd disgleirdeb eich dyfais.</string>
+    <string name="allow_draw_overlays_title">Caniatáu Ace Stream mewn ffenestr llaim dros aplenni eraill</string>
+    <string name="allow_sdraw_overlays_description">Mae Ace Stream angen ichi ganiatáu hyn er mwyn dangos eich fideo mewn ffenestr dros ben aplenni eraill.</string>
     <string name="permission_ask_again">Caniatáu</string>
     <string name="exit_app">Cau VLC</string>
     <string name="exit_app_msg">Wyt ti wir eisiau gadael VLC?</string>
@@ -518,4 +494,60 @@
     <string name="recommendations_desc">Cardiau argymhellion ar lansiwr</string>
     <string name="browser_quick_access">Mynediad Cyflym</string>
     <string name="browser_storages">Storfeydd</string>
+    <string name="torrent_files">Torrent ffeiliau</string>
+    <string name="select_language">Dewis iaith</string>
+    <string name="media_fast_seek" source="google_translate">Galluogi opsiwn chwilio cyflym</string>
+    <string name="subtitles_autoload_title" source="google_translate">Isdeitlau llwythi auto</string>
+    <string name="enable_headset_actions_title" source="google_translate">Llwybrau troi rheoli anghysbell</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Gwasgwch ddwywaith ar \'Play \' i sgipio\'r wasg nesaf a hir arno i fynd heibio i\'r trac blaenorol</string>
+    <string name="audio_ducking_title" source="google_translate">Cyfrol VLC Isaf ar hysbysiadau</string>
+    <string name="audio_ducking_summary" source="google_translate">Yn helpu i glywed hysbysiadau sain, cyfarwyddiadau mordwyo neu siarad cynorthwyol</string>
+    <string name="casting_category" source="google_translate">Castio</string>
+    <string name="casting_passthrough_title" source="google_translate">Passthrough Sain</string>
+    <string name="casting_passthrough_summary" source="google_translate">Gadewch i\'ch teledu reoli rendro sain</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Ansawdd trosi</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Dewiswch ansawdd yr addasiad wrth fwrw ar sgrin o bell</string>
+    <string name="casting_quality_high" source="google_translate">Uchel</string>
+    <string name="casting_quality_medium" source="google_translate">Canolig</string>
+    <string name="casting_quality_low" source="google_translate">Isel</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Isaf</string>
+    <string name="cast_performance_warning" source="google_translate">Mae angen trawsnewid y fideo hwn. Gall yr addasiad hwn ddefnyddio\'r holl bŵer sydd ar gael a gallai draenio\'ch batri yn gyflym.</string>
+    <string name="artists_show_all_title" source="google_translate">Dangoswch yr holl artistiaid</string>
+    <string name="artists_show_all_summary" source="google_translate">Dangoswch yr holl artistiaid yn rhestru Artistiaid, nid yn unig artistiaid albwm</string>
+    <string name="main_prefs_category" source="google_translate">Prif leoliadau</string>
+    <string name="dump_media_db" source="google_translate">Cronfa ddata cyfryngau dump</string>
+    <string name="dump_media_db_summary" source="google_translate">Copi cronfa ddata i wraidd storio mewnol</string>
+    <string name="network_shares_discovery" source="google_translate">Chwilio am gyfranddaliadau rhwydwaith ...</string>
+    <string name="connecting" source="google_translate">Cysylltu ...</string>
+    <string name="streams" source="google_translate">nentydd</string>
+    <string name="loading_medialibrary" source="google_translate">Llwytho Medialibrary ...</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Save equalizer-set fel ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Arbedwch ecwiti newydd-set fel ...</string>
+    <string name="renderer_list_title" source="google_translate">Arddangosfeydd</string>
+    <string name="feedback_player_crashed" source="google_translate">Mae\'n ddrwg gennyf, dim ond VLC wedi cwympo. Trio eto os gwelwch yn dda.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Rhaid ichi roi mynediad ysgrifenedig VLC i\'ch Cerdyn SD</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">Ni all VLC ddileu\'r ffeil hon heb ganiatâd ysgrifenedig. \ NDylech fynd at eich Cerdyn SD a chlicio ar \ "Dewis \". \ N Efallai y bydd rhaid i chi glicio ar \ "Dangos cerdyn SD \" yn y ddewislen ar y dde i\'r dde</string>
+    <string name="dialog_sd_wizard" source="google_translate">Dangoswch fi</string>
+    <string name="renderers_disconnect" source="google_translate">Datgysylltu</string>
+    <string name="audio_digital_failed" source="google_translate">Methu newid cyflwr Allbwn Digidol Sain</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Allbwn Digidol Sain wedi\'i alluogi</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Allbwn Digidol Sain anabl</string>
+    <string name="live_streams" source="google_translate">Ffrydiau byw</string>
+    <string name="all_live_streams" source="google_translate">Pob ffryd byw</string>
+    <string name="video_torrents" source="google_translate">Toriau fideo</string>
+    <string name="audio_torrents" source="google_translate">Toriau sain</string>
+    <string name="all_torrents" source="google_translate">Pob torrent</string>
+    <string name="main" source="google_translate">Prif</string>
+    <string name="media_player" source="google_translate">Chwaraewr cyfryngau</string>
+    <string name="acestream_server" source="google_translate">Gweinyddwr Ace Stream (injan)</string>
+    <string name="media_player_settings" source="google_translate">Lleoliadau chwaraewyr cyfryngau</string>
+    <string name="acestream_server_settings" source="google_translate">Lleoliadau gweinyddwr Ace Stream (peiriant)</string>
+    <string name="sign_out" source="google_translate">Arwyddwch</string>
+    <string name="sign_in" source="google_translate">Mewngofnodi</string>
+    <string name="sign_in_acestream" source="google_translate">Mewngofnodwch ag Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Mewngofnodwch â Google</string>
+    <string name="video_files" source="google_translate">Ffeiliau fideo</string>
+    <string name="audio_files" source="google_translate">Ffeiliau sain</string>
+    <string name="retry" source="google_translate">Ailadroddwch</string>
+    <string name="failed_to_load_web_page" source="google_translate">Methwyd llwytho tudalen we</string>
 </resources>

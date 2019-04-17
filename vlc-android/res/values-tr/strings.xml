@@ -19,10 +19,6 @@
     <string name="sortby_number_desc">İz numarası (azalan)</string>
     <string name="searchable_hint">Arama…</string>
     <string name="history">Geçmiş</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d sonuç bulundu</item>
-        <item quantity="other">%d sonuç bulundu</item>
-    </plurals>
     <string name="play">Oynat</string>
     <string name="playback">Oynatma</string>
     <string name="playback_controls">Oynatma denetimleri</string>
@@ -71,14 +67,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">%d altklasör</item>
         <item quantity="other">%d altklasör</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">%d ortam dosyası</item>
-        <item quantity="other">%d ortam dosyası</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 görüntü</item>
-        <item quantity="other">%d görüntü</item>
     </plurals>
     <string name="internal_memory">İç bellek</string>
     <string name="parent_folder">Üst klasör</string>
@@ -140,10 +128,6 @@
     <string name="navmenu">gezinme menüsü</string>
     <string name="advanced">gelişmiş ayarlar</string>
     <string name="audio_boost_warning">%100 üzerine çıkmak için yeniden yukarı kaydırın</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 kanal\n</item>
-        <item quantity="other">%1$d kanal\n</item>
-    </plurals>
     <string name="track_samplerate_info">Örnekleme hızı: %1$d Hz\n</string>
     <string name="track_resolution_info">Çözünürlük: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Kare hızı: %1$.3f\n</string>
@@ -179,7 +163,7 @@
     <string name="error_not_compatible">Malesef, bu Android™ için VLC sürümü aygıtınızı desteklemiyor.\n\nHata iletisi (hata ayıklama raporunda bu iletiyi belirtin):\n</string>
     <string name="error_problem">Android için VLC yüklenirken bir sorun çıktı ve kapatılması gerekti.</string>
     <string name="error_message_is">Hata iletisi (hata ayıklarken bu iletiyi aktarın):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Oynatım hatası</string>
     <string name="encountered_error_message">VLC bu ortamı kullanırken bir sorun çıktı.\nLütfen ortam kitaplığını yenilemeyi deneyin.</string>
     <string name="invalid_location">%1$s konumu oynatılamadı.</string>
@@ -442,14 +426,14 @@
     <!--Widget-->
     <string name="widget_name_w">Açık VLC Gereci</string>
     <string name="widget_name_b">Koyu VLC Gereci</string>
-    <string name="allow_storage_access_title">VLC görüntü ve ses dosyalarına erişebilsin</string>
-    <string name="allow_storage_access_description">VLC bu aygıttaki ortam dosyalarına erişmek için bu izne gereksinim duyar.</string>
-    <string name="allow_settings_access_ringtone_title">VLC zil sesini ayarlayabilsin</string>
-    <string name="allow_settings_access_ringtone_description">VLC geçerli parçayı zil sesiniz olarak ayarlamak için bu izne gereksinim duyar.</string>
-    <string name="allow_settings_access_brightness_title">VLC parlaklık kipini ayarlayabilsin</string>
-    <string name="allow_settings_access_brightness_description">VLC parlaklık kipinizi ayarlamak için bu izne gereksinim duyar.</string>
-    <string name="allow_draw_overlays_title">VLC oynatıcı diğer uygulamaların üzerine açılabilsin</string>
-    <string name="allow_sdraw_overlays_description">VLC oynatıcı penceresini diğer uygulamaların üzerine açmak için bu izne gereksinim duyar.</string>
+    <string name="allow_storage_access_title">Ace Stream görüntü ve ses dosyalarına erişebilsin</string>
+    <string name="allow_storage_access_description">Ace Stream bu aygıttaki ortam dosyalarına erişmek için bu izne gereksinim duyar.</string>
+    <string name="allow_settings_access_ringtone_title">Ace Stream zil sesini ayarlayabilsin</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream geçerli parçayı zil sesiniz olarak ayarlamak için bu izne gereksinim duyar.</string>
+    <string name="allow_settings_access_brightness_title">Ace Stream parlaklık kipini ayarlayabilsin</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream parlaklık kipinizi ayarlamak için bu izne gereksinim duyar.</string>
+    <string name="allow_draw_overlays_title">Ace Stream oynatıcı diğer uygulamaların üzerine açılabilsin</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream oynatıcı penceresini diğer uygulamaların üzerine açmak için bu izne gereksinim duyar.</string>
     <string name="permission_ask_again">İzin ver</string>
     <string name="exit_app">Kapat</string>
     <string name="exit_app_msg">VLC uygulamasından çıkmak istediğinize emin misiniz?</string>
@@ -532,4 +516,34 @@
     <string name="sdcard_permission_dialog_title">VLC uygulamasına SD Kart yazma izni verin</string>
     <string name="sdcard_permission_dialog_message">Yazma izni verilmeden VLC uygulaması bu dosyayı silemez.\n\nLütfen SD Kart üzerine giderek \"Seçin\" üzerine tıklayın.\nSağ üst menüdeki birinci öge olan \"SD Kartı Görüntüle\" üzerine tıklamanız gerekebilir</string>
     <string name="dialog_sd_wizard">Bana görüntülensin</string>
+    <string name="torrent_files">Torrent dosyalar</string>
+    <string name="select_language">Dil Seçin</string>
+    <string name="enable_headset_actions_title" source="google_translate">Uzaktan Kumanda kısayolları</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Bir sonraki adıma geçmek için \'Oynat \' düğmesine iki kez basın ve önceki parçaya atlamak için uzun basın</string>
+    <string name="main_prefs_category" source="google_translate">Ana ayarlar</string>
+    <string name="dump_media_db" source="google_translate">Medya veritabanı dökümü</string>
+    <string name="dump_media_db_summary" source="google_translate">Veritabanını iç depolama köküne kopyala</string>
+    <string name="streams" source="google_translate">akışları</string>
+    <string name="renderers_disconnect" source="google_translate">kesmek</string>
+    <string name="audio_digital_failed" source="google_translate">Ses Dijital Çıkış durumu değiştirilemedi</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Dijital Ses Çıkışı etkin</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Ses Dijital Çıkışı devre dışı</string>
+    <string name="live_streams" source="google_translate">Canlı yayınlar</string>
+    <string name="all_live_streams" source="google_translate">Tüm canlı akışlar</string>
+    <string name="video_torrents" source="google_translate">Video torrentleri</string>
+    <string name="audio_torrents" source="google_translate">Ses torrentleri</string>
+    <string name="all_torrents" source="google_translate">Tüm seller</string>
+    <string name="main" source="google_translate">Ana</string>
+    <string name="media_player" source="google_translate">Medya oynatıcı</string>
+    <string name="acestream_server" source="google_translate">Ace Stream sunucusu (motor)</string>
+    <string name="media_player_settings" source="google_translate">Medya oynatıcı ayarları</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream sunucusu (motor) ayarları</string>
+    <string name="sign_out" source="google_translate">oturumu Kapat</string>
+    <string name="sign_in" source="google_translate">oturum aç</string>
+    <string name="sign_in_acestream" source="google_translate">Ace Stream ile giriş yapın</string>
+    <string name="sign_in_google" source="google_translate">Google ile giriş yap</string>
+    <string name="video_files" source="google_translate">Video dosyaları</string>
+    <string name="audio_files" source="google_translate">Ses dosyaları</string>
+    <string name="retry" source="google_translate">Tekrar dene</string>
+    <string name="failed_to_load_web_page" source="google_translate">Web sayfası yüklenemedi</string>
 </resources>

@@ -26,11 +26,13 @@ package org.videolan.vlc.gui.tv.browser;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.support.v17.leanback.widget.Presenter;
-import android.support.v17.leanback.widget.Row;
-import android.support.v17.leanback.widget.RowPresenter;
+import android.os.Bundle;
+import androidx.leanback.widget.Presenter;
+import androidx.leanback.widget.Row;
+import androidx.leanback.widget.RowPresenter;
 import android.text.TextUtils;
 
+import org.videolan.medialibrary.Medialibrary;
 import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.vlc.VLCApplication;
 import org.videolan.vlc.gui.helpers.MediaComparators;
@@ -42,7 +44,17 @@ import java.util.TreeMap;
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class SongsBrowserFragment extends SortedBrowserFragment {
 
+    private long mCategory = MusicFragment.CATEGORY_SONGS;
     private MediaWrapper[] mSongs;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(getActivity() != null) {
+            mCategory = getActivity().getIntent().getLongExtra(
+                    MusicFragment.AUDIO_CATEGORY,
+                    MusicFragment.CATEGORY_SONGS);
+        }
+    }
 
     @Override
     protected String getKey() {
@@ -54,7 +66,13 @@ public class SongsBrowserFragment extends SortedBrowserFragment {
         VLCApplication.runBackground(new Runnable() {
             @Override
             public void run() {
-                mSongs = VLCApplication.getMLInstance().getAudio();
+                Medialibrary ml = VLCApplication.getMLInstance();
+                if(mCategory == MusicFragment.CATEGORY_P2P_SONGS) {
+                    mSongs = ml.getP2PAudio();
+                }
+                else {
+                    mSongs = ml.getRegularAudio();
+                }
                 VLCApplication.runOnMainThread(new Runnable() {
                     @Override
                     public void run() {

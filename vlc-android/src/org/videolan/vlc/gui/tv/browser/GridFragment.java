@@ -22,9 +22,9 @@ package org.videolan.vlc.gui.tv.browser;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v17.leanback.app.VerticalGridSupportFragment;
-import android.support.v17.leanback.widget.ArrayObjectAdapter;
-import android.support.v17.leanback.widget.VerticalGridPresenter;
+import androidx.leanback.app.VerticalGridSupportFragment;
+import androidx.leanback.widget.ArrayObjectAdapter;
+import androidx.leanback.widget.VerticalGridPresenter;
 
 import org.videolan.vlc.gui.tv.CardPresenter;
 import org.videolan.vlc.gui.tv.browser.interfaces.BrowserFragmentInterface;

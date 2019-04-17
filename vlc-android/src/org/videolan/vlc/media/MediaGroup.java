@@ -20,6 +20,9 @@
 
 package org.videolan.vlc.media;
 
+import android.text.TextUtils;
+import android.util.Log;
+
 import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.vlc.gui.helpers.BitmapUtil;
 
@@ -51,9 +54,19 @@ public class MediaGroup extends MediaWrapper {
                 media.getTrackNumber(),
                 media.getDiscNumber(),
                 media.getLastModified(),
-                media.getSeen());
+                media.getSeen(),
+                media.isParsed(),
+                media.isP2PItem(),
+                media.getParentMediaId(),
+                media.getInfohash(),
+                media.getFileIndex(),
+                media.isLive() ? 1 : 0
+        );
         mMedias = new ArrayList<MediaWrapper>();
         mMedias.add(media);
+        //:ace
+        mGroupTitle = media.getGroupTitle();
+        ///ace
     }
 
     public String getDisplayTitle() {
@@ -82,7 +95,20 @@ public class MediaGroup extends MediaWrapper {
     private void merge(MediaWrapper media, String title) {
         mMedias.add(media);
         this.mTitle = title;
+        this.mGroupTitle = title;
     }
+
+    //:ace
+    @Override
+    public String getTitle() {
+        if(!TextUtils.isEmpty(mGroupTitle)) {
+            return mGroupTitle;
+        }
+        else {
+            return super.getTitle();
+        }
+    }
+    ///ace
 
     public static List<MediaGroup> group(MediaWrapper[] mediaList, int minGroupLengthValue) {
         final ArrayList<MediaGroup> groups = new ArrayList<>();
@@ -97,7 +123,21 @@ public class MediaGroup extends MediaWrapper {
     }
 
     private static void insertInto(ArrayList<MediaGroup> groups, MediaWrapper media, int minGroupLengthValue) {
+        String mediaGroupTitle = media.getGroupTitle();
+
         for (MediaGroup mediaGroup : groups) {
+            if(!TextUtils.isEmpty(mediaGroupTitle)) {
+                // Don't try to find common prefix when media has explicit group title.
+                // Just add to group or create new one.
+                if(TextUtils.equals(mediaGroupTitle, mediaGroup.getGroupTitle())) {
+                    mediaGroup.add(media);
+                    return;
+                }
+                else {
+                    continue;
+                }
+            }
+
             final String group = mediaGroup.getTitle().toLowerCase();
             String title = media.getTitle().toLowerCase();
 

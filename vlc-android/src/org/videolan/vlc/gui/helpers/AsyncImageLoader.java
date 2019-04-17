@@ -23,16 +23,16 @@
 
 package org.videolan.vlc.gui.helpers;
 
-import android.databinding.BindingAdapter;
-import android.databinding.DataBindingUtil;
-import android.databinding.OnRebindCallback;
-import android.databinding.ViewDataBinding;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.OnRebindCallback;
+import androidx.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.support.v17.leanback.widget.ImageCardView;
-import android.support.v4.util.Pools;
-import android.support.v4.view.ViewCompat;
+import androidx.leanback.widget.ImageCardView;
+import androidx.core.util.Pools;
+import androidx.core.view.ViewCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,8 +57,10 @@ public class AsyncImageLoader {
 
     public final static String TAG = "VLC/AsyncImageLoader";
 
-    public static final Bitmap DEFAULT_COVER_VIDEO = BitmapCache.getFromResource(VLCApplication.getAppResources(), R.drawable.ic_no_thumbnail_1610);
-    public static final BitmapDrawable DEFAULT_COVER_VIDEO_DRAWABLE = new BitmapDrawable(VLCApplication.getAppResources(), DEFAULT_COVER_VIDEO);
+    public static final Bitmap DEFAULT_COVER_VIDEO_SINGLE = BitmapCache.getFromResource(VLCApplication.getAppResources(), R.drawable.ic_no_thumbnail_1610);
+    public static final Bitmap DEFAULT_COVER_VIDEO_GROUP = BitmapCache.getFromResource(VLCApplication.getAppResources(), R.drawable.ic_video_library_1610);
+    public static final BitmapDrawable DEFAULT_COVER_VIDEO_SINGLE_DRAWABLE = new BitmapDrawable(VLCApplication.getAppResources(), DEFAULT_COVER_VIDEO_SINGLE);
+    public static final BitmapDrawable DEFAULT_COVER_VIDEO_GROUP_DRAWABLE = new BitmapDrawable(VLCApplication.getAppResources(), DEFAULT_COVER_VIDEO_GROUP);
     public static final Bitmap DEFAULT_COVER_AUDIO = BitmapCache.getFromResource(VLCApplication.getAppResources(), R.drawable.ic_no_song);
     public static final BitmapDrawable DEFAULT_COVER_AUDIO_DRAWABLE = new BitmapDrawable(VLCApplication.getAppResources(), DEFAULT_COVER_AUDIO);
     public static final BitmapDrawable DEFAULT_COVER_ARTIST_DRAWABLE = new BitmapDrawable(VLCApplication.getAppResources(), BitmapCache.getFromResource(VLCApplication.getAppResources(), R.drawable.ic_no_artist));

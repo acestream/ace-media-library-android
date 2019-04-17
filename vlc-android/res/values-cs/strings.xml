@@ -13,11 +13,6 @@
     <string name="sortby_date_desc">Datum (popis)</string>
     <string name="searchable_hint">Hledat…</string>
     <string name="history">Historie</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d nalezený výsledek</item>
-        <item quantity="few">%d nalezené výsledky</item>
-        <item quantity="other">%d nalezených výsledků</item>
-    </plurals>
     <string name="play">Přehrát</string>
     <string name="play_from_start">Přehrát od začátku</string>
     <string name="play_as_audio">Přehrát jako zvuk</string>
@@ -60,16 +55,6 @@
         <item quantity="one">1 podsložka</item>
         <item quantity="few">%d podsložky</item>
         <item quantity="other">%d podsložek</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 mediální soubor</item>
-        <item quantity="few">%d mediální soubory</item>
-        <item quantity="other">%d mediálních souborů</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">%d video</item>
-        <item quantity="few">%d videa</item>
-        <item quantity="other">%d videí</item>
     </plurals>
     <string name="internal_memory">Vnitřní paměť</string>
     <string name="parent_folder">Vzhůru do nadřazené složky</string>
@@ -130,11 +115,6 @@
     <string name="brightness">Jas</string>
     <string name="navmenu">menu navigace</string>
     <string name="advanced">pokročilé možnosti</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 kanál\n</item>
-        <item quantity="few"> %1$d kanály\n</item>
-        <item quantity="other"> %1$d kanálů\n</item>
-    </plurals>
     <string name="track_samplerate_info">Vzorkovací frekvence: %1$d Hz\n</string>
     <string name="track_resolution_info">Rozlíšení: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Obnovovací frekvence: %1$.3f\n</string>
@@ -393,14 +373,14 @@
     <!--Widget-->
     <string name="widget_name_w">Bílý widget VLC</string>
     <string name="widget_name_b">Tmavý widget VLC</string>
-    <string name="allow_storage_access_title">Povolit VLC přistupovat k videím a zvukovým souborům.</string>
-    <string name="allow_storage_access_description">VLC potřebuje, abyste mu udělil/a oprávnění přistupovat k multimediálním souborům na tomto zařízení.</string>
-    <string name="allow_settings_access_ringtone_title">Umožnit VLC nastavit vyzváněcí melodii</string>
-    <string name="allow_settings_access_ringtone_description">VLC potřebuje, abyste mu udělil/a oprávnění nastavit tuto skladbu jako vyzváněcí melodii.</string>
-    <string name="allow_settings_access_brightness_title">Povolit VLC změnit jas</string>
-    <string name="allow_settings_access_brightness_description">VLC potřebuje, abyste mu udělil/a oprávnění upravovat jas</string>
-    <string name="allow_draw_overlays_title">Povolit VLC vyskočit nad ostatní aplikace</string>
-    <string name="allow_sdraw_overlays_description">VLC potřebuje, abyste mu udělil/a oprávnění vyskočit nad ostatní aplikace</string>
+    <string name="allow_storage_access_title">Povolit Ace Stream přistupovat k videím a zvukovým souborům.</string>
+    <string name="allow_storage_access_description">Ace Stream potřebuje, abyste mu udělil/a oprávnění přistupovat k multimediálním souborům na tomto zařízení.</string>
+    <string name="allow_settings_access_ringtone_title">Umožnit Ace Stream nastavit vyzváněcí melodii</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream potřebuje, abyste mu udělil/a oprávnění nastavit tuto skladbu jako vyzváněcí melodii.</string>
+    <string name="allow_settings_access_brightness_title">Povolit Ace Stream změnit jas</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream potřebuje, abyste mu udělil/a oprávnění upravovat jas</string>
+    <string name="allow_draw_overlays_title">Povolit Ace Stream vyskočit nad ostatní aplikace</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream potřebuje, abyste mu udělil/a oprávnění vyskočit nad ostatní aplikace</string>
     <string name="permission_ask_again">Udělit oprávnění</string>
     <string name="exit_app">Zavřít VLC</string>
     <!--fast scroller-->
@@ -451,4 +431,114 @@
     <string name="ml_external_storage_msg">Chcete, aby VLC přidalo médium %1$s do vaší knihovny médií?</string>
     <string name="last_added_media">poslední přidané</string>
     <string name="no">Ne</string>
+    <string name="torrent_files">Torrent soubory</string>
+    <string name="select_language">Zvolte jazyk</string>
+    <string name="sortby_artist_name" source="google_translate">Název umělce</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Jméno umělce (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Název alba</string>
+    <string name="sortby_album_name_desc" source="google_translate">Název alba (desc)</string>
+    <string name="sortby_number" source="google_translate">Nb stopy</string>
+    <string name="sortby_number_desc" source="google_translate">Nb stopy (desc)</string>
+    <string name="playback" source="google_translate">Přehrávání</string>
+    <string name="playback_controls" source="google_translate">Ovládání přehrávání</string>
+    <string name="medialibrary_scan" source="google_translate">Skenování mediální knihovny</string>
+    <string name="Medialibrary_progress" source="google_translate">Probíhá aktualizace skenování mediálních knihoven</string>
+    <string name="video_app_switch_title" source="google_translate">Režim pozadí / PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">Při přepnutí na jinou aplikaci z přehrávání videa vyberte chování VLC</string>
+    <string name="play_pip_title" source="google_translate">Přehrávání videí v režimu obraz v obraze</string>
+    <string name="unknown_number" source="google_translate">Neznámý počet stop</string>
+    <string name="tracks" source="google_translate">stopy</string>
+    <string name="media_fast_seek" source="google_translate">Povolte možnost rychlého vyhledávání</string>
+    <string name="media_seen" source="google_translate">Zobrazit viditelnou značku videa</string>
+    <string name="media_seen_summary" source="google_translate">Označte video tak, jak je vidět při jeho přehrávání až do konce</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Dvojitým klepnutím vyhledejte</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Dvojitým klepnutím na okraje obrazovky vyhledáte 10 sekund</string>
+    <string name="popup_keepscreen_title" source="google_translate">Udržujte obrazovku zapnutou v režimu Pop-Up</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Během zobrazení okna Pop-Up vždy zachovejte obrazovku, i když je video pozastaveno.</string>
+    <string name="subtitles_color_gray" source="google_translate">Šedá</string>
+    <string name="subtitles_bold_title" source="google_translate">Tučné titulky</string>
+    <string name="subtitles_autoload_title" source="google_translate">Automatické načtení titulků</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Animace aktuálního automatického rolování playlistu</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Animace posouvání na přechod médií</string>
+    <string name="audio_save_repeat_title" source="google_translate">Uložit režim opakování</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Nezapomeňte na režim opakování při načítání zvukových seznamů skladeb</string>
+    <string name="audio_boost_title" source="google_translate">Audio-boost</string>
+    <string name="enable_headset_actions_title" source="google_translate">Klávesové zkratky dálkového ovládání</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Dvojitým stisknutím tlačítka \'Play \' přeskočíte na další a dlouhé stisknutí, čímž přeskočíte na předchozí skladbu</string>
+    <string name="audio_ducking_title" source="google_translate">Nižší hlasitost VLC na oznámeních</string>
+    <string name="audio_ducking_summary" source="google_translate">Pomáhá slyšet zvuková upozornění, navigační instrukce nebo pomocník</string>
+    <string name="casting_category" source="google_translate">Casting</string>
+    <string name="casting_passthrough_title" source="google_translate">Zvuková pasáž</string>
+    <string name="casting_passthrough_summary" source="google_translate">Nechte televizor spravovat vykreslování zvuku</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Konverze kvality</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Při vysílání na vzdálené obrazovce vyberte kvalitu konverzí</string>
+    <string name="casting_quality_high" source="google_translate">Vysoký</string>
+    <string name="casting_quality_medium" source="google_translate">Střední</string>
+    <string name="casting_quality_low" source="google_translate">Nízký</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Nejnižší</string>
+    <string name="cast_performance_warning" source="google_translate">Odesílání tohoto videa vyžaduje konverzi. Tato konverze může využívat veškerý dostupný výkon a může baterii rychle vypustit.</string>
+    <string name="artists_show_all_title" source="google_translate">Zobrazit všechny umělce</string>
+    <string name="artists_show_all_summary" source="google_translate">Zobrazit všechny umělce v seznamu interpretů, a to nejen umělců alba</string>
+    <string name="extensions_prefs_category" source="google_translate">Rozšíření</string>
+    <string name="extensions_enable_category" source="google_translate">Vyberte rozšíření, které chcete povolit</string>
+    <string name="extensions_empty" source="google_translate">Nebylo zjištěno žádné rozšíření</string>
+    <string name="extension_prefs_activation_title" source="google_translate">aktivovat</string>
+    <string name="android_auto" source="google_translate">Android vůz</string>
+    <string name="main_prefs_category" source="google_translate">Hlavní nastavení</string>
+    <string name="dump_media_db" source="google_translate">Databáze výpisu médií</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopírovat databázi do kořenového interního úložiště</string>
+    <string name="medialibrary" source="google_translate">Knihovna médií</string>
+    <string name="exit_app_msg" source="google_translate">Opravdu chcete ukončit VLC?</string>
+    <string name="fastscroller_track" source="google_translate">Skladba FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">Rukojeť FastScroller</string>
+    <string name="opengl_on" source="google_translate">Vynucené zapnutí</string>
+    <string name="opengl_off" source="google_translate">force Off</string>
+    <string name="streams" source="google_translate">proudy</string>
+    <string name="ml_external_storage_accept" source="google_translate">Ano</string>
+    <string name="ml_external_storage_decline" source="google_translate">Ne</string>
+    <string name="loading_medialibrary" source="google_translate">Načítání Medialibrary ...</string>
+    <string name="yes" source="google_translate">Ano</string>
+    <string name="custom_set_save_title" source="google_translate">Neuložené změny</string>
+    <string name="custom_set_save_warning" source="google_translate">Upozornění: neuložené změny</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Uložit ekvalizér jako ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Uložit nový ekvalizér jako ...</string>
+    <string name="save" source="google_translate">Uložit</string>
+    <string name="do_not_save" source="google_translate">Neukládat</string>
+    <string name="custom_set_wrong_input" source="google_translate">Neplatné jméno.</string>
+    <string name="custom_set_already_exist" source="google_translate">Nastavení ekvalizéru s tímto názvem již existuje</string>
+    <string name="custom_set_restored" source="google_translate">Obnovení vlastní ekvalizér.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Neuložené nastavení ekvalizéru bylo odstraněno.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Nový</string>
+    <string name="settings_ml_block_scan" source="google_translate">Mediální knihovna právě skenuje vaše zařízení</string>
+    <string name="recommendations" source="google_translate">Doporučení</string>
+    <string name="recommendations_desc" source="google_translate">Doporučení karty na spouštěči</string>
+    <string name="browser_quick_access" source="google_translate">Rychlý přístup</string>
+    <string name="browser_storages" source="google_translate">Zásoby</string>
+    <string name="renderer_list_title" source="google_translate">Zobrazuje se</string>
+    <string name="feedback_player_crashed" source="google_translate">Promiň, VLC právě havaroval. Prosím zkuste to znovu.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Musíte poskytnout přístup k psaní VLC na kartu SD</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC nemůže tento soubor smazat bez oprávnění pro přístup k zápisu. \ NPlease přejděte na kartu SD a klikněte na tlačítko \ "Vybrat \". \ NV pravém horním menu pravděpodobně budete muset kliknout na \ "Zobrazit SD kartu \"</string>
+    <string name="dialog_sd_wizard" source="google_translate">Ukaž mi</string>
+    <string name="renderers_disconnect" source="google_translate">Odpojit</string>
+    <string name="audio_digital_failed" source="google_translate">Nepodařilo se změnit stav digitálního výstupu zvuku</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Zvukový digitální výstup je povolen</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio digitální výstup je vypnutý</string>
+    <string name="live_streams" source="google_translate">Živé proudy</string>
+    <string name="all_live_streams" source="google_translate">Všechny živé proudy</string>
+    <string name="video_torrents" source="google_translate">Video torrenty</string>
+    <string name="audio_torrents" source="google_translate">Audio torrenty</string>
+    <string name="all_torrents" source="google_translate">Všechny torrenty</string>
+    <string name="main" source="google_translate">Hlavní</string>
+    <string name="media_player" source="google_translate">Přehrávač médií</string>
+    <string name="acestream_server" source="google_translate">Server Ace Stream (motor)</string>
+    <string name="media_player_settings" source="google_translate">Nastavení přehrávače médií</string>
+    <string name="acestream_server_settings" source="google_translate">Nastavení serveru Ace Stream (motor)</string>
+    <string name="sign_out" source="google_translate">Odhlásit se</string>
+    <string name="sign_in" source="google_translate">Přihlásit se</string>
+    <string name="sign_in_acestream" source="google_translate">Přihlaste se pomocí aplikace Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Přihlaste se pomocí služby Google</string>
+    <string name="video_files" source="google_translate">Video soubory</string>
+    <string name="audio_files" source="google_translate">Audio soubory</string>
+    <string name="retry" source="google_translate">Opakujte</string>
+    <string name="failed_to_load_web_page" source="google_translate">Webová stránka se nezdařila</string>
 </resources>

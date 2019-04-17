@@ -28,21 +28,21 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.icu.text.UnicodeSetIterator;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.WorkerThread;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.WorkerThread;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.vlc.BuildConfig;
 import org.videolan.vlc.R;
@@ -106,9 +106,7 @@ public class SubtitlesDownloader {
         try {
             languages = Collections.singleton(Locale.getDefault().getISO3Language().toLowerCase());
         } catch (MissingResourceException ignored) {}
-        if (AndroidUtil.isHoneycombOrLater) {
-            languages = VLCApplication.getSettings().getStringSet("languages_download_list", languages);
-        }
+        languages = VLCApplication.getSettings().getStringSet("languages_download_list", languages);
         if (languages == null) { // In case getDefault().getISO3Language() fails
             Toast.makeText(mContext, R.string.subs_dl_lang_fail, Toast.LENGTH_SHORT).show();
             return;

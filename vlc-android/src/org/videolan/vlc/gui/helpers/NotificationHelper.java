@@ -26,16 +26,15 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.media.session.MediaSession;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.support.v4.media.session.MediaSessionCompat;
-import android.support.v7.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 
-import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.vlc.R;
+import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.vlc.StartActivity;
 import org.videolan.vlc.util.AndroidDevices;
 import org.videolan.vlc.util.Constants;
@@ -104,19 +103,39 @@ public class NotificationHelper {
                 builder.addAction(R.drawable.ic_widget_play_w, ctx.getString(R.string.play), piPlay);
             builder.addAction(R.drawable.ic_widget_next_w, ctx.getString(R.string.next), piForward);
             builder.addAction(R.drawable.ic_widget_close_w, ctx.getString(R.string.stop), piStop);
-            if (AndroidDevices.showMediaStyle) {
-                builder.setStyle(new NotificationCompat.MediaStyle()
-                        .setMediaSession(sessionToken)
-                        .setShowActionsInCompactView(0,1,2)
-                        .setShowCancelButton(true)
-                        .setCancelButtonIntent(piStop)
-                );
-            }
+
+            // this requires android.support.v7.app.NotificationCompat
+//            if (AndroidDevices.showMediaStyle) {
+//                builder.setStyle(new NotificationCompat.MediaStyle()
+//                        .setMediaSession(sessionToken)
+//                        .setShowActionsInCompactView(0,1,2)
+//                        .setShowCancelButton(true)
+//                        .setCancelButtonIntent(piStop)
+//                );
+//            }
             return builder.build();
         }
     }
 
-    private static android.support.v4.app.NotificationCompat.Builder scanCompatBuilder;
+    public static Notification createSimplePlaybackNotification(Context ctx) {
+        if (AndroidUtil.isOOrLater) {
+            final Notification.Builder builder = new Notification.Builder(ctx, "vlc_playback");
+            builder.setSmallIcon(R.drawable.ic_notif_video)
+                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .setContentTitle(ctx.getString(R.string.playing_video))
+                    .setCategory(NotificationCompat.CATEGORY_SERVICE);
+            return builder.build();
+        } else {
+            final NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx);
+            builder.setSmallIcon(R.drawable.ic_notif_video)
+                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .setContentTitle(ctx.getString(R.string.playing_video))
+                    .setCategory(NotificationCompat.CATEGORY_SERVICE);
+            return builder.build();
+        }
+    }
+
+    private static androidx.core.app.NotificationCompat.Builder scanCompatBuilder;
     private static Notification.Builder scanBuilder;
     private static final Intent notificationIntent = new Intent();
     public static Notification createScanNotification(Context ctx, String progressText, boolean updateActions, boolean paused) {
@@ -136,8 +155,8 @@ public class NotificationHelper {
             if (updateActions) {
                 notificationIntent.setAction(paused ? ACTION_RESUME_SCAN : ACTION_PAUSE_SCAN);
                 final PendingIntent pi = PendingIntent.getBroadcast(ctx.getApplicationContext(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                final Notification.Action playpause = paused ? new Notification.Action(R.drawable.ic_play, ctx.getString(R.string.resume), pi)
-                        : new Notification.Action(R.drawable.ic_pause, ctx.getString(R.string.pause), pi);
+                final Notification.Action playpause = paused ? new Notification.Action(R.drawable.ic_play_light, ctx.getString(R.string.resume), pi)
+                        : new Notification.Action(R.drawable.ic_pause_light, ctx.getString(R.string.pause), pi);
                 scanBuilder.setActions(playpause);
             }
             return scanBuilder.build();
@@ -158,8 +177,8 @@ public class NotificationHelper {
             if (updateActions) {
                 notificationIntent.setAction(paused ? ACTION_RESUME_SCAN : ACTION_PAUSE_SCAN);
                 final PendingIntent pi = PendingIntent.getBroadcast(ctx.getApplicationContext(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                final NotificationCompat.Action playpause = paused ? new NotificationCompat.Action(R.drawable.ic_play, ctx.getString(R.string.resume), pi)
-                        : new NotificationCompat.Action(R.drawable.ic_pause, ctx.getString(R.string.pause), pi);
+                final NotificationCompat.Action playpause = paused ? new NotificationCompat.Action(R.drawable.ic_play_light, ctx.getString(R.string.resume), pi)
+                        : new NotificationCompat.Action(R.drawable.ic_pause_light, ctx.getString(R.string.pause), pi);
                 scanCompatBuilder.mActions.clear();
                 scanCompatBuilder.addAction(playpause);
             }

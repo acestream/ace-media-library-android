@@ -19,10 +19,6 @@
     <string name="sortby_number_desc">Fjöldi laga (lýsandi)</string>
     <string name="searchable_hint">Leita…</string>
     <string name="history">Ferill</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d niðurstaða fannst</item>
-        <item quantity="other">%d niðurstöður fundust</item>
-    </plurals>
     <string name="play">Spila</string>
     <string name="playback">Afspilun</string>
     <string name="playback_controls">Stýringar fyrir afspilun</string>
@@ -71,14 +67,6 @@
     <plurals name="subfolders_quantity">
         <item quantity="one">1 undirmappa</item>
         <item quantity="other">%d undirmöppur</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 margmiðlunarskrá</item>
-        <item quantity="other">%d margmiðlunarskrár</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 myndskeið</item>
-        <item quantity="other">%d myndskeið</item>
     </plurals>
     <string name="internal_memory">Innra minni</string>
     <string name="parent_folder">Upp í yfirmöppu</string>
@@ -140,10 +128,6 @@
     <string name="navmenu">flakkvalmynd</string>
     <string name="advanced">ítarlegir valkostir</string>
     <string name="audio_boost_warning">Renndu upp aftur til að fara yfir 100%</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 rás\n</item>
-        <item quantity="other">%1$d rásir\n</item>
-    </plurals>
     <string name="track_samplerate_info">Söfnunartíðni: %1$d Hz\n</string>
     <string name="track_resolution_info">Upplausn: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Rammatíðni: %1$.3f\n</string>
@@ -179,7 +163,7 @@
     <string name="error_not_compatible">Því miður, tækið þitt er ekki ennþá stutt af þessari útgáfu VLC fyrir Android™.</string>
     <string name="error_problem">Því miður, VLC fyrir Android átti í vandræðum með að ræsast og varð því að hætta.</string>
     <string name="error_message_is">Villumeldingin er (taktu þetta fram við aflúsun):\n</string>
-    <string name="empty" translatable="false"></string>
+    <string name="empty" translatable="false"/>
     <string name="encountered_error_title">Afspilunarvilla</string>
     <string name="encountered_error_message">VLC rakst á villu í þessum miðli.\nReyndu að endurlesa margmiðlunarsafnið.</string>
     <string name="invalid_location">Ekki er hægt að spila staðsetninguna %1$s</string>
@@ -424,14 +408,14 @@
     <!--Widget-->
     <string name="widget_name_w">Hvítir VLC-viðmótshlutar</string>
     <string name="widget_name_b">Dökkir VLC-viðmótshlutar</string>
-    <string name="allow_storage_access_title">Leyfa VLC að fá aðgang að hljóð- og myndskeiðaskrám</string>
-    <string name="allow_storage_access_description">VLC þarf að fá þessa heimild hjá þér til að fá aðgang að margmiðlunarskrám á þessu tæki.</string>
-    <string name="allow_settings_access_ringtone_title">Leyfa VLC að setja hringitón</string>
-    <string name="allow_settings_access_ringtone_description">VLC þarf að fá þessa heimild hjá þér til að setja þetta lag upp sem hringitón.</string>
-    <string name="allow_settings_access_brightness_title">Leyfa VLC að stilla birtustigsham</string>
-    <string name="allow_settings_access_brightness_description">VLC þarf að fá þessa heimild hjá þér til að breyta birtustigshamnum.</string>
-    <string name="allow_draw_overlays_title">Leyfa VLC-spilaranum að spretta upp yfir aðra forritsglugga</string>
-    <string name="allow_sdraw_overlays_description">VLC þarf að fá þessa heimild hjá þér til að birta myndskeið í sprettglugga ofan á öðrum forritum.</string>
+    <string name="allow_storage_access_title">Leyfa Ace Stream að fá aðgang að hljóð- og myndskeiðaskrám</string>
+    <string name="allow_storage_access_description">Ace Stream þarf að fá þessa heimild hjá þér til að fá aðgang að margmiðlunarskrám á þessu tæki.</string>
+    <string name="allow_settings_access_ringtone_title">Leyfa Ace Stream að setja hringitón</string>
+    <string name="allow_settings_access_ringtone_description">Ace Stream þarf að fá þessa heimild hjá þér til að setja þetta lag upp sem hringitón.</string>
+    <string name="allow_settings_access_brightness_title">Leyfa Ace Stream að stilla birtustigsham</string>
+    <string name="allow_settings_access_brightness_description">Ace Stream þarf að fá þessa heimild hjá þér til að breyta birtustigshamnum.</string>
+    <string name="allow_draw_overlays_title">Leyfa Ace Stream-spilaranum að spretta upp yfir aðra forritsglugga</string>
+    <string name="allow_sdraw_overlays_description">Ace Stream þarf að fá þessa heimild hjá þér til að birta myndskeið í sprettglugga ofan á öðrum forritum.</string>
     <string name="permission_ask_again">Gefa heimild</string>
     <string name="exit_app">Loka VLC</string>
     <string name="exit_app_msg">Ertu viss um að þú viljir hætta í VLC?</string>
@@ -504,4 +488,60 @@
     <string name="recommendations_desc">Meðmælaspjöld á ræsi</string>
     <string name="browser_quick_access">Flýtiaðgangur</string>
     <string name="browser_storages">Gagnageymslur</string>
+    <string name="torrent_files">Torrent skrár</string>
+    <string name="select_language">Veldu tungumál</string>
+    <string name="media_fast_seek" source="google_translate">Virkja fljótleg leit</string>
+    <string name="subtitles_autoload_title" source="google_translate">Texta sjálfkrafa hlaðið</string>
+    <string name="enable_headset_actions_title" source="google_translate">Flýtileiðir á fjarstýringu</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Tvöfalt ýttu á \'Play \' til að sleppa til næst og lengi ýttu á það til að sleppa til fyrri lags</string>
+    <string name="audio_ducking_title" source="google_translate">Neðri VLC bindi á tilkynningum</string>
+    <string name="audio_ducking_summary" source="google_translate">Hjálpar til við að heyra hljóð tilkynningar, leiðsögn leiðbeiningar eða aðstoðarmaður tala</string>
+    <string name="casting_category" source="google_translate">Casting</string>
+    <string name="casting_passthrough_title" source="google_translate">Audio Passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">Láttu sjónvarpið stjórna hljóðupptöku</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Viðskiptagæði</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Veldu viðskipti gæði þegar steypu á ytri skjánum</string>
+    <string name="casting_quality_high" source="google_translate">Hár</string>
+    <string name="casting_quality_medium" source="google_translate">Miðlungs</string>
+    <string name="casting_quality_low" source="google_translate">Lágt</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Lægsta</string>
+    <string name="cast_performance_warning" source="google_translate">Kasta þessu myndskeiði krefst viðskipta. Þessi viðskipti geta notað alla tiltæka orku og gæti fljótt holræsi rafhlöðuna þína.</string>
+    <string name="artists_show_all_title" source="google_translate">Sýna alla listamenn</string>
+    <string name="artists_show_all_summary" source="google_translate">Sýnið öllum listamönnum í listamönnum listamanna, ekki aðeins listamannalistar</string>
+    <string name="main_prefs_category" source="google_translate">Aðalstillingar</string>
+    <string name="dump_media_db" source="google_translate">Taka fjölmiðla gagnagrunn</string>
+    <string name="dump_media_db_summary" source="google_translate">Afritaðu gagnagrunninn í innri geymslu rót</string>
+    <string name="network_shares_discovery" source="google_translate">Ertu að leita að hlutum net ...</string>
+    <string name="connecting" source="google_translate">Tengist ...</string>
+    <string name="streams" source="google_translate">lækir</string>
+    <string name="loading_medialibrary" source="google_translate">Hleður Medialibrary ...</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Vista tónjafnari-stillt sem ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Vista nýja tónjafnari-sett sem ...</string>
+    <string name="renderer_list_title" source="google_translate">Sýnir</string>
+    <string name="feedback_player_crashed" source="google_translate">Því miður, VLC hrundi bara. Vinsamlegast reyndu aftur.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Þú verður að veita VLC skrifa aðgang að SD kortinu þínu</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC getur ekki eytt þessari skrá án skriflegs aðgangsleyfis. \ NVeldu á SD-kortið og smelltu á \ "Select \". \ NÞú gætir þurft að smella á \ "Sýna SD kort \" fyrst í efra hægra valmyndinni</string>
+    <string name="dialog_sd_wizard" source="google_translate">Sýndu mér</string>
+    <string name="renderers_disconnect" source="google_translate">Aftengja</string>
+    <string name="audio_digital_failed" source="google_translate">Mistókst að breyta hljóðdrætti útgangsstaða</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Audio Digital Output virkt</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio Digital Output óvirkt</string>
+    <string name="live_streams" source="google_translate">Lifandi læki</string>
+    <string name="all_live_streams" source="google_translate">Allir lifandi læki</string>
+    <string name="video_torrents" source="google_translate">Vídeóstraumar</string>
+    <string name="audio_torrents" source="google_translate">Hljóðstraumar</string>
+    <string name="all_torrents" source="google_translate">Allir straumar</string>
+    <string name="main" source="google_translate">Aðal</string>
+    <string name="media_player" source="google_translate">Media Player</string>
+    <string name="acestream_server" source="google_translate">Ace Stream miðlara (vél)</string>
+    <string name="media_player_settings" source="google_translate">Stillingar fyrir miðlara</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream miðlara (vél) stillingar</string>
+    <string name="sign_out" source="google_translate">Útskrá</string>
+    <string name="sign_in" source="google_translate">Skráðu þig inn</string>
+    <string name="sign_in_acestream" source="google_translate">Skráðu þig inn með Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Skráðu þig inn með Google</string>
+    <string name="video_files" source="google_translate">Vídeóskrár</string>
+    <string name="audio_files" source="google_translate">Hljóðskrár</string>
+    <string name="retry" source="google_translate">Reyndu aftur</string>
+    <string name="failed_to_load_web_page" source="google_translate">Mistókst að hlaða inn vefsíðu</string>
 </resources>

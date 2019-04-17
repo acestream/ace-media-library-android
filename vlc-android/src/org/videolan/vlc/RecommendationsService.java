@@ -28,8 +28,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.vlc.gui.helpers.BitmapUtil;
@@ -37,8 +37,7 @@ import org.videolan.vlc.gui.video.VideoPlayerActivity;
 import org.videolan.vlc.util.Constants;
 import org.videolan.vlc.util.Util;
 
-import java.util.Arrays;
-import java.util.List;
+import org.videolan.vlc.R;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class RecommendationsService extends IntentService {
@@ -104,8 +103,8 @@ public class RecommendationsService extends IntentService {
             @Override
             public void run() {
                 int id = 0;
-                List<MediaWrapper> videoList = Arrays.asList(VLCApplication.getMLInstance().getRecentVideos());
-                if (Util.isListEmpty(videoList))
+                MediaWrapper[] videoList = VLCApplication.getMLInstance().getRecentVideos(-1, -1);
+                if (Util.isArrayEmpty(videoList))
                     return;
                 for (MediaWrapper mediaWrapper : videoList){
                     buildRecommendation(mediaWrapper, ++id, Notification.PRIORITY_DEFAULT);

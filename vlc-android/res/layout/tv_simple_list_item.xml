@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <data>
+    <data class="org.videolan.vlc.databinding.TvSimpleListItemBinding">
         <import type="org.videolan.vlc.media.MediaUtils" />
         <variable
             name="bgColor"

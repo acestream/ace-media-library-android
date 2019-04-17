@@ -1,9 +1,17 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     packagingOptions {
+        exclude 'META-INF/main.kotlin_module'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/armeabi/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
     }
 
     dexOptions {
@@ -13,9 +21,6 @@ android {
     }
 
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
-
-    flavorDimensions "target", "abi"
 
     lintOptions {
         abortOnError false
@@ -39,23 +44,46 @@ android {
     }
 
     defaultConfig {
-        applicationId "org.videolan.vlc"
+        applicationId "org.videolan.vlc.acestream"
 
         resValue "string", "build_time", buildTime()
         resValue "string", "build_host", hostName()
         resValue "string", "build_revision", revision()
-        resValue "string", "build_vlc_revision", vlcRevision()
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // The following argument makes the Android Test Orchestrator run its
+        // "pm clear" command after each test invocation. This command ensures
+        // that the app's state is completely cleared between tests.
+        testInstrumentationRunnerArguments clearPackageData: 'true'
 
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
+        buildConfigField "boolean", "enableDebugLogging", rootProject.ext.enableDebugLogging
+
+        multiDexEnabled true
+
         tasks.whenTaskAdded { task ->
             if (task.name.startsWith('merge')) {
                 task.dependsOn luaPlaylistCopy
                 task.dependsOn luaMetaCopy
             }
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/assets/schemas".toString()]
+            }
+        }
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        unitTests {
+            includeAndroidResources = true
         }
     }
 
@@ -68,115 +96,89 @@ android {
             storealias=androiddebugkey
             storepwd=android
              */
-            storeFile file(keyStoreFile)
-            keyAlias storealias
-            if (System.getenv('PASSWORD_KEYSTORE') != null && !System.getenv('PASSWORD_KEYSTORE').isEmpty()){
-                storePassword = System.getenv('PASSWORD_KEYSTORE')
-                keyPassword = System.getenv('PASSWORD_KEYSTORE')
-            } else {
-                storePassword storepwd
-                keyPassword storepwd
+            if (project.hasProperty('keyStoreFile')) {
+                storeFile file(project.findProperty('keyStoreFile'))
+                keyAlias project.findProperty('storealias')
+                if (System.getenv('PASSWORD_KEYSTORE') != null && !System.getenv('PASSWORD_KEYSTORE').isEmpty()){
+                    storePassword = System.getenv('PASSWORD_KEYSTORE')
+                    keyPassword = System.getenv('PASSWORD_KEYSTORE')
+                } else {
+                    storePassword project.findProperty('storePassword')
+                    keyPassword project.findProperty('keyPassword')
+                }
             }
         }
     }
 
     buildTypes {
         release {
-            signingConfig null
-            minifyEnabled true
+            signingConfig = signingConfigs.release
+            minifyEnabled false
             shrinkResources false
             proguardFile 'proguard.cfg'
-        }
-        signedRelease {
-            initWith release
-            signingConfig = signingConfigs.release
-            matchingFallbacks = ['release']
+            kotlinOptions.freeCompilerArgs = [ 'Xno-param-assertions']
         }
         debug {
-            applicationIdSuffix ".debug"
             jniDebuggable true
         }
     }
-    productFlavors {
-        vanilla {
-            dimension "target"
-            versionCode = 1
-        }
-        chrome {
-            minSdkVersion 19
-            dimension "target"
-            versionCode = 2
-        }
-        ARMv7 {
-            dimension "abi"
-            versionCode = 4
-        }
-        x86 {
-            dimension "abi"
-            versionCode = 5
-        }
-        MIPS {
-            dimension "abi"
-            versionCode = 6
-        }
-        ARMv8 {
-            dimension "abi"
-            versionCode = 7
-        }
-        x86_64 {
-            dimension "abi"
-            versionCode = 8
-        }
-        MIPS64 {
-            dimension "abi"
-            versionCode = 9
+
+    flavorDimensions "abi"
+    splits {
+        abi {
+            def isReleaseBuild = false
+            gradle.startParameter.taskNames.find {
+                // Enable split for release builds in different build flavors
+                // (assemblePaidRelease, assembleFreeRelease, etc.).
+                if (it.toLowerCase() ==~ /assemble.*Release/.toLowerCase()) {
+                    isReleaseBuild = true
+                    return true // break
+                }
+                return false // continue
+            }
+            enable isReleaseBuild
+            reset()
+            include "x86", "x86_64", "armeabi-v7a", "arm64-v8a"
+//            universalApk !isReleaseBuild
         }
     }
 
+    def abiCodes = ['x86':5, 'x86_64':8, 'armeabi-v7a':4, 'arm64-v8a':7]
     // make per-variant version code
     applicationVariants.all { variant ->
-
-        def generatedCode = variant.productFlavors.get(0).versionCode * 10000000 + defaultConfig.versionCode + variant.productFlavors.get(1).versionCode
-        variant.mergedFlavor.versionCode = generatedCode
-        //Custom APK name
-        variant.outputs.all { output ->
-            def outputName = "VLC-Android-"
-            if (variant.productFlavors.get(0).name != "vanilla")
-                outputName += variant.productFlavors.get(0).name.toUpperCase() + "-"
-            outputName += variant.versionName + "-" + variant.productFlavors.get(1).name + ".apk"
-            outputFileName = outputName
-            output.processManifest.doLast {
-                // set the composite code
-                String manifestPath = "$manifestOutputDirectory/AndroidManifest.xml"
-                def manifestContent = file(manifestPath).getText()
-                manifestContent = manifestContent.replace('android:versionCode="1"',
-                        String.format('android:versionCode="%s"', generatedCode))
-                file(manifestPath).write(manifestContent)
-            }
+        //Custom APK name and versionCode
+        variant.outputs.each { output ->
+            def abiName = System.getenv('GRADLE_ABI')?.toLowerCase() ?: "all"
+            output.versionCodeOverride = 10000000 + defaultConfig.versionCode + abiCodes.get(abiName, 0)
+            def outputName = "Ace-Media-Library-"
+            outputName += variant.versionName + "-" + abiName + ".apk"
+            output.outputFileName = outputName
         }
     }
 
-    sourceSets.main {
-        manifest.srcFile 'AndroidManifest.xml'
-        java.srcDirs = ['src']
-        resources.srcDirs = ['src']
-        aidl.srcDirs = ['src']
-        renderscript.srcDirs = ['src']
-        res.srcDirs = ['res']
-        assets.srcDirs = ['assets']
-    }
-    sourceSets.release {
-        manifest.srcFile 'flavors/release/AndroidManifest.xml'
-    }
-    sourceSets.debug {
-        res.srcDirs = ['flavors/debug/res']
-    }
-    sourceSets.test {
-        java.srcDirs = ['test']
-    }
-    sourceSets.chrome {
-        manifest.srcFile 'flavors/chrome/AndroidManifest.xml'
-        res.srcDirs = ['flavors/chrome/res']
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+        release {
+            manifest.srcFile 'flavors/release/AndroidManifest.xml'
+        }
+        debug {
+            res.srcDirs = ['flavors/debug/res']
+        }
+        test {
+            java.srcDirs = ['test', 'test-common']
+        }
+        androidTest {
+            java.srcDirs = ['androidTest', 'test-common']
+            assets.srcDirs += files("$projectDir/assets/schemas".toString())
+        }
     }
 }
 
@@ -190,27 +192,53 @@ dependencies {
     implementation project(':medialibrary')
     implementation project(':api')
     implementation project(':axmlrpc')
+    implementation project(':tools')
+    implementation project(':acestream-android-sdk')
+
+    // MultiDex
+    implementation 'androidx.multidex:multidex:2.0.1'
+
     // AppCompat
-    kapt 'com.android.databinding:compiler:3.0.1'
-    implementation "com.android.support:recyclerview-v7:$rootProject.ext.appCompatVersion"
-    implementation "com.android.support:design:$rootProject.ext.appCompatVersion"
-    implementation "com.android.support:support-annotations:$rootProject.ext.appCompatVersion"
-    implementation "com.android.support:preference-v7:$rootProject.ext.appCompatVersion"
-    implementation "com.android.support:leanback-v17:$rootProject.ext.appCompatVersion"
-    implementation "com.android.support:preference-leanback-v17:$rootProject.ext.appCompatVersion"
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLayoutVersion"
-    testImplementation 'junit:junit:4.12'
+    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.androidxVersion"
+    implementation "com.google.android.material:material:$rootProject.ext.androidxVersion"
+    implementation "androidx.annotation:annotation:$rootProject.ext.androidxAnnotationVersion"
+    implementation "androidx.preference:preference:$androidxPreferencesVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
+
+    //TV
+    implementation "androidx.leanback:leanback:$rootProject.ext.androidxVersion"
+    implementation "androidx.leanback:leanback-preference:$rootProject.ext.androidxVersion"
+    implementation "androidx.tvprovider:tvprovider:$rootProject.ext.androidxVersion"
+
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    kapt "com.android.databinding:compiler:$rootProject.ext.android_plugin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.ext.kotlinx_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.kotlinx_version"
-}
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.ext.archVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.ext.archVersion"
+    implementation "androidx.room:room-runtime:$rootProject.ext.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.ext.roomVersion"
+    implementation "androidx.paging:paging-runtime:$rootProject.ext.pagingVersion"
 
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.ext.retrofitVersion"
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    // Test
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.ext.roomVersion"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.ext.archVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.ext.archVersion"
+    androidTestImplementation "androidx.test:runner:$rootProject.ext.supportTest"
+    androidTestUtil "androidx.test:orchestrator:$rootProject.ext.supportTest"
+    testImplementation "org.mockito:mockito-core:$rootProject.ext.mockito"
+    testImplementation "org.powermock:powermock-api-mockito2:$rootProject.ext.powerMock"
+    testImplementation "org.powermock:powermock-module-junit4:$rootProject.ext.powerMock"
 }
 
 static def buildTime() {
@@ -218,7 +246,7 @@ static def buildTime() {
 }
 
 static def hostName() {
-    return System.getProperty("user.name") + "@" + InetAddress.localHost.hostName
+    return "${System.getProperty("user.name")}@${InetAddress.localHost.hostName}"
 }
 
 def revision() {
@@ -228,14 +256,4 @@ def revision() {
         standardOutput = code
     }
     return code.toString()
-}
-
-def vlcRevision() {
-    def vlc = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', '--short', 'HEAD'
-        workingDir '../vlc'
-        standardOutput = vlc
-    }
-    return vlc.toString()
 }

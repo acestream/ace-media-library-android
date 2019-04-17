@@ -20,17 +20,20 @@
 
 package org.videolan.vlc.gui.preferences;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.design.widget.AppBarLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import com.google.android.material.appbar.AppBarLayout;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 
 import org.videolan.vlc.PlaybackService;
 import org.videolan.vlc.R;
+import org.videolan.vlc.VLCApplication;
 
 @SuppressWarnings("deprecation")
 public class PreferencesActivity extends AppCompatActivity implements PlaybackService.Client.Callback {
@@ -55,6 +58,8 @@ public class PreferencesActivity extends AppCompatActivity implements PlaybackSe
     public final static int RESULT_RESTART_APP = RESULT_FIRST_USER + 3;
     public final static int RESULT_UPDATE_SEEN_MEDIA = RESULT_FIRST_USER + 4;
     public final static int RESULT_UPDATE_ARTISTS = RESULT_FIRST_USER + 5;
+    public final static int RESULT_CLEAR_CACHE = RESULT_FIRST_USER + 6;
+    public final static int RESULT_SHUTDOWN_ENGINE = RESULT_FIRST_USER + 7;
 
     private PlaybackService.Client mClient = new PlaybackService.Client(this, this);
     private PlaybackService mService;
@@ -70,8 +75,20 @@ public class PreferencesActivity extends AppCompatActivity implements PlaybackSe
         setContentView(R.layout.preferences_activity);
         setSupportActionBar((Toolbar) findViewById(R.id.main_toolbar));
         if (savedInstanceState == null) {
+            Fragment fragment;
+            String category = getIntent().getStringExtra("category");
+            if(TextUtils.equals(category, "engine")) {
+                fragment = new PreferencesEngine();
+            }
+            else if(TextUtils.equals(category, "ads")) {
+                fragment = new PreferencesAds();
+            }
+            else {
+                fragment = new PreferencesFragment();
+            }
+
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_placeholder, new PreferencesFragment())
+                    .replace(R.id.fragment_placeholder, fragment)
                     .commit();
         }
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
@@ -104,9 +121,7 @@ public class PreferencesActivity extends AppCompatActivity implements PlaybackSe
     }
 
     private void applyTheme() {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean enableBlackTheme = pref.getBoolean("enable_black_theme", false);
-        if (enableBlackTheme) {
+        if (VLCApplication.isBlackTheme()) {
             setTheme(R.style.Theme_VLC_Black);
         }
     }
@@ -148,4 +163,29 @@ public class PreferencesActivity extends AppCompatActivity implements PlaybackSe
         if (mService != null)
             mService.detectHeadset(detect);
     }
+
+    public void setClearCache() {
+        setResult(RESULT_CLEAR_CACHE);
+    }
+
+    public void setShutdownEngine() {
+        setResult(RESULT_SHUTDOWN_ENGINE);
+    }
+
+    public void clearCache() {
+        setClearCache();
+        finish();
+    }
+
+    public void shutdownEngine() {
+        setShutdownEngine();
+        finish();
+    }
+
+    //:ace
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(VLCApplication.updateBaseContextLocale(base));
+    }
+    ///ace
 }

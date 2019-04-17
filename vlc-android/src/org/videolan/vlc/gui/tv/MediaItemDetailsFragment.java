@@ -27,17 +27,17 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v17.leanback.app.BackgroundManager;
-import android.support.v17.leanback.app.DetailsFragment;
-import android.support.v17.leanback.widget.Action;
-import android.support.v17.leanback.widget.ArrayObjectAdapter;
-import android.support.v17.leanback.widget.ClassPresenterSelector;
-import android.support.v17.leanback.widget.DetailsOverviewRow;
-import android.support.v17.leanback.widget.FullWidthDetailsOverviewRowPresenter;
-import android.support.v17.leanback.widget.ListRow;
-import android.support.v17.leanback.widget.ListRowPresenter;
-import android.support.v17.leanback.widget.OnActionClickedListener;
-import android.support.v4.content.ContextCompat;
+import androidx.leanback.app.BackgroundManager;
+import androidx.leanback.app.DetailsFragment;
+import androidx.leanback.widget.Action;
+import androidx.leanback.widget.ArrayObjectAdapter;
+import androidx.leanback.widget.ClassPresenterSelector;
+import androidx.leanback.widget.DetailsOverviewRow;
+import androidx.leanback.widget.FullWidthDetailsOverviewRowPresenter;
+import androidx.leanback.widget.ListRow;
+import androidx.leanback.widget.ListRowPresenter;
+import androidx.leanback.widget.OnActionClickedListener;
+import androidx.core.content.ContextCompat;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -68,6 +68,7 @@ public class MediaItemDetailsFragment extends DetailsFragment implements Playbac
     private static final int ID_DL_SUBS = 6;
     private static final int ID_PLAY_ALL = 7;
     private static final int ID_PLAY_FROM_START = 8;
+    private static final int ID_OPEN_IN_PLAYER = 9;
 
     private BackgroundManager mBackgroundManager;
     private ArrayObjectAdapter mRowsAdapter;
@@ -180,6 +181,9 @@ public class MediaItemDetailsFragment extends DetailsFragment implements Playbac
                         VideoPlayerActivity.start(getActivity(), media.getUri(), true);
                         getActivity().finish();
                         break;
+                    case ID_OPEN_IN_PLAYER:
+                        MediaUtils.showPlayerSelector(getActivity(), media);
+                        break;
                 }
             }
         });
@@ -212,18 +216,18 @@ public class MediaItemDetailsFragment extends DetailsFragment implements Playbac
                         } else if (media.getType() == MediaWrapper.TYPE_AUDIO) {
                             // Add images and action buttons to the details view
                             if (cover == null)
-                                detailsOverview.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_default_cone));
+                                detailsOverview.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_acestream));
                             else
                                 detailsOverview.setImageBitmap(getActivity(), cover);
 
                             detailsOverview.addAction(new Action(ID_PLAY, getString(R.string.play)));
                             detailsOverview.addAction(new Action(ID_LISTEN, getString(R.string.listen)));
-                            if (mediaList != null && mediaList.contains(media))
+                            if (mediaList != null && mediaList.size() > 1 && mediaList.contains(media))
                                 detailsOverview.addAction(new Action(ID_PLAY_ALL, getString(R.string.play_all)));
                         } else if (media.getType() == MediaWrapper.TYPE_VIDEO) {
                             // Add images and action buttons to the details view
                             if (cover == null)
-                                detailsOverview.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_default_cone));
+                                detailsOverview.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_acestream));
                             else
                                 detailsOverview.setImageBitmap(getActivity(), cover);
 
@@ -231,8 +235,10 @@ public class MediaItemDetailsFragment extends DetailsFragment implements Playbac
                             detailsOverview.addAction(new Action(ID_PLAY_FROM_START, getString(R.string.play_from_start)));
                             if (FileUtils.canWrite(media.getUri()))
                                 detailsOverview.addAction(new Action(ID_DL_SUBS, getString(R.string.download_subtitles)));
-                            if (mediaList != null && mediaList.contains(media))
+                            if (mediaList != null && mediaList.size() > 1 && mediaList.contains(media))
                                 detailsOverview.addAction(new Action(ID_PLAY_ALL, getString(R.string.play_all)));
+                            if(media.isP2PItem())
+                                detailsOverview.addAction(new Action(ID_OPEN_IN_PLAYER, getString(R.string.select_player)));
                         }
                         mRowsAdapter.add(detailsOverview);
                         setAdapter(mRowsAdapter);

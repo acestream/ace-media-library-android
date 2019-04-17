@@ -2,40 +2,48 @@ package org.videolan.vlc.media
 
 import android.content.Intent
 import android.net.Uri
-import android.support.annotation.MainThread
-import android.support.v4.content.LocalBroadcastManager
-import android.support.v7.preference.PreferenceManager
+import android.os.Bundle
+import androidx.annotation.MainThread
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
-import kotlinx.coroutines.experimental.CoroutineStart
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.*
+import org.acestream.sdk.*
+import org.acestream.sdk.controller.EngineApi
+import org.acestream.sdk.player.api.AceStreamPlayer
+import org.acestream.sdk.utils.Logger
+import org.acestream.sdk.utils.MiscUtils
 import org.videolan.libvlc.Media
 import org.videolan.libvlc.MediaPlayer
 import org.videolan.medialibrary.Medialibrary
 import org.videolan.medialibrary.media.MediaWrapper
+import org.videolan.vlc.*
 import org.videolan.vlc.BuildConfig
-import org.videolan.vlc.PlaybackService
 import org.videolan.vlc.R
-import org.videolan.vlc.VLCApplication
+import org.videolan.vlc.gui.dialogs.MobileNetworksDialogActivity
 import org.videolan.vlc.gui.preferences.PreferencesActivity
 import org.videolan.vlc.gui.preferences.PreferencesFragment
 import org.videolan.vlc.gui.video.VideoPlayerActivity
 import org.videolan.vlc.util.*
 import java.util.*
+import org.videolan.vlc.util.Constants
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
+class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventListener, Media.EventListener, CoroutineScope {
 
-class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventListener, Media.EventListener {
+    override val coroutineContext = Dispatchers.Main.immediate
 
-    private val TAG = "VLC/PlaylistManager"
+    private val TAG = "VLC/PM"
     private val PREVIOUS_LIMIT_DELAY = 5000L
     private val AUDIO_REPEAT_MODE_KEY = "audio_repeat_mode"
 
     private val medialibrary by lazy(LazyThreadSafetyMode.NONE) { Medialibrary.getInstance() }
     val player by lazy(LazyThreadSafetyMode.NONE) { PlayerController() }
-    private val settings by lazy(LazyThreadSafetyMode.NONE) { PreferenceManager.getDefaultSharedPreferences(service) }
+    private val settings by lazy(LazyThreadSafetyMode.NONE) { VLCApplication.getSettings() }
     private val ctx by lazy(LazyThreadSafetyMode.NONE) { VLCApplication.getAppContext() }
     private val mediaList = MediaWrapperList()
     var currentIndex = -1
@@ -62,6 +70,15 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
 
     fun canShuffle() = mediaList.size() > 2
 
+    //:ace
+    fun findPositionByFileIndex(fileIndex: Int) = mediaList.findPositionByFileIndex(fileIndex)
+
+    fun updateCurrentIndex(value: Int) {
+        currentIndex = value
+        launch { determinePrevAndNextIndices() }
+    }
+    ///ace
+
     fun isValidPosition(position: Int) = position in 0 until mediaList.size()
 
     init {
@@ -76,7 +93,7 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
      * @param position The position to start playing at
      */
     @MainThread
-    fun loadLocations(mediaPathList: List<String>, position: Int) {
+    fun loadLocations(mediaPathList: List<String>, position: Int, start: Boolean=true) {
         val mediaList = ArrayList<MediaWrapper>()
 
         for (location in mediaPathList) {
@@ -92,12 +109,16 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
             }
             mediaList.add(mediaWrapper)
         }
-        load(mediaList, position)
+        load(mediaList, position, start)
     }
 
-    fun load(list: List<MediaWrapper>, position: Int) {
+    fun load(list: List<MediaWrapper>,
+             position: Int,
+             start: Boolean=true,
+             skipPlayer: Boolean=false,
+             extras: Bundle?=null) {
         mediaList.removeEventListener(this)
-        mediaList.clear()
+        mediaList.clear(service.aceStreamManager)
         previous.clear()
         for (media in list) mediaList.add(media)
         if (!hasMedia()) {
@@ -108,24 +129,50 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
 
         // Add handler after loading the list
         mediaList.addEventListener(this)
-        playIndex(position)
+        if(start)
+            playIndex(position, 0, skipPlayer, extras)
         onPlaylistLoaded()
+    }
+
+    fun getLastPlaylistSync(type: Int): ArrayList<MediaWrapper>? {
+        var playlist: ArrayList<MediaWrapper>? = null
+        runBlocking {
+            playlist = getLastPlaylist(type)
+        }
+        return playlist
+    }
+
+    suspend fun getLastPlaylist(type: Int): ArrayList<MediaWrapper>? {
+        val audio = type == Constants.PLAYLIST_TYPE_AUDIO
+        val locationsJson = settings.getString(if (audio) "audio_list" else "media_list", null)
+        if(locationsJson == null) {
+            Logger.v(TAG, "loadLastPlaylist: empty playlist")
+            return null
+        }
+        val locations = Gson().fromJson<List<String>>(locationsJson, object : TypeToken<List<String>>() {}.getType())
+        if(locations == null || locations.isEmpty()) {
+            Logger.v(TAG, "loadLastPlaylist: empty playlist")
+            return null
+        }
+        return withContext(Dispatchers.Default) {
+            locations.mapTo(ArrayList(locations.size)) { MediaWrapper.fromJson(it) }
+        }
     }
 
     @Volatile
     private var loadingLastPlaylist = false
     fun loadLastPlaylist(type: Int) {
+        Logger.v(TAG, "loadLastPlaylist: type=${type} loading=${loadingLastPlaylist}")
         if (loadingLastPlaylist) return
         loadingLastPlaylist = true
-        launch(UI, CoroutineStart.UNDISPATCHED) {
+        launch {
             val audio = type == Constants.PLAYLIST_TYPE_AUDIO
-            val currentMedia = settings.getString(if (audio) "current_song" else "current_media", "")
-            if ("" == currentMedia) return@launch
-            val locations = settings.getString(if (audio) "audio_list" else "media_list", "").split(" ".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
-            if (Util.isArrayEmpty(locations)) return@launch
-            val playList = async {
-                locations.map { Uri.decode(it) }.mapTo(ArrayList(locations.size)) { MediaWrapper(Uri.parse(it)) }
-            }.await()
+            val playList = getLastPlaylist(type)
+            if (playList === null) {
+                loadingLastPlaylist = false
+                return@launch
+            }
+            Logger.v(TAG, "loadLastPlaylist: loaded ${playList.size} items")
             // load playlist
             shuffling = settings.getBoolean(if (audio) "audio_shuffling" else "media_shuffling", false)
             repeating = settings.getInt(if (audio) "audio_repeating" else "media_repeating", Constants.REPEAT_NONE)
@@ -145,7 +192,7 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
 
     private fun onPlaylistLoaded() {
         service.onPlaylistLoaded()
-        launch(UI, CoroutineStart.UNDISPATCHED) {
+        launch {
             determinePrevAndNextIndices()
             launch { mediaList.updateWithMLMeta() }
         }
@@ -163,6 +210,13 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
     fun next() {
         val size = mediaList.size()
         previous.push(currentIndex)
+
+        // Save current media meta
+        if (hasCurrentMedia()) {
+            Logger.v(TAG, "next: save current media meta: currentIndex=$currentIndex")
+            saveMediaMeta()
+        }
+
         currentIndex = nextIndex
         if (size == 0 || currentIndex < 0 || currentIndex >= size) {
             Log.w(TAG, "Warning: invalid next index, aborted !")
@@ -175,16 +229,23 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
         playIndex(currentIndex)
     }
 
-    fun stop(systemExit: Boolean = false) {
-        if (hasCurrentMedia()) {
+    fun stop(systemExit: Boolean = false, clearPlaylist: Boolean = true, saveMetadata: Boolean = true, keepRenderer: Boolean = false) {
+        if (saveMetadata && hasCurrentMedia()) {
             savePosition()
             saveMediaMeta()
         }
         player.releaseMedia()
-        mediaList.removeEventListener(this)
-        previous.clear()
-        currentIndex = -1
-        mediaList.clear()
+
+        if (!keepRenderer && !RendererDelegate.globalRenderer) {
+            RendererDelegate.restoreRenderer(false)
+        }
+
+        if(clearPlaylist) {
+            mediaList.removeEventListener(this)
+            previous.clear()
+            currentIndex = -1
+            mediaList.clear(service.aceStreamManager)
+        }
         if (systemExit) player.release()
         else player.restart()
         service.onPlaybackStopped()
@@ -192,9 +253,17 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
 
     @MainThread
     fun previous(force : Boolean) {
+        Logger.v(TAG, "prev: hasPrevious=${hasPrevious()} currentIndex=$currentIndex force=$force seekable=${player.seekable} delay=${player.getTime() < PREVIOUS_LIMIT_DELAY}")
         if (hasPrevious() && currentIndex > 0 &&
                 (force || !player.seekable || player.getTime() < PREVIOUS_LIMIT_DELAY)) {
             val size = mediaList.size()
+
+            // Save current media meta
+            if (hasCurrentMedia()) {
+                Logger.v(TAG, "previous: save current media meta: currentIndex=$currentIndex")
+                saveMediaMeta()
+            }
+
             currentIndex = prevIndex
             if (previous.size > 0) previous.pop()
             if (size == 0 || prevIndex < 0 || currentIndex >= size) {
@@ -207,25 +276,32 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
     }
 
     fun shuffle() {
+        setShuffle(!shuffling)
+    }
+
+    fun setShuffle(shuffle: Boolean) {
+        if(shuffling == shuffle) return
         if (shuffling) previous.clear()
-        shuffling = !shuffling
+        shuffling = shuffle
         savePosition()
-        launch(UI, CoroutineStart.UNDISPATCHED) { determinePrevAndNextIndices() }
+        launch { determinePrevAndNextIndices() }
     }
 
     fun setRepeatType(repeatType: Int) {
+        if (repeating == repeatType) return
         repeating = repeatType
         if (isAudioList() && settings.getBoolean("audio_save_repeat", false))
             settings.edit().putInt(AUDIO_REPEAT_MODE_KEY, repeating).apply()
         savePosition()
-        launch(UI, CoroutineStart.UNDISPATCHED) { determinePrevAndNextIndices() }
+        launch { determinePrevAndNextIndices() }
     }
 
-    fun playIndex(index: Int, flags: Int = 0) {
+    fun playIndex(index: Int, flags: Int = 0, skipPlayer: Boolean=false, extras: Bundle?=null) {
         if (mediaList.size() == 0) {
             Log.w(TAG, "Warning: empty media list, nothing to play !")
             return
         }
+
         currentIndex = if (isValidPosition(index)) {
             index
         } else {
@@ -234,22 +310,167 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
         }
 
         val mw = mediaList.getMedia(index) ?: return
+
+        //:ace
+        if(BuildConfig.DEBUG) {
+            Log.v(TAG, "playIndex: index=$index p2p=${mw.isP2PItem} skipPlayer=${skipPlayer} uri=${mw.uri} playbackUri=${mw.playbackUri}")
+        }
+
+        // set uri to null for all p2p items except current
+        mediaList.resetP2PItems(service.aceStreamManager, index)
+        ///ace
+
         val isVideoPlaying = mw.type == MediaWrapper.TYPE_VIDEO && player.isVideoPlaying()
+
         if (!videoBackground && isVideoPlaying) mw.addFlags(MediaWrapper.MEDIA_VIDEO)
         if (videoBackground) mw.addFlags(MediaWrapper.MEDIA_FORCE_AUDIO)
         parsed = false
         player.switchToVideo = false
         if (TextUtils.equals(mw.uri.scheme, "content")) MediaUtils.retrieveMediaTitle(mw)
 
-        launch(UI, CoroutineStart.UNDISPATCHED) {
+        service.updateRenderer("pm.playIndex")
+        Logger.v(TAG, "playIndex: type=${mw.type} isVideoPlaying=$isVideoPlaying player.isVideoPlaying=${player.isVideoPlaying()} hasRenderer=${service.hasRenderer()}")
+
+        launch {
             if (mw.hasFlag(MediaWrapper.MEDIA_FORCE_AUDIO) && player.getAudioTracksCount() == 0) {
+                Logger.v(TAG, "playIndex: start 1")
                 determinePrevAndNextIndices(true)
                 if (currentIndex != nextIndex) next()
                 else stop(false)
-            } else if (mw.type != MediaWrapper.TYPE_VIDEO || isVideoPlaying || player.hasRenderer
+            } else if (mw.type != MediaWrapper.TYPE_VIDEO || isVideoPlaying || service.hasRenderer()
                     || mw.hasFlag(MediaWrapper.MEDIA_FORCE_AUDIO)) {
-                val media = Media(VLCInstance.get(), FileUtils.getUri(mw.uri))
-                VLCOptions.setMediaOptions(media, ctx, flags or mw.flags)
+                if(mw.isP2PItem && mw.playbackUri === null) {
+                    Logger.v(TAG, "playIndex:internal: start p2p session: remoteDevice=${service.currentRemoteDevice}")
+
+                    service.getEngine(object : PlaybackService.EngineStateCallback {
+                        override fun onEngineConnected(manager: AceStreamManager, engineApi: EngineApi) {
+                            Logger.vv(TAG, "playIndex: engine connected")
+
+                            if(manager.engineSession != null && service.currentRemoteDevice == null) {
+                                if(mw.mediaFile != null && mw.mediaFile.equals(manager.engineSession?.playbackData?.mediaFile)) {
+                                    mw.playbackUri = Uri.parse(manager.engineSession?.playbackUrl)
+                                    Log.v(TAG, "playIndex: restore uri for active session: uri=${mw.uri}")
+                                    playIndex(index, flags)
+                                    return
+                                }
+                            }
+
+                            MainScope().launch {
+                                determinePrevAndNextIndices()
+
+                                LocalBroadcastManager.getInstance(service).sendBroadcast(Intent(Constants.ACTION_P2P_STARTING))
+
+                                val nextMedia = getMedia(nextIndex)
+
+                                var nextFileIndex: Int?
+                                if(nextMedia !== null && nextMedia.isP2PItem) {
+                                    if (nextMedia.mediaFile !== null) {
+                                        nextFileIndex = nextMedia.mediaFile.index
+                                    }
+                                    else {
+                                        try {
+                                            nextFileIndex = Integer.parseInt(MiscUtils.getQueryParameter(nextMedia.uri, "index"))
+                                        } catch (e: NumberFormatException) {
+                                            nextFileIndex = null
+                                        }
+                                    }
+                                }
+                                else {
+                                    nextFileIndex = null
+                                }
+
+                                val nextFileIndexes = if (nextFileIndex !== null) intArrayOf(nextFileIndex) else null
+
+                                if(service.currentVlcRenderer != null && mw.isP2PItem) {
+                                    // switch to acestream remote device
+                                    val device = manager.findRemoteDeviceByIp(
+                                            MiscUtils.getRendererIp(service.currentVlcRenderer.sout),
+                                            SelectedPlayer.CONNECTABLE_DEVICE)
+                                    Logger.v(TAG, "playIndex: switch to CSDK device: current=${service.currentVlcRenderer} new=${device}")
+                                    if(device === null) {
+                                        service.showToast("Internal error", Toast.LENGTH_SHORT)
+                                        return@launch
+                                    }
+                                    val renderer = RendererItemWrapper(device)
+                                    service.setRenderer(renderer, "switch-to-csdk")
+                                    RendererDelegate.selectRenderer(false, renderer)
+                                }
+
+                                val fromStart = (true == extras?.getBoolean("playFromStart", false))
+
+                                if(service.currentRemoteDevice != null) {
+                                    Logger.v(TAG, "playIndex: start remote acestream device: fromStart=$fromStart")
+                                    player.stop()
+                                    playbackPostInit(mw)
+                                    if(!skipPlayer) {
+                                        VideoPlayerActivity.startRemoteDevice(ctx, mw,
+                                                service.currentRemoteDevice,
+                                                fromStart)
+                                    }
+                                }
+                                else {
+                                    if(AceStreamUtils.shouldStartAceStreamPlayer(mw)) {
+                                        startCurrentPlaylistInAceStreamPlayer(extras)
+                                    }
+                                    else {
+                                        if(!MobileNetworksDialogActivity.checkMobileNetworkConnection(ctx, manager, mw)) {
+                                            Log.w(TAG, "ask about mobile networks")
+                                            return@launch
+                                        }
+
+                                        // Start local engine session
+                                        Logger.v(TAG, "playIndex: start local p2p session")
+                                        mw.startP2P(
+                                                manager,
+                                                object : P2PItemStartListener {
+                                                    override fun onSessionStarted(session: EngineSession) {
+                                                        Log.v(TAG, "playIndex: p2p session started")
+                                                        val intent = Intent(Constants.ACTION_P2P_SESSION_STARTED)
+                                                        LocalBroadcastManager.getInstance(service).sendBroadcast(intent)
+                                                        // Start actual playback when we got playback uri
+                                                        playIndex(index, flags)
+                                                    }
+
+                                                    override fun onPrebufferingDone() {
+                                                        Log.v(TAG, "playIndex: p2p prebuffering done")
+                                                        LocalBroadcastManager.getInstance(service).sendBroadcast(
+                                                                VideoPlayerActivity.getIntent(Constants.ACTION_P2P_STARTED,
+                                                                        mw, false, currentIndex))
+                                                    }
+
+                                                    override fun onError(err: String) {
+                                                        Log.e(TAG, "Failed to start engine session: $err")
+                                                        val intent = Intent(Constants.ACTION_P2P_FAILED);
+                                                        intent.putExtra(org.acestream.sdk.Constants.EXTRA_ERROR_MESSAGE, err)
+                                                        LocalBroadcastManager.getInstance(service).sendBroadcast(intent)
+                                                    }
+                                                },
+                                                nextFileIndexes)
+                                    }
+                                }
+                            }
+                        }
+
+                    })
+                    return@launch
+                }
+
+                if(service.currentRemoteDevice != null && !service.currentRemoteDevice.isAceCast && !mw.isP2PItem) {
+                    // switch to VLC renderer
+                    val device = RendererDelegate.findVlcRendererByIp(service.currentRemoteDevice.ipAddress)
+                    Logger.v(TAG, "playIndex: switch to VLC renderer: current=${service.currentRemoteDevice} new=${device}")
+                    if(device === null) {
+                        service.showToast("Internal error", Toast.LENGTH_SHORT)
+                        return@launch
+                    }
+                    val renderer = RendererItemWrapper(device)
+                    service.setRenderer(renderer, "switch-to-vlc")
+                    RendererDelegate.selectRenderer(false, renderer)
+                }
+
+                Logger.v(TAG, "playIndex:internal: start item: playbackUri=${mw.playbackUri}")
+                val media = Media(VLCInstance.get(), FileUtils.getUri(mw.playbackUri))
+                VLCOptions.setMediaOptions(media, ctx, flags or mw.flags, mw.mime)
                 /* keeping only video during benchmark */
                 if (isBenchmark) {
                     media.addOption(":no-audio")
@@ -265,36 +486,105 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
                 }
                 media.setEventListener(this@PlaylistManager)
                 player.setSlaves(mw)
+                if(mw.userAgent !== null) {
+                    VLCInstance.setUserAgent(mw.userAgent)
+                }
                 player.startPlayback(media, mediaplayerEventListener)
                 media.release()
-                if (savedTime <= 0L && mw.time >= 0L && mw.isPodcast) savedTime = mw.time
-                determinePrevAndNextIndices()
-                service.onNewPlayback(mw)
-                if (settings.getBoolean(PreferencesFragment.PLAYBACK_HISTORY, true)) launch {
-                    var id = mw.id
-                    if (id == 0L) {
-                        var internalMedia = medialibrary.findMedia(mw)
-                        if (internalMedia != null && internalMedia.id != 0L)
-                            id = internalMedia.id
-                        else {
-                            internalMedia = medialibrary.addMedia(Uri.decode(mw.uri.toString()))
-                            if (internalMedia != null)
-                                id = internalMedia.id
-                        }
-                    }
-                    medialibrary.increasePlayCount(id)
+
+                playbackPostInit(mw)
+
+            } else {
+                if(AceStreamUtils.shouldStartAceStreamPlayer(mw)) {
+                    startCurrentPlaylistInAceStreamPlayer(extras)
                 }
-                saveCurrentMedia()
-                newMedia = true
-            } else { //Start VideoPlayer for first video, it will trigger playIndex when ready.
-                player.stop()
-                VideoPlayerActivity.startOpened(ctx, mw.uri, currentIndex)
+                else {
+                    // Start VideoPlayer for first video, it will trigger playIndex when ready.
+                    Logger.v(TAG, "playIndex: start video player")
+                    player.stop()
+                    VideoPlayerActivity.startOpened(ctx, mw.uri, currentIndex)
+                }
             }
         }
     }
 
+    private suspend fun playbackPostInit(mw: MediaWrapper) {
+        if (savedTime <= 0L && mw.time >= 0L && mw.isPodcast) savedTime = mw.time
+        determinePrevAndNextIndices()
+        service.onNewPlayback(mw)
+        increasePlayCount(mw)
+        saveCurrentMedia()
+        saveMediaList()
+        newMedia = true
+    }
+
+    fun increasePlayCount(mw: MediaWrapper, mediaId: Long=0L) {
+        if (settings.getBoolean(PreferencesFragment.PLAYBACK_HISTORY, true)) launch {
+            var id = if (mediaId == 0L) mw.id else mediaId
+            if (id == 0L) {
+                var internalMedia = medialibrary.findMedia(mw)
+                if (internalMedia != null && internalMedia.id != 0L) {
+                    id = internalMedia.id
+                }
+                else {
+                    internalMedia = medialibrary.addMedia(mw)
+                    if (internalMedia != null)
+                        id = internalMedia.id
+                }
+            }
+            medialibrary.increasePlayCount(id)
+        }
+    }
+
+    fun switchStream(streamIndex: Int) {
+        val mw = getCurrentMedia()
+        if(mw === null) return
+
+        val pm = service.aceStreamManager
+        if(pm === null) throw IllegalStateException("missing playback manager")
+
+        launch {
+            LocalBroadcastManager.getInstance(service).sendBroadcast(Intent(Constants.ACTION_P2P_STARTING))
+
+            // Save time to resume playback
+            mw.time = player.getTime()
+            savedTime = mw.time
+
+            val nextMedia = getMedia(nextIndex)
+            val nextFileIndexes = if(nextMedia === null) null else intArrayOf(nextMedia.mediaFile.index)
+
+            // start new session
+            mw.startP2P(
+                    pm,
+                    object : P2PItemStartListener {
+                        override fun onSessionStarted(session: EngineSession) {
+                            // Do nothing.
+                            // Current we inform player about session start to load ads,
+                            // but no need to show ads when switching stream.
+                        }
+
+                        override fun onPrebufferingDone() {
+                            LocalBroadcastManager.getInstance(service).sendBroadcast(
+                                    VideoPlayerActivity.getIntent(Constants.ACTION_P2P_STARTED,
+                                            mw, false, currentIndex))
+                        }
+
+                        override fun onError(err: String) {
+                            Log.e(TAG, "Failed to start engine session: $err")
+                            val intent = Intent(Constants.ACTION_P2P_FAILED);
+                            intent.putExtra(org.acestream.sdk.Constants.EXTRA_ERROR_MESSAGE, err)
+                            LocalBroadcastManager.getInstance(service).sendBroadcast(intent)
+                        }
+                    },
+                    nextFileIndexes,
+                    streamIndex)
+        }
+    }
+
     fun onServiceDestroyed() {
+        mediaList.resetP2PItems(service.aceStreamManager, -1)
         player.release()
+        VLCInstance.destroy()
     }
 
     @MainThread
@@ -306,9 +596,12 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
         videoBackground = false
         if (player.isVideoPlaying() && !hasRenderer) {//Player is already running, just send it an intent
             player.setVideoTrackEnabled(true)
-            LocalBroadcastManager.getInstance(service).sendBroadcast(
-                    VideoPlayerActivity.getIntent(Constants.PLAY_FROM_SERVICE,
-                            media, false, currentIndex))
+            if(!media.isP2PItem) {
+                Logger.v(TAG, "switchToVideo: send PLAY_FROM_SERVICE intent")
+                LocalBroadcastManager.getInstance(service).sendBroadcast(
+                        VideoPlayerActivity.getIntent(Constants.PLAY_FROM_SERVICE,
+                                media, false, currentIndex))
+            }
         } else if (!player.switchToVideo) { //Start the video player
             VideoPlayerActivity.startOpened(VLCApplication.getAppContext(), media.uri, currentIndex)
             if (!hasRenderer) player.switchToVideo = true
@@ -330,7 +623,7 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
     override fun onItemAdded(index: Int, mrl: String?) {
         if (BuildConfig.DEBUG) Log.i(TAG, "CustomMediaListItemAdded")
         if (currentIndex >= index && !expanding) ++currentIndex
-        launch(UI, CoroutineStart.UNDISPATCHED) {
+        launch {
             determinePrevAndNextIndices()
             executeUpdate()
             saveMediaList()
@@ -341,7 +634,7 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
         if (BuildConfig.DEBUG) Log.i(TAG, "CustomMediaListItemDeleted")
         val currentRemoved = currentIndex == index
         if (currentIndex >= index && !expanding) --currentIndex
-        launch(UI, CoroutineStart.UNDISPATCHED) {
+        launch {
             determinePrevAndNextIndices()
             if (currentRemoved && !expanding) {
                 when {
@@ -362,12 +655,20 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
     fun saveMediaMeta() {
         val media = medialibrary.findMedia(getCurrentMedia())
         if (media === null || media.id == 0L) return
+
+        Logger.v(TAG, "saveMediaMeta: uri=${media.metaUri}")
+
         val canSwitchToVideo = player.canSwitchToVideo()
         if (media.type == MediaWrapper.TYPE_VIDEO || canSwitchToVideo || media.isPodcast) {
             //Save progress
-            val time = player.getTime()
-            val length = player.length
-            var progress = time / length.toFloat()
+            val time = service.time
+            val length = service.length
+            var progress = 0.0f
+            if(time > 0 && length > 0)
+                progress = time / length.toFloat()
+
+            Logger.v(TAG, "saveMediaMeta: p2p=${media.isP2PItem} length=$length time=$time progress=$progress uri=${media.uri}")
+
             if (progress > 0.95f || length - time < 10000) {
                 //increase seen counter if more than 95% of the media have been seen
                 //and reset progress to 0
@@ -376,6 +677,11 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
             }
             media.time = if (progress == 0f) 0L else time
             media.setLongMeta(MediaWrapper.META_PROGRESS, media.time)
+            //:ace
+            if(media.isP2PItem) {
+                media.setLongMeta(MediaWrapper.META_DURATION, length)
+            }
+            ///ace
         }
         if (canSwitchToVideo) {
             //Save audio delay
@@ -404,14 +710,37 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
     }
 
     @Synchronized
-    private fun saveMediaList() {
-        if (getCurrentMedia() === null) return
-        val locations = StringBuilder()
-        for (mw in mediaList.all) locations.append(" ").append(Uri.encode(Uri.decode(mw.uri.toString())))
-        //We save a concatenated String because putStringSet is APIv11.
+    fun saveMediaList(list: MediaWrapperList?=null) {
+        Log.v(TAG, "saveMediaList")
+
+        val listToSave: MediaWrapperList
+        val isAudio: Boolean
+        if(list === null) {
+            listToSave = mediaList
+            if (getCurrentMedia() === null) return
+            isAudio = isAudioList()
+        }
+        else {
+            listToSave = list
+            isAudio = list.isAudioList
+        }
+
+        val locations = ArrayList<String>()
+        for (mw in listToSave.all) {
+            if(mw.uri !== null && mw.uri.toString().startsWith("acestream:?data=content%3A%2F%2F")) {
+                // Skip p2p items with "content://" scheme
+                continue
+            }
+            locations.add(mw.toJson())
+        }
+        val data = Gson().toJson(locations)
         settings.edit()
-                .putString(if (!isAudioList()) "media_list" else "audio_list", locations.toString().trim { it <= ' ' })
+                .putString(if (!isAudio) "media_list" else "audio_list", data)
                 .apply()
+    }
+
+    fun hasLastPlaylist(): Boolean {
+        return settings.contains("media_list")
     }
 
     override fun onItemMoved(indexBefore: Int, indexAfter: Int, mrl: String?) {
@@ -428,7 +757,7 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
         // If we are in random mode, we completely reset the stored previous track
         // as their indices changed.
         previous.clear()
-        launch(UI, CoroutineStart.UNDISPATCHED) {
+        launch {
             determinePrevAndNextIndices()
             executeUpdate()
             saveMediaList()
@@ -535,16 +864,23 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
 
     private fun seekToResume(media: MediaWrapper) {
         var mw = media
+        Logger.v(TAG, "seekToResume: savedTime=$savedTime mw_time=${mw.time} mw_length=${mw.length} player_length=${player.length}")
         if (savedTime > 0L) {
-            if (savedTime < 0.95 * player.length) player.seek(savedTime)
+            if (savedTime < 0.95 * player.length) {
+                Logger.v(TAG, "seekToResume: seek to $savedTime")
+                player.seek(savedTime)
+            }
             savedTime = 0L
         } else {
             val length = player.length
             if (mw.length <= 0L && length > 0L) {
-                mw = medialibrary.findMedia(mw)
-                if (mw.id != 0L) {
-                    mw.time = mw.getMetaLong(MediaWrapper.META_PROGRESS)
-                    if (mw.time > 0L) player.seek(mw.time)
+                val mediaFromML = medialibrary.findMedia(mw)
+                if (mediaFromML.id != 0L) {
+                    mw.time = mediaFromML.getMetaLong(MediaWrapper.META_PROGRESS)
+                    if (mw.time > 0L) {
+                        Logger.v(TAG, "seekToResume: seek to ${mw.time}")
+                        player.seek(mw.time)
+                    }
                 }
             }
         }
@@ -597,23 +933,23 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
      */
     fun moveItem(positionStart: Int, positionEnd: Int) {
         mediaList.move(positionStart, positionEnd)
-        launch(UI, CoroutineStart.UNDISPATCHED) { determinePrevAndNextIndices() }
+        launch { determinePrevAndNextIndices() }
     }
 
     fun insertItem(position: Int, mw: MediaWrapper) {
         mediaList.insert(position, mw)
-        launch(UI, CoroutineStart.UNDISPATCHED) { determinePrevAndNextIndices() }
+        launch { determinePrevAndNextIndices() }
     }
 
 
     fun remove(position: Int) {
         mediaList.remove(position)
-        launch(UI, CoroutineStart.UNDISPATCHED) { determinePrevAndNextIndices() }
+        launch { determinePrevAndNextIndices() }
     }
 
     fun removeLocation(location: String) {
         mediaList.remove(location)
-        launch(UI, CoroutineStart.UNDISPATCHED) { determinePrevAndNextIndices() }
+        launch { determinePrevAndNextIndices() }
     }
 
     fun getMediaListSize()= mediaList.size()
@@ -661,7 +997,7 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
             MediaPlayer.Event.EndReached -> {
                 saveMediaMeta()
                 if (isBenchmark) player.setPreviousStats()
-                launch(UI, CoroutineStart.UNDISPATCHED) {
+                launch {
                     determinePrevAndNextIndices(true)
                     if (nextIndex == -1) savePosition(true)
                     next()
@@ -678,4 +1014,89 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
     }
 
     fun isAudioList() = !player.canSwitchToVideo() && mediaList.isAudioList
+
+    //:ace
+    fun startCurrentPlaylistInAceStreamPlayer(extras: Bundle?=null) {
+        // Start playback in AcePlayer (in separate process)
+        val intent: Intent
+        var selectedPlayer: SelectedPlayer?
+        val context = VLCApplication.getAppContext()
+        val currentMedia = getCurrentMedia()
+
+        if(true == extras?.containsKey("player")) {
+            selectedPlayer = SelectedPlayer.fromJson(extras.getString("player"))
+        }
+        else {
+            selectedPlayer = service.aceStreamManager?.selectedPlayer
+        }
+
+        Logger.v(TAG, "start current playlist in acestream player: currentIndex=$currentIndex selectedPlayer=$selectedPlayer")
+
+        if(currentMedia == null && mediaList.size() == 0) {
+            Log.e(TAG, "startCurrentPlaylistInAceStreamPlayer: empty playlist")
+            return
+        }
+
+        // Use AceStream player as default
+        if(selectedPlayer == null || selectedPlayer.isOurPlayer) {
+            intent = AceStreamUtils.getPlayerIntent()
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra(AceStreamPlayer.EXTRA_PLAYLIST, mediaList.toAceStreamPlaylist())
+            intent.putExtra(AceStreamPlayer.EXTRA_PLAYLIST_POSITION, currentIndex)
+
+            if(true == extras?.containsKey("askResume")) {
+                intent.putExtra(AceStreamPlayer.EXTRA_ASK_RESUME,
+                        extras.getBoolean("askResume"))
+            }
+
+            if(currentMedia !== null) {
+                currentMedia.updateFromMediaLibrary()
+
+                var time = -1L
+                if(extras != null) {
+                    time = extras.getLong("seekOnStart", -1)
+                }
+                if(time == -1L) {
+                    time = currentMedia.getMetaLong(MediaWrapper.META_PROGRESS)
+                }
+                if(time > 0L) {
+                    intent.putExtra(AceStreamPlayer.EXTRA_PLAY_FROM_TIME, time)
+                }
+
+                val remoteClientId = extras?.getString("remoteClientId")
+                if(remoteClientId != null) {
+                    intent.putExtra(AceStreamPlayer.EXTRA_REMOTE_CLIENT_ID, remoteClientId)
+                }
+
+                if(time == 0L || true == extras?.getBoolean("playFromStart", false)) {
+                    intent.putExtra(AceStreamPlayer.EXTRA_PLAY_FROM_START, true)
+                }
+            }
+        }
+        else {
+            // use current media of first media in playlist
+            val media = currentMedia ?: mediaList.getMedia(0) ?: return
+            intent = AceStream.makeIntentFromUri(
+                    context,
+                    media.uri,
+                    selectedPlayer,
+                    false,
+                    false)
+        }
+
+        context.startActivity(intent)
+        // Save playlist before clearing
+        saveMediaList()
+        // Clear playlist because it's now handled in AceStream player
+        stop(false, true, false)
+        // Ensure that VLC video player is closed
+        VideoPlayerActivity.closePlayer()
+    }
+
+    fun fireMediaPlayerEvent(event: MediaPlayer.Event) {
+        if(hasCurrentMedia()) {
+            mediaplayerEventListener.onEvent(event)
+        }
+    }
+    ///ace
 }

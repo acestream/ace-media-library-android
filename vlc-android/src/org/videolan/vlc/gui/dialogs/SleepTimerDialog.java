@@ -74,7 +74,7 @@ public class SleepTimerDialog extends PickTimeFragment {
 
     @Override
     protected int getIcon() {
-        return R.attr.ic_sleep_normal_style;
+        return R.attr.ic_sleep;
     }
 
 }

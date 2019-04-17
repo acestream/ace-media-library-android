@@ -36,8 +36,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.MediaDescriptionCompat;
 
@@ -202,7 +202,7 @@ public class BrowserProvider implements ExtensionManagerService.ExtensionManager
                     return results;
                 case ID_LAST_ADDED:
                     limitSize = true;
-                    list = VLCApplication.getMLInstance().getRecentAudio();
+                    list = VLCApplication.getMLInstance().getRecentAudio(-1, -1);
                     break;
                 case ID_HISTORY:
                     limitSize = true;
@@ -221,7 +221,7 @@ public class BrowserProvider implements ExtensionManagerService.ExtensionManager
                     list = VLCApplication.getMLInstance().getPlaylists();
                     break;
                 case ID_SONGS:
-                    list = VLCApplication.getMLInstance().getAudio();
+                    list = VLCApplication.getMLInstance().getAudio(-1, -1);
                     break;
                 default:
                     String[] idSections = parentId.split("_");

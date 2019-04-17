@@ -22,7 +22,7 @@
 package org.videolan.vlc.gui.dialogs;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,8 +83,10 @@ public class PlaybackSpeedDialog extends DialogFragment implements PlaybackServi
         getDialog().setCancelable(true);
         getDialog().setCanceledOnTouchOutside(true);
         Window window = getDialog().getWindow();
-        window.setBackgroundDrawableResource(UiTools.getResourceFromAttribute(getActivity(), R.attr.rounded_bg));
-        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        if(window != null) {
+            window.setBackgroundDrawableResource(UiTools.getResourceFromAttribute(getActivity(), R.attr.rounded_bg));
+            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        }
         return view;
     }
 
@@ -162,10 +164,14 @@ public class PlaybackSpeedDialog extends DialogFragment implements PlaybackServi
         float rate = mService.getRate();
         mSpeedValue.setText(Strings.formatRateString(rate));
         if (rate != 1.0f) {
-            mPlaybackSpeedIcon.setImageResource(R.drawable.ic_speed_reset);
-            mSpeedValue.setTextColor(getResources().getColor(R.color.orange500));
+            mPlaybackSpeedIcon.setImageResource(
+                    UiTools.getResourceFromAttribute(getActivity(), R.attr.ic_speed_reset));
+            mSpeedValue.setTextColor(UiTools.getColorFromAttribute(
+                    getActivity(),
+                    R.attr.controls_color));
         } else {
-            mPlaybackSpeedIcon.setImageResource(UiTools.getResourceFromAttribute(getActivity(), R.attr.ic_speed_normal_style));
+            mPlaybackSpeedIcon.setImageResource(
+                    UiTools.getResourceFromAttribute(getActivity(), R.attr.ic_speed));
             mSpeedValue.setTextColor(mTextColor);
         }
 

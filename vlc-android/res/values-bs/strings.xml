@@ -13,17 +13,11 @@
     <string name="sortby_date_desc">Datumu (silazno)</string>
     <string name="searchable_hint">Pretrazi…</string>
     <string name="history">Historija</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="one">%d rezultat pronađen</item>
-        <item quantity="few">%d rezultata pronađeno</item>
-        <item quantity="other">%d rezultati pronađeni</item>
-    </plurals>
     <string name="play">Produciraj</string>
     <string name="play_from_start">Produciraj od početka</string>
     <string name="play_as_audio">Produciraj kao zvuk</string>
     <string name="play_as_video">Produciraj kao video</string>
     <string name="play_as_audio_background">Produciraj videe u pozadini</string>
-    <string name="play_as_audio_background_summary">Nastavi reproduciranje videa u pozadini kada se ugasi ekran ili klikne dugme za POČETNU.</string>
     <string name="append">Prisvoji</string>
     <string name="play_all">Produciraj sve</string>
     <string name="append_all">Prisvoji sve</string>
@@ -60,16 +54,6 @@
         <item quantity="one">1 podmapa</item>
         <item quantity="few">%d podmapa</item>
         <item quantity="other">%d podmape</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="one">1 medijska datoteka</item>
-        <item quantity="few">%d medijskih datoteka</item>
-        <item quantity="other">%d medijske datoteke</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="one">1 video</item>
-        <item quantity="few">%d videa</item>
-        <item quantity="other">%d  videi</item>
     </plurals>
     <string name="internal_memory">Interna memorija</string>
     <string name="parent_folder">Do nadređene mape</string>
@@ -126,11 +110,6 @@
     <string name="brightness">Svjetlost</string>
     <string name="navmenu">navigacijski meni</string>
     <string name="advanced">dodatne opcije</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="one">1 kanal\n</item>
-        <item quantity="few">%1$d kanala\n</item>
-        <item quantity="other">%1$d kanali\n</item>
-    </plurals>
     <string name="track_samplerate_info">Brzina stope: %1$d Hz\n</string>
     <string name="track_resolution_info">Rezolucija: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Brzina prikaza: %1$.3f\n</string>
@@ -309,10 +288,254 @@
     <!--Widget-->
     <string name="widget_name_w">VLC Bijeli Widget</string>
     <string name="widget_name_b">VLC Tamni Widget</string>
-    <string name="allow_storage_access_title">Dozvoli da VLC pristupi video i audio datotekama</string>
-    <string name="allow_storage_access_description">VLC zahtjeva da odobrite pristup medijskim datotekama na ovom uređaju.</string>
+    <string name="allow_storage_access_title">Dozvoli da Ace Stream pristupi video i audio datotekama</string>
+    <string name="allow_storage_access_description">Ace Stream zahtjeva da odobrite pristup medijskim datotekama na ovom uređaju.</string>
     <string name="permission_ask_again">Odobri pristup</string>
     <string name="exit_app">Zatvori VLC</string>
     <!--fast scroller-->
     <!--Plugins-->
+    <string name="torrent_files">Torrent datoteke</string>
+    <string name="select_language">Izaberite jezik</string>
+    <string name="sortby_artist_name" source="google_translate">Ime autora</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Ime autora (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Naziv albuma</string>
+    <string name="sortby_album_name_desc" source="google_translate">Naziv albuma (desc)</string>
+    <string name="sortby_number" source="google_translate">Nb tracks</string>
+    <string name="sortby_number_desc" source="google_translate">Nb staze (desc)</string>
+    <string name="playback" source="google_translate">Reprodukcija</string>
+    <string name="playback_controls" source="google_translate">Kontrole reprodukcije</string>
+    <string name="medialibrary_scan" source="google_translate">Skeniranje biblioteke medija</string>
+    <string name="Medialibrary_progress" source="google_translate">Medijska biblioteka skenira ažuriranja progresa</string>
+    <string name="video_app_switch_title" source="google_translate">Režim pozadine / PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">Izaberite VLC ponašanje kada se prebacite na drugu aplikaciju iz video reprodukcije</string>
+    <string name="play_pip_title" source="google_translate">Reprodukujte video zapise u režimu slike u slici</string>
+    <string name="insert_next" source="google_translate">Insert next</string>
+    <string name="unknown_number" source="google_translate">Nepoznat broj zapisa</string>
+    <string name="tracks" source="google_translate">Tracks</string>
+    <string name="shuffle_title" source="google_translate">Shuffle mode</string>
+    <string name="repeat_title" source="google_translate">Repeat mode</string>
+    <string name="surface_fit_screen" source="google_translate">Fit screen</string>
+    <string name="server_add_title" source="google_translate">Dodajte novi server u favorite</string>
+    <string name="server_domain_hint" source="google_translate">Adresa servera (naziv domene ili IP)</string>
+    <string name="server_share_hint" source="google_translate">Naziv mrežnog dijeljenja (ili IP adresa)</string>
+    <string name="server_folder_hint" source="google_translate">Putanja mape (opcionalno)</string>
+    <string name="server_username_hint" source="google_translate">Username</string>
+    <string name="server_servername_hint" source="google_translate">Ime servera, za pogodnost</string>
+    <string name="server_port" source="google_translate">Luka:</string>
+    <string name="login" source="google_translate">Ulogovati se</string>
+    <string name="password" source="google_translate">Lozinka</string>
+    <string name="search_results" source="google_translate">Rezultati pretrage</string>
+    <string name="search_no_result" source="google_translate">Nema pronađenih medija</string>
+    <string name="favorites_add" source="google_translate">Dodaj u favorite</string>
+    <string name="favorites_remove" source="google_translate">Ukloni iz omiljenih</string>
+    <string name="favorites_edit" source="google_translate">Uredi</string>
+    <string name="favorite_added" source="google_translate">Spremljeno u favorite</string>
+    <string name="favorite_removed" source="google_translate">Uklonjeno iz omiljenih</string>
+    <string name="playback_history_title" source="google_translate">Istorija reprodukcije</string>
+    <string name="playback_history_summary" source="google_translate">Sačuvajte sve medije reproducirane u sekciji Istorija</string>
+    <string name="playback_speed_title" source="google_translate">Spremi brzinu reprodukcije</string>
+    <string name="playback_speed_summary" source="google_translate">Zapamtite brzinu reprodukcije koju ste postavili</string>
+    <string name="daynight_title" source="google_translate">DayNight mod</string>
+    <string name="daynight_summary" source="google_translate">Automatski se prebacite u noćni režim u odgovarajuće vrijeme</string>
+    <string name="interface_gui" source="google_translate">Display</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">Sekundarni prikaz</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">Podešavanja kada su povezani drugi ekrani (HDMI / Chromecast).</string>
+    <string name="video_prefs_category" source="google_translate">Video</string>
+    <string name="video_min_group_length_title" source="google_translate">Grupni video</string>
+    <string name="video_min_group_length_summary" source="google_translate">Videozapisi se grupišu ako su njihova prva slova ista.</string>
+    <string name="video_min_group_length_disable" source="google_translate">Onemogući</string>
+    <string name="video_min_group_length_first" source="google_translate">Samo prvo slovo</string>
+    <string name="video_min_group_length_short" source="google_translate">Kratak broj slova (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Dugačak broj slova (9)</string>
+    <string name="media_fast_seek" source="google_translate">Omogućite opciju brzog traženja</string>
+    <string name="media_seen" source="google_translate">Prikaži prikazani video marker</string>
+    <string name="media_seen_summary" source="google_translate">Označite videozapis koji se vidi kada ga reprodukujete do kraja</string>
+    <string name="force_play_all_summary" source="google_translate">Reproducirajte sve videozapise, počevši od one koju ste kliknuli</string>
+    <string name="force_play_all_title" source="google_translate">Režim za reprodukciju video zapisa</string>
+    <string name="save_audiodelay_summary" source="google_translate">Sačuvajte pojedinačno kašnjenje zvuka za svaki video</string>
+    <string name="save_audiodelay_title" source="google_translate">Sačuvajte kašnjenje zvuka</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Gesta osvetljenja</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Gest za glasnoću</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Kontrolišite jačinu zvuka gestom tokom reprodukcije video zapisa</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Dvaput dodirnite za traženje</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Dvaput dodirnite ivice ekrana da biste tražili 10 sekundi</string>
+    <string name="popup_keepscreen_title" source="google_translate">Zadržite ekran ON u pop-up modu</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Uvek držite ekran uključenim dok se pojavljuje Pop-Up, čak i ako je video pauziran.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Prikaži skrivene datoteke</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Prikaži skrivene datoteke u preglednicima</string>
+    <string name="subtitles_prefs_category" source="google_translate">Titlovi</string>
+    <string name="subtitles_size_title" source="google_translate">Veličina Veličina</string>
+    <string name="subtitles_size_small" source="google_translate">Mala</string>
+    <string name="subtitles_size_normal" source="google_translate">Normalno</string>
+    <string name="subtitles_size_big" source="google_translate">Big</string>
+    <string name="subtitles_size_huge" source="google_translate">Ogroman</string>
+    <string name="subtitles_color_title" source="google_translate">Titlovi Color</string>
+    <string name="subtitles_color_white" source="google_translate">White</string>
+    <string name="subtitles_color_gray" source="google_translate">siva</string>
+    <string name="subtitles_color_pink" source="google_translate">Pink</string>
+    <string name="subtitles_color_blue" source="google_translate">Plavo</string>
+    <string name="subtitles_color_yellow" source="google_translate">Žuta</string>
+    <string name="subtitles_color_green" source="google_translate">Zelena</string>
+    <string name="subtitles_background_title" source="google_translate">Subtitles Background</string>
+    <string name="subtitles_bold_title" source="google_translate">Bold subtitles</string>
+    <string name="subtitles_autoload_title" source="google_translate">Automatski učitaj titlove</string>
+    <string name="audio_prefs_category" source="google_translate">Audio</string>
+    <string name="lockscreen_cover_title" source="google_translate">Poklopac medija na ekranu</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Kada je dostupno, podesite trenutnu medijsku sliku kao pozadinu ekrana</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Animirajte automatsko skrolovanje trenutne playliste</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Animirajte skrolovanje na medijskoj tranziciji</string>
+    <string name="audio_save_repeat_title" source="google_translate">Sačuvaj režim ponavljanja</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Zapamtite način ponavljanja prilikom učitavanja audio lista za reprodukciju</string>
+    <string name="audio_boost_title" source="google_translate">Pojačavanje zvuka</string>
+    <string name="headset_prefs_category" source="google_translate">Headset</string>
+    <string name="enable_headset_detection_summary" source="google_translate">Otkrivanje umetanja i uklanjanja slušalica</string>
+    <string name="enable_headset_actions_title" source="google_translate">Prečice za daljinsko upravljanje</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Dvaput pritisnite na Play da biste prešli na sledeći i dugo pritisnite da biste prešli na prethodnu numeru</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Nastavite na umetanju slušalica</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">U suprotnom pauzu</string>
+    <string name="audio_ducking_title" source="google_translate">Smanjite volumen VLC na obavijesti</string>
+    <string name="audio_ducking_summary" source="google_translate">Pomaže u slušanju zvučnih obaveštenja, uputstava za navigaciju ili razgovora pomoćnika</string>
+    <string name="casting_category" source="google_translate">Casting</string>
+    <string name="casting_passthrough_title" source="google_translate">Audio Passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">Neka vaš TV upravlja audio prikazom</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Kvalitet konverzije</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Izaberite kvalitet konverzije prilikom bacanja na udaljeni ekran</string>
+    <string name="casting_quality_high" source="google_translate">Visoko</string>
+    <string name="casting_quality_medium" source="google_translate">Srednje</string>
+    <string name="casting_quality_low" source="google_translate">Low</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Najniže</string>
+    <string name="cast_performance_warning" source="google_translate">Casting ovog videa zahtijeva konverziju. Ova konverzija može koristiti svu raspoloživu snagu i može brzo isprazniti bateriju.</string>
+    <string name="artists_show_all_title" source="google_translate">Pokaži sve umjetnike</string>
+    <string name="artists_show_all_summary" source="google_translate">Prikažite sve izvođače u listingu umetnika, a ne samo izvođače albuma</string>
+    <string name="extensions_prefs_category" source="google_translate">Extensions</string>
+    <string name="extensions_enable_category" source="google_translate">Izaberite proširenja za omogućavanje</string>
+    <string name="extensions_empty" source="google_translate">Nije otkriveno proširenje</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Aktiviraj</string>
+    <string name="android_auto" source="google_translate">Android auto</string>
+    <string name="controls_prefs_category" source="google_translate">Kontrole</string>
+    <string name="main_prefs_category" source="google_translate">Glavne postavke</string>
+    <string name="save_video_none" source="google_translate">Ne štedite brzinu</string>
+    <string name="save_video_session" source="google_translate">Sačuvajte brzinu tokom sesije</string>
+    <string name="save_video_always" source="google_translate">Spremite brzinu preko sesija</string>
+    <string name="dump_media_db" source="google_translate">Dump medijska baza podataka</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopirajte bazu podataka u korijen interne memorije</string>
+    <string name="clear_media_db_summary" source="google_translate">Pristupite Android VLC info da biste izbrisali podatke</string>
+    <string name="resume_playback_title" source="google_translate">Nastavite reprodukciju nakon poziva</string>
+    <string name="resume_playback_summary" source="google_translate">Ostani u pauzi</string>
+    <string name="network_caching_popup" source="google_translate">Ova vrijednost mora biti između 0 i 6000 ms</string>
+    <string name="browsing" source="google_translate">Pregledavanje</string>
+    <string name="search_list_hint" source="google_translate">Pretražite medije u trenutnoj listi</string>
+    <string name="search_global" source="google_translate">Pretražite u svim medijskim bibliotekama</string>
+    <string name="player_touch_title" source="google_translate">Dodirnite kontrole za Video</string>
+    <string name="player_touch_enable_all" source="google_translate">Omogući dodirne kontrole</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Onemogućite kontrolu svetline</string>
+    <string name="player_touch_disable_all" source="google_translate">Onemogućite sve Touch kontrole</string>
+    <string name="tv_ui_title" source="google_translate">Android TV interfejs</string>
+    <string name="tv_ui_summary" source="google_translate">Promijenite UI na temu prilagođenu televiziji</string>
+    <string name="medialibrary" source="google_translate">Medijska biblioteka</string>
+    <string name="medialibrary_directories" source="google_translate">Folderi biblioteke medija</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Dozvolite Ace Streamu da podesi ton zvona</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace Stream treba da odobrite ovu dozvolu da postavite ovu pesmu kao zvuk zvona.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Dozvolite Ace Streamu da promeni režim osvetljenja</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace Stream treba da dozvolite ovu dozvolu za promenu režima osvetljenja.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Dozvolite Ace Stream playeru da se pojavi preko drugih aplikacija</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream treba da odobrite ovu dozvolu za prikazivanje vašeg video zapisa u drugim prozorima.</string>
+    <string name="exit_app_msg" source="google_translate">Jeste li sigurni da želite zatvoriti VLC?</string>
+    <string name="fastscroller_track" source="google_translate">FastScroller track</string>
+    <string name="fastscroller_handle" source="google_translate">FastScroller handle</string>
+    <string name="plugins" source="google_translate">Dodaci</string>
+    <string name="download_on_device" source="google_translate">Skinuti</string>
+    <string name="extension_empty" source="google_translate">Nema stavki za prikazivanje, idite na postavke proširenja da biste ih dobili.</string>
+    <string name="opengl_title" source="google_translate">OpenGL ES2 upotreba</string>
+    <string name="opengl_summary" source="google_translate">Po defaultu, OpenGL ES2 se koristi za dekodiranje softvera i dekodiranje hardvera kada je potrebno (360 ° video).</string>
+    <string name="opengl_automatic" source="google_translate">Automatski</string>
+    <string name="opengl_on" source="google_translate">Force On</string>
+    <string name="opengl_off" source="google_translate">Force Off</string>
+    <string name="network_favorites" source="google_translate">Favoriti mreže</string>
+    <string name="network_shared_folders" source="google_translate">Deljene fascikle</string>
+    <string name="encryption_warning" source="google_translate">Upozorenje, šifriranje nije dostupno za ovu verziju Androida, lozinka će biti pohranjena u privatnom prostoru, ali ne i kodirana</string>
+    <string name="store_password" source="google_translate">Zapamti lozinku</string>
+    <string name="add_to_playlist" source="google_translate">Dodaj na listu</string>
+    <string name="popup_playback_title" source="google_translate">Reprodukujte video u iskačućem prozoru</string>
+    <string name="popup_playback" source="google_translate">Reprodukcija u pop-up prozoru</string>
+    <string name="popup_expand" source="google_translate">Proširi video</string>
+    <string name="snack_subloader_sub_found" source="google_translate">Preuzeti titlovi</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">Titlovi nisu pronađeni</string>
+    <string name="dialog_subloader_success" source="google_translate">Titlovi pronađeni za:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Titlovi nisu pronađeni za:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">Preuzimanje je završeno</string>
+    <string name="download_subtitles" source="google_translate">Preuzmite titlove</string>
+    <string name="preferences_languages_download" source="google_translate">Subtitles languages</string>
+    <string name="list_languages_download_summary" source="google_translate">Jezici koje treba preuzeti prilikom preuzimanja titlova</string>
+    <string name="list_languages_download_title" source="google_translate">Subtitles download languages</string>
+    <string name="service_unavailable" source="google_translate">Usluga nedostupna</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Nije uspjelo postavljanje jezika titla, pokušajte ga postaviti u postavkama aplikacije</string>
+    <string name="downloading_subtitles" source="google_translate">Preuzimanje titlova</string>
+    <string name="browse_folder" source="google_translate">Browse folder</string>
+    <string name="listen" source="google_translate">Slušaj</string>
+    <string name="subtitles_download_title" source="google_translate">Subs download</string>
+    <string name="connecting" source="google_translate">Povezivanje ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">sačuvajte kašnjenje za Bluetooth uređaj</string>
+    <string name="episodes" source="google_translate">epizode</string>
+    <string name="movies" source="google_translate">filmove</string>
+    <string name="videos" source="google_translate">videos</string>
+    <string name="streams" source="google_translate">potoci</string>
+    <string name="clear_playback_history" source="google_translate">Očisti povijest reprodukcije</string>
+    <string name="various_artists" source="google_translate">razliciti umjetnici</string>
+    <string name="ml_scanning" source="google_translate">Skeniranje za medijske datoteke</string>
+    <string name="ml_parse_media" source="google_translate">Medium Parsing</string>
+    <string name="ml_discovering" source="google_translate">Discovering</string>
+    <string name="resume" source="google_translate">Nastavi</string>
+    <string name="length" source="google_translate">Length</string>
+    <string name="tv_settings_hint" source="google_translate">Dugo pritisnite dugme OK da biste proverili / odznačili direktorijume</string>
+    <string name="ml_external_storage_title" source="google_translate">Otkrivena nova vanjska pohrana</string>
+    <string name="ml_external_storage_accept" source="google_translate">Da</string>
+    <string name="ml_external_storage_decline" source="google_translate">Ne</string>
+    <string name="last_added_media" source="google_translate">last added</string>
+    <string name="no" source="google_translate">Ne</string>
+    <string name="loading_medialibrary" source="google_translate">Loading Medialibrary…</string>
+    <string name="yes" source="google_translate">Da</string>
+    <string name="custom_set_save_title" source="google_translate">Nespremljene promjene</string>
+    <string name="custom_set_save_warning" source="google_translate">Upozorenje: nespremljene promjene</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Spremi skup ekvilajzera kao…</string>
+    <string name="new_custom_set_save_message" source="google_translate">Spremite novi skup ekvilajzera kao…</string>
+    <string name="save" source="google_translate">Spremi</string>
+    <string name="do_not_save" source="google_translate">Ne štedite</string>
+    <string name="custom_set_wrong_input" source="google_translate">Nevažeće ime.</string>
+    <string name="custom_set_already_exist" source="google_translate">Set ekvilajzera sa ovim imenom već postoji</string>
+    <string name="custom_set_restored" source="google_translate">Korisnički podešeni ekvilajzer je vraćen.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Izbrisan je nespremljeni skup ekvilajzera.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Novo</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary trenutno skenira vaše uređaje</string>
+    <string name="recommendations" source="google_translate">Preporuke</string>
+    <string name="recommendations_desc" source="google_translate">Preporuke kartice na lanseru</string>
+    <string name="browser_quick_access" source="google_translate">Quick Access</string>
+    <string name="browser_storages" source="google_translate">Skladišta</string>
+    <string name="renderer_list_title" source="google_translate">Displays</string>
+    <string name="feedback_player_crashed" source="google_translate">Žao mi je, VLC se upravo srušio. Molimo pokušajte ponovo.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Morate odobriti VLC pristupu pisanja na SD karticu</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC ne može izbrisati ovu datoteku bez dozvole pristupa za pisanje Molimo vas da odete na vašu SD karticu i kliknete na "Select".</string>
+    <string name="dialog_sd_wizard" source="google_translate">Pokaži mi</string>
+    <string name="renderers_disconnect" source="google_translate">Disconnect</string>
+    <string name="audio_digital_failed" source="google_translate">Nije bilo moguće promijeniti stanje digitalnog audio izlaza</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Omogućen je digitalni audio izlaz</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio Digitalni izlaz je onemogućen</string>
+    <string name="live_streams" source="google_translate">Live streams</string>
+    <string name="all_live_streams" source="google_translate">Svi prenosi uživo</string>
+    <string name="video_torrents" source="google_translate">Video torrents</string>
+    <string name="audio_torrents" source="google_translate">Audio torrents</string>
+    <string name="all_torrents" source="google_translate">Svi torrenti</string>
+    <string name="main" source="google_translate">Main</string>
+    <string name="media_player" source="google_translate">Media player</string>
+    <string name="acestream_server" source="google_translate">Ace Stream server (motor)</string>
+    <string name="media_player_settings" source="google_translate">Podešavanja medija plejera</string>
+    <string name="acestream_server_settings" source="google_translate">Postavke Ace Stream servera (motora)</string>
+    <string name="sign_out" source="google_translate">Odjaviti se</string>
+    <string name="sign_in" source="google_translate">Prijavite se</string>
+    <string name="sign_in_acestream" source="google_translate">Prijavite se pomoću Ace Stream-a</string>
+    <string name="sign_in_google" source="google_translate">Prijavite se sa Google-om</string>
+    <string name="video_files" source="google_translate">Video datoteke</string>
+    <string name="audio_files" source="google_translate">Audio files</string>
+    <string name="retry" source="google_translate">Ponovi</string>
+    <string name="failed_to_load_web_page" source="google_translate">Nije uspelo učitavanje web stranice</string>
 </resources>

@@ -13,6 +13,29 @@
 #define LOG_TAG "VLC/JNI/Utils"
 #include "log.h"
 
+medialibrary::IMedia::Type
+mediaWrapperTypeToMediaType(jint mediaWrapperType)
+{
+    medialibrary::IMedia::Type type;
+
+    switch (mediaWrapperType) {
+        case 1: //MediaWrapper.TYPE_AUDIO
+            type = medialibrary::IMedia::Type::Audio;
+            break;
+        case 0: //MediaWrapper.TYPE_VIDEO
+            type = medialibrary::IMedia::Type::Video;
+            break;
+        case 7: //MediaWrapper.TYPE_TRANSPORT_FILE
+            type = medialibrary::IMedia::Type::TransportFile;
+            break;
+        default:
+            type = medialibrary::IMedia::Type::Unknown;
+            break;
+    }
+
+    return type;
+}
+
 jobject
 mediaToMediaWrapper(JNIEnv* env, fields *fields, medialibrary::MediaPtr const& mediaPtr)
 {
@@ -30,12 +53,15 @@ mediaToMediaWrapper(JNIEnv* env, fields *fields, medialibrary::MediaPtr const& m
     case medialibrary::IMedia::Type::Video:
         type = 0; //MediaWrapper.TYPE_VIDEO
         break;
+    case medialibrary::IMedia::Type::TransportFile:
+        type = 7; //MediaWrapper.TYPE_TRANSPORT_FILE
+        break;
     default:
         type = -1; //MediaWrapper.TYPE_ALL
         break;
     }
     medialibrary::AlbumTrackPtr p_albumTrack = mediaPtr->albumTrack();
-    jstring artist = NULL, genre = NULL, album = NULL, albumArtist = NULL, mrl = NULL, title = NULL, thumbnail = NULL;
+    jstring artist = NULL, genre = NULL, album = NULL, albumArtist = NULL, mrl = NULL, title = NULL, thumbnail = NULL, p2pInfohash = NULL;
     jint trackNumber = 0, discNumber = 0;
     if (p_albumTrack)
     {
@@ -62,6 +88,7 @@ mediaToMediaWrapper(JNIEnv* env, fields *fields, medialibrary::MediaPtr const& m
     title = mediaPtr->title().empty() ? NULL : env->NewStringUTF(mediaPtr->title().c_str());
     mrl = env->NewStringUTF(files.at(0)->mrl().c_str());
     thumbnail = mediaPtr->thumbnail().empty() ? NULL : env->NewStringUTF(mediaPtr->thumbnail().c_str());
+    p2pInfohash = mediaPtr->p2pInfohash().empty() ? NULL : env->NewStringUTF(mediaPtr->p2pInfohash().c_str());
     std::vector<medialibrary::VideoTrackPtr> videoTracks = mediaPtr->videoTracks();
     bool hasVideoTracks = !videoTracks.empty();
     unsigned int width = hasVideoTracks ? videoTracks.at(0)->width() : 0;
@@ -78,7 +105,9 @@ mediaToMediaWrapper(JNIEnv* env, fields *fields, medialibrary::MediaPtr const& m
                           (jlong) mediaPtr->id(), mrl,(jlong) progress, (jlong) duration, type,
                           title, artist, genre, album,
                           albumArtist, width, height, thumbnail,
-                          audioTrack, spuTrack, trackNumber, discNumber, (jlong) files.at(0)->lastModificationDate(), seen);
+                          audioTrack, spuTrack, trackNumber, discNumber, (jlong) files.at(0)->lastModificationDate(), seen,
+                          mediaPtr->isParsed(), mediaPtr->isP2P(), mediaPtr->parentMediaId(), p2pInfohash, mediaPtr->p2pFileIndex(),
+                          mediaPtr->isP2PLive() );
     if (artist != NULL)
         env->DeleteLocalRef(artist);
     if (genre != NULL)
@@ -89,6 +118,8 @@ mediaToMediaWrapper(JNIEnv* env, fields *fields, medialibrary::MediaPtr const& m
         env->DeleteLocalRef(albumArtist);
     if (title != NULL)
         env->DeleteLocalRef(title);
+    if (p2pInfohash != NULL)
+        env->DeleteLocalRef(p2pInfohash);
     if (mrl != NULL)
         env->DeleteLocalRef(mrl);
     if (thumbnail != NULL)

@@ -34,7 +34,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.vlc.BuildConfig;
 import org.videolan.vlc.R;
 import org.videolan.vlc.StartActivity;
@@ -79,7 +78,7 @@ abstract public class VLCAppWidgetProvider extends AppWidgetProvider {
         }
 
         final RemoteViews views = new RemoteViews(BuildConfig.APPLICATION_ID, getLayout());
-        final boolean partial = !ACTION_WIDGET_INIT.equals(action) && AndroidUtil.isHoneycombOrLater;
+        final boolean partial = !ACTION_WIDGET_INIT.equals(action);
 
         if (!partial) {
             /* commands */
@@ -100,7 +99,7 @@ abstract public class VLCAppWidgetProvider extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.stop, piStop);
             views.setOnClickPendingIntent(R.id.forward, piForward);
             views.setOnClickPendingIntent(R.id.cover, piVlc);
-            if (AndroidUtil.isJellyBeanMR1OrLater && TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL) {
+            if (TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL) {
                 final boolean black = this instanceof VLCAppWidgetProviderBlack;
                 views.setImageViewResource(R.id.forward, black ? R.drawable.ic_widget_previous_w : R.drawable.ic_widget_previous);
                 views.setImageViewResource(R.id.backward, black ? R.drawable.ic_widget_next_w : R.drawable.ic_widget_next);

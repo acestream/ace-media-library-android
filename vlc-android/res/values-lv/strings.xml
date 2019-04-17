@@ -13,11 +13,6 @@
     <string name="sortby_date_desc">Datuma(dilstoši)</string>
     <string name="searchable_hint">Meklēt...</string>
     <string name="history">Vēsture</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="zero">%d rezultāti atrasti</item>
-        <item quantity="one">%d rezultāts atrasts</item>
-        <item quantity="other">%d rezultāti atrasti</item>
-    </plurals>
     <string name="play">Atskaņot</string>
     <string name="play_from_start">Atskaņot no sākuma</string>
     <string name="play_as_audio">Atskaņot kā audio</string>
@@ -57,16 +52,6 @@
         <item quantity="zero">%d</item>
         <item quantity="one">1 apakšmape</item>
         <item quantity="other">%d apakšmapes</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="zero">%d multivides faili</item>
-        <item quantity="one">1 multivides fails</item>
-        <item quantity="other">%d multivides faili</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="zero">%d video</item>
-        <item quantity="one">1 videos</item>
-        <item quantity="other">%d video</item>
     </plurals>
     <string name="internal_memory">iekšējā atmiņa</string>
     <string name="parent_folder">Līdz mātes mapei</string>
@@ -112,11 +97,6 @@
     <string name="sound_on">Skaņa ieslēgta</string>
     <string name="sound_off">Skaņa izslēgta</string>
     <string name="brightness">Spilgtums</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="zero">%1$d kanālu\n</item>
-        <item quantity="one">1 kanāls\n</item>
-        <item quantity="other">%1$d kanāli\n</item>
-    </plurals>
     <string name="track_resolution_info">Izšķirtspēja: %1$dx%2$d\n</string>
     <string name="tools">Darbarīki</string>
     <string name="playback_speed">Atskaņošanas ātrums</string>
@@ -169,7 +149,6 @@
     <string name="subtitle_text_encoding">Apakšvirsraksta teksta kodēšana</string>
     <string name="interface_prefs_screen">Interfeiss</string>
     <string name="interface_other_category">Interfeiss - Cits</string>
-    <string name="enable_brightness_gesture">Aktivizēt spilgtuma žestu</string>
     <string name="enable_brightness_gesture_summary">Kontrolējiet spilgtumu ar žestu video atskaņošanas laikā</string>
     <string name="enable_headset_detection">Atklāt austiņas</string>
     <string name="enable_headset_detection_summary">Apturēt uz austiņu noņemšanu; atsākt uz austiņu ievietošanu</string>
@@ -217,4 +196,339 @@
     <string name="restart_vlc">Pārstartēt VLC</string>
     <!--Accessibility-->
     <!--Widget-->
+    <string name="torrent_files">Torrent failus</string>
+    <string name="select_language">Izvēlēties valodu</string>
+    <string name="sortby_artist_name" source="google_translate">Mākslinieka vārds</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Mākslinieka vārds (desc)</string>
+    <string name="sortby_album_name" source="google_translate">Albuma nosaukums</string>
+    <string name="sortby_album_name_desc" source="google_translate">Albuma nosaukums (desc)</string>
+    <string name="sortby_number" source="google_translate">Nb ieraksti</string>
+    <string name="sortby_number_desc" source="google_translate">Nb dziesmas (desc)</string>
+    <string name="playback" source="google_translate">Atskaņošana</string>
+    <string name="playback_controls" source="google_translate">Atskaņošanas vadība</string>
+    <string name="medialibrary_scan" source="google_translate">Multivides bibliotēkas skenēšana</string>
+    <string name="Medialibrary_progress" source="google_translate">Multivides bibliotēkas skenēšanas progresa atjauninājumi</string>
+    <string name="video_app_switch_title" source="google_translate">Fona / PiP režīms</string>
+    <string name="video_app_switch_summary" source="google_translate">Izvēloties VLC uzvedību, kad pārslēdzaties uz citu programmu no video atskaņošanas</string>
+    <string name="play_pip_title" source="google_translate">Atskaņojiet videoklipus režīmā Picture-in-picture</string>
+    <string name="insert_next" source="google_translate">Ievietojiet nākamo</string>
+    <string name="unknown_number" source="google_translate">Nezināms dziesmu skaits</string>
+    <string name="tracks" source="google_translate">Dziesmas</string>
+    <string name="nomedia" source="google_translate">Neviens multivides fails nav atrasts, lūdzu, pārsūtiet dažus failus savā ierīcē vai pielāgojiet savas preferences.</string>
+    <string name="noplaylist" source="google_translate">Nav atrasts neviens atskaņošanas saraksts.</string>
+    <string name="shuffle_title" source="google_translate">Jaukšanas režīms</string>
+    <string name="shuffle" source="google_translate">Jaukta izslēgšana</string>
+    <string name="shuffle_on" source="google_translate">Jaukta ieslēgšana</string>
+    <string name="repeat_title" source="google_translate">Atkārtošanas režīms</string>
+    <string name="repeat" source="google_translate">Atkārtojiet nevienu</string>
+    <string name="repeat_single" source="google_translate">Atkārtojiet vienu</string>
+    <string name="repeat_all" source="google_translate">Atkārtojiet visus</string>
+    <string name="firstsong" source="google_translate">Pirmā atskaņošanas saraksta dziesma</string>
+    <string name="lastsong" source="google_translate">Pēdējā atskaņošanas saraksta dziesma</string>
+    <string name="surface_fit_screen" source="google_translate">Piemērot ekrānu</string>
+    <string name="navmenu" source="google_translate">navigācijas izvēlne</string>
+    <string name="advanced" source="google_translate">pielāgota opcija</string>
+    <string name="sleep_in" source="google_translate">Aizgulēties</string>
+    <string name="server_add_title" source="google_translate">Pievienojiet izlasei jaunu serveri</string>
+    <string name="server_domain_hint" source="google_translate">Servera adrese (domēna vārds vai IP)</string>
+    <string name="server_share_hint" source="google_translate">Tīkla koplietošanas nosaukums (vai IP adrese)</string>
+    <string name="server_folder_hint" source="google_translate">Mapju ceļš (pēc izvēles)</string>
+    <string name="server_username_hint" source="google_translate">Lietotājvārds</string>
+    <string name="server_servername_hint" source="google_translate">Servera nosaukums, par ērtumu</string>
+    <string name="server_port" source="google_translate">Port:</string>
+    <string name="login" source="google_translate">Pieslēgties</string>
+    <string name="password" source="google_translate">Parole</string>
+    <string name="search_results" source="google_translate">Meklēšanas rezultāti</string>
+    <string name="search_no_result" source="google_translate">Nav atrasts neviens nesējs</string>
+    <string name="favorites_add" source="google_translate">Pievienot pie favorītiem</string>
+    <string name="favorites_remove" source="google_translate">Noņemt no izlases</string>
+    <string name="favorites_edit" source="google_translate">Rediģēt</string>
+    <string name="favorite_added" source="google_translate">Saglabāts izlasē</string>
+    <string name="favorite_removed" source="google_translate">Noņemts no izlases</string>
+    <string name="error_message_is" source="google_translate">Kļūdas ziņojums ir (lūdzu, norādiet to atkļūdošanas laikā): n</string>
+    <string name="encountered_error_message" source="google_translate">VLC radās kļūda ar šo mediju. \ T</string>
+    <string name="playback_history_title" source="google_translate">Atskaņošanas vēsture</string>
+    <string name="playback_history_summary" source="google_translate">Saglabājiet visus vēstures sadaļā atskaņotos medijus</string>
+    <string name="playback_speed_title" source="google_translate">Saglabāt atskaņošanas ātrumu</string>
+    <string name="playback_speed_summary" source="google_translate">Atcerieties iestatīto atskaņošanas ātrumu</string>
+    <string name="video_player_tips" source="google_translate">Video atskaņotāja padomi:</string>
+    <string name="seek" source="google_translate">Meklējiet</string>
+    <string name="audio_sub" source="google_translate">Audio ieraksti un subtitri</string>
+    <string name="resize" source="google_translate">Mainīt izmērus</string>
+    <string name="lock" source="google_translate">Bloķēt</string>
+    <string name="ok_got_it" source="google_translate">Tas ir, noraidiet</string>
+    <string name="playlist_tips" source="google_translate">Atskaņošanas saraksta padomi</string>
+    <string name="rearrange_order" source="google_translate">Pārkārtot pasūtījumu</string>
+    <string name="hold_to_seek" source="google_translate">Turiet, lai meklētu</string>
+    <string name="audio_player_tips" source="google_translate">Audio atskaņotāja padomi</string>
+    <string name="previous_next_song" source="google_translate">Iepriekšējā / nākamā dziesma</string>
+    <string name="show_playlist" source="google_translate">Rādīt atskaņošanas sarakstu</string>
+    <string name="hardware_acceleration_summary" source="google_translate">Atspējots: labāka stabilitāte, dekodēšana: var uzlabot veiktspēju.</string>
+    <string name="hardware_acceleration_decoding" source="google_translate">Dekodēšanas paātrinājums</string>
+    <string name="hardware_acceleration_full" source="google_translate">Pilns paātrinājums</string>
+    <string name="dev_hardware_decoder" source="google_translate">Uzlabots aparatūras dekodētājs</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">Piespiediet aparatūras dekodētāju tikai pieredzējušiem lietotājiem</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">iomx</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-dr</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">mediacodec</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">mediacodec-dr</string>
+    <string name="enable_black_theme_summary" source="google_translate">Mainiet interfeisa krāsas, lai nodrošinātu labāku komfortu zema apgaismojuma apstākļos.</string>
+    <string name="daynight_title" source="google_translate">Dienas nakts režīms</string>
+    <string name="daynight_summary" source="google_translate">Automātiski pārslēdzieties uz nakts režīmu atbilstošā laikā</string>
+    <string name="extra_prefs_category" source="google_translate">Papildu iestatījumi</string>
+    <string name="interface_gui" source="google_translate">Displejs</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">Sekundārais displejs</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">Iestatījumi, kad ir pievienoti sekundārie displeji (HDMI / Chromecast).</string>
+    <string name="enable_clone_mode" source="google_translate">Ieteicams klons</string>
+    <string name="enable_clone_mode_summary" source="google_translate">Klonējiet ierīces ekrānu bez tālvadības pults.</string>
+    <string name="video_prefs_category" source="google_translate">Video</string>
+    <string name="video_min_group_length_title" source="google_translate">Grupējiet videoklipus</string>
+    <string name="video_min_group_length_summary" source="google_translate">Video tiek sagrupēti, ja to pirmie burti ir vienādi.</string>
+    <string name="video_min_group_length_disable" source="google_translate">Atspējot</string>
+    <string name="video_min_group_length_first" source="google_translate">Tikai pirmais burts</string>
+    <string name="video_min_group_length_short" source="google_translate">Īss burtu skaits (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Garš burtu skaits (9)</string>
+    <string name="media_fast_seek" source="google_translate">Iespējot ātrās meklēšanas iespēju</string>
+    <string name="media_seen" source="google_translate">Rādīt redzamo video marķieri</string>
+    <string name="media_seen_summary" source="google_translate">Atzīmējiet videoklipu, kas redzams, kad to atskaņojat līdz beigām</string>
+    <string name="force_list_portrait" source="google_translate">Nav režģa portreta režīmā</string>
+    <string name="force_list_portrait_summary" source="google_translate">Rādīt portretu režīmā video attēlus saraksta vietā</string>
+    <string name="force_play_all_summary" source="google_translate">Atskaņojiet visus videoklipus, sākot ar to, kuru noklikšķinājāt</string>
+    <string name="force_play_all_title" source="google_translate">Video atskaņošanas saraksta režīms</string>
+    <string name="save_brightness_summary" source="google_translate">Atcerieties spilgtuma līmeni video atskaņotājā</string>
+    <string name="save_brightness_title" source="google_translate">Saglabājiet video spilgtuma līmeni</string>
+    <string name="save_audiodelay_summary" source="google_translate">Saglabājiet atsevišķu audio aizkavi katram video</string>
+    <string name="save_audiodelay_title" source="google_translate">Saglabājiet audio aizkavi</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Spilgtuma žests</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Apjoma žests</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Video atskaņošanas laikā kontrolējiet skaļumu, izmantojot žestu</string>
+    <string name="enable_seek_buttons" source="google_translate">Iespējot meklēšanas pogas</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">Rādīt video attīšanas un nospiešanas pogas video saskarnē</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Divreiz pieskarieties, lai meklētu</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">Divreiz pieskarieties ekrāna malām, lai meklētu 10 sekundes</string>
+    <string name="popup_keepscreen_title" source="google_translate">Saglabājiet ekrānu ieslēgtā režīmā</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Vienmēr turiet ekrānu ON, kamēr parādās uznirstošais logs, pat ja videoklips ir apturēts.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Rādīt slēptos failus</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Rādīt slēptos failus pārlūkprogrammās</string>
+    <string name="subtitles_prefs_category" source="google_translate">Subtitri</string>
+    <string name="subtitles_size_title" source="google_translate">Subtitru lielums</string>
+    <string name="subtitles_size_small" source="google_translate">Mazs</string>
+    <string name="subtitles_size_normal" source="google_translate">Normāls</string>
+    <string name="subtitles_size_big" source="google_translate">Liels</string>
+    <string name="subtitles_size_huge" source="google_translate">Milzīgs</string>
+    <string name="subtitles_color_title" source="google_translate">Subtitru krāsa</string>
+    <string name="subtitles_color_white" source="google_translate">Balta</string>
+    <string name="subtitles_color_gray" source="google_translate">Pelēka</string>
+    <string name="subtitles_color_pink" source="google_translate">Rozā</string>
+    <string name="subtitles_color_blue" source="google_translate">Zils</string>
+    <string name="subtitles_color_yellow" source="google_translate">Dzeltens</string>
+    <string name="subtitles_color_green" source="google_translate">Zaļš</string>
+    <string name="subtitles_background_title" source="google_translate">Subtitru fons</string>
+    <string name="subtitles_bold_title" source="google_translate">Bold subtitri</string>
+    <string name="subtitles_autoload_title" source="google_translate">Automātiska subtitru ielāde</string>
+    <string name="audio_prefs_category" source="google_translate">Audio</string>
+    <string name="lockscreen_cover_title" source="google_translate">Plaukstdatora vāks Lockscreen ekrānā</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Kad tas ir pieejams, iestatiet pašreizējo multivides vāka attēlu kā bloķēšanas ekrāna fonu</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Animēt pašreizējo atskaņošanas saraksta automātisko ritināšanu</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Animēt ritināšanu uz mediju pāreju</string>
+    <string name="audio_title_alignment" source="google_translate">Audio nosaukuma izlīdzināšana</string>
+    <string name="audio_title_alignment_marquee" source="google_translate">Telts</string>
+    <string name="audio_save_repeat_title" source="google_translate">Saglabāt atkārtotu režīmu</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Atcerieties atkārtošanas režīmu, ielādējot audio atskaņošanas sarakstus</string>
+    <string name="audio_boost_title" source="google_translate">Audio-palielināt</string>
+    <string name="headset_prefs_category" source="google_translate">Austiņas</string>
+    <string name="enable_headset_actions_title" source="google_translate">Tālvadības pults īsceļi</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Divreiz nospiediet pogu „Atskaņot”, lai pārietu uz nākamo un</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Turpināt austiņu ievietošanu</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">Pauze citādi</string>
+    <string name="audio_ducking_title" source="google_translate">Zemāks VLC skaļums paziņojumiem</string>
+    <string name="audio_ducking_summary" source="google_translate">Palīdz dzirdēt audio paziņojumus, navigācijas instrukcijas vai runātāja palīgu</string>
+    <string name="casting_category" source="google_translate">Liešana</string>
+    <string name="casting_passthrough_title" source="google_translate">Audio pārraide</string>
+    <string name="casting_passthrough_summary" source="google_translate">Ļaujiet televizoram pārvaldīt audio atveidojumu</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Konversijas kvalitāte</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Atlasot reklāmguvumu kvalitāti, atverot tālvadības ekrānā</string>
+    <string name="casting_quality_high" source="google_translate">Augsts</string>
+    <string name="casting_quality_medium" source="google_translate">Vidējs</string>
+    <string name="casting_quality_low" source="google_translate">Zems</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Zemākais</string>
+    <string name="cast_performance_warning" source="google_translate">Lai skatītu šo videoklipu, ir nepieciešama konvertēšana. Šī konvertēšana var izmantot visu pieejamo jaudu un ātri iztukšot akumulatoru.</string>
+    <string name="artists_show_all_title" source="google_translate">Rādīt visus māksliniekus</string>
+    <string name="artists_show_all_summary" source="google_translate">Rādīt visus mākslinieku saraksta māksliniekus, ne tikai albuma izpildītājus</string>
+    <string name="extensions_prefs_category" source="google_translate">Paplašinājumi</string>
+    <string name="extensions_enable_category" source="google_translate">Izvēlēties paplašinājumus, lai iespējotu</string>
+    <string name="extensions_empty" source="google_translate">Nav konstatēts paplašinājums</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Aktivizēt</string>
+    <string name="android_auto" source="google_translate">Android automašīna</string>
+    <string name="controls_prefs_category" source="google_translate">Kontrole</string>
+    <string name="chroma_format_summary" source="google_translate">RGB 32-bit: noklusējuma hroma nRGB 16-bit: labāka veiktspēja, bet zemāka kvalitāte YUV: labākā veiktspēja, bet nedarbojas visās ierīcēs. Tikai Android 2.3 un jaunākas versijas.</string>
+    <string name="main_prefs_category" source="google_translate">Galvenie iestatījumi</string>
+    <string name="save_video_none" source="google_translate">Neuzlabojiet ātrumu</string>
+    <string name="save_video_session" source="google_translate">Saglabājiet ātrumu sesijas laikā</string>
+    <string name="save_video_always" source="google_translate">Saglabājiet ātrumu sesijās</string>
+    <string name="auto_rescan" source="google_translate">Automātiska atkārtota pārbaude</string>
+    <string name="auto_rescan_summary" source="google_translate">Automātiska skenēšanas ierīce jauniem vai izdzēstiem multivides materiāliem lietojumprogrammas startēšanas laikā</string>
+    <string name="dump_media_db" source="google_translate">Dempinga datu bāze</string>
+    <string name="dump_media_db_summary" source="google_translate">Kopējiet datubāzi uz iekšējo atmiņas sakni</string>
+    <string name="clear_media_db_summary" source="google_translate">Piekļūstiet Android VLC informācijai, lai notīrītu datus</string>
+    <string name="set_locale_popup" source="google_translate">Iziet un restartējiet VLC, lai izmaiņas stātos spēkā.</string>
+    <string name="resume_playback_title" source="google_translate">Turpiniet atskaņošanu pēc sarunas</string>
+    <string name="resume_playback_summary" source="google_translate">Palieciet pauze citādi</string>
+    <string name="network_caching_popup" source="google_translate">Šai vērtībai jābūt starp 0 un 6000 ms</string>
+    <string name="log_service_title" source="google_translate">VLC reģistrē ierakstus</string>
+    <string name="log_service_text" source="google_translate">Atveriet žurnāla konsoli</string>
+    <string name="serious_crash" source="google_translate">Diemžēl radās nopietna kļūda, un VLC bija jāslēdz.</string>
+    <string name="help_us_send_log" source="google_translate">Palīdziet mums uzlabot VLC, nosūtot šādu avāriju žurnālu:</string>
+    <string name="send_log" source="google_translate">Sūtīt žurnālu</string>
+    <string name="sending_log" source="google_translate">Žurnāla nosūtīšana ...</string>
+    <string name="drawer_open" source="google_translate">Atveriet navigācijas atvilktni</string>
+    <string name="drawer_close" source="google_translate">Aizveriet navigācijas atvilktni</string>
+    <string name="network_browsing" source="google_translate">Vietējais tīkls</string>
+    <string name="browsing" source="google_translate">Pārlūkošana</string>
+    <string name="file_size" source="google_translate">Faila lielums:</string>
+    <string name="audio_delay" source="google_translate">Audio aizkave</string>
+    <string name="spu_delay" source="google_translate">Subtitru aizkave</string>
+    <string name="sleep_time_not_set" source="google_translate">neviens nav iestatīts</string>
+    <string name="network_shares_discovery" source="google_translate">Meklējat tīkla akcijas…</string>
+    <string name="network_empty" source="google_translate">Šis katalogs ir tukšs.</string>
+    <string name="network_connection_needed" source="google_translate">Nav savienojuma ar vietējo tīklu.</string>
+    <string name="search_hint" source="google_translate">Meklēt plašsaziņas līdzekļus</string>
+    <string name="search_list_hint" source="google_translate">Meklējiet mediju pašreizējā sarakstā</string>
+    <string name="search_global" source="google_translate">Meklēt visās mediju bibliotēkās</string>
+    <string name="directory_show_medialib" source="google_translate">Rādīt MediaLib</string>
+    <string name="directory_hide_medialib" source="google_translate">Paslēpt no MediaLib</string>
+    <string name="playlist_save" source="google_translate">Saglabāt atskaņošanas sarakstu</string>
+    <string name="playlist_name_hint" source="google_translate">atskaņošanas saraksta nosaukums</string>
+    <string name="go_to_chapter" source="google_translate">Doties uz nodaļu…</string>
+    <string name="chapter" source="google_translate">Nodaļa</string>
+    <string name="resume_from_position" source="google_translate">Turpināt no pēdējās pozīcijas</string>
+    <string name="confirm_resume" source="google_translate">Vai atsākt pēdējo pozīciju?</string>
+    <string name="confirm_resume_title" source="google_translate">Uzdot apstiprinājumu, lai atsāktu darbu</string>
+    <string name="confirm_resume_summary" source="google_translate">ja tas ir aktivizēts, jums tiks prasīts apstiprināt, kad videoklipu var atsākt no pēdējās pozīcijas</string>
+    <string name="directory_empty" source="google_translate">Katalogs ir tukšs</string>
+    <string name="player_touch_title" source="google_translate">Pieskarieties video kontrolei</string>
+    <string name="player_touch_enable_all" source="google_translate">Iespējot skārienekontroles</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Atspējot spilgtuma kontroli</string>
+    <string name="player_touch_disable_all" source="google_translate">Atspējot visas skārienjutīgas vadības ierīces</string>
+    <string name="tv_ui_title" source="google_translate">Android TV saskarne</string>
+    <string name="tv_ui_summary" source="google_translate">Mainīt lietotāja interfeisu uz TV pielāgotu tēmu</string>
+    <string name="medialibrary" source="google_translate">Multivides bibliotēka</string>
+    <string name="medialibrary_directories" source="google_translate">Multivides bibliotēkas mapes</string>
+    <string name="more_actions" source="google_translate">Vairāk darbību</string>
+    <string name="move" source="google_translate">Kustēties</string>
+    <string name="back_quit_lock" source="google_translate">Nospiediet Atpakaļ, lai izietu no video</string>
+    <string name="playlist_deleted" source="google_translate">Dzēsts atskaņošanas saraksts</string>
+    <string name="file_deleted" source="google_translate">Fails izdzēsts</string>
+    <string name="no_subs_found" source="google_translate">Šajā direktorijā nav subtitru</string>
+    <string name="music_now_playing" source="google_translate">Tagad spēlē</string>
+    <string name="widget_name_w" source="google_translate">VLC White Widget</string>
+    <string name="widget_name_b" source="google_translate">VLC Dark Widget</string>
+    <string name="allow_storage_access_title" source="google_translate">Atļaut Ace Stream piekļūt video un audio failiem</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace Stream jums ir jāpiešķir šī atļauja, lai piekļūtu multivides failiem šajā ierīcē.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Atļaut Ace Stream iestatīt zvana signālu</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace Stream jums ir jāpiešķir šī atļauja, lai iestatītu šo dziesmu kā zvana signālu.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Ļauj Ace Stream mainīt spilgtuma režīmu</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace Stream jums ir jāpiešķir šī atļauja, lai mainītu spilgtuma režīmu.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Atļaut Ace Stream atskaņotāja uznirstošo pār citām lietotnēm</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream jums ir jāpiešķir šī atļauja, lai parādītu jūsu videoklipu uznirstošajā logā pār citām lietojumprogrammām.</string>
+    <string name="permission_ask_again" source="google_translate">Dot atļauju</string>
+    <string name="exit_app" source="google_translate">Aizveriet VLC</string>
+    <string name="exit_app_msg" source="google_translate">Vai tiešām vēlaties iziet no VLC?</string>
+    <string name="fastscroller_track" source="google_translate">FastScroller dziesma</string>
+    <string name="fastscroller_handle" source="google_translate">FastScroller rokturis</string>
+    <string name="plugins" source="google_translate">Spraudņi</string>
+    <string name="download_on_device" source="google_translate">Lejupielādēt</string>
+    <string name="extension_empty" source="google_translate">Neviens vienums, kas jāparādās, dodieties uz paplašinājuma iestatījumiem, lai iegūtu kādu.</string>
+    <string name="opengl_title" source="google_translate">OpenGL ES2 izmantošana</string>
+    <string name="opengl_summary" source="google_translate">Pēc noklusējuma OpenGL ES2 tiek izmantots programmatūras dekodēšanai un aparatūras dekodēšanai, ja nepieciešams (360 ° video).</string>
+    <string name="opengl_automatic" source="google_translate">Automātiski</string>
+    <string name="opengl_on" source="google_translate">Spēka ieslēgšana</string>
+    <string name="opengl_off" source="google_translate">Spēka izslēgšana</string>
+    <string name="network_favorites" source="google_translate">Tīkla izlase</string>
+    <string name="network_shared_folders" source="google_translate">Koplietotās mapes</string>
+    <string name="encryption_warning" source="google_translate">Brīdinājums, šifrēšana nav pieejama šai Android versijai, parole tiks saglabāta privātā telpā, bet ne šifrēta</string>
+    <string name="store_password" source="google_translate">Atceries paroli</string>
+    <string name="add_to_playlist" source="google_translate">Pievienot atskaņošanas sarakstam</string>
+    <string name="popup_playback_title" source="google_translate">Atskaņot videoklipu uznirstošajā logā</string>
+    <string name="popup_playback" source="google_translate">Atskaņošana uznirstošajā logā</string>
+    <string name="popup_expand" source="google_translate">Izvērsiet videoklipu</string>
+    <string name="snack_subloader_sub_found" source="google_translate">Lejupielādētie subtitri</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">Subtitri nav atrasti</string>
+    <string name="dialog_subloader_success" source="google_translate">Subtitri atrasti:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Subtitri nav atrasti:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">Lejupielāde pabeigta</string>
+    <string name="download_subtitles" source="google_translate">Lejupielādējiet subtitrus</string>
+    <string name="preferences_languages_download" source="google_translate">Subtitru valodas</string>
+    <string name="list_languages_download_summary" source="google_translate">Valodas, kas lejupielādējamas subtitru ielādēšanas laikā</string>
+    <string name="list_languages_download_title" source="google_translate">Subtitri lejupielādē valodas</string>
+    <string name="service_unavailable" source="google_translate">Pakalpojums nav pieejams</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Neizdevās iestatīt subtitru valodu, mēģiniet to iestatīt lietojumprogrammu iestatījumos</string>
+    <string name="downloading_subtitles" source="google_translate">Subtitru lejupielāde</string>
+    <string name="browse_folder" source="google_translate">Pārlūkot mapi</string>
+    <string name="listen" source="google_translate">Klausieties</string>
+    <string name="subtitles_download_title" source="google_translate">Lejupielāde</string>
+    <string name="connecting" source="google_translate">Savienošana ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">saglabājiet Bluetooth ierīces aizkavi</string>
+    <string name="episodes" source="google_translate">epizodes</string>
+    <string name="movies" source="google_translate">filmas</string>
+    <string name="videos" source="google_translate">video</string>
+    <string name="streams" source="google_translate">plūsmas</string>
+    <string name="clear_playback_history" source="google_translate">Notīrīt atskaņošanas vēsturi</string>
+    <string name="various_artists" source="google_translate">Dažādi mākslinieki</string>
+    <string name="ml_scanning" source="google_translate">Multivides failu skenēšana</string>
+    <string name="ml_parse_media" source="google_translate">Vidēja parsēšana</string>
+    <string name="ml_discovering" source="google_translate">Atklāšana</string>
+    <string name="resume" source="google_translate">Turpināt</string>
+    <string name="length" source="google_translate">Garums</string>
+    <string name="tv_settings_hint" source="google_translate">Ilgi nospiediet pogu OK, lai pārbaudītu / noņemtu direktoriju atzīmi</string>
+    <string name="ml_external_storage_title" source="google_translate">Tika konstatēta jauna ārējā atmiņa</string>
+    <string name="ml_external_storage_accept" source="google_translate">Jā</string>
+    <string name="ml_external_storage_decline" source="google_translate">Nē</string>
+    <string name="last_added_media" source="google_translate">pēdējo reizi pievienots</string>
+    <string name="no" source="google_translate">Nē</string>
+    <string name="loading_medialibrary" source="google_translate">Notiek Medialibrary ielāde ...</string>
+    <string name="yes" source="google_translate">Jā</string>
+    <string name="custom_set_save_title" source="google_translate">Saglabātās izmaiņas</string>
+    <string name="custom_set_save_warning" source="google_translate">Brīdinājums: nesaglabātas izmaiņas</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Saglabāt ekvalaizera iestatījumu kā…</string>
+    <string name="new_custom_set_save_message" source="google_translate">Saglabājiet jaunu ekvalaizera iestatījumu kā…</string>
+    <string name="save" source="google_translate">Saglabāt</string>
+    <string name="do_not_save" source="google_translate">Nesaglabājiet</string>
+    <string name="custom_set_wrong_input" source="google_translate">Nederīgs nosaukums.</string>
+    <string name="custom_set_already_exist" source="google_translate">Ekvalaizers iestatīts ar šo nosaukumu jau pastāv</string>
+    <string name="custom_set_restored" source="google_translate">Atjaunots pielāgots ekvalaizera komplekts.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Izdzēsts neatjaunots ekvalaizera komplekts.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Jauns</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary pašlaik skenē jūsu ierīces</string>
+    <string name="recommendations" source="google_translate">Ieteikumi</string>
+    <string name="recommendations_desc" source="google_translate">Ieteikumu kartes uz palaišanas</string>
+    <string name="browser_quick_access" source="google_translate">Ātra piekļuve</string>
+    <string name="browser_storages" source="google_translate">Noliktavas</string>
+    <string name="renderer_list_title" source="google_translate">Displeji</string>
+    <string name="feedback_player_crashed" source="google_translate">Atvainojiet, VLC sabruka. Lūdzu mēģiniet vēlreiz.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">Jums ir jāpiešķir VLC rakstīšanas piekļuve savai SD kartei</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC nevar izdzēst šo failu bez atļaujas piekļuves atļaujas, lūdzu, dodieties uz savu SD karti un noklikšķiniet uz "Izvēlēties", iespējams, vispirms augšējā labajā izvēlnē noklikšķiniet uz "Rādīt SD karti"</string>
+    <string name="dialog_sd_wizard" source="google_translate">Parādi man</string>
+    <string name="renderers_disconnect" source="google_translate">Atvienot</string>
+    <string name="audio_digital_failed" source="google_translate">Neizdevās mainīt audio digitālā izvades stāvokli</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Audio ciparu izeja ir iespējota</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Audio ciparu izeja ir atspējota</string>
+    <string name="live_streams" source="google_translate">Live plūsmas</string>
+    <string name="all_live_streams" source="google_translate">Visas tiešraides</string>
+    <string name="video_torrents" source="google_translate">Video straumēm</string>
+    <string name="audio_torrents" source="google_translate">Audio torrents</string>
+    <string name="all_torrents" source="google_translate">Visi straumi</string>
+    <string name="main" source="google_translate">Galvenais</string>
+    <string name="media_player" source="google_translate">Multivides atskaņotājs</string>
+    <string name="acestream_server" source="google_translate">Ace Stream serveris (dzinējs)</string>
+    <string name="media_player_settings" source="google_translate">Multivides atskaņotāja iestatījumi</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream servera (dzinēja) iestatījumi</string>
+    <string name="sign_out" source="google_translate">Izrakstīties</string>
+    <string name="sign_in" source="google_translate">Ielogoties</string>
+    <string name="sign_in_acestream" source="google_translate">Pierakstieties ar Ace Stream</string>
+    <string name="sign_in_google" source="google_translate">Pierakstieties, izmantojot Google</string>
+    <string name="video_files" source="google_translate">Video faili</string>
+    <string name="audio_files" source="google_translate">Audio faili</string>
+    <string name="retry" source="google_translate">Mēģiniet vēlreiz</string>
+    <string name="failed_to_load_web_page" source="google_translate">Neizdevās ielādēt tīmekļa lapu</string>
 </resources>

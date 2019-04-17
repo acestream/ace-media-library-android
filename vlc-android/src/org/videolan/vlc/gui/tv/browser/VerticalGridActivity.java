@@ -21,10 +21,11 @@
 package org.videolan.vlc.gui.tv.browser;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -33,6 +34,7 @@ import android.widget.TextView;
 import org.videolan.vlc.R;
 import org.videolan.vlc.VLCApplication;
 import org.videolan.vlc.gui.tv.MainTvActivity;
+import org.videolan.vlc.gui.tv.TvUtil;
 import org.videolan.vlc.gui.tv.browser.interfaces.BrowserActivityInterface;
 import org.videolan.vlc.gui.tv.browser.interfaces.BrowserFragmentInterface;
 import org.videolan.vlc.gui.tv.browser.interfaces.DetailsFragment;
@@ -51,38 +53,54 @@ public class VerticalGridActivity extends BaseTvActivity implements BrowserActiv
         setContentView(R.layout.tv_vertical_grid);
         mContentLoadingProgressBar = findViewById(R.id.tv_fragment_progress);
         mEmptyView = findViewById(R.id.tv_fragment_empty);
-        if (savedInstanceState == null) {
-            long type = getIntent().getLongExtra(MainTvActivity.BROWSER_TYPE, -1);
-            if (type == MainTvActivity.HEADER_VIDEO)
-                mFragment = new VideoBrowserFragment();
-            else if (type == MainTvActivity.HEADER_CATEGORIES)
-                if (getIntent().getLongExtra(MusicFragment.AUDIO_CATEGORY, MusicFragment.CATEGORY_SONGS) == MusicFragment.CATEGORY_SONGS &&
-                    VLCApplication.getMLInstance().getAudioCount() > GRID_LIMIT) {
-                    mFragment = new SongsBrowserFragment();
-                } else {
-                    mFragment = new MusicFragment();
-                    Bundle args = new Bundle();
-                    args.putParcelable(MusicFragment.AUDIO_ITEM, getIntent().getParcelableExtra(MusicFragment.AUDIO_ITEM));
-                    ((Fragment)mFragment).setArguments(args);
-                }
-            else if (type == MainTvActivity.HEADER_NETWORK) {
-                Uri uri = getIntent().getData();
-                if (uri == null)
-                    uri = getIntent().getParcelableExtra(SortedBrowserFragment.KEY_URI);
-                if (uri == null)
-                    mFragment = new BrowserGridFragment();
-                else
-                    mFragment = new NetworkBrowserFragment();
-            } else if (type == MainTvActivity.HEADER_DIRECTORIES)
-                mFragment = new DirectoryBrowserFragment();
-            else {
-                finish();
-                return;
-            }
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.tv_fragment_placeholder, ((Fragment)mFragment))
-                    .commit();
+        TvUtil.applyOverscanMargin(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        long type = getIntent().getLongExtra(MainTvActivity.BROWSER_TYPE, -1);
+        if (type == MainTvActivity.HEADER_VIDEO
+                || type == MainTvActivity.HEADER_P2P_VIDEO
+                || type == MainTvActivity.HEADER_P2P_STREAM) {
+            mFragment = new VideoBrowserFragment();
+            ((VideoBrowserFragment) mFragment).setCategory(type);
         }
+        else if (type == MainTvActivity.HEADER_CATEGORIES
+                || type == MainTvActivity.HEADER_P2P_AUDIO) {
+            long category = getIntent().getLongExtra(
+                    MusicFragment.AUDIO_CATEGORY,
+                    MusicFragment.CATEGORY_SONGS);
+            if ((category == MusicFragment.CATEGORY_SONGS
+                    || category == MusicFragment.CATEGORY_P2P_SONGS)
+                    && VLCApplication.getMLInstance().getAudioCount() > GRID_LIMIT) {
+                mFragment = new SongsBrowserFragment();
+            }
+            else {
+                mFragment = new MusicFragment();
+                Bundle args = new Bundle();
+                args.putParcelable(MusicFragment.AUDIO_ITEM, getIntent().getParcelableExtra(MusicFragment.AUDIO_ITEM));
+                ((Fragment) mFragment).setArguments(args);
+            }
+        }
+        else if (type == MainTvActivity.HEADER_NETWORK) {
+            Uri uri = getIntent().getData();
+            if (uri == null)
+                uri = getIntent().getParcelableExtra(SortedBrowserFragment.KEY_URI);
+            if (uri == null)
+                mFragment = new BrowserGridFragment();
+            else
+                mFragment = new NetworkBrowserFragment();
+        } else if (type == MainTvActivity.HEADER_DIRECTORIES)
+            mFragment = new DirectoryBrowserFragment();
+        else {
+            finish();
+            return;
+        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.tv_fragment_placeholder, ((Fragment)mFragment))
+                .commit();
     }
 
     @Override
@@ -124,4 +142,10 @@ public class VerticalGridActivity extends BaseTvActivity implements BrowserActiv
             }
         });
     }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+    }
+
 }

@@ -24,10 +24,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v7.view.ActionMode;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ActionMode;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,7 +35,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.medialibrary.media.MediaLibraryItem;
 import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.vlc.R;
@@ -46,7 +45,9 @@ import org.videolan.vlc.interfaces.IEventsHandler;
 import org.videolan.vlc.interfaces.IHistory;
 import org.videolan.vlc.interfaces.IRefreshable;
 import org.videolan.vlc.media.MediaUtils;
+import org.videolan.vlc.util.Util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryFragment extends MediaBrowserFragment implements IRefreshable, IHistory, SwipeRefreshLayout.OnRefreshListener, IEventsHandler {
@@ -62,6 +63,13 @@ public class HistoryFragment extends MediaBrowserFragment implements IRefreshabl
     /* All subclasses of Fragment must include a public empty constructor. */
     public HistoryFragment() {
         mHistoryAdapter = new HistoryAdapter(this);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFabPlayImageResourceId = R.drawable.ic_fab_play;
+        mCanShowBonusAds = true;
     }
 
     @Override
@@ -86,8 +94,7 @@ public class HistoryFragment extends MediaBrowserFragment implements IRefreshabl
         mRecyclerView.setNextFocusUpId(R.id.ml_menu_search);
         mRecyclerView.setNextFocusLeftId(android.R.id.list);
         mRecyclerView.setNextFocusRightId(android.R.id.list);
-        if (AndroidUtil.isHoneycombOrLater)
-            mRecyclerView.setNextFocusForwardId(android.R.id.list);
+        mRecyclerView.setNextFocusForwardId(android.R.id.list);
         mRecyclerView.requestFocus();
         registerForContextMenu(mRecyclerView);
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -204,8 +211,8 @@ public class HistoryFragment extends MediaBrowserFragment implements IRefreshabl
             return false;
         }
         menu.findItem(R.id.action_history_info).setVisible(selectionCount == 1);
-        menu.findItem(R.id.action_history_play).setVisible(AndroidUtil.isHoneycombOrLater || selectionCount == 1);
-        menu.findItem(R.id.action_history_append).setVisible(mService.hasMedia() && AndroidUtil.isHoneycombOrLater);
+        menu.findItem(R.id.action_history_play).setVisible(true);
+        menu.findItem(R.id.action_history_append).setVisible(mService.hasMedia());
         return true;
     }
 

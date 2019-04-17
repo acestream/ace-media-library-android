@@ -7,19 +7,22 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
-import android.support.v4.app.FragmentActivity
-import android.support.v4.provider.DocumentFile
-import android.support.v7.app.AlertDialog
-import android.support.v7.preference.PreferenceManager
+import androidx.fragment.app.FragmentActivity
+import androidx.documentfile.provider.DocumentFile
+import androidx.appcompat.app.AlertDialog
+import androidx.preference.PreferenceManager
 import android.text.TextUtils
+import kotlinx.coroutines.*
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.vlc.R
 import org.videolan.vlc.VLCApplication
 import org.videolan.vlc.util.AndroidDevices
 import org.videolan.vlc.util.FileUtils
 
-
-class WriteExternalDelegate : BaseHeadlessFragment() {
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
+class WriteExternalDelegate : BaseHeadlessFragment(), CoroutineScope {
+    override val coroutineContext = Dispatchers.Main.immediate
 
     @TargetApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +32,7 @@ class WriteExternalDelegate : BaseHeadlessFragment() {
 
     private fun showDialog() {
         if (!isAdded) return
-        val builder = AlertDialog.Builder(activity)
+        val builder = AlertDialog.Builder(activity!!)
         builder.setMessage(R.string.sdcard_permission_dialog_message)
                 .setTitle(R.string.sdcard_permission_dialog_title)
                 .setPositiveButton(R.string.ok, { _, _ ->
@@ -44,18 +47,21 @@ class WriteExternalDelegate : BaseHeadlessFragment() {
 
     private fun showHelpDialog() {
         if (!isAdded) return
-        val inflater = activity.layoutInflater
-        AlertDialog.Builder(activity).setView(inflater.inflate(R.layout.dialog_sd_write, null))
-                .setOnDismissListener { showDialog() }
-                .create().show()
+        activity?.let {
+            val inflater = it.layoutInflater
+            AlertDialog.Builder(it).setView(inflater.inflate(R.layout.dialog_sd_write, null))
+                    .setOnDismissListener { showDialog() }
+                    .create().show()
+
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (data !== null && requestCode == REQUEST_CODE_STORAGE_ACCES) {
             if (resultCode == Activity.RESULT_OK) {
-                val context = context
-                val treeUri = data.data
+                val context = context ?: return
+                val treeUri = data.data ?: return
                 PreferenceManager.getDefaultSharedPreferences(VLCApplication.getAppContext()).edit()
                         .putString("tree_uri_"+ storage, treeUri.toString()).apply()
                 val treeFile = DocumentFile.fromTreeUri(context, treeUri)
@@ -65,7 +71,7 @@ class WriteExternalDelegate : BaseHeadlessFragment() {
                 val persistedUriPermissions = contentResolver.persistedUriPermissions
                 for (uriPermission in persistedUriPermissions) {
                     val file = DocumentFile.fromTreeUri(context, uriPermission.uri)
-                    if (treeFile.name == file.name) {
+                    if (treeFile?.name == file?.name) {
                         contentResolver.releasePersistableUriPermission(uriPermission.uri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
                         return
                     }
@@ -100,8 +106,9 @@ class WriteExternalDelegate : BaseHeadlessFragment() {
         fun needsWritePermission(uri: Uri) : Boolean {
             val path = uri.path
             return AndroidUtil.isLolliPopOrLater && "file" == uri.scheme
-                    && !TextUtils.isEmpty(path) && path.startsWith('/')
-                    && !path.startsWith(AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY)
+                    && !TextUtils.isEmpty(path)
+                    && true == path?.startsWith('/')
+                    && false == path?.startsWith(AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY)
                     && !(FileUtils.findFile(uri)?.canWrite() ?: false)
         }
     }

@@ -22,12 +22,12 @@ package org.videolan.vlc.gui.video;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.databinding.BindingAdapter;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.support.annotation.MainThread;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.annotation.MainThread;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,6 +100,9 @@ public class VideoListAdapter extends SortableAdapter<MediaWrapper, VideoListAda
         if (media == null)
             return;
         holder.binding.setVariable(BR.scaleType, ImageView.ScaleType.CENTER_CROP);
+        holder.binding.setVariable(BR.cover, media instanceof MediaGroup
+                ? AsyncImageLoader.DEFAULT_COVER_VIDEO_GROUP_DRAWABLE
+                : AsyncImageLoader.DEFAULT_COVER_VIDEO_SINGLE_DRAWABLE);
         fillView(holder, media);
         holder.binding.setVariable(BR.media, media);
         holder.selectView(media.hasStateFlags(MediaLibraryItem.FLAG_SELECTED));
@@ -130,7 +133,7 @@ public class VideoListAdapter extends SortableAdapter<MediaWrapper, VideoListAda
 
     @Override
     public void onViewRecycled(ViewHolder holder) {
-        holder.binding.setVariable(BR.cover, AsyncImageLoader.DEFAULT_COVER_VIDEO_DRAWABLE);
+        holder.binding.setVariable(BR.cover, AsyncImageLoader.DEFAULT_COVER_VIDEO_SINGLE_DRAWABLE);
     }
 
     public boolean isEmpty() {
@@ -293,7 +296,6 @@ public class VideoListAdapter extends SortableAdapter<MediaWrapper, VideoListAda
             super(binding);
             thumbView = itemView.findViewById(R.id.ml_item_thumbnail);
             binding.setVariable(BR.holder, this);
-            binding.setVariable(BR.cover, AsyncImageLoader.DEFAULT_COVER_VIDEO_DRAWABLE);
             if (AndroidUtil.isMarshMallowOrLater) itemView.setOnContextClickListener(new View.OnContextClickListener() {
                 @Override
                 public boolean onContextClick(View v) {

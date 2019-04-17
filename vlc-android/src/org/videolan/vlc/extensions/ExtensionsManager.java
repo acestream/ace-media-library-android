@@ -12,8 +12,8 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.NavigationView;
-import android.support.v7.app.AlertDialog;
+import com.google.android.material.navigation.NavigationView;
+import androidx.appcompat.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.MenuItem;
 

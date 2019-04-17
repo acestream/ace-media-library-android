@@ -32,10 +32,10 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -43,7 +43,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.vlc.R;
 import org.videolan.vlc.util.WeakHandler;
 
@@ -156,8 +155,6 @@ public class FastScroller extends LinearLayout {
     }
 
     public void setRecyclerView(RecyclerView recyclerView) {
-        if (!AndroidUtil.isHoneycombOrLater)
-            return;
         if (mRecyclerView != null)
             mRecyclerView.removeOnScrollListener(scrollListener);
         setVisibility(INVISIBLE);

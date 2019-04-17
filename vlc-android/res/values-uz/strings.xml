@@ -13,15 +13,11 @@
     <string name="sortby_date_desc">sana bo‘yicha (kamayuvchi)</string>
     <string name="searchable_hint">Qidirish...</string>
     <string name="history">Tarix</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="other">%d ta natija topildi</item>
-    </plurals>
     <string name="play">Ijro etish</string>
     <string name="play_from_start">Boshidan ijro etish</string>
     <string name="play_as_audio">Audio sifatida ijro etish</string>
     <string name="play_as_video">Video sifatida ijro etish</string>
     <string name="play_as_audio_background">Videolarni orqa fonda ijro etish</string>
-    <string name="play_as_audio_background_summary">Qurilma ekrani o‘chirilganda yoki uy (HOME) tugmasi bosilganda videoni orqa fonda ijro etishda davom etish.</string>
     <string name="append">Qo‘shish</string>
     <string name="play_all">Barchasini ijro etish</string>
     <string name="append_all">Barchasini qo‘shish</string>
@@ -50,12 +46,6 @@
     </plurals>
     <plurals name="subfolders_quantity">
         <item quantity="other">%d ta tagjild</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="other">%d ta media fayl</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="other">%d ta video</item>
     </plurals>
     <string name="internal_memory">Ichki xotira</string>
     <string name="parent_folder">Asosiy jildga qaytish</string>
@@ -103,9 +93,6 @@
     <string name="sound_off">Ovoz o\'chiq</string>
     <string name="brightness">Yorqinlik</string>
     <string name="advanced">ilgʻor moslamalar</string>
-    <plurals name="track_channels_info_quantity">
-        <item quantity="other">%1$d ta kanallar\n</item>
-    </plurals>
     <string name="track_samplerate_info">Chastota: %1$d Hz\n</string>
     <string name="track_resolution_info">Rezolutsiya: %1$dx%2$d\n</string>
     <string name="track_framerate_info">Kadr chastotasi: %1$.3f\n</string>
@@ -183,7 +170,6 @@
     <string name="enable_clone_mode">Nusxasini afzal ko‘rish</string>
     <string name="enable_clone_mode_summary">Qurilma ekranini masofadan boshqaruvsiz nusxalash</string>
     <string name="interface_other_category">Interfeys – Boshqa</string>
-    <string name="enable_brightness_gesture">Harakatlar yorqinligini yoqib qo‘yish</string>
     <string name="enable_brightness_gesture_summary">Video ijrosi davomidagi harakatlarga tegishli yoqrinlikni boshqarish</string>
     <string name="audio_title_alignment">Audio sarlavhani to\'g\'irlash</string>
     <string name="enable_headset_detection">Quloqlikni aniqlash</string>
@@ -246,4 +232,301 @@
     <!--Accessibility-->
     <!--Widget-->
     <!--PLugins-->
+    <string name="torrent_files">Torrent fayllar</string>
+    <string name="select_language">Tilni tanlang</string>
+    <string name="sortby_artist_name" source="google_translate">Artist nomi</string>
+    <string name="sortby_artist_name_desc" source="google_translate">Ijrochi nomi (ozayib)</string>
+    <string name="sortby_album_name" source="google_translate">Albom nomi</string>
+    <string name="sortby_album_name_desc" source="google_translate">Albom nomi (ozayib)</string>
+    <string name="sortby_number" source="google_translate">Nb izlari</string>
+    <string name="sortby_number_desc" source="google_translate">Nb treklari (desc)</string>
+    <string name="playback" source="google_translate">Ijro etish</string>
+    <string name="playback_controls" source="google_translate">Ijroni boshqarish</string>
+    <string name="medialibrary_scan" source="google_translate">Media kutubxonasini skanerlash</string>
+    <string name="Medialibrary_progress" source="google_translate">Media-kutubxona taraqqiyotining yangilanishi</string>
+    <string name="video_app_switch_title" source="google_translate">Fon / PiP rejimi</string>
+    <string name="video_app_switch_summary" source="google_translate">Videoni ijro etishdan boshqa dasturga o\'tishda VLC xatti-ni tanlang</string>
+    <string name="play_pip_title" source="google_translate">Tasvir ichiga rasm rejimida videolarni o\'ynatish</string>
+    <string name="insert_next" source="google_translate">Keyin qo\'shing</string>
+    <string name="unknown_number" source="google_translate">Noma\'lum treklar soni</string>
+    <string name="tracks" source="google_translate">Tracks</string>
+    <string name="noplaylist" source="google_translate">Hech qanday ijro ro\'yxati topilmadi.</string>
+    <string name="shuffle_title" source="google_translate">Shuffle rejimi</string>
+    <string name="shuffle" source="google_translate">Shuffle Off</string>
+    <string name="shuffle_on" source="google_translate">Shuffle On</string>
+    <string name="repeat_title" source="google_translate">Takrorlash rejimi</string>
+    <string name="repeat" source="google_translate">Hechqisi takrorlang</string>
+    <string name="repeat_single" source="google_translate">Bitta takrorlang</string>
+    <string name="repeat_all" source="google_translate">Barchasini takrorlang</string>
+    <string name="firstsong" source="google_translate">Ijro ro\'yxatining birinchi qo\'shig\'i</string>
+    <string name="lastsong" source="google_translate">Pleylistning oxirgi qo\'shiqi</string>
+    <string name="surface_fit_screen" source="google_translate">Fit ekrani</string>
+    <string name="navmenu" source="google_translate">navigatsiya menyusi</string>
+    <string name="sleep_in" source="google_translate">Kutib turing</string>
+    <string name="server_add_title" source="google_translate">Sevimlilarga yangi server qo\'shing</string>
+    <string name="server_domain_hint" source="google_translate">Server manzili (domen nomi yoki IP)</string>
+    <string name="server_share_hint" source="google_translate">Tarmoq ulushi nomi (yoki IP manzil)</string>
+    <string name="server_folder_hint" source="google_translate">Papka yo\'li (ixtiyoriy)</string>
+    <string name="server_username_hint" source="google_translate">Foydalanuvchi nomi</string>
+    <string name="server_servername_hint" source="google_translate">Server nomi, qulaylik uchun</string>
+    <string name="server_port" source="google_translate">Port:</string>
+    <string name="login" source="google_translate">Kirish</string>
+    <string name="password" source="google_translate">Parol</string>
+    <string name="search_results" source="google_translate">Qidiruv natijalari</string>
+    <string name="search_no_result" source="google_translate">Hech qanday ommaviy axborot topilmadi</string>
+    <string name="favorites_add" source="google_translate">Sevimlilarga qo\'shish</string>
+    <string name="favorites_remove" source="google_translate">Sevimlilardan o\'chirish</string>
+    <string name="favorites_edit" source="google_translate">Tahrirlash</string>
+    <string name="favorite_added" source="google_translate">Sevimlilarga saqlandi</string>
+    <string name="favorite_removed" source="google_translate">Sevimlilar o\'chirildi</string>
+    <string name="playback_history_title" source="google_translate">Ijro tarixi</string>
+    <string name="playback_history_summary" source="google_translate">Tarix qismida o\'ynalgan barcha vositalarni saqlash</string>
+    <string name="playback_speed_title" source="google_translate">Ijro etish tezligini tejash</string>
+    <string name="playback_speed_summary" source="google_translate">Siz o\'rnatgan ijro etish tezligini eslab ko\'ring</string>
+    <string name="dev_hardware_decoder" source="google_translate">Murakkab apparat kod hal qiluvchi</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">Faqat malakali foydalanuvchilar uchun apparat dekoderini majburlash</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">iomx</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-dr</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">mediacodec</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">mediacodec-DR</string>
+    <string name="daynight_title" source="google_translate">DayNight rejimi</string>
+    <string name="daynight_summary" source="google_translate">Vaqti-vaqti bilan kecha rejimiga avtomatik ravishda o\'tish</string>
+    <string name="interface_gui" source="google_translate">Ko\'rish</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">Ikkinchi displey</string>
+    <string name="video_prefs_category" source="google_translate">Video</string>
+    <string name="video_min_group_length_title" source="google_translate">Guruhli videolar</string>
+    <string name="video_min_group_length_summary" source="google_translate">Agar ularning birinchi harflari bir xil bo\'lsa, videolar guruhlangan.</string>
+    <string name="video_min_group_length_disable" source="google_translate">O\'chirish</string>
+    <string name="video_min_group_length_first" source="google_translate">Faqat birinchi harf</string>
+    <string name="video_min_group_length_short" source="google_translate">Qisqa harflar soni (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">Ko\'p harflar (9)</string>
+    <string name="media_fast_seek" source="google_translate">Tez terish imkoniyatini yoqish</string>
+    <string name="media_seen" source="google_translate">Ko\'rilgan video belgisini ko\'rsating</string>
+    <string name="media_seen_summary" source="google_translate">Videoni oxirigacha o\'ynayotganingizda ko\'rilgani kabi belgilang</string>
+    <string name="force_list_portrait" source="google_translate">Portret rejimida grid yo\'q</string>
+    <string name="force_list_portrait_summary" source="google_translate">Portret rejimda panjara o\'rniga videolarni ko\'rsatish</string>
+    <string name="force_play_all_summary" source="google_translate">Chertganingizdan boshlangan barcha videolarni tomosha qiling</string>
+    <string name="force_play_all_title" source="google_translate">Video pleylist rejimi</string>
+    <string name="save_brightness_summary" source="google_translate">Video pleyerda nashrida darajasini eslab qoling</string>
+    <string name="save_brightness_title" source="google_translate">Video uchun nashrida darajasini saqlang</string>
+    <string name="save_audiodelay_summary" source="google_translate">Har bir videoning individual audio kechikishidan saqlaning</string>
+    <string name="save_audiodelay_title" source="google_translate">Ovozni kechiktirish</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">Yorqinlik harakati</string>
+    <string name="enable_volume_gesture_title" source="google_translate">Hajm jest</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">Videoni ijro etish paytida imo-ishorali jildni boshqarish</string>
+    <string name="enable_seek_buttons" source="google_translate">Qidiruv tugmalarini yoqish</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">Video interfeysidagi orqaga va oldinga tugmalarini ko\'rsatish</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">Qo\'ng\'iroq qilish uchun ikki marta teging</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">10 soniya davomida qidirish uchun ekran qirralariga ikki marta bosing</string>
+    <string name="popup_keepscreen_title" source="google_translate">Ekranni Pop-Up rejimida yoqing</string>
+    <string name="popup_keepscreen_summary" source="google_translate">Videoni to\'xtatib turganda ham, har doim Pop-Up ko\'rsatilganda ekranni yoqing.</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">Yashirin fayllarni ko\'rsatish</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">Brauzerlarda maxfiy fayllarni ko\'rsatish</string>
+    <string name="subtitles_prefs_category" source="google_translate">Subtitrlar</string>
+    <string name="subtitles_size_title" source="google_translate">Subtitrlar hajmi</string>
+    <string name="subtitles_size_small" source="google_translate">Kichik</string>
+    <string name="subtitles_size_normal" source="google_translate">Oddiy</string>
+    <string name="subtitles_size_big" source="google_translate">Katta</string>
+    <string name="subtitles_size_huge" source="google_translate">Katta</string>
+    <string name="subtitles_color_title" source="google_translate">Subtitrlar rangi</string>
+    <string name="subtitles_color_white" source="google_translate">Oq rang</string>
+    <string name="subtitles_color_gray" source="google_translate">Kulrang</string>
+    <string name="subtitles_color_pink" source="google_translate">Pushti</string>
+    <string name="subtitles_color_blue" source="google_translate">Moviy</string>
+    <string name="subtitles_color_yellow" source="google_translate">Sariq</string>
+    <string name="subtitles_color_green" source="google_translate">Yashil rang</string>
+    <string name="subtitles_background_title" source="google_translate">Subtitr fon</string>
+    <string name="subtitles_bold_title" source="google_translate">Jildli subtitrlar</string>
+    <string name="subtitles_autoload_title" source="google_translate">Avtomatik yuklash taglavhalari</string>
+    <string name="audio_prefs_category" source="google_translate">Audio</string>
+    <string name="lockscreen_cover_title" source="google_translate">Lockscreen-da media qopqoq</string>
+    <string name="lockscreen_cover_summary" source="google_translate">Mavjud bo\'lsa, mavjud bo\'lgan muhit qopqog\'ini ekranning devor qog\'ozi sifatida o\'rnating</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">Joriy ijro ro\'yxatini avtomatik ravishda aylantirish</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">Media o\'tish jarayonida harakatlanuvchi kayfiyat</string>
+    <string name="audio_save_repeat_title" source="google_translate">Takrorlash rejimini saqlang</string>
+    <string name="audio_save_repeat_summary" source="google_translate">Ovozli pleylistlarni yuklashda takrorlash rejimini eslab ko\'ring</string>
+    <string name="audio_boost_title" source="google_translate">Ovozni kuchaytirish</string>
+    <string name="headset_prefs_category" source="google_translate">Eshitish vositasi</string>
+    <string name="enable_headset_actions_title" source="google_translate">Masofadan boshqarish yorliqlari</string>
+    <string name="enable_headset_actions_summary" source="google_translate">Keyingi trekka o\'tish uchun keyingi va uzoq bosib o\'tish uchun "Play \" tugmasini ikki marta bosing</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">Garniturani ulashda davom eting</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">Aks holda to\'xtatib turing</string>
+    <string name="audio_ducking_title" source="google_translate">Bildirishnomalarda past VLC hajmi</string>
+    <string name="audio_ducking_summary" source="google_translate">Ovozli bildirishnomalarni, navigatsiya yo\'riqnomalarini yoki suhbatdoshni gaplashishga yordam beradi</string>
+    <string name="casting_category" source="google_translate">Casting</string>
+    <string name="casting_passthrough_title" source="google_translate">Ovozli passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">Televizoringiz audio ishlashni boshqarishi uchun ruxsat bering</string>
+    <string name="casting_conversion_quality_title" source="google_translate">Ishlab chiqarish sifati</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">Masofadan ekranda translatsiya qilish jarayonini tanlang</string>
+    <string name="casting_quality_high" source="google_translate">Oliy</string>
+    <string name="casting_quality_medium" source="google_translate">O\'rtacha</string>
+    <string name="casting_quality_low" source="google_translate">Kam</string>
+    <string name="casting_quality_lowcpu" source="google_translate">Eng past</string>
+    <string name="cast_performance_warning" source="google_translate">Ushbu videoni translatsiya qilish kerak. Ushbu konversiya barcha mavjud kuchlardan foydalanishi va tezda batareyangizni to\'kib yuborishi mumkin.</string>
+    <string name="artists_show_all_title" source="google_translate">Barcha rassomlarni ko\'rsatish</string>
+    <string name="artists_show_all_summary" source="google_translate">Barcha rassomlarni faqat rassomlar emas, balki rassomlar ro\'yxatida ko\'rsatish</string>
+    <string name="extensions_prefs_category" source="google_translate">Kengaytmalar</string>
+    <string name="extensions_enable_category" source="google_translate">Faollashtirish uchun kengaytmani tanlash</string>
+    <string name="extensions_empty" source="google_translate">Kengaytma aniqlanmadi</string>
+    <string name="extension_prefs_activation_title" source="google_translate">Faollashtirish</string>
+    <string name="android_auto" source="google_translate">Android qurilmasi</string>
+    <string name="controls_prefs_category" source="google_translate">Tekshiruvlar</string>
+    <string name="main_prefs_category" source="google_translate">Asosiy sozlamalar</string>
+    <string name="save_video_none" source="google_translate">Tezlikni saqlamang</string>
+    <string name="save_video_session" source="google_translate">Seans vaqtida tezlikni saqlang</string>
+    <string name="save_video_always" source="google_translate">Sessiyalar davomida tezlikni saqlang</string>
+    <string name="auto_rescan" source="google_translate">Avtomatik qayta qidirish</string>
+    <string name="auto_rescan_summary" source="google_translate">Dasturni ishga tushirishda qurilmani avtomatik ravishda yoki yangi yoki ochirilgan muhit uchun skanerlash</string>
+    <string name="dump_media_db" source="google_translate">Media ma\'lumotlar bazasini to\'ldiring</string>
+    <string name="dump_media_db_summary" source="google_translate">Ma\'lumotlar bazasini ichki saqlash rootiga nusxalash</string>
+    <string name="clear_media_db_summary" source="google_translate">Ma\'lumotlarni tozalash uchun Android VLC ma\'lumotlariga kirish</string>
+    <string name="resume_playback_title" source="google_translate">Qo\'ng\'iroqdan so\'ng ijro etishni davom ettirish</string>
+    <string name="resume_playback_summary" source="google_translate">Aks holda to\'xtatib turing</string>
+    <string name="network_caching_popup" source="google_translate">Ushbu qiymat 0 va 6000 ms orasida bo\'lishi kerak</string>
+    <string name="log_service_title" source="google_translate">VLC qaydlarni qayd qiladi</string>
+    <string name="log_service_text" source="google_translate">Kundalik konsolni oching</string>
+    <string name="browsing" source="google_translate">Internet saytlarini ko\'rish</string>
+    <string name="audio_delay" source="google_translate">Audio kechikish</string>
+    <string name="spu_delay" source="google_translate">Subtitr kechiktirilishi</string>
+    <string name="sleep_time_not_set" source="google_translate">hech kim o\'rnatilmagan</string>
+    <string name="network_shares_discovery" source="google_translate">Tarmoq aktsiyalarini qidirish ...</string>
+    <string name="network_connection_needed" source="google_translate">Mahalliy tarmoqqa ulanish yo\'q.</string>
+    <string name="search_list_hint" source="google_translate">Joriy ro\'yxatdagi media qidirish</string>
+    <string name="search_global" source="google_translate">Barcha ommaviy axborot kutubxonasidan qidirish</string>
+    <string name="directory_show_medialib" source="google_translate">MediaLib-da ko\'rsatish</string>
+    <string name="directory_hide_medialib" source="google_translate">MediaLib-dan yashirish</string>
+    <string name="playlist_save" source="google_translate">Ijro ro\'yxatini saqlang</string>
+    <string name="playlist_name_hint" source="google_translate">pleylist nomi</string>
+    <string name="go_to_chapter" source="google_translate">Bo\'limga o\'ting ...</string>
+    <string name="chapter" source="google_translate">Bo\'lim</string>
+    <string name="resume_from_position" source="google_translate">Oxirgi manzildan davom eting</string>
+    <string name="confirm_resume" source="google_translate">Oxirgi manzildan davom ettirilsinmi?</string>
+    <string name="confirm_resume_title" source="google_translate">Qayta tiklash uchun tasdiq so\'rash</string>
+    <string name="confirm_resume_summary" source="google_translate">agar faollashtirilgan bo\'lsa, videoni oxirgi holatdan boshlash mumkinligini tasdiqlash so\'raladi</string>
+    <string name="directory_empty" source="google_translate">Katalog bo\'sh</string>
+    <string name="player_touch_title" source="google_translate">Video uchun sensorli boshqaruv</string>
+    <string name="player_touch_enable_all" source="google_translate">Sensorli boshqaruvlarni yoqish</string>
+    <string name="player_touch_disable_brightness" source="google_translate">Nashrida boshqaruvini o\'chirib qo\'yish</string>
+    <string name="player_touch_disable_all" source="google_translate">Barcha sensorli boshqaruvlarni o\'chirib qo\'ying</string>
+    <string name="tv_ui_title" source="google_translate">Android TV interfeysi</string>
+    <string name="tv_ui_summary" source="google_translate">UI-ni televizorga moslashtirilgan mavzuni o\'zgartiring</string>
+    <string name="medialibrary" source="google_translate">Media kutubxonasi</string>
+    <string name="medialibrary_directories" source="google_translate">Media-kutubxona papkalari</string>
+    <string name="more_actions" source="google_translate">Boshqa harakatlar</string>
+    <string name="move" source="google_translate">Ko\'chiring</string>
+    <string name="back_quit_lock" source="google_translate">Videoni o\'chirish uchun yana Orqaga bosing</string>
+    <string name="playlist_deleted" source="google_translate">Pleylist o\'chirib tashlandi</string>
+    <string name="file_deleted" source="google_translate">Fayl o\'chirib tashlandi</string>
+    <string name="no_subs_found" source="google_translate">Ushbu katalogda taglavha yo\'q</string>
+    <string name="music_now_playing" source="google_translate">Endi o\'ynash</string>
+    <string name="widget_name_w" source="google_translate">VLC Oq Vidjet</string>
+    <string name="widget_name_b" source="google_translate">VLC Dark Vidjet</string>
+    <string name="allow_storage_access_title" source="google_translate">Ace Stream video va audio fayllariga kirishga ruxsat bering</string>
+    <string name="allow_storage_access_description" source="google_translate">Ace Stream ushbu qurilmadagi muhit fayllariga kirish uchun ushbu ruxsatni berishingizga muhtoj.</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">Ace Stream-ni ohangni o\'rnatish uchun ruxsat bering</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">Ace Stream sizga ushbu qo\'shiqni qo\'ng\'iroq ohangingiz sifatida o\'rnatish uchun ushbu ruxsatni berishga muhtoj.</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">Ace Stream-ga noyoblik rejimini o\'zgartirishga ruxsat bering</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">Ace Stream sizning nashrida rejimini o\'zgartirish uchun ushbu ruxsat berishingizni talab qiladi.</string>
+    <string name="allow_draw_overlays_title" source="google_translate">Ace Stream pleyeriga boshqa ilovalar orqali ochiladi</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">Ace Stream sizga ushbu ruxsatni berish uchun sizning videongizni boshqa ilovalar orqali ochilgan oynada ko\'rsatishingizni talab qiladi.</string>
+    <string name="permission_ask_again" source="google_translate">Grant ruxsat berilsin</string>
+    <string name="exit_app" source="google_translate">VLCni yoping</string>
+    <string name="exit_app_msg" source="google_translate">VLC-dan chiqishni xohlaysizmi?</string>
+    <string name="fastscroller_track" source="google_translate">FastScroller yo\'li</string>
+    <string name="fastscroller_handle" source="google_translate">FastScroller ushlagichi</string>
+    <string name="plugins" source="google_translate">Plaginlar</string>
+    <string name="download_on_device" source="google_translate">Yuklab oling</string>
+    <string name="extension_empty" source="google_translate">Ko\'rsatiladigan element yo\'q, ayrimlarini olish uchun kengaytma sozlamalariga o\'ting.</string>
+    <string name="opengl_title" source="google_translate">OpenGL ES2 foydalanish</string>
+    <string name="opengl_summary" source="google_translate">Sukut bo\'yicha, OpenGL ES2 dasturiy ta\'minotni dekodlash va kerak bo\'lganda apparatdan kodlash uchun ishlatiladi (360 ° video).</string>
+    <string name="opengl_automatic" source="google_translate">Avtomatik</string>
+    <string name="opengl_on" source="google_translate">Majburan</string>
+    <string name="opengl_off" source="google_translate">O\'chirish</string>
+    <string name="network_favorites" source="google_translate">Tarmoq sevimlilari</string>
+    <string name="network_shared_folders" source="google_translate">Birgalikda papkalar</string>
+    <string name="encryption_warning" source="google_translate">Ushbu Android versiyasi uchun ogohlantirish, shifrlash mavjud emas, parol shaxsiy maydonda saqlanadi, lekin shifrlanmaydi</string>
+    <string name="store_password" source="google_translate">Parolni eslang</string>
+    <string name="add_to_playlist" source="google_translate">Pleylistga qo\'shish</string>
+    <string name="popup_playback_title" source="google_translate">Pop-up oynasida videoni ijro eting</string>
+    <string name="popup_playback" source="google_translate">Pop-up oynasida o\'ynash</string>
+    <string name="popup_expand" source="google_translate">Videoni kengaytirish</string>
+    <string name="snack_subloader_sub_found" source="google_translate">Subtitrlar yuklab olingan</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">Taglavhalar topilmadi</string>
+    <string name="dialog_subloader_success" source="google_translate">Taglavhalar topildi:</string>
+    <string name="dialog_subloader_fails" source="google_translate">Taglavhalar topilmadi:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">Yuklab olish tugadi</string>
+    <string name="download_subtitles" source="google_translate">Taglavhalarni yuklab oling</string>
+    <string name="preferences_languages_download" source="google_translate">Subtitr tillari</string>
+    <string name="list_languages_download_summary" source="google_translate">Subtitrlarni olishda yuklab olinadigan tillar</string>
+    <string name="list_languages_download_title" source="google_translate">Subtitrlarni yuklash tillari</string>
+    <string name="service_unavailable" source="google_translate">Xizmat ish faoliyatida emas</string>
+    <string name="subs_dl_lang_fail" source="google_translate">Taglavhalar tilini sozlab bo\'lmadi, uni dastur sozlamalarida o\'rnatishga harakat qiling</string>
+    <string name="downloading_subtitles" source="google_translate">Subtitrlarni yuklab olish</string>
+    <string name="browse_folder" source="google_translate">Jildni ko\'rib chiqish</string>
+    <string name="listen" source="google_translate">Tinglang</string>
+    <string name="subtitles_download_title" source="google_translate">Subsni yuklab olish</string>
+    <string name="connecting" source="google_translate">Ulanilmoqda ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">bluetooth qurilmasi uchun kechikishdan saqlash</string>
+    <string name="episodes" source="google_translate">epizodlar</string>
+    <string name="movies" source="google_translate">filmlar</string>
+    <string name="videos" source="google_translate">videolar</string>
+    <string name="streams" source="google_translate">oqimlari</string>
+    <string name="clear_playback_history" source="google_translate">Ijro tarixini tozalash</string>
+    <string name="various_artists" source="google_translate">Turli san\'atkorlar</string>
+    <string name="ml_scanning" source="google_translate">Media fayllarini skanerlash</string>
+    <string name="ml_parse_media" source="google_translate">O\'rtacha ajralish</string>
+    <string name="ml_discovering" source="google_translate">Kundalik</string>
+    <string name="resume" source="google_translate">Rezyume; qayta boshlash</string>
+    <string name="length" source="google_translate">Uzunligi</string>
+    <string name="tv_settings_hint" source="google_translate">Kataloglarni tekshirish / bekor qilish uchun uzoq vaqt OK tugmasini bosing</string>
+    <string name="ml_external_storage_title" source="google_translate">Yangi tashqi xotira aniqlandi</string>
+    <string name="ml_external_storage_accept" source="google_translate">Ha</string>
+    <string name="ml_external_storage_decline" source="google_translate">Yo\'q</string>
+    <string name="last_added_media" source="google_translate">oxirgi qo\'shilgan</string>
+    <string name="no" source="google_translate">Yo\'q</string>
+    <string name="loading_medialibrary" source="google_translate">Medialibraryni yuklash ...</string>
+    <string name="yes" source="google_translate">Ha</string>
+    <string name="custom_set_save_title" source="google_translate">Saqlanmagan o\'zgarishlar</string>
+    <string name="custom_set_save_warning" source="google_translate">Ogohlantirish: saqlanmagan o\'zgarishlar</string>
+    <string name="existing_custom_set_save_message" source="google_translate">Ekvalayzerni saqlab turing ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">Yangi ekvalayzer-setni saqlash ...</string>
+    <string name="save" source="google_translate">Saqlash</string>
+    <string name="do_not_save" source="google_translate">Saqlamang</string>
+    <string name="custom_set_wrong_input" source="google_translate">Noto\'g\'ri nom.</string>
+    <string name="custom_set_already_exist" source="google_translate">Ushbu nom bilan ekvalayzer-set allaqachon mavjud</string>
+    <string name="custom_set_restored" source="google_translate">Maxsus ekvalayzer-set qayta tiklandi.</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">Saqlanmagan ekvalayzer siljidi o\'chirildi.</string>
+    <string name="equalizer_new_preset_name" source="google_translate">Yangi</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary hozirda qurilmalarni skanerdan o\'tkazmoqda</string>
+    <string name="recommendations" source="google_translate">Tavsiyalar</string>
+    <string name="recommendations_desc" source="google_translate">Launcherda tavsiyalar kartalari</string>
+    <string name="browser_quick_access" source="google_translate">Tez kirish</string>
+    <string name="browser_storages" source="google_translate">Qavatlar</string>
+    <string name="renderer_list_title" source="google_translate">Ko\'rsatadi</string>
+    <string name="feedback_player_crashed" source="google_translate">Kechirasiz, VLC quladi. Iltimos, yana bir bor urinib ko\'ring.</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">SD kartangizga VLC yozish uchun ruxsat berishingiz kerak</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC ushbu faylni yozma ruxsatnomasiz o\'chira olmaydi. \ NLütfen SD-kartangizga o\'ting va \ "Select \" ustiga bosing. \ NQarang o\'ng yuqori menyuda avval \ "SD-kartani ko\'rsatish \" tugmasini bosishingiz kerak bo\'lishi mumkin.</string>
+    <string name="dialog_sd_wizard" source="google_translate">Menga ko\'rsating</string>
+    <string name="renderers_disconnect" source="google_translate">Ulanishni tugatish</string>
+    <string name="audio_digital_failed" source="google_translate">Ovozli Raqamli Chiqish holatini o\'zgartirib bo\'lmadi</string>
+    <string name="audio_digital_output_enabled" source="google_translate">Ovozli Raqamli Chiqish yoqilgan</string>
+    <string name="audio_digital_output_disabled" source="google_translate">Ovozli Raqamli Chiqish o\'chirilgan</string>
+    <string name="live_streams" source="google_translate">Jonli efirlar</string>
+    <string name="all_live_streams" source="google_translate">Barcha translatsiyalar</string>
+    <string name="video_torrents" source="google_translate">Video torrentlar</string>
+    <string name="audio_torrents" source="google_translate">Ovoz torrentlari</string>
+    <string name="all_torrents" source="google_translate">Barcha torrentlar</string>
+    <string name="main" source="google_translate">Asosiy</string>
+    <string name="media_player" source="google_translate">Media pleer</string>
+    <string name="acestream_server" source="google_translate">Ace Stream serveri (qidiruvi)</string>
+    <string name="media_player_settings" source="google_translate">Media pleer sozlamalari</string>
+    <string name="acestream_server_settings" source="google_translate">Ace Stream server (dvigatel) sozlamalari</string>
+    <string name="sign_out" source="google_translate">Chiqish</string>
+    <string name="sign_in" source="google_translate">tizimga kirish</string>
+    <string name="sign_in_acestream" source="google_translate">Ace Stream bilan kiring</string>
+    <string name="sign_in_google" source="google_translate">Google bilan kiring</string>
+    <string name="video_files" source="google_translate">Video fayllari</string>
+    <string name="audio_files" source="google_translate">Ovozli fayllar</string>
+    <string name="retry" source="google_translate">Qayta urin</string>
+    <string name="failed_to_load_web_page" source="google_translate">Veb-sahifani yuklab bo\'lmadi</string>
 </resources>

@@ -24,10 +24,10 @@
 package org.videolan.vlc.gui.audio;
 
 import android.content.Context;
-import android.databinding.ViewDataBinding;
+import androidx.databinding.ViewDataBinding;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;

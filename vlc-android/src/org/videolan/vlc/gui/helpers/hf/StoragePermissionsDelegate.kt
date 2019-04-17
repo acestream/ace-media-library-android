@@ -29,8 +29,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.vlc.MediaParsingService
 import org.videolan.vlc.util.Constants
@@ -57,7 +57,7 @@ class StoragePermissionsDelegate : BaseHeadlessFragment() {
             intent.removeExtra(Constants.EXTRA_UPGRADE)
             intent.removeExtra(Constants.EXTRA_FIRST_RUN)
         }
-        mWrite = arguments.getBoolean("write")
+        mWrite = arguments?.getBoolean("write") ?: false
         if (AndroidUtil.isMarshMallowOrLater && !canReadStorage(activity)) {
             if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE))
                 Permissions.showStoragePermissionDialog(mActivity, false)

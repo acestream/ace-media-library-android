@@ -14,13 +14,16 @@ import android.view.Display
 import android.view.SurfaceView
 import android.view.WindowManager
 import android.widget.FrameLayout
-import org.videolan.libvlc.RendererItem
-import org.videolan.libvlc.util.AndroidUtil
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.R
 import org.videolan.vlc.RendererDelegate
 import org.videolan.vlc.util.AndroidDevices
+import org.videolan.vlc.util.RendererItemWrapper
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 class DisplayManager(private val activity: Activity, cloneMode: Boolean) : RendererDelegate.RendererPlayer {
 
@@ -28,17 +31,19 @@ class DisplayManager(private val activity: Activity, cloneMode: Boolean) : Rende
 
     val displayType: DisplayType
     // Presentation
-    private val mediaRouter: MediaRouter? by lazy { if (AndroidUtil.isJellyBeanMR1OrLater) activity.applicationContext.getSystemService(Context.MEDIA_ROUTER_SERVICE) as MediaRouter else null }
+    private val mediaRouter: MediaRouter? by lazy { activity.applicationContext.getSystemService(Context.MEDIA_ROUTER_SERVICE) as MediaRouter }
     private var mediaRouterCallback: MediaRouter.SimpleCallback? = null
     var presentation: SecondaryDisplay? = null
     private var presentationDisplayId = -1
     ///Renderers
-    private var rendererItem: RendererItem? = null
+    private var rendererItem: RendererItemWrapper? = null
 
     val isPrimary: Boolean
         get() = displayType == DisplayType.PRIMARY
     val isOnRenderer: Boolean
         get() = displayType == DisplayType.RENDERER
+
+    var recreateOnDisplayChange = true
 
     /**
      * Listens for when presentations are dismissed.
@@ -52,7 +57,7 @@ class DisplayManager(private val activity: Activity, cloneMode: Boolean) : Rende
     }
 
     init {
-        presentation = if (AndroidUtil.isJellyBeanMR1OrLater) createPresentation(cloneMode) else null
+        presentation = createPresentation(cloneMode)
         rendererItem = if (!AndroidDevices.isChromeBook) RendererDelegate.selectedRenderer else null
         displayType = getCurrentType()
         if (!AndroidDevices.isChromeBook) RendererDelegate.addPlayerListener(this)
@@ -69,8 +74,12 @@ class DisplayManager(private val activity: Activity, cloneMode: Boolean) : Rende
         }
     }
 
-    private fun updateDisplayType() {
-        if (getCurrentType() != displayType && activity is VideoPlayerActivity) activity.recreate()
+    private fun updateDisplayType(fromUser: Boolean) {
+        if (fromUser && getCurrentType() != displayType
+                && activity is VideoPlayerActivity
+                && recreateOnDisplayChange) {
+            activity.recreate()
+        }
     }
 
     private fun getCurrentType() = when {
@@ -110,7 +119,7 @@ class DisplayManager(private val activity: Activity, cloneMode: Boolean) : Rende
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     fun mediaRouterAddCallback(add: Boolean) {
-        if (!AndroidUtil.isJellyBeanMR1OrLater || mediaRouter === null
+        if (mediaRouter === null
                 || add == (mediaRouterCallback !== null))
             return
         if (add) {
@@ -121,7 +130,7 @@ class DisplayManager(private val activity: Activity, cloneMode: Boolean) : Rende
                     val newDisplayId = info.presentationDisplay?.displayId ?: -1
                     if (newDisplayId == presentationDisplayId) return
                     presentationDisplayId = newDisplayId
-                    if (presentationDisplayId != -1) removePresentation() else updateDisplayType()
+                    if (presentationDisplayId != -1) removePresentation() else updateDisplayType(false)
                 }
             }
             mediaRouter?.addCallback(MediaRouter.ROUTE_TYPE_LIVE_VIDEO, mediaRouterCallback)
@@ -139,12 +148,12 @@ class DisplayManager(private val activity: Activity, cloneMode: Boolean) : Rende
         if (BuildConfig.DEBUG) Log.i(TAG, "Dismissing presentation because the current route no longer " + "has a presentation display.")
         presentation?.dismiss()
         presentation = null
-        updateDisplayType()
+        updateDisplayType(false)
     }
 
-    override fun onRendererChanged(renderer: RendererItem?) {
+    override fun onRendererChanged(fromUser: Boolean, renderer: RendererItemWrapper?) {
         rendererItem = renderer
-        updateDisplayType()
+        updateDisplayType(fromUser)
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)

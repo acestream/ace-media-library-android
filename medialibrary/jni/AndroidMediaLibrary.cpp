@@ -1,14 +1,16 @@
 #include "AndroidMediaLibrary.h"
 #define LOG_TAG "VLC/JNI/AndroidMediaLibrary"
 #include "log.h"
-#include "jniloader.h"
+// #include "jniloader.h"
+#include <jni.h>
 
-#define FLAG_MEDIA_UPDATED_AUDIO       1 << 0
-#define FLAG_MEDIA_UPDATED_AUDIO_EMPTY 1 << 1
-#define FLAG_MEDIA_UPDATED_VIDEO       1 << 2
-#define FLAG_MEDIA_ADDED_AUDIO         1 << 3
-#define FLAG_MEDIA_ADDED_AUDIO_EMPTY   1 << 4
-#define FLAG_MEDIA_ADDED_VIDEO         1 << 5
+#define FLAG_MEDIA_UPDATED_AUDIO        1 << 0
+#define FLAG_MEDIA_UPDATED_AUDIO_EMPTY  1 << 1
+#define FLAG_MEDIA_UPDATED_VIDEO        1 << 2
+#define FLAG_MEDIA_ADDED_AUDIO          1 << 3
+#define FLAG_MEDIA_ADDED_AUDIO_EMPTY    1 << 4
+#define FLAG_MEDIA_ADDED_VIDEO          1 << 5
+#define FLAG_MEDIA_ADDED_TRANSPORT_FILE 1 << 6
 
 static pthread_key_t jni_env_key;
 static JavaVM *myVm;
@@ -172,6 +174,12 @@ AndroidMediaLibrary::forceRescan()
     p_ml->forceRescan();
 }
 
+void
+AndroidMediaLibrary::reinit()
+{
+    p_ml->reinit();
+}
+
 bool
 AndroidMediaLibrary::increasePlayCount(int64_t mediaId)
 {
@@ -179,6 +187,12 @@ AndroidMediaLibrary::increasePlayCount(int64_t mediaId)
     if (media != nullptr)
         return media->increasePlayCount();
     return false;
+}
+
+bool
+AndroidMediaLibrary::deleteMedia(int64_t mediaId)
+{
+    return p_ml->deleteMedia(mediaId);
 }
 
 std::vector<medialibrary::MediaPtr>
@@ -268,16 +282,28 @@ AndroidMediaLibrary::addMedia(const std::string& mrl)
     return p_ml->addMedia(mrl);
 }
 
-std::vector<medialibrary::MediaPtr>
-AndroidMediaLibrary::videoFiles( medialibrary::SortingCriteria sort, bool desc )
+medialibrary::MediaPtr
+AndroidMediaLibrary::addP2PMedia(int64_t parentMediaId, uint8_t type, const std::string& title, const std::string& mrl)
 {
-    return p_ml->videoFiles(sort, desc);
+    return p_ml->addP2PMedia(parentMediaId, type, title, mrl);
 }
 
 std::vector<medialibrary::MediaPtr>
-AndroidMediaLibrary::audioFiles( medialibrary::SortingCriteria sort, bool desc )
+AndroidMediaLibrary::videoFiles( int is_p2p, int is_live, medialibrary::SortingCriteria sort, bool desc )
 {
-    return p_ml->audioFiles(sort, desc);
+    return p_ml->videoFiles(is_p2p, is_live, sort, desc);
+}
+
+std::vector<medialibrary::MediaPtr>
+AndroidMediaLibrary::transportFiles( int is_parsed, medialibrary::SortingCriteria sort, bool desc )
+{
+    return p_ml->transportFiles(is_parsed, sort, desc);
+}
+
+std::vector<medialibrary::MediaPtr>
+AndroidMediaLibrary::audioFiles( int is_p2p, int is_live, medialibrary::SortingCriteria sort, bool desc )
+{
+    return p_ml->audioFiles(is_p2p, is_live, sort, desc);
 }
 
 std::vector<medialibrary::AlbumPtr>
@@ -417,7 +443,8 @@ void
 AndroidMediaLibrary::onMediaAdded( std::vector<medialibrary::MediaPtr> mediaList )
 {
     if (m_mediaAddedType & FLAG_MEDIA_ADDED_AUDIO || m_mediaAddedType & FLAG_MEDIA_ADDED_VIDEO
-            || m_mediaAddedType & FLAG_MEDIA_ADDED_AUDIO_EMPTY) {
+            || m_mediaAddedType & FLAG_MEDIA_ADDED_AUDIO_EMPTY
+            || m_mediaAddedType & FLAG_MEDIA_ADDED_TRANSPORT_FILE) {
         JNIEnv *env = getEnv();
         if (env == NULL /*|| env->IsSameObject(weak_thiz, NULL)*/)
             return;
@@ -435,6 +462,7 @@ AndroidMediaLibrary::onMediaAdded( std::vector<medialibrary::MediaPtr> mediaList
             for (medialibrary::MediaPtr const& media : mediaList) {
                 medialibrary::IMedia::Type type = media->type();
                 if ((type == medialibrary::IMedia::Type::Audio && m_mediaAddedType & FLAG_MEDIA_ADDED_AUDIO) ||
+                        (type == medialibrary::IMedia::Type::TransportFile && m_mediaAddedType & FLAG_MEDIA_ADDED_TRANSPORT_FILE) ||
                         (type == medialibrary::IMedia::Type::Video && m_mediaAddedType & FLAG_MEDIA_ADDED_VIDEO))
                     item = mediaToMediaWrapper(env, p_fields, media);
                 else
@@ -809,3 +837,35 @@ void
 AndroidMediaLibrary::detachCurrentThread() {
     myVm->DetachCurrentThread();
 }
+
+//:ace
+std::vector<medialibrary::MediaPtr>
+AndroidMediaLibrary::findMediaByInfohash( const std::string& infohash, int fileIndex, medialibrary::SortingCriteria sort, bool desc )
+{
+    return p_ml->findMediaByInfohash(infohash, fileIndex, sort, desc);
+}
+
+std::vector<medialibrary::MediaPtr>
+AndroidMediaLibrary::findMediaByParent( int64_t parentId, medialibrary::SortingCriteria sort, bool desc)
+{
+    return p_ml->findMediaByParent(parentId, sort, desc);
+}
+
+std::vector<medialibrary::MediaPtr>
+AndroidMediaLibrary::findDuplicatesByInfohash()
+{
+    return p_ml->findDuplicatesByInfohash();
+}
+
+bool
+AndroidMediaLibrary::copyMetadata(int64_t sourceId, int64_t destId)
+{
+    return p_ml->copyMetadata(sourceId, destId);
+}
+
+bool
+AndroidMediaLibrary::removeOrphanTransportFiles()
+{
+    return p_ml->removeOrphanTransportFiles();
+}
+///ace

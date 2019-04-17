@@ -22,14 +22,14 @@ package org.videolan.vlc.gui.dialogs
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.DialogFragment
+import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import org.videolan.libvlc.RendererItem
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.videolan.vlc.PlaybackService
 import org.videolan.vlc.R
 import org.videolan.vlc.RendererDelegate
@@ -39,7 +39,10 @@ import org.videolan.vlc.gui.DiffUtilAdapter
 import org.videolan.vlc.gui.PlaybackServiceFragment
 import org.videolan.vlc.gui.helpers.SelectorViewHolder
 import org.videolan.vlc.gui.helpers.UiTools
+import org.videolan.vlc.util.RendererItemWrapper
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class RenderersDialog : DialogFragment(), RendererDelegate.RendererListener, PlaybackService.Client.Callback {
 
     companion object {
@@ -55,7 +58,7 @@ class RenderersDialog : DialogFragment(), RendererDelegate.RendererListener, Pla
         RendererDelegate.addListener(this)
     }
 
-    override fun onDismiss(dialog: DialogInterface?) {
+    override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         RendererDelegate.removeListener(this)
     }
@@ -77,10 +80,10 @@ class RenderersDialog : DialogFragment(), RendererDelegate.RendererListener, Pla
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mBinding.holder = mClickHandler;
-        mBinding.renderersList.layoutManager = LinearLayoutManager(view.context)
+        mBinding.renderersList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(view.context)
         mBinding.renderersList.adapter = mAdapter
         mBinding.renderersDisconnect.isEnabled = RendererDelegate.selectedRenderer !== null
-        mBinding.renderersDisconnect.setTextColor(ContextCompat.getColor(view.context, if (RendererDelegate.selectedRenderer !== null) R.color.orange800 else R.color.grey400))
+        mBinding.renderersDisconnect.setTextColor(ContextCompat.getColor(view.context, if (RendererDelegate.selectedRenderer !== null) UiTools.getResourceFromAttribute(activity, R.attr.text_color_highlight) else UiTools.getResourceFromAttribute(activity, R.attr.text_color_normal)))
         mAdapter.update(mRenderers)
     }
 
@@ -101,24 +104,25 @@ class RenderersDialog : DialogFragment(), RendererDelegate.RendererListener, Pla
 
     override fun onConnected(service: PlaybackService) {
         mService = service
+        service.discoverDevices(false)
     }
 
     override fun onDisconnected() {
         mService = null
     }
 
-    private inner class RendererAdapter : DiffUtilAdapter<RendererItem, SelectorViewHolder<ItemRendererBinding>>() {
+    private inner class RendererAdapter : DiffUtilAdapter<RendererItemWrapper, SelectorViewHolder<ItemRendererBinding>>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectorViewHolder<ItemRendererBinding> {
             val binding = ItemRendererBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            binding.clicHandler = mClickHandler
+            binding.clickHandler = mClickHandler
             return SelectorViewHolder(binding)
         }
 
         override fun onBindViewHolder(holder: SelectorViewHolder<ItemRendererBinding>, position: Int) {
             holder.binding.renderer = mRenderers[position]
-            if (mRenderers[position] == RendererDelegate.selectedRenderer)
-                holder.binding.rendererName.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.orange800))
+            if (RendererItemWrapper.equals(mRenderers[position], RendererDelegate.selectedRenderer, false))
+                holder.binding.rendererName.setTextColor(ContextCompat.getColor(holder.itemView.context, UiTools.getResourceFromAttribute(activity, R.attr.text_color_highlight)))
         }
 
         override fun getItemCount() = dataset.size
@@ -127,11 +131,11 @@ class RenderersDialog : DialogFragment(), RendererDelegate.RendererListener, Pla
     }
 
     inner class RendererClickhandler {
-        fun connect(item: RendererItem?) {
-            RendererDelegate.selectRenderer(item)
-            mService?.setRenderer(item)
+        fun connect(item: RendererItemWrapper?) {
+            RendererDelegate.selectRenderer(true, item)
+            mService?.setRenderer(item, true, "renderers-dialog")
             if (item !== null) activity?.window?.findViewById<View>(R.id.audio_player_container)?.let {
-                UiTools.snacker(it, getString(R.string.casting_connected_renderer, item.displayName))
+                UiTools.snacker(it, getString(R.string.casting_connected_renderer, item.displayName()))
             }
             dismiss()
         }

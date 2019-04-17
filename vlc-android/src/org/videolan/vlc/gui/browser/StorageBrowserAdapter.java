@@ -24,7 +24,7 @@
 package org.videolan.vlc.gui.browser;
 
 import android.net.Uri;
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
 import android.view.View;
 import android.widget.CheckBox;
 

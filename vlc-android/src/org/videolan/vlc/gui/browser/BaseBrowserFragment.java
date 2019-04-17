@@ -33,18 +33,19 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.util.SimpleArrayMap;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.view.ActionMode;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.collection.SimpleArrayMap;
+import androidx.preference.PreferenceManager;
+import androidx.appcompat.view.ActionMode;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -55,7 +56,6 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import org.videolan.libvlc.Media;
-import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.libvlc.util.MediaBrowser;
 import org.videolan.medialibrary.media.MediaLibraryItem;
 import org.videolan.medialibrary.media.MediaWrapper;
@@ -215,7 +215,6 @@ public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAd
         if (hidden) {
             releaseBrowser();
         } else if (mFabPlay != null) {
-            mFabPlay.setImageResource(R.drawable.ic_fab_play);
             updateFab();
         }
     }
@@ -268,13 +267,19 @@ public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAd
         final FragmentActivity activity = getActivity();
         if (activity == null) return false;
         if (!mRoot) {
-            final FragmentManager fm = activity.getSupportFragmentManager();
-            final String tag = fm.getBackStackEntryAt(fm.getBackStackEntryCount()-1).getName();
-            if (!activity.getSupportFragmentManager().popBackStackImmediate() && activity instanceof MainActivity)
-                ((MainActivity)activity).showFragment(this instanceof NetworkBrowserFragment ? R.id.nav_network : R.id.nav_directories);
-            final Fragment current = fm.findFragmentByTag(tag);
-            final View view = current != null ? current.getView() : null;
-            if (view != null) view.setVisibility(View.VISIBLE);
+            try {
+                final FragmentManager fm = activity.getSupportFragmentManager();
+                final String tag = fm.getBackStackEntryAt(fm.getBackStackEntryCount() - 1).getName();
+                if (!activity.getSupportFragmentManager().popBackStackImmediate() && activity instanceof MainActivity)
+                    ((MainActivity) activity).showFragment(this instanceof NetworkBrowserFragment ? R.id.nav_network : R.id.nav_directories);
+                final Fragment current = fm.findFragmentByTag(tag);
+                final View view = current != null ? current.getView() : null;
+                if (view != null) view.setVisibility(View.VISIBLE);
+            }
+            catch(IllegalStateException e) {
+                Log.e(TAG, "error", e);
+                return false;
+            }
         }
         return !mRoot;
     }
@@ -512,7 +517,7 @@ public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAd
             }
         } else {
             boolean canPlayInList =  mw.getType() == MediaWrapper.TYPE_AUDIO ||
-                    (mw.getType() == MediaWrapper.TYPE_VIDEO && AndroidUtil.isHoneycombOrLater);
+                    (mw.getType() == MediaWrapper.TYPE_VIDEO);
             menu.findItem(R.id.directory_view_play_all).setVisible(canPlayInList);
             menu.findItem(R.id.directory_view_append).setVisible(canPlayInList);
             menu.findItem(R.id.directory_view_delete).setVisible(canWrite);
@@ -620,7 +625,7 @@ public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAd
         for (Object file : mAdapter.getAll())
             if (file instanceof MediaWrapper) {
                 final MediaWrapper media = (MediaWrapper) file;
-                if ((AndroidUtil.isHoneycombOrLater && media.getType() == MediaWrapper.TYPE_VIDEO) || media.getType() == MediaWrapper.TYPE_AUDIO) {
+                if ((media.getType() == MediaWrapper.TYPE_VIDEO) || media.getType() == MediaWrapper.TYPE_AUDIO) {
                     mediaLocations.add(media);
                     if (mw != null && media.equals(mw))
                         positionInPlaylist = mediaLocations.size() - 1;

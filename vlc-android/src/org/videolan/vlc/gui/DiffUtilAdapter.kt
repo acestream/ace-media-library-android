@@ -1,18 +1,17 @@
 package org.videolan.vlc.gui
 
-import android.support.annotation.MainThread
-import android.support.annotation.WorkerThread
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.channels.Channel
-import kotlinx.coroutines.experimental.channels.actor
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.newSingleThreadContext
-import kotlinx.coroutines.experimental.withContext
+import androidx.annotation.MainThread
+import androidx.annotation.WorkerThread
+import androidx.recyclerview.widget.DiffUtil
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.actor
 import java.util.*
 
-abstract class DiffUtilAdapter<D, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>() {
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
+abstract class DiffUtilAdapter<D, VH : androidx.recyclerview.widget.RecyclerView.ViewHolder> : androidx.recyclerview.widget.RecyclerView.Adapter<VH>(), CoroutineScope {
+    override val coroutineContext = Dispatchers.Main.immediate
 
     protected var dataset: List<D> = listOf()
     private set
@@ -33,7 +32,7 @@ abstract class DiffUtilAdapter<D, VH : RecyclerView.ViewHolder> : RecyclerView.A
     private suspend fun internalUpdate(list: List<D>) {
         val finalList = prepareList(list)
         val result = DiffUtil.calculateDiff(diffCallback.apply { update(dataset, finalList) }, detectMoves())
-        withContext(UI) {
+        withContext(Dispatchers.Main) {
             dataset = finalList
             result.dispatchUpdatesTo(this@DiffUtilAdapter)
             onUpdateFinished()

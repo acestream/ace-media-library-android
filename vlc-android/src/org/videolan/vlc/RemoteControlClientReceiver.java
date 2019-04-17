@@ -22,7 +22,7 @@ package org.videolan.vlc;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
-import android.support.v4.media.session.MediaButtonReceiver;
+import androidx.media.session.MediaButtonReceiver;
 import android.view.KeyEvent;
 
 import org.videolan.libvlc.util.AndroidUtil;

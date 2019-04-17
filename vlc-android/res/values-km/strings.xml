@@ -9,9 +9,6 @@
     <string name="sortby_length">រយៈពេល</string>
     <string name="searchable_hint">ស្វែងរក…</string>
     <string name="history">ប្រវត្តិ</string>
-    <plurals name="search_found_results_quantity">
-        <item quantity="other">រក​ឃើញ​លទ្ធផល %d</item>
-    </plurals>
     <string name="play">ចាក់</string>
     <string name="play_from_start">ចាក់​ពី​ដើម</string>
     <string name="play_as_audio">ចាក់​ជា​អូឌីយ៉ូ</string>
@@ -43,12 +40,6 @@
     </plurals>
     <plurals name="subfolders_quantity">
         <item quantity="other">ថត​រង %d</item>
-    </plurals>
-    <plurals name="mediafiles_quantity">
-        <item quantity="other">ឯកសារ​មេឌៀ %d</item>
-    </plurals>
-    <plurals name="videos_quantity">
-        <item quantity="other">%d វីដេអូ</item>
     </plurals>
     <string name="internal_memory">អង្គ​ចងចាំ​ខាង​ក្នុង</string>
     <string name="parent_folder">ទៅ​ថត​មេ</string>
@@ -148,11 +139,9 @@
     <string name="subtitle_text_encoding">ការ​ដាក់​លេខ​កូដ​អត្ថបទ​ចំណង​ជើង​រង</string>
     <string name="extra_prefs_category">ការ​កំណត់​បន្ថែម</string>
     <string name="interface_prefs_screen">ចំណុច​ប្រទាក់</string>
-    <string name="interface_secondary_display_category">ចំណុច​ប្រទាក់ - ការ​បង្ហាញ​ទីពីរ</string>
     <string name="enable_clone_mode">ក្លូន​ដែល​ពេញចិត្ត</string>
     <string name="enable_clone_mode_summary">ក្លូន​អេក្រង់​ឧបករណ៍​នេះ ដោយ​មិន​បាច់​ការ​បញ្ជា​ពី​ចម្ងាយ។</string>
     <string name="interface_other_category">ចំណុចប្រទាក់ - ផ្សេង</string>
-    <string name="enable_brightness_gesture">បើក​កាយវិការ​ពន្លឺ</string>
     <string name="enable_brightness_gesture_summary">ពិនិត្យ​ពន្លឺ​ដោយ​កាយវិការ​អំឡុង​ពេល​ចាក់​វីដេអូ​ឡើងវិញ</string>
     <string name="enable_headset_detection">រក​កាស</string>
     <string name="enable_headset_detection_summary">ផ្អាក​ពេល​ដក​កាស​ចេញ បន្ត​ពេល​ដោត​កាស​</string>
@@ -199,4 +188,339 @@
     <string name="sending_log">កំពុង​ផ្ញើចូល...</string>
     <!--Accessibility-->
     <!--Widget-->
+    <string name="torrent_files">Torrent ឯកសារ</string>
+    <string name="select_language">ជ្រើសរើស​ភាសា</string>
+    <string name="sortby_name_desc" source="google_translate">ឈ្មោះ (desc)</string>
+    <string name="sortby_artist_name" source="google_translate">ឈ្មោះសិល្បករ</string>
+    <string name="sortby_artist_name_desc" source="google_translate">ឈ្មោះសិល្បករ (desc)</string>
+    <string name="sortby_album_name" source="google_translate">ឈ្មោះអាល់ប៊ុម</string>
+    <string name="sortby_album_name_desc" source="google_translate">ឈ្មោះអាល់ប៊ុម (desc)</string>
+    <string name="sortby_length_desc" source="google_translate">ប្រវែង (desc)</string>
+    <string name="sortby_date" source="google_translate">កាលបរិច្ឆេទ</string>
+    <string name="sortby_date_desc" source="google_translate">ទិន្នន័យ (desc)</string>
+    <string name="sortby_number" source="google_translate">បទលេខ</string>
+    <string name="sortby_number_desc" source="google_translate">បទលេខ (desc)</string>
+    <string name="playback" source="google_translate">ចាក់សារថ្មី</string>
+    <string name="playback_controls" source="google_translate">ការគ្រប់គ្រងការចាក់សារថ្មី</string>
+    <string name="medialibrary_scan" source="google_translate">បណ្ណាល័យប្រព័ន្ធផ្សព្វផ្សាយស្កេន</string>
+    <string name="Medialibrary_progress" source="google_translate">បណ្ណាល័យមេឌៀធ្វើបច្ចុប្បន្នភាពវឌ្ឍនភាព</string>
+    <string name="video_app_switch_title" source="google_translate">របៀបផ្ទៃខាងក្រោយ / PiP</string>
+    <string name="video_app_switch_summary" source="google_translate">ជ្រើសឥរិយាបថ VLC នៅពេលអ្នកប្តូរទៅកម្មវិធីផ្សេងទៀតពីការចាក់វីដេអូឡើងវិញ</string>
+    <string name="play_pip_title" source="google_translate">ចាក់វីដេអូក្នុងរបៀបរូបភាពក្នុងរូបភាព</string>
+    <string name="play_as_audio_background" source="google_translate">លេងវីដេអូក្នុងផ្ទៃខាងក្រោយ</string>
+    <string name="insert_next" source="google_translate">បញ្ចូលបន្ទាប់ទៀត</string>
+    <string name="info_title" source="google_translate">VLC</string>
+    <string name="unknown_number" source="google_translate">ចំនួនបទដែលមិនស្គាល់</string>
+    <string name="tracks" source="google_translate">បទ</string>
+    <string name="noplaylist" source="google_translate">រកមិនឃើញបញ្ជីចាក់។</string>
+    <string name="shuffle_title" source="google_translate">របៀបសាប់</string>
+    <string name="shuffle" source="google_translate">ច្របល់បិទ</string>
+    <string name="shuffle_on" source="google_translate">ច្របល់លើ</string>
+    <string name="repeat_title" source="google_translate">ធ្វើម្តងទៀតរបៀប</string>
+    <string name="repeat" source="google_translate">កុំធ្វើម្តងទៀត</string>
+    <string name="repeat_single" source="google_translate">ធ្វើម្តងទៀតម្តង</string>
+    <string name="repeat_all" source="google_translate">ធ្វើម្តងទៀតទាំងអស់</string>
+    <string name="firstsong" source="google_translate">ចម្រៀងដំបូងនៃបញ្ជីចាក់</string>
+    <string name="lastsong" source="google_translate">បទចម្រៀងចុងក្រោយនៃបញ្ជីចាក់</string>
+    <string name="surface_fit_screen" source="google_translate">សមនឹងអេក្រង់</string>
+    <string name="sound_on" source="google_translate">សំឡេងនៅលើ</string>
+    <string name="sound_off" source="google_translate">សំឡេងបិទ</string>
+    <string name="navmenu" source="google_translate">ម៉ឺនុយរុករក</string>
+    <string name="advanced" source="google_translate">ជម្រើសកម្រិតខ្ពស់</string>
+    <string name="sleep_in" source="google_translate">គេងនៅក្នុង</string>
+    <string name="server_add_title" source="google_translate">បន្ថែមម៉ាស៊ីនមេថ្មីទៅសំណព្វ</string>
+    <string name="server_domain_hint" source="google_translate">អាសយដ្ឋានម៉ាស៊ីនបម្រើ (ឈ្មោះដែនឬ IP)</string>
+    <string name="server_share_hint" source="google_translate">ឈ្មោះចែករំលែកបណ្ដាញ (ឬអាសយដ្ឋាន IP)</string>
+    <string name="server_folder_hint" source="google_translate">ផ្លូវថត (ស្រេចចិត្ត)</string>
+    <string name="server_username_hint" source="google_translate">ឈ្មោះ​អ្នកប្រើប្រាស់</string>
+    <string name="server_servername_hint" source="google_translate">ឈ្មោះម៉ាស៊ីនបម្រើសម្រាប់ភាពងាយស្រួល</string>
+    <string name="server_port" source="google_translate">ច្រក:</string>
+    <string name="login" source="google_translate">ចូល</string>
+    <string name="password" source="google_translate">ពាក្យសម្ងាត់</string>
+    <string name="search_results" source="google_translate">លទ្ធផលស្វែងរក</string>
+    <string name="search_no_result" source="google_translate">រកមិនឃើញមេឌៀ</string>
+    <string name="favorites_add" source="google_translate">បន្ថែមទៅសំណព្វ</string>
+    <string name="favorites_remove" source="google_translate">លុបចេញពីសំណព្វ</string>
+    <string name="favorites_edit" source="google_translate">កែប្រែ</string>
+    <string name="favorite_added" source="google_translate">បានរក្សាទុកទៅសំណព្វ</string>
+    <string name="favorite_removed" source="google_translate">បានយកចេញពីចិត្ត</string>
+    <string name="error_message_is" source="google_translate">សារកំហុសឆ្គងគឺ (សូមនិយាយអំពីបញ្ហានេះពេលបំបាត់កំហុស): \ n</string>
+    <string name="encountered_error_message" source="google_translate">VLC បានជួបប្រទះកំហុសឆ្គងជាមួយមេឌៀនេះ។ \ n សូមសាកល្បងធ្វើឱ្យបណ្ណាល័យព័ត៌មានទាន់សម័យ។</string>
+    <string name="playback_history_title" source="google_translate">ប្រវត្តិចាក់សារថ្មី</string>
+    <string name="playback_history_summary" source="google_translate">រក្សាទុកមេឌៀទាំងអស់ដែលបានចាក់នៅក្នុងផ្នែកប្រវត្តិសាស្ត្រ</string>
+    <string name="playback_speed_title" source="google_translate">សន្សំល្បឿនលេង</string>
+    <string name="playback_speed_summary" source="google_translate">ចងចាំពីល្បឿនលេងដែលអ្នកបានកំណត់</string>
+    <string name="audio_sub" source="google_translate">បទអូឌីយ៉ូ \ n និងអក្សររត់</string>
+    <string name="ok_got_it" source="google_translate">ទទួលបានវាបោះបង់ចោលនេះ</string>
+    <string name="playlist_tips" source="google_translate">គន្លឹះបញ្ជីចាក់</string>
+    <string name="remove_song" source="google_translate">លុបបទចម្រៀង</string>
+    <string name="rearrange_order" source="google_translate">រៀបចំលំដាប់</string>
+    <string name="hold_to_seek" source="google_translate">សង្កត់ដើម្បីស្វែងរក</string>
+    <string name="audio_player_tips" source="google_translate">គន្លឹះអ្នកលេងអូឌីយ៉ូ</string>
+    <string name="previous_next_song" source="google_translate">មុន / បទចម្រៀងបន្ទាប់</string>
+    <string name="show_playlist" source="google_translate">បង្ហាញបញ្ជីចាក់</string>
+    <string name="hold_to_stop" source="google_translate">សង្កត់ឱ្យឈប់</string>
+    <string name="hardware_acceleration_summary" source="google_translate">បិទដំណើរការ: ស្ថេរភាពប្រសើរជាងមុន។ \ n ការកំណត់កូដ: អាចធ្វើឱ្យប្រតិបត្តិការប្រសើរឡើង។ \ n ពេញ: អាចធ្វើឱ្យដំណើរការកាន់តែប្រសើរ។</string>
+    <string name="dev_hardware_decoder" source="google_translate">ឌិកូដឧបករណ៍កម្រិតខ្ពស់</string>
+    <string name="dev_hardware_decoder_summary" source="google_translate">បង្ខំឧបករណ៍ឌិកូដផ្នែករឹងសម្រាប់អ្នកប្រើកម្រិតខ្ពស់តែប៉ុណ្ណោះ</string>
+    <string name="dev_hardware_decoder_omx" source="google_translate">iomx</string>
+    <string name="dev_hardware_decoder_omx_dr" source="google_translate">iomx-dr</string>
+    <string name="dev_hardware_decoder_mediacodec" source="google_translate">mediacodec</string>
+    <string name="dev_hardware_decoder_mediacodec_dr" source="google_translate">mediacodec-បណ្ឌិត</string>
+    <string name="daynight_title" source="google_translate">របៀបថ្ងៃរាត្រី</string>
+    <string name="daynight_summary" source="google_translate">ប្តូរដោយស្វ័យប្រវត្តិទៅជារបៀបពេលយប់តាមពេលវេលាសមស្រប</string>
+    <string name="interface_gui" source="google_translate">បង្ហាញ</string>
+    <string name="interface_secondary_display_category_title" source="google_translate">បង្ហាញជាអនុវិទ្យាល័យ</string>
+    <string name="interface_secondary_display_category_summary" source="google_translate">ការកំណត់នៅពេលការបង្ហាញទីពីរត្រូវបានភ្ជាប់ (HDMI / Chromecast) ។</string>
+    <string name="video_prefs_category" source="google_translate">វីដេអូ</string>
+    <string name="video_min_group_length_title" source="google_translate">វីដេអូក្រុម</string>
+    <string name="video_min_group_length_summary" source="google_translate">វីដេអូត្រូវបានដាក់ជាក្រុមប្រសិនបើសំបុត្រដំបូងរបស់ពួកគេគឺដូចគ្នា។</string>
+    <string name="video_min_group_length_disable" source="google_translate">បិទ</string>
+    <string name="video_min_group_length_first" source="google_translate">លិខិតដំបូងតែប៉ុណ្ណោះ</string>
+    <string name="video_min_group_length_short" source="google_translate">ចំនួនអក្សរទាប (6)</string>
+    <string name="video_min_group_length_long" source="google_translate">ចំនួនអក្សរច្រើន (9)</string>
+    <string name="media_fast_seek" source="google_translate">អនុញ្ញាតជម្រើសស្វែងរកលឿន</string>
+    <string name="media_seen" source="google_translate">បង្ហាញឧបករណ៍សម្គាល់វីដេអូបានមើល</string>
+    <string name="media_seen_summary" source="google_translate">សម្គាល់វីដេអូដូចបានឃើញនៅពេលអ្នកលេងវារហូតដល់ចប់</string>
+    <string name="force_list_portrait" source="google_translate">គ្មានក្រឡាចត្រង្គក្នុងរបៀបបញ្ឈរ</string>
+    <string name="force_list_portrait_summary" source="google_translate">បង្ហាញវីដេអូក្នុងបញ្ជីជំនួសឱ្យក្រឡាចត្រង្គក្នុងរបៀបបញ្ឈរ</string>
+    <string name="force_play_all_summary" source="google_translate">ចាក់វីដេអូទាំងអស់ដោយចាប់ផ្ដើមជាមួយវីដេអូដែលអ្នកបានចុច</string>
+    <string name="force_play_all_title" source="google_translate">របៀបបញ្ជីចាក់វីដេអូ</string>
+    <string name="save_brightness_summary" source="google_translate">ចងចាំកម្រិតភ្លឺនៅក្នុងកម្មវិធីចាក់វីដេអូ</string>
+    <string name="save_brightness_title" source="google_translate">រក្សាទុកកម្រិតពន្លឺសម្រាប់វីដេអូ</string>
+    <string name="save_audiodelay_summary" source="google_translate">រក្សាទុកការពន្យារអូឌីយ៉ូនីមួយៗសម្រាប់វីដេអូនីមួយៗ</string>
+    <string name="save_audiodelay_title" source="google_translate">រក្សាទុកការពន្យារអូឌីយ៉ូ</string>
+    <string name="enable_brightness_gesture_title" source="google_translate">កាយវិការពន្លឺ</string>
+    <string name="enable_volume_gesture_title" source="google_translate">កាយវិការបរិមាណ</string>
+    <string name="enable_volume_gesture_summary" source="google_translate">គ្រប់គ្រងកម្រិតសំឡេងតាមកាយវិការអំឡុងពេលចាក់សារថ្មី</string>
+    <string name="enable_seek_buttons" source="google_translate">បើកដំណើរការស្វែងរកប៊ូតុង</string>
+    <string name="enable_seek_buttons_summary" source="google_translate">បង្ហាញប៊ូតុងថយក្រោយនិងបញ្ជូនបន្តនៅលើចំណុចប្រទាក់វីដេអូ</string>
+    <string name="enable_double_tap_seek_title" source="google_translate">ប៉ះទ្វេដងដើម្បីស្វែងរក</string>
+    <string name="enable_double_tap_seek_summary" source="google_translate">ប៉ះទ្វេដងលើគែមអេក្រង់ដើម្បីស្វែងរករយៈពេល 10 វិនាទី</string>
+    <string name="popup_keepscreen_title" source="google_translate">រក្សាអេក្រង់នៅលើរបៀបលេចឡើង</string>
+    <string name="popup_keepscreen_summary" source="google_translate">រក្សាអេក្រង់បើកជានិច្ចនៅពេលលេចឡើងត្រូវបានបង្ហាញទោះបីជាវីដេអូត្រូវបានផ្អាកក៏ដោយ។</string>
+    <string name="browser_show_hidden_files_title" source="google_translate">បង្ហាញឯកសារដែលលាក់</string>
+    <string name="browser_show_hidden_files_summary" source="google_translate">បង្ហាញឯកសារដែលលាក់នៅក្នុងកម្មវិធីរុករក</string>
+    <string name="subtitles_prefs_category" source="google_translate">ចំណងជើងរង</string>
+    <string name="subtitles_size_title" source="google_translate">ទំហំចំណងជើងរង</string>
+    <string name="subtitles_size_small" source="google_translate">តូច</string>
+    <string name="subtitles_size_normal" source="google_translate">ធម្មតា</string>
+    <string name="subtitles_size_big" source="google_translate">ធំ</string>
+    <string name="subtitles_size_huge" source="google_translate">ធំ</string>
+    <string name="subtitles_color_title" source="google_translate">ចំណងជើងរងពណ៌</string>
+    <string name="subtitles_color_white" source="google_translate">ពណ៌ស</string>
+    <string name="subtitles_color_gray" source="google_translate">ប្រផេះ</string>
+    <string name="subtitles_color_pink" source="google_translate">ពណ៌ផ្កាឈូក</string>
+    <string name="subtitles_color_blue" source="google_translate">ខៀវ</string>
+    <string name="subtitles_color_yellow" source="google_translate">លឿង</string>
+    <string name="subtitles_color_green" source="google_translate">បៃតង</string>
+    <string name="subtitles_background_title" source="google_translate">ចំណងជើងរងផ្ទៃខាងក្រោយ</string>
+    <string name="subtitles_bold_title" source="google_translate">ចំណងជើងដិត</string>
+    <string name="subtitles_autoload_title" source="google_translate">ផ្ទុកចំណងជើងរងដោយស្វ័យប្រវត្តិ</string>
+    <string name="audio_prefs_category" source="google_translate">អូឌីយ៉ូ</string>
+    <string name="lockscreen_cover_title" source="google_translate">គម្របប្រព័ន្ធផ្សព្វផ្សាយនៅលើ Lockscreen</string>
+    <string name="lockscreen_cover_summary" source="google_translate">នៅពេលដែលអាចរកបានសូមដាក់គម្របមេឌៀបច្ចុប្បន្នជាផ្ទាំងរូបភាពចាក់សោរ</string>
+    <string name="playlist_animate_scroll_title" source="google_translate">ធ្វើបច្ចុប្បន្នភាពបញ្ជីចាក់ស្វ័យប្រវត្តិបច្ចុប្បន្ន</string>
+    <string name="playlist_animate_scroll_summary" source="google_translate">ធ្វើចលនាលើការផ្លាស់ប្តូរប្រព័ន្ធផ្សព្វផ្សាយ</string>
+    <string name="audio_title_alignment" source="google_translate">តម្រឹមចំណងជើងអូឌីយ៉ូ</string>
+    <string name="audio_title_alignment_default" source="google_translate">លំនាំដើម</string>
+    <string name="audio_title_alignment_left" source="google_translate">ឆ្វេង</string>
+    <string name="audio_title_alignment_centre" source="google_translate">មជ្ឈមណ្ឌល</string>
+    <string name="audio_title_alignment_right" source="google_translate">សិទ្ធិ</string>
+    <string name="audio_title_alignment_marquee" source="google_translate">Marquee</string>
+    <string name="audio_save_repeat_title" source="google_translate">រក្សាទុករបៀបធ្វើឡើងវិញ</string>
+    <string name="audio_save_repeat_summary" source="google_translate">ចងចាំរបៀបធ្វើឡើងវិញនៅពេលផ្ទុកបញ្ជីអូឌីយ៉ូ</string>
+    <string name="audio_boost_title" source="google_translate">បង្កើនអូឌីយ៉ូ</string>
+    <string name="headset_prefs_category" source="google_translate">កាស</string>
+    <string name="enable_headset_actions_title" source="google_translate">ផ្លូវកាត់បញ្ជាពីចម្ងាយ</string>
+    <string name="enable_headset_actions_summary" source="google_translate">ចុចទ្វេដងលើ \'លេង \' ដើម្បីរំលងទៅបន្ទាប់ហើយចុចលើវាយូរដើម្បីរំលងទៅបទមុន</string>
+    <string name="enable_play_on_headset_insertion" source="google_translate">បន្តនៅលើការបញ្ចូលកាស</string>
+    <string name="enable_play_on_headset_insertion_summary" source="google_translate">ផ្អាកបើមិនដូច្នេះទេ</string>
+    <string name="audio_ducking_title" source="google_translate">បន្ថយទំហំ VLC នៅលើការជូនដំណឹង</string>
+    <string name="audio_ducking_summary" source="google_translate">ជួយស្ដាប់ការជូនដំណឹងអូឌីយ៉ូការណែនាំអំពីការបើកបរឬជំនួយការនិយាយ</string>
+    <string name="casting_category" source="google_translate">កំពុងខាស</string>
+    <string name="casting_passthrough_title" source="google_translate">អូឌីយ៉ូ Passthrough</string>
+    <string name="casting_passthrough_summary" source="google_translate">ឱ្យទូរទស្សន៍របស់អ្នកគ្រប់គ្រងការបង្ហាញអូឌីយ៉ូ</string>
+    <string name="casting_conversion_quality_title" source="google_translate">គុណភាពការបម្លែង</string>
+    <string name="casting_conversion_quality_summary" source="google_translate">ជ្រើសគុណភាពការបម្លែងនៅពេលចាក់នៅលើអេក្រង់ពីចម្ងាយ</string>
+    <string name="casting_quality_high" source="google_translate">ខ្ពស់</string>
+    <string name="casting_quality_medium" source="google_translate">មធ្យម</string>
+    <string name="casting_quality_low" source="google_translate">ទាប</string>
+    <string name="casting_quality_lowcpu" source="google_translate">ទាបបំផុត</string>
+    <string name="cast_performance_warning" source="google_translate">ការខាសវីដេអូនេះតម្រូវឱ្យមានការផ្លាស់ប្តូរ។ ការបម្លែងនេះអាចប្រើថាមពលដែលអាចប្រើបានទាំងអស់ហើយអាចបង្រួមថ្មរបស់អ្នកបានយ៉ាងលឿន។</string>
+    <string name="artists_show_all_title" source="google_translate">បង្ហាញសិល្បករទាំងអស់</string>
+    <string name="artists_show_all_summary" source="google_translate">បង្ហាញសិល្បករទាំងអស់ក្នុងបញ្ជីសិល្បករមិនមែនសិល្បករអាល់ប៊ុមទេ</string>
+    <string name="extensions_prefs_category" source="google_translate">ផ្នែកបន្ថែម</string>
+    <string name="extensions_enable_category" source="google_translate">ជ្រើសផ្នែកបន្ថែមដើម្បីបើក</string>
+    <string name="extensions_empty" source="google_translate">រកមិនឃើញផ្នែកបន្ថែមទេ</string>
+    <string name="extension_prefs_activation_title" source="google_translate">ធ្វើឱ្យសកម្ម</string>
+    <string name="android_auto" source="google_translate">រថយន្ត Android</string>
+    <string name="controls_prefs_category" source="google_translate">ការត្រួតពិនិត្យ</string>
+    <string name="chroma_format_summary" source="google_translate">RGB 32 ប៊ីត: chroma លំនាំដើម \ nRGB 16 ប៊ីត: ដំណើរការល្អប្រសើរជាងមុនប៉ុន្តែគុណភាពទាប \ nYUV: ដំណើរការល្អបំផុតប៉ុន្តែមិនដំណើរការលើគ្រប់ឧបករណ៍ទាំងអស់ទេ។ Android 2.3 ហើយក្រោយមកតែប៉ុណ្ណោះ។</string>
+    <string name="main_prefs_category" source="google_translate">ការកំណត់ចំបង</string>
+    <string name="save_video_none" source="google_translate">កុំរក្សាទុកល្បឿន</string>
+    <string name="save_video_session" source="google_translate">សន្សំសំចៃល្បឿនកំឡុងសម័យ</string>
+    <string name="save_video_always" source="google_translate">សន្សំល្បឿនឆ្លងកាត់សម័យ</string>
+    <string name="auto_rescan" source="google_translate">ពិនិត្យឡើងវិញដោយស្វ័យប្រវត្តិ</string>
+    <string name="auto_rescan_summary" source="google_translate">ស្កេនឧបករណ៍សម្រាប់មេឌៀថ្មីឬលុបដោយស្វ័យប្រវត្តិនៅពេលចាប់ផ្តើមកម្មវិធី</string>
+    <string name="dump_media_db" source="google_translate">បោះបង់មូលដ្ឋានទិន្នន័យប្រព័ន្ធផ្សព្វផ្សាយ</string>
+    <string name="dump_media_db_summary" source="google_translate">ចម្លងមូលដ្ឋានទិន្នន័យទៅជា root ផ្ទុកខាងក្នុង</string>
+    <string name="clear_media_db_summary" source="google_translate">ចូលដំណើរការព័ត៌មាន Android VLC ដើម្បីជម្រះទិន្នន័យ</string>
+    <string name="resume_playback_title" source="google_translate">បន្តការចាក់សារឡើងវិញបន្ទាប់ពីការហៅ</string>
+    <string name="resume_playback_summary" source="google_translate">ស្នាក់នៅក្នុងការផ្អាកបើមិនដូច្នេះទេ</string>
+    <string name="network_caching_popup" source="google_translate">តម្លៃនេះត្រូវតែនៅចន្លោះ 0 និង 6000 ms</string>
+    <string name="log_service_title" source="google_translate">ការថតកំណត់ហេតុ VLC</string>
+    <string name="log_service_text" source="google_translate">បើកកុងសូលកំណត់ហេតុ</string>
+    <string name="serious_crash" source="google_translate">ជាអកុសលកំហុសធ្ងន់ធ្ងរមួយបានកើតឡើងហើយ VLC ត្រូវបិទ។</string>
+    <string name="help_us_send_log" source="google_translate">ជួយយើងកែលម្អ VLC ដោយការផ្ញើកំណត់ហេតុគាំងដូចខាងក្រោម:</string>
+    <string name="drawer_open" source="google_translate">បើកថតរុករក</string>
+    <string name="drawer_close" source="google_translate">បិទថតរុករក</string>
+    <string name="network_browsing" source="google_translate">បណ្តាញមូលដ្ឋាន</string>
+    <string name="browsing" source="google_translate">ការរុករក</string>
+    <string name="file_size" source="google_translate">ទំហំ​ឯកសារ:</string>
+    <string name="audio_delay" source="google_translate">ការពន្យារអូឌីយ៉ូ</string>
+    <string name="spu_delay" source="google_translate">ការពន្យារចំណងជើងរង</string>
+    <string name="sleep_time_not_set" source="google_translate">គ្មានសំណុំ</string>
+    <string name="network_shares_discovery" source="google_translate">កំពុងរកមើលការចែករំលែកបណ្ដាញ ...</string>
+    <string name="network_empty" source="google_translate">ថតនេះទទេ។</string>
+    <string name="network_connection_needed" source="google_translate">គ្មានការតភ្ជាប់ទៅបណ្តាញមូលដ្ឋាន។</string>
+    <string name="search_hint" source="google_translate">ស្វែងរកប្រព័ន្ធផ្សព្វផ្សាយ</string>
+    <string name="search_list_hint" source="google_translate">ស្វែងរកមេឌៀនៅក្នុងបញ្ជីបច្ចុប្បន្ន</string>
+    <string name="search_global" source="google_translate">ស្វែងរកនៅក្នុងបណ្ណាល័យព័ត៌មានទាំងអស់</string>
+    <string name="directory_show_medialib" source="google_translate">បង្ហាញក្នុង MediaLib</string>
+    <string name="directory_hide_medialib" source="google_translate">លាក់ពី MediaLib</string>
+    <string name="playlist_save" source="google_translate">រក្សាទុកបញ្ជីចាក់</string>
+    <string name="playlist_name_hint" source="google_translate">ឈ្មោះបញ្ជីចាក់</string>
+    <string name="go_to_chapter" source="google_translate">ទៅជំពូក ...</string>
+    <string name="chapter" source="google_translate">ជំពូក</string>
+    <string name="resume_from_position" source="google_translate">បន្តពីទីតាំងចុងក្រោយ</string>
+    <string name="confirm_resume" source="google_translate">បន្តពីតំណែងចុងក្រោយ?</string>
+    <string name="confirm_resume_title" source="google_translate">ស្នើការបញ្ជាក់ដើម្បីបន្ត</string>
+    <string name="confirm_resume_summary" source="google_translate">ប្រសិនបើសកម្មអ្នកនឹងត្រូវបានស្នើសុំឱ្យបញ្ជាក់នៅពេលវីដេអូអាចត្រូវបានបន្តពីទីតាំងចុងក្រោយ</string>
+    <string name="directory_empty" source="google_translate">ថតគឺទទេ</string>
+    <string name="player_touch_title" source="google_translate">ប៉ះបញ្ជាសម្រាប់វីដេអូ</string>
+    <string name="player_touch_enable_all" source="google_translate">បើកដំណើរការត្រួតពិនិត្យទូច</string>
+    <string name="player_touch_disable_brightness" source="google_translate">បិទដំណើរការគ្រប់គ្រងពន្លឺ</string>
+    <string name="player_touch_disable_all" source="google_translate">បិទដំណើរការត្រួតពិនិត្យទាំងអស់</string>
+    <string name="tv_ui_title" source="google_translate">ចំណុចប្រទាក់ទូរទស្សន៍ Android</string>
+    <string name="tv_ui_summary" source="google_translate">ផ្លាស់ប្តូរចំណុចប្រទាក់ទៅជាប្រធានបទទូរទស្សន៍ដែលប្រែប្រួល</string>
+    <string name="medialibrary" source="google_translate">បណ្ណាល័យប្រព័ន្ធផ្សព្វផ្សាយ</string>
+    <string name="medialibrary_directories" source="google_translate">ថតបណ្ណាល័យមេឌៀ</string>
+    <string name="more_actions" source="google_translate">សកម្មភាពបន្ថែមទៀត</string>
+    <string name="move" source="google_translate">ផ្លាស់ទី</string>
+    <string name="back_quit_lock" source="google_translate">ចុចថយក្រោយម្តងទៀតដើម្បីចេញពីវីដេអូ</string>
+    <string name="playlist_deleted" source="google_translate">បានលុបបញ្ជីចាក់</string>
+    <string name="file_deleted" source="google_translate">បានលុបឯកសារ</string>
+    <string name="no_subs_found" source="google_translate">មិនមានចំណងជើងរងនៅក្នុងថតនេះទេ</string>
+    <string name="music_now_playing" source="google_translate">ឥឡូវកំពុងលេង</string>
+    <string name="widget_name_w" source="google_translate">VLC White Widget</string>
+    <string name="widget_name_b" source="google_translate">VLC Widget ងងឹត</string>
+    <string name="allow_storage_access_title" source="google_translate">អនុញ្ញាតឱ្យស្ទ្រីមអាត់ដើម្បីចូលប្រើវីដេអូនិងឯកសារអូឌីយ៉ូ</string>
+    <string name="allow_storage_access_description" source="google_translate">អាត់ស្ទ្រីមត្រូវការឱ្យអ្នកអនុញ្ញាតការអនុញ្ញាតនេះដើម្បីចូលប្រើឯកសារមេឌៀនៅលើឧបករណ៍នេះ។</string>
+    <string name="allow_settings_access_ringtone_title" source="google_translate">អនុញ្ញាតឱ្យស្ទ្រីមអាត់ដើម្បីកំណត់សំឡេងរោទ៍</string>
+    <string name="allow_settings_access_ringtone_description" source="google_translate">អាត់ស្ទ្រីមត្រូវការឱ្យអ្នកអនុញ្ញាតការអនុញ្ញាតនេះដើម្បីបង្កើតបទចំរៀងនេះជាសម្លេងរោទ៍របស់អ្នក។</string>
+    <string name="allow_settings_access_brightness_title" source="google_translate">អនុញ្ញាតឱ្យអាត់ស្ទ្រីមផ្លាស់ប្តូររបៀបពន្លឺ</string>
+    <string name="allow_settings_access_brightness_description" source="google_translate">អាត់ស្ទ្រីមត្រូវការអ្នកឱ្យផ្តល់ការអនុញ្ញាតនេះដើម្បីប្តូររបៀបពន្លឺរបស់អ្នក។</string>
+    <string name="allow_draw_overlays_title" source="google_translate">អនុញ្ញាតឱ្យអាត់ស្ទ្រីមកម្មវិធីចាក់លេចឡើងលើកម្មវិធីផ្សេងទៀត</string>
+    <string name="allow_sdraw_overlays_description" source="google_translate">អាត់ស្ទ្រីមត្រូវការអ្នកឱ្យផ្តល់ការអនុញ្ញាតនេះបង្ហាញវីដេអូរបស់អ្នកនៅក្នុងប្រអប់លេចឡើងលើកម្មវិធីផ្សេងទៀត។</string>
+    <string name="permission_ask_again" source="google_translate">ផ្តល់ការអនុញ្ញាត</string>
+    <string name="exit_app" source="google_translate">បិទ VLC</string>
+    <string name="exit_app_msg" source="google_translate">តើអ្នកប្រាកដជាចង់បោះបង់ VLC មែនទេ?</string>
+    <string name="fastscroller_track" source="google_translate">បទ FastScroller</string>
+    <string name="fastscroller_handle" source="google_translate">ដោះស្រាយ FastScroller</string>
+    <string name="plugins" source="google_translate">កម្មវិធីជំនួយ</string>
+    <string name="download_on_device" source="google_translate">ទាញយក</string>
+    <string name="extension_empty" source="google_translate">គ្មានធាតុដើម្បីបង្ហាញទេសូមទៅកាន់ការកំណត់ផ្នែកបន្ថែមរបស់អ្នកដើម្បីទទួលបានខ្លះ។</string>
+    <string name="opengl_title" source="google_translate">ការប្រើប្រាស់ OpenGL ES2</string>
+    <string name="opengl_summary" source="google_translate">តាមលំនាំដើម OpenGL ES2 ត្រូវបានប្រើសម្រាប់ការឌីកូដកម្មវិធីនិងការឌិកូដផ្នែករឹងនៅពេលដែលត្រូវការ (វីដេអូ 360 អង្សារ) ។</string>
+    <string name="opengl_automatic" source="google_translate">ដោយស្វ័យប្រវត្តិ</string>
+    <string name="opengl_on" source="google_translate">បង្ខំ</string>
+    <string name="opengl_off" source="google_translate">បង្ខំឱ្យបិទ</string>
+    <string name="network_favorites" source="google_translate">បណ្តាញសំណព្វ</string>
+    <string name="network_shared_folders" source="google_translate">ថតចែករំលែក</string>
+    <string name="encryption_warning" source="google_translate">ការព្រមានការអ៊ិនគ្រីបមិនមានសម្រាប់កំណែ Android នេះទេពាក្យសម្ងាត់នឹងត្រូវរក្សាទុកក្នុងកន្លែងឯកជនប៉ុន្តែមិនត្រូវបានអ៊ីនគ្រីបទេ</string>
+    <string name="store_password" source="google_translate">ចងចាំ​ពាក្យ​សម្ងាត់</string>
+    <string name="add_to_playlist" source="google_translate">បន្ថែមទៅបញ្ជី</string>
+    <string name="popup_playback_title" source="google_translate">លេងវីដេអូនៅក្នុងបង្អួចលេចឡើង</string>
+    <string name="popup_playback" source="google_translate">លេងនៅក្នុងបង្អួចលេចឡើង</string>
+    <string name="popup_expand" source="google_translate">ពង្រីកវីដេអូ</string>
+    <string name="snack_subloader_sub_found" source="google_translate">ចំណងជើងរងបានទាញយក</string>
+    <string name="snack_subloader_sub_not_found" source="google_translate">មិនឃើញចំណងជើងរង</string>
+    <string name="dialog_subloader_success" source="google_translate">ចំណងជើងរងរកឃើញសម្រាប់:</string>
+    <string name="dialog_subloader_fails" source="google_translate">រកមិនឃើញចំណងជើងរងសម្រាប់:</string>
+    <string name="dialog_subloader_sumup" source="google_translate">បានបញ្ចប់ការទាញយក</string>
+    <string name="download_subtitles" source="google_translate">ទាញយកចំណងជើងរង</string>
+    <string name="preferences_languages_download" source="google_translate">ភាសាចំណងជើងរង</string>
+    <string name="list_languages_download_summary" source="google_translate">ភាសាដែលត្រូវទាញយកនៅពេលស្រង់យកអត្ថបទរង</string>
+    <string name="list_languages_download_title" source="google_translate">ចំណងជើងរងទាញយកភាសា</string>
+    <string name="service_unavailable" source="google_translate">សេវាកម្មមិនមាន</string>
+    <string name="subs_dl_lang_fail" source="google_translate">បានបរាជ័យក្នុងការកំណត់ភាសាអក្សរសាស្រ្ត, ព្យាយាមកំណត់វានៅក្នុងការកំណត់កម្មវិធី</string>
+    <string name="downloading_subtitles" source="google_translate">ទាញយកចំណងជើងរង</string>
+    <string name="browse_folder" source="google_translate">រកមើលថត</string>
+    <string name="listen" source="google_translate">ស្តាប់</string>
+    <string name="subtitles_download_title" source="google_translate">ទាញយកការទាញយក</string>
+    <string name="connecting" source="google_translate">កំពុងភ្ជាប់ ...</string>
+    <string name="save_bluetooth_delay" source="google_translate">សន្សំការពន្យាសម្រាប់ឧបករណ៍ប៊្លូធូស</string>
+    <string name="episodes" source="google_translate">វគ្គ</string>
+    <string name="movies" source="google_translate">ភាពយន្ត</string>
+    <string name="videos" source="google_translate">វីដេអូ</string>
+    <string name="streams" source="google_translate">ស្ទ្រីម</string>
+    <string name="clear_playback_history" source="google_translate">សម្អាតប្រវត្តិការចាក់សារថ្មី</string>
+    <string name="various_artists" source="google_translate">សិល្បករជាច្រើន</string>
+    <string name="ml_scanning" source="google_translate">កំពុងវិភាគរកឯកសារមេឌៀ</string>
+    <string name="ml_parse_media" source="google_translate">ញែកមធ្យម</string>
+    <string name="ml_discovering" source="google_translate">ការស្វែងយល់</string>
+    <string name="resume" source="google_translate">ប្រវត្តិរូប</string>
+    <string name="length" source="google_translate">ប្រវែង</string>
+    <string name="tv_settings_hint" source="google_translate">ចុចប៊ូតុងយល់ព្រមយូរដើម្បីពិនិត្យ / ដោះធីកថត</string>
+    <string name="ml_external_storage_title" source="google_translate">ឧបករណ៍ផ្ទុកខាងក្រៅថ្មីត្រូវបានរកឃើញ</string>
+    <string name="ml_external_storage_accept" source="google_translate">បាទ</string>
+    <string name="ml_external_storage_decline" source="google_translate">ទេ</string>
+    <string name="last_added_media" source="google_translate">បានបន្ថែមចុងក្រោយ</string>
+    <string name="no" source="google_translate">ទេ</string>
+    <string name="loading_medialibrary" source="google_translate">កំពុងផ្ទុក Medialibrary ...</string>
+    <string name="yes" source="google_translate">បាទ</string>
+    <string name="custom_set_save_title" source="google_translate">ការផ្លាស់ប្តូរមិនបានរក្សាទុក</string>
+    <string name="custom_set_save_warning" source="google_translate">ព្រមាន: ការផ្លាស់ប្តូរមិនបានរក្សាទុក</string>
+    <string name="existing_custom_set_save_message" source="google_translate">រក្សាទុកការកំណត់អេហ្គុយជា ...</string>
+    <string name="new_custom_set_save_message" source="google_translate">រក្សាទុកការកំណត់អេហ្គុយថ្មីជា ...</string>
+    <string name="save" source="google_translate">រក្សាទុក</string>
+    <string name="do_not_save" source="google_translate">កុំរក្សាទុក</string>
+    <string name="custom_set_wrong_input" source="google_translate">ឈ្មោះមិនត្រឹមត្រូវ។</string>
+    <string name="custom_set_already_exist" source="google_translate">បានកំណត់អេឡិចត្រូនិកជាមួយឈ្មោះនេះរួចហើយ</string>
+    <string name="custom_set_restored" source="google_translate">បានកំណត់ស្ដង់ដារឡើងវិញ។</string>
+    <string name="unsaved_set_deleted_message" source="google_translate">បានលុបអេឡិចត្រូនិកមិនបានរក្សាទុក។</string>
+    <string name="equalizer_new_preset_name" source="google_translate">ថ្មី</string>
+    <string name="settings_ml_block_scan" source="google_translate">Medialibrary កំពុងស្កេនឧបករណ៍របស់អ្នកឥឡូវនេះ</string>
+    <string name="recommendations" source="google_translate">អនុសាសន៍</string>
+    <string name="recommendations_desc" source="google_translate">ប័ណ្ណអនុសាសន៍នៅលើកម្មវិធីបើកដំណើរការ</string>
+    <string name="browser_quick_access" source="google_translate">ការចូលដំណើរការរហ័ស</string>
+    <string name="browser_storages" source="google_translate">ឃ្លាំង</string>
+    <string name="renderer_list_title" source="google_translate">បង្ហាញ</string>
+    <string name="feedback_player_crashed" source="google_translate">សូមទោស VLC គ្រាន់តែគាំង។ សូម​ព្យាយាម​ម្តង​ទៀត។</string>
+    <string name="sdcard_permission_dialog_title" source="google_translate">អ្នកត្រូវផ្តល់សិទ្ធិសរសេរ VLC ទៅកាតអេសឌីរបស់អ្នក</string>
+    <string name="sdcard_permission_dialog_message" source="google_translate">VLC មិនអាចលុបឯកសារនេះបានទេប្រសិនបើគ្មានសិទ្ធិចូលសរសេរទេ \ n សូមទៅកាន់កាតអេសឌីរបស់អ្នកហើយចុចលើ \ "ជ្រើសរើស \" ។ \ n អ្នកប្រហែលជាត្រូវចុច \ "បង្ហាញកាតអេសឌី \" ជាមុនសិនក្នុងម៉ឺនុយខាងស្តាំ។</string>
+    <string name="dialog_sd_wizard" source="google_translate">បង្ហាញ​ខ្ញុំ</string>
+    <string name="renderers_disconnect" source="google_translate">ផ្ដាច់</string>
+    <string name="audio_digital_failed" source="google_translate">បានបរាជ័យក្នុងការប្តូរស្ថានភាពទិន្នផលឌីជីថល</string>
+    <string name="audio_digital_output_enabled" source="google_translate">បានចេញលទ្ធផលឌីជីថលអូឌីយ៉ូ</string>
+    <string name="audio_digital_output_disabled" source="google_translate">លទ្ធផលឌីជីថលអូឌីយ៉ូបានបិទ</string>
+    <string name="live_streams" source="google_translate">ស្ទ្រីមបន្តផ្ទាល់</string>
+    <string name="all_live_streams" source="google_translate">ស្ទ្រីមផ្សាយផ្ទាល់ទាំងអស់</string>
+    <string name="video_torrents" source="google_translate">torrent វីដេអូ</string>
+    <string name="audio_torrents" source="google_translate">អូឌីយ៉ូអូឌីយ៉ូ</string>
+    <string name="all_torrents" source="google_translate">torrent ទាំងអស់</string>
+    <string name="main" source="google_translate">ចម្បង</string>
+    <string name="media_player" source="google_translate">កម្មវិធីចាក់មេឌៀ</string>
+    <string name="acestream_server" source="google_translate">ម៉ាស៊ីនបម្រើអាត់ស្ទ្រីម (ម៉ាស៊ីន)</string>
+    <string name="media_player_settings" source="google_translate">ការកំណត់អ្នកលេងមេឌៀ</string>
+    <string name="acestream_server_settings" source="google_translate">ការកំណត់ម៉ាស៊ីនបម្រើអេស៊ីស្ទ្រី (ម៉ាស៊ីន)</string>
+    <string name="sign_out" source="google_translate">ចាកចេញ</string>
+    <string name="sign_in" source="google_translate">ចូល</string>
+    <string name="sign_in_acestream" source="google_translate">ចូលជាមួយអាត់ស្ទ្រីម</string>
+    <string name="sign_in_google" source="google_translate">ចូលជាមួយ Google</string>
+    <string name="video_files" source="google_translate">ឯកសារវីដេអូ</string>
+    <string name="audio_files" source="google_translate">ឯកសារអូឌីយ៉ូ</string>
+    <string name="retry" source="google_translate">ព្យាយាមម្តងទៀត</string>
+    <string name="failed_to_load_web_page" source="google_translate">បានបរាជ័យក្នុងការផ្ទុកទំព័របណ្ដាញ</string>
 </resources>

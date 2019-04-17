@@ -21,9 +21,23 @@
  *  ***************************************************************************
  */
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+def abi = System.getenv('GRADLE_ABI')?.toLowerCase()
+ext {
+    library_version = '0.4.7'
+    repoName = 'Android'
+    libraryName = 'Medialibrary-Android'
+    lib_artifact = "medialibrary-$abi"
+
+    libraryDescription = 'Android bindings and API for Medialibrary'
+}
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+    }
 
     sourceSets {
         main {
@@ -38,6 +52,13 @@ android {
             res.srcDirs = ['res']
             assets.srcDirs = ['assets', 'libcompat/libs/armeabi']
         }
+        test {
+            java.srcDirs = ['test']
+        }
+        androidTest {
+            java.srcDirs = ['androidTest']
+            assets.srcDirs += files("$projectDir/assets/schemas".toString())
+        }
     }
 
     buildTypes {
@@ -45,26 +66,38 @@ android {
             minifyEnabled false
             proguardFile 'proguard.cfg'
         }
+        dev {
+            initWith debug
+            matchingFallbacks = ['debug']
+        }
     }
 
     dataBinding {
         enabled = true
     }
-}
 
-task generateSources (type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.java.srcDirs
+    // Make per-variant version code
+    libraryVariants.all { variant ->
+        //Custom APK name
+        variant.outputs.each { output ->
+            if (output.outputFileName != null && output.outputFileName.endsWith('.aar')) {
+                output.outputFileName = "medialibrary-${abi}-${library_version}.aar"
+            }
+        }
+    }
 }
 
 clean {
-    delete 'build', 'jni/libs', 'jni/obj'
+    //delete 'build', 'jni/libs', 'jni/obj'
 }
 
 dependencies {
     implementation project(':libvlc')
-    api "com.android.support:support-v4:$rootProject.ext.appCompatVersion"
-    api "com.android.support:support-compat:$rootProject.ext.appCompatVersion"
-    api "com.android.support:support-fragment:$rootProject.ext.appCompatVersion"
-    testApi 'junit:junit:4.12'
+    implementation project(':acestream-android-sdk')
+    api "androidx.legacy:legacy-support-v4:$rootProject.ext.androidxVersion"
+    api "androidx.core:core:$rootProject.ext.androidxCoreVersion"
+    api "androidx.fragment:fragment:$rootProject.ext.androidxVersion"
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
 }
+
+// apply from: '../publish.gradle'

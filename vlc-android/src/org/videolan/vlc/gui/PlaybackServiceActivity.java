@@ -23,22 +23,30 @@
 package org.videolan.vlc.gui;
 
 import android.content.Context;
-import android.support.annotation.MainThread;
-import android.support.v4.app.FragmentActivity;
+import androidx.annotation.MainThread;
+import androidx.fragment.app.FragmentActivity;
+import android.util.Log;
 
+import org.acestream.sdk.utils.PermissionUtils;
 import org.videolan.vlc.PlaybackService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlaybackServiceActivity extends FragmentActivity implements PlaybackService.Client.Callback {
-    final private Helper mHelper = new Helper(this, this);
+    private final static String TAG = "AS/VLC/PSActivity";
+    final protected Helper mHelper = new Helper(this, this);
     protected PlaybackService mService;
 
     @Override
     protected void onStart() {
         super.onStart();
-        mHelper.onStart();
+        if(PermissionUtils.hasStorageAccess()) {
+            mHelper.onStart();
+        }
+        else {
+            Log.w(TAG, "onStart: skip start, no storage access");
+        }
     }
 
     @Override
