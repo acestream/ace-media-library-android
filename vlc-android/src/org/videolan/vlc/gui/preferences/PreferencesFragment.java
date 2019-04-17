@@ -34,6 +34,7 @@ import androidx.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.view.View;
 
+import org.acestream.sdk.AceStreamManager;
 import org.videolan.vlc.BuildConfig;
 import org.videolan.vlc.R;
 import org.videolan.vlc.VLCApplication;
@@ -156,6 +157,12 @@ public class PreferencesFragment extends BasePreferenceFragment implements Share
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (TextUtils.equals(key, "set_locale")) {
+            //TODO: avoid using static instance. Connect to service instead.
+            AceStreamManager manager = AceStreamManager.getInstance();
+            if(manager != null) {
+                manager.setLocale(sharedPreferences.getString(key, ""));
+            }
+
             updatePrefSummary(findPreference(key));
             ((PreferencesActivity) getActivity()).exitAndRescan();
         }
