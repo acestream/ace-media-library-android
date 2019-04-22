@@ -567,6 +567,8 @@
             android:screenOrientation="landscape"
             android:theme="@style/Theme.VLC.TV"  />
         <activity android:name=".gui.dialogs.MobileNetworksDialogActivity"/>
+        <activity android:name=".gui.tv.PrivacyPolicyActivity" />
+        <activity android:name=".gui.tv.AgreementActivity" />
 
         <service
             android:name=".RecommendationsService"
