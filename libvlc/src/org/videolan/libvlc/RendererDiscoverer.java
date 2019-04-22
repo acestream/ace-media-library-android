@@ -20,13 +20,15 @@
 
 package org.videolan.libvlc;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.collection.LongSparseArray;
 
 public class RendererDiscoverer extends VLCObject<RendererDiscoverer.Event> {
-    private final static String TAG = "LibVLC/RendererDiscoverer";
+    private final static String TAG = "LibVLC/RDiscoverer";
 
     final List<RendererItem> mRenderers = new ArrayList<>();
 
@@ -87,7 +89,10 @@ public class RendererDiscoverer extends VLCObject<RendererDiscoverer.Event> {
      * (You can also call {@link #release() to stop the discovery directly}.
      */
     public void stop() {
-        if (isReleased()) throw new IllegalStateException("MediaDiscoverer is released");
+        if (isReleased()) {
+            Log.e(TAG, "stop: MediaDiscoverer is released");
+            return;
+        }
         setEventListener(null);
         nativeStop();
         release();
