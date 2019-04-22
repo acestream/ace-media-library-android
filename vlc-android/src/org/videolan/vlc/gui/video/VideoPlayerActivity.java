@@ -1544,7 +1544,7 @@ public class VideoPlayerActivity extends AppCompatActivity
         setPlaying(false);
 
         if(stopEngineSession) {
-            RemoteDevice device = mService.getCurrentRemoteDevice();
+            RemoteDevice device = (mService == null) ? null : mService.getCurrentRemoteDevice();
             if(mSwitchingToAnotherPlayer) {
                 mSwitchingToAnotherPlayer = false;
                 Log.v(TAG, "stopPlayback: skip stop engine session, switching to another player");
@@ -1556,7 +1556,7 @@ public class VideoPlayerActivity extends AppCompatActivity
             else if(mAceStreamManager == null) {
                 Log.v(TAG, "stopPlayback: skip stop engine session, no PM");
             }
-            else if(mService != null && device != null && !device.isAceCast()) {
+            else if(device != null && !device.isAceCast()) {
                 Log.v(TAG, "stopPlayback: skip stop engine session, on renderer");
             }
             else {
