@@ -120,7 +120,7 @@
 
     <CheckBoxPreference
         android:persistent="true"
-        android:key="start_acecast_server"
+        android:key="acestream_start_acecast_server_on_boot"
         android:title="@string/start_acecast_server" />
 
     <EditTextPreference

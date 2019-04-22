@@ -139,7 +139,7 @@ public class PreferencesEngine
 
         Preference p;
 
-        p = findPreference("start_acecast_server");
+        p = findPreference("acestream_start_acecast_server_on_boot");
         p.setVisible(!AceStream.isAndroidTv());
         setDefaultPreferenceValue((CheckBoxPreference)p, true);
 
