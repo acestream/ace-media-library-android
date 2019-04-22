@@ -21,6 +21,7 @@
 package org.videolan.vlc.gui.network;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -131,13 +133,13 @@ public class MRLPanelFragment extends DialogFragment implements View.OnKeyListen
                 mTestCallback.onGotMediaWrapper(mw);
             }
             if(mw.isP2PItem()) {
-                processP2PMedia(mw);
-                closeDialog();
+                processP2PMedia(getActivity(), mw);
             }
             else {
                 playMedia(mw);
             }
-            mEditText.getEditText().getText().clear();
+            mEditText.getEditText().setText(getResources().getString(R.string.loading));
+            mEditText.getEditText().setEnabled(false);
             return true;
         }
         else {
@@ -158,17 +160,17 @@ public class MRLPanelFragment extends DialogFragment implements View.OnKeyListen
     }
 
     //:ace
-    private void processP2PMedia(final MediaWrapper mw) {
-        final Activity activity = getActivity();
-        if(activity == null) {
-            Log.e(TAG, "processP2PMedia: missing activity");
+    private void processP2PMedia(@Nullable final Context context, final MediaWrapper mw) {
+        if(context == null) {
+            Log.e(TAG, "processP2PMedia: missing context");
+            closeDialog();
             return;
         }
 
         try {
-            final TransportFileDescriptor descriptor = TransportFileDescriptor.fromMrl(activity.getContentResolver(), mw.getUri());
+            final TransportFileDescriptor descriptor = TransportFileDescriptor.fromMrl(context.getContentResolver(), mw.getUri());
 
-            mAceStreamManagerClient = new AceStreamManager.Client(getActivity(), new AceStreamManager.Client.Callback() {
+            mAceStreamManagerClient = new AceStreamManager.Client(context, new AceStreamManager.Client.Callback() {
                 private AceStreamManager mAceStreamManager = null;
                 private EngineApi mEngineApi = null;
 
@@ -190,8 +192,9 @@ public class MRLPanelFragment extends DialogFragment implements View.OnKeyListen
                                     if(mTestCallback != null) {
                                         mTestCallback.onMediaFilesSuccess(result, playlist);
                                     }
-                                    MediaUtils.openList(activity, playlist, 0);
+                                    MediaUtils.openList(context, playlist, 0);
                                     mAceStreamManagerClient.disconnect();
+                                    closeDialog();
                                 }
 
                                 @Override
@@ -202,6 +205,7 @@ public class MRLPanelFragment extends DialogFragment implements View.OnKeyListen
                                         mTestCallback.onMediaFilesError(err);
                                     }
                                     mAceStreamManagerClient.disconnect();
+                                    closeDialog();
                                 }
                             });
                         }
