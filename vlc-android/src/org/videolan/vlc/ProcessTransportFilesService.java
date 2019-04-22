@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -18,6 +20,7 @@ import org.acestream.sdk.controller.EngineApi;
 import org.acestream.sdk.controller.api.TransportFileDescriptor;
 import org.acestream.sdk.controller.api.response.MediaFilesResponse;
 import org.acestream.sdk.errors.TransportFileParsingException;
+import org.acestream.sdk.interfaces.IAceStreamManager;
 import org.acestream.sdk.utils.Logger;
 import org.acestream.sdk.utils.MiscUtils;
 import org.videolan.medialibrary.Medialibrary;
@@ -44,64 +47,37 @@ public class ProcessTransportFilesService extends Service implements Handler.Cal
     private static volatile boolean sJobIsRunning = false;
 
     private LocalBroadcastManager mLocalBroadcastManager;
-    private AceStreamManager.Client mPlaybackManagerClient;
-    private AceStreamManager mPlaybackManager;
+    private AceStreamManager.Client mAceStreamManagerClient;
+    private AceStreamManager mAceStreamManager;
     private EngineApi mEngineService;
     private Handler mHandler = new Handler(this);
 
-    private AceStreamManager.Client.Callback mPlaybackManagerClientCallback = new AceStreamManager.Client.Callback() {
+    private AceStreamManager.Client.Callback mAceStreamManagerClientCallback = new AceStreamManager.Client.Callback() {
         @Override
         public void onConnected(AceStreamManager service) {
             Logger.v(TAG, "pm connected");
-            mPlaybackManager = service;
-            mPlaybackManager.addCallback(mPlaybackManagerCallback);
-            mPlaybackManager.startEngine();
+            mAceStreamManager = service;
+            mAceStreamManager.getEngine(false, new IAceStreamManager.EngineStateCallback() {
+                @Override
+                public void onEngineConnected(@NonNull IAceStreamManager playbackManager, @NonNull EngineApi engineApi) {
+                    if(mEngineService == null) {
+                        Logger.v(TAG, "engine connected");
+                        mEngineService = engineApi;
+                        VLCApplication.runBackground(new Runnable() {
+                            @Override
+                            public void run() {
+                                doJob();
+                            }
+                        });
+                    }
+                }
+            });
         }
 
         @Override
         public void onDisconnected() {
             Logger.v(TAG, "pm disconnected");
-            mPlaybackManager = null;
-        }
-    };
-
-    private AceStreamManager.Callback mPlaybackManagerCallback = new AceStreamManager.Callback() {
-        @Override
-        public void onEngineConnected(EngineApi service) {
-            if(mEngineService == null) {
-                Logger.v(TAG, "engine connected");
-                mEngineService = service;
-                VLCApplication.runBackground(new Runnable() {
-                    @Override
-                    public void run() {
-                        doJob();
-                    }
-                });
-            }
-        }
-
-        @Override
-        public void onEngineFailed() {
-
-        }
-
-        @Override
-        public void onEngineUnpacking() {
-
-        }
-
-        @Override
-        public void onEngineStarting() {
-
-        }
-
-        @Override
-        public void onEngineStopped() {
-
-        }
-
-        @Override
-        public void onBonusAdsAvailable(boolean available) {
+            mAceStreamManager = null;
         }
     };
 
@@ -111,8 +87,8 @@ public class ProcessTransportFilesService extends Service implements Handler.Cal
         Logger.v(TAG, "onCreate");
 
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
-        mPlaybackManagerClient = new AceStreamManager.Client(this, mPlaybackManagerClientCallback);
-        mPlaybackManagerClient.connect();
+        mAceStreamManagerClient = new AceStreamManager.Client(this, mAceStreamManagerClientCallback);
+        mAceStreamManagerClient.connect(false);
     }
 
     @Override
@@ -120,10 +96,7 @@ public class ProcessTransportFilesService extends Service implements Handler.Cal
         super.onDestroy();
         Logger.v(TAG, "onDestroy");
 
-        if(mPlaybackManager != null) {
-            mPlaybackManager.removeCallback(mPlaybackManagerCallback);
-        }
-        mPlaybackManagerClient.disconnect();
+        mAceStreamManagerClient.disconnect();
     }
 
     @Nullable
