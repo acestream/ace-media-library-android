@@ -1340,11 +1340,9 @@ public class MainActivity
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 Log.d(TAG, "user granted permission");
-                onStorageAccessGranted();
 
             } else {
                 Log.d(TAG, "user denied permission");
-                onStorageAccessDenied();
             }
         }
     }
