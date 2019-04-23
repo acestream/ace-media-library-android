@@ -300,8 +300,9 @@ public class Medialibrary {
 
     @Nullable
     public MediaWrapper getMedia(String mrl) {
+        if(!mIsInitiated) return null;
         final String vlcMrl = convertMrl(Tools.encodeVLCMrl(mrl), false);
-        return mIsInitiated && !TextUtils.isEmpty(vlcMrl) ? nativeGetMediaFromMrl(vlcMrl) : null;
+        return !TextUtils.isEmpty(vlcMrl) ? nativeGetMediaFromMrl(vlcMrl) : null;
     }
 
     //:ace
@@ -332,8 +333,9 @@ public class Medialibrary {
 
     @Nullable
     public MediaWrapper addMedia(String mrl) {
+        if(!mIsInitiated) return null;
         final String vlcMrl = convertMrl(Tools.encodeVLCMrl(mrl), true);
-        return mIsInitiated && !TextUtils.isEmpty(vlcMrl) ? nativeAddMedia(vlcMrl) : null;
+        return !TextUtils.isEmpty(vlcMrl) ? nativeAddMedia(vlcMrl) : null;
     }
 
     @Nullable
