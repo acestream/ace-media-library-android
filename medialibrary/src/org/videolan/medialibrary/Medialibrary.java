@@ -342,14 +342,35 @@ public class Medialibrary {
     public MediaWrapper addP2PMedia(long parentMediaId, TransportFileDescriptor descriptor, MediaFilesResponse.MediaFile mediaFile) {
         if(!mIsInitiated) return null;
 
-        if(descriptor == null)
-            throw new IllegalStateException("missing descriptor");
+        if(descriptor == null) {
+            if(BuildConfig.DEBUG) {
+                throw new IllegalStateException("missing descriptor");
+            }
+            else {
+                Log.e(TAG, "missing descriptor");
+                return null;
+            }
+        }
 
-        if(mediaFile == null)
-            throw new IllegalStateException("missing media file");
+        if(mediaFile == null) {
+            if(BuildConfig.DEBUG) {
+                throw new IllegalStateException("missing media file");
+            }
+            else {
+                Log.e(TAG, "missing media file");
+                return null;
+            }
+        }
 
-        if(TextUtils.isEmpty(mediaFile.filename))
-            throw new IllegalStateException("empty mediaFile.filename");
+        if(TextUtils.isEmpty(mediaFile.filename)) {
+            if(BuildConfig.DEBUG) {
+                throw new IllegalStateException("empty mediaFile.filename");
+            }
+            else {
+                Log.e(TAG, "empty mediaFile.filename");
+                return null;
+            }
+        }
 
         if(descriptor.getDescriptorString().startsWith("data=content%3A%2F%2F")) {
             Logger.v(TAG, "addP2PMedia: skip item: descriptor=" + descriptor);
