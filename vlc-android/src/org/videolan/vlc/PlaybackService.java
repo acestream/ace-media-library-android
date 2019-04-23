@@ -2962,7 +2962,15 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
 
         @MainThread
         public void connect() {
-            if (mBound) throw new IllegalStateException("already connected");
+            if (mBound) {
+                if(BuildConfig.DEBUG) {
+                    throw new IllegalStateException("already connected");
+                }
+                else {
+                    Log.e(TAG, "connect: already connected");
+                    return;
+                }
+            }
             final Intent serviceIntent = getServiceIntent(mContext);
             if (mContext instanceof Activity) mContext.startService(serviceIntent);
             else Util.startService(mContext, serviceIntent);
