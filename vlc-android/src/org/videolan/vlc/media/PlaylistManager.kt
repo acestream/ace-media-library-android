@@ -1040,7 +1040,6 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
         // Use AceStream player as default
         if(selectedPlayer == null || selectedPlayer.isOurPlayer) {
             intent = AceStreamUtils.getPlayerIntent()
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra(AceStreamPlayer.EXTRA_PLAYLIST, mediaList.toAceStreamPlaylist())
             intent.putExtra(AceStreamPlayer.EXTRA_PLAYLIST_POSITION, currentIndex)
 
@@ -1084,6 +1083,7 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
                     false)
         }
 
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
         // Save playlist before clearing
         saveMediaList()
