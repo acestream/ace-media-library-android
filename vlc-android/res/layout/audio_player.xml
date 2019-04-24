@@ -238,7 +238,7 @@
             android:minHeight="1dip"
             android:paddingLeft="@dimen/half_default_margin"
             android:paddingRight="@dimen/half_default_margin"
-            android:progressDrawable="@drawable/po_seekbar"
+            android:progressDrawable="?attr/po_seekbar"
             android:splitTrack="false"
             android:thumb="?attr/seekbar_thumb" />
 

@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:maxHeight="4dip"
             android:minHeight="4dip"
-            android:progressDrawable="@drawable/po_seekbar"
+            android:progressDrawable="?attr/po_seekbar"
             android:thumb="?attr/seekbar_thumb"
             android:splitTrack="false"
             app:layout_constraintBottom_toTopOf="@+id/equalizer_scroll"

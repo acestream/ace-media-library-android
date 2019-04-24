@@ -98,8 +98,8 @@
         <item name="ic_passthrough_on">@drawable/ic_passthrough_on_light</item>
         <item name="rci_more_vert">@drawable/rci_more_vert_light_selector</item>
 
-        <item name="seekbar_background">@color/controls_light</item>
         <item name="seekbar_thumb">@drawable/seekbar_thumb_light</item>
+        <item name="po_seekbar">@drawable/po_seekbar_light</item>
         <item name="controls_color">@color/controls_light</item>
         <item name="rci_add_selector">@drawable/rci_add_light_selector</item>
         <item name="rci_remove_selector">@drawable/rci_remove_light_selector</item>
@@ -215,8 +215,8 @@
         <item name="ic_passthrough_on">@drawable/ic_passthrough_on_dark</item>
         <item name="rci_more_vert">@drawable/rci_more_vert_dark_selector</item>
 
-        <item name="seekbar_background">@color/controls_dark</item>
         <item name="seekbar_thumb">@drawable/seekbar_thumb_dark</item>
+        <item name="po_seekbar">@drawable/po_seekbar_dark</item>
         <item name="controls_color">@color/controls_dark</item>
         <item name="rci_add_selector">@drawable/rci_add_dark_selector</item>
         <item name="rci_remove_selector">@drawable/rci_remove_dark_selector</item>
@@ -317,8 +317,8 @@
         <item name="list_title_last">@color/list_title_last_dark</item>
         <item name="list_title">@color/bt_list_title</item>
 
-        <item name="seekbar_background">@color/controls_dark</item>
         <item name="seekbar_thumb">@drawable/seekbar_thumb_dark</item>
+        <item name="po_seekbar">@drawable/po_seekbar_dark</item>
         <item name="controls_color">@color/controls_dark</item>
         <item name="rci_more_vert">@drawable/rci_more_vert_dark_selector</item>
         <item name="rci_add_selector">@drawable/rci_add_dark_selector</item>

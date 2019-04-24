@@ -104,7 +104,7 @@
             android:splitTrack="false"
             android:focusable="true"
             android:progress="@{progress}"
-            android:progressDrawable="@drawable/po_seekbar"
+            android:progressDrawable="?attr/po_seekbar"
             android:thumb="?attr/seekbar_thumb"
             vlc:mediamax="@{length}"/>
 

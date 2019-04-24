@@ -30,11 +30,13 @@
     <attr name="text_color_normal" format="reference|color" />
     <attr name="text_color_highlight" format="reference|color" />
     <attr name="selected_item_background" format="reference|color" />
-    <attr name="seekbar_background" format="reference|color" />
     <attr name="controls_color" format="reference|color" />
 
-    <!--Main Icons-->
+    <!-- Seekbar -->
     <attr name="seekbar_thumb" format="reference" />
+    <attr name="po_seekbar" format="reference" />
+
+    <!-- Main Icons -->
     <attr name="ic_down_style" format="reference" />
     <attr name="ic_up_style" format="reference" />
     <attr name="ic_playlist" format="reference" />
