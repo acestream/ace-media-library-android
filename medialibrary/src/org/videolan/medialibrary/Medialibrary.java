@@ -919,6 +919,7 @@ public class Medialibrary {
             try {
                 Logger.v(TAG, "convertMrl:transform: uri=" + uri + " path=" + file.getAbsolutePath() + " exists=" + file.exists());
                 FileOutputStream output = new FileOutputStream(file);
+                MiscUtils.readBytesFromContentUri(sContext.getContentResolver(), uri, output, 1048576);
                 output.write(MiscUtils.readBytesFromContentUri(sContext.getContentResolver(), uri));
                 output.close();
             } catch (IOException e) {
