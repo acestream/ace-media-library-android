@@ -23,8 +23,10 @@
 
 package org.videolan.vlc;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -54,6 +56,19 @@ public class StartActivity extends FragmentActivity {
         if (Intent.ACTION_VIEW.equals(action) && intent.getData() != null) {
             startPlaybackFromApp(intent);
             return;
+        }
+        else if (Intent.ACTION_SEND.equals(action)) {
+            final ClipData cd = intent.getClipData();
+            final ClipData.Item item = cd != null && cd.getItemCount() > 0 ? cd.getItemAt(0) : null;
+            if (item != null) {
+                Uri uri = item.getUri();
+                if (uri == null && item.getText() != null) uri = Uri.parse(item.getText().toString());
+                if (uri != null) {
+                    MediaUtils.openMediaNoUi(uri);
+                    finish();
+                    return;
+                }
+            }
         }
 
         // Start application
