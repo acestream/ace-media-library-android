@@ -290,7 +290,12 @@ public class MRLPanelFragment extends DialogFragment implements View.OnKeyListen
             mTestCallback.onDialogClosed();
         }
         else {
-            dismissAllowingStateLoss();
+            try {
+                dismissAllowingStateLoss();
+            }
+            catch(Throwable e) {
+                Logger.e(TAG, "closeDialog: error", e);
+            }
         }
     }
 
