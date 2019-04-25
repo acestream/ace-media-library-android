@@ -259,6 +259,7 @@ public class MRLPanelFragment extends DialogFragment implements View.OnKeyListen
         }
         catch(TransportFileParsingException e) {
             AceStream.toast(e.getMessage());
+            closeDialog();
         }
     }
     ///ace
