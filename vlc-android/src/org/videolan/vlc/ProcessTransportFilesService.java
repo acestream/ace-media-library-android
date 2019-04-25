@@ -1,7 +1,10 @@
 package org.videolan.vlc;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
@@ -14,6 +17,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import org.acestream.engine.BaseService;
 import org.acestream.sdk.AceStream;
 import org.acestream.sdk.AceStreamManager;
 import org.acestream.sdk.controller.EngineApi;
@@ -45,12 +49,25 @@ public class ProcessTransportFilesService extends Service implements Handler.Cal
     private static final int MIN_ORPHAN_TRANSPORT_FILE_AGE = 3600000;
 
     private static volatile boolean sJobIsRunning = false;
+    private volatile boolean mShutdownFlag = false;
 
     private LocalBroadcastManager mLocalBroadcastManager;
     private AceStreamManager.Client mAceStreamManagerClient;
     private AceStreamManager mAceStreamManager;
     private EngineApi mEngineService;
     private Handler mHandler = new Handler(this);
+
+    // broadcast receiver
+    private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent == null) return;
+            if(TextUtils.equals(intent.getAction(), AceStream.ACTION_STOP_APP)) {
+                Log.d(TAG, "receiver: stop app: class=" + ProcessTransportFilesService.this.getClass().getSimpleName());
+                shutdown();
+            }
+        }
+    };
 
     private AceStreamManager.Client.Callback mAceStreamManagerClientCallback = new AceStreamManager.Client.Callback() {
         @Override
@@ -84,19 +101,24 @@ public class ProcessTransportFilesService extends Service implements Handler.Cal
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.v(TAG, "onCreate");
+        Log.v(TAG, "onCreate");
 
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
         mAceStreamManagerClient = new AceStreamManager.Client(this, mAceStreamManagerClientCallback);
         mAceStreamManagerClient.connect(false);
+
+        final IntentFilter filter = new IntentFilter();
+        filter.addAction(AceStream.ACTION_STOP_APP);
+        registerReceiver(mBroadcastReceiver, filter);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Logger.v(TAG, "onDestroy");
+        Log.v(TAG, "onDestroy");
 
         mAceStreamManagerClient.disconnect();
+        unregisterReceiver(mBroadcastReceiver);
     }
 
     @Nullable
@@ -121,6 +143,7 @@ public class ProcessTransportFilesService extends Service implements Handler.Cal
         }
 
         sJobIsRunning = true;
+        mShutdownFlag = false;
         startJob();
 
         return START_NOT_STICKY;
@@ -274,6 +297,11 @@ public class ProcessTransportFilesService extends Service implements Handler.Cal
 
             mHandler.obtainMessage(MSG_NOTIFY_PROGRESS, seq, tfiles.length)
                     .sendToTarget();
+
+            if(mShutdownFlag) {
+                Log.d(TAG, "processTransportFiles: got shutdown flag");
+                break;
+            }
         }
 
         Logger.v(TAG, "processTransportFiles: " + tfiles.length + " files processed");
@@ -435,5 +463,11 @@ public class ProcessTransportFilesService extends Service implements Handler.Cal
                 return true;
         }
         return false;
+    }
+
+    private void shutdown() {
+        Log.d(TAG, "shutdown");
+        stopSelf();
+        mShutdownFlag = true;
     }
 }
