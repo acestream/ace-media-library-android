@@ -2855,7 +2855,14 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
         }
 
         if(item == null) {
-            playlistManager.getPlayer().setRenderer(null);
+            try {
+                playlistManager.getPlayer().setRenderer(null);
+            }
+            catch(IllegalStateException e) {
+                // nativeSetRenderer() can throw this:
+                // java.lang.IllegalStateException: can't get VLCObject instance
+                Log.e(TAG, "setRenderer: failed: " + e.getMessage());
+            }
         }
         else if(item.getVlcRenderer() != null) {
             playlistManager.getPlayer().setRenderer(item.getVlcRenderer());
