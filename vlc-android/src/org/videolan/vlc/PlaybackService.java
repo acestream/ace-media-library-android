@@ -571,11 +571,6 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
             mAceStreamManager.addPlaybackStatusListener(mCsdkDeviceListener);
             mAceStreamManager.addPlaybackStateCallback(mPlaybackStateCallback);
 
-            mAceStreamManager.startEngine();
-
-            // Now we got access to ace remote devices so number of renderers may change.
-            //notifyRemoteDeviceListeners();
-
             for(RemoteDevice device: mAceStreamManager.getRemoteDevices()) {
                 RendererDelegate.INSTANCE.addDevice(device);
             }
