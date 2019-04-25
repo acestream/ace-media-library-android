@@ -209,15 +209,7 @@ public class MainActivityHelper {
     }
 
     public void shutdown() {
-        runWhenEngineReady(new Runnable() {
-            @Override
-            public void run() {
-                mAceStreamManager.stopEngine();
-                mAceStreamManager.shutdown();
-                mActivity.finish();
-                PlaybackService.Client.stopService(VLCApplication.getAppContext());
-            }
-        });
+        AceStream.stopApp();
     }
 
     public void clearEngineCache() {

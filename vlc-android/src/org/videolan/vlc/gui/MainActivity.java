@@ -510,12 +510,6 @@ public class MainActivity
 
         Intent intent = getIntent();
 
-        if(intent != null && intent.hasExtra(VlcBridge.EXTRA_SHUTDOWN_ENGINE)) {
-            // consume one
-            intent.removeExtra(VlcBridge.EXTRA_SHUTDOWN_ENGINE);
-            mMainActivityHelper.shutdown();
-        }
-
         String fragmentId = (intent == null) ? null : intent.getStringExtra(VlcBridge.EXTRA_FRAGMENT_ID);
         if(fragmentId != null) {
             // consume once

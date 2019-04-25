@@ -678,6 +678,7 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
         filter.addAction(VLCApplication.SLEEP_INTENT);
         filter.addAction(Constants.ACTION_CAR_MODE_EXIT);
         filter.addAction(Constants.ACTION_ACE_STREAM_PLAYER_EVENT);
+        filter.addAction(AceStream.ACTION_STOP_APP);
         registerReceiver(mReceiver, filter);
 
         IntentFilter lbFilter = new IntentFilter(Constants.ACTION_SERVICE_STARTED);
@@ -1091,6 +1092,12 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             final int state = intent.getIntExtra("state", 0);
+
+            // Handle "stop app" intent
+            if(TextUtils.equals(intent.getAction(), AceStream.ACTION_STOP_APP)) {
+                Logger.d(TAG, "receiver: stop app");
+                stopApp();
+            }
 
             // skip all headsets events if there is a call
             final TelephonyManager telManager = (TelephonyManager) PlaybackService.this.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
@@ -3061,8 +3068,8 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
     }
 
     @MainThread
-    public void destroy() {
-        Log.d(TAG, "destroy");
+    public void stopApp() {
+        Logger.d(TAG, "stopApp");
         stopSelf();
     }
 
