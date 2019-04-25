@@ -39,6 +39,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.acestream.engine.controller.Callback;
@@ -64,6 +65,7 @@ public class MRLPanelFragment extends DialogFragment implements View.OnKeyListen
     public static final String KEY_MRL = "mrl";
     private MRLAdapter mAdapter;
     private TextInputLayout mEditText;
+    private ImageView mButtonSend;
 
     //:ace
     private AceStreamManager.Client mAceStreamManagerClient;
@@ -79,6 +81,7 @@ public class MRLPanelFragment extends DialogFragment implements View.OnKeyListen
         setStyle(DialogFragment.STYLE_NO_FRAME, 0);
         final View v = inflater.inflate(R.layout.mrl_panel, container, false);
         mEditText = v.findViewById(R.id.mrl_edit);
+        mButtonSend = v.findViewById(R.id.send);
         mEditText.getEditText().setOnKeyListener(this);
         mEditText.getEditText().setOnEditorActionListener(this);
         mEditText.setHint(getString(R.string.open_link_dialog_msg));
@@ -140,6 +143,7 @@ public class MRLPanelFragment extends DialogFragment implements View.OnKeyListen
             }
             mEditText.getEditText().setText(getResources().getString(R.string.loading));
             mEditText.getEditText().setEnabled(false);
+            mButtonSend.setEnabled(false);
             return true;
         }
         else {
