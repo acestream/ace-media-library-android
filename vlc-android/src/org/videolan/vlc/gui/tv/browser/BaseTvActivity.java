@@ -34,12 +34,16 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 
+import org.acestream.sdk.AceStream;
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.vlc.MediaParsingService;
 import org.videolan.vlc.ExternalMonitor;
 import org.videolan.vlc.VLCApplication;
+import org.videolan.vlc.gui.BaseActivity;
 import org.videolan.vlc.gui.PlaybackServiceActivity;
 import org.videolan.vlc.gui.helpers.UiTools;
 import org.videolan.vlc.gui.tv.SearchActivity;
@@ -56,6 +60,18 @@ public abstract class BaseTvActivity extends PlaybackServiceActivity implements 
     boolean mRegistering = false;
     private volatile boolean mIsVisible = false;
 
+    // broadcast receiver
+    private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent == null) return;
+            if(TextUtils.equals(intent.getAction(), AceStream.ACTION_STOP_APP)) {
+                Log.d(TAG, "receiver: stop app: class=" + BaseTvActivity.this.getClass().getName());
+                finish();
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Init Medialibrary if KO
@@ -64,6 +80,10 @@ public abstract class BaseTvActivity extends PlaybackServiceActivity implements 
         super.onCreate(savedInstanceState);
         mMediaLibrary = VLCApplication.getMLInstance();
         mSettings = PreferenceManager.getDefaultSharedPreferences(this);
+
+        final IntentFilter filter = new IntentFilter();
+        filter.addAction(AceStream.ACTION_STOP_APP);
+        registerReceiver(mBroadcastReceiver, filter);
     }
 
     @Override
@@ -143,5 +163,11 @@ public abstract class BaseTvActivity extends PlaybackServiceActivity implements 
 
     //:ace
     protected void onMedialibraryUpdated() {}
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
     ///ace
 }
