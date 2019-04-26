@@ -47,6 +47,8 @@ public class AceStreamUtils {
                 prefs.getBoolean("dialog_confirm_resume", false));
         intent.putExtra(AceStreamPlayer.EXTRA_BROADCAST_ACTION,
                 Constants.ACTION_ACE_STREAM_PLAYER_EVENT);
+        intent.putExtra(AceStreamPlayer.EXTRA_SCREEN_ORIENTATION,
+                prefs.getString("screen_orientation", "99" /*SCREEN ORIENTATION SENSOR*/));
 
         // LibVLC options
         Bundle libvlcOptions = new Bundle();
