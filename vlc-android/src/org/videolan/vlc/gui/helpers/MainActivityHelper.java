@@ -209,6 +209,7 @@ public class MainActivityHelper {
     }
 
     public void shutdown() {
+        Logger.v(TAG, "stopApp");
         AceStream.stopApp();
     }
 

@@ -197,6 +197,7 @@ public class MainActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Logger.v(TAG, "onCreate");
         super.onCreate(savedInstanceState);
 
         if (!VLCInstance.testCompatibleCPU(this)) {
@@ -441,6 +442,7 @@ public class MainActivity
 
     @Override
     protected void onStart() {
+        Logger.v(TAG, "onStart");
         super.onStart();
 
         if(!PermissionUtils.hasStorageAccess()) {
@@ -462,18 +464,14 @@ public class MainActivity
                 restoreCurrentList();
         }
         mNavigationView.setNavigationItemSelectedListener(this);
-        if (BuildConfig.DEBUG)
+        if (BuildConfig.DEBUG) {
             createExtensionServiceConnection();
-//        mActivityHandler.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                new RenderersDialog().show(getSupportFragmentManager(), "renderers");
-//            }
-//        });
+        }
     }
 
     @Override
     protected void onStop() {
+        Logger.v(TAG, "onStop");
         super.onStop();
         mNavigationView.setNavigationItemSelectedListener(null);
         if (getChangingConfigurations() == 0) {
@@ -488,6 +486,12 @@ public class MainActivity
             mSettings.edit()
                     .putString("current_extension_name", mExtensionsManager.getExtensions(getApplication(), false).get(mCurrentFragmentId).componentName().getPackageName())
                     .apply();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Logger.v(TAG, "onDestroy");
+        super.onDestroy();
     }
 
     @Override

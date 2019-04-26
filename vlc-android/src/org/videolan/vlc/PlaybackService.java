@@ -733,6 +733,8 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
         if (intent == null) return START_NOT_STICKY;
         final String action = intent.getAction();
 
+        Logger.v(TAG, "onStartCommand: action=" + action);
+
         if (Intent.ACTION_MEDIA_BUTTON.equals(action)) {
             MediaButtonReceiver.handleIntent(mMediaSession, intent);
             return START_NOT_STICKY;
@@ -2938,7 +2940,7 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
 
                 final PlaybackService service = PlaybackService.getService(iBinder);
                 if (service != null) {
-                    // Update rendeder each time someone is connected
+                    // Update renderer each time someone is connected
                     service.updateRenderer("client.connected");
                     mCallback.onConnected(service);
                 }
@@ -2956,10 +2958,12 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
         }
 
         private static void startService(Context context) {
+            Logger.v(TAG, "startService: ctx=" + context);
             Util.startService(context, getServiceIntent(context));
         }
 
         public static void stopService(Context context) {
+            Logger.v(TAG, "stopService: ctx=" + context);
             context.stopService(getServiceIntent(context));
         }
 
@@ -2971,6 +2975,7 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
 
         @MainThread
         public void connect() {
+            Logger.v(TAG, "connect: bound=" + mBound + " ctx=" + mContext);
             if (mBound) {
                 if(BuildConfig.DEBUG) {
                     throw new IllegalStateException("already connected");
@@ -2988,6 +2993,7 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
 
         @MainThread
         public void disconnect() {
+            Logger.v(TAG, "disconnect: bound=" + mBound + " ctx=" + mContext);
             if (mBound) {
                 mBound = false;
                 mContext.unbindService(mServiceConnection);

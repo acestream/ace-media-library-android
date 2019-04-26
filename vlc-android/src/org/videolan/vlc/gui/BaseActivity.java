@@ -29,7 +29,7 @@ public class BaseActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             if(intent == null) return;
             if(TextUtils.equals(intent.getAction(), AceStream.ACTION_STOP_APP)) {
-                Log.d(TAG, "receiver: stop app: class=" + BaseActivity.this.getClass().getSimpleName());
+                Log.d(TAG, "receiver: stop app: class=" + BaseActivity.this.getClass().getName());
                 finish();
             }
         }
