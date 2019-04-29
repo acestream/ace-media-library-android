@@ -1347,6 +1347,8 @@ public class VideoPlayerActivity extends AppCompatActivity
         if(mAceStreamManager != null) {
             mAceStreamManager.setOurPlayerActive(false);
             mAceStreamManager.unregisterCastResultListener(mCastResultListener);
+            mAceStreamManager.removeEngineStatusListener(mEngineStatusListener);
+            mAceStreamManager.removeEngineCallbackListener(this);
         }
 
         // Need to reset to correctly reconnect after stop
