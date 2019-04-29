@@ -15,22 +15,17 @@ import android.util.Log;
 import org.acestream.sdk.AceStream;
 import org.acestream.sdk.AceStreamManager;
 import org.acestream.sdk.AceStreamManagerActivityHelper;
-import org.acestream.sdk.EngineStatus;
 import org.acestream.sdk.controller.EngineApi;
 import org.acestream.sdk.controller.api.AceStreamPreferences;
 import org.acestream.sdk.controller.api.response.AuthData;
-import org.acestream.sdk.interfaces.EngineStatusListener;
-import org.acestream.sdk.interfaces.IRemoteDevice;
 import org.acestream.sdk.utils.Logger;
 import org.acestream.sdk.utils.PermissionUtils;
-import org.videolan.vlc.PlaybackService;
 import org.videolan.vlc.R;
 import org.videolan.vlc.StartActivity;
 import org.videolan.vlc.VLCApplication;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 import androidx.annotation.Nullable;
@@ -61,7 +56,6 @@ public class MainActivityHelper {
         public void onResumeConnected() {
             mAceStreamManager.addEngineSettingsCallback(mEngineSettingsCallback);
             mAceStreamManager.addAuthCallback(mAuthCallback);
-            mAceStreamManager.addEngineStatusListener(mEngineStatusListener);
             mAceStreamManager.discoverDevices(false);
             updateAuth();
         }
@@ -99,23 +93,6 @@ public class MainActivityHelper {
         @Override
         public void onAuthUpdated(AuthData authData) {
             updateAuth();
-        }
-    };
-
-    private EngineStatusListener mEngineStatusListener = new EngineStatusListener() {
-        @Override
-        public void onEngineStatus(final EngineStatus status, final IRemoteDevice remoteDevice) {
-            VLCApplication.runOnMainThread(new Runnable() {
-                @Override
-                public void run() {
-                    processEngineStatus(status, remoteDevice);
-                }
-            });
-        }
-
-        @Override
-        public boolean updatePlayerActivity() {
-            return false;
         }
     };
 
@@ -250,51 +227,6 @@ public class MainActivityHelper {
                 .show();
     }
 
-    public void processEngineStatus(final EngineStatus status, final IRemoteDevice remoteDevice) {
-        if(remoteDevice != null)
-            return;
-
-        String message = "";
-
-        if(status != null) {
-            switch(status.status) {
-                case "engine_unpacking":
-                    message = mActivity.getResources().getString(R.string.dialog_unpack);
-                    break;
-                case "engine_starting":
-                    message = mActivity.getResources().getString(R.string.dialog_start);
-                    break;
-                case "engine_failed":
-                    message = mActivity.getResources().getString(R.string.start_fail);
-                    break;
-                case "loading":
-                    message = mActivity.getResources().getString(R.string.loading);
-                    break;
-                case "starting":
-                    message = mActivity.getResources().getString(R.string.starting);
-                    break;
-                case "checking":
-                    message = mActivity.getResources().getString(R.string.status_checking_short, status.progress);
-                    break;
-                case "prebuf":
-                    message = mActivity.getResources().getString(R.string.status_prebuffering, status.progress, status.peers, status.speedDown);
-                    break;
-                case "error":
-                    message = status.errorMessage;
-                    break;
-                case "dl":
-                    message = String.format(
-                            Locale.getDefault(),
-                            "Peers:%d DL:%d UL:%d",
-                            status.peers,
-                            status.speedDown,
-                            status.speedUp
-                    );
-                    break;
-            }
-        }
-    }
-
     public void onResume() {
         mActivityHelper.onResume();
     }
@@ -305,7 +237,6 @@ public class MainActivityHelper {
         if(mAceStreamManager != null) {
             mAceStreamManager.removeEngineSettingsCallback(mEngineSettingsCallback);
             mAceStreamManager.removeAuthCallback(mAuthCallback);
-            mAceStreamManager.removeEngineStatusListener(mEngineStatusListener);
         }
     }
 
