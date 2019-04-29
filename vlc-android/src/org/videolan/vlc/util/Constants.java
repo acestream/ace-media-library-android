@@ -26,6 +26,7 @@ public class Constants {
     public static final String PREF_FIRST_RUN = "first_run";
     public static final String EXTRA_FIRST_RUN = "extra_first_run";
     public static final String EXTRA_UPGRADE = "extra_upgrade";
+    public static final String EXTRA_PARSE = "extra_parse";
 
     // PlaybackService
     public static final String ACTION_REMOTE_GENERIC =  Strings.buildPkgString("remote.");

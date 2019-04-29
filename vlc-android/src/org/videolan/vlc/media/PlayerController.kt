@@ -3,6 +3,7 @@ package org.videolan.vlc.media
 import android.net.Uri
 import androidx.annotation.MainThread
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,9 +23,8 @@ import org.videolan.vlc.util.VLCOptions
 class PlayerController : IVLCVout.Callback, MediaPlayer.EventListener, CoroutineScope {
     override val coroutineContext = Dispatchers.Main.immediate
 
-    private val TAG = "AceStream/VLC/PC"
+    private val TAG = "VLC/PC"
 
-//    private val exceptionHandler by lazy(LazyThreadSafetyMode.NONE) { CoroutineExceptionHandler { _, _ -> onPlayerError() } }
     private val playerContext by lazy(LazyThreadSafetyMode.NONE) { newSingleThreadContext("vlc-player") }
     private val settings by lazy(LazyThreadSafetyMode.NONE) { VLCApplication.getSettings() }
 
@@ -32,7 +32,6 @@ class PlayerController : IVLCVout.Callback, MediaPlayer.EventListener, Coroutine
     var switchToVideo = false
     var seekable = false
     var pausable = false
-    //var isInBackground = false
     var previousMediaStats: Media.Stats? = null
         private set
     @Volatile var playbackState = PlaybackStateCompat.STATE_STOPPED

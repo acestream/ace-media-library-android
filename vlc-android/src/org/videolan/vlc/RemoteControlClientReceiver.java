@@ -25,6 +25,7 @@ import android.os.SystemClock;
 import androidx.media.session.MediaButtonReceiver;
 import android.view.KeyEvent;
 
+import org.acestream.sdk.utils.Logger;
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.vlc.util.AndroidDevices;
 import org.videolan.vlc.util.Constants;
@@ -35,7 +36,7 @@ import org.videolan.vlc.util.Util;
  */
 public class RemoteControlClientReceiver extends MediaButtonReceiver {
     @SuppressWarnings("unused")
-    private static final String TAG = "VLC/RemoteControlClientReceiver";
+    private static final String TAG = "VLC/RCCR";
 
     /* It should be safe to use static variables here once registered via the AudioManager */
     private static long mHeadsetDownTime = 0;
@@ -44,6 +45,7 @@ public class RemoteControlClientReceiver extends MediaButtonReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();
+        Logger.v(TAG, "onReceive: action=" + action);
         if (action == null) return;
 
         final KeyEvent event = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);

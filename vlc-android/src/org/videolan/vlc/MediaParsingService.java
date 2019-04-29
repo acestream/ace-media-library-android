@@ -20,6 +20,7 @@ import androidx.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import org.acestream.sdk.utils.Logger;
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.medialibrary.interfaces.DevicesDiscoveryCb;
@@ -37,11 +38,8 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.videolan.vlc.BuildConfig;
-import org.videolan.vlc.R;
-
 public class MediaParsingService extends Service implements DevicesDiscoveryCb {
-    public final static String TAG = "AS/VLC/MPS";
+    public final static String TAG = "VLC/MPS";
 
     private static final long NOTIFICATION_DELAY = 1000L;
     private PowerManager.WakeLock mWakeLock;
@@ -87,6 +85,7 @@ public class MediaParsingService extends Service implements DevicesDiscoveryCb {
 
     @Override
     public void onCreate() {
+        Logger.v(TAG, "onCreate");
         super.onCreate();
 
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
@@ -98,7 +97,7 @@ public class MediaParsingService extends Service implements DevicesDiscoveryCb {
         registerReceiver(mReceiver, filter);
         mLocalBroadcastManager.registerReceiver(mReceiver, new IntentFilter(Medialibrary.ACTION_IDLE));
         PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
-        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "vlc:mps");
         mWakeLock.acquire();
     }
 
@@ -124,7 +123,9 @@ public class MediaParsingService extends Service implements DevicesDiscoveryCb {
         }
         switch (intent.getAction()) {
             case Constants.ACTION_INIT:
-                setupMedialibrary(intent.getBooleanExtra(Constants.EXTRA_UPGRADE, false));
+                setupMedialibrary(
+                        intent.getBooleanExtra(Constants.EXTRA_UPGRADE, false),
+                        intent.getBooleanExtra(Constants.EXTRA_PARSE, true));
                 break;
             case Constants.ACTION_RELOAD:
                 reload(intent.getStringExtra(Constants.EXTRA_PATH));
@@ -198,6 +199,7 @@ public class MediaParsingService extends Service implements DevicesDiscoveryCb {
     }
 
     private void reload(String path) {
+        Logger.v(TAG, "reload: mReload=" + mReload + " path=" + path);
         if (mReload > 0)
             return;
         if (TextUtils.isEmpty(path))
@@ -206,7 +208,8 @@ public class MediaParsingService extends Service implements DevicesDiscoveryCb {
             mMedialibrary.reload(path);
     }
 
-    private void setupMedialibrary(final boolean upgrade) {
+    private void setupMedialibrary(final boolean upgrade, final boolean parse) {
+        Logger.v(TAG, "setupMedialibrary: parse=" + parse + " upgrade=" + upgrade);
         if (mMedialibrary.isInitiated()) {
             mMedialibrary.resumeBackgroundOperations();
             exitCommand();
@@ -243,7 +246,7 @@ public class MediaParsingService extends Service implements DevicesDiscoveryCb {
                             mMedialibrary.unbanFolder(AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY + "/WhatsApp/");
                             mMedialibrary.banFolder(AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY + "/WhatsApp/Media/WhatsApp Animated Gifs/");
                             mMedialibrary.forceParserRetry();
-                        } else if (PreferenceManager.getDefaultSharedPreferences(MediaParsingService.this).getBoolean("auto_rescan", true))
+                        } else if (parse)
                             reload(null);
                         else
                             exitCommand();
@@ -392,6 +395,7 @@ public class MediaParsingService extends Service implements DevicesDiscoveryCb {
 
     @Override
     public void onDestroy() {
+        Logger.v(TAG, "onDestroy");
         mLocalBroadcastManager.sendBroadcast(new Intent(Constants.ACTION_SERVICE_ENDED));
         hideNotification();
         mMedialibrary.removeDeviceDiscoveryCb(this);

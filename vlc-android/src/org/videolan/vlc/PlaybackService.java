@@ -151,7 +151,10 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
     private static final long DELAY_DOUBLE_CLICK = 800L;
     private static final long DELAY_LONG_CLICK = 1000L;
 
-    private static boolean sIsStarted = false;
+    private static boolean sServiceCreated = false;
+
+    // true when service was started by startService()
+    private boolean mStarted = false;
 
     // RendererDelegate.InstanceListener
     @Override
@@ -629,7 +632,7 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
     public void onCreate() {
         Logger.v(TAG, "onCreate");
         super.onCreate();
-        sIsStarted = true;
+        sServiceCreated = true;
         mSettings = PreferenceManager.getDefaultSharedPreferences(this);
         playlistManager = new PlaylistManager(this);
         if (!VLCInstance.testCompatibleCPU(this)) {
@@ -693,15 +696,8 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
         mKeyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
 
         //:ace
-        mEngineStateCallbacks = new CopyOnWriteArraySet<>();
         mAceStreamManagerClient = new AceStreamManager.Client(this, mAceStreamManagerClientCallback);
-        mAceStreamManagerClient.connect();
-
-        RendererDelegate.INSTANCE.addInstanceListener(this);
-        RendererDelegate.INSTANCE.resume();
-
-        // Restore selected renderer from RendererDelegate instance
-        updateRenderer("service.onCreate");
+        mEngineStateCallbacks = new CopyOnWriteArraySet<>();
         ///ace
     }
 
@@ -716,7 +712,9 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
         if (mLibraryReceiver == null) {
             mLibraryReceiver = new MedialibraryReceiver();
             lbm.registerReceiver(mLibraryReceiver, new IntentFilter(VLCApplication.ACTION_MEDIALIBRARY_READY));
-            Util.startService(PlaybackService.this, new Intent(Constants.ACTION_INIT, null, this, MediaParsingService.class));
+            final Intent intent = new Intent(Constants.ACTION_INIT, null, this, MediaParsingService.class);
+            intent.putExtra(Constants.EXTRA_PARSE, false);
+            Util.startService(PlaybackService.this, intent);
         }
         if (action != null) mLibraryReceiver.addAction(action);
     }
@@ -730,7 +728,26 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
 
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
-        if (intent == null) return START_NOT_STICKY;
+        //:ace
+        if(!mStarted) {
+            Logger.v(TAG, "service is started");
+
+            mAceStreamManagerClient.connect();
+
+            RendererDelegate.INSTANCE.addInstanceListener(this);
+            RendererDelegate.INSTANCE.resume();
+
+            // Restore selected renderer from RendererDelegate instance
+            updateRenderer("service.started");
+
+        }
+        mStarted = true;
+        ///ace
+
+        if (intent == null) {
+            Logger.v(TAG, "onStartCommand: null intent");
+            return START_NOT_STICKY;
+        }
         final String action = intent.getAction();
 
         Logger.v(TAG, "onStartCommand: action=" + action);
@@ -913,7 +930,8 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
     public void onDestroy() {
         Logger.v(TAG, "onDestroy");
         super.onDestroy();
-        sIsStarted = false;
+        sServiceCreated = false;
+        mStarted = false;
 
         //:ace
         RendererDelegate.INSTANCE.shutdown();
@@ -948,7 +966,14 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
 
     @Override
     public IBinder onBind(Intent intent) {
+        Logger.v(TAG, "onBind: action=" + intent.getAction());
         return SERVICE_INTERFACE.equals(intent.getAction()) ? super.onBind(intent) : mBinder;
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Logger.v(TAG, "onUnbind");
+        return super.onUnbind(intent);
     }
 
     public IVLCVout getVLCVout()  {
@@ -3013,11 +3038,13 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
     @Nullable
     @Override
     public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, @Nullable Bundle rootHints) {
+        Logger.v(TAG, "onGetRoot: clientPackageName=" + clientPackageName);
         return Permissions.canReadStorage(PlaybackService.this) ? new BrowserRoot(BrowserProvider.ID_ROOT, null) : null;
     }
 
     @Override
     public void onLoadChildren(@NonNull final String parentId, @NonNull final Result<List<MediaBrowserCompat.MediaItem>> result) {
+        Logger.v(TAG, "onLoadChildren: parentId=" + parentId);
         result.detach();
         if (!mMedialibrary.isInitiated() || mLibraryReceiver != null)
             registerMedialibrary(new Runnable() {
@@ -3416,6 +3443,6 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
     }
 
     public static boolean isStarted() {
-        return sIsStarted;
+        return sServiceCreated;
     }
 }

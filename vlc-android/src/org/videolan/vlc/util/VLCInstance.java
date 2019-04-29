@@ -35,7 +35,7 @@ import org.videolan.vlc.VLCCrashHandler;
 import org.videolan.vlc.gui.CompatErrorActivity;
 
 public class VLCInstance {
-    public final static String TAG = "AceStream/VLC/I";
+    public final static String TAG = "VLC/I";
 
     private static LibVLC sLibVLC = null;
     private static String sUserAgent = null;

@@ -42,7 +42,11 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
     private val AUDIO_REPEAT_MODE_KEY = "audio_repeat_mode"
 
     private val medialibrary by lazy(LazyThreadSafetyMode.NONE) { Medialibrary.getInstance() }
-    val player by lazy(LazyThreadSafetyMode.NONE) { PlayerController() }
+    private var playerInitialized = false
+    val player by lazy(LazyThreadSafetyMode.NONE) {
+        playerInitialized = true
+        PlayerController()
+    }
     private val settings by lazy(LazyThreadSafetyMode.NONE) { VLCApplication.getSettings() }
     private val ctx by lazy(LazyThreadSafetyMode.NONE) { VLCApplication.getAppContext() }
     private val mediaList = MediaWrapperList()
@@ -234,7 +238,9 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
             savePosition()
             saveMediaMeta()
         }
-        player.releaseMedia()
+        if(playerInitialized) {
+            player.releaseMedia()
+        }
 
         if (!keepRenderer && !RendererDelegate.globalRenderer) {
             RendererDelegate.restoreRenderer(false)
@@ -246,8 +252,10 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
             currentIndex = -1
             mediaList.clear(service.aceStreamManager)
         }
-        if (systemExit) player.release()
-        else player.restart()
+        if(playerInitialized) {
+            if (systemExit) player.release()
+            else player.restart()
+        }
         service.onPlaybackStopped()
     }
 
@@ -583,8 +591,9 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
 
     fun onServiceDestroyed() {
         mediaList.resetP2PItems(service.aceStreamManager, -1)
-        player.release()
-        VLCInstance.destroy()
+        if(playerInitialized) {
+            player.release()
+        }
     }
 
     @MainThread
