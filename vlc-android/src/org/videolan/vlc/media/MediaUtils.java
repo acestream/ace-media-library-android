@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.WindowManager;
 
 import org.acestream.sdk.AceStream;
 import org.videolan.libvlc.util.AndroidUtil;
@@ -112,12 +113,17 @@ public class MediaUtils {
     public static void openList(final Context context, final List<MediaWrapper> list, final int position){
         if (Util.isListEmpty(list))
             return;
-        new DialogCallback(context, new DialogCallback.Runnable() {
-            @Override
-            public void run(PlaybackService service) {
-                service.load(list, position);
-            }
-        });
+        try {
+            new DialogCallback(context, new DialogCallback.Runnable() {
+                @Override
+                public void run(PlaybackService service) {
+                    service.load(list, position);
+                }
+            });
+        }
+        catch(WindowManager.BadTokenException e) {
+            Log.e(TAG, "openList: activity was destroyed");
+        }
     }
 
     public static void openUri(final Context context, final Uri uri){
