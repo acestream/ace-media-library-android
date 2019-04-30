@@ -3148,7 +3148,7 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
         RemoteDevice device = getCurrentRemoteDevice();
         if(device != null) {
             device.stop(clearPlaylist);
-            if(clearPlaylist && !device.isAceCast()) {
+            if(clearPlaylist && !device.isAceCast() && mAceStreamManager != null) {
                 mAceStreamManager.stopRemotePlayback(true);
             }
         }
