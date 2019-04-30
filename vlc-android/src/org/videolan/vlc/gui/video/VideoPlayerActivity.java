@@ -376,7 +376,6 @@ public class VideoPlayerActivity extends AppCompatActivity
      * For uninterrupted switching between audio and video mode
      */
     private boolean mSwitchingView;
-    private boolean mSwitchToPopup;
     private boolean mHasSubItems = false;
 
     // size of the video
@@ -699,7 +698,7 @@ public class VideoPlayerActivity extends AppCompatActivity
         mAdvOptionsButton = findViewById(R.id.player_overlay_adv_function);
         mAdvOptionsButton.setOnClickListener(this);
 
-        if (mDisplayManager.isPrimary() && (!VLCApplication.showTvUi() || AndroidDevices.hasPiP) && !AndroidDevices.isDex(this)) {
+        if (mDisplayManager.isPrimary() && AndroidDevices.hasPiP && !AndroidDevices.isDex(this)) {
             mPipToggle.setOnClickListener(this);
             mPipToggle.setVisibility(View.VISIBLE);
         }
@@ -1093,32 +1092,28 @@ public class VideoPlayerActivity extends AppCompatActivity
         final MediaWrapper mw = mService != null ? mService.getCurrentMediaWrapper() : null;
         if (mw == null) return;
         if (AndroidDevices.hasPiP) {
-            if (AndroidUtil.isOOrLater)
-                try {
-                    final int height = mVideoHeight != 0 ? mVideoHeight : mw.getHeight();
-                    final int width = Math.min(mVideoWidth != 0 ? mVideoWidth : mw.getWidth(), (int) (height*2.39f));
-                    enterPictureInPictureMode(new PictureInPictureParams.Builder().setAspectRatio(new Rational(width, height)).build());
-                } catch (IllegalArgumentException e) { // Fallback with default parameters
+            try {
+                if (AndroidUtil.isOOrLater)
+                    try {
+                        final int height = mVideoHeight != 0 ? mVideoHeight : mw.getHeight();
+                        final int width = Math.min(mVideoWidth != 0 ? mVideoWidth : mw.getWidth(), (int) (height * 2.39f));
+                        enterPictureInPictureMode(new PictureInPictureParams.Builder().setAspectRatio(new Rational(width, height)).build());
+                    } catch (IllegalArgumentException e) { // Fallback with default parameters
+                        //noinspection deprecation
+                        enterPictureInPictureMode();
+                    }
+                else {
                     //noinspection deprecation
                     enterPictureInPictureMode();
                 }
-            else {
-                //noinspection deprecation
-                enterPictureInPictureMode();
+            }
+            catch(IllegalStateException e) {
+                // Some devices throw IllegalStateException("enterPictureInPictureMode: Device doesn't support picture-in-picture mode.")
+                Logger.wtf(TAG, "Failed to enter pip", e);
+                AceStream.toast("Failed to enter PiP");
             }
         } else {
-            if (Permissions.canDrawOverlays(this)) {
-                Logger.v(TAG, "switchToPopup: can draw overlays");
-                mSwitchingView = true;
-                mSwitchToPopup = true;
-                if (mService != null && !mService.isPlaying())
-                    mw.addFlags(MediaWrapper.MEDIA_PAUSED);
-                cleanUI();
-                exitOK();
-            } else {
-                Logger.v(TAG, "switchToPopup: cannot draw overlays");
-                Permissions.checkDrawOverlaysPermission(this);
-            }
+            Logger.v(TAG, "switchToPopup: pip is not supported");
         }
     }
 
@@ -1593,17 +1588,9 @@ public class VideoPlayerActivity extends AppCompatActivity
                 Logger.v(TAG, "stopPlayback: view are not attached");
             }
             if (mService.hasMedia() && mSwitchingView) {
-                Log.v(TAG, "stopPlayback: switching view: toPopup=" + mSwitchToPopup + " uri=" + mUri);
-                //r
-//            if (mSwitchToPopup)
-//                mService.switchToPopup(mService.getCurrentMediaPosition());
-//            else {
-//                mService.getCurrentMediaWrapper().addFlags(MediaWrapper.MEDIA_FORCE_AUDIO);
-//                mService.showWithoutParse(mService.getCurrentMediaPosition());
-//            }
-                //--
-                Log.w(TAG, "stopPlayback: switching view is not implemented");
-                //<<
+                Log.v(TAG, "stopPlayback: switching view: uri=" + mUri);
+                mService.getCurrentMediaWrapper().addFlags(MediaWrapper.MEDIA_FORCE_AUDIO);
+                mService.showWithoutParse(mService.getCurrentMediaPosition());
                 return;
             }
 
