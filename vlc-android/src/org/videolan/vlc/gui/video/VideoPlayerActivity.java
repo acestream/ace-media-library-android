@@ -379,14 +379,6 @@ public class VideoPlayerActivity extends AppCompatActivity
     private boolean mSwitchToPopup;
     private boolean mHasSubItems = false;
 
-    // size of the ad player video
-    private int mAdPlayerVideoHeight;
-    private int mAdPlayerVideoWidth;
-    private int mAdPlayerVideoVisibleHeight;
-    private int mAdPlayerVideoVisibleWidth;
-    private int mAdPlayerSarNum;
-    private int mAdPlayerSarDen;
-
     // size of the video
     private int mVideoHeight;
     private int mVideoWidth;
@@ -1116,14 +1108,17 @@ public class VideoPlayerActivity extends AppCompatActivity
             }
         } else {
             if (Permissions.canDrawOverlays(this)) {
+                Logger.v(TAG, "switchToPopup: can draw overlays");
                 mSwitchingView = true;
                 mSwitchToPopup = true;
                 if (mService != null && !mService.isPlaying())
                     mw.addFlags(MediaWrapper.MEDIA_PAUSED);
                 cleanUI();
                 exitOK();
-            } else
+            } else {
+                Logger.v(TAG, "switchToPopup: cannot draw overlays");
                 Permissions.checkDrawOverlaysPermission(this);
+            }
         }
     }
 
