@@ -64,7 +64,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         @Override
         protected boolean isSelected() {
-            return mMediaList.get(getLayoutPosition()).hasStateFlags(MediaLibraryItem.FLAG_SELECTED);
+            try {
+                return mMediaList.get(getLayoutPosition()).hasStateFlags(MediaLibraryItem.FLAG_SELECTED);
+            }
+            catch(IndexOutOfBoundsException e) {
+                return false;
+            }
         }
     }
 
