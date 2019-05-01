@@ -81,7 +81,7 @@ public class ExternalMonitor extends BroadcastReceiver {
 
     private static void checkNewStorages(final Context ctx) {
         if (VLCApplication.getMLInstance().isInitiated())
-            ctx.startService(new Intent(Constants.ACTION_CHECK_STORAGES, null,ctx, MediaParsingService.class));
+            Util.startService(ctx, new Intent(Constants.ACTION_CHECK_STORAGES, null, ctx, MediaParsingService.class));
     }
 
     static void unregister(Context ctx) {
