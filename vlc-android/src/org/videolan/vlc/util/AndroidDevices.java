@@ -104,7 +104,8 @@ public class AndroidDevices {
         isAndroidTv = pm != null && pm.hasSystemFeature("android.software.leanback");
         isChromeBook = pm != null && pm.hasSystemFeature("org.chromium.arc.device_management");
         hasPlayServices = pm == null || hasPlayServices(pm);
-        hasPiP = AndroidUtil.isOOrLater || AndroidUtil.isNougatOrLater && isAndroidTv;
+        hasPiP = AndroidUtil.isOOrLater && pm != null && pm.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)
+                || AndroidUtil.isNougatOrLater && isAndroidTv;
         final TelephonyManager tm = ctx != null ? ((TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE)) : null;
         isPhone = tm == null || tm.getPhoneType() != TelephonyManager.PHONE_TYPE_NONE;
         // hasCombBar test if device has Combined Bar : only for tablet with Honeycomb or ICS
