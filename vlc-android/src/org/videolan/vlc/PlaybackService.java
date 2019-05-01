@@ -1438,7 +1438,9 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
     }
 
     public void onNewPlayback(final MediaWrapper mw) {
-        mMediaSession.setSessionActivity(getSessionPendingIntent());
+        if(mMediaSession != null) {
+            mMediaSession.setSessionActivity(getSessionPendingIntent());
+        }
         mHandler.sendEmptyMessage(SHOW_PROGRESS);
     }
 
