@@ -5704,7 +5704,7 @@ public class VideoPlayerActivity extends AppCompatActivity
 
         Logger.v(TAG, "handleIntent: intent=" + intent + " data=" + data);
 
-        if(mWasStopped && !intentHasTransportDescriptor() && !mService.hasMedia() && mService.hasLastPlaylist()) {
+        if(mWasStopped && !intentHasTransportDescriptor() && mService != null && !mService.hasMedia() && mService.hasLastPlaylist()) {
             Log.v(TAG, "handleIntent: was stopped, start last playlist");
             mWasStopped = false;
             mService.loadLastPlaylist(org.videolan.vlc.util.Constants.PLAYLIST_TYPE_VIDEO);
