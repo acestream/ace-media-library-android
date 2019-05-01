@@ -133,7 +133,7 @@ public class Medialibrary {
     }
 
     public boolean addDevice(@NonNull String uuid, @NonNull String path, boolean removable) {
-        return nativeAddDevice(Tools.encodeVLCMrl(uuid), Tools.encodeVLCMrl(path), removable);
+        return mIsInitiated && nativeAddDevice(Tools.encodeVLCMrl(uuid), Tools.encodeVLCMrl(path), removable);
     }
 
     public void discover(@NonNull String path) {
