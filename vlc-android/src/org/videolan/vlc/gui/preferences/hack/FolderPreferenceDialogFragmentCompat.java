@@ -69,7 +69,9 @@ public class FolderPreferenceDialogFragmentCompat
         final ArrayList<String> stored = new ArrayList<>(entries.length);
 
         for (final CharSequence cs : entries) {
-            stored.add(cs.toString());
+            if(cs != null) {
+                stored.add(cs.toString());
+            }
         }
 
         out.putStringArrayList(key, stored);
@@ -78,7 +80,7 @@ public class FolderPreferenceDialogFragmentCompat
     private static CharSequence[] getCharSequenceArray(Bundle in, String key) {
         final ArrayList<String> stored = in.getStringArrayList(key);
 
-        return stored == null ? null : stored.toArray(new CharSequence[stored.size()]);
+        return stored == null ? null : stored.toArray(new CharSequence[0]);
     }
 
     private ListPreference getListPreference() {
