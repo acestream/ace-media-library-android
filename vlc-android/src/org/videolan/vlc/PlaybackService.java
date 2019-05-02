@@ -3437,6 +3437,10 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
      * Based on files inside update media type.
      */
     public void processTransportFiles() {
+        if(!mStarted) {
+            Logger.v(TAG, "processTransportFiles: not started");
+            return;
+        }
         Context ctx = VLCApplication.getAppContext();
         Intent intent = new Intent(
                 ctx,
