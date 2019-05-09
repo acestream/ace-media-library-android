@@ -1548,7 +1548,7 @@ public class VideoPlayerActivity extends AppCompatActivity
             else if(mAceStreamManager == null) {
                 Log.v(TAG, "stopPlayback: skip stop engine session, no PM");
             }
-            else if(device != null && !device.isAceCast()) {
+            else if(device != null && !device.isAceCast() && !stopRemoteDevice) {
                 Log.v(TAG, "stopPlayback: skip stop engine session, on renderer");
             }
             else {
