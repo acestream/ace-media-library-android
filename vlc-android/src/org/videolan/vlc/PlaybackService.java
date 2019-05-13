@@ -156,6 +156,12 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
     // true when service was started by startService()
     private boolean mStarted = false;
 
+    // true when foreground playback notification is shown
+    private volatile boolean mShowingPlaybackNotification = false;
+
+    // true when player is started (updated based on broadcast events)
+    private volatile boolean mAceStreamPlayerStarted = false;
+
     // RendererDelegate.InstanceListener
     @Override
     public void onReloaded() {
@@ -793,6 +799,21 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
             }
         }
         else if(VlcBridge.ACTION_LOAD_P2P_PLAYLIST.equals(action)) {
+            // Show notification now because we need to go foreground ASAP
+            showSimplePlaybackNotification();
+
+            // After 6 seconds check that player was started.
+            // If not started - hide foreground notification.
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(!mAceStreamPlayerStarted) {
+                        Logger.v(TAG, "hide playback notification after timeout");
+                        hideSimplePlaybackNotification();
+                    }
+                }
+            }, 6000);
+
             mAceStreamManagerClient.runWhenReady(new Runnable() {
                 @Override
                 public void run() {
@@ -811,17 +832,17 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
     }
 
     public void showSimplePlaybackNotification() {
-        if(!mIsForeground) {
+        if(!mShowingPlaybackNotification) {
             Notification notification = NotificationHelper.createSimplePlaybackNotification(this);
             startForeground(4, notification);
-            mIsForeground = true;
+            mShowingPlaybackNotification = true;
         }
     }
 
     public void hideSimplePlaybackNotification() {
-        if (mIsForeground) {
+        if (mShowingPlaybackNotification) {
             stopForeground(true);
-            mIsForeground = false;
+            mShowingPlaybackNotification = false;
         }
         NotificationManagerCompat.from(this).cancel(4);
     }
@@ -3366,9 +3387,11 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
                 }
                 break;
             case AceStreamPlayer.BROADCAST_EVENT_PLAYER_STARTED:
+                mAceStreamPlayerStarted = true;
                 showSimplePlaybackNotification();
                 break;
             case AceStreamPlayer.BROADCAST_EVENT_PLAYER_STOPPED:
+                mAceStreamPlayerStarted = false;
                 hideSimplePlaybackNotification();
                 break;
             case AceStreamPlayer.BROADCAST_EVENT_SAVE_METADATA:
