@@ -113,8 +113,8 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.release
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFile 'proguard.cfg'
             kotlinOptions.freeCompilerArgs = [ 'Xno-param-assertions']
         }
