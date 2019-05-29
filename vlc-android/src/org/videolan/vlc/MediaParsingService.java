@@ -1,5 +1,6 @@
 package org.videolan.vlc;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -9,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -116,10 +118,8 @@ public class MediaParsingService extends Service implements DevicesDiscoveryCb {
         synchronized (MediaParsingService.this) {
             // Set 1s delay before displaying scan icon
             // Except for Android 8+ which expects startForeground immediately
-            if (mLastNotificationTime <= 0L)
-                mLastNotificationTime = AndroidUtil.isOOrLater ? 0L : System.currentTimeMillis();
-            if (AndroidUtil.isOOrLater)
-                showNotification();
+            if (AndroidUtil.isOOrLater) forceForeground();
+            else if (mLastNotificationTime <= 0L) mLastNotificationTime = System.currentTimeMillis();
         }
         switch (intent.getAction()) {
             case Constants.ACTION_INIT:
@@ -145,6 +145,13 @@ public class MediaParsingService extends Service implements DevicesDiscoveryCb {
         }
         mLocalBroadcastManager.sendBroadcast(new Intent(Constants.ACTION_SERVICE_STARTED));
         return START_NOT_STICKY;
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    private void forceForeground() {
+        Notification notification = NotificationHelper.createScanNotification(getApplicationContext(), getString(R.string.loading_medialibrary), false, mScanPaused);
+        NotificationHelper.createNotificationChannels(getApplicationContext());
+        startForeground(43, notification);
     }
 
     private void discoverStorage(final String path) {
