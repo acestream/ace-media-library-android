@@ -159,7 +159,14 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
             return null
         }
         return withContext(Dispatchers.Default) {
-            locations.mapTo(ArrayList(locations.size)) { MediaWrapper.fromJson(it) }
+            try {
+                locations.mapTo(ArrayList(locations.size)) { MediaWrapper.fromJson(it) }
+            }
+            catch(e: Throwable) {
+                AceStream.toast("Failed to load last playlist")
+                Logger.wtf(TAG, "Failed to load last playlist", e)
+                ArrayList<MediaWrapper>()
+            }
         }
     }
 
