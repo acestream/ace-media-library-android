@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import org.acestream.sdk.AceStream;
 import org.acestream.sdk.player.api.AceStreamPlayer;
 import org.videolan.medialibrary.media.MediaWrapper;
 import org.videolan.medialibrary.media.TrackDescription;
@@ -25,9 +26,18 @@ public class AceStreamUtils {
     }
 
     public static boolean shouldStartAceStreamPlayer(MediaWrapper mw) {
-        return ACE_STREAM_PLAYER_ENABLED
-                && mw != null
-                && mw.isP2PItem()
+        if(!ACE_STREAM_PLAYER_ENABLED) {
+            return false;
+        }
+        if(mw == null) {
+            return false;
+        }
+        if(AceStream.parseAceStreamContentUrl(mw.getUri()) != null) {
+            // This happens when some external app started engine session and passed
+            // playback url to our app.
+            return true;
+        }
+        return mw.isP2PItem()
                 && !RendererDelegate.INSTANCE.hasRenderer()
                 && mw.getType() != MediaWrapper.TYPE_AUDIO
                 && !mw.hasFlag(MediaWrapper.MEDIA_FORCE_AUDIO);

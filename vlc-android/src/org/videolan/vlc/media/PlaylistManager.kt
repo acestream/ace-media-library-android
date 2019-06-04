@@ -354,7 +354,13 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
                 else stop(false)
             } else if (mw.type != MediaWrapper.TYPE_VIDEO || isVideoPlaying || service.hasRenderer()
                     || mw.hasFlag(MediaWrapper.MEDIA_FORCE_AUDIO)) {
-                if(mw.isP2PItem && mw.playbackUri === null) {
+
+                if(AceStreamUtils.shouldStartAceStreamPlayer(mw)) {
+                    // This happens when some external app has started engine session and passed
+                    // playback url to this app.
+                    startCurrentPlaylistInAceStreamPlayer(extras)
+                }
+                else if(mw.isP2PItem && mw.playbackUri === null) {
                     Logger.v(TAG, "playIndex:internal: start p2p session: remoteDevice=${service.currentRemoteDevice}")
 
                     service.getEngine(object : PlaybackService.EngineStateCallback {
