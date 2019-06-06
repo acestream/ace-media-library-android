@@ -32,7 +32,7 @@ public class AceStreamUtils {
         if(mw == null) {
             return false;
         }
-        if(AceStream.parseAceStreamContentUrl(mw.getUri()) != null) {
+        if(AceStream.isAceStreamUrl(mw.getUri())) {
             // This happens when some external app started engine session and passed
             // playback url to our app.
             return true;
