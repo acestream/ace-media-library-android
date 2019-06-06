@@ -131,6 +131,6 @@ public class Tools {
             // and after that query string cannot be parsed.
             return mrl;
         else
-            return Uri.encode(Uri.decode(mrl), ".-_~/()&!$*+,;='@:");
+            return Uri.encode(Uri.decode(mrl), "?.-_~/()&!$*+,;='@:");
     }
 }
