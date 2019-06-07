@@ -32,6 +32,7 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import androidx.fragment.app.FragmentActivity;
 
+import org.acestream.sdk.AceStream;
 import org.acestream.sdk.utils.PermissionUtils;
 import org.videolan.vlc.gui.MainActivity;
 import org.videolan.vlc.gui.SearchActivity;
@@ -102,7 +103,9 @@ public class StartActivity extends FragmentActivity {
     }
 
     private void startPlaybackFromApp(Intent intent) {
-        if (intent.getType() != null && intent.getType().startsWith("video"))
+        if (intent.getType() != null
+                && intent.getType().startsWith("video")
+                && !AceStream.isAceStreamUrl(intent.getData()))
             startActivity(intent.setClass(this, VideoPlayerActivity.class));
         else
             MediaUtils.openMediaNoUi(intent.getData());
