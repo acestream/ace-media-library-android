@@ -122,6 +122,7 @@ import org.acestream.sdk.interfaces.IRemoteDevice;
 import org.acestream.sdk.player.api.AceStreamPlayer;
 import org.acestream.sdk.utils.Logger;
 import org.acestream.sdk.utils.MiscUtils;
+import org.acestream.sdk.utils.VlcBridge;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONException;
 import org.videolan.libvlc.IVLCVout;
@@ -744,6 +745,7 @@ public class VideoPlayerActivity extends AppCompatActivity
         if (mBattery != null)
             filter.addAction(Intent.ACTION_BATTERY_CHANGED);
         filter.addAction(VLCApplication.SLEEP_INTENT);
+        filter.addAction(VlcBridge.ACTION_CLOSE_PLAYER);
         registerReceiver(mReceiver, filter);
 
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -1924,6 +1926,9 @@ public class VideoPlayerActivity extends AppCompatActivity
                     mBattery.setTextColor(Color.RED);
                 mBattery.setText(String.format("%d%%", batteryLevel));
             } else if (VLCApplication.SLEEP_INTENT.equalsIgnoreCase(action)) {
+                exitOK();
+            } else if(VlcBridge.ACTION_CLOSE_PLAYER.equalsIgnoreCase(action)) {
+                Logger.v(TAG, "received: close player");
                 exitOK();
             }
         }
