@@ -1101,7 +1101,7 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
 
     public TransportFileDescriptor getDescriptor() throws TransportFileParsingException {
         if(mDescriptor == null) {
-            Log.v(TAG, "getDescriptor: no descriptor, parse from MRL");
+            Logger.v(TAG, "getDescriptor: no descriptor, parse from MRL: uri=" + mUri);
             if(mUri == null) {
                 throw new TransportFileParsingException("missing descriptor and MRL");
             }
