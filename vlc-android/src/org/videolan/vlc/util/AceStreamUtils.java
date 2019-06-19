@@ -111,6 +111,7 @@ public class AceStreamUtils {
         libvlcOptions.putBoolean("subtitles_background", prefs.getBoolean("subtitles_background", false));
         libvlcOptions.putString("opengl", prefs.getString("opengl", "-1"));
         libvlcOptions.putString("resampler", VLCOptions.getResampler());
+        libvlcOptions.putBoolean("fix_audio_volume", prefs.getBoolean("fix_audio_volume", true));
 
         intent.putExtra(AceStreamPlayer.EXTRA_LIBVLC_OPTIONS, libvlcOptions);
 
