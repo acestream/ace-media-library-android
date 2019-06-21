@@ -1,4 +1,5 @@
-apply plugin: 'com.android.application'
+// import com.android.build.OutputFile
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -149,6 +150,7 @@ android {
         //Custom APK name and versionCode
         variant.outputs.each { output ->
             def abiName = System.getenv('GRADLE_ABI')?.toLowerCase() ?: "all"
+            // def abiName = output.getFilter(OutputFile.ABI) ?: System.getenv('GRADLE_ABI')?.toLowerCase() ?: "all"
             output.versionCodeOverride = 10000000 + defaultConfig.versionCode + abiCodes.get(abiName, 0)
             def outputName = "Ace-Media-Library-"
             outputName += variant.versionName + "-" + abiName + ".apk"
