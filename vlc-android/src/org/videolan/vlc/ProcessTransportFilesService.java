@@ -17,7 +17,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import org.acestream.engine.BaseService;
 import org.acestream.sdk.AceStream;
 import org.acestream.sdk.AceStreamManager;
 import org.acestream.sdk.controller.EngineApi;
