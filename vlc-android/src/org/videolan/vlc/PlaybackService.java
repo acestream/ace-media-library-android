@@ -3358,10 +3358,24 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
         VLCApplication.postOnMainThread(new Runnable() {
             @Override
             public void run() {
-                Logger.v(TAG, "restoreRemoteDeviceConnection:post-check:"
-                        + " playing=" + isPlaying()
-                        + " paused=" + isPaused());
-                if(!isPlaying() && !isPaused()) {
+                boolean stop = false;
+                RemoteDevice device = getCurrentRemoteDevice();
+                if(device == null) {
+                    Logger.v(TAG, "restoreRemoteDeviceConnection:post-check: missing remote device");
+                    stop = true;
+                }
+                else {
+                    Logger.v(TAG, "restoreRemoteDeviceConnection:post-check:"
+                            + " playing=" + device.isPlaying()
+                            + " paused=" + device.isPaused()
+                            + " engineStatus=" + device.getEngineStatus());
+
+                    stop = !device.isPlaying()
+                            && !device.isPaused()
+                            && device.getEngineStatus() == null;
+                }
+
+                if(stop) {
                     stop(false, true, true);
                 }
             }
