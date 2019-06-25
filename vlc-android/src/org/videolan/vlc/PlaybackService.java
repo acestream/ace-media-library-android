@@ -1977,6 +1977,17 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
     }
 
     @MainThread
+    public boolean isPaused() {
+        RemoteDevice device = getCurrentRemoteDevice();
+        if(device != null) {
+            return device.isPaused();
+        }
+        else {
+            return playlistManager.getPlayer().isPaused();
+        }
+    }
+
+    @MainThread
     public boolean isSeekable() {
         RemoteDevice device = getCurrentRemoteDevice();
         if(device != null) {
@@ -3347,8 +3358,10 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
         VLCApplication.postOnMainThread(new Runnable() {
             @Override
             public void run() {
-                Logger.v(TAG, "restoreRemoteDeviceConnection:post-check: playing=" + isPlaying());
-                if(!isPlaying()) {
+                Logger.v(TAG, "restoreRemoteDeviceConnection:post-check:"
+                        + " playing=" + isPlaying()
+                        + " paused=" + isPaused());
+                if(!isPlaying() && !isPaused()) {
                     stop(false, true, true);
                 }
             }
