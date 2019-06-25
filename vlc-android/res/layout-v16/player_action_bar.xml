@@ -31,17 +31,6 @@
         android:visibility="gone"/>
 
     <ImageView
-        android:id="@+id/player_overlay_toggle_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/player_action_bar_icon_gap"
-        android:layout_marginEnd="@dimen/player_action_bar_icon_gap"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/rci_info_selector"
-        android:visibility="gone"
-        android:focusable="true"/>
-
-    <ImageView
         android:id="@+id/playlist_toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
