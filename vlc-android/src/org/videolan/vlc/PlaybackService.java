@@ -936,8 +936,6 @@ public class PlaybackService extends MediaBrowserServiceCompat implements Render
                     }
                 }
             }
-            playlist.sort();
-
 
             return playlist;
         }
