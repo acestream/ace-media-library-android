@@ -49,6 +49,8 @@ public class AceStreamUtils {
     public static Intent getPlayerIntent() {
         SharedPreferences prefs = VLCApplication.getSettings();
         Intent intent = AceStreamPlayer.getPlayerIntent();
+        intent.putExtra(AceStreamPlayer.EXTRA_SHOW_TV_UI,
+                VLCApplication.showTvUi());
         intent.putExtra(AceStreamPlayer.EXTRA_AUDIO_OUTPUT,
                 VLCOptions.getAout(prefs));
         intent.putExtra(AceStreamPlayer.EXTRA_AUDIO_DIGITAL_OUTPUT_ENABLED,
