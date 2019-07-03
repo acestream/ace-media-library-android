@@ -1,0 +1,60 @@
+diff --git a/modules/demux/adaptive/ChunksSource.hpp b/modules/demux/adaptive/ChunksSource.hpp
+index afe84abeba..b8c6ba5070 100644
+--- a/modules/demux/adaptive/ChunksSource.hpp
++++ b/modules/demux/adaptive/ChunksSource.hpp
+@@ -30,6 +30,7 @@ namespace adaptive
+             virtual ~ChunksSource() {}
+             virtual block_t *readNextBlock() = 0;
+             virtual std::string getContentType() = 0;
++            virtual bool isEOF() = 0;
+     };
+ }
+ 
+diff --git a/modules/demux/adaptive/Streams.cpp b/modules/demux/adaptive/Streams.cpp
+index 0cc195f0ce..a68ddcbd5e 100644
+--- a/modules/demux/adaptive/Streams.cpp
++++ b/modules/demux/adaptive/Streams.cpp
+@@ -459,6 +459,11 @@ std::string AbstractStream::getContentType()
+         return std::string();
+ }
+ 
++bool AbstractStream::isEOF()
++{
++    return eof;
++}
++
+ block_t * AbstractStream::readNextBlock()
+ {
+     if (currentChunk == NULL && !eof)
+diff --git a/modules/demux/adaptive/Streams.hpp b/modules/demux/adaptive/Streams.hpp
+index 5a8c29e7ed..643aaf072d 100644
+--- a/modules/demux/adaptive/Streams.hpp
++++ b/modules/demux/adaptive/Streams.hpp
+@@ -95,6 +95,7 @@ namespace adaptive
+         /* Used by demuxers fake streams */
+         virtual std::string getContentType(); /* impl */
+         virtual block_t *readNextBlock(); /* impl */
++        virtual bool isEOF(); /* impl */
+ 
+         /**/
+         virtual void fillExtraFMTInfo( es_format_t * ) const; /* impl */
+diff --git a/modules/demux/adaptive/plumbing/SourceStream.cpp b/modules/demux/adaptive/plumbing/SourceStream.cpp
+index 08cf27c54b..3210ec774c 100644
+--- a/modules/demux/adaptive/plumbing/SourceStream.cpp
++++ b/modules/demux/adaptive/plumbing/SourceStream.cpp
+@@ -84,8 +84,13 @@ ssize_t ChunksSourceStream::Read(uint8_t *buf, size_t size)
+     {
+         if(!p_block && !(p_block = source->readNextBlock()))
+         {
+-            b_eof = true;
+-            break;
++            if(source->isEOF()) {
++                msg_Info(p_obj, "ChunksSourceStream::Read: EOF on chunk");
++                b_eof = true;
++                break;
++            }
++            msg_Info(p_obj, "ChunksSourceStream::Read: skip chunk");
++            continue;
+         }
+ 
+         if(p_block->i_buffer > i_toread)
