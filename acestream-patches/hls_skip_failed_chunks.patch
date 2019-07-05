@@ -1,60 +1,85 @@
 diff --git a/modules/demux/adaptive/ChunksSource.hpp b/modules/demux/adaptive/ChunksSource.hpp
-index afe84abeba..b8c6ba5070 100644
+index afe84abeba..05f8025102 100644
 --- a/modules/demux/adaptive/ChunksSource.hpp
 +++ b/modules/demux/adaptive/ChunksSource.hpp
 @@ -30,6 +30,7 @@ namespace adaptive
              virtual ~ChunksSource() {}
              virtual block_t *readNextBlock() = 0;
              virtual std::string getContentType() = 0;
-+            virtual bool isEOF() = 0;
++            virtual bool canSkipLastChunk() = 0;
      };
  }
  
 diff --git a/modules/demux/adaptive/Streams.cpp b/modules/demux/adaptive/Streams.cpp
-index 0cc195f0ce..a68ddcbd5e 100644
+index 0cc195f0ce..a143bae6c2 100644
 --- a/modules/demux/adaptive/Streams.cpp
 +++ b/modules/demux/adaptive/Streams.cpp
-@@ -459,6 +459,11 @@ std::string AbstractStream::getContentType()
+@@ -459,8 +459,15 @@ std::string AbstractStream::getContentType()
          return std::string();
  }
  
-+bool AbstractStream::isEOF()
++bool AbstractStream::canSkipLastChunk()
 +{
-+    return eof;
++    return lastChunkFailed;
 +}
 +
  block_t * AbstractStream::readNextBlock()
  {
++    lastChunkFailed = false;
++
      if (currentChunk == NULL && !eof)
+         currentChunk = segmentTracker->getNextChunk(!fakeesout->restarting(), connManager);
+ 
+@@ -482,6 +489,10 @@ block_t * AbstractStream::readNextBlock()
+     block_t *block = currentChunk->readBlock();
+     if(block == NULL)
+     {
++        // Set this flag to informate calling module that NULL is returned because last chunkd failed.
++        // In such case chunk can be just skipped.
++        lastChunkFailed = true;
++
+         delete currentChunk;
+         currentChunk = NULL;
+         return NULL;
 diff --git a/modules/demux/adaptive/Streams.hpp b/modules/demux/adaptive/Streams.hpp
-index 5a8c29e7ed..643aaf072d 100644
+index 5a8c29e7ed..c16fcf5e59 100644
 --- a/modules/demux/adaptive/Streams.hpp
 +++ b/modules/demux/adaptive/Streams.hpp
 @@ -95,6 +95,7 @@ namespace adaptive
          /* Used by demuxers fake streams */
          virtual std::string getContentType(); /* impl */
          virtual block_t *readNextBlock(); /* impl */
-+        virtual bool isEOF(); /* impl */
++        virtual bool canSkipLastChunk(); /* impl */
  
          /**/
          virtual void fillExtraFMTInfo( es_format_t * ) const; /* impl */
+@@ -124,6 +125,7 @@ namespace adaptive
+ 
+         SegmentChunk *currentChunk;
+         bool eof;
++        bool lastChunkFailed;
+         std::string language;
+         std::string description;
+ 
 diff --git a/modules/demux/adaptive/plumbing/SourceStream.cpp b/modules/demux/adaptive/plumbing/SourceStream.cpp
-index 08cf27c54b..3210ec774c 100644
+index 08cf27c54b..ed1c747edd 100644
 --- a/modules/demux/adaptive/plumbing/SourceStream.cpp
 +++ b/modules/demux/adaptive/plumbing/SourceStream.cpp
-@@ -84,8 +84,13 @@ ssize_t ChunksSourceStream::Read(uint8_t *buf, size_t size)
+@@ -84,8 +84,15 @@ ssize_t ChunksSourceStream::Read(uint8_t *buf, size_t size)
      {
          if(!p_block && !(p_block = source->readNextBlock()))
          {
 -            b_eof = true;
 -            break;
-+            if(source->isEOF()) {
++            if(source->canSkipLastChunk()) {
++                msg_Info(p_obj, "ChunksSourceStream::Read: skip chunk");
++                continue;
++            }
++            else {
 +                msg_Info(p_obj, "ChunksSourceStream::Read: EOF on chunk");
 +                b_eof = true;
 +                break;
 +            }
-+            msg_Info(p_obj, "ChunksSourceStream::Read: skip chunk");
-+            continue;
          }
  
          if(p_block->i_buffer > i_toread)
